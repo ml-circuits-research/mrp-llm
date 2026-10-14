@@ -1,0 +1,26 @@
+# formalizer-protocol-v1: the questions about the message acts (P-2.1, owner request of 2026-10-03; DS022 "LocalLLMStepByStep",
+# DS023 "How each strategy writes them"). The acts themselves are data of the reply memory (cv_act, cv_act_group, ...: the conversation
+# layers, sop/message-acts.mjs); these are only the texts of the questions LocalLLMStepByStep asks about them, coarse first and then
+# fine, so that no single menu lists every act:
+#   acts_coarse   one lettered yes/no line per group of acts that has a line, and a last line for a request ({{lines}})
+#   acts_fine     for each group the model ticked: the group's acts as a numbered list ({{choices}}), several answers allowed
+#   act_copy      for an act that copies a part of the message (cv_act_span), the verbatim part
+#   act_besides   when the kind of answer asks for a lookup but an act can be the whole request (cv_act_standalone): whether the
+#                 message also asks about the world
+#   self_other    the 0 line of the question about the assistant: something the self layer does not answer (the act's reply does)
+# {{name}} placeholders are filled by the protocol (lib/query-author/step-by-step/protocol.mjs actQuestions).
+
+@fp_act1 fact
+  holds fp_protocol_text acts_coarse "The message is: \"{{message}}\"\nFor each line, do the words of this message contain it?\n{{lines}}\nReply with one line per letter, yes or no, like \"A: no\"."
+@fp_act2 fact
+  holds fp_protocol_text acts_request_line "a question, or a request to look something up or check something"
+@fp_act3 fact
+  holds fp_protocol_text acts_fine "The message is: \"{{message}}\"\nIt shows: {{group}}. Which of these exactly?\n{{choices}}\n0. none of these\nReply with the numbers separated by commas, or 0."
+@fp_act4 fact
+  holds fp_protocol_text act_copy "Copy {{what}} exactly as it is written in the message, on one line. Reply with the copied words only, or 0 if there is none."
+@fp_act5 fact
+  holds fp_protocol_text act_besides "The message is: \"{{message}}\"\nBesides {{act}}, does it also ask a question about the world or ask to look up or check a fact?\n1. yes\n2. no\nReply with the number only."
+@fp_act6 fact
+  holds fp_protocol_text act_example "for example: {{examples}}"
+@fp_act7 fact
+  holds fp_protocol_text self_other "none of these: something else about the assistant"

@@ -1,0 +1,20 @@
+{
+  "feature": "Mode of work: conformance checking of a performed trace against the procedures and norms in force",
+  "status": "non_compliant",
+  "complete": true,
+  "compliance": {
+    "hard": "violated",
+    "violated": [
+      "no_hard_reset_in_hours"
+    ],
+    "soft_violations": [],
+    "total_cost": 3
+  },
+  "requires": [
+    "check_plan",
+    "norms_hard",
+    "norms_soft",
+    "method",
+    "zero_arity"
+  ]
+}

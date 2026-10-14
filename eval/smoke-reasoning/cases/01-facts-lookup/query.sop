@@ -1,0 +1,3 @@
+@q query
+  where located_in ?city france
+  select ?city

@@ -1,0 +1,80 @@
+{
+  "name": "Small talk: playful (English)",
+  "description": "Jokes and riddles, replies to laughter and playful teasing, and playful variants that join the light situations of the other collections (greetings, thanks, goodbyes, how-are-you, compliments).",
+  "imports": [
+    "conversation-v1"
+  ],
+  "role": "conversation",
+  "licence": "MIT (repository LICENSE); original MRP-LLM text written by model runs of jobs/smalltalk-replies and reviewed automatically",
+  "provenance": {
+    "generator": "jobs/smalltalk-replies (worker tier, bulk audit by the auditor tier, decider tier for fixes)",
+    "builder": "tools/smalltalk/build.mjs",
+    "taxonomy": "tools/smalltalk/taxonomy.json",
+    "runs": [
+      "state/llm-jobs/smalltalk-replies/20261002T155845-d6eeea",
+      "state/llm-jobs/smalltalk-replies-escalated/20261002T171332-ff6ba4"
+    ],
+    "inspired_by": [
+      {
+        "source": "DailyDialog",
+        "use": "topic categories and dialogue-act types (inform, question, directive, commissive) as ideas",
+        "text_copied": false
+      },
+      {
+        "source": "EmpatheticDialogues",
+        "use": "the set of 32 emotion labels, grouped into the empathy situations",
+        "text_copied": false
+      },
+      {
+        "source": "MultiWOZ",
+        "use": "general dialogue acts (greet, bye, thank, welcome, reqmore) as ideas",
+        "text_copied": false
+      },
+      {
+        "source": "Wizard of Wikipedia",
+        "use": "chit-chat about a topic that leads to knowledge, as an idea",
+        "text_copied": false
+      },
+      {
+        "source": "Cornell Movie-Dialogs Corpus",
+        "use": "turn patterns of casual conversation, as an idea",
+        "text_copied": false
+      }
+    ]
+  },
+  "counts": {
+    "situations": 34,
+    "replies": 121,
+    "by_register": {
+      "playful": 118,
+      "warm": 3
+    },
+    "rules": 2,
+    "data_facts": 110,
+    "mean_distinct_1": 0.74,
+    "mean_distinct_2": 0.923,
+    "near_duplicates_dropped": 1
+  },
+  "acts": [
+    {
+      "kind": "ask_joke",
+      "group": "play",
+      "situation": "playful_joke"
+    },
+    {
+      "kind": "ask_riddle",
+      "group": "play",
+      "situation": "playful_riddle"
+    },
+    {
+      "kind": "laughter",
+      "group": "play",
+      "situation": "playful_laughter"
+    },
+    {
+      "kind": "banter",
+      "group": "play",
+      "situation": "playful_banter"
+    }
+  ]
+}

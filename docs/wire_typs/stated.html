@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#stated" target="_top">Wire index</a> · <a href="assumed.html">assumed</a> · <a href="unclear.html">unclear</a> · <a href="query.html">query</a> · <a href="unparsed.html">unparsed</a> · <a href="small-model.html">model/host roles</a></p><h1><code>stated</code></h1>
+<p>A <code>stated</code> wire is the small model's formalized report of <strong>one clause that the user's message puts forward</strong>: an assertion, a supposition or a reported claim attached to the question. It belongs to the model language. The model writes <code>stated</code> only when it is sure the claim comes from the message; anything it adds, infers, completes or presupposes is <a href="assumed.html">assumed</a>. When in doubt, <code>assumed</code>. One finite clause is one short wire; a subordinate clause is its own wire, related to its main clause by a <a href="#links">link line</a>. The normative contract is <a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a>.</p>
+<p><strong>The model has no context.</strong> Its prompt is the user's message only: no vocabulary, identifiers, knowledge or date. So a proposition is written as <em>strings</em>: a relation phrase, one line per role from a small closed inventory with the value as written in the message, the polarity, optional temporal expressions and the user's certainty. Content words are <strong>English</strong>, normalized: <code>relation "work at"</code> (the core is English-only: a Romanian or mixed message is translated into English before it reaches the model). After the model, the <strong>host links</strong> the strings to its reviewed lexicon: a phrase that does not link directly is retried with its English synonyms (<code>config/dictionary/</code>), the relation phrase and the set of role names select one predicate, the role values are resolved as entities with that predicate's argument types, and the temporal expressions are normalized. An unknown or ambiguous relation, entity or date becomes a host <a href="clarify.html">clarify</a>; nothing is guessed. The result is the existing positional atom (<code>works_at maria lab_alpha</code>), so reasoners and oracles are unchanged. There is no <code>quote</code>, <code>source</code> or write field, and the statement is never recorded in the repository.</p>
+<h2>Every accepted keyword</h2><table><thead><tr><th>Keyword</th><th>Cardinality / default</th><th>Accepted value and concrete effect</th></tr></thead><tbody><tr><td id="field-relation"><code>relation</code></td><td>Exactly once; required</td><td>One JSON-quoted, nonempty relation phrase <strong>as meant</strong>, normalized to its English lemma: the base form (<code>"work at"</code> for "works at", "worked at", "wroks at"). The host links it to a lexicon predicate by its labels, aliases, identifier and gloss after case and accent folding; a phrase that does not link is retried with its English synonyms, and the lexicon picks (the packet lists the step in <code>translations</code>). Unknown → host question; several predicates → the role set decides, otherwise host question.</td></tr><tr><td id="field-role"><code>role</code></td><td>Repeatable, 1 to 4 lines; required; a name at most once</td><td><code>role NAME VALUE</code>. NAME is one of the closed, context-free inventory <code>subject</code>, <code>object</code>, <code>recipient</code>, <code>location</code>, <code>source</code>, <code>destination</code>, <code>instrument</code>, <code>time</code>, <code>topic</code> (<code>role_unknown</code>, <code>role_duplicate</code>). VALUE is one of:<br>• a JSON-quoted string: a proper name (person, organization, place, title) <strong>exactly as written</strong> (diacritics and typos kept); any other content word of the message, normalized with the message's determiners, lower case (<code>"the gym"</code>, <code>"the user's brother"</code>), or an English synonym of it (the host retries a synonym with the dictionary when the word does not link);<br>• a number: an integer or a decimal (<code>4000</code>, <code>1.84</code>), written as digits; it is anchored when the message writes the same number, with or without thousands separators ("4,000") or as a number word up to twenty; a problem's numbers are its data (DS014 "Problems that state their own data");<br>• <code>$id</code> (unquoted) naming another <code>stated</code> or <code>assumed</code> wire of this output: that proposition used as an argument ("Ana regrets <em>that Maria left</em>"). At most one <code>$id</code> role value per wire (<code>reference_multiple</code>); the host reports such a statement only (its predicate is <code>null</code>) and never blocks on it;<br>• a placeholder <code>?variable</code>, only for a value that lies in a span the model marked <a href="unparsed.html"><code>unparsed</code></a>: the unparsed wire names this wire with <code>near $id</code> and this role with <code>hint NAME</code> (or a generic <code>value</code>/<code>reference</code>/<code>other</code> hint when it is the only span near the wire). An unpaired placeholder is rejected (<code>proposition_not_ground</code>); the host fills it from the repaired span or asks one question.<br>Never a <code>~handle</code>, a bare identifier or a sigil inside quotes (<code>proposition_not_ground</code>). A statement must bind exactly the roles the linked predicate declares.</td></tr><tr><td id="field-polarity"><code>polarity</code></td><td>Exactly once; required, no default</td><td><code>affirmed</code> or <code>negated</code>. <code>negated</code> is explicit (strong) negation and lowers to the <code>not</code> prefix; absence of evidence is never expressed this way.</td></tr><tr><td id="field-valid"><code>valid</code></td><td>Repeatable, at most one line per form; optional; absent means timeless</td><td><code>valid on "TEXT"</code>, <code>valid from "TEXT"</code> or <code>valid until "TEXT"</code> (<code>on</code> excludes the others). TEXT is the temporal expression <strong>as written in the message</strong> (<code>"1 March 2026"</code>, <code>"March 2024"</code>). The host normalizes ISO dates and UTC timestamps, a year, a year-month, a month name with a year and a day, now, today, yesterday and tomorrow against its clock; <code>from</code> starts at the period's start and <code>until</code> ends before the period's start. Anything else becomes a host question (<code>time_form</code> for a malformed line). A dated clause also gives a <a href="#links">temporal link</a> its time. A statement's own time is always written with <code>valid</code>; a quoted <code>role time "…"</code> (as some older annotations write it) on a relation that declares no time role is read by the host frame normalization as the validity, so both spellings link alike (DS014 "Time of a clause").</td></tr><tr><td id="field-certainty"><code>certainty</code></td><td>Exactly once; required</td><td><code>asserted</code>: the user asserts it; lowered to a turn-local <code>fact … source user</code> used as evidence, not hypothetical, and carried to later turns in caller-owned conversation context. <code>hedged</code> ("I think …", "cred că") and <code>supposed</code> ("suppose …", "if …", "dacă"): user suppositions, lowered to <code>fact … source assumption</code> consumed through <code>solve.assume</code>; results that use them are <code>hypothetical</code>, and they are not carried. The target of an <code>if</code>, <code>unless</code> or <code>so_that</code> link is always <code>supposed</code>.</td></tr><tr><td id="field-speaker"><code>speaker</code></td><td>At most once; default <code>user</code></td><td><code>user</code> or a JSON-quoted name as written: reported speech ("Ion says that …"). The claim stays attributed to the speaker, is used conditionally like <code>supposed</code>, and the packet renders it as "According to …".</td></tr>
+<tr><td id="field-because"><code>because</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>because $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>cause</code>. The main clause holds because of the named clause: "Maria works at Alpha Lab because she is on the Delta Project" puts <code>because $s2</code> on the "works at" wire. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-because">clause links</a>.</td></tr>
+<tr><td id="field-so"><code>so</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>so $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>cause</code>. A result: "X, so Y" puts <code>so $x</code> on the <em>effect</em> wire Y, pointing at its cause X. The only keyword written on the result side; "so that" is <code>so_that</code>. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-so">clause links</a>.</td></tr>
+<tr><td id="field-if"><code>if</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>if $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>condition</code>. A condition: "if X, …" puts <code>if $x</code> on the main clause; X is a <code>stated</code> wire with <code>certainty supposed</code> (<code>link_condition_not_supposed</code> otherwise). Target: a <code>stated</code> wire with <code>certainty supposed</code>. On a statement: the statement is <strong>conditional</strong>; it is reported only, never used as evidence, and the link is <code>not_checked</code>. See <a href="syntax.html#link-if">clause links</a>.</td></tr>
+<tr><td id="field-unless"><code>unless</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>unless $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>negative_condition</code>. A negative condition: "unless X" puts <code>unless $x</code> on the main clause; X is written as the message words it, affirmed, with <code>certainty supposed</code>, and the host negates it. One clause is never the target of both <code>if</code> and <code>unless</code> (<code>link_conflict</code>). Target: a <code>stated</code> wire with <code>certainty supposed</code>. On a statement: the statement is <strong>conditional</strong>; it is reported only, never used as evidence, and the link is <code>not_checked</code>. See <a href="syntax.html#link-unless">clause links</a>.</td></tr>
+<tr><td id="field-although"><code>although</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>although $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>concession</code>. A concession: "although X, Y" puts <code>although $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-although">clause links</a>.</td></tr>
+<tr><td id="field-so_that"><code>so_that</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>so_that $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>purpose</code>. A purpose: "Y so that X" (also "in order to") puts <code>so_that $x</code> on Y; the purpose X is not asserted to happen, so it is a <code>stated</code> wire with <code>certainty supposed</code>. Target: a <code>stated</code> wire with <code>certainty supposed</code>. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-so_that">clause links</a>.</td></tr>
+<tr><td id="field-before"><code>before</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>before $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>before</code>. Temporal: "Y before X" puts <code>before $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-before">clause links</a>.</td></tr>
+<tr><td id="field-after"><code>after</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>after $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>after</code>. Temporal: "Y after X" puts <code>after $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-after">clause links</a>.</td></tr>
+<tr><td id="field-when"><code>when</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>when $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>during</code>. Temporal: "Y when X" puts <code>when $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-when">clause links</a>.</td></tr>
+<tr><td id="field-while"><code>while</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>while $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>during</code>. Temporal: "Y while X" puts <code>while $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-while">clause links</a>.</td></tr>
+</tbody></table>
+<h2>Anchoring and reports</h2><p>There is no quotation field; the anchor to the message is checked mechanically by the agent guard: every quoted role value of a <code>stated</code> wire, and a non-user speaker, must appear in this turn's message after case, whitespace and accent folding, tolerating a small edit distance (0 for tokens up to 3 characters, 1 up to 7, otherwise 2, including an adjacent transposition) and a short inflected ending, or be an English synonym of words of the message ("Alpha Lab" for "the Alfa Laboratory"). Otherwise the turn is rejected with <code>stated_value_not_in_message</code>, and the model should use <code>assumed</code>, a query variable or an <a href="unparsed.html"><code>unparsed</code></a> span instead. <code>$id</code> values and placeholders are structural and are anchored through the wires they name. The relation phrase is not anchored, because the model normalizes it. Exact duplicates are rejected (<code>stated_duplicate</code>); two contrary statements are accepted and the result reports the conflict. Every turn returns <code>user_statements</code> in the packet, each with the authored strings, the linked predicate and atom, validity, certainty, speaker, treatment (<code>evidence</code> or <code>supposition</code>) and a host-rendered <code>statement</code> such as <code>You stated: works at (subject: Maria; object: Alpha Lab).</code>, <code>You supposed: …</code> or <code>According to Ana: …</code>; a statement with links adds them, for example <code>…, because: … [not checked]</code>.</p>
+<h2>A user assertion and a question</h2><pre data-sop="current"><code>@s1 stated
+  relation "works at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted
+
+@q query
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+  select ?who</code></pre><p>"Maria works at Alpha Lab. Who works at Alpha Lab?" The host links both phrases to <code>works_at</code>, resolves "Maria" and "Alpha Lab" with that predicate's types, and answers <code>maria</code>, <strong>not</strong> hypothetically: the user said it. The fact exists only for this turn's execution and the conversation context; it is never stored or reinforced.</p>
+<h2>A dated supposition</h2><pre data-sop="current"><code>@s1 stated
+  relation "works at"
+  role object "Alpha Lab"
+  role subject "Maria"
+  polarity affirmed
+  valid from "2025"
+  valid until "2026"
+  certainty supposed
+
+@q query
+  where match
+    relation "works at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+  at "June 2025"</code></pre><p>"Suppose Maria worked at Alpha Lab during 2025. Was she there in June 2025?" Role lines may appear in any order. The host normalizes the years and the month; the answer is conditional (<code>hypothetical: true</code>) and the rendering lists the supposition.</p>
+<h2>Reported speech on one day</h2><pre data-sop="current"><code>@s1 stated
+  relation "door open"
+  role source "room A"
+  role destination "room B"
+  polarity negated
+  valid on "3 March 2026"
+  certainty asserted
+  speaker "Ana"</code></pre><p>"Ana says the door between room A and room B was not open on 3 March 2026." The date is copied as written; the model has no clock and never converts it, the host normalizes it. Without a question the turn only reports the statement; reported claims and suppositions apply only to a question in the same message, and only asserted user statements are carried.</p>
+<h2>Borderline cases</h2><p>The boundary rule: <code>stated</code> only when the claim surely comes from the message; anything else is <code>assumed</code>. "Since Nera left the lab, who runs it now?" → <code>stated</code> (an assertion embedded in a question). "Is Ana <em>still</em> at Acme?" → <code>assumed</code> with <code>basis implicature</code> (the user did not assert the earlier state). "Rooms A and B are booked. Is room C free?" → two <code>stated</code> plus an <code>assumed</code> <code>basis closure</code> for room C. "I think the door is open" → <code>stated certainty hedged</code>. "Is the bank open?" with two banks → the model writes <code>"the bank"</code>; the host finds two entities and asks. A name mentioned only in an earlier turn is not in this message: the earlier asserted statement is carried by the host, so the model does not restate it. More borderline cases, with executed examples, are in <a href="model-guide.html#boundary">How the model writes</a>.</p>
+<h2>First person</h2><p>Facts about the user and the people the user names are formalized (DS014 Q-LANG-5, convention C4). The values are written <code>"the user"</code> and <code>"the user's brother"</code>; the host links "the user" to the caller's entity when the conversation supplies one. The user's own plans, feelings and chit-chat are left out. A modal stays in the relation ("be allowed to sign").</p>
+<section id="links"><h2>Clause links and arguments</h2><p>A message with a subordinate clause gives one wire per clause. The main clause carries one keyword line per related clause, <code>KEYWORD $id</code>, with one of the ten link keywords (<a href="syntax.html#clause-links">syntax</a>). On a statement every link is recorded and reported (<code>clause_links</code>, <code>status: "not_checked"</code>); no engine checks a cause, a concession or a purpose, and the two propositions still execute. A statement that carries <code>if</code> or <code>unless</code> is conditional: it is reported only and never used as evidence.</p>
+<p class="example-message"><span class="lang">EN</span> “Maria works at Alpha Lab because she is on the Delta Project. Who works at Alpha Lab?”</p><pre data-sop="current"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted
+  because $s2
+
+@s2 stated
+  relation "be a member of project"
+  role subject "Maria"
+  role object "Delta Project"
+  polarity affirmed
+  certainty asserted
+
+@q query
+  select ?who
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>The answer is <code>maria</code> from the user's evidence; the packet lists <code>{"from": "s1", "keyword": "because", "type": "cause", "to": "s2", "status": "not_checked", "reason": "statement_link"}</code> and the statement renders as "…, because: … [not checked]".</p>
+<p class="example-message"><span class="lang">EN</span> “The rollback failed because the migration is not idempotent.”</p><pre data-sop="current"><code>@s1 stated
+  relation "fail"
+  role subject "the rollback"
+  polarity affirmed
+  certainty asserted
+  because $s2
+
+@s2 stated
+  relation "be idempotent"
+  role subject "the migration"
+  polarity negated
+  certainty asserted</code></pre><p>Two clauses, two wires; "because" is <code>because</code> on the main clause; the negation is <code>polarity negated</code> on the clause that says "not".</p>
+<p class="example-message"><span class="lang">EN</span> “Ana regrets that Maria left Alpha Lab.”</p><pre data-sop="current"><code>@s1 stated
+  relation "leave"
+  role subject "Maria"
+  role source "Alpha Lab"
+  polarity affirmed
+  certainty asserted
+
+@s2 stated
+  relation "regret"
+  role subject "Ana"
+  role topic $s1
+  polarity affirmed
+  certainty asserted</code></pre><p>The complement clause "that Maria left Alpha Lab" is its own wire, used as the <code>topic</code> argument of "regret" with <code>$s1</code>. The host reports <code>s2</code> with its argument shown as "[leave]" and computes nothing over it.</p></section>
+<h2>Invalid model output</h2><pre data-sop="invalid" data-check="parse" data-error="Unsupported field holds on stated"><code>@bad stated
+  holds works_at maria lab_alpha
+  certainty asserted</code></pre><p>A statement is written as keyword lines of strings; there is no packed atom, and the model does not know predicate identifiers.</p>
+<pre data-sop="invalid" data-check="parse" data-error="@bad needs polarity"><code>@bad stated
+  relation "works at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  certainty asserted</code></pre><p>Polarity has no default: omitting it would hide a negation decision.</p>
+<pre data-sop="invalid" data-check="parse" data-error="relation takes one JSON-quoted string"><code>@bad stated
+  relation works_at
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted</code></pre><p>The relation is a quoted phrase, not an identifier.</p>
+<pre data-sop="invalid" data-check="parse" data-error="role_unknown"><code>@bad stated
+  relation "works at"
+  role employee "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted</code></pre><p>Role names come from the closed inventory; predicate-specific names such as <code>employee</code> are unknown to a context-free model.</p>
+<pre data-sop="invalid" data-check="parse" data-error="role_duplicate"><code>@bad stated
+  relation "works at"
+  role subject "Maria"
+  role subject "Ana"
+  polarity affirmed
+  certainty asserted</code></pre><p>A role name appears once.</p>
+<pre data-sop="invalid" data-check="compile" data-error="proposition_not_ground"><code>@bad stated
+  relation "works at"
+  role subject ?who
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted</code></pre><p>A statement states what the message says. A <code>?variable</code> is only a placeholder paired with an <a href="unparsed.html"><code>unparsed</code></a> span; an unknown the user asks about belongs in a query <code>match</code>.</p>
+<pre data-sop="invalid" data-check="parse" data-error="value must be a JSON-quoted string"><code>@bad stated
+  relation "works at"
+  role subject maria
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted</code></pre><p>Values are strings as written in the message; the model cannot know canonical identifiers.</p>
+<pre data-sop="invalid" data-check="parse" data-error="Unsupported field quote on stated"><code>@bad stated
+  relation "works at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted
+  quote "Maria works at Alpha Lab"</code></pre><p>No quotation field: anchoring is checked mechanically against the message.</p>
+<pre data-sop="invalid" data-check="parse" data-error="valid on excludes valid from/until"><code>@bad stated
+  relation "works at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  valid on "2026-03-03"
+  valid from "2026"
+  certainty asserted</code></pre><p>One day or an interval, not both.</p>
+<pre data-sop="invalid" data-check="parse" data-error="Unsupported field basis on stated"><code>@bad stated
+  relation "works at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted
+  basis world</code></pre><p><code>basis</code> belongs to <a href="assumed.html">assumed</a>.</p>
+<pre data-sop="invalid" data-check="parse" data-error="link_form"><code>@bad stated
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted
+  because s2</code></pre><p>A link line takes exactly one <code>$id</code>.</p>
+<pre data-sop="invalid" data-check="parse" data-error="reference_multiple"><code>@bad stated
+  relation "cause"
+  role subject $s1
+  role object $s2
+  polarity affirmed
+  certainty asserted</code></pre><p>At most one <code>$id</code> role value per wire: "X caused Y" is <code>so</code> or <code>because</code> between the two clause wires.</p>
+<pre data-sop="invalid" data-check="graph" data-error="Unknown reference s2"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted
+  because $s2</code></pre><p>The linked clause must be a wire of the same output.</p>
+<pre data-sop="invalid" data-check="compile" data-error="link_target_type"><code>@q query
+  select ?who
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+
+@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted
+  because $q</code></pre><p>A link names a clause (a <code>stated</code> or <code>assumed</code> wire), never a query.</p>
+<pre data-sop="invalid" data-check="compile" data-error="reference_target_type"><code>@q query
+  select ?who
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+
+@s2 stated
+  relation "regret"
+  role subject "Ana"
+  role topic $q
+  polarity affirmed
+  certainty asserted</code></pre><p>A statement's <code>$id</code> argument is a proposition; the answers of a query belong in another query (<a href="query.html#chaining"><code>$q</code> chaining</a>).</p>
+<h2>Sources</h2><p><code>sop/parser.mjs</code> (<code>SPEC.stated</code>, <code>parseProposition</code>, <code>linksOf</code>, <code>roleReferences</code>), <code>sop/enums.mjs</code> (<code>ROLE_NAMES</code>, <code>LINK_KEYWORDS</code>), <code>sop/clauses.mjs</code> (link and reference admission, the host plan), <code>sop/dictionary.mjs</code> (English synonyms), <code>sop/linking.mjs</code> (host linking, time normalization, anchoring), <code>sop/propositions.mjs</code> (reports), <code>sop/declarative.mjs</code> (compilation), <code>server/agent.mjs</code> (anchoring guard), <a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a>.</p></main><script type="module" src="help-page.mjs"></script></body></html>

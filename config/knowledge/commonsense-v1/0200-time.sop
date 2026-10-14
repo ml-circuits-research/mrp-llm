@@ -1,0 +1,247 @@
+# commonsense-v1: time (rules, defaults, integrity and facts written by a Claude Haiku subagent of commonsense-agent from its skeleton, 2026-10-02; reviewed and corrected by commonsense-agent; mechanically validated by tools/commonsense/check.mjs).
+# Time and lifespan predicates (cs_t_)
+# Derives older_than, younger_than, contemporary_of, lived_before, outlived, age_difference, age_in_year
+# with negative heads for certain negations and integrity constraints for violations
+
+# ---- older_than / younger_than from birth years ----
+
+@cs_t_older_than rule
+  when born_on ?a ?x
+  when born_on ?b ?y
+  when compare ?x below ?y
+  then older_than ?a ?b
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): born in an earlier year means older"
+
+@cs_t_younger_than rule
+  when born_on ?a ?x
+  when born_on ?b ?y
+  when compare ?x above ?y
+  then younger_than ?a ?b
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): born in a later year means younger"
+
+@cs_t_not_older_than rule
+  when born_on ?a ?x
+  when born_on ?b ?y
+  when compare ?x above ?y
+  then not older_than ?a ?b
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): not born earlier means not older"
+
+@cs_t_not_younger_than rule
+  when born_on ?a ?x
+  when born_on ?b ?y
+  when compare ?x below ?y
+  then not younger_than ?a ?b
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): not born later means not younger"
+
+# ---- contemporary_of when lifetimes overlap ----
+
+@cs_t_contemporary_of rule
+  when born_on ?a ?xa
+  when born_on ?b ?xb
+  when died_on ?a ?da
+  when died_on ?b ?db
+  when compare ?xa below ?db
+  when compare ?xb below ?da
+  then contemporary_of ?a ?b
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): lifetimes overlap if each born before the other died"
+
+@cs_t_not_contemporary_of rule
+  when born_on ?a ?xa
+  when died_on ?b ?db
+  when compare ?xa above ?db
+  then not contemporary_of ?a ?b
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): born after death means not contemporary"
+
+# ---- lived_before: one died before the other was born ----
+
+@cs_t_lived_before rule
+  when died_on ?a ?da
+  when born_on ?b ?xb
+  when compare ?da below ?xb
+  then lived_before ?a ?b
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): died before birth means lived before"
+
+@cs_t_not_contemporary_via_lived_before rule
+  when lived_before ?a ?b
+  then not contemporary_of ?a ?b
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): if one lived entirely before the other, they are not contemporary"
+
+# ---- outlived: died in a later year ----
+
+@cs_t_outlived rule
+  when died_on ?a ?da
+  when died_on ?b ?db
+  when compare ?da above ?db
+  then outlived ?a ?b
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): died in a later year means outlived"
+
+@cs_t_not_outlived rule
+  when died_on ?a ?da
+  when died_on ?b ?db
+  when compare ?da below ?db
+  then not outlived ?a ?b
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): not died later means not outlived"
+
+# ---- age_difference from birth years ----
+
+@cs_t_age_difference rule
+  when born_on ?a ?ba
+  when born_on ?b ?bb
+  when compare ?a not_equal ?b
+  when compute ?diff ?bb minus ?ba
+  then age_difference ?a ?b ?diff
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): age difference is birth year of second minus birth year of first"
+
+# ---- age_in_year at founding of an organization they founded ----
+
+@cs_t_age_in_year_founded rule
+  when born_on ?p ?b
+  when founded ?p ?org
+  when founded_year ?org ?y
+  when compute ?age ?y minus ?b
+  then age_in_year ?p ?y ?age
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): age in founding year of an organization the person founded"
+
+# ---- age_in_year at publication of a work they wrote ----
+
+@cs_t_age_in_year_published rule
+  when born_on ?p ?b
+  when writes ?p ?w
+  when publication_year ?w ?y
+  when compute ?age ?y minus ?b
+  then age_in_year ?p ?y ?age
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): age in publication year of a work the person wrote"
+
+# ---- age_in_year at death year ----
+
+@cs_t_age_in_year_death rule
+  when born_on ?p ?b
+  when died_on ?p ?d
+  when compute ?age ?d minus ?b
+  then age_in_year ?p ?d ?age
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): age at death is death year minus birth year"
+
+# ---- Integrity: died before being born ----
+
+@cs_i_death_before_birth integrity
+  never all
+    born_on ?p ?b
+    died_on ?p ?d
+    compare ?d below ?b
+  end
+  witness ?p
+  message "a person died before being born"
+  severity error
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): birth precedes death"
+
+# ---- Integrity: parent born after or in same year as child ----
+
+@cs_i_parent_younger_than_child integrity
+  never all
+    parent_of ?parent ?child
+    born_on ?parent ?pb
+    born_on ?child ?cb
+    compare ?pb at_least ?cb
+  end
+  witness ?parent
+  message "a parent was born in the same year or later than their child"
+  severity error
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): parents must be born before their children"
+
+# ---- Integrity (warning): parent less than 10 years older than child ----
+
+@cs_i_parent_too_young integrity
+  never all
+    parent_of ?parent ?child
+    born_on ?parent ?pb
+    born_on ?child ?cb
+    compute ?diff ?cb minus ?pb
+    compare ?diff below 10
+  end
+  witness ?parent
+  message "a parent is less than 10 years older than their child"
+  severity warning
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): parents are typically at least 10 years older than their children"
+
+# ---- Integrity (warning): person older than 125 at death ----
+
+@cs_i_person_too_old integrity
+  never all
+    born_on ?p ?b
+    died_on ?p ?d
+    compute ?years ?d minus ?b
+    compare ?years above 125
+  end
+  witness ?p
+  message "a person lived more than 125 years"
+  severity warning
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): people rarely live longer than 125 years"
+
+# ---- Integrity: work published before author was born ----
+
+@cs_i_published_before_birth integrity
+  never all
+    writes ?p ?w
+    publication_year ?w ?py
+    born_on ?p ?b
+    compare ?py below ?b
+  end
+  witness ?p
+  message "a work was published before its author was born"
+  severity error
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): publication must occur after the author's birth"
+
+# ---- Integrity: organization founded before founder was born ----
+
+@cs_i_founded_before_birth integrity
+  never all
+    founded ?p ?org
+    founded_year ?org ?fy
+    born_on ?p ?b
+    compare ?fy below ?b
+  end
+  witness ?p
+  message "an organization was founded before its founder was born"
+  severity error
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): founding must occur after the founder's birth"
+
+# ---- Integrity (warning): person with two different birth years ----
+
+@cs_i_conflicting_birth_years integrity
+  never all
+    born_on ?p ?b1
+    born_on ?p ?b2
+    compare ?b1 not_equal ?b2
+  end
+  witness ?p
+  message "a person has two different recorded birth years"
+  severity warning
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): a person should have one consistent birth year"
+
+# ---- Integrity (warning): person died before child was born more than 1 year early ----
+
+@cs_i_parent_died_before_child_born integrity
+  never all
+    parent_of ?p ?c
+    died_on ?p ?d
+    born_on ?c ?b
+    compute ?limit ?d plus 1
+    compare ?limit below ?b
+  end
+  witness ?p
+  message "a parent died more than 1 year before their child was born"
+  severity warning
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): a parent typically dies less than 1 year before their child is born (if at all)"
+
+# ---- Integrity: entity ends before it starts ----
+
+@cs_i_ends_before_starts integrity
+  never all
+    starts_at ?e ?start
+    ends_at ?e ?end
+    compare ?end below ?start
+  end
+  witness ?e
+  message "an event ends before it starts"
+  severity error
+  source "authored (commonsense-v1, time; years are compared strictly, reviewed by commonsense-agent): an event must start before it ends"

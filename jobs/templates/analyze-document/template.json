@@ -1,0 +1,21 @@
+{
+  "name": "analyze-document",
+  "description": "Analyse attached documents (a report, a manual, a scientific article, a policy) with the analysis procedures of a base memory: first ingest each document into a session or a base memory (ingestion v2, with provenance: document, location, quote), then run the procedures over that document's wires (contradictions, numeric and temporal consistency, claims without support, KPIs, a quality rubric), then report the findings with the document's own words. Use when the user asks to check, audit, review or evaluate a document for errors or inconsistencies, or to compute its indicators.",
+  "kind": "adapter",
+  "adapter": "adapter.mjs",
+  "targets": ["memory", "session", "none"],
+  "taskKind": "analyze-document",
+  "params": {
+    "rights": {"type": "string", "enum": ["cleared", "permissive-attribution", "owner-provided"], "description": "the source rights of the attachments, as the user stated them (DS011); required: without it nothing is ingested or analysed"},
+    "purpose": {"type": "string", "max": 500, "default": "", "description": "what the analysis is for, in the user's words"},
+    "procedures": {"type": "string[]", "required": false, "description": "the analysis procedures to run (ids of procedure wires tagged analysis); default: every analysis procedure of the memory"},
+    "base": {"type": "string", "max": 64, "default": "analysis-core-v1", "description": "target none: the base memory of the new session the documents are ingested into (it must hold analysis procedures; analysis-core-v1 is created when missing)"},
+    "tier": {"type": "string", "enum": ["tiny", "small", "medium", "good"], "default": "small", "description": "the tier of the ingestion's structure role"},
+    "fol_tier": {"type": "string", "enum": ["tiny", "small", "medium", "good"], "required": false, "description": "the tier of the ingestion's FOL role and its repair (default medium, with reasoning)"},
+    "merge_tier": {"type": "string", "enum": ["tiny", "small", "medium", "good"], "default": "medium", "description": "the tier that decides the conflicts of the ingestion's canonical vocabulary"},
+    "max_chunk_bytes": {"type": "integer", "min": 1000, "max": 7000, "required": false, "description": "the largest chunk of a document handled in one call (default 3000)"},
+    "reasoning": {"type": "string", "max": 40, "default": "auto", "description": "the engine of the analysis queries: auto (the StrategyRouter) or one engine id run exactly"}
+  },
+  "budget": {"usd": 0.5, "credits": 60},
+  "_note": "Wraps two product functions: ingestV2 (lib/ingest/v2: structure role, canonical vocabulary, FOL per sentence, converter, validator, contradiction and quote checks, storage with provenance) and analyzeSession (lib/analysis: the procedures' members over the document layer and its view, the StrategyRouter, the oracle's proofs). Writes, per document, <taskDir>/analysis/<document>/analysis.json and report.md, plus ingest-v2/ for the ingestion's files."
+}

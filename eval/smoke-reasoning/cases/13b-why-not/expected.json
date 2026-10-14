@@ -1,0 +1,14 @@
+{
+  "feature": "Explanation: why a claim is NOT derivable (the missing premises)",
+  "status": "unknown",
+  "complete": true,
+  "missing": [
+    [
+      "parent bob cy"
+    ]
+  ],
+  "requires": [
+    "rules",
+    "why_not"
+  ]
+}

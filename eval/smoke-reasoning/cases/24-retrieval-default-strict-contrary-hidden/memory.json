@@ -1,0 +1,20 @@
+{
+  "distractors": {
+    "seed": 5,
+    "facts": 0,
+    "rules": 0,
+    "predicates": 5,
+    "hard": {
+      "flies": {
+        "n": 300,
+        "arity": 1,
+        "neg": true
+      }
+    }
+  },
+  "start": {
+    "radius": 1,
+    "hops": 1,
+    "cap": 8
+  }
+}

@@ -1,0 +1,12 @@
+# The analysis request for orion-project-status: the budget burn ratio, as a domain procedure written as data.
+
+@or_def_burn fact
+  holds ratio_definition budget_burn spending_to_date budget
+  source "analysis request: budget burn = spending to date / approved budget"
+
+@orion_ratios procedure
+  members $an_k_ratio $or_def_burn
+  description "Analysis: the ratios the analyst asks for in the Orion status report (budget burn)."
+  scope "analysis, kpis"
+  source "eval/analysis-v1 analysis request"
+  report kpi_ratio ?name ?ratio

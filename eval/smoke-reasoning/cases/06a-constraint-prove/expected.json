@@ -1,0 +1,12 @@
+{
+  "feature": "Constraints and arithmetic: prove a claim over finite integers",
+  "status": "entailed",
+  "complete": true,
+  "witness": {
+    "x": 6,
+    "y": 4
+  },
+  "requires": [
+    "constraint"
+  ]
+}

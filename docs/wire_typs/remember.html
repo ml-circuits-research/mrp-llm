@@ -1,0 +1,44 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#remember" target="_top">Wire index</a> · <a href="fact.html">fact</a> · <a href="solve.html">solve</a> · <a href="event.html">event</a> · <a href="pack.html">pack</a></p><h1><code>remember</code></h1>
+<p><code>remember</code> records specified fact values or revision events in the current repository session. It is a runtime/tool operation with a concrete side effect, not a proof that a statement is true and not automatic publication to a shared library. Model-authored <code>stated</code> and <code>assumed</code> wires are lowered to turn-local facts and never become observed repository facts; an authorized host/tool operation that records an independently admitted fact is distinct: only genuine user assertions selected for admission should be recorded, not quoted material, hypotheses, inferred answers or every <code>fact</code> wire. This explicit operation requires a repository, an active session and host <code>allowWrite</code>. A successful receipt contains <code>status: stored</code>, recorded claim IDs, count and session revision. <code>Repository.commit(session)</code> is a separate host action that advances user history; session recording is already saved and visible in the active session before commit.</p>
+<h2>Every accepted keyword</h2><table><thead><tr><th>Keyword</th><th>Cardinality / default</th><th>Accepted value and concrete effect</th></tr></thead><tbody>
+<tr><td id="field-input"><code>input</code></td><td>Repeatable; at least one required</td><td>Whitespace-separated <code>$value</code> references or approved <code>~definition</code> handles per line; packed arrays flatten recursively. Facts/events are recorded in the session; approved library definitions require reviewed ingestion and <code>allowRules</code>. A <code>fact … source assumption</code> is explicitly rejected, even inside a pack; it cannot become a sourced fact through this operation. Other unsupported kinds fail before recording.</td></tr>
+<tr><td id="field-scope"><code>scope</code></td><td>At most once; default <code>session</code></td><td>Only <code>session</code> is executable. Other text may parse but is rejected at runtime; no <code>global</code> or <code>library</code> scope grants publication.</td></tr>
+<tr><td id="field-after"><code>after</code></td><td>Repeatable; default none</td><td><code>$wire</code> value reference per line; makes this recording depend on a previous operation, without turning its result into input.</td></tr></tbody></table>
+<h2>Record an admitted catalog statement</h2><pre data-sop="current"><code>@catalog fact
+  holds on_shelf book_a shelf_north
+  valid timeless
+  source "catalog card 17"
+
+@record remember
+  input $catalog
+  scope session</code></pre><p><code>@catalog</code> constructs the claim value with its provenance; <code>@record</code> asks the runtime to save that claim in the active session. A receipt identifies the stored claim, but does not certify the catalog card. Without <code>@record</code> the fact is only a value. Passing <code>$catalog</code> to <code>solve.data</code> would instead make it temporary evidence for one solution and would not save it.</p>
+<h2>Query the recorded session</h2><pre data-sop="current"><code>@one fact
+  holds on_shelf book_a shelf_north
+  valid timeless
+
+@two fact
+  holds on_shelf book_c shelf_north
+  valid timeless
+
+@batch pack
+  items $one $two
+
+@record remember
+  input $batch
+
+@question query
+  where on_shelf ?book shelf_north
+  select ?book
+  mode select
+
+@answer solve
+  query $question
+  after $record
+  output ?book many</code></pre><p><code>pack</code> groups the two claim values; one <code>remember</code> operation records both and returns their IDs. <code>after $record</code> places solve after the session write. The query then asks for books on shelf_north; a complete retrieval view that includes those claims can return <code>["book_a", "book_c"]</code>. The retrieval strategy and any other visible claims determine the actual answer. The host may later commit this session to user history; no SOP field performs that commit or global publication.</p>
+<h2>Invalid scope</h2><pre data-sop="invalid" data-check="runtime" data-error="SOP writes target the current session"><code>@catalog fact
+  holds on_shelf book_a shelf_north
+  valid timeless
+
+@bad remember
+  input $catalog
+  scope library</code></pre><p>The field parses, but runtime rejects <code>scope library</code>; session is the only allowed scope. A different failure is attempting this operation without a writable host session.</p><p><strong>Implementation sources:</strong> <code>sop/parser.mjs</code> (<code>SPEC.remember</code>), <code>sop/runtime.mjs</code> (effect batch), <code>memory/repository.mjs</code> (<code>apply</code>, <code>commit</code>).</p></main><script type="module" src="help-page.mjs"></script></body></html>

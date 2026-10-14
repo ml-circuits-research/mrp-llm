@@ -1,0 +1,946 @@
+{
+  "language": "SOP Lang",
+  "modelTypes": [
+    "stated",
+    "assumed",
+    "unclear",
+    "query",
+    "constraint",
+    "unparsed",
+    "pragmatic",
+    "instruction"
+  ],
+  "unclearKinds": [
+    "gibberish",
+    "no_request",
+    "ambiguous",
+    "relation_not_in_memory"
+  ],
+  "roleNames": [
+    "subject",
+    "object",
+    "recipient",
+    "location",
+    "source",
+    "destination",
+    "instrument",
+    "time",
+    "topic"
+  ],
+  "lexicon": {
+    "predicate": {
+      "args": {
+        "card": "one",
+        "required": false
+      },
+      "role": {
+        "card": "many",
+        "required": false
+      },
+      "label": {
+        "card": "many",
+        "required": false
+      },
+      "domain": {
+        "card": "one",
+        "required": false
+      },
+      "closed": {
+        "card": "one",
+        "required": false
+      },
+      "key": {
+        "card": "one",
+        "required": false
+      },
+      "transitive": {
+        "card": "one",
+        "required": false
+      },
+      "inverse": {
+        "card": "one",
+        "required": false
+      },
+      "unit": {
+        "card": "one",
+        "required": false
+      },
+      "description": {
+        "card": "one",
+        "required": false
+      },
+      "reading": {
+        "card": "many",
+        "required": false
+      },
+      "describe_rank": {
+        "card": "one",
+        "required": false
+      }
+    },
+    "lexeme": {
+      "of": {
+        "card": "one",
+        "required": true
+      },
+      "language": {
+        "card": "one",
+        "required": true
+      },
+      "pos": {
+        "card": "one",
+        "required": false
+      },
+      "form": {
+        "card": "many",
+        "required": true
+      },
+      "frame": {
+        "card": "one",
+        "required": true
+      },
+      "restrict": {
+        "card": "many",
+        "required": false
+      },
+      "weight": {
+        "card": "one",
+        "required": false
+      },
+      "source": {
+        "card": "one",
+        "required": false
+      },
+      "quote": {
+        "card": "one",
+        "required": false
+      }
+    },
+    "entity": {
+      "kind": {
+        "card": "one",
+        "required": false
+      },
+      "label": {
+        "card": "many",
+        "required": false
+      },
+      "alias": {
+        "card": "many",
+        "required": false
+      },
+      "domain": {
+        "card": "one",
+        "required": false
+      },
+      "notability": {
+        "card": "one",
+        "required": false
+      },
+      "source": {
+        "card": "one",
+        "required": false
+      }
+    }
+  },
+  "memoryEngines": [
+    "recall-memory",
+    "holo-memory",
+    "sqlite",
+    "scan",
+    "hybrid"
+  ],
+  "reasoning": {
+    "reference": {
+      "engine": "js-reference oracle (reasoning/strategies/js-reference) through reasoning/bridge",
+      "deduce": "finite-function-free-Horn",
+      "temporal": "bitemporal-view-and-interval-join",
+      "classify": "deductive-rules",
+      "abduce": "oracle-all-inclusion-minimal-explanations",
+      "diagnose": "oracle-abduction-and-test-partition",
+      "associate": "lexical-relational-recall-memory-score",
+      "induce": "bounded-candidate-pattern-evaluation",
+      "analogize": "injective-entity-mapping",
+      "plan": "oracle-uniform-cost-search",
+      "simulate": "oracle-whatif-and-causal-Horn-intervention",
+      "constraint": "finite-linear-integers",
+      "optimize": "finite-linear-integers"
+    },
+    "prolog-tabling": {
+      "deduce": "swi-prolog-tabling-checked-against-the-oracle",
+      "other": "unsupported-explicit-backend-named-no-fallback"
+    },
+    "z3-smt-bounded": {
+      "constraint": "z3-integer-constraints",
+      "optimize": "z3-plus-optimality-check",
+      "other": "unsupported-explicit-backend-named-no-fallback"
+    }
+  },
+  "wires": {
+    "value": {
+      "one": [
+        "data"
+      ],
+      "required": [
+        "data"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "resolve": {
+      "one": [
+        "text",
+        "language",
+        "kind",
+        "type",
+        "domain"
+      ],
+      "required": [
+        "text",
+        "language",
+        "kind"
+      ],
+      "role": "host-identity-lookup",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write",
+      "note": "Looks up a scoped identity; the host must not invent the intended entity."
+    },
+    "fact": {
+      "one": [
+        "holds",
+        "valid",
+        "source",
+        "quote",
+        "retention"
+      ],
+      "required": [
+        "holds",
+        "valid"
+      ],
+      "role": "constructs-explicit-claim-value",
+      "declaration": true,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "stated": {
+      "one": [
+        "relation",
+        "polarity",
+        "certainty",
+        "speaker"
+      ],
+      "many": [
+        "role",
+        "valid",
+        "because",
+        "so",
+        "if",
+        "unless",
+        "although",
+        "so_that",
+        "before",
+        "after",
+        "when",
+        "while"
+      ],
+      "required": [
+        "relation",
+        "role",
+        "polarity",
+        "certainty"
+      ],
+      "role": "user-statement-proposition",
+      "declaration": true,
+      "authoredByModel": true,
+      "effects": "no-world-write",
+      "note": "Model language: a context-free string proposition the user message puts forward, one finite clause per wire (quoted relation phrase and common nouns in the message language, normalized, or in English; closed-inventory roles with names as written; a $id role value names another clause; link lines because, so, if, unless, although, so_that, before, after, when, while name the related clause). The host links it to the lexicon; certainty asserted lowers to a turn-local fact source user used as evidence and carried in caller-owned context; hedged, supposed or reported speech (speaker) is used only conditionally. Never stored or reinforced (DS014)."
+    },
+    "assumed": {
+      "one": [
+        "relation",
+        "polarity",
+        "basis"
+      ],
+      "many": [
+        "role",
+        "valid",
+        "because",
+        "so",
+        "if",
+        "unless",
+        "although",
+        "so_that",
+        "before",
+        "after",
+        "when",
+        "while"
+      ],
+      "required": [
+        "relation",
+        "role",
+        "polarity"
+      ],
+      "role": "model-assumption-proposition",
+      "declaration": true,
+      "authoredByModel": true,
+      "effects": "no-world-write",
+      "note": "Model language: a context-free string proposition the model adds. Reported by default (policy modelAssumptions report); branch runs a separate hypothetical solve. basis is descriptive only. Never stored, never carried across turns (DS014)."
+    },
+    "unclear": {
+      "one": [
+        "kind",
+        "language"
+      ],
+      "many": [
+        "reading"
+      ],
+      "required": [
+        "kind"
+      ],
+      "role": "uninterpretable-message-marker",
+      "declaration": false,
+      "authoredByModel": true,
+      "effects": "no-world-write",
+      "note": "Model language: the only wire of an output (besides pragmatic wires) that is unintelligible (gibberish), has neither a statement nor a question (no_request), or shows an ambiguity the model does not resolve (ambiguous, with 2 to 4 reading lines paraphrasing the candidate readings); the host renders a fixed reply per kind and lists the readings as a clarification (DS014)."
+    },
+    "unparsed": {
+      "one": [
+        "span",
+        "near",
+        "hint"
+      ],
+      "required": [
+        "span"
+      ],
+      "role": "unformalized-message-span",
+      "declaration": false,
+      "authoredByModel": true,
+      "effects": "no-world-write",
+      "note": "Model language: a verbatim span of the message the model could not formalize (span), optionally near the wire it belongs to (near $id) and the slot it probably fills (hint subject, object, time, location, value, relation, reference or other). A role whose value lies in the span holds a placeholder ?variable paired by near and hint. The host repairs spans symbolically (dates, numbers, money, names, the dictionary, the conversation) before linking and asks one question per unresolved span (DS014)."
+    },
+    "pragmatic": {
+      "one": [
+        "kind",
+        "score",
+        "span",
+        "near",
+        "source",
+        "basis"
+      ],
+      "required": [
+        "kind",
+        "basis"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": true,
+      "effects": "no-world-write",
+      "note": "Model language: what the message does besides asking or stating (a greeting, thanks, an apology, a closing, a polite word, an emotion), written by the formalizer in the same understanding step with basis llm and an optional verbatim span; alone for a message of courtesy or emotion only. Advisory: the host renders the courtesy reply and the tone of the answer from it; never evidence, never stored (DS023)."
+    },
+    "instruction": {
+      "one": [
+        "do",
+        "kind",
+        "text",
+        "span",
+        "source"
+      ],
+      "required": [
+        "do"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": true,
+      "effects": "no-world-write",
+      "note": "Model language: what the user asks about how the assistant should answer from now on: do set (kind prefix or suffix with the verbatim text, or the style short or detailed), do cancel (one kind, or all) or do list. Never a fact and never evidence: the runtime applies it to the caller-owned behaviour of the conversation, where it becomes a reply wire and a rule of the conversation layer (origin user) that the reasoner follows on every later turn (DS023 Behaviour layer)."
+    },
+    "rule": {
+      "one": [
+        "then",
+        "valid",
+        "mode",
+        "source"
+      ],
+      "many": [
+        "when"
+      ],
+      "required": [
+        "then",
+        "when"
+      ],
+      "role": "approved-implication",
+      "declaration": true,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "query": {
+      "one": [
+        "mode",
+        "select",
+        "scope",
+        "measure",
+        "span",
+        "at",
+        "during",
+        "overlaps",
+        "asof",
+        "limit",
+        "rank",
+        "quantifier",
+        "order",
+        "fragment"
+      ],
+      "many": [
+        "where",
+        "filter",
+        "compare",
+        "except",
+        "candidate",
+        "because",
+        "so",
+        "if",
+        "unless",
+        "although",
+        "so_that",
+        "before",
+        "after",
+        "when",
+        "while"
+      ],
+      "required": [],
+      "role": "logical-goal",
+      "declaration": true,
+      "authoredByModel": true,
+      "effects": "no-world-write",
+      "note": "Model language: match blocks (quoted relation, closed roles, polarity) under where; a $q role value chains the answers of another query (a join); if/unless $s scopes a supposition to this query and a timed before/after/when/while $s bounds its period; mode select, exists, count, explain (why: the answer is a derivation) or every (a universal question: where is the restriction, scope what must hold); role time ?t asks for the validity interval (when), with measure start, end or duration (since when, until when, how long) and mode count for how many times. candidate $id (1 to 8, modes effect and abduce only, Q-LANG-10) names a supposed stated wire or a session rule/default of the same output that is in force only in this query's runs: mode effect classifies each candidate against a ground claim (establishes, blocks, contradicts, no_effect, inconsistent), mode abduce returns the minimal consistent sets of candidates and the necessary ones; if $r may also suppose a session rule. span is host plumbing (DS014). where is required unless every compare line compares two quoted quantities with units (\"1 hour\" above \"3000 seconds\"), which the runtime converts through the unit facts of the memory."
+    },
+    "constraint": {
+      "one": [
+        "claim",
+        "task",
+        "unit",
+        "objective",
+        "direction",
+        "select"
+      ],
+      "many": [
+        "var",
+        "require"
+      ],
+      "required": [],
+      "role": "numeric-problem",
+      "declaration": true,
+      "authoredByModel": true,
+      "effects": "no-world-write"
+    },
+    "event": {
+      "one": [
+        "action",
+        "target",
+        "effective",
+        "replacement",
+        "source"
+      ],
+      "required": [
+        "action",
+        "target"
+      ],
+      "role": "constructs-claim-update",
+      "declaration": true,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "pack": {
+      "many": [
+        "items"
+      ],
+      "required": [
+        "items"
+      ],
+      "role": "collection-plumbing",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write",
+      "note": "Collects values for downstream execution; host-approved metaprograms assemble this plumbing."
+    },
+    "remember": {
+      "one": [
+        "scope"
+      ],
+      "many": [
+        "input",
+        "after"
+      ],
+      "required": [
+        "input"
+      ],
+      "role": "session-fact-event-recording",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "records-explicit-facts-and-events-in-session",
+      "note": "Records independently admitted facts or events in the session; this does not prove them true or publish them globally. Session commit is separate. Model-authored statements and assumptions are not recording inputs."
+    },
+    "recall": {
+      "one": [
+        "query",
+        "strategy"
+      ],
+      "many": [
+        "after"
+      ],
+      "required": [
+        "query"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "link": {
+      "one": [
+        "query",
+        "data",
+        "strategy"
+      ],
+      "many": [
+        "after"
+      ],
+      "required": [
+        "query"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "solve": {
+      "one": [
+        "query",
+        "constraint",
+        "data",
+        "backend",
+        "strategy",
+        "assume",
+        "reasoning"
+      ],
+      "many": [
+        "output",
+        "after"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "binding": {
+      "one": [
+        "result",
+        "variable",
+        "mode",
+        "owner"
+      ],
+      "required": [
+        "result",
+        "variable",
+        "mode",
+        "owner"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "reason": {
+      "one": [
+        "query",
+        "memory",
+        "data",
+        "constraint",
+        "backend",
+        "assume",
+        "reasoning",
+        "mode"
+      ],
+      "many": [
+        "after"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "may-reinforce-nonhypothetical-observed-proof",
+      "note": "A real non-hypothetical proof may reinforce previously admitted, metadata-verified observed facts when host policy (policy.reinforce is not false) and the memory retention configuration allow promotion; the reason packet reports any promotion, and retrieval or candidate hits alone never promote."
+    },
+    "cnl": {
+      "one": [
+        "result",
+        "language"
+      ],
+      "required": [
+        "result"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "jsEval": {
+      "one": [
+        "expr"
+      ],
+      "required": [
+        "expr"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "template": {
+      "one": [
+        "params",
+        "yield",
+        "body",
+        "description"
+      ],
+      "many": [
+        "cue"
+      ],
+      "required": [
+        "body",
+        "yield"
+      ],
+      "role": "approved-subcircuit",
+      "declaration": true,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "expand": {
+      "one": [
+        "using"
+      ],
+      "many": [
+        "with",
+        "after"
+      ],
+      "required": [
+        "using"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "clarify": {
+      "one": [
+        "text"
+      ],
+      "required": [
+        "text"
+      ],
+      "role": "host-request-for-blocking-information",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write",
+      "note": "The host requests a next-turn answer for a blocking identity or scalar dependency; unknown evidence alone does not require clarification."
+    },
+    "pattern": {
+      "one": [
+        "then",
+        "support",
+        "coverage",
+        "samples",
+        "counterexamples",
+        "source",
+        "status"
+      ],
+      "many": [
+        "when"
+      ],
+      "required": [
+        "when",
+        "then"
+      ],
+      "role": "candidate-regularity",
+      "declaration": true,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "hypothesis": {
+      "one": [
+        "holds",
+        "cost",
+        "status",
+        "source"
+      ],
+      "many": [
+        "assume"
+      ],
+      "role": "candidate-assumptions",
+      "declaration": true,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "action": {
+      "one": [
+        "params",
+        "cost",
+        "source",
+        "valid"
+      ],
+      "many": [
+        "requires",
+        "adds",
+        "removes"
+      ],
+      "required": [
+        "requires"
+      ],
+      "role": "state-transition",
+      "declaration": true,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "goal": {
+      "many": [
+        "where"
+      ],
+      "required": [
+        "where"
+      ],
+      "role": "desired-state",
+      "declaration": true,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "trace": {
+      "one": [
+        "text",
+        "source",
+        "closed",
+        "known"
+      ],
+      "many": [
+        "feature"
+      ],
+      "role": "case-evidence",
+      "declaration": true,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "policy": {
+      "one": [
+        "maxNodes",
+        "maxDepth",
+        "maxHypotheses",
+        "maxCandidates",
+        "maxPlans",
+        "timeoutMs"
+      ],
+      "role": "host-budget-restriction",
+      "declaration": true,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "theory": {
+      "one": [
+        "dialect",
+        "body"
+      ],
+      "required": [
+        "dialect",
+        "body"
+      ],
+      "role": "requires-extension-compiler",
+      "declaration": true,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "procedure": {
+      "one": [
+        "params",
+        "yield",
+        "body",
+        "description"
+      ],
+      "many": [
+        "cue"
+      ],
+      "required": [
+        "body",
+        "yield"
+      ],
+      "role": "approved-subcircuit",
+      "declaration": true,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "abduce": {
+      "one": [
+        "query",
+        "data",
+        "memory",
+        "observation",
+        "candidates",
+        "reasoning",
+        "policy"
+      ],
+      "many": [
+        "output",
+        "after"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "diagnose": {
+      "one": [
+        "query",
+        "data",
+        "memory",
+        "observation",
+        "candidates",
+        "tests",
+        "reasoning",
+        "policy"
+      ],
+      "many": [
+        "output",
+        "after"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "associate": {
+      "one": [
+        "cue",
+        "data",
+        "mode",
+        "reasoning",
+        "policy"
+      ],
+      "many": [
+        "output",
+        "after"
+      ],
+      "required": [
+        "cue",
+        "data"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "induce": {
+      "one": [
+        "data",
+        "candidates",
+        "holdout",
+        "reasoning",
+        "policy"
+      ],
+      "many": [
+        "output",
+        "after"
+      ],
+      "required": [
+        "data"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "analogize": {
+      "one": [
+        "source",
+        "target",
+        "transfer",
+        "reasoning",
+        "policy"
+      ],
+      "many": [
+        "output",
+        "after"
+      ],
+      "required": [
+        "source",
+        "target"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "plan": {
+      "one": [
+        "data",
+        "memory",
+        "actions",
+        "goal",
+        "reasoning",
+        "policy"
+      ],
+      "many": [
+        "output",
+        "after"
+      ],
+      "required": [
+        "goal"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "simulate": {
+      "one": [
+        "query",
+        "data",
+        "memory",
+        "intervention",
+        "mode",
+        "reasoning",
+        "policy"
+      ],
+      "many": [
+        "output",
+        "after"
+      ],
+      "required": [
+        "query",
+        "intervention"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    },
+    "temporal": {
+      "one": [
+        "query",
+        "data",
+        "memory",
+        "reasoning",
+        "policy"
+      ],
+      "many": [
+        "output",
+        "after"
+      ],
+      "required": [
+        "query"
+      ],
+      "role": "operation",
+      "declaration": false,
+      "authoredByModel": false,
+      "effects": "no-world-write"
+    }
+  }
+}

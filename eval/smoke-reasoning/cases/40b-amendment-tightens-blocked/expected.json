@@ -1,0 +1,23 @@
+{
+  "feature": "Amendment what-if that tightens: the proposed prohibition leaves the strict method no legal run, and the answer names both norms",
+  "status": "blocked",
+  "complete": true,
+  "conditional": [
+    "am_tight"
+  ],
+  "blocked_by": [
+    "no_hard_reset_in_hours",
+    "no_soft_reset_in_hours"
+  ],
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "norms_hard",
+    "whatif",
+    "versions",
+    "amendment",
+    "blocked_info",
+    "zero_arity"
+  ]
+}

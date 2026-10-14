@@ -1,0 +1,7 @@
+@p policy
+  maxRounds 3
+
+@q query
+  where reaches n0 ?t
+  select ?t
+  policy $p

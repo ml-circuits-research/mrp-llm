@@ -1,0 +1,344 @@
+# ChatSOP host dictionary: hand-authored and reviewed entries (priority 10: these win over generator.tsv and wiktionary.tsv).
+# Licence: MIT (repository LICENSE); original ChatSOP authored text.
+# Maintain with `node tools/dictionary.mjs add` or `approve` (from review.tsv); columns id pos en ro forms note, lists separated by |, def: marks a definite Romanian form.
+id	pos	en	ro	forms	note
+man:prep:in	prep	in|into	în		prepositions
+man:prep:la	prep	at|to	la		prepositions
+man:prep:din	prep	from|in|of	din		prepositions
+man:prep:de-la	prep	from	de la		prepositions
+man:prep:pe	prep	on	pe		prepositions
+man:prep:cu	prep	with	cu		prepositions
+man:prep:de	prep	of|from|by	de		prepositions
+man:prep:pentru	prep	for	pentru		prepositions
+man:prep:despre	prep	about	despre		prepositions
+man:prep:fara	prep	without	fără		prepositions
+man:prep:sub	prep	under	sub		prepositions
+man:prep:peste	prep	over	peste		prepositions
+man:prep:intre	prep	between	între		prepositions
+man:prep:dupa	prep	after	după		prepositions
+man:prep:inainte-de	prep	before	înainte de		prepositions
+man:prep:pana-la	prep	until	până la		prepositions
+man:prep:catre	prep	towards|to	către		prepositions
+man:prep:langa	prep	near|next to	lângă		prepositions
+man:prep:spre	prep	towards	spre		prepositions
+man:prep:din-cauza	prep	because of	din cauza		prepositions
+man:conj:si	conj	and	și		conjunctions, pronouns, determiners
+man:conj:sau	conj	or	sau		conjunctions, pronouns, determiners
+man:conj:dar	conj	but	dar		conjunctions, pronouns, determiners
+man:conj:daca	conj	if|whether	dacă		conjunctions, pronouns, determiners
+man:conj:ca	conj	that	că		conjunctions, pronouns, determiners
+man:pron:cine	pron	who	cine		conjunctions, pronouns, determiners
+man:pron:ce	pron	what	ce		conjunctions, pronouns, determiners
+man:adv:unde	adv	where	unde		conjunctions, pronouns, determiners
+man:adv:cand	adv	when	când		conjunctions, pronouns, determiners
+man:adv:cat	adv	how much	cât		conjunctions, pronouns, determiners
+man:det:cati	det	how many	câți	câte	conjunctions, pronouns, determiners
+man:det:acest	det	this	acest	această|aceasta|acesta	conjunctions, pronouns, determiners
+man:det:acel	det	that	acel	acea|aceea|acela	conjunctions, pronouns, determiners
+man:det:fiecare	det	every|each	fiecare		conjunctions, pronouns, determiners
+man:det:toti	det	all	toți	toate	conjunctions, pronouns, determiners
+man:verb:fi	verb	be	fi	e|este|sunt|era|erau|fost|a fost|au fost|fiind	copula and auxiliaries
+man:verb:avea	verb	have	avea	am|are|au|avea|aveau|avut|a avut	copula and auxiliaries
+man:verb:putea	verb	can|be able to	putea	poate|pot|putut|a putut	copula and auxiliaries
+man:verb:trebui	verb	must|have to	trebui	trebuie|trebuia|trebuit|a trebuit	copula and auxiliaries
+man:verb:vrea	verb	want	vrea	vreau|vor|vrut|a vrut	copula and auxiliaries
+man:verb:dori	verb	want|wish	dori	dorește|doresc|dorit|a dorit	copula and auxiliaries
+man:verb:lucra	verb	work	lucra	lucrează|lucrez|lucrat|a lucrat	everyday verbs
+man:verb:munci	verb	work	munci	muncește|muncesc|muncit|a muncit	everyday verbs
+man:verb:locui	verb	live|reside	locui	locuiește|locuiesc|locuit|a locuit	everyday verbs
+man:verb:studia	verb	study	studia	studiază|studiez|studiat|a studiat	everyday verbs
+man:verb:invata	verb	learn|study	învăța	învață|învăț|învățat|a învățat	everyday verbs
+man:verb:preda	verb	teach	preda	predă|predau|predat|a predat	everyday verbs
+man:verb:cumpara	verb	buy	cumpăra	cumpără|cumpăr|cumpărat|a cumpărat	everyday verbs
+man:verb:vinde	verb	sell	vinde	vând|vândut|a vândut	everyday verbs
+man:verb:plati	verb	pay	plăti	plătește|plătesc|plătit|a plătit	everyday verbs
+man:verb:achita	verb	pay|settle	achita	achită|achit|achitat|a achitat	everyday verbs
+man:verb:deschide	verb	open	deschide	deschid|deschis|a deschis	everyday verbs
+man:verb:inchide	verb	close|shut	închide	închid|închis|a închis	everyday verbs
+man:verb:trimite	verb	send	trimite	trimit|trimis|a trimis	everyday verbs
+man:verb:primi	verb	receive|get	primi	primește|primesc|primit|a primit	everyday verbs
+man:verb:sosi	verb	arrive	sosi	sosește|sosesc|sosit|a sosit	everyday verbs
+man:verb:ajunge	verb	arrive|get to|reach	ajunge	ajung|ajuns|a ajuns	everyday verbs
+man:verb:pleca	verb	leave|depart	pleca	pleacă|plec|plecat|a plecat	everyday verbs
+man:verb:detine	verb	own|hold	deține	dețin|deținut|a deținut	everyday verbs
+man:verb:inchiria	verb	rent|hire	închiria	închiriază|închiriez|închiriat|a închiriat	everyday verbs
+man:verb:vizita	verb	visit	vizita	vizitează|vizitez|vizitat|a vizitat	everyday verbs
+man:verb:scrie	verb	write	scrie	scriu|scris|a scris	everyday verbs
+man:verb:citi	verb	read	citi	citește|citesc|citit|a citit	everyday verbs
+man:verb:intalni	verb	meet	întâlni	întâlnește|întâlnesc|întâlnit|a întâlnit	everyday verbs
+man:verb:suna	verb	call|ring	suna	sună|sun|sunat|a sunat	everyday verbs
+man:verb:chema	verb	call|summon	chema	cheamă|chem|chemat|a chemat	everyday verbs
+man:verb:conduce	verb	lead|manage|drive	conduce	conduc|condus|a condus	everyday verbs
+man:verb:gestiona	verb	manage	gestiona	gestionează|gestionez|gestionat|a gestionat	everyday verbs
+man:verb:coordona	verb	coordinate|manage	coordona	coordonează|coordonez|coordonat|a coordonat	everyday verbs
+man:verb:repara	verb	repair|fix	repara	repară|repar|reparat|a reparat	everyday verbs
+man:verb:costa	verb	cost	costa	costă|costat|a costat	everyday verbs
+man:verb:apartine	verb	belong	aparține	aparțin|aparținut|a aparținut	everyday verbs
+man:verb:intampla	verb	happen	întâmpla	întâmplă|întâmplat|s-a întâmplat	everyday verbs
+man:verb:incepe	verb	start|begin	începe	încep|început|a început	everyday verbs
+man:verb:termina	verb	finish|end	termina	termină|termin|terminat|a terminat	everyday verbs
+man:verb:anula	verb	cancel	anula	anulează|anulez|anulat|a anulat	everyday verbs
+man:verb:amana	verb	postpone|delay	amâna	amână|amân|amânat|a amânat	everyday verbs
+man:verb:merge	verb	go	merge	merg|mers|a mers	everyday verbs
+man:verb:veni	verb	come	veni	vine|vin|venit|a venit	everyday verbs
+man:verb:da	verb	give	da	dă|dau|dat|a dat	everyday verbs
+man:verb:lua	verb	take	lua	ia|iau|luat|a luat	everyday verbs
+man:verb:face	verb	do|make	face	fac|făcut|a făcut	everyday verbs
+man:verb:vedea	verb	see	vedea	vede|văd|văzut|a văzut	everyday verbs
+man:verb:sti	verb	know	ști	știe|știu|știut|a știut	everyday verbs
+man:verb:cunoaste	verb	know	cunoaște	cunosc|cunoscut|a cunoscut	everyday verbs
+man:verb:spune	verb	say|tell	spune	spun|spus|a spus	everyday verbs
+man:verb:intreba	verb	ask	întreba	întreabă|întreb|întrebat|a întrebat	everyday verbs
+man:verb:raspunde	verb	answer|reply	răspunde	răspund|răspuns|a răspuns	everyday verbs
+man:verb:ajuta	verb	help	ajuta	ajută|ajut|ajutat|a ajutat	everyday verbs
+man:verb:folosi	verb	use	folosi	folosește|folosesc|folosit|a folosit	everyday verbs
+man:verb:gasi	verb	find	găsi	găsește|găsesc|găsit|a găsit	everyday verbs
+man:verb:pierde	verb	lose|miss	pierde	pierd|pierdut|a pierdut	everyday verbs
+man:verb:astepta	verb	wait|expect	aștepta	așteaptă|aștept|așteptat|a așteptat	everyday verbs
+man:verb:rezerva	verb	book|reserve	rezerva	rezervă|rezerv|rezervat|a rezervat	everyday verbs
+man:verb:comanda	verb	order	comanda	comandă|comand|comandat|a comandat	everyday verbs
+man:verb:livra	verb	deliver	livra	livrează|livrez|livrat|a livrat	everyday verbs
+man:verb:calatori	verb	travel	călători	călătorește|călătoresc|călătorit|a călătorit	everyday verbs
+man:verb:manca	verb	eat	mânca	mănâncă|mănânc|mâncat|a mâncat	everyday verbs
+man:verb:bea	verb	drink	bea	beau|băut|a băut	everyday verbs
+man:verb:dormi	verb	sleep	dormi	doarme|dorm|dormit|a dormit	everyday verbs
+man:verb:gati	verb	cook	găti	gătește|gătesc|gătit|a gătit	everyday verbs
+man:verb:juca	verb	play	juca	joacă|joc|jucat|a jucat	everyday verbs
+man:verb:canta	verb	sing	cânta	cântă|cânt|cântat|a cântat	everyday verbs
+man:verb:castiga	verb	win|earn	câștiga	câștigă|câștig|câștigat|a câștigat	everyday verbs
+man:verb:imprumuta	verb	borrow|lend	împrumuta	împrumută|împrumut|împrumutat|a împrumutat	everyday verbs
+man:verb:muta	verb	move	muta	mută|mut|mutat|a mutat|s-a mutat	everyday verbs
+man:verb:sta	verb	stay|stand|live	sta	stă|stau|stat|a stat	everyday verbs
+man:verb:ramane	verb	stay|remain	rămâne	rămân|rămas|a rămas	everyday verbs
+man:verb:angaja	verb	hire|employ	angaja	angajează|angajez|angajat|a angajat	everyday verbs
+man:verb:concedia	verb	dismiss|fire	concedia	concediază|concediez|concediat|a concediat	everyday verbs
+man:verb:demisiona	verb	resign	demisiona	demisionează|demisionez|demisionat|a demisionat	everyday verbs
+man:verb:semna	verb	sign	semna	semnează|semnez|semnat|a semnat	everyday verbs
+man:verb:aproba	verb	approve	aproba	aprobă|aprob|aprobat|a aprobat	everyday verbs
+man:verb:refuza	verb	refuse|reject	refuza	refuză|refuz|refuzat|a refuzat	everyday verbs
+man:verb:accepta	verb	accept	accepta	acceptă|accept|acceptat|a acceptat	everyday verbs
+man:verb:verifica	verb	check|verify	verifica	verifică|verific|verificat|a verificat	everyday verbs
+man:verb:schimba	verb	change	schimba	schimbă|schimb|schimbat|a schimbat	everyday verbs
+man:verb:returna	verb	return	returna	returnează|returnez|returnat|a returnat	everyday verbs
+man:verb:invita	verb	invite	invita	invită|invit|invitat|a invitat	everyday verbs
+man:verb:participa	verb	take part|participate|attend	participa	participă|particip|participat|a participat	everyday verbs
+man:verb:arata	verb	show	arăta	arată|arăt|arătat|a arătat	everyday verbs
+man:verb:crede	verb	believe|think	crede	cred|crezut|a crezut	everyday verbs
+man:verb:placea	verb	like	plăcea	place|plac|plăcut|a plăcut	everyday verbs
+man:verb:iubi	verb	love	iubi	iubește|iubesc|iubit|a iubit	everyday verbs
+man:verb:alege	verb	choose|elect	alege	aleg|ales|a ales	everyday verbs
+man:verb:incerca	verb	try	încerca	încearcă|încerc|încercat|a încercat	everyday verbs
+man:verb:construi	verb	build	construi	construiește|construiesc|construit|a construit	everyday verbs
+man:verb:curata	verb	clean	curăța	curăță|curăț|curățat|a curățat	everyday verbs
+man:verb:instala	verb	install	instala	instalează|instalez|instalat|a instalat	everyday verbs
+man:verb:inscrie	verb	enrol|register	înscrie	înscriu|înscris|a înscris	everyday verbs
+man:verb:absolvi	verb	graduate from	absolvi	absolvește|absolvesc|absolvit|a absolvit	everyday verbs
+man:verb:casatori	verb	marry	căsători	căsătorește|căsătoresc|căsătorit|s-a căsătorit	everyday verbs
+man:verb:muri	verb	die	muri	moare|mor|murit|a murit	everyday verbs
+man:verb:creste	verb	grow|raise	crește	cresc|crescut|a crescut	everyday verbs
+man:verb:zbura	verb	fly	zbura	zboară|zbor|zburat|a zburat	everyday verbs
+man:verb:alerga	verb	run	alerga	aleargă|alerg|alergat|a alergat	everyday verbs
+man:verb:intelege	verb	understand	înțelege	înțeleg|înțeles|a înțeles	everyday verbs
+man:verb:uita	verb	forget	uita	uită|uit|uitat|a uitat	everyday verbs
+man:verb:contine	verb	contain	conține	conțin|conținut|a conținut	everyday verbs
+man:verb:cheltui	verb	spend	cheltui	cheltuiește|cheltuiesc|cheltuit|a cheltuit	everyday verbs
+man:verb:transfera	verb	transfer	transfera	transferă|transfer|transferat|a transferat	everyday verbs
+man:verb:purta	verb	wear|carry	purta	poartă|port|purtat|a purtat	everyday verbs
+man:verb:aduce	verb	bring	aduce	aduc|adus|a adus	everyday verbs
+man:verb:lipsi	verb	be absent|be missing	lipsi	lipsește|lipsesc|lipsit|a lipsit	everyday verbs
+man:verb:trata	verb	treat	trata	tratează|tratez|tratat|a tratat	everyday verbs
+man:verb:antrena	verb	train|coach	antrena	antrenează|antrenez|antrenat|a antrenat	everyday verbs
+man:verb:intretine	verb	maintain	întreține	întrețin|întreținut|a întreținut	everyday verbs
+man:verb:depinde	verb	depend	depinde	depind|depins|a depins	everyday verbs
+man:verb:necesita	verb	require|need	necesita	necesită|necesitat|a necesitat	everyday verbs
+man:verb:publica	verb	publish	publica	publică|public|publicat|a publicat	everyday verbs
+man:verb:gazdui	verb	host	găzdui	găzduiește|găzduiesc|găzduit|a găzduit	everyday verbs
+man:verb:elibera	verb	issue|release	elibera	eliberează|eliberez|eliberat|a eliberat	everyday verbs
+man:verb:cultiva	verb	grow|cultivate	cultiva	cultivă|cultiv|cultivat|a cultivat	everyday verbs
+man:verb:emite	verb	issue	emite	emit|emis|a emis	everyday verbs
+man:verb:rambursa	verb	refund|reimburse	rambursa	rambursează|rambursez|rambursat|a rambursat	everyday verbs
+man:verb:factura	verb	invoice|bill	factura	facturează|facturez|facturat|a facturat	everyday verbs
+man:noun:firma	noun	company|firm	firmă	def:firma|firme|def:firmele	nouns
+man:noun:companie	noun	company	companie	def:compania|companii|def:companiile	nouns
+man:noun:scoala	noun	school	școală	def:școala|școli|def:școlile	nouns
+man:noun:spital	noun	hospital	spital	def:spitalul|spitale|def:spitalele	nouns
+man:noun:medic	noun	doctor|physician	medic	def:medicul|medici|def:medicii	nouns
+man:noun:doctor	noun	doctor	doctor	def:doctorul|doctori|def:doctorii	nouns
+man:noun:profesor	noun	teacher|professor	profesor	def:profesorul|profesori|def:profesorii|profesoară|def:profesoara	nouns
+man:noun:oras	noun	city|town	oraș	def:orașul|orașe|def:orașele	nouns
+man:noun:sat	noun	village	sat	def:satul|sate|def:satele	nouns
+man:noun:casa	noun	house|home	casă	def:casa|case|def:casele	nouns
+man:noun:apartament	noun	apartment|flat	apartament	def:apartamentul|apartamente|def:apartamentele	nouns
+man:noun:masina	noun	car	mașină	def:mașina|mașini|def:mașinile	nouns
+man:noun:autobuz	noun	bus	autobuz	def:autobuzul|autobuze|def:autobuzele	nouns
+man:noun:tren	noun	train	tren	def:trenul|trenuri|def:trenurile	nouns
+man:noun:factura	noun	invoice|bill	factură	def:factura|facturi|def:facturile	nouns
+man:noun:contract	noun	contract	contract	def:contractul|contracte|def:contractele	nouns
+man:noun:intalnire	noun	meeting|appointment	întâlnire	def:întâlnirea|întâlniri|def:întâlnirile	nouns
+man:noun:sedinta	noun	meeting	ședință	def:ședința|ședințe|def:ședințele	nouns
+man:noun:birou	noun	office|desk	birou	def:biroul|birouri|def:birourile	nouns
+man:phrase:sala-de-sport	phrase	gym	sală de sport	def:sala de sport|săli de sport	nouns
+man:noun:sala	noun	room|hall	sală	def:sala|săli|def:sălile	nouns
+man:noun:magazin	noun	shop|store	magazin	def:magazinul|magazine|def:magazinele	nouns
+man:noun:banca	noun	bank	bancă	def:banca|bănci|def:băncile	nouns
+man:noun:card	noun	card	card	def:cardul|carduri|def:cardurile	nouns
+man:noun:cont	noun	account	cont	def:contul|conturi|def:conturile	nouns
+man:noun:plata	noun	payment	plată	def:plata|plăți|def:plățile	nouns
+man:noun:rambursare	noun	refund	rambursare	def:rambursarea|rambursări|def:rambursările	nouns
+man:noun:bilet	noun	ticket	bilet	def:biletul|bilete|def:biletele	nouns
+man:noun:zbor	noun	flight	zbor	def:zborul|zboruri|def:zborurile	nouns
+man:noun:weekend	noun	weekend	weekend	def:weekendul|weekenduri	nouns
+man:phrase:sfarsit-de-saptamana	phrase	weekend	sfârșit de săptămână	def:sfârșitul de săptămână	nouns
+man:noun:dimineata	noun	morning	dimineață	def:dimineața|dimineți	nouns
+man:noun:seara	noun	evening	seară	def:seara|seri|def:serile	nouns
+man:noun:noapte	noun	night	noapte	def:noaptea|nopți|def:nopțile	nouns
+man:noun:zi	noun	day	zi	def:ziua|zile|def:zilele	nouns
+man:noun:saptamana	noun	week	săptămână	def:săptămâna|săptămâni|def:săptămânile	nouns
+man:noun:luna	noun	month	lună	def:luna|luni|def:lunile	nouns
+man:noun:an	noun	year	an	def:anul|ani|def:anii	nouns
+man:noun:ora	noun	hour	oră	def:ora|ore|def:orele	nouns
+man:noun:minut	noun	minute	minut	def:minutul|minute|def:minutele	nouns
+man:noun:persoana	noun	person	persoană	def:persoana|persoane|def:persoanele	nouns
+man:noun:om	noun	person|man	om	def:omul|oameni|def:oamenii	nouns
+man:noun:barbat	noun	man	bărbat	def:bărbatul|bărbați|def:bărbații	nouns
+man:noun:femeie	noun	woman	femeie	def:femeia|femei|def:femeile	nouns
+man:noun:copil	noun	child	copil	def:copilul|copii|def:copiii	nouns
+man:noun:familie	noun	family	familie	def:familia|familii|def:familiile	nouns
+man:noun:client	noun	client|customer	client	def:clientul|clienți|def:clienții	nouns
+man:noun:angajat	noun	employee	angajat	def:angajatul|angajați|def:angajații|angajată|def:angajata	nouns
+man:noun:manager	noun	manager	manager	def:managerul|manageri|def:managerii	nouns
+man:noun:student	noun	student	student	def:studentul|studenți|def:studenții|studentă|def:studenta	nouns
+man:noun:elev	noun	pupil|student	elev	def:elevul|elevi|def:elevii|elevă|def:eleva	nouns
+man:noun:universitate	noun	university	universitate	def:universitatea|universități|def:universitățile	nouns
+man:noun:curs	noun	course|class	curs	def:cursul|cursuri|def:cursurile	nouns
+man:noun:clasa	noun	class	clasă	def:clasa|clase|def:clasele	nouns
+man:noun:examen	noun	exam	examen	def:examenul|examene|def:examenele	nouns
+man:noun:carte	noun	book	carte	def:cartea|cărți|def:cărțile	nouns
+man:noun:biblioteca	noun	library	bibliotecă	def:biblioteca|biblioteci|def:bibliotecile	nouns
+man:noun:restaurant	noun	restaurant	restaurant	def:restaurantul|restaurante|def:restaurantele	nouns
+man:noun:hotel	noun	hotel	hotel	def:hotelul|hoteluri|def:hotelurile	nouns
+man:noun:camera	noun	room	cameră	def:camera|camere|def:camerele	nouns
+man:noun:strada	noun	street	stradă	def:strada|străzi|def:străzile	nouns
+man:noun:tara	noun	country	țară	def:țara|țări|def:țările	nouns
+man:noun:aeroport	noun	airport	aeroport	def:aeroportul|aeroporturi|def:aeroporturile	nouns
+man:noun:gara	noun	railway station|station	gară	def:gara|gări|def:gările	nouns
+man:noun:statie	noun	stop|station	stație	def:stația|stații|def:stațiile	nouns
+man:noun:pret	noun	price	preț	def:prețul|prețuri|def:prețurile	nouns
+man:noun:bani	noun	money	bani	def:banii	nouns
+man:noun:salariu	noun	salary|wage	salariu	def:salariul|salarii|def:salariile	nouns
+man:noun:slujba	noun	job	slujbă	def:slujba|slujbe|def:slujbele	nouns
+man:phrase:loc-de-munca	phrase	job|workplace	loc de muncă	def:locul de muncă|locuri de muncă	nouns
+man:noun:munca	noun	work|labour	muncă	def:munca	nouns
+man:noun:comanda	noun	order	comandă	def:comanda|comenzi|def:comenzile	nouns
+man:noun:colet	noun	parcel|package	colet	def:coletul|colete|def:coletele	nouns
+man:noun:livrare	noun	delivery	livrare	def:livrarea|livrări|def:livrările	nouns
+man:noun:telefon	noun	phone|telephone	telefon	def:telefonul|telefoane|def:telefoanele	nouns
+man:noun:e-mail	noun	email|e-mail	e-mail	def:e-mailul|e-mailuri|email|def:emailul	nouns
+man:noun:mesaj	noun	message	mesaj	def:mesajul|mesaje|def:mesajele	nouns
+man:noun:document	noun	document	document	def:documentul|documente|def:documentele	nouns
+man:noun:raport	noun	report	raport	def:raportul|rapoarte|def:rapoartele	nouns
+man:noun:proiect	noun	project	proiect	def:proiectul|proiecte|def:proiectele	nouns
+man:noun:echipa	noun	team	echipă	def:echipa|echipe|def:echipele	nouns
+man:noun:programare	noun	appointment	programare	def:programarea|programări|def:programările	nouns
+man:noun:rezervare	noun	reservation|booking	rezervare	def:rezervarea|rezervări|def:rezervările	nouns
+man:noun:abonament	noun	subscription	abonament	def:abonamentul|abonamente|def:abonamentele	nouns
+man:noun:asigurare	noun	insurance	asigurare	def:asigurarea|asigurări|def:asigurările	nouns
+man:noun:imprumut	noun	loan	împrumut	def:împrumutul|împrumuturi|def:împrumuturile	nouns
+man:noun:credit	noun	loan|credit	credit	def:creditul|credite|def:creditele	nouns
+man:noun:taxa	noun	fee|tax	taxă	def:taxa|taxe|def:taxele	nouns
+man:noun:impozit	noun	tax	impozit	def:impozitul|impozite|def:impozitele	nouns
+man:noun:chitanta	noun	receipt	chitanță	def:chitanța|chitanțe|def:chitanțele	nouns
+man:noun:reducere	noun	discount	reducere	def:reducerea|reduceri|def:reducerile	nouns
+man:noun:cheie	noun	key	cheie	def:cheia|chei|def:cheile	nouns
+man:noun:usa	noun	door	ușă	def:ușa|uși|def:ușile	nouns
+man:noun:masa	noun	table|meal	masă	def:masa|mese|def:mesele	nouns
+man:noun:bucatarie	noun	kitchen	bucătărie	def:bucătăria|bucătării|def:bucătăriile	nouns
+man:noun:gradina	noun	garden	grădină	def:grădina|grădini|def:grădinile	nouns
+man:noun:parc	noun	park	parc	def:parcul|parcuri|def:parcurile	nouns
+man:noun:biserica	noun	church	biserică	def:biserica|biserici|def:bisericile	nouns
+man:noun:muzeu	noun	museum	muzeu	def:muzeul|muzee|def:muzeele	nouns
+man:noun:farmacie	noun	pharmacy	farmacie	def:farmacia|farmacii|def:farmaciile	nouns
+man:noun:clinica	noun	clinic	clinică	def:clinica|clinici|def:clinicile	nouns
+man:noun:medicament	noun	medicine|drug	medicament	def:medicamentul|medicamente|def:medicamentele	nouns
+man:noun:boala	noun	illness|disease	boală	def:boala|boli|def:bolile	nouns
+man:noun:apa	noun	water	apă	def:apa|ape|def:apele	nouns
+man:noun:mancare	noun	food	mâncare	def:mâncarea|mâncăruri	nouns
+man:noun:cafea	noun	coffee	cafea	def:cafeaua|cafele|def:cafelele	nouns
+man:noun:paine	noun	bread	pâine	def:pâinea|pâini|def:pâinile	nouns
+man:noun:problema	noun	problem|issue	problemă	def:problema|probleme|def:problemele	nouns
+man:noun:intrebare	noun	question	întrebare	def:întrebarea|întrebări|def:întrebările	nouns
+man:noun:raspuns	noun	answer|reply	răspuns	def:răspunsul|răspunsuri|def:răspunsurile	nouns
+man:noun:numar	noun	number	număr	def:numărul|numere|def:numerele	nouns
+man:noun:adresa	noun	address	adresă	def:adresa|adrese|def:adresele	nouns
+man:noun:nume	noun	name	nume	def:numele	nouns
+man:noun:data	noun	date	dată	def:data	nouns
+man:noun:vacanta	noun	holiday|vacation	vacanță	def:vacanța|vacanțe|def:vacanțele	nouns
+man:noun:concediu	noun	leave|holiday	concediu	def:concediul|concedii|def:concediile	nouns
+man:noun:calatorie	noun	trip|journey	călătorie	def:călătoria|călătorii|def:călătoriile	nouns
+man:noun:excursie	noun	trip|excursion	excursie	def:excursia|excursii|def:excursiile	nouns
+man:noun:eveniment	noun	event	eveniment	def:evenimentul|evenimente|def:evenimentele	nouns
+man:noun:concert	noun	concert	concert	def:concertul|concerte|def:concertele	nouns
+man:noun:meci	noun	match|game	meci	def:meciul|meciuri|def:meciurile	nouns
+man:noun:jucator	noun	player	jucător	def:jucătorul|jucători|def:jucătorii	nouns
+man:noun:primarie	noun	town hall|city hall	primărie	def:primăria|primării|def:primăriile	nouns
+man:noun:politie	noun	police	poliție	def:poliția	nouns
+man:noun:tribunal	noun	court	tribunal	def:tribunalul|tribunale|def:tribunalele	nouns
+man:noun:avocat	noun	lawyer	avocat	def:avocatul|avocați|def:avocații	nouns
+man:noun:lege	noun	law	lege	def:legea|legi|def:legile	nouns
+man:noun:regula	noun	rule	regulă	def:regula|reguli|def:regulile	nouns
+man:noun:calculator	noun	computer	calculator	def:calculatorul|calculatoare|def:calculatoarele	nouns
+man:noun:aplicatie	noun	app|application	aplicație	def:aplicația|aplicații|def:aplicațiile	nouns
+man:noun:parola	noun	password	parolă	def:parola|parole|def:parolele	nouns
+man:noun:serviciu	noun	job|service	serviciu	def:serviciul|servicii|def:serviciile	nouns
+man:noun:program	noun	schedule|programme|program	program	def:programul|programe|def:programele	nouns
+man:phrase:masina-de-spalat	phrase	washing machine	mașină de spălat	def:mașina de spălat	nouns
+man:noun:vecin	noun	neighbour|neighbor	vecin	def:vecinul|vecini|def:vecinii	nouns
+man:noun:prieten	noun	friend	prieten	def:prietenul|prieteni|def:prietenii	nouns
+man:noun:coleg	noun	colleague	coleg	def:colegul|colegi|def:colegii	nouns
+man:noun:sef	noun	boss	șef	def:șeful|șefi|def:șefii|șefă|def:șefa	nouns
+man:adj:deschis	adj	open	deschis	deschisă|deschiși|deschise	adjectives and adverbs
+man:adj:inchis	adj	closed	închis	închisă|închiși|închise	adjectives and adverbs
+man:adj:liber	adj	free|available	liber	liberă|liberi|libere	adjectives and adverbs
+man:adj:gratuit	adj	free|free of charge	gratuit	gratuită|gratuiți|gratuite	adjectives and adverbs
+man:adj:disponibil	adj	available	disponibil	disponibilă|disponibili|disponibile	adjectives and adverbs
+man:adj:nou	adj	new	nou	nouă|noi	adjectives and adverbs
+man:adj:vechi	adj	old	vechi	veche	adjectives and adverbs
+man:adj:mare	adj	big|large	mare		adjectives and adverbs
+man:adj:mic	adj	small|little	mic	mică|mici	adjectives and adverbs
+man:adj:bun	adj	good	bun	bună|buni|bune	adjectives and adverbs
+man:adj:rau	adj	bad	rău	rea|răi|rele	adjectives and adverbs
+man:adj:ieftin	adj	cheap	ieftin	ieftină|ieftini|ieftine	adjectives and adverbs
+man:adj:scump	adj	expensive	scump	scumpă|scumpi|scumpe	adjectives and adverbs
+man:adj:bolnav	adj	ill|sick	bolnav	bolnavă|bolnavi|bolnave	adjectives and adverbs
+man:adj:ocupat	adj	busy|occupied	ocupat	ocupată|ocupați|ocupate	adjectives and adverbs
+man:adj:valabil	adj	valid	valabil	valabilă|valabili|valabile	adjectives and adverbs
+man:adj:platit	adj	paid	plătit	plătită|plătiți|plătite	adjectives and adverbs
+man:adj:urmator	adj	next|following	următor	următoare|următori	adjectives and adverbs
+man:adj:trecut	adj	last|past	trecut	trecută|trecuți|trecute	adjectives and adverbs
+man:adv:azi	adv	today	azi	astăzi	adjectives and adverbs
+man:adv:maine	adv	tomorrow	mâine		adjectives and adverbs
+man:adv:ieri	adv	yesterday	ieri		adjectives and adverbs
+man:adv:acum	adv	now	acum		adjectives and adverbs
+man:adv:mereu	adv	always	mereu	întotdeauna	adjectives and adverbs
+man:adv:niciodata	adv	never	niciodată		adjectives and adverbs
+man:adv:des	adv	often	des	adesea	adjectives and adverbs
+man:adv:devreme	adv	early	devreme		adjectives and adverbs
+man:adv:tarziu	adv	late	târziu		adjectives and adverbs
+man:adv:inca	adv	still|yet	încă		adjectives and adverbs
+man:adv:deja	adv	already	deja		adjectives and adverbs
+man:noun:luni	noun	Monday	luni		weekdays and numbers
+man:noun:marti	noun	Tuesday	marți		weekdays and numbers
+man:noun:miercuri	noun	Wednesday	miercuri		weekdays and numbers
+man:noun:joi	noun	Thursday	joi		weekdays and numbers
+man:noun:vineri	noun	Friday	vineri		weekdays and numbers
+man:noun:sambata	noun	Saturday	sâmbătă		weekdays and numbers
+man:noun:duminica	noun	Sunday	duminică		weekdays and numbers
+man:num:unu	num	one	unu	unul|una	weekdays and numbers
+man:num:doi	num	two	doi	două	weekdays and numbers
+man:num:trei	num	three	trei		weekdays and numbers
+man:num:patru	num	four	patru		weekdays and numbers
+man:num:cinci	num	five	cinci		weekdays and numbers
+man:num:sase	num	six	șase		weekdays and numbers
+man:num:sapte	num	seven	șapte		weekdays and numbers
+man:num:opt	num	eight	opt		weekdays and numbers
+man:num:zece	num	ten	zece		weekdays and numbers

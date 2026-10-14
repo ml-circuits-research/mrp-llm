@@ -1,0 +1,31 @@
+{
+  "schema": "symbolic-vs-llm-generator-config-v1",
+  "seed": 20261001,
+  "dev": {
+    "root": "eval/smoke-reasoning/bench",
+    "split": "dev",
+    "seed": 20261001,
+    "per_family": 100
+  },
+  "sealed": {
+    "root": "eval/suites/symbolic-vs-llm-v1",
+    "split": "sealed",
+    "seed": 20261003,
+    "per_family": 600,
+    "stages": [100, 300, 600],
+    "generated": false,
+    "requires_owner_sealing_procedure": true
+  },
+  "heldout_preview": {
+    "split": "preview",
+    "seed": 20261002,
+    "persisted": false,
+    "source": "in-memory independently generated identities; audit via eval/smoke-reasoning/bench/audit.mjs"
+  },
+  "scale_cells": [
+    {"facts": 1000, "materialized_dev": true},
+    {"facts": 10000, "materialized_dev": false},
+    {"facts": 100000, "materialized_dev": false},
+    {"facts": 1000000, "materialized_dev": false, "verified_in_memory": true, "observed_knowledge_bytes": 43666865, "observed_english_parts": 40, "observed_largest_english_part_bytes": 1375277}
+  ]
+}

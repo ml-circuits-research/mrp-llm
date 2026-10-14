@@ -1,0 +1,125 @@
+# conversation-v1: the data of the situations (DS023 "Conversation layer"): priorities (per part, the highest applicable one is used)
+# and the pragmatic kinds that select a courtesy reply, an opening, a closing or the short style. The kinds are sop/enums.mjs PRAGMATIC_KINDS.
+
+@cv_d1 fact
+  holds cv_situation_priority answer_found 100
+@cv_d2 fact
+  holds cv_situation_priority near_candidate_described 90
+@cv_d3 fact
+  holds cv_situation_priority near_candidate 89
+@cv_d4 fact
+  holds cv_situation_priority relation_missing_topics 80
+@cv_d5 fact
+  holds cv_situation_priority relation_missing 79
+@cv_d6 fact
+  holds cv_situation_priority ambiguous_readings 75
+@cv_d7 fact
+  holds cv_situation_priority ambiguous 74
+@cv_d8 fact
+  holds cv_situation_priority gibberish 72
+@cv_d9 fact
+  holds cv_situation_priority no_request_topics 71
+@cv_d10 fact
+  holds cv_situation_priority no_request 70
+@cv_d11 fact
+  holds cv_situation_priority courtesy_greeting 66
+@cv_d12 fact
+  holds cv_situation_priority courtesy_closing 65
+@cv_d13 fact
+  holds cv_situation_priority courtesy_thanks 64
+@cv_d14 fact
+  holds cv_situation_priority courtesy_apology 63
+@cv_d15 fact
+  holds cv_situation_priority courtesy_politeness 62
+@cv_d16 fact
+  holds cv_situation_priority courtesy_confusion 61
+@cv_d17 fact
+  holds cv_situation_priority courtesy_trouble 60
+@cv_d18 fact
+  holds cv_situation_priority courtesy_sadness 59
+@cv_d19 fact
+  holds cv_situation_priority courtesy_joy 58
+@cv_d20 fact
+  holds cv_situation_priority courtesy_urgency 57
+@cv_d21 fact
+  holds cv_situation_priority courtesy_curiosity 56
+@cv_d22 fact
+  holds cv_situation_priority courtesy_none_topics 11
+@cv_d23 fact
+  holds cv_situation_priority courtesy_none 10
+@cv_d24 fact
+  holds cv_situation_priority answer_open 40
+@cv_d25 fact
+  holds cv_situation_priority open_sorry 35
+@cv_d26 fact
+  holds cv_situation_priority open_support 34
+@cv_d27 fact
+  holds cv_situation_priority open_greeting 30
+@cv_d28 fact
+  holds cv_situation_priority open_thanks 29
+@cv_d29 fact
+  holds cv_situation_priority open_apology 28
+@cv_d30 fact
+  holds cv_situation_priority open_politeness 27
+@cv_d31 fact
+  holds cv_situation_priority near_relations 40
+@cv_d32 fact
+  holds cv_situation_priority close_confusion 32
+@cv_d33 fact
+  holds cv_situation_priority close_goodbye 30
+@cv_d34 fact
+  holds cv_situation_priority offer_topics 10
+@cv_d35 fact
+  holds cv_courtesy_situation greeting courtesy_greeting
+@cv_d36 fact
+  holds cv_courtesy_situation closing courtesy_closing
+@cv_d37 fact
+  holds cv_courtesy_situation thanks courtesy_thanks
+@cv_d38 fact
+  holds cv_courtesy_situation apology courtesy_apology
+@cv_d39 fact
+  holds cv_courtesy_situation politeness courtesy_politeness
+@cv_d40 fact
+  holds cv_courtesy_situation confusion courtesy_confusion
+@cv_d41 fact
+  holds cv_courtesy_situation frustration courtesy_trouble
+@cv_d42 fact
+  holds cv_courtesy_situation anger courtesy_trouble
+@cv_d43 fact
+  holds cv_courtesy_situation disappointment courtesy_trouble
+@cv_d44 fact
+  holds cv_courtesy_situation sadness courtesy_sadness
+@cv_d45 fact
+  holds cv_courtesy_situation fear courtesy_sadness
+@cv_d46 fact
+  holds cv_courtesy_situation joy courtesy_joy
+@cv_d47 fact
+  holds cv_courtesy_situation urgency courtesy_urgency
+@cv_d48 fact
+  holds cv_courtesy_situation curiosity courtesy_curiosity
+@cv_d49 fact
+  holds cv_opening_situation frustration open_sorry
+@cv_d50 fact
+  holds cv_opening_situation anger open_sorry
+@cv_d51 fact
+  holds cv_opening_situation disappointment open_sorry
+@cv_d52 fact
+  holds cv_opening_situation sadness open_support
+@cv_d53 fact
+  holds cv_opening_situation fear open_support
+@cv_d54 fact
+  holds cv_opening_situation greeting open_greeting
+@cv_d55 fact
+  holds cv_opening_situation thanks open_thanks
+@cv_d56 fact
+  holds cv_opening_situation apology open_apology
+@cv_d57 fact
+  holds cv_opening_situation politeness open_politeness
+@cv_d58 fact
+  holds cv_closing_situation confusion close_confusion
+@cv_d59 fact
+  holds cv_closing_situation closing close_goodbye
+@cv_d60 fact
+  holds cv_short_kind urgency
+@cv_d61 fact
+  holds cv_situation_priority known_candidate_described 85

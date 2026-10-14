@@ -1,0 +1,27 @@
+{
+  "benchmark": "lcquad2",
+  "title": "LC-QuAD 2.0, test split",
+  "url": "https://github.com/AskNowQA/LC-QuAD2.0 (figshare 7982858)",
+  "license": "CC-BY-4.0 (figshare record; the Hugging Face card states CC-BY-3.0)",
+  "citation": "Dubey, Banerjee, Abdelkawi, Lehmann. LC-QuAD 2.0: A Large Dataset for Complex Question Answering over Wikidata and DBpedia. ISWC 2019.",
+  "files": {
+    "test.json": "https://raw.githubusercontent.com/AskNowQA/LC-QuAD2.0/master/dataset/test.json"
+  },
+  "seed": "kbqa-v1",
+  "population": 5836,
+  "sampled": 953,
+  "dropped_no_gold": 227,
+  "dropped_error": 0,
+  "built_at": "2026-10-01T16:02:42.453Z",
+  "gold_source": "gold SPARQL executed on query.wikidata.org at build time (answers capped at 2000)",
+  "types": {
+    "count": 125,
+    "intersection": 125,
+    "simple": 125,
+    "string_filter": 103,
+    "superlative": 100,
+    "yesno": 125,
+    "multihop": 125,
+    "qualifier": 125
+  }
+}

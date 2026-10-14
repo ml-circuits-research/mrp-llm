@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>API</title><link rel="stylesheet" href="styles.css">
+<style>
+.api-example,.api-response{overflow-x:auto;white-space:pre;border:1px solid currentColor;border-radius:6px;padding:.5rem .75rem;background:rgba(127,127,127,.08);font-size:.9em}
+.api-response{border-style:dashed}
+.note{border-left:4px solid currentColor;padding:.1rem .8rem;opacity:.9}
+.ep{font-family:ui-monospace,Menlo,monospace;font-weight:600}
+</style></head><body>
+<div data-include="partials/header.html"></div><main class="page"><article class="page__panel"><p class="breadcrumb"><a href="index.html">Overview</a> / API</p><h1>API</h1>
+<p>The server exposes an OpenAI-compatible chat endpoint and the endpoints around it (base memories, sessions, the direct author) under <code>/v1</code>. Normative contracts: <a href="specsLoader.html?spec=DS009-local-server.md">DS009</a> for the server and <a href="specsLoader.html?spec=DS022-sessions-and-base-memories.md">DS022</a> for sessions and base memories. The commands below use <code>$TOKEN</code>, a bearer token minted on <a href="/admin">/admin</a> or the <code>CHATSOP_API_KEY</code> value, and the default address <code>http://127.0.0.1:9999</code>. The JSON examples marked as product examples are executed against the live handlers by <code>tests/docs/product-api-docs.test.mjs</code>. The capability endpoints of the frozen small-model branch (<code>/v1/symbolic/*</code>, <code>/v1/understand</code>, <code>/v1/language/proofread</code>, <code>/v1/text-to-clean-english</code>, <code>/v1/emotion/detect</code>, <code>/v1/server/models</code>, <code>/v1/route</code>, <code>/v1/sessions/{id}/scope-answer</code>, <code>/v1/models/{id}/start</code>) are removed.</p>
+
+<section id="endpoints"><h2>1. Endpoints</h2>
+<div class="table-wrap"><table><thead><tr><th scope="col">Endpoint</th><th scope="col">Capability</th><th scope="col">Component</th></tr></thead><tbody>
+<tr><td class="ep">POST /v1/chat/completions</td><td>Ask a question: the message goes through the session's formalization strategy, admission and repair, the KnowledgeLinker, slice retrieval, the StrategyRouter and oracle verification. The answer is rendered in English and, when the message is not English, phrased in the message's language. Fields: <code>model</code> (the facade id), <code>messages</code>, <code>conversation_id</code>, <code>session_id</code>, <code>stream</code>, <code>user</code>, <code>chatSop.trustedSop</code>, <code>adapter</code> (the ChatSOPAdapter mode: <code>stepwise</code>, <code>routed</code>, <code>direct-verified</code>). Errors 503 <code>parse_unavailable</code>, 422 <code>parse_failed</code>, 422 <code>model_output_rejected</code> (section 3)</td><td>lib/adapter, server/agent.mjs, server/query-parser.mjs, lib/query-author</td></tr>
+<tr><td class="ep">GET /v1/status</td><td>Readiness, uptime, the formalization strategies with their availability and models, the base memories with their warmup, the reasoning engines and the caches (section 4)</td><td>server</td></tr>
+<tr><td class="ep">GET /v1/models</td><td>The MRP-LLM Models (<code>owned_by: mrp-llm</code>, with name, description, base memory, language and which one is the default) and the server default with the availability of the formalizer</td><td>server, lib/mrp</td></tr>
+<tr><td class="ep">GET /v1/mrp/strategies[?check=1], GET /v1/mrp/profiles, GET, POST /v1/mrp/models, GET, PUT, DELETE /v1/mrp/models/{id}, GET /v1/mrp/models/{id}/effective, POST /v1/mrp/models/{id}/reflex-feedback, GET /v1/mrp/models/{id}/review, POST /v1/mrp/models/{id}/review/{item}/approve|reject</td><td>Models and the strategy catalog (section 11)</td><td>server/mrp-routes.mjs, lib/mrp</td></tr>
+<tr><td class="ep">GET /v1/mrp/tiers</td><td>The Ploinky tiers with their configured chains and the real models the running proxy serves for each (read only, every authenticated user; no key)</td><td>server/mrp-routes.mjs, Ploinky Workers</td></tr>
+<tr><td class="ep">GET /v1/mrp/pworker, PUT /v1/mrp/pworker/providers/{name}/key, POST /v1/mrp/pworker/providers, GET /v1/mrp/pworker/providers/{name}/models, PUT, DELETE /v1/mrp/pworker/tiers/{tier}, POST /v1/mrp/pworker/restart</td><td>The model gateway settings: provider API keys, custom providers, tier chains, proxy restart; administrator session only (section 12)</td><td>server/mrp-routes.mjs, Ploinky Workers</td></tr>
+<tr><td class="ep">GET /healthz, GET /readyz</td><td>Liveness (no authentication); readiness and the availability of the formalizer</td><td>server</td></tr>
+<tr><td class="ep">GET, POST /v1/memories, GET, DELETE /v1/memories/{id}, POST /v1/memories/{id}/fork, POST /v1/memories/{id}/knowledge, GET, POST /v1/memory-composer</td><td>Base memories: list, create or import, view, delete, fork, add validated knowledge with provenance, compose from chosen layers (any authenticated user may write; section 5)</td><td>chat data root, memory strategies DS016 to DS021, knowledge validator</td></tr>
+<tr><td class="ep">POST /v1/sessions, GET /v1/sessions, GET, DELETE /v1/sessions/{id}, POST .../settings, .../commit, .../theory, .../query</td><td>Sessions on a cloned base memory: settings (<code>formalizer_model</code>, <code>formalizer</code>, <code>adapter_mode</code>), draft circuits, acceptance, commit to a fork, the theory and a query over it (sections 6 and 8)</td><td>chat data root, exact oracle, StrategyRouter</td></tr>
+<tr><td class="ep">POST /v1/author, GET /v1/sessions/{id}/requests/{request}</td><td>The authoring path that turns attached files and instructions into validated circuits through a chain model, the status of a request (section 7)</td><td>lib/ingest/direct-author.mjs, skill sop-wire-authoring</td></tr>
+<tr><td class="ep">POST /v1/memories/{id}/ingest, GET /v1/memories/{id}/ingestions, GET /v1/memories/{id}/ingestions/{ingestion}, POST /v1/memories/{id}/procedures</td><td>Document ingestion into a task-type base memory (rights check, chunking, drafting by a model through Ploinky Workers, quote and conflict checks, a report, storing with provenance) and the procedure library (section 7)</td><td>lib/ingest, direct author, knowledge validator, lib/query-author/procedures.mjs</td></tr>
+<tr><td class="ep">POST /v1/sessions/{id}/analyze, POST /v1/memories/{id}/analyze, GET /v1/sessions/{id}/analysis-procedures, GET /v1/memories/{id}/analysis-procedures</td><td>Analysis procedures (<a href="analysis.html">Analysis procedures</a>, DS022): run the procedures tagged <code>analysis</code> of the memory over the document layer, with the body <code>{procedures?, parameters?, documents?, reasoning?, verify?, proofs?}</code>. The answer holds the findings, each with its rule, severity and the document's own quotes, the KPI and rubric measures, and the report text. The GET routes list the procedures. These routes are read only and call no model.</td><td>lib/analysis, server/analysis.mjs, the StrategyRouter and the oracle</td></tr>
+<tr><td class="ep">GET /review, GET /v1/knowledge/memories, GET /v1/knowledge/memories/{id}, GET /v1/knowledge/memories/{id}/items, GET /v1/knowledge/search, GET /v1/knowledge/entities/{id}, GET /v1/knowledge/predicates/{id}, GET /v1/knowledge/rules/{id}, GET /v1/knowledge/derive</td><td>The knowledge browser, read only: base memories and their layers with provenance and flags, risk-sorted items with evidence and example sentences, keyword search, entity, predicate and rule cards, and what the oracle derives about an entity, over a base memory (<code>memory=</code>) or a chat session (<code>session=</code>) (section 9)</td><td>lib/review, server/review.mjs, memory strategy, exact oracle</td></tr>
+<tr><td class="ep">POST /v1/feedback, GET /v1/feedback, GET /v1/feedback/stats, GET /v1/sessions/{id}/turns/{turn}</td><td>Thumbs up or down on an answered chat turn, joined to the recorded turn and routed by its cause; the recent votes (administrator session) and the counts per cause; the recorded turn (section 10)</td><td>server/feedback.mjs, lib/formalization-errors.mjs</td></tr>
+<tr><td class="ep">GET /v1/capabilities</td><td>The endpoint list, the limits and the availability of the formalizer</td><td>server</td></tr>
+<tr><td class="ep">GET /v1/cache/stats, POST /v1/cache/clear</td><td>Cache statistics (any authenticated user); empty the caches</td><td>server</td></tr>
+</tbody></table></div></section>
+
+<section id="conventions"><h2>2. Conventions</h2>
+<ul>
+<li><b>Authentication.</b> <code>Authorization: Bearer &lt;token&gt;</code>, or the administrator session cookie of <a href="/login">/login</a> (the chat page uses it). Without either: 401 <code>unauthorized</code>; before the administrator password is set: 403 <code>setup_required</code>.</li>
+<li><b>Errors.</b> An invalid request, a limit or authentication is an HTTP error, always <code>{"error": {"message", "type": "invalid_request_error", "code"}}</code>: 400 <code>invalid_request</code>, <code>unsupported_parameter</code>; 401 <code>unauthorized</code>; 403 <code>forbidden</code>; 404 <code>not_found</code>; 413 <code>request_limit</code>; 429 <code>concurrency_limit</code>. An unknown parameter is refused, not ignored.</li>
+<li><b>Answer language.</b> A message may be in any language: the request parser reads it and writes an English circuit, and the answer is first rendered deterministically in English. When the message does not look English, an optional last step (<code>answerLanguage</code>, section 3) phrases that answer in the message's language. The English rendering is always kept in <code>chatSop.english_text</code>. There is no <code>language</code> or <code>parser</code> field; the formalization strategy is a session setting (section 6).</li>
+<li><b>No available model.</b> When no model of the session's formalization strategy can write the circuit, the chat turn answers <code>parse_unavailable</code> honestly; there is no fallback parser and another strategy is never substituted.</li>
+</ul></section>
+
+
+
+
+
+
+<section id="chat"><h2>3. POST /v1/chat/completions</h2>
+<p>Body: <code>model</code> (the facade id listed by <code>GET /v1/models</code>, <code>chatsop-local</code> by default; another value is 400 <code>unknown_model</code>), <code>messages</code> (exactly one new user message; the server owns the history), <code>conversation_id</code> (a stable id keeps the conversation-local statements), <code>session_id</code> (the session whose base memory, settings and drafts the turn uses; without it, one automatic session per user and conversation on the default base memory), <code>stream</code> (<code>true</code> sends the verified result as server-sent events), <code>user</code> (must equal the authenticated principal) <code>chatSop.trustedSop</code> (a trusted circuit of <code>fact</code>, <code>event</code> and <code>remember</code> wires run before the question) and <code>adapter</code> (<code>{mode, options?}</code>: the ChatSOPAdapter mode of this turn, <code>stepwise</code>, <code>routed</code> or <code>direct-verified</code>; <code>options</code> may set <code>tiers</code> <code>{structure, formalizer, compute, direct}</code> and <code>routed</code> <code>{second, engineCodeLanguages, fallbackToFol, earlyStop}</code>; without it the session's <code>adapter_mode</code>, else <code>config/runtime.json</code> <code>adapter.mode</code>, shipped <code>stepwise</code>; an unknown mode or option is 400). Any other field is refused. The answer is an OpenAI-style completion whose text is the deterministic English rendering of the result packet. The extension <code>chatSop</code> is the trace:</p>
+<ul>
+<li><code>adapter</code>: the ChatSOPAdapter answer packet (<code>lib/adapter</code>, the backend of the chat and of every evaluation): <code>mode</code>; <code>path</code> (what produced the answer: <code>stepwise</code>, <code>B</code>, <code>jsEval</code>, <code>engineCode:&lt;lang&gt;</code>, <code>fol</code>, <code>direct</code>); <code>answer</code> <code>{values, answers, text}</code>; <code>verification</code> <code>{status, paths, alternatives?, model_answer?, check?, same_call?}</code> with <code>status</code> <code>verified</code> (two different formalizations agree, or in <code>direct-verified</code> a symbolic path confirms the model's answer), <code>unverified</code> (one formalization, or the model's answer that nothing confirmed), <code>contradicted</code> (two symbolic paths agree on another value than the model's; that value is answered) or <code>unresolved</code> (the formalizations disagree, or nothing answered); <code>route</code> (the structure route: <code>js</code> for computation, <code>fol</code> otherwise, with the reason); <code>paths</code> (every path that ran: status, values, circuits, proofs, ms, tier, calls, cached); <code>circuits</code> and <code>proofs</code> of the answering path; <code>timings</code> (ms per stage and <code>total</code>); <code>tiers</code> (the Ploinky Workers tier of each role). In the modes <code>routed</code> and <code>direct-verified</code> the reply body states the status (conversation-v1 situations <code>answer_verified</code>, <code>answer_model_verified</code>, <code>answer_contradicted</code>, <code>answer_formalized_unverified</code>, <code>answer_model_unverified</code>, <code>answer_unresolved</code>, <code>adapter_no_answer</code>).</li>
+<li><code>strategy</code>: the step-by-step formalization strategy that assembled the circuit (<code>LocalLLMStepByStep</code> or <code>InternalReasoningStepByStep</code>; the one-shot <code>LLMDirect</code> is archived and a session that names it runs the default, noted in <code>parse.strategy_note</code>).</li>
+<li><code>parse</code>: <code>parser</code>, <code>strategy</code>, <code>strategy_note</code> (when an archived strategy name was asked for), <code>model</code> (the tier that answered, or the tiers joined by <code>+</code> after an escalation), <code>ladder</code> (the tiers in order), <code>tiers</code> (when more than one tier answered: <code>{answered: {tier: count}, escalated: [{question, tier}]}</code>), <code>steps</code> (number of questions), <code>dialog</code> (<code>[{name, answer, tier?, escalated?}]</code>, one per question asked, a superseded answer marked <code>escalated</code>), <code>backend</code>, <code>retrieval</code> (predicate count, entity mentions, the schema <code>neighbourhood</code>), <code>cost_usd</code>, <code>ms</code>, <code>cache</code>.</li>
+<li><code>pragmatic</code> (the advisory <code>pragmatic</code> wires the formalizer wrote for courtesy and emotion, <code>[{id, kind, score, span, near, source, basis}]</code>, never facts) , <code>reply</code> (the reply chosen by the JS oracle over the conversation layer: <code>{opening, body, closing, style, facts, ms, layer}</code>, each part <code>{id, situation, priority, variants, why, outranked}</code>; the former <code>pragmatic_use</code> is gone) <code>near_miss</code> (<code>{candidates: [{id, label, description, distance, mention, relations: [{predicate, facts}]}], ms}</code>: the closest names of the memory for a turn without an answer), <code>instructions</code> (the <code>instruction</code> wires of the message, <code>[{id, do, kind, text, span, source}]</code>) and <code>behaviour</code> (<code>{turn, instructions: [{id, kind, text, since_turn}], changes?}</code>: the user's active instructions; a message of instructions only has <code>status: instruction</code>). The reply parts are <code>prefix</code>, <code>opening</code>, <code>body</code>, <code>aside</code>, <code>follow_up</code>, <code>closing</code> and <code>suffix</code> (DS023 "Behaviour layer"). A message of pragmatic wires only is answered with <code>status: courtesy</code> and a reply from the conversation layer, with no computation; the same holds for <code>POST /v1/sessions/{id}/query</code> with <code>message</code> (<a href="specsLoader.html?spec=DS023-courtesy-and-emotion.md">DS023</a>).</li>
+<li><code>model_sop</code> (the authored circuit), <code>circuit</code> (the generated execution circuit), <code>linking</code> (surface, symbol, matched form, alternatives), <code>session_circuits</code> (session definitions proposed this turn, each with <code>draft_id</code>; accept or reject them with <code>POST /v1/sessions/{id}/drafts/{draft}/accept|reject</code>), <code>user_statements</code>, <code>carried_statements</code>, <code>model_assumptions</code>, <code>assumption_policy</code>, <code>assumption_branch</code>, <code>unclear</code>, <code>understood_as</code>.</li>
+<li><code>status</code>, <code>completeness</code>, <code>retrieval</code> (the slice: size, predicates, bounds, complete or not and why), <code>route</code> (requested, chosen, rule, features, alternatives, backend, fallback), <code>verification</code> (the oracle check of a routed answer, <code>route.verification</code>), <code>provenance</code>, <code>reinforcement</code>, <code>cnl</code> and <code>english_text</code> (the deterministic English answer), <code>answer_language</code> (<code>{mode, message_language, applied, model, ms, tried, reason}</code>: whether and by which model the answer was phrased in the message's language), <code>pendingSop</code> and <code>required</code> for a clarification, <code>session</code> (id, base memory, formalizer, adapter mode), <code>latency_ms</code> and <code>formalization_ms</code>, <code>turn_ms</code>.</li></ul>
+<pre class="api-request"><code>curl -s -X POST http://127.0.0.1:9999/v1/chat/completions -H &quot;Authorization: Bearer $TOKEN&quot; -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;: &quot;chatsop-local&quot;, &quot;session_id&quot;: &quot;demo-session&quot;, &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Where does Maria work?&quot;}]}'</code></pre>
+<p>A routed turn (the message is a self-contained problem; the answer says whether two formalizations verified it):</p>
+<pre class="api-request"><code>curl -s -X POST http://127.0.0.1:9999/v1/chat/completions -H &quot;Authorization: Bearer $TOKEN&quot; -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;: &quot;chatsop-local&quot;, &quot;adapter&quot;: {&quot;mode&quot;: &quot;routed&quot;}, &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Pens cost 3 dollars each. Ann buys 4 pens. How much does Ann pay?&quot;}]}'</code></pre>
+<p>Abridged <code>chatSop.adapter</code>:</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;chatsop.answer&quot;, &quot;mode&quot;: &quot;routed&quot;, &quot;path&quot;: &quot;B&quot;,
+ &quot;answer&quot;: {&quot;values&quot;: [12], &quot;text&quot;: &quot;12&quot;},
+ &quot;verification&quot;: {&quot;status&quot;: &quot;verified&quot;, &quot;paths&quot;: [&quot;B&quot;, &quot;jsEval&quot;], &quot;alternatives&quot;: []},
+ &quot;route&quot;: {&quot;route&quot;: &quot;js&quot;, &quot;reason&quot;: &quot;a goal in the question and registry quantities&quot;},
+ &quot;timings&quot;: {&quot;structure&quot;: 9800, &quot;B&quot;: 6100, &quot;jsEval&quot;: 5200, &quot;total&quot;: 21400},
+ &quot;tiers&quot;: {&quot;structure&quot;: &quot;structure&quot;, &quot;compute&quot;: &quot;tiny&quot;}
+}</code></pre>
+<p><b>Answer language.</b> Settings <code>answerLanguage</code> in <code>config/runtime.json</code>: <code>mode</code> is <code>auto</code> (the default: on when the message does not look English, off for English), <code>always</code> or <code>off</code>; <code>providers</code> (default the Ploinky Workers tier <code>small</code>, <code>Qwen3.8 27b</code>) phrases the answer, entry by entry. The model works strictly from the English answer and a compact result packet (status, answers, count, facts used with their sources). Every number and Wikidata id of the English answer must appear in its text; otherwise the next model is tried, and in the end the English answer is returned.</p>
+<p>Chat errors: 503 <code>parse_unavailable</code> (no model of the strategy can run; <code>chatSop.status: parse_unavailable</code> with the reason), 422 <code>parse_failed</code> (the models ran and no valid circuit came back after the last repair round), 422 <code>model_output_rejected</code> (a circuit was written but not admitted or not executable; <code>chatSop</code> carries <code>model_sop</code> and <code>rejection</code>), 409 the conversation is still answering, 429 the server is busy, 504 the time limit (<code>limits.timeoutMs</code>, 180,000 ms by default) was reached, 413 the message is too long. Every error with a <code>chatSop</code> carries the <code>parse</code> record. <code>GET /v1/models</code> lists the facade and whether a coding-agent model is available.</p></section>
+
+<section id="meta"><h2>4. GET /v1/status, GET /v1/capabilities and the cache endpoints</h2>
+<pre class="api-request"><code>curl -s http://127.0.0.1:9999/v1/status -H &quot;Authorization: Bearer $TOKEN&quot;
+curl -s http://127.0.0.1:9999/v1/capabilities -H &quot;Authorization: Bearer $TOKEN&quot;
+curl -s http://127.0.0.1:9999/v1/cache/stats -H &quot;Authorization: Bearer $TOKEN&quot;
+curl -s -X POST http://127.0.0.1:9999/v1/cache/clear -H &quot;Authorization: Bearer $TOKEN&quot;</code></pre>
+<p><code>/v1/status</code> (bearer token or the session cookie) is what the chat's Settings tab shows as the server status card. Shape:</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;status&quot;, &quot;ready&quot;: true, &quot;started_at&quot;: &quot;…&quot;, &quot;uptime_s&quot;: 812,
+ &quot;default_base&quot;: &quot;world-v1&quot;,
+ &quot;formalization&quot;: {
+  &quot;default&quot;: &quot;LocalLLMStepByStep&quot;,
+  &quot;strategies&quot;: [
+   {&quot;id&quot;: &quot;LocalLLMStepByStep&quot;, &quot;label&quot;: &quot;…&quot;, &quot;available&quot;: true, &quot;backend&quot;: &quot;completion&quot;, &quot;model&quot;: &quot;tiny&quot;, &quot;ladder&quot;: [&quot;tiny&quot;, &quot;small&quot;, &quot;good&quot;], &quot;endpoint&quot;: &quot;pworker&quot;},
+   {&quot;id&quot;: &quot;InternalReasoningStepByStep&quot;, &quot;label&quot;: &quot;…&quot;, &quot;available&quot;: true, &quot;backend&quot;: &quot;completion&quot;, &quot;model&quot;: &quot;tiny&quot;, &quot;ladder&quot;: [&quot;tiny&quot;, &quot;small&quot;, &quot;good&quot;], &quot;endpoint&quot;: &quot;pworker&quot;}
+  ]
+ },
+ &quot;memories&quot;: [{&quot;id&quot;: &quot;world-v1&quot;, &quot;name&quot;: &quot;…&quot;, &quot;strategy&quot;: &quot;sqlite&quot;, &quot;facts&quot;: 357000, &quot;circuits&quot;: 247, &quot;knowledge_files&quot;: 280, &quot;sop_wires&quot;: 425796, &quot;wires_by_type&quot;: {&quot;fact&quot;: 367579, &quot;entity&quot;: 57151, &quot;rule&quot;: 158}, &quot;warm&quot;: {&quot;ms&quot;: 12000, &quot;facts&quot;: 357000, &quot;layers&quot;: 221}}],
+ &quot;reasoning&quot;: {&quot;router&quot;: &quot;StrategyRouter v1&quot;, &quot;oracle&quot;: &quot;js-reference&quot;, &quot;engines&quot;: [{&quot;id&quot;: &quot;sql-sqlite&quot;, &quot;routable&quot;: true, &quot;available&quot;: true}]},
+ &quot;caches&quot;: {&quot;query-parser&quot;: {&quot;entries&quot;: 12, &quot;hits&quot;: 3, &quot;requests&quot;: 15}}
+}</code></pre>
+<p><code>ready</code> is true when the default strategy can run; <code>default_base</code> names the base memory new sessions fork. Each formalization strategy reports <code>available</code> and, when it cannot run, the <code>reason</code>; the step-by-step strategies name their first tier (<code>model</code>), the tier <code>ladder</code> and the endpoint <code>pworker</code>, and are available when the first tier answers; a memory's <code>warm</code> is the background warmup (<code>{ms, facts, layers}</code>), <code>{skipped}</code> or <code>null</code> when it was not warmed. The values above are illustrative. <code>/v1/capabilities</code> lists the endpoints with their parameters, the limits and the availability of the formalizer. <code>/v1/cache/stats</code> returns per-cache statistics (entries, bytes, hits, misses, evictions; any authenticated user) and <code>/v1/cache/clear</code> empties the caches; a failed computation is never cached.</p></section>
+
+<section id="memories"><h2>5. Base memories</h2>
+<p class="note">Memory sizes: besides the storage counters <code>circuits</code> and <code>facts</code> (kept unchanged), <code>GET /v1/status</code> (memories), <code>GET /v1/memories</code>, <code>GET /v1/memories/{id}</code>, <code>GET /v1/sessions/{id}</code> and the knowledge browser list carry <code>knowledge_files</code> (files of all layers), <code>sop_wires</code> (wires in them) and <code>wires_by_type</code> (for example <code>{"fact": 3, "entity": 8}</code>). The chat pages show these as &quot;N knowledge files &middot; M SOP wires&quot;; <code>facts</code> is the number of facts in the store, an index for fast lookup. The wire statistics are parsed once per memory content and cached.</p>
+<p class="note">Sections 5 to 8 are the product endpoints (sessions, base memories, the direct author). Their examples are executed against a live test server by <code>tests/docs/product-api-docs.test.mjs</code>, with a stub of the authoring model (no model is called), so the costs below are those of the stub.</p>
+<p>A base memory is a named, forkable knowledge store of the one memory strategy the product offers (<code>sqlite</code>; the associative and scan engines of <code>memory/</code> are research engines), kept under <code>chat_data/base_memories/&lt;id&gt;/</code> (<a href="specsLoader.html?spec=DS022-sessions-and-base-memories.md">DS022</a>). Reading needs any token; creating, importing, forking, adding knowledge and deleting need the <b>administrator session</b> (the cookie of <a href="/login">/login</a>), because adding knowledge is an approval recorded with the approver in the memory's provenance. Circuits are checked by the knowledge validator (<code>sop/knowledge/</code>) together with the circuits already stored; a failing circuit answers 422 <code>validation_failed</code> with <code>problems</code> and <code>warnings</code> and nothing is written. A circuit may not contain <code>jsEval</code>, model-surface wires, <code>query</code> wires or governance fields.</p>
+<h3>List</h3>
+<pre class="api-example product-example" data-endpoint="GET /v1/memories" data-request="{}" data-as="user" data-status="200" data-response-keys="object,data,strategies,default_base,kinds"><code>curl -s -X GET http://127.0.0.1:9999/v1/memories -H &quot;Authorization: Bearer $TOKEN&quot;</code></pre>
+<p>Abridged response (HTTP 200):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;list&quot;,
+ &quot;data&quot;: [
+  {
+   &quot;id&quot;: &quot;default&quot;,
+   &quot;name&quot;: &quot;Default (empty)&quot;,
+   &quot;parent&quot;: null,
+   &quot;strategy&quot;: &quot;sqlite&quot;,
+   &quot;created_at&quot;: &quot;2026-10-01T14:12:27.009Z&quot;,
+   &quot;description&quot;: &quot;Empty base memory used by chats that name none.&quot;,
+   &quot;circuits&quot;: 0,
+   &quot;facts&quot;: 0
+  }
+ ],
+ &quot;strategies&quot;: [
+  {
+   &quot;id&quot;: &quot;sqlite&quot;,
+   &quot;note&quot;: &quot;SQLite (DS018): exact indexed tuples&quot;
+  }
+ ],
+ &quot;default_base&quot;: &quot;default&quot;,
+ &quot;kinds&quot;: [&quot;encyclopedic&quot;, &quot;minimal&quot;, &quot;empty&quot;]
+}</code></pre>
+<h3>Create or import</h3>
+<p><code>default_base</code> is the base memory that sessions naming none fork from: <code>chatData.defaultBase</code>, which is the encyclopedic <code>world-v1</code>. When <code>world-v1</code> is not loaded, as on the test server above, the minimal <code>default</code> (which imports <code>core-min</code>) is used. <code>kind</code> (optional) chooses what a new memory is built on: <code>encyclopedic</code> is a copy-on-write fork of <code>world-v1</code> and answers 409 <code>not_available</code> when it is not loaded; <code>minimal</code> imports <code>core-min</code> and is the default when neither <code>kind</code> nor <code>imports</code> is given; <code>empty</code> has no imports. <code>kind</code> and <code>imports</code> are exclusive. Without <code>circuits</code> the memory holds no circuits of its own; with them it is imported all or nothing. <code>id</code> is optional (lowercase letters, digits, <code>_</code>, <code>-</code>). <code>imports</code> (optional array of base memory ids, default <code>["core-min"]</code>, <code>[]</code> for none) names the memories whose circuits are the lower layers of the new one: their classes, predicates and lexemes are its vocabulary, snapshotted at creation (a later change of the imported memory does not reach it). Chats link words against the vocabulary of their session's memory.</p>
+<pre class="api-example product-example" data-endpoint="POST /v1/memories" data-request="{&quot;name&quot;:&quot;Family&quot;,&quot;id&quot;:&quot;family&quot;,&quot;strategy&quot;:&quot;sqlite&quot;,&quot;description&quot;:&quot;Parent facts&quot;,&quot;circuits&quot;:[{&quot;name&quot;:&quot;family&quot;,&quot;text&quot;:&quot;@parent predicate\n  args subject:entity object:entity\n\n@f1 fact\n  holds parent ann bob\n  source \&quot;family register\&quot;\n&quot;}],&quot;reason&quot;:&quot;import of the family register&quot;,&quot;source&quot;:&quot;family register&quot;}" data-as="user" data-status="201" data-response-keys="object,id,name,parent,strategy,created_at,description"><code>curl -s -X POST http://127.0.0.1:9999/v1/memories -b cookies.txt -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;Family&quot;,&quot;id&quot;:&quot;family&quot;,&quot;strategy&quot;:&quot;sqlite&quot;,&quot;description&quot;:&quot;Parent facts&quot;,&quot;circuits&quot;:[{&quot;name&quot;:&quot;family&quot;,&quot;text&quot;:&quot;@parent predicate\n  args subject:entity object:entity\n\n@f1 fact\n  holds parent ann bob\n  source \&quot;family register\&quot;\n&quot;}],&quot;reason&quot;:&quot;import of the family register&quot;,&quot;source&quot;:&quot;family register&quot;}'</code></pre>
+<p>Abridged response (HTTP 201):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;memory&quot;,
+ &quot;id&quot;: &quot;family&quot;,
+ &quot;name&quot;: &quot;Family&quot;,
+ &quot;parent&quot;: null,
+ &quot;strategy&quot;: &quot;sqlite&quot;,
+ &quot;created_at&quot;: &quot;2026-10-01T14:12:27.155Z&quot;,
+ &quot;description&quot;: &quot;Parent facts&quot;,
+ &quot;circuits&quot;: 1,
+ &quot;facts&quot;: 1
+}</code></pre>
+<h3>View one</h3>
+<pre class="api-example product-example" data-endpoint="GET /v1/memories/family" data-request="{}" data-as="user" data-status="200" data-response-keys="object,id,name,parent,strategy,created_at,description"><code>curl -s -X GET http://127.0.0.1:9999/v1/memories/family -H &quot;Authorization: Bearer $TOKEN&quot;</code></pre>
+<p>Abridged response (HTTP 200):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;memory&quot;,
+ &quot;id&quot;: &quot;family&quot;,
+ &quot;name&quot;: &quot;Family&quot;,
+ &quot;strategy&quot;: &quot;sqlite&quot;,
+ &quot;circuits&quot;: 1,
+ &quot;facts&quot;: 1,
+ &quot;circuit_files&quot;: [
+  &quot;0001-family.sop&quot;
+ ],
+ &quot;provenance&quot;: [
+  {
+   &quot;kind&quot;: &quot;import&quot;,
+   &quot;seq&quot;: 1,
+   &quot;file&quot;: &quot;0001-family.sop&quot;,
+   &quot;sha256&quot;: &quot;90ae8ccd6a61c506c6f47349ed01e99d54dcd8139377fd50db1d871c827dde7a&quot;,
+   &quot;approved_by&quot;: &quot;admin&quot;,
+   &quot;approved_at&quot;: &quot;2026-10-01T14:12:27.155Z&quot;,
+   &quot;reason&quot;: &quot;import of the family register&quot;,
+   &quot;source&quot;: &quot;family register&quot;,
+   &quot;wires&quot;: 2,
+   &quot;ingest&quot;: {
+    &quot;facts_in_circuit&quot;: 1,
+    &quot;facts_ingested&quot;: 1,
+    &quot;facts_defaulted_valid&quot;: 1,
+    &quot;facts_skipped&quot;: [
+     &quot;...&quot;
+    ]
+   }
+  }
+ ]
+}</code></pre>
+<p><code>?facts=1</code> adds <code>stored_facts</code>, what the memory strategy would retrieve.</p>
+<h3>Fork</h3>
+<p>The same strategy clones the repository by hard links (copy-on-write, <code>method: clone</code>). A fork of another strategy would replay the circuits into a rebuilt repository (<code>method: replay</code>); SQLite is the only strategy the product offers, so a fork is a clone.</p>
+<pre class="api-example product-example" data-endpoint="POST /v1/memories/family/fork" data-request="{&quot;name&quot;:&quot;Family (copy)&quot;,&quot;id&quot;:&quot;family-copy&quot;}" data-as="user" data-status="201" data-response-keys="object,memory,method,rebuilt"><code>curl -s -X POST http://127.0.0.1:9999/v1/memories/family/fork -b cookies.txt -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;Family (copy)&quot;,&quot;id&quot;:&quot;family-copy&quot;}'</code></pre>
+<p>Abridged response (HTTP 201):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;memory.fork&quot;,
+ &quot;memory&quot;: {
+  &quot;id&quot;: &quot;family-copy&quot;,
+  &quot;name&quot;: &quot;Family (copy)&quot;,
+  &quot;parent&quot;: {
+   &quot;id&quot;: &quot;family&quot;,
+   &quot;name&quot;: &quot;Family&quot;,
+   &quot;strategy&quot;: &quot;sqlite&quot;,
+   &quot;circuits&quot;: 1,
+   &quot;forked_at&quot;: &quot;2026-10-01T14:12:27.174Z&quot;
+  },
+  &quot;strategy&quot;: &quot;sqlite&quot;,
+  &quot;created_at&quot;: &quot;2026-10-01T14:12:27.174Z&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;circuits&quot;: 1,
+  &quot;facts&quot;: 1
+ },
+ &quot;method&quot;: &quot;clone&quot;,
+ &quot;rebuilt&quot;: null
+}</code></pre>
+<h3>Add knowledge</h3>
+<pre class="api-example product-example" data-endpoint="POST /v1/memories/family-copy/knowledge" data-request="{&quot;circuits&quot;:[{&quot;name&quot;:&quot;more&quot;,&quot;text&quot;:&quot;@f3 fact\n  holds parent cy di\n  source \&quot;family register\&quot;\n&quot;}],&quot;reason&quot;:&quot;one more row&quot;}" data-as="user" data-status="200" data-response-keys="object,memory,added,warnings"><code>curl -s -X POST http://127.0.0.1:9999/v1/memories/family-copy/knowledge -b cookies.txt -H &quot;Content-Type: application/json&quot; -d '{&quot;circuits&quot;:[{&quot;name&quot;:&quot;more&quot;,&quot;text&quot;:&quot;@f3 fact\n  holds parent cy di\n  source \&quot;family register\&quot;\n&quot;}],&quot;reason&quot;:&quot;one more row&quot;}'</code></pre>
+<p>Abridged response (HTTP 200):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;memory.knowledge&quot;,
+ &quot;memory&quot;: {
+  &quot;id&quot;: &quot;family-copy&quot;,
+  &quot;name&quot;: &quot;Family (copy)&quot;,
+  &quot;parent&quot;: {
+   &quot;id&quot;: &quot;family&quot;,
+   &quot;name&quot;: &quot;Family&quot;,
+   &quot;strategy&quot;: &quot;sqlite&quot;,
+   &quot;circuits&quot;: 1,
+   &quot;forked_at&quot;: &quot;2026-10-01T14:12:27.174Z&quot;
+  },
+  &quot;strategy&quot;: &quot;sqlite&quot;,
+  &quot;created_at&quot;: &quot;2026-10-01T14:12:27.174Z&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;circuits&quot;: 2,
+  &quot;facts&quot;: 2
+ },
+ &quot;added&quot;: [
+  {
+   &quot;kind&quot;: &quot;add&quot;,
+   &quot;seq&quot;: 2,
+   &quot;file&quot;: &quot;0002-more.sop&quot;,
+   &quot;sha256&quot;: &quot;370a68f26a2483481d28cfba73caf2bf41378fa42122db2dbb8dd7969b5b7f03&quot;,
+   &quot;approved_by&quot;: &quot;admin&quot;,
+   &quot;approved_at&quot;: &quot;2026-10-01T14:12:27.180Z&quot;,
+   &quot;reason&quot;: &quot;one more row&quot;,
+   &quot;source&quot;: null,
+   &quot;wires&quot;: 1,
+   &quot;ingest&quot;: {
+    &quot;facts_in_circuit&quot;: 1,
+    &quot;facts_ingested&quot;: 1,
+    &quot;facts_defaulted_valid&quot;: 1,
+    &quot;facts_skipped&quot;: [
+     &quot;...&quot;
+    ]
+   }
+  }
+ ],
+ &quot;warnings&quot;: []
+}</code></pre>
+<h3>Composing a base memory</h3>
+<p>The base-memory composer (DS022 "Composing a base memory"; the checkboxes of <code>/admin</code>) builds or refreshes a base memory from prepared layers through the ordinary import path: the seed layers of <code>config/knowledge</code> (core vocabulary, common sense, the conversation layer and its small-talk collections) and any other base memory. <code>GET /v1/memory-composer</code> lists the layers (seed or not, role <code>knowledge</code> or <code>conversation</code>, an exclusive <code>group</code>, licence and counts from <code>seed.json</code>, stale seeds) with the chat's reply memory and default base. <code>POST /v1/memory-composer</code> takes <code>id</code>, <code>layers</code> (in order), and optionally <code>name</code> and <code>description</code>; it refreshes an existing memory only when it is not a seed and holds no circuits of its own (409 otherwise), checks that the layers hold together (422 with <code>problems</code>), and when the rebuilt memory is the chat's reply memory the reply layer is reloaded (<code>reply_layer</code>).</p>
+<pre class="api-example product-example" data-endpoint="GET /v1/memory-composer" data-request="{}" data-as="user" data-status="200" data-response-keys="object,layers,reply_memory,default_base"><code>curl -s -X GET http://127.0.0.1:9999/v1/memory-composer -H &quot;Authorization: Bearer $TOKEN&quot;</code></pre>
+<pre class="api-example product-example" data-endpoint="POST /v1/memory-composer" data-request="{&quot;id&quot;:&quot;demo-composed&quot;,&quot;name&quot;:&quot;Demo vocabulary&quot;,&quot;layers&quot;:[&quot;core-min&quot;,&quot;demo&quot;]}" data-as="user" data-status="201" data-response-keys="object,id,name,imports,composition,replaced,validated"><code>curl -s -X POST http://127.0.0.1:9999/v1/memory-composer -H &quot;Authorization: Bearer $TOKEN&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;id&quot;:&quot;demo-composed&quot;,&quot;name&quot;:&quot;Demo vocabulary&quot;,&quot;layers&quot;:[&quot;core-min&quot;,&quot;demo&quot;]}'</code></pre>
+<p>Abridged response (HTTP 201): <code>{"object": "memory.composed", "id": "demo-composed", "name": "Demo vocabulary", "imports": [{"id": "core-min", ...}, {"id": "demo", ...}], "composition": {"layers": ["core-min", "demo"], "validated": true}, "replaced": false, "validated": true, "ms": 41}</code></p>
+</section>
+
+<section id="sessions"><h2>6. Sessions</h2>
+<p>A session works on its own copy of a base memory under <code>chat_data/sessions/&lt;id&gt;/</code>: the repository is cloned by hard links, the base circuits are copied. What the conversation adds stays in the session; it is visible to the user who started it and to an administrator. The chat request <code>POST /v1/chat/completions</code> carries <code>session_id</code>; without it one automatic session per user and conversation is used, on the default base memory. <code>base</code> in <code>POST /v1/sessions</code> is optional; without it the session forks the default base memory. Sessions abandoned for <code>chatData.sessionTtlDays</code> (14) are removed.</p>
+<h3>Start</h3>
+<pre class="api-example product-example" data-endpoint="POST /v1/sessions" data-request="{&quot;base&quot;:&quot;family&quot;,&quot;id&quot;:&quot;demo-session&quot;,&quot;name&quot;:&quot;Demo chat&quot;}" data-as="user" data-status="201" data-response-keys="object,id,user,name,created_at,last_active_at,base,settings"><code>curl -s -X POST http://127.0.0.1:9999/v1/sessions -H &quot;Authorization: Bearer $TOKEN&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;base&quot;:&quot;family&quot;,&quot;id&quot;:&quot;demo-session&quot;,&quot;name&quot;:&quot;Demo chat&quot;}'</code></pre>
+<p>Abridged response (HTTP 201):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;session&quot;,
+ &quot;id&quot;: &quot;demo-session&quot;,
+ &quot;name&quot;: &quot;Demo chat&quot;,
+ &quot;base&quot;: {
+  &quot;id&quot;: &quot;family&quot;,
+  &quot;name&quot;: &quot;Family&quot;,
+  &quot;strategy&quot;: &quot;sqlite&quot;,
+  &quot;circuits&quot;: 1
+ },
+ &quot;settings&quot;: {
+  &quot;formalizer_model&quot;: null,
+  &quot;formalizer&quot;: null,
+  &quot;adapter_mode&quot;: null
+ },
+ &quot;created_at&quot;: &quot;2026-10-01T14:12:27.186Z&quot;
+}</code></pre>
+<h3>Settings</h3>
+<p>Body <code>{formalizer_model?, formalizer?, adapter_mode?}</code>; the same object is accepted as <code>settings</code> in <code>POST /v1/sessions</code>.</p><ul><li><code>adapter_mode</code>: the ChatSOPAdapter mode of the session's turns, <code>stepwise</code>, <code>routed</code> or <code>direct-verified</code>; <code>null</code> uses <code>config/runtime.json</code> <code>adapter.mode</code> (shipped <code>stepwise</code>). A request's <code>adapter.mode</code> overrides it for one turn (section 3).</li><li><code>formalizer</code>: the formalization strategy of the session's chat turns, <code>LocalLLMStepByStep</code> or <code>InternalReasoningStepByStep</code>; <code>null</code> uses the server default (<code>LocalLLMStepByStep</code>). The archived <code>LLMDirect</code> (and the earlier names <code>CodingAgent</code>, <code>LocalLLMDirect</code>, stored as <code>LLMDirect</code>) is accepted and runs the default step-by-step strategy with <code>parse.strategy_note</code>. Another value is refused with 400. A turn whose strategy this server cannot run (see <code>GET /v1/status</code>) is refused with 503 <code>parse_unavailable</code> naming the strategy; it is never silently replaced by another.</li><li><code>formalizer_model</code>: the Ploinky Workers tier the session's step-by-step questions start at (such as <code>small</code>; <code>omp_model</code> is still accepted on input). A tier on the ladder (<code>queryParser.local.ladder</code>, shipped <code>tiny</code>, <code>small</code>, <code>good</code>) starts the ladder there; another tier is the only one asked. <code>null</code> uses the configured ladder. It does not choose the knowledge author.</li></ul>
+<pre class="api-example product-example" data-endpoint="POST /v1/sessions/demo-session/settings" data-request="{&quot;formalizer_model&quot;:&quot;openrouter/deepseek/deepseek-v4-flash&quot;}" data-as="user" data-status="200" data-response-keys="object,id,user,name,created_at,last_active_at,base,settings"><code>curl -s -X POST http://127.0.0.1:9999/v1/sessions/demo-session/settings -H &quot;Authorization: Bearer $TOKEN&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;formalizer_model&quot;:&quot;openrouter/deepseek/deepseek-v4-flash&quot;}'</code></pre>
+<p>Abridged response (HTTP 200):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;session&quot;,
+ &quot;id&quot;: &quot;demo-session&quot;,
+ &quot;settings&quot;: {
+  &quot;formalizer_model&quot;: &quot;openrouter/deepseek/deepseek-v4-flash&quot;,
+  &quot;formalizer&quot;: null,
+  &quot;adapter_mode&quot;: null
+ }
+}</code></pre>
+</section>
+
+<section id="authoring"><h2>7. The direct author: knowledge authoring</h2>
+<p>Attached instruction or source files go to the direct author: the configured authoring tier <code>ingest.tier</code> (shipped <code>small</code>), called through Ploinky Workers as a chat completion (no tools, no shell, no files; there is no omp), with the skill <code>sop-wire-authoring</code>. It writes SOP circuits that the server validates in a temporary folder. With a session, the circuits that pass the knowledge validator join that session's layer at once; there is no manual acceptance (owner, 2026-10-02): errors are corrected through tests and interactions. The model is the request's <code>model</code>, else <code>ingest.tier</code>; at most three repair rounds are made (<a href="specsLoader.html?spec=DS022-sessions-and-base-memories.md">DS022</a>).</p>
+<h3>POST /v1/author</h3>
+<p><code>files</code> are UTF-8 text files (at most 10, 2 MB each); <code>session</code> adds the validated circuits to that session's layer (without it only the circuits are returned and the temporary folder is under <code>chat_data/tmp/</code>); <code>wait: false</code> answers 202 at once and <code>GET /v1/sessions/&lt;id&gt;/requests/&lt;request&gt;</code> reports the progress and the result. The folder holds <code>TASK.md</code>, the skill, the input and the model's conversation; the validator checks the circuits and sends its problems back to the model in the same conversation, as patches, for a bounded number of rounds. The answer names <code>model</code> (the chain id that wrote the circuits) and <code>cost_class</code> (<code>subscription</code> for the openference plan, otherwise <code>paid_api</code>). Errors: 429 <code>author_busy</code>, 400 <code>unknown_model</code>.</p>
+<pre class="api-example product-example" data-endpoint="POST /v1/author" data-request="{&quot;session&quot;:&quot;demo-session&quot;,&quot;instructions&quot;:&quot;Compile the register.&quot;,&quot;files&quot;:[{&quot;name&quot;:&quot;register.txt&quot;,&quot;text&quot;:&quot;Ann is the parent of Bob. Bob is the parent of Cy. A grandparent is a parent of a parent.&quot;}],&quot;model&quot;:&quot;openrouter/deepseek/deepseek-v4-flash&quot;}" data-as="user" data-status="200" data-response-keys="object,request_id,session,status,ok,rounds,model,cost_class"><code>curl -s -X POST http://127.0.0.1:9999/v1/author -H &quot;Authorization: Bearer $TOKEN&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;session&quot;:&quot;demo-session&quot;,&quot;instructions&quot;:&quot;Compile the register.&quot;,&quot;files&quot;:[{&quot;name&quot;:&quot;register.txt&quot;,&quot;text&quot;:&quot;Ann is the parent of Bob. Bob is the parent of Cy. A grandparent is a parent of a parent.&quot;}],&quot;model&quot;:&quot;openrouter/deepseek/deepseek-v4-flash&quot;}'</code></pre>
+<p>Abridged response (HTTP 200):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;author.result&quot;,
+ &quot;request_id&quot;: &quot;r-mupm5li1-c33fe0&quot;,
+ &quot;session&quot;: &quot;demo-session&quot;,
+ &quot;status&quot;: &quot;validated&quot;,
+ &quot;ok&quot;: true,
+ &quot;rounds&quot;: 1,
+ &quot;model&quot;: &quot;openrouter/deepseek/deepseek-v4-flash&quot;,
+ &quot;cost_class&quot;: &quot;paid_api&quot;,
+ &quot;added&quot;: {&quot;file&quot;: &quot;0001-authored-r-mupm5li1-c33fe0.sop&quot;},
+ &quot;validation&quot;: {
+  &quot;ok&quot;: true,
+  &quot;problems&quot;: [],
+  &quot;warnings&quot;: []
+ },
+ &quot;usage&quot;: {
+  &quot;turns&quot;: 1,
+  &quot;input_tokens&quot;: 1000,
+  &quot;output_tokens&quot;: 200,
+  &quot;cache_read_tokens&quot;: 50,
+  &quot;cost_usd&quot;: 0.0025
+ },
+ &quot;duration_ms&quot;: 55,
+ &quot;folder&quot;: &quot;sessions/demo-session/requests/r-mupm5li1-c33fe0&quot;
+}</code></pre>
+<h3>Status of a request</h3>
+<pre class="api-example product-example" data-endpoint="GET /v1/sessions/demo-session/requests/{request}" data-request="{}" data-as="user" data-status="200" data-response-keys="object,request_id,session,status,phase,round,model,cost_class"><code>curl -s -X GET http://127.0.0.1:9999/v1/sessions/demo-session/requests/&lt;request-id&gt; -H &quot;Authorization: Bearer $TOKEN&quot;</code></pre>
+<p>Abridged response (HTTP 200):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;author.status&quot;,
+ &quot;request_id&quot;: &quot;r-mupm5li1-c33fe0&quot;,
+ &quot;status&quot;: &quot;validated&quot;,
+ &quot;phase&quot;: &quot;done&quot;,
+ &quot;round&quot;: 0,
+ &quot;model&quot;: &quot;openrouter/deepseek/deepseek-v4-flash&quot;,
+ &quot;cost_class&quot;: &quot;paid_api&quot;,
+ &quot;started_at&quot;: &quot;2026-10-01T14:12:27.289Z&quot;
+}</code></pre>
+<h3 id="ingest">Ingest documents into a base memory</h3>
+<p>Documents, books and other material become knowledge of a <em>task-type base memory</em> (DS022 "Ingesting documents into a base memory"). Every document states its rights (<code>cleared</code>, <code>permissive-attribution</code> or <code>owner-provided</code>, DS011); anything else is refused with 400 <code>rights_required</code> before a model runs. The document is cut into chunks along its headings; a model compiles each chunk over the memory's vocabulary and the chunks merged before it (<code>author: "direct"</code>, the only author: one chat-completion conversation per chunk through Ploinky Workers; the retired <code>omp</code> author is refused with 400); the validator and the quote check (every <code>quote</code> must be words of the passage) run in the repair rounds; a fact that duplicates or contradicts the memory is held back. Every validated chunk is stored at once with its provenance (no acceptance step); the answer is the ingestion with its report. <code>wait: false</code> answers 202 with the status URL. A chunk stored earlier (same SHA-256) is skipped, so ingesting the same document again adds nothing.</p>
+<pre class="api-example product-example" data-endpoint="POST /v1/memories/family-copy/ingest" data-request="{&quot;documents&quot;: [{&quot;name&quot;: &quot;family-register.md&quot;, &quot;text&quot;: &quot;# Family register\n\nAnn is the parent of Bob. Bob is the parent of Cy.\n&quot;, &quot;source&quot;: {&quot;rights&quot;: &quot;owner-provided&quot;}}], &quot;purpose&quot;: &quot;family questions&quot;}" data-as="user" data-status="200" data-response-keys="object,id,status,chunks,totals,report"><code>curl -s -X POST http://127.0.0.1:9999/v1/memories/family-copy/ingest -H &quot;Authorization: Bearer $TOKEN&quot; -H &#x27;content-type: application/json&#x27; -d &#x27;{&quot;documents&quot;: [{&quot;name&quot;: &quot;family-register.md&quot;, &quot;text&quot;: &quot;# Family register\n\nAnn is the parent of Bob. Bob is the parent of Cy.\n&quot;, &quot;source&quot;: {&quot;rights&quot;: &quot;owner-provided&quot;}}], &quot;purpose&quot;: &quot;family questions&quot;}&#x27;</code></pre>
+<p>Abridged response (HTTP 200):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;memory.ingestion&quot;,
+ &quot;id&quot;: &quot;ing-mur0b2k1-4c1a9e&quot;,
+ &quot;memory&quot;: {&quot;id&quot;: &quot;family-copy&quot;, &quot;name&quot;: &quot;Family (copy)&quot;},
+ &quot;status&quot;: &quot;stored&quot;,
+ &quot;documents&quot;: [{&quot;name&quot;: &quot;family-register.md&quot;, &quot;title&quot;: &quot;Family register&quot;, &quot;sha256&quot;: &quot;…&quot;, &quot;source&quot;: {&quot;rights&quot;: &quot;owner-provided&quot;}}],
+ &quot;chunks&quot;: [{&quot;key&quot;: &quot;family-register-md-01&quot;, &quot;status&quot;: &quot;stored&quot;, &quot;start_line&quot;: 1, &quot;end_line&quot;: 3, &quot;wires&quot;: {&quot;predicate&quot;: 1, &quot;rule&quot;: 1}, &quot;rejected&quot;: [], &quot;conflicts&quot;: [{&quot;code&quot;: &quot;duplicate_of_memory&quot;, &quot;wire&quot;: &quot;f_bc&quot;, &quot;…&quot;: &quot;…&quot;}], &quot;uncertain&quot;: []}],
+ &quot;totals&quot;: {&quot;chunks&quot;: 1, &quot;validated&quot;: 1, &quot;rejected_quotes&quot;: 0, &quot;conflicts&quot;: 1, &quot;cost_usd&quot;: 0.0025},
+ &quot;report&quot;: &quot;# Ingestion ing-mur0b2k1-4c1a9e into Family (copy) (family-copy) …&quot;
+}</code></pre>
+<p>Every validated chunk is stored in the memory at the end of the ingestion, with its provenance (document, location, quote); there is no acceptance step. <code>GET /v1/memories/&lt;id&gt;/ingestions</code> lists the ingestions of a memory and <code>GET /v1/memories/&lt;id&gt;/ingestions/&lt;ingestion&gt;</code> returns one with its report.</p>
+<p>Then start sessions on the memory as on any base memory (<code>POST /v1/sessions {&quot;base&quot;: &quot;family&quot;}</code>). From the command line: <code>node tools/ingest-documents.mjs ingest --memory ID --file book.md --rights cleared</code>.</p>
+
+<h3 id="procedures">Procedure library</h3>
+<p>A procedure is a bundle of definitions (predicates, rules, defaults) with a description of the question form it answers, stored in a base memory like any knowledge (DS022 "Procedure library"). When a message matches a description, the query author is offered the procedure's head predicate and its rules, and queries it instead of re-deriving the rule. A typical source is a session definition the formalizer wrote for one question.</p>
+<pre class="api-example product-example" data-endpoint="POST /v1/memories/family-copy/procedures" data-request="{&quot;id&quot;: &quot;proc_grandparent&quot;, &quot;description&quot;: &quot;Answers: who is a grandparent of a person?&quot;, &quot;definitions&quot;: &quot;@grandparent_of predicate\n  args subject:entity object:entity\n  label en \&quot;grandparent of\&quot;\n\n@r_grandparent_of rule\n  when all\n    parent ?x ?y\n    parent ?y ?z\n  end\n  then grandparent_of ?x ?z\n&quot;}" data-as="user" data-status="200" data-response-keys="object,procedure,memory,added"><code>curl -s -X POST http://127.0.0.1:9999/v1/memories/family-copy/procedures -H &quot;Authorization: Bearer $TOKEN&quot; -H &#x27;content-type: application/json&#x27; -d @procedure.json</code></pre>
+<p>The answer names the stored circuit (<code>added</code>) and the memory's new counters; the circuit is <code>procedure-proc_grandparent</code> with a <code>@proc_grandparent procedure</code> wire whose <code>members</code> are the definitions.</p>
+</section>
+
+
+<section id="session-use"><h2>8. Using the session: theory, query, commit</h2>
+<h3>Circuits for a message</h3>
+<p>A message becomes a query through <code>lib/query-author</code>: the formalizer writes the query circuit from the memory\'s vocabulary (<a href="specsLoader.html?spec=DS022-sessions-and-base-memories.md">DS022</a>). <code>POST /v1/sessions/{id}/query</code> takes either <code>query</code> (a query circuit, run as written) or <code>message</code> (a request in any language; the answer carries <code>parse</code>, <code>model_sop</code> and <code>circuit</code>). Whoever wrote the query, it is linked, retrieved over a slice, routed, verified and rendered by the same symbolic path. The answer packet and <code>chatSop</code> carry <code>parse: {model, backend, rounds, cost_usd, ms, cache, ...}</code>; with no available model the answer is <code>parse_unavailable</code>. A clear question that no predicate of the memory expresses is answered <code>unclear</code> (<code>relation_not_in_memory</code>), never with an invented relation.</p>
+<h3>The theory and a query over it</h3>
+<p>The theory is the base circuits followed by the session circuits; a query circuit runs over it with the exact oracle.</p>
+<pre class="api-example product-example" data-endpoint="GET /v1/sessions/demo-session/theory" data-request="{}" data-as="user" data-status="200" data-response-keys="object,theory,base,session_circuits"><code>curl -s -X GET http://127.0.0.1:9999/v1/sessions/demo-session/theory -H &quot;Authorization: Bearer $TOKEN&quot;</code></pre>
+<p>Abridged response (HTTP 200):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;session.theory&quot;,
+ &quot;theory&quot;: &quot;@parent predicate\n  args subject:entity object:entity\n\n@f1 fact\n  holds parent ann bob\n...&quot;,
+ &quot;base&quot;: {
+  &quot;id&quot;: &quot;family&quot;,
+  &quot;name&quot;: &quot;Family&quot;,
+  &quot;strategy&quot;: &quot;sqlite&quot;,
+  &quot;circuits&quot;: 1
+ },
+ &quot;session_circuits&quot;: [
+  &quot;0001-authored-r-mupm5li1-c33fe0.sop&quot;
+ ]
+}</code></pre>
+<pre class="api-example product-example" data-endpoint="POST /v1/sessions/demo-session/query" data-request="{&quot;query&quot;:&quot;@q query\n  where grandparent ann ?who\n  select ?who\n&quot;}" data-as="user" data-status="200" data-response-keys="object,session,answer"><code>curl -s -X POST http://127.0.0.1:9999/v1/sessions/demo-session/query -H &quot;Authorization: Bearer $TOKEN&quot; -H &quot;Content-Type: application/json&quot; -d '{&quot;query&quot;:&quot;@q query\n  where grandparent ann ?who\n  select ?who\n&quot;}'</code></pre>
+<p>Abridged response (HTTP 200):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;session.query&quot;,
+ &quot;session&quot;: &quot;demo-session&quot;,
+ &quot;answer&quot;: {
+  &quot;strategy&quot;: &quot;js-reference&quot;,
+  &quot;guarantee&quot;: &quot;exact&quot;,
+  &quot;status&quot;: &quot;supported&quot;,
+  &quot;complete&quot;: true,
+  &quot;budget&quot;: {
+   &quot;limit&quot;: {
+    &quot;maxRounds&quot;: 1000,
+    &quot;maxJoins&quot;: 2000000,
+    &quot;maxFacts&quot;: 200000,
+    &quot;maxNodes&quot;: 200000,
+    &quot;maxDepth&quot;: 20,
+    &quot;maxHypotheses&quot;: 12,
+    &quot;maxCandidates&quot;: 4096,
+    &quot;maxAssignments&quot;: 2000000,
+    &quot;maxFanout&quot;: 100000,
+    &quot;maxPlans&quot;: 1,
+    &quot;timeoutMs&quot;: 30000
+   },
+   &quot;used&quot;: {
+    &quot;maxRounds&quot;: 1,
+    &quot;maxJoins&quot;: 12,
+    &quot;maxFacts&quot;: 1,
+    &quot;maxNodes&quot;: 0,
+    &quot;maxFanout&quot;: 0,
+    &quot;maxAssignments&quot;: 0,
+    &quot;maxHypotheses&quot;: 0,
+    &quot;maxCandidates&quot;: 0,
+    &quot;ms&quot;: 3
+   },
+   &quot;exhausted&quot;: false,
+   &quot;reason&quot;: null,
+   &quot;partial&quot;: false
+  },
+  &quot;sensitivity&quot;: {
+   &quot;monotone&quot;: true,
+   &quot;over&quot;: [],
+   &quot;defaults&quot;: [],
+   &quot;aggregates&quot;: []
+  },
+  &quot;ignored&quot;: [],
+  &quot;notes&quot;: [],
+  &quot;retrieval&quot;: {
+   &quot;complete&quot;: true,
+   &quot;truncated&quot;: false,
+   &quot;keyed&quot;: false,
+   &quot;steps&quot;: 0,
+   &quot;wires&quot;: 2,
+   &quot;probes&quot;: 0
+  },
+  &quot;rows&quot;: [
+   {
+    &quot;who&quot;: &quot;cy&quot;
+   }
+  ],
+  &quot;used&quot;: [
+   {
+    &quot;id&quot;: &quot;r_grand&quot;,
+    &quot;version&quot;: 1
+   },
+   {
+    &quot;id&quot;: &quot;f1&quot;,
+    &quot;version&quot;: 1
+   },
+   &quot;...&quot;
+  ],
+  &quot;timings&quot;: {
+   &quot;ask&quot;: 1,
+   &quot;total&quot;: 4
+  },
+  &quot;route&quot;: {
+   &quot;requested&quot;: null,
+   &quot;chosen&quot;: &quot;js-reference&quot;,
+   &quot;reason&quot;: &quot;direct call to the oracle&quot;,
+   &quot;fallback&quot;: null
+  }
+ }
+}</code></pre>
+<p>Optional body parameters: <code>reasoning</code> (<code>auto</code>, the default, or one strategy id: <code>reference</code>, <code>sql-sqlite</code>, <code>datalog-souffle</code>, <code>asp-clingo</code>, <code>datalog-e10</code>, <code>prolog-tabling</code>) and <code>verify</code> (<code>auto</code>, <code>always</code>, <code>never</code>). With <code>auto</code> the StrategyRouter (<a href="specsLoader.html?spec=DS006-reasoning.md">DS006</a> "Routing rules") chooses the engine from the features of the circuit and the size of the retrieved slice; the answer carries <code>route</code> with <code>requested</code>, <code>chosen</code>, <code>rule</code> (<code>small</code>, <code>scale</code>, <code>proof_or_mode_of_work</code>, <code>caller_budget</code>, <code>oracle</code>, <code>discrepancy</code>), <code>reason</code>, <code>features</code>, <code>alternatives</code> and <code>verification</code> (a routed answer is re-checked by the oracle; on a disagreement the oracle's answer is returned with <code>outcome: discrepancy</code>). A named strategy runs exactly that engine and never another: an engine that is not installed or cannot express the circuit answers <code>status: unsupported</code> with the engine in <code>route.backend</code> and <code>route.fallback: null</code>.</p>
+<h3>Commit to a fork</h3>
+<p>Creates a new base memory: a fork of the session's base memory plus the session circuits, validated again, with provenance. The original base memory does not change. Asserted statements are turn-local evidence and are not committed.</p>
+<pre class="api-example product-example" data-endpoint="POST /v1/sessions/demo-session/commit" data-request="{&quot;name&quot;:&quot;Family plus register&quot;,&quot;id&quot;:&quot;family-register&quot;}" data-as="user" data-status="201" data-response-keys="object,memory,added,fork_method"><code>curl -s -X POST http://127.0.0.1:9999/v1/sessions/demo-session/commit -b cookies.txt -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;Family plus register&quot;,&quot;id&quot;:&quot;family-register&quot;}'</code></pre>
+<p>Abridged response (HTTP 201):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;session.commit&quot;,
+ &quot;memory&quot;: {
+  &quot;id&quot;: &quot;family-register&quot;,
+  &quot;name&quot;: &quot;Family plus register&quot;,
+  &quot;parent&quot;: {
+   &quot;id&quot;: &quot;family&quot;,
+   &quot;name&quot;: &quot;Family&quot;,
+   &quot;strategy&quot;: &quot;sqlite&quot;,
+   &quot;circuits&quot;: 1,
+   &quot;forked_at&quot;: &quot;2026-10-01T14:12:27.373Z&quot;
+  },
+  &quot;strategy&quot;: &quot;sqlite&quot;,
+  &quot;created_at&quot;: &quot;2026-10-01T14:12:27.373Z&quot;,
+  &quot;description&quot;: &quot;Committed from session demo-session&quot;,
+  &quot;circuits&quot;: 2,
+  &quot;facts&quot;: 2,
+  &quot;circuit_files&quot;: [
+   &quot;0001-family.sop&quot;,
+   &quot;0002-authored-r-mupm5li1-c33fe0-sop.sop&quot;
+  ],
+  &quot;provenance&quot;: [
+   {
+    &quot;kind&quot;: &quot;import&quot;,
+    &quot;seq&quot;: 1,
+    &quot;file&quot;: &quot;0001-family.sop&quot;,
+    &quot;sha256&quot;: &quot;90ae8ccd6a61c506c6f47349ed01e99d54dcd8139377fd50db1d871c827dde7a&quot;,
+    &quot;approved_by&quot;: &quot;admin&quot;,
+    &quot;approved_at&quot;: &quot;2026-10-01T14:12:27.155Z&quot;,
+    &quot;reason&quot;: &quot;import of the family register&quot;,
+    &quot;source&quot;: &quot;family register&quot;,
+    &quot;wires&quot;: 2,
+    &quot;ingest&quot;: &quot;...&quot;
+   },
+   {
+    &quot;kind&quot;: &quot;fork&quot;,
+    &quot;from&quot;: &quot;family&quot;,
+    &quot;strategy_from&quot;: &quot;sqlite&quot;,
+    &quot;strategy_to&quot;: &quot;sqlite&quot;,
+    &quot;method&quot;: &quot;hard-link clone (copy-on-write)&quot;,
+    &quot;at&quot;: &quot;2026-10-01T14:12:27.373Z&quot;
+   },
+   &quot;...&quot;
+  ]
+ },
+ &quot;added&quot;: [
+  {
+   &quot;kind&quot;: &quot;commit&quot;,
+   &quot;seq&quot;: 2,
+   &quot;file&quot;: &quot;0002-authored-r-mupm5li1-c33fe0-sop.sop&quot;,
+   &quot;sha256&quot;: &quot;80b36325c189a8f52a002ec05a430f0d6c11f71ed7864fa47ff36b84dd0ddf95&quot;,
+   &quot;approved_by&quot;: &quot;admin&quot;,
+   &quot;approved_at&quot;: &quot;2026-10-01T14:12:27.373Z&quot;,
+   &quot;reason&quot;: &quot;commit of session demo-session&quot;,
+   &quot;source&quot;: &quot;session:demo-session&quot;,
+   &quot;wires&quot;: 3,
+   &quot;ingest&quot;: {
+    &quot;facts_in_circuit&quot;: 1,
+    &quot;facts_ingested&quot;: 1,
+    &quot;facts_defaulted_valid&quot;: 1,
+    &quot;facts_skipped&quot;: [
+     &quot;...&quot;
+    ]
+   }
+  }
+ ],
+ &quot;fork_method&quot;: &quot;clone&quot;
+}</code></pre>
+<pre class="api-example product-example" data-endpoint="GET /v1/sessions/demo-session" data-request="{}" data-as="user" data-status="200" data-response-keys="object,id,user,name,created_at,last_active_at,base,settings"><code>curl -s -X GET http://127.0.0.1:9999/v1/sessions/demo-session -H &quot;Authorization: Bearer $TOKEN&quot;</code></pre>
+<p>Abridged response (HTTP 200):</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;session&quot;,
+ &quot;id&quot;: &quot;demo-session&quot;,
+ &quot;base&quot;: {
+  &quot;id&quot;: &quot;family&quot;,
+  &quot;name&quot;: &quot;Family&quot;,
+  &quot;strategy&quot;: &quot;sqlite&quot;,
+  &quot;circuits&quot;: 1
+ },
+ &quot;circuits&quot;: [
+  &quot;0001-authored-r-mupm5li1-c33fe0.sop&quot;
+ ],
+ &quot;committed_to&quot;: [
+  {
+   &quot;id&quot;: &quot;family-register&quot;,
+   &quot;at&quot;: &quot;2026-10-01T14:12:27.373Z&quot;,
+   &quot;by&quot;: &quot;admin&quot;
+  }
+ ]
+}</code></pre>
+
+</section>
+
+<section id="knowledge"><h2>9. Knowledge browser (read only)</h2>
+<p>The page <a href="/review">/review</a> (signed in; menu <em>Knowledge</em>) and the API below show what a base memory or a chat session knows, layer by layer: the import layers (<code>core-min</code>, <code>core-en</code>, <code>commonsense-v1</code>, …), the memory's own circuits, one layer per document ingestion and, for a session, the session layer. Every route is <code>GET</code> and writes nothing; another method answers 405. There is no accept or reject endpoint: flags mark likely problems (a form with no corpus or Wikidata evidence, a form two predicates claim, a converse frame, a rule, a flipped or merged Wikidata mapping, a predicate without a description) and corrections go through tests and interactions. A target is named with <code>memory=&lt;id&gt;</code> or <code>session=&lt;id&gt;</code> (a session must be visible to the caller); an unknown memory answers 404 <code>unknown_memory</code>, a bad parameter 400 <code>invalid_parameter</code>.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Route</th><th scope="col">Answer</th></tr></thead><tbody>
+<tr><td class="ep">GET /v1/knowledge/memories</td><td>every base memory: layers, provenance summary (kind, approver, source, counts, dates), circuits, facts, ingestions</td></tr>
+<tr><td class="ep">GET /v1/knowledge/memories/{id}</td><td>layers with files, wires, entities, facts and flag statistics; provenance; ingestions; the world-v1 mapping table (Wikidata property, predicate, kind, flip, scope, facts built) when a layer is the Wikidata build</td></tr>
+<tr><td class="ep">GET /v1/knowledge/memories/{id}/items?layer=&amp;type=&amp;flag=&amp;group=&amp;q=&amp;offset=&amp;limit=</td><td>the items of a layer, most risk first, with flags, evidence (mined corpus counts and example messages, Wikidata properties, dropped forms, mapping rows) and examples: generated sentences and the atom they map to, sample facts in words, a derivation of each rule over stored facts</td></tr>
+<tr><td class="ep">GET /v1/knowledge/search?memory=|session=&amp;q=&amp;kind=&amp;offset=&amp;limit=</td><td>keyword search: every word must match, the last also as a prefix; groups <code>entities</code>, <code>classes</code>, <code>predicates</code> (labels, aliases, lexeme forms, descriptions), <code>rules</code>, <code>facts</code> (text values), ranked; <code>kind</code> pages one group</td></tr>
+<tr><td class="ep">GET /v1/knowledge/entities/{id}</td><td>label, aliases, classes closed over <code>is_a</code>, description, the stored facts in both directions grouped by predicate with source and layer, the rules that can derive more</td></tr>
+<tr><td class="ep">GET /v1/knowledge/predicates/{id}</td><td>roles, description, closedness, the lexemes with their forms and evidence, generated sentences, fact counts per layer, example facts, the rules that conclude or use it, the mapping rows</td></tr>
+<tr><td class="ep">GET /v1/knowledge/rules/{id}</td><td>the SOP, a deterministic English reading and an example derivation over stored facts (or over placeholder names, labelled hypothetical)</td></tr>
+<tr><td class="ep">GET /v1/knowledge/derive?entity=&amp;predicate=</td><td>what the oracle derives about an entity through the rules (bounded queries), each derived fact with its proof tree and the layer of every premise</td></tr>
+</tbody></table></div>
+<h3>Search</h3>
+<pre class="api-example product-example" data-endpoint="GET /v1/knowledge/search?memory=family&amp;q=parent" data-request="" data-as="user" data-status="200" data-response-keys="object,q,target,total,groups"><code>curl -s 'http://127.0.0.1:9999/v1/knowledge/search?memory=family&amp;q=parent' -b cookies.txt</code></pre>
+<p>Abridged response:</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;knowledge.search&quot;,
+ &quot;q&quot;: &quot;parent&quot;,
+ &quot;target&quot;: {&quot;kind&quot;: &quot;memory&quot;, &quot;id&quot;: &quot;family&quot;},
+ &quot;total&quot;: 1,
+ &quot;groups&quot;: {
+  &quot;predicates&quot;: {&quot;total&quot;: 1, &quot;offset&quot;: 0, &quot;items&quot;: [{&quot;id&quot;: &quot;parent&quot;, &quot;label&quot;: &quot;parent&quot;, &quot;matched&quot;: &quot;parent&quot;, &quot;score&quot;: 100, &quot;facts&quot;: 1}]},
+  &quot;entities&quot;: {&quot;total&quot;: 0, &quot;offset&quot;: 0, &quot;items&quot;: []},
+  &quot;...&quot;: &quot;...&quot;
+ }
+}</code></pre>
+<h3>A predicate card</h3>
+<pre class="api-example product-example" data-endpoint="GET /v1/knowledge/predicates/parent?memory=family" data-request="" data-as="user" data-status="200" data-response-keys="object,id,roles,lexemes,sentences,examples,used_by,concluded_by"><code>curl -s 'http://127.0.0.1:9999/v1/knowledge/predicates/parent?memory=family' -b cookies.txt</code></pre>
+<p>Abridged response: the example facts are read through the memory strategy and rendered in words through the predicate's first English lexeme (here the predicate has none, so the atom is shown as <code>parent(ann, bob)</code>).</p>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;knowledge.predicate&quot;,
+ &quot;id&quot;: &quot;parent&quot;,
+ &quot;roles&quot;: [{&quot;name&quot;: &quot;subject&quot;, &quot;type&quot;: &quot;entity&quot;}, {&quot;name&quot;: &quot;object&quot;, &quot;type&quot;: &quot;entity&quot;}],
+ &quot;layer&quot;: &quot;family&quot;,
+ &quot;lexemes&quot;: [],
+ &quot;sentences&quot;: [],
+ &quot;examples&quot;: [{&quot;atom&quot;: &quot;parent ann bob&quot;, &quot;sentence&quot;: &quot;parent(ann, bob)&quot;, &quot;source&quot;: &quot;family register&quot;, &quot;layer&quot;: &quot;family&quot;}],
+ &quot;concluded_by&quot;: [],
+ &quot;used_by&quot;: [],
+ &quot;...&quot;: &quot;...&quot;
+}</code></pre>
+</section>
+
+<section id="feedback"><h2>10. Chat feedback</h2>
+<p>Every answered turn of a session gets a number: the chat answer carries <code>chatSop.turn</code> and <code>chatSop.trace_id</code> (the completion id), and the session transcript keeps the turn record (the message, the formalization strategy and model, the authored and the execution circuit, the status, the answer text, the trace id). The chat page shows thumbs up and thumbs down under each such answer; thumbs down asks for one cause and an optional comment.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Route</th><th scope="col">Answer</th></tr></thead><tbody>
+<tr><td class="ep">POST /v1/feedback</td><td>Body <code>{session, turn, vote: "up"|"down", cause?, comment?}</code>; <code>cause</code> is required for a down vote and refused for an up vote: <code>not_understood</code> (did not understand the request), <code>wrong_answer</code> (the reasoning or the facts are wrong), <code>missing_knowledge</code> (it should know this), <code>unnecessary_question</code> (asked back although the request was clear), <code>bad_wording</code> (correct but phrased badly). <code>comment</code> is at most 2000 characters. 201 <code>{object: "feedback", session, turn, vote, cause, routed, duplicate, trace_id}</code>; 400 <code>invalid_parameter</code> or <code>unsupported_parameter</code>; 403 for a session of another user; 404 <code>unknown_session</code> or <code>turn_not_found</code>.</td></tr>
+<tr><td class="ep">GET /v1/feedback?limit=</td><td>The signed-in administrator session only (403 otherwise): the recent votes newest first (<code>data</code>), the same grouped by <code>up</code> and by cause (<code>groups</code>), and <code>stats</code>. The admin page shows them as a table with a link to each turn.</td></tr>
+<tr><td class="ep">GET /v1/feedback/stats</td><td><code>{votes: {up, down}, causes: {not_understood, wrong_answer, missing_knowledge, unnecessary_question, bad_wording}, turns, records}</code>, counted over the latest vote of each turn and user.</td></tr>
+<tr><td class="ep">GET /v1/sessions/{id}/turns/{turn}</td><td>The recorded turn: <code>message</code>, <code>text</code> (the answer), <code>status</code>, <code>strategy</code>, <code>model</code>, <code>model_sop</code>, <code>circuit</code>, <code>reasoning_strategy</code>, <code>backend</code>, <code>trace_id</code>.</td></tr>
+</tbody></table></div>
+<p><b>Storage and routing.</b> Every vote is appended to <code>state/feedback/chat-feedback.jsonl</code> (append-only, gitignored) with the turn record. A down vote is routed by its cause, once per turn and cause (a repeated identical vote is recorded with <code>duplicate: true</code> and not routed again): <code>not_understood</code> to the formalization error inbox <code>state/formalization-errors/inbox.jsonl</code> (kind <code>wrong</code>, with the circuit), <code>unnecessary_question</code> to the same inbox (kind <code>unclear</code>), <code>missing_knowledge</code> to the knowledge-gap queue <code>query-gaps.jsonl</code> of the chat data root, <code>bad_wording</code> to <code>state/feedback/reply-layer.jsonl</code> (for the conversation-layer wires), <code>wrong_answer</code> to <code>state/feedback/answer-wrong.jsonl</code>.</p>
+<pre class="api-request"><code>curl -s -X POST http://127.0.0.1:9999/v1/feedback -H &quot;Authorization: Bearer $TOKEN&quot; -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;session&quot;: &quot;demo-session&quot;, &quot;turn&quot;: 1, &quot;vote&quot;: &quot;down&quot;, &quot;cause&quot;: &quot;not_understood&quot;, &quot;comment&quot;: &quot;It read Maria as a company.&quot;}'</code></pre>
+<pre class="api-response"><code>{
+ &quot;object&quot;: &quot;feedback&quot;,
+ &quot;session&quot;: &quot;demo-session&quot;,
+ &quot;turn&quot;: 1,
+ &quot;vote&quot;: &quot;down&quot;,
+ &quot;cause&quot;: &quot;not_understood&quot;,
+ &quot;routed&quot;: {&quot;route&quot;: &quot;formalization&quot;, &quot;kind&quot;: &quot;wrong&quot;},
+ &quot;duplicate&quot;: false,
+ &quot;trace_id&quot;: &quot;chatcmpl-6f1c…&quot;
+}</code></pre>
+</section>
+
+<section id="mrp-models"><h2>11. Models and strategies</h2>
+<p>A <a href="wiki.html#definition-model">Model</a> is a base memory plus one <a href="wiki.html#definition-strategy">strategy</a> per <a href="wiki.html#definition-slot">slot</a> (<a href="specsLoader.html?spec=DS025-models-slots-and-strategies.md">DS025</a>). <code>POST /v1/chat/completions</code> takes <code>model</code> (a Model id) and an optional <code>metadata</code> object with <code>language</code> (the answer language: <code>auto</code> or a code such as <code>ro</code>) and <code>slots</code> (per-request strategy overrides, applied when the Model allows overrides). The response adds <code>mrp</code>: the Model, the original and English message, the detected and output languages, the reflex hit, the affect, the round-trip result, the effective slots, the applied overrides and one trace entry per slot. A Model whose slot names a strategy this server cannot run answers 503 <code>strategy_unavailable</code>.</p>
+<pre class="api-response"><code>POST /v1/mrp/models
+{&quot;id&quot;: &quot;hr&quot;, &quot;profile&quot;: &quot;support-bot&quot;, &quot;base&quot;: &quot;hr-policies&quot;, &quot;createBase&quot;: true,
+ &quot;language&quot;: {&quot;output&quot;: &quot;auto&quot;},
+ &quot;slots&quot;: {&quot;reflex&quot;: {&quot;strategy&quot;: &quot;faq-margin&quot;, &quot;params&quot;: {&quot;threshold&quot;: 0.55, &quot;margin&quot;: 0.15}},
+           &quot;roundtrip&quot;: &quot;lexical-sampled&quot;, &quot;commit&quot;: &quot;review-queue&quot;},
+ &quot;faq&quot;: [{&quot;q&quot;: &quot;How many vacation days do I have?&quot;, &quot;variants&quot;: [&quot;Annual leave entitlement?&quot;], &quot;a&quot;: &quot;21 working days per year.&quot;}]}</code></pre>
+<p><code>PUT /v1/mrp/models/{id}</code> replaces the given fields (<code>name</code>, <code>description</code>, <code>base</code>, <code>language</code>, <code>slots</code>, <code>faq</code>, <code>allowOverrides</code>); parameters are checked against the catalog. <code>GET /v1/mrp/strategies?check=1</code> lists every slot with its strategies, parameters, costs and availability on this server. Sessions take the settings <code>model</code>, <code>language</code> and <code>slots</code> (<code>POST /v1/sessions</code>, <code>POST /v1/sessions/{id}/settings</code>); a session of a Model starts on the Model's base memory.</p>
+</section>
+
+<section id="mrp-gateway"><h2>12. Model gateway settings</h2>
+<p>These routes need the administrator session (a bearer token gets 403) and configure the Ploinky Workers home of the machine (<a href="specsLoader.html?spec=DS027-model-gateway-settings.md">DS027</a>). <code>PUT /v1/mrp/pworker/providers/deepseek/key {&quot;key&quot;: &quot;…&quot;}</code> checks the key against the provider's model list and stores it only in the Pworker home; an empty key removes it. <code>PUT /v1/mrp/pworker/tiers/fast {&quot;entries&quot;: [{&quot;provider&quot;: &quot;deepseek&quot;, &quot;model&quot;: &quot;deepseek-flash&quot;, &quot;extraBody&quot;: {&quot;thinking&quot;: {&quot;type&quot;: &quot;disabled&quot;}}}]}</code> sets a tier chain. Changes take effect after <code>POST /v1/mrp/pworker/restart</code>. <code>GET /v1/mrp/pworker</code> reports the proxy, the providers (whether a key is configured, never the key), the tier chains and what each tier serves now.</p>
+</section>
+</article></main></body></html>

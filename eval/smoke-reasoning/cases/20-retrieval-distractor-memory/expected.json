@@ -1,0 +1,26 @@
+{
+  "feature": "Memory at scale: symbol-driven slice from a store full of distractors",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "w": "bob"
+    },
+    {
+      "w": "cy"
+    },
+    {
+      "w": "di"
+    }
+  ],
+  "retrieval": {
+    "max_wires": 120,
+    "needed_recall": 1,
+    "min_steps": 2
+  },
+  "requires": [
+    "rules",
+    "recursion",
+    "retrieval"
+  ]
+}

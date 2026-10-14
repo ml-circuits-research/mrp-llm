@@ -1,0 +1,497 @@
+{
+ "_note": "Ground truth of the analysis test set (eval/analysis-v1/README.md): the planted issues of each document as {rule, witness} (the integrity wire of analysis-core-v1 that must fire and its witness in the hand-written SOP) and the KPI values the procedures must compute from the stated numbers. Written with the documents; the procedures were not tuned on a held-out part, so this set measures the procedures in isolation (level a), not generality.",
+ "documents": {
+  "northwind-annual-2025": {
+   "kind": "business report",
+   "findings": [
+    {
+     "rule": "an_breakdown_mismatch",
+     "witness": "revenue_fy2025",
+     "planted": "regions add up to 11.9 of 12.4",
+     "lines": [
+      7,
+      8
+     ]
+    },
+    {
+     "rule": "an_shares_below_100",
+     "witness": "revenue_fy2025",
+     "planted": "shares 49 + 34 + 13 = 96",
+     "lines": [
+      8,
+      9
+     ]
+    },
+    {
+     "rule": "an_contradicted_atom",
+     "witness": "has_debt northwind",
+     "planted": "no debt, but a bank loan, and a loan is debt",
+     "lines": [
+      14,
+      15,
+      16
+     ]
+    },
+    {
+     "rule": "an_unsupported_claim",
+     "witness": "revenue_growth_fy2026",
+     "planted": "the order book is never stated",
+     "lines": [
+      20
+     ]
+    }
+   ],
+   "kpis": [
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "revenue_europe",
+      "revenue_fy2025"
+     ],
+     "value": 49.19
+    },
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "revenue_north_america",
+      "revenue_fy2025"
+     ],
+     "value": 33.87
+    },
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "revenue_asia_pacific",
+      "revenue_fy2025"
+     ],
+     "value": 12.9
+    },
+    {
+     "predicate": "kpi_growth",
+     "key": [
+      "revenue",
+      "fy2025"
+     ],
+     "value": 12.73
+    },
+    {
+     "predicate": "kpi_average",
+     "key": [
+      "revenue_fy2025"
+     ],
+     "value": 3.97
+    },
+    {
+     "predicate": "kpi_ratio",
+     "key": [
+      "net_margin_fy2025"
+     ],
+     "value": 0.075
+    }
+   ],
+   "rubric": {
+    "score": 4,
+    "max": 11
+   }
+  },
+  "hx200-pump-manual": {
+   "kind": "technical manual",
+   "findings": [
+    {
+     "rule": "an_above_upper_limit",
+     "witness": "operating_pressure",
+     "planted": "rated at 12 bar, maximum 10 bar",
+     "lines": [
+      6,
+      12
+     ]
+    },
+    {
+     "rule": "an_conflicting_values",
+     "witness": "amount pump_weight",
+     "planted": "18 kg in the specifications, 21 kg in transport",
+     "lines": [
+      5,
+      18
+     ]
+    },
+    {
+     "rule": "an_contradicted_atom",
+     "witness": "may_run_dry hx200",
+     "planted": "never run dry, but may run dry during commissioning",
+     "lines": [
+      13,
+      14
+     ]
+    },
+    {
+     "rule": "an_implausible_high",
+     "witness": "hydraulic_efficiency",
+     "planted": "an efficiency of 112%",
+     "lines": [
+      7
+     ]
+    }
+   ],
+   "kpis": [
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "motor_power",
+      "power_draw"
+     ],
+     "value": 80
+    },
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "controller_power",
+      "power_draw"
+     ],
+     "value": 20
+    },
+    {
+     "predicate": "kpi_average",
+     "key": [
+      "power_draw"
+     ],
+     "value": 0.75
+    }
+   ],
+   "rubric": {
+    "score": 7,
+    "max": 11
+   }
+  },
+  "statin-trial-abstract": {
+   "kind": "scientific abstract",
+   "findings": [
+    {
+     "rule": "an_parts_exceed_total",
+     "witness": "enrolled_patients",
+     "planted": "130 + 120 = 250 of 240 enrolled",
+     "lines": [
+      5
+     ]
+    },
+    {
+     "rule": "an_end_before_start",
+     "witness": "trial",
+     "planted": "ran from 2023-03-01 to 2022-11-30",
+     "lines": [
+      7
+     ]
+    },
+    {
+     "rule": "an_above_upper_limit",
+     "witness": "oldest_patient_age",
+     "planted": "eligible 18 to 65, oldest enrolled 71",
+     "lines": [
+      3,
+      7
+     ]
+    },
+    {
+     "rule": "an_unsupported_claim",
+     "witness": "varostatin_reduces_mortality",
+     "planted": "mortality is never reported in the results",
+     "lines": [
+      11
+     ]
+    }
+   ],
+   "kpis": [
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "treatment_group",
+      "enrolled_patients"
+     ],
+     "value": 54.17
+    },
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "control_group",
+      "enrolled_patients"
+     ],
+     "value": 50
+    },
+    {
+     "predicate": "kpi_average",
+     "key": [
+      "enrolled_patients"
+     ],
+     "value": 125
+    },
+    {
+     "predicate": "kpi_ratio",
+     "key": [
+      "response_ratio"
+     ],
+     "value": 1.5
+    }
+   ],
+   "rubric": {
+    "score": 5,
+    "max": 11
+   }
+  },
+  "meridian-leave-policy": {
+   "kind": "policy",
+   "findings": [
+    {
+     "rule": "an_share_amount_mismatch",
+     "witness": "part_time_leave",
+     "planted": "50% of 25 days is not 15 days",
+     "lines": [
+      7,
+      8
+     ]
+    },
+    {
+     "rule": "an_disjoint_membership",
+     "witness": "maria_lopez",
+     "planted": "contractors are not employees; Maria is both",
+     "lines": [
+      12,
+      13,
+      14
+     ]
+    },
+    {
+     "rule": "an_order_against_dates",
+     "witness": "leave_request",
+     "planted": "request before approval, but dated after it",
+     "lines": [
+      18,
+      19
+     ]
+    }
+   ],
+   "kpis": [],
+   "rubric": {
+    "score": 5,
+    "max": 11
+   }
+  },
+  "ada-brennan-biography": {
+   "kind": "book excerpt (biography)",
+   "findings": [
+    {
+     "rule": "an_age_mismatch",
+     "witness": "ada_brennan",
+     "planted": "born 1931, 96 years old in 2025",
+     "lines": [
+      5
+     ]
+    },
+    {
+     "rule": "an_age_mismatch",
+     "witness": "tom_brennan",
+     "planted": "born 1927, 141 years old in 2025",
+     "lines": [
+      6
+     ]
+    },
+    {
+     "rule": "an_impossible_age",
+     "witness": "tom_brennan",
+     "planted": "an age of 141",
+     "lines": [
+      6
+     ]
+    },
+    {
+     "rule": "an_contradicted_atom",
+     "witness": "married ada_brennan",
+     "planted": "never married, but has a husband",
+     "lines": [
+      8,
+      9,
+      10
+     ]
+    },
+    {
+     "rule": "an_end_before_start",
+     "witness": "coastal_ecology_institute",
+     "planted": "founded 1960, dissolved 1958",
+     "lines": [
+      12
+     ]
+    }
+   ],
+   "kpis": [],
+   "rubric": {
+    "score": 7,
+    "max": 11
+   }
+  },
+  "orion-project-status": {
+   "kind": "project status report",
+   "findings": [
+    {
+     "rule": "an_breakdown_mismatch",
+     "witness": "budget",
+     "planted": "120 + 260 + 90 = 470 of 500",
+     "lines": [
+      7
+     ]
+    },
+    {
+     "rule": "an_order_against_dates",
+     "witness": "phase_3",
+     "planted": "phase 3 before phase 2, but starts after it",
+     "lines": [
+      13,
+      14
+     ]
+    },
+    {
+     "rule": "an_implausible_high",
+     "witness": "overall_progress",
+     "planted": "progress of 135%",
+     "lines": [
+      18
+     ]
+    }
+   ],
+   "kpis": [
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "design_budget",
+      "budget"
+     ],
+     "value": 24
+    },
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "build_budget",
+      "budget"
+     ],
+     "value": 52
+    },
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "testing_budget",
+      "budget"
+     ],
+     "value": 18
+    },
+    {
+     "predicate": "kpi_average",
+     "key": [
+      "budget"
+     ],
+     "value": 156.67
+    },
+    {
+     "predicate": "kpi_ratio",
+     "key": [
+      "budget_burn"
+     ],
+     "value": 0.62
+    }
+   ],
+   "rubric": {
+    "score": 8,
+    "max": 11
+   }
+  },
+  "kiln-lab-note": {
+   "kind": "scientific lab note",
+   "findings": [
+    {
+     "rule": "an_conflicting_values",
+     "witness": "starts_on experiment_14",
+     "planted": "started on 2025-05-02, later 2025-05-03",
+     "lines": [
+      5,
+      10
+     ]
+    },
+    {
+     "rule": "an_implausible_low",
+     "witness": "wall_minimum_temperature",
+     "planted": "-300 degrees Celsius",
+     "lines": [
+      8
+     ]
+    },
+    {
+     "rule": "an_unit_mismatch",
+     "witness": "core_mass",
+     "planted": "the core in grams, the sample in kilograms",
+     "lines": [
+      6
+     ]
+    },
+    {
+     "rule": "an_parts_exceed_total",
+     "witness": "sample_mass",
+     "planted": "1800 + 0.7 against 2.5 (the unit slip)",
+     "lines": [
+      6
+     ]
+    }
+   ],
+   "kpis": [],
+   "rubric": {
+    "score": 6,
+    "max": 11
+   }
+  },
+  "harbor-supplies-budget": {
+   "kind": "budget (control, no planted issue)",
+   "findings": [],
+   "kpis": [
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "paper_budget",
+      "supplies_budget"
+     ],
+     "value": 40
+    },
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "toner_budget",
+      "supplies_budget"
+     ],
+     "value": 35
+    },
+    {
+     "predicate": "kpi_share",
+     "key": [
+      "other_budget",
+      "supplies_budget"
+     ],
+     "value": 25
+    },
+    {
+     "predicate": "kpi_growth",
+     "key": [
+      "supplies_budget",
+      "year_2026"
+     ],
+     "value": 11.11
+    },
+    {
+     "predicate": "kpi_average",
+     "key": [
+      "supplies_budget"
+     ],
+     "value": 3333.33
+    }
+   ],
+   "rubric": {
+    "score": 11,
+    "max": 11
+   }
+  }
+ }
+}

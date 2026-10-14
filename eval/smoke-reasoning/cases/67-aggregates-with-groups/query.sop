@@ -1,0 +1,5 @@
+@q query
+  where dept_total ?d ?t
+  where dept_top ?d ?m
+  where dept_size ?d ?n
+  select ?d ?t ?m ?n

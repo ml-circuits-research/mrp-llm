@@ -1,0 +1,501 @@
+# commonsense-v1: the vocabulary of the common-sense layer (hand-written by commonsense-agent, 2026-10-02).
+# The predicates that the layer's rules derive and that its source-derived facts use (WordNet, ConceptNet, units), with their English
+# lexemes. English only. Everything else the layer uses is declared by core-min and core-en, which this layer imports and never redeclares.
+# Class-level facts ("used_for violin ...") are about the kind: a class symbol (kind class) in the subject position stands for a typical
+# member of the class. Provenance of every fact is its `source` line; the layer's own rules carry `source "authored ..."`.
+
+# ---- class-level common sense (ConceptNet, WordNet) -----------------------------------------------------------------------------
+
+@used_for predicate
+  args subject:entity object:text
+  role subject entity
+  role object text
+  label en "used for"
+  description "Things of the subject's kind are typically used for the activity named by the object (class-level common sense, for example a hammer is used for driving nails)."
+
+@lx_used_for_en_copula lexeme
+  of used_for
+  language en
+  pos copula
+  form "be used for"
+  form "be used to"
+  form "be good for"
+  frame subject object
+  source "authored (commonsense-agent): ConceptNet UsedFor"
+
+@capable_of predicate
+  args subject:entity object:text
+  role subject entity
+  role object text
+  label en "can"
+  description "Things of the subject's kind are typically able to do the activity named by the object (class-level common sense, for example a dog can bark)."
+
+@lx_capable_of_en_verb lexeme
+  of capable_of
+  language en
+  pos verb
+  form "be able to"
+  form "be capable of"
+  frame subject object
+  source "authored (commonsense-agent): ConceptNet CapableOf"
+
+@typical_property predicate
+  args subject:entity object:text
+  role subject entity
+  role object text
+  label en "is typically"
+  description "Things of the subject's kind typically have the quality named by the object (class-level common sense, for example ice is cold)."
+
+@lx_typical_property_en_copula lexeme
+  of typical_property
+  language en
+  pos copula
+  form "be typically"
+  form "be usually"
+  form "tend to be"
+  frame subject object
+  weight 5
+  source "authored (commonsense-agent): ConceptNet HasProperty"
+
+@found_at predicate
+  args subject:entity location:entity
+  role subject entity
+  role location entity
+  label en "typically found at"
+  description "Things of the subject's kind are typically found at or kept in places of the location's kind (class-level common sense, for example a pillow is found in a bedroom)."
+
+@lx_found_at_en_copula lexeme
+  of found_at
+  language en
+  pos copula
+  form "be found at"
+  form "be usually kept in"
+  form "be typically found in"
+  frame subject location
+  source "authored (commonsense-agent): ConceptNet AtLocation"
+
+@typically_has predicate
+  args subject:entity object:entity
+  role subject entity
+  role object entity
+  label en "typically has"
+  description "Things of the subject's kind typically have a thing of the object's kind (class-level common sense, for example a bird has wings)."
+
+@lx_typically_has_en_verb lexeme
+  of typically_has
+  language en
+  pos verb
+  form "usually have"
+  form "typically have"
+  frame subject object
+  weight 4
+  source "authored (commonsense-agent): ConceptNet HasA"
+
+@made_of_material predicate
+  args subject:entity object:entity
+  role subject entity
+  role object entity
+  label en "made of the material"
+  description "Things of the subject's kind are made of, or contain as a substance, the material or substance named by the object (class-level, for example glass windows, water contains oxygen); core-en made_of is the instance-level relation of an artifact."
+
+@lx_made_of_material_en_copula lexeme
+  of made_of_material
+  language en
+  pos copula
+  form "be made from"
+  form "contain the substance"
+  frame subject object
+  source "authored (commonsense-agent): WordNet substance meronym, ConceptNet MadeOf"
+
+@disjoint_with predicate
+  args subject:entity object:entity
+  role subject class
+  role object class
+  label en "disjoint with"
+  description "No entity belongs to both classes (for example nothing is both a person and a place). Symmetric."
+
+@lx_disjoint_with_en_copula lexeme
+  of disjoint_with
+  language en
+  pos copula
+  form "be disjoint with"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+# ---- time and lifetimes (derived from born_on / died_on years) --------------------------------------------------------------------
+
+@older_than predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "older than"
+  description "The subject was born in an earlier year than the object. Derived from the birth years (born_on), never stated."
+
+@lx_older_than_en_copula lexeme
+  of older_than
+  language en
+  pos copula
+  form "be older than"
+  form "be born before"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@younger_than predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "younger than"
+  description "The subject was born in a later year than the object. Derived from the birth years (born_on), never stated."
+
+@lx_younger_than_en_copula lexeme
+  of younger_than
+  language en
+  pos copula
+  form "be younger than"
+  form "be born after"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@contemporary_of predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "contemporary of"
+  description "The lifetimes of the two persons overlapped (each was born before the other died), so they could have met; refuted when one died before the other was born. Derived from born_on and died_on years."
+
+@lx_contemporary_of_en_copula lexeme
+  of contemporary_of
+  language en
+  pos copula
+  form "be a contemporary of"
+  form "be alive at the same time as"
+  form "live at the same time as"
+  form "could have met"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@lived_before predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "lived before"
+  description "The subject died before the object was born: their lifetimes did not overlap. Derived from died_on and born_on years."
+
+@lx_lived_before_en_verb lexeme
+  of lived_before
+  language en
+  pos verb
+  form "live before"
+  form "die before the birth of"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@outlived predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "outlived"
+  description "The subject died in a later year than the object. Derived from the death years (died_on)."
+
+@lx_outlived_en_verb lexeme
+  of outlived
+  language en
+  pos verb
+  form "outlive"
+  form "survive"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@age_difference predicate
+  args subject:entity topic:entity object:integer
+  role subject person
+  role topic person
+  role object integer
+  label en "age difference"
+  description "The subject was born the given number of years before the topic person (birth year of the topic minus birth year of the subject; approximate to one year)."
+  unit "years"
+
+@age_in_year predicate
+  args subject:entity time:time object:integer
+  role subject person
+  role time time
+  role object integer
+  label en "age in year"
+  description "The approximate age of a person in a given year (the year minus the birth year), for the years of the person's lifetime that the memory mentions (the founding, publication or discovery years of things the person made, the death year)."
+  unit "years"
+
+# ---- family (derived from parent_of, sibling_of, married_to and gender) ------------------------------------------------------------
+
+@male_child_of predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "male child of"
+  description "A male child of a parent. Derived from child_of and gender."
+
+@lx_son_of_en_copula lexeme
+  of male_child_of
+  language en
+  pos copula
+  form "be the male child of"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@female_child_of predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "female child of"
+  description "A female child of a parent. Derived from child_of and gender."
+
+@lx_daughter_of_en_copula lexeme
+  of female_child_of
+  language en
+  pos copula
+  form "be the female child of"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@male_sibling_of predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "male sibling of"
+  description "A male sibling. Derived from sibling_of and gender."
+
+@lx_brother_of_en_copula lexeme
+  of male_sibling_of
+  language en
+  pos copula
+  form "be the male sibling of"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@female_sibling_of predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "female sibling of"
+  description "A female sibling. Derived from sibling_of and gender."
+
+@lx_sister_of_en_copula lexeme
+  of female_sibling_of
+  language en
+  pos copula
+  form "be the female sibling of"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@uncle_of predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "uncle of"
+  description "A brother of a parent, or the husband of a parent's sibling. Derived."
+
+@lx_uncle_of_en_copula lexeme
+  of uncle_of
+  language en
+  pos copula
+  form "be the uncle of"
+  form "be an uncle of"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@aunt_of predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "aunt of"
+  description "A sister of a parent, or the wife of a parent's sibling. Derived."
+
+@lx_aunt_of_en_copula lexeme
+  of aunt_of
+  language en
+  pos copula
+  form "be the aunt of"
+  form "be an aunt of"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@nibling_of predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "nephew or niece of"
+  description "A child of a sibling. Derived from parent_of and sibling_of."
+
+@lx_nibling_of_en_copula lexeme
+  of nibling_of
+  language en
+  pos copula
+  form "be the nephew of"
+  form "be the niece of"
+  form "be a nephew of"
+  form "be a niece of"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@parent_in_law_of predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "parent-in-law of"
+  description "A parent of the object's spouse. Derived from parent_of and married_to."
+
+@lx_parent_in_law_of_en_copula lexeme
+  of parent_in_law_of
+  language en
+  pos copula
+  form "be the father-in-law of"
+  form "be the mother-in-law of"
+  form "be a parent-in-law of"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@sibling_in_law_of predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  label en "sibling-in-law of"
+  description "A sibling of the object's spouse, or the spouse of the object's sibling. Derived."
+
+@lx_sibling_in_law_of_en_copula lexeme
+  of sibling_in_law_of
+  language en
+  pos copula
+  form "be the brother-in-law of"
+  form "be the sister-in-law of"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+# ---- geography (derived from located_in, capital_of and the class of the container) -----------------------------------------------
+
+@on_continent predicate
+  args subject:entity location:entity
+  role subject entity
+  role location continent
+  label en "on continent"
+  description "The subject (a place, organization or anything located somewhere) is on the given continent. Derived from located_in and the class continent."
+
+@lx_on_continent_en_copula lexeme
+  of on_continent
+  language en
+  pos copula
+  form "be on the continent of"
+  frame subject location
+  source "authored (commonsense-agent)"
+
+@in_country predicate
+  args subject:entity location:entity
+  role subject entity
+  role location country
+  label en "in country"
+  description "The subject (a city, region, building, organization) is in the given country. Derived from located_in and the class country."
+
+@lx_in_country_en_copula lexeme
+  of in_country
+  language en
+  pos copula
+  form "be in the country"
+  frame subject location
+  source "authored (commonsense-agent)"
+
+@same_country_as predicate
+  args subject:entity object:entity
+  role subject entity
+  role object entity
+  label en "in the same country as"
+  description "Both are in the same country. Derived from in_country."
+
+@lx_same_country_as_en_copula lexeme
+  of same_country_as
+  language en
+  pos copula
+  form "be in the same country as"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+@same_continent_as predicate
+  args subject:entity object:entity
+  role subject entity
+  role object entity
+  label en "on the same continent as"
+  description "Both are on the same continent. Derived from on_continent."
+
+@lx_same_continent_as_en_copula lexeme
+  of same_continent_as
+  language en
+  pos copula
+  form "be on the same continent as"
+  frame subject object
+  source "authored (commonsense-agent)"
+
+# ---- quantities and units -------------------------------------------------------------------------------------------------------
+
+@dimension entity
+  kind class
+  label en "physical dimension"
+  alias en "dimension"
+  alias en "quantity kind"
+  source "authored (commonsense-agent)"
+
+@mass entity
+  kind dimension
+  label en "mass"
+  alias en "weight"
+  source "authored (commonsense-agent)"
+
+@length entity
+  kind dimension
+  label en "length"
+  alias en "distance"
+  source "authored (commonsense-agent)"
+
+@duration_dimension entity
+  kind dimension
+  label en "duration"
+  alias en "time span"
+  source "authored (commonsense-agent)"
+
+@volume entity
+  kind dimension
+  label en "volume"
+  alias en "capacity"
+  source "authored (commonsense-agent)"
+
+@surface_area entity
+  kind dimension
+  label en "surface area"
+  source "authored (commonsense-agent)"
+
+@dimension_of predicate
+  args subject:entity object:entity
+  role subject unit
+  role object dimension
+  label en "dimension of"
+  reading unit_dimension
+  description "The physical dimension a unit measures (mass, length, duration, volume, area); quantities can be compared only within one dimension."
+
+@base_amount predicate
+  args subject:entity object:integer
+  role subject unit
+  role object integer
+  label en "amount in base units"
+  reading unit_amount
+  description "One of the unit equals this whole number of the fine base unit of its dimension: milligrams for mass, micrometres for length, milliseconds for duration, microlitres for volume, square millimetres for area (imperial units rounded to the nearest base unit). Comparing 1 kg with 900 g: 1 x 1000000 mg against 900 x 1000 mg."
+
+@same_dimension predicate
+  args subject:entity object:entity
+  role subject unit
+  role object unit
+  label en "same dimension"
+  description "Two units measure the same dimension, so their quantities can be converted and compared. Derived from dimension_of."
+
+@converts_to predicate
+  args subject:entity topic:entity object:integer
+  role subject unit
+  role topic unit
+  role object integer
+  label en "converts to"
+  description "One of the subject unit is exactly this whole number of the topic unit (for example 1 kilogram is 1000 grams); derived from base_amount when the ratio is whole."

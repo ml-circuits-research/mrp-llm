@@ -1,0 +1,746 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#query" target="_top">Wire index</a> · <a href="fact.html">fact</a> · <a href="solve.html">solve</a> · <a href="syntax.html#boolean-groups">all/any/end</a></p><h1><code>query</code></h1><p>A query defines conditions and requested results, not evidence and not an answer. It is one of the six model wire types (<a href="stated.html"><code>stated</code></a>, <a href="assumed.html"><code>assumed</code></a>, <a href="unclear.html"><code>unclear</code></a>, <code>query</code>, <a href="constraint.html"><code>constraint</code></a> and <a href="unparsed.html"><code>unparsed</code></a>). A query may carry <a href="#clause-links">clause links</a> (a condition that applies only to it, a temporal clause that bounds its period) and may take the answers of another query as a role value (<a href="#chaining"><code>$q</code> chaining</a>). The context-free model writes each condition as a <code>match</code> block of strings; the host links it to the positional atoms documented here, which trusted circuits write directly. <code>where</code> describes the relation to match; <code>select</code> names the variables to return. <code>solve</code> subsequently evaluates it using explicitly supplied local data or a selected memory view.</p>
+<h2>Every accepted keyword</h2><table><thead><tr><th>Keyword</th><th>Cardinality / default</th><th>Accepted value and concrete effect</th></tr></thead><tbody>
+<tr><td id="field-where"><code>where</code></td><td>Repeatable; required unless every <code>compare</code> line compares two quoted quantities with units</td><td>Trusted form: <code>[not |absent ]predicate term1 ...</code> (1–4 terms), or nested <code>all</code>/<code>any</code>/<code>end</code> block of atom leaves; <code>absent</code> requires a declared closed predicate. Model form: every leaf is a <code>match … end</code> block with <code>relation "PHRASE"</code>, <code>role NAME VALUE</code> lines (closed inventory; VALUE a quoted string (a proper name as written; another content word of the message, normalized, or an English synonym), an integer, a <code>?variable</code>, or one <code>$id</code>: <code>$q</code> naming another query that selects exactly one variable (its answers, a join) or <code>$s</code> naming a <code>stated</code>/<code>assumed</code> wire (a proposition used as an argument, answered <code>not_computable</code>); at most one <code>$id</code> per query, <code>reference_multiple</code>) and a required <code>polarity</code>: <code>affirmed</code>, explicit-negative <code>negated</code>, or query-only closed-list <code>absent</code>. The runtime links the phrase and role set to one predicate and fills unmentioned roles with fresh variables (<code>query_needs_match</code> rejects model atoms). Repeated lines are conjunctions; alternatives in any are disjunctions. Variables in a query are matched, not asserted.</td></tr>
+<tr><td id="field-select"><code>select</code></td><td>At most once; default empty</td><td>Whitespace-separated <code>?name</code> variables bound in every relevant alternative; defines selected columns, not an output wire by itself.</td></tr>
+<tr><td id="field-mode"><code>mode</code></td><td>At most once; default <code>select</code> when select is present, otherwise <code>exists</code></td><td><code>select</code>, <code>exists</code>, <code>count</code>, <code>explain</code> or <code>every</code>, or a reasoning mode (<code>why_not</code>, <code>abduce</code>, <code>effect</code> are answered by the oracle; <code>plan</code>, <code>conform</code>, <code>procedure</code> are reported <code>not_computable</code>; see <a href="query-modes.html">Query modes</a> and <a href="#candidates">candidates</a> below); any other value fails parsing (<code>query mode must be one of</code>). Select mode requires a selected variable (<code>select mode needs variables</code>). <code>count</code> counts distinct projections of the <code>select</code> variables, or distinct whole bindings when <code>select</code> is absent; with a selected time variable it answers "how many times" (distinct validity intervals). <code>explain</code> answers "why" or "how come": it evaluates the proposition like <code>exists</code> and the packet adds <code>explanation</code> with kind <code>derivation</code> (rules and the facts they used), <code>recorded</code> (a recorded fact, no further reason) or <code>none</code>; it selects nothing (<code>explain_no_select</code>). <code>every</code> is a universal question: <code>where</code> is the restriction (the domain) and <code>scope</code> what must hold for each member; it is <code>refuted</code> when a known member explicitly fails the scope (the packet lists <code>counterexamples</code>), <code>supported</code> when every known member satisfies it and the restriction has a member, otherwise <code>unknown</code>. With <code>select</code>, members are grouped by the selected variables and the answers are the groups whose members all satisfy the scope. With <code>mode exists</code> a <code>select</code> list is accepted but has no effect. Because the default depends on another field, write <code>mode</code> explicitly.</td></tr>
+<tr><td id="field-scope"><code>scope</code></td><td>Exactly once with <code>mode every</code>; otherwise absent</td><td>A condition in the <code>where</code> form (a <code>match</code> block, or an <code>all</code>/<code>any</code> group of them) that must hold for every binding of the restriction; the restriction's variables are shared. "Nobody at X is certified" is <code>mode every</code> with a <code>negated</code> scope; the model never rewrites "all" as "nobody … not". A scope without <code>mode every</code> fails with <code>scope_needs_every</code>, <code>mode every</code> without a scope with <code>every_needs_scope</code>. The check covers the members known to the host.</td></tr>
+<tr><td id="field-measure"><code>measure</code></td><td>At most once; only with one selected time variable</td><td><code>start</code>, <code>end</code> or <code>duration</code>: the part of the selected time variable's interval that the question asks for ("since when", "until when", "how long"). The answer is an ISO start, an ISO end (<code>open</code> when ongoing) or a whole number of days up to the runtime clock (<code>unbounded</code> without a start). The selected variable must be written as <code>role time ?t</code> in a match block (<code>measure_needs_time_variable</code>).</td></tr>
+<tr><td id="field-span"><code>span</code></td><td>Host only; at most once</td><td>A <code>?variable</code> bound to the validity interval of each answer row, written by the host when a model match block uses <code>role time ?t</code> on a relation that declares no time role ("When did Ana work at Acme?"). Without <code>at</code> or <code>during</code>, a query with a span looks at the whole timeline. The model asks for a time with <code>role time ?t</code>; a model-authored <code>span</code> is rejected (<code>span is host plumbing</code>).</td></tr>
+<tr><td id="field-filter"><code>filter</code></td><td>Repeatable; default none; <strong>trusted circuits only</strong></td><td>Restricted Boolean comparison such as <code>?quantity &gt; 0</code>, or <code>all</code>/<code>any</code>/<code>end</code> expression block. Filters matched values; every referenced variable must be guaranteed bound by where. The model never writes <code>filter</code> (<code>operator_not_words</code>); it writes <code>compare</code>, <code>except</code> or <code>order</code>, which the host lowers.</td></tr>
+<tr><td id="field-compare"><code>compare</code></td><td>Repeatable; default none</td><td>Words-only comparison of a value (DS014 Q-LANG-1): <code>compare ?v COMPARATOR operand</code>, COMPARATOR one of <code>above</code>, <code>below</code>, <code>at_least</code>, <code>at_most</code>, <code>equal</code>, <code>not_equal</code>; the operand is an integer, a JSON-quoted string or another <code>?variable</code> ("over 80": <code>compare ?age above 80</code>; "older than Ion": two values, <code>compare ?a above ?b</code>). The host reads each value as a number (a string that starts with a number, such as "2380 lei", counts as that number); when an ordering comparison meets a value that is not a number the answer is <code>not_computable</code>. A yes/no question whose known values all fail the comparison is answered no. Two JSON-quoted quantities with units the memory knows are compared through its unit facts, not by their leading numbers (<code>compare "1 kilogram" above "900 grams"</code>; such a query needs no <code>where</code>; units of different dimensions give no answer). Alternatives are an <code>any</code> group: <code>compare any</code>, then <code>?bank equal "BT"</code> and <code>?bank equal "UniCredit"</code> lines, then <code>end</code> (also <code>all</code>, nested).</td></tr>
+<tr><td id="field-except"><code>except</code></td><td>Repeatable; default none</td><td>Words-only exclusion: <code>except ?x "Ana"</code> ("besides Ana"). The host resolves the quoted value like a role value and keeps only bindings where <code>?x</code> is a different entity.</td></tr>
+<tr><td id="field-rank"><code>rank</code></td><td>At most once; default none</td><td>Superlative (Q-LANG-1): <code>rank highest ?v</code> or <code>rank lowest ?v</code> ("the cheapest", "the oldest"), optionally followed by <code>position N</code> ("the second largest": the rows with the N-th best distinct value) or <code>top N</code> ("the three largest": the rows among the N best distinct values). The host keeps the rows whose numeric value is the best; ties keep every tied row. No numeric value at all is <code>not_computable</code>; a position beyond the number of distinct values gives no row. A ranking is valid only over a complete view of the facts: over a partial slice the answer is <code>incomplete</code>, never the best of the part.</td></tr>
+<tr><td id="field-quantifier"><code>quantifier</code></td><td>At most once; only with <code>mode every</code>; default <code>all</code></td><td>Quantifier word of a universal question (Q-LANG-2): <code>all</code>, <code>none</code>, <code>not_all</code>, <code>most</code> (more than half), <code>half</code> (exactly half), or <code>at_least N</code>. The host counts the known members whose scope is supported, refuted or unknown; an outcome the unknown members could still change is unknown.</td></tr>
+<tr><td id="field-order"><code>order</code></td><td>At most once; default none</td><td>Temporal order (Q-LANG-3): <code>order ?t1 before ?t2</code> (also <code>after</code>, <code>same_time</code>) over exactly two time variables written as <code>role time ?t1</code> and <code>role time ?t2</code> in two match blocks ("before or after"); only then may a query use two time variables. The host binds each to the validity interval of its own match and compares the starts (<code>same_time</code>: overlapping intervals); unknown starts give unknown. The host appends <code>leaves I J</code> in the generated circuit. Sampling: the single word <code>order random</code> (mode <code>select</code> only, <code>order_random_mode</code> otherwise) returns the same answers in a random order drawn with the turn's seed; with <code>limit N</code> it is a random sample of N answers ("a random fact", "give me some examples"), and the packet reports <code>sample {order, limit, of, seed}</code>.</td></tr>
+<tr><td id="field-fragment"><code>fragment</code></td><td>At most once; value <code>follow_up</code></td><td>An elliptical follow-up (Q-LANG-4: "and Priya?", "dar anul trecut?"). Its match blocks carry only what the message gives and may omit <code>relation</code> and <code>polarity</code>. The host completes it from the previous question of the caller-owned conversation (a given role replaces the same role; a quoted <code>role time</code> becomes the period) or, without one, asks what the follow-up is about. The model decides nothing.</td></tr>
+<tr><td id="field-at"><code>at</code></td><td>At most once; default runtime now; exclusive with <code>during</code> (<code>Use at OR during</code>)</td><td>In model output <code>at</code>, <code>during</code> and <code>asof</code> take a JSON-quoted temporal expression as written in the message, in its language (<code>at "June 2025"</code>, <code>at "iunie 2025"</code>), which the host normalizes or asks about. Host form: ISO date/UTC instant (or <code>beginning</code>/<code>open</code> accepted by instant parser); a whole-field <code>$value</code> can supply an instant. Selects valid-time instant. The default is not neutral: a query with neither <code>at</code> nor <code>during</code> is evaluated at the runtime clock, so claims whose validity ended in the past do not match. Write <code>at</code> explicitly when the time matters.</td></tr>
+<tr><td id="field-during"><code>during</code></td><td>At most once; exclusive with <code>at</code></td><td><code>timeless</code> or ISO/UTC <code>START END</code> interval, inclusive/exclusive; selects overlapping valid-time window, not necessarily complete-window support.</td></tr>
+<tr><td id="field-overlaps"><code>overlaps</code></td><td>At most once; exclusive with <code>at</code> and <code>during</code> (<code>Use at OR during OR overlaps</code>)</td><td>Model output only (v2.7): a JSON-quoted temporal expression as written in the message, for "at any point in 2025", "at some time during March": the answer holds at SOME instant of the period. The host runs it as its overlapping <code>during</code> window; the knowledge language's own <code>overlaps</code> is documented below.</td></tr>
+<tr><td id="field-asof"><code>asof</code></td><td>At most once; default runtime now</td><td>ISO/UTC knowledge cutoff or whole-field <code>$value</code> instant; limits repository history visible to retrieval.</td></tr>
+<tr><td id="field-limit"><code>limit</code></td><td>At most once; default <code>100</code></td><td>Safe integer 1–10,000; caps returned answers. Truncation means result is incomplete.</td></tr>
+<tr><td id="field-candidate"><code>candidate</code></td><td>Repeatable, 1 to 8 per query (<code>candidate_limit</code>); only with <code>mode effect</code> or <code>mode abduce</code> (<code>candidate_needs_mode</code>); never together with <code>if</code> on the same wire (<code>candidate_also_if</code>) nor with a temporal link (<code>candidate_temporal_link</code>)</td><td><code>candidate $id</code> (Q-LANG-10, owner decision 2026-10-03) names a wire of the same output that is <strong>not in force</strong>: a <code>stated</code> wire with <code>certainty supposed</code> (a candidate fact) or a session <code>rule</code>/<code>default</code> (a candidate rule); anything else is <code>candidate_target</code>. The candidate is in force only in this query's runs, never for another query and never in the session (a candidate rule is not stored). <code>mode effect</code> asks a ground claim (no variables, no <code>select</code>: <code>effect_needs_ground_claim</code>) without the candidates and then with each one, and classifies each: <code>establishes</code>, <code>blocks</code>, <code>contradicts</code>, <code>no_effect</code> or <code>inconsistent</code> (packet field <code>effects</code>). <code>mode abduce</code> with candidates returns the minimal consistent sets of candidates that make the claim derivable and <code>necessary</code>, the candidates in every set. See <a href="#candidates">Candidates</a>.</td></tr>
+<tr><td id="field-because"><code>because</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>because $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>cause</code>. The main clause holds because of the named clause: "Maria works at Alpha Lab because she is on the Delta Project" puts <code>because $s2</code> on the "works at" wire. Target: a <code>stated</code> or <code>assumed</code> wire. On a query: recorded <code>not_checked</code> (<code>reason: "no_engine"</code>); the query is answered without it and the answer lists the link as not checked. See <a href="syntax.html#link-because">clause links</a>.</td></tr>
+<tr><td id="field-so"><code>so</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>so $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>cause</code>. A result: "X, so Y" puts <code>so $x</code> on the <em>effect</em> wire Y, pointing at its cause X. The only keyword written on the result side; "so that" is <code>so_that</code>. Target: a <code>stated</code> or <code>assumed</code> wire. On a query: recorded <code>not_checked</code> (<code>reason: "no_engine"</code>); the query is answered without it and the answer lists the link as not checked. See <a href="syntax.html#link-so">clause links</a>.</td></tr>
+<tr><td id="field-if"><code>if</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>if $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>condition</code>. A condition: "if X, …" puts <code>if $x</code> on the main clause; X is a <code>stated</code> wire with <code>certainty supposed</code> (<code>link_condition_not_supposed</code> otherwise). Target: a <code>stated</code> wire with <code>certainty supposed</code>. On a query: the supposition is used <strong>only by this query</strong> (<code>status: "applied"</code>, <code>effect: "condition_scoped"</code>); a supposition no query links applies to every query of the turn. On a query, <code>if $r</code> may also name a session <code>rule</code> or <code>default</code> of the same output (Q-LANG-10: "what if the rule also held the other way?"): the rule is in force only for this query and the answer is <code>conditional</code> on it. See <a href="syntax.html#link-if">clause links</a>.</td></tr>
+<tr><td id="field-unless"><code>unless</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>unless $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>negative_condition</code>. A negative condition: "unless X" puts <code>unless $x</code> on the main clause; X is written as the message words it, affirmed, with <code>certainty supposed</code>, and the host negates it. One clause is never the target of both <code>if</code> and <code>unless</code> (<code>link_conflict</code>). Target: a <code>stated</code> wire with <code>certainty supposed</code>. On a query: the negated supposition is used only by this query (<code>applied</code>, <code>effect: "negated_condition_scoped"</code>). See <a href="syntax.html#link-unless">clause links</a>.</td></tr>
+<tr><td id="field-although"><code>although</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>although $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>concession</code>. A concession: "although X, Y" puts <code>although $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a query: recorded <code>not_checked</code> (<code>reason: "no_engine"</code>); the query is answered without it and the answer lists the link as not checked. See <a href="syntax.html#link-although">clause links</a>.</td></tr>
+<tr><td id="field-so_that"><code>so_that</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>so_that $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>purpose</code>. A purpose: "Y so that X" (also "in order to") puts <code>so_that $x</code> on Y; the purpose X is not asserted to happen, so it is a <code>stated</code> wire with <code>certainty supposed</code>. Target: a <code>stated</code> wire with <code>certainty supposed</code>. On a query: recorded <code>not_checked</code> (<code>reason: "no_engine"</code>); the query is answered without it and the answer lists the link as not checked. See <a href="syntax.html#link-so_that">clause links</a>.</td></tr>
+<tr><td id="field-before"><code>before</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>before $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>before</code>. Temporal: "Y before X" puts <code>before $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a query: when the target has a readable time (a quoted <code>role time</code> or a <code>valid</code> line), the query period becomes <strong>until</strong> that time (<code>applied</code>, <code>effect: "until"</code>); otherwise <code>not_checked</code> with <code>reason</code> <code>untimed</code>, <code>query_has_time</code> (the query has <code>at</code>/<code>during</code>) or <code>empty_period</code>. See <a href="syntax.html#link-before">clause links</a>.</td></tr>
+<tr><td id="field-after"><code>after</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>after $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>after</code>. Temporal: "Y after X" puts <code>after $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a query: when the target has a readable time (a quoted <code>role time</code> or a <code>valid</code> line), the query period becomes <strong>from</strong> that time (<code>applied</code>, <code>effect: "from"</code>); otherwise <code>not_checked</code> with <code>reason</code> <code>untimed</code>, <code>query_has_time</code> (the query has <code>at</code>/<code>during</code>) or <code>empty_period</code>. See <a href="syntax.html#link-after">clause links</a>.</td></tr>
+<tr><td id="field-when"><code>when</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>when $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>during</code>. Temporal: "Y when X" puts <code>when $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a query: when the target has a readable time (a quoted <code>role time</code> or a <code>valid</code> line), the query period becomes <strong>during</strong> that time (<code>applied</code>, <code>effect: "during"</code>); otherwise <code>not_checked</code> with <code>reason</code> <code>untimed</code>, <code>query_has_time</code> (the query has <code>at</code>/<code>during</code>) or <code>empty_period</code>. See <a href="syntax.html#link-when">clause links</a>.</td></tr>
+<tr><td id="field-while"><code>while</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>while $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>during</code>. Temporal: "Y while X" puts <code>while $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a query: when the target has a readable time (a quoted <code>role time</code> or a <code>valid</code> line), the query period becomes <strong>during</strong> that time (<code>applied</code>, <code>effect: "during"</code>); otherwise <code>not_checked</code> with <code>reason</code> <code>untimed</code>, <code>query_has_time</code> (the query has <code>at</code>/<code>during</code>) or <code>empty_period</code>. See <a href="syntax.html#link-while">clause links</a>.</td></tr>
+</tbody></table>
+<h2>Which books are on the north shelf?</h2><p>Two local catalog claims are grouped only because <code>solve.data</code> takes one value. The query asks about shelf_north, so shelf_south does not match; solving evaluates this question without recording either fact in a session.</p><pre data-sop="current"><code>@north fact
+  holds on_shelf book_a shelf_north
+  valid timeless
+
+@south fact
+  holds on_shelf book_b shelf_south
+  valid timeless
+
+@catalog pack
+  items $north $south
+
+@question query
+  where on_shelf ?book shelf_north
+  select ?book
+  mode select
+
+@answer solve
+  query $question
+  data $catalog
+  output ?book many</code></pre><p>A complete answer can bind <code>$book</code> to <code>["book_a"]</code>; <code>many</code> requests a collection, not independent truth certification. The following asks a different question: how many distinct shelf bindings match?</p><pre data-sop="current"><code>@north fact
+  holds on_shelf book_a shelf_north
+  valid timeless
+
+@other fact
+  holds on_shelf book_c shelf_north
+  valid timeless
+
+@books pack
+  items $north $other
+
+@count query
+  where on_shelf ?book shelf_north
+  mode count
+
+@total solve
+  query $count
+  data $books
+  output ?number count</code></pre><p>The count port <code>?number</code> names a result, not a variable from the query; with both facts admitted, the count is two.</p>
+<h2>A context-free model question</h2><pre data-sop="current"><code>@q query
+  where all
+    match
+      relation "works at"
+      role subject ?who
+      role object "Alpha Lab"
+      polarity affirmed
+    end
+    match
+      relation "member of project"
+      role subject ?who
+      role object "Delta Project"
+      polarity affirmed
+    end
+  end
+  select ?who
+  at "1 September 2026"</code></pre><p>"Who worked at Alpha Lab and on the Delta Project on 1 September 2026?" The date is copied as written; the model has no clock. The host links the phrases to <code>works_at</code> and <code>project_member</code>, resolves the names, normalizes the date and compiles the atom query <code>works_at ?who lab_alpha</code> and <code>project_member ?who project_delta</code>.</p><pre data-sop="invalid" data-check="parse" data-error="needs polarity"><code>@q query
+  where match
+    relation "works at"
+    role subject ?who
+  end</code></pre><p>A match block states its polarity explicitly, like every proposition.</p>
+<h2 id="quoted-time-ranges">Quoted time ranges</h2><p>The formalizer copies the period as written. The runtime accepts ISO or named-month endpoints separated by <code>to</code>, as well as dash ranges. An explicit trailing year applies to a named-month start without a year: the following interval starts on 1 April 2025 and ends exclusively on 1 May 2025, regardless of the runtime clock. Invalid dates, reversed bounds and inferred year rollover are refused. <code>during</code> asks for support throughout the period; <code>overlaps</code> asks for support at some time within it.</p><pre data-sop="current"><code>@q query
+  where match
+    relation "works at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+  during "April 1 to May 1, 2025"</code></pre>
+<h2 id="closed-absence">Closed-list absence is not explicit negative evidence</h2><p>A query match can use <code>polarity absent</code> only for a predicate declared <code>closed true</code> in the reviewed memory or a valid new session definition. It lowers to <code>absent predicate terms</code>; a missing positive tuple supports it and a present positive tuple refutes it. <code>polarity negated</code> instead asks for explicit negative evidence. An open relation cannot establish absence, so the following is refused before execution (<code>absent_needs_closed</code>). Neither <code>stated</code> nor <code>assumed</code> accepts this polarity.</p><pre data-sop="invalid" data-check="compile" data-error="absent_needs_closed"><code>@q query
+  where match
+    relation "works at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    polarity absent
+  end</code></pre>
+<p>An absence match binds no variables: bind each variable with evidence matches in the same conjunction, and supply every role. An <code>any</code> group binds only variables shared by all branches. Partial or inexact retrieval withholds absence answers and counts depending on absence; it cannot justify even an <code>at_least</code> count.</p>
+<h2>Question forms of the model language</h2><p>Each question word has one formalization (<a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a>); <a href="question-types.html">Question types</a> maps all eighteen corpus question types to their forms with executed English examples. "Does everyone on the Delta Project work at Alpha Lab?" is a universal question:</p><pre data-sop="current"><code>@q query
+  mode every
+  where match
+    relation "member of project"
+    role subject ?m
+    role object "Delta Project"
+    polarity affirmed
+  end
+  scope match
+    relation "works at"
+    role subject ?m
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>"When did Maria work at Alpha Lab?" asks for the validity interval with a time variable; the host binds <code>?t</code> to the interval of the matched fact:</p><pre data-sop="current"><code>@q query
+  select ?t
+  where match
+    relation "works at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    role time ?t
+    polarity affirmed
+  end</code></pre><p>"Since when does Maria work at Alpha Lab?" adds <code>measure start</code>; "until when" is <code>measure end</code>, "how long" <code>measure duration</code>:</p><pre data-sop="current"><code>@q query
+  select ?t
+  measure start
+  where match
+    relation "works at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    role time ?t
+    polarity affirmed
+  end</code></pre><p>"How many times did Ana work at Beta Lab?" counts distinct intervals:</p><pre data-sop="current"><code>@q query
+  mode count
+  select ?t
+  where match
+    relation "works at"
+    role subject "Ana"
+    role object "Beta Lab"
+    role time ?t
+    polarity affirmed
+  end</code></pre><p>"Where is Alpha Lab?" asks for the location role ("how" asks for the instrument role in the same way):</p><pre data-sop="current"><code>@q query
+  select ?place
+  where match
+    relation "located in"
+    role subject "Alpha Lab"
+    role location ?place
+    polarity affirmed
+  end</code></pre><p>"Why does Maria work at Alpha Lab?" asks for the derivation:</p><pre data-sop="current"><code>@q query
+  mode explain
+  where match
+    relation "works at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre>
+<h2>Words, not operators: values, comparisons, superlatives, quantifiers, order and follow-ups</h2><p>"How much does the Delta Project cost?": an attribute value is a match with a value variable; "how old", "what time" and "how many minutes" are the same.</p><pre data-sop="current"><code>@q query
+  select ?price
+  where match
+    relation "cost"
+    role subject "Delta Project"
+    role object ?price
+    polarity affirmed
+  end</code></pre><p>"Who is over 80?" (also "Cine are peste 80 de ani?"):</p><pre data-sop="current"><code>@q query
+  select ?who
+  compare ?age above 80
+  where match
+    relation "be aged"
+    role subject ?who
+    role object ?age
+    polarity affirmed
+  end</code></pre><p>"Is Ana older than Maria?" compares two values of one relation:</p><pre data-sop="current"><code>@q query
+  compare ?a above ?b
+  where all
+    match
+      relation "be aged"
+      role subject "Ana"
+      role object ?a
+      polarity affirmed
+    end
+    match
+      relation "be aged"
+      role subject "Maria"
+      role object ?b
+      polarity affirmed
+    end
+  end</code></pre><p>"Is an hour longer than 3000 seconds?" compares two amounts with units; the runtime converts both through the unit facts of the memory (the predicates declared <code>reading unit_amount</code> and <code>reading unit_dimension</code>); the lowering needs the memory's lexicon, so this form is model-authored only (a trusted circuit writes the matches and the bound itself):</p><pre><code>@q query
+  compare "1 hour" above "3000 seconds"</code></pre><p>"Which task takes the fewest minutes?" is a superlative:</p><pre data-sop="current"><code>@q query
+  select ?task
+  rank lowest ?minutes
+  where match
+    relation "takes minutes"
+    role subject ?task
+    role object ?minutes
+    polarity affirmed
+  end</code></pre><p>"What is the largest country in Europe?" and "What is the second most populous city in Canada?" are superlatives of a class inside a place: the class (<code>be a</code>), the place (<code>be in</code>), the gradable adjective as an attribute match with a value variable (the knowledge declares which measure "large" or "populous" stands for), and <code>rank</code>:</p><pre data-sop="current"><code>@q query
+  select ?x
+  rank highest ?v
+  where all
+    match
+      relation "be large"
+      role subject ?x
+      role object ?v
+      polarity affirmed
+    end
+    match
+      relation "be a"
+      role subject ?x
+      role object "country"
+      polarity affirmed
+    end
+    match
+      relation "be in"
+      role subject ?x
+      role location "Europe"
+      polarity affirmed
+    end
+  end</code></pre><pre data-sop="current"><code>@q query
+  select ?x
+  rank highest ?v position 2
+  where all
+    match
+      relation "be populous"
+      role subject ?x
+      role object ?v
+      polarity affirmed
+    end
+    match
+      relation "be a"
+      role subject ?x
+      role object "city"
+      polarity affirmed
+    end
+    match
+      relation "be in"
+      role subject ?x
+      role location "Canada"
+      polarity affirmed
+    end
+  end</code></pre><p>"Which is bigger, Canada or Brazil?" ranks the two options (a value among options, <code>compare any</code>):</p><pre data-sop="current"><code>@q query
+  select ?x
+  rank highest ?v
+  where match
+    relation "be big"
+    role subject ?x
+    role object ?v
+    polarity affirmed
+  end
+  compare any
+    ?x equal "Canada"
+    ?x equal "Brazil"
+  end</code></pre><p>"Where was the director of Inception born?" is two chained questions: the inner noun phrase is a query of its own and the outer question takes its answers with <code>$q</code>:</p><pre data-sop="current"><code>@q query
+  select ?x
+  where match
+    relation "be the director of"
+    role subject ?x
+    role object "Inception"
+    polarity affirmed
+  end
+
+@q2 query
+  select ?place
+  where match
+    relation "be born in"
+    role subject $q
+    role location ?place
+    polarity affirmed
+  end</code></pre><p>"How old was Marie Curie when she died?" asks for the age at death, written as the relation "die at the age of" (the knowledge derives it from the dates of birth and death):</p><pre data-sop="current"><code>@q query
+  select ?age
+  where match
+    relation "die at the age of"
+    role subject "Marie Curie"
+    role object ?age
+    polarity affirmed
+  end</code></pre><p>"Who closed the most tickets in the L2 queue last week?" is a superlative of a <em>count</em>: it is written literally, "the most" stays in the relation and the counted noun is the value; <code>rank</code> orders a numeric value, so the host answers <code>not_computable</code> and shows the formalization (owner answer to Q-SYM-3):</p><pre data-sop="current"><code>@q query
+  select ?x
+  where match
+    relation "close the most"
+    role subject ?x
+    role object "tickets in the L2 queue"
+    polarity affirmed
+  end
+  during "last week"</code></pre><p>"Who else works at Alpha Lab, besides Maria?":</p><pre data-sop="current"><code>@q query
+  select ?who
+  except ?who "Maria"
+  where match
+    relation "works at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>"Both at once: does Maria work at Alpha Lab, and is she a member of the Delta Project?": conjoined clauses inside one embedded question, or two questions under an explicit conjunction frame that asks both at once, are one query with a <code>where all</code> group; without such a frame, several questions are one query each (owner answer to Q-SYM-3):</p><pre data-sop="current"><code>@q query
+  where all
+    match
+      relation "works at"
+      role subject "Maria"
+      role object "Alpha Lab"
+      polarity affirmed
+    end
+    match
+      relation "member of project"
+      role subject "Maria"
+      role object "Delta Project"
+      polarity affirmed
+    end
+  end</code></pre><p>"Who did Maria leave Alpha Lab because of?": "because of" stays in the relation phrase like any preposition (C2) and the cause is <code>role topic</code>:</p><pre data-sop="current"><code>@q query
+  select ?x
+  where match
+    relation "leave because of"
+    role subject "Maria"
+    role topic ?x
+    polarity affirmed
+  end</code></pre>
+<p>"Do most Delta Project members work at Alpha Lab?" ("Not every ..." is <code>quantifier not_all</code>):</p><pre data-sop="current"><code>@q query
+  mode every
+  quantifier most
+  where match
+    relation "member of project"
+    role subject ?m
+    role object "Delta Project"
+    polarity affirmed
+  end
+  scope match
+    relation "works at"
+    role subject ?m
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>"Did Maria work at Alpha Lab before she joined the Delta Project?":</p><pre data-sop="current"><code>@q query
+  order ?t1 before ?t2
+  where all
+    match
+      relation "works at"
+      role subject "Maria"
+      role object "Alpha Lab"
+      role time ?t1
+      polarity affirmed
+    end
+    match
+      relation "member of project"
+      role subject "Maria"
+      role object "Delta Project"
+      role time ?t2
+      polarity affirmed
+    end
+  end</code></pre><p id="random-sample">"Tell me someone who works at Alpha Lab, at random": <code>order random</code> with <code>limit 1</code> draws one answer from the full answer set ("give me three examples" is <code>limit 3</code>); without <code>limit</code> every answer comes, in a random order:</p><pre data-sop="current"><code>@q query
+  select ?who
+  where match
+    relation "works at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+  order random
+  limit 1</code></pre><p>"And Carina?" after a question, or "Și Carina?": a fragment the host completes from the previous question of the conversation (without one it asks "What would you like to know about Carina?"):</p><pre data-sop="current"><code>@q query
+  fragment follow_up
+  where match
+    role subject "Carina"
+  end</code></pre>
+<section id="clause-links"><h2>Clause links on a question</h2><p>A condition, a temporal clause or a reason attached to a question is its own <code>stated</code> wire, and the query names it with one keyword line (<a href="syntax.html#clause-links">the ten link keywords</a>). The host acts on two kinds and reports the rest (packet <code>clause_links</code>): <code>if</code>/<code>unless</code> scope a supposition to this query; <code>before</code>/<code>after</code>/<code>when</code>/<code>while</code> bound the query period to until/from/during the time of a dated clause; <code>because</code>, <code>so</code>, <code>although</code> and <code>so_that</code> are <code>not_checked</code> and the question is answered without them.</p>
+<p class="example-message"><span class="lang">EN</span> “If Maria works at Alpha Lab, who works at Alpha Lab?”</p><pre data-sop="current"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty supposed
+
+@q query
+  select ?who
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+  if $s1</code></pre><p>The supposition is used only by <code>q</code>: the answer <code>maria</code> is hypothetical and rendered with "Condition: You supposed: …"; the link is <code>{"keyword": "if", "type": "condition", "status": "applied", "effect": "condition_scoped"}</code>. Without the <code>if</code> line the supposition would apply to every query of the turn.</p>
+<p>The clause has a readable time (<code>valid from</code>), so <code>before $s1</code> becomes the query period <strong>until</strong> 1 March 2026 (<code>status: "applied"</code>, <code>effect: "until"</code>). An undated clause, or a query that already has <code>at</code>/<code>during</code>, leaves the link <code>not_checked</code> (<code>reason</code> <code>untimed</code> or <code>query_has_time</code>).</p></section>
+<section id="chaining"><h2>A question on the answers of another: <code>$q</code></h2><p>"Who is on the Delta Project, and where do they work?" asks the second question about the answers of the first. The second query writes <code>$q</code> as a role value; the host inlines q's conditions with a fresh variable (a join) and answers both. The named query must select exactly one variable in <code>mode select</code> (<code>reference_query_not_single</code>).</p>
+
+<p>A <code>$s</code> value naming a <code>stated</code> or <code>assumed</code> wire is a proposition used as an argument ("Is it fair that Maria works at Alpha Lab?"). No engine decides such a question: it is answered <code>not_computable</code>, and the answer shows how it was understood, with the argument written as "[work at]".</p>
+<p class="example-message"><span class="lang">EN</span> “Maria works at Alpha Lab. Is that fair?”</p><pre data-sop="current"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted
+
+@q query
+  where match
+    relation "be fair"
+    role subject $s1
+    polarity affirmed
+  end</code></pre></section>
+<section id="candidates"><h2>Candidates: what an option does to a claim (<code>mode effect</code>, <code>abduce</code>)</h2><p>Argument questions ("which option strengthens the argument", "what does the speaker assume", "which story fits the signs", "would the converse of the rule prove it") are asked over <strong>candidates</strong> (Q-LANG-10, owner decision 2026-10-03; <a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a> "Candidates: effect and abduce"). The formalizer writes each option as a <code>stated</code> wire with <code>certainty supposed</code>, or as a session <code>rule</code>, and the question names them with <code>candidate $id</code>. It never decides what supports what: the oracle runs the claim without the candidates (the baseline) and once with each, and reports the class of each candidate.</p><div class="table-wrap"><table><thead><tr><th>Class</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>establishes</code></td><td>the claim becomes <code>supported</code> (it strengthens it)</td></tr>
+<tr><td><code>blocks</code></td><td>the claim the baseline decided becomes <code>unknown</code> (only through a default's exception, a strict contrary or an absence)</td></tr>
+<tr><td><code>contradicts</code></td><td>the claim becomes <code>refuted</code> or <code>both</code> (it weakens it)</td></tr>
+<tr><td><code>no_effect</code></td><td>the status does not change</td></tr>
+<tr><td><code>inconsistent</code></td><td>the candidate is contradicted by what is known (a supposed fact whose contrary holds, or a rule that makes another atom hold both ways); it is not counted, and the packet names the contradicted literals</td></tr>
+</tbody></table></div><p>The answer is the baseline's status with <code>effects</code>: one row <code>{candidate, kind fact|rule, baseline, with, effect, used}</code> per candidate. Every run is hypothetical: nothing is stored or reinforced from it; strict knowledge beats defaults as everywhere; <code>closed</code> and <code>absent</code> keep their meaning (a candidate fact of a closed predicate can block a conclusion that rests on its absence); <code>at</code>, <code>during</code> and <code>overlaps</code> apply to every run. <code>mode abduce</code> with candidates returns the minimal consistent sets of candidates that make the claim derivable and <code>necessary</code>: the candidates every set needs (what the argument assumes). Only the oracle runs candidates; every other engine answers <code>not_expressible</code>, and the StrategyRouter sends these questions to the oracle. The executed logic-book examples are on <a href="query-modes.html#candidates">Query modes</a>.</p><p>"The day is rainy, so the match is off. Would the fact that the stadium has a roof change that?" Two options, each a supposed statement; the question names them. (The runtime of this page runs no candidates, so the question is reported <code>not_computable</code>; the chat answers it with the oracle.)</p><pre data-sop="current"><code>@s_rain stated
+  relation "rain"
+  role subject "Paris"
+  polarity affirmed
+  certainty asserted
+@s_roof stated
+  relation "have a roof"
+  role subject "Paris"
+  polarity affirmed
+  certainty supposed
+@q query
+  mode effect
+  where match
+    relation "be cancelled"
+    role subject "Paris"
+    polarity affirmed
+  end
+  candidate $s_roof</code></pre><p>A session rule is a candidate the same way: with the definition <code>@r_converse rule</code> (<code>when pavement_wet ?m</code>, <code>then rained ?m</code>) in the output, <code>candidate $r_converse</code> asks whether the converse of the card's rule would make "it rained" follow (logic book item 171: <code>establishes</code>); <code>if $r_converse</code> on an ordinary question supposes it for that question only.</p><h3>Invalid: a candidate on a plain question</h3><pre data-sop="invalid" data-check="compile" data-error="candidate_needs_mode"><code>@s_roof stated
+  relation "have a roof"
+  role subject "Paris"
+  polarity affirmed
+  certainty supposed
+@q query
+  where match
+    relation "be cancelled"
+    role subject "Paris"
+    polarity affirmed
+  end
+  candidate $s_roof</code></pre><h3>Invalid: a candidate that is asserted, not supposed</h3><pre data-sop="invalid" data-check="compile" data-error="candidate_target"><code>@s_roof stated
+  relation "have a roof"
+  role subject "Paris"
+  polarity affirmed
+  certainty asserted
+@q query
+  mode effect
+  where match
+    relation "be cancelled"
+    role subject "Paris"
+    polarity affirmed
+  end
+  candidate $s_roof</code></pre><h3>Invalid: mode effect over a claim with a variable</h3><pre data-sop="invalid" data-check="compile" data-error="effect_needs_ground_claim"><code>@s_roof stated
+  relation "have a roof"
+  role subject "Paris"
+  polarity affirmed
+  certainty supposed
+@q query
+  mode effect
+  where match
+    relation "be cancelled"
+    role subject ?city
+    polarity affirmed
+  end
+  candidate $s_roof</code></pre><h3>Invalid: the same wire as a candidate and a condition</h3><pre data-sop="invalid" data-check="compile" data-error="candidate_also_if"><code>@s_roof stated
+  relation "have a roof"
+  role subject "Paris"
+  polarity affirmed
+  certainty supposed
+@q query
+  mode effect
+  where match
+    relation "be cancelled"
+    role subject "Paris"
+    polarity affirmed
+  end
+  candidate $s_roof
+  if $s_roof</code></pre><p>More than eight candidates is <code>candidate_limit</code>; a temporal link (<code>before</code>, <code>after</code>, <code>when</code>, <code>while</code>) together with candidates is <code>candidate_temporal_link</code> (ask with <code>at</code> or <code>during</code>).</p></section>
+<h2>Invalid question forms</h2><pre data-sop="invalid" data-check="parse" data-error="Unsupported field if in @q match"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty supposed
+
+@q query
+  select ?who
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+    if $s1
+  end</code></pre><p>A link is a wire-level line of the query, never a line inside a <code>match</code> block.</p><pre data-sop="invalid" data-check="compile" data-error="link_condition_not_supposed"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted
+
+@q query
+  select ?who
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+  if $s1</code></pre><p>A condition is not asserted to hold: its clause is <code>certainty supposed</code>.</p><pre data-sop="invalid" data-check="compile" data-error="link_conflict"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty supposed
+
+@q query
+  select ?who
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+  if $s1
+
+@q2 query
+  where match
+    relation "work at"
+    role subject "Ana"
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+  unless $s1</code></pre><p>One clause is either a condition or a negative condition; "unless X" and "if X" of the same message are two clause wires.</p><pre data-sop="invalid" data-check="compile" data-error="reference_query_not_single"><code>@q query
+  select ?p ?c
+  where match
+    relation "work at"
+    role subject ?p
+    role object ?c
+    polarity affirmed
+  end
+
+@q2 query
+  select ?l
+  where match
+    relation "be located in"
+    role subject $q
+    role location ?l
+    polarity affirmed
+  end</code></pre><p>A chained query stands for one value per answer: the named query selects exactly one variable.</p><pre data-sop="invalid" data-check="graph" data-error="Cyclic value dependencies"><code>@q query
+  select ?p
+  where match
+    relation "work at"
+    role subject ?p
+    role object $q2
+    polarity affirmed
+  end
+
+@q2 query
+  select ?c
+  where match
+    relation "work at"
+    role subject $q
+    role object ?c
+    polarity affirmed
+  end</code></pre><p>Chains and links never form a cycle.</p><pre data-sop="invalid" data-check="compile" data-error="operator_not_words"><code>@q query
+  select ?who
+  filter ?who != "Maria"
+  where match
+    relation "works at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>The model writes <code>except ?who "Maria"</code>, never an operator.</p><pre data-sop="invalid" data-check="parse" data-error="quantifier_needs_every"><code>@q query
+  quantifier most
+  where match
+    relation "works at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>A quantifier belongs to <code>mode every</code>.</p><pre data-sop="invalid" data-check="parse" data-error="every_needs_scope"><code>@q query
+  mode every
+  where match
+    relation "member of project"
+    role subject ?m
+    role object "Delta Project"
+    polarity affirmed
+  end</code></pre><p>A universal question states what must hold for each member.</p><pre data-sop="invalid" data-check="parse" data-error="scope_needs_every"><code>@q query
+  where match
+    relation "member of project"
+    role subject ?m
+    role object "Delta Project"
+    polarity affirmed
+  end
+  scope match
+    relation "works at"
+    role subject ?m
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>A scope belongs to <code>mode every</code>.</p><pre data-sop="invalid" data-check="parse" data-error="measure_needs_time_variable"><code>@q query
+  measure start
+  where match
+    relation "works at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    role time ?t
+    polarity affirmed
+  end</code></pre><p>A measure applies to exactly one selected time variable.</p><pre data-sop="invalid" data-check="parse" data-error="explain_no_select"><code>@q query
+  mode explain
+  select ?who
+  where match
+    relation "works at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>"Why" asks about one proposition; it selects nothing.</p><pre data-sop="invalid" data-check="parse" data-error="order_random_mode"><code>@q query
+  mode count
+  where match
+    relation "works at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+  order random</code></pre><p>A random order samples the answers of mode <code>select</code>; a count, a yes/no question, a universal question and an explanation have no answers to sample.</p><pre data-sop="invalid" data-check="compile" data-error="span is host plumbing"><code>@q query
+  select ?t
+  span ?t
+  where match
+    relation "works at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    role time ?t
+    polarity affirmed
+  end</code></pre><p>The model asks for a time with <code>role time ?t</code>; the host writes <code>span</code>.</p><pre data-sop="invalid" data-check="compile" data-error="time_variable_multiple"><code>@q query
+  select ?t ?u
+  where all
+    match
+      relation "works at"
+      role subject "Maria"
+      role object "Alpha Lab"
+      role time ?t
+      polarity affirmed
+    end
+    match
+      relation "member of project"
+      role subject "Maria"
+      role object "Delta Project"
+      role time ?u
+      polarity affirmed
+    end
+  end</code></pre><p>One query asks for at most one time; two times are two queries, unless <code>order ?t before ?u</code> compares them.</p><h2>Invalid: unbound output variable</h2><pre data-sop="invalid" data-check="lower" data-error="Unbound selected variable"><code>@bad query
+  where on_shelf ?book shelf_north
+  select ?building
+  mode select</code></pre><p>This atom parses, but lowering cannot select a variable not bound by <code>where</code>. See <a href="syntax.html#boolean-groups">Boolean conditions</a> for supported alternatives.</p><p><strong>Implementation sources:</strong> <code>sop/parser.mjs</code> (<code>SPEC.query</code>), <code>sop/lower.mjs</code> (<code>lowerQuery</code>), <code>reasoning/bridge/reason.mjs</code> (<code>evaluate</code>) and <code>reasoning/strategies/js-reference/forms.mjs</code> (the question forms).</p><section id="knowledge-language"><h2>Knowledge language: <code>query</code></h2><p class="note">In the knowledge language a <code>query</code> is the question put to the knowledge wires: the model or the host writes it, an author writes test queries. Ten modes, the time words, the link keywords and the reasoning modes are described here and on <a href="query-modes.html">Query modes</a>; the field anchors of this section start with <code>kfield-</code>. The sections above describe the host-circuit form.</p><p>Other field names are rejected (<code>unknown_field</code>). The table is generated from <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table data-knowledge="fields"><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="kfield-where"><code>where</code></th><td>Repeatable; optional</td><td>The question: atoms of the knowledge language (zero to six terms), or, from the model, <code>match ... end</code> blocks of strings that the host links. Required, except for <code>mode conform</code>.</td></tr>
+<tr><th scope="row" id="kfield-select"><code>select</code></th><td>At most once; optional</td><td>The <code>?variables</code> to return; each must occur in <code>where</code> (<code>select_unbound</code>).</td></tr>
+<tr><th scope="row" id="kfield-mode"><code>mode</code></th><td>At most once; optional</td><td><code>select</code> (default with <code>select</code>), <code>exists</code>, <code>count</code>, <code>explain</code>, <code>every</code>, <code>why_not</code>, <code>plan</code>, <code>abduce</code>, <code>conform</code>, <code>procedure</code>, <code>effect</code>. See Query modes.</td></tr>
+<tr><th scope="row" id="kfield-scope"><code>scope</code></th><td>Repeatable; optional</td><td>Only for <code>mode every</code> (<code>bad_field_for_mode</code>): what must hold for each member of the <code>where</code> restriction.</td></tr>
+<tr><th scope="row" id="kfield-at"><code>at</code></th><td>At most once; optional</td><td>One instant (ISO date or timestamp). At most one of <code>at</code>, <code>during</code>, <code>overlaps</code> (<code>temporal_conflict</code>).</td></tr>
+<tr><th scope="row" id="kfield-during"><code>during</code></th><td>At most once; optional</td><td><code>START END</code>: the answer holds THROUGHOUT the interval (every instant, end exclusive).</td></tr>
+<tr><th scope="row" id="kfield-overlaps"><code>overlaps</code></th><td>At most once; optional</td><td><code>START END</code>: the answer holds at SOME instant of the interval; rows keep their own validity.</td></tr>
+<tr><th scope="row" id="kfield-asof"><code>asof</code></th><td>At most once; optional</td><td>One instant: the knowledge as known at that date (facts by <code>known_at</code>, governed wires by <code>approved_at</code>).</td></tr>
+<tr><th scope="row" id="kfield-trace"><code>trace</code></th><td>At most once; optional</td><td><code>$trace</code>: only for <code>mode conform</code>; the host supplies it (the model never writes identifiers).</td></tr>
+<tr><th scope="row" id="kfield-via"><code>via</code></th><td>Repeatable; optional</td><td><code>~action term...</code>: only for <code>plan</code>, <code>why_not</code> and <code>abduce</code>: steps the plan must contain or the step asked about. The host supplies it.</td></tr>
+<tr><th scope="row" id="kfield-compare"><code>compare</code></th><td>Repeatable; optional</td><td>Words-only comparison of a bound variable and a value (<code>?v above 3</code>).</td></tr>
+<tr><th scope="row" id="kfield-order"><code>order</code></th><td>Repeatable; optional</td><td>Temporal order of two time variables (<code>?t1 before ?t2</code>), or the single word <code>random</code>: the answers of mode <code>select</code> in a seeded random order, a random sample with <code>limit</code> (at most one; <code>order_random_mode</code>, <code>order_random_repeated</code>).</td></tr>
+<tr><th scope="row" id="kfield-rank"><code>rank</code></th><td>At most once; optional</td><td><code>highest ?v</code> or <code>lowest ?v</code>, optionally <code>position N</code> or <code>top N</code>.</td></tr>
+<tr><th scope="row" id="kfield-filter"><code>filter</code></th><td>Repeatable; optional</td><td>Trusted-circuit boolean condition; the model uses words instead.</td></tr>
+<tr><th scope="row" id="kfield-measure"><code>measure</code></th><td>At most once; optional</td><td><code>start</code>, <code>end</code> or <code>duration</code> of the selected time variable.</td></tr>
+<tr><th scope="row" id="kfield-quantifier"><code>quantifier</code></th><td>At most once; optional</td><td><code>all</code>, <code>none</code>, <code>not_all</code>, <code>most</code>, <code>half</code> or <code>at_least N</code> (mode <code>every</code>).</td></tr>
+<tr><th scope="row" id="kfield-except"><code>except</code></th><td>Repeatable; optional</td><td><code>?x "value"</code>: excludes a value.</td></tr>
+<tr><th scope="row" id="kfield-observe"><code>observe</code></th><td>At most once; optional</td><td>Numeric goal of a <code>mode plan</code> query (extension E2): <code>observe ENTITY EXPR WORD NUMBER</code> with WORD in <code>above below at_least at_most equal</code>; the planner looks for a shortest plan of numeric actions after which the expression over the <code>state</code> facts of the entity reaches the threshold. With <code>observe</code> a plan query needs no <code>where</code> (<code>bad_observe</code> for a malformed line).</td></tr>
+<tr><th scope="row" id="kfield-horizon"><code>horizon</code></th><td>At most once; optional</td><td>A positive integer search bound for the numeric plan. A cut is reported as <code>budget_exhausted</code> with reason <code>horizon</code>, never as <code>no_plan</code>.</td></tr>
+<tr><th scope="row" id="kfield-limit"><code>limit</code></th><td>At most once; optional</td><td>A positive integer: bounds the rows (and the list of explanations of <code>abduce</code>).</td></tr>
+<tr><th scope="row" id="kfield-policy"><code>policy</code></th><td>At most once; optional</td><td><code>$policy</code> in force for this query; host-supplied.</td></tr>
+<tr><th scope="row" id="kfield-candidate"><code>candidate</code></th><td>Repeatable, 1 to 8; only with <code>mode effect</code> or <code>abduce</code></td><td><code>$id</code> of a <code>fact</code> with <code>status supposed</code> or of a <code>rule</code>/<code>default</code> (any approval): in force only in the runs of this query (<code>candidate_target</code>, <code>candidate_needs_mode</code>, <code>candidate_limit</code>, <code>candidate_also_if</code>, <code>effect_needs_ground_claim</code>). See <a href="query-modes.html#candidates">Query modes</a>.</td></tr>
+<tr><th scope="row" id="kfield-because"><code>because</code></th><td>Repeatable; optional</td><td>A clause link <code>KEYWORD $id</code> (<code>because so if unless although so_that before after when while</code>): relates this question to a clause of the same message. <code>if $id</code> supposes a <code>supposed</code> fact, a proposed wire or an amendment, and the answer is <code>conditional</code> on it.</td></tr>
+<tr><th scope="row" id="kfield-so"><code>so</code></th><td>Repeatable; optional</td><td>A clause link <code>KEYWORD $id</code> (<code>because so if unless although so_that before after when while</code>): relates this question to a clause of the same message. <code>if $id</code> supposes a <code>supposed</code> fact, a proposed wire or an amendment, and the answer is <code>conditional</code> on it.</td></tr>
+<tr><th scope="row" id="kfield-if"><code>if</code></th><td>Repeatable; optional</td><td>A clause link <code>KEYWORD $id</code> (<code>because so if unless although so_that before after when while</code>): relates this question to a clause of the same message. <code>if $id</code> supposes a <code>supposed</code> fact, a proposed wire or an amendment, and the answer is <code>conditional</code> on it.</td></tr>
+<tr><th scope="row" id="kfield-unless"><code>unless</code></th><td>Repeatable; optional</td><td>A clause link <code>KEYWORD $id</code> (<code>because so if unless although so_that before after when while</code>): relates this question to a clause of the same message. <code>if $id</code> supposes a <code>supposed</code> fact, a proposed wire or an amendment, and the answer is <code>conditional</code> on it.</td></tr>
+<tr><th scope="row" id="kfield-although"><code>although</code></th><td>Repeatable; optional</td><td>A clause link <code>KEYWORD $id</code> (<code>because so if unless although so_that before after when while</code>): relates this question to a clause of the same message. <code>if $id</code> supposes a <code>supposed</code> fact, a proposed wire or an amendment, and the answer is <code>conditional</code> on it.</td></tr>
+<tr><th scope="row" id="kfield-so_that"><code>so_that</code></th><td>Repeatable; optional</td><td>A clause link <code>KEYWORD $id</code> (<code>because so if unless although so_that before after when while</code>): relates this question to a clause of the same message. <code>if $id</code> supposes a <code>supposed</code> fact, a proposed wire or an amendment, and the answer is <code>conditional</code> on it.</td></tr>
+<tr><th scope="row" id="kfield-before"><code>before</code></th><td>Repeatable; optional</td><td>A clause link <code>KEYWORD $id</code> (<code>because so if unless although so_that before after when while</code>): relates this question to a clause of the same message. <code>if $id</code> supposes a <code>supposed</code> fact, a proposed wire or an amendment, and the answer is <code>conditional</code> on it.</td></tr>
+<tr><th scope="row" id="kfield-after"><code>after</code></th><td>Repeatable; optional</td><td>A clause link <code>KEYWORD $id</code> (<code>because so if unless although so_that before after when while</code>): relates this question to a clause of the same message. <code>if $id</code> supposes a <code>supposed</code> fact, a proposed wire or an amendment, and the answer is <code>conditional</code> on it.</td></tr>
+<tr><th scope="row" id="kfield-when"><code>when</code></th><td>Repeatable; optional</td><td>A clause link <code>KEYWORD $id</code> (<code>because so if unless although so_that before after when while</code>): relates this question to a clause of the same message. <code>if $id</code> supposes a <code>supposed</code> fact, a proposed wire or an amendment, and the answer is <code>conditional</code> on it.</td></tr>
+<tr><th scope="row" id="kfield-while"><code>while</code></th><td>Repeatable; optional</td><td>A clause link <code>KEYWORD $id</code> (<code>because so if unless although so_that before after when while</code>): relates this question to a clause of the same message. <code>if $id</code> supposes a <code>supposed</code> fact, a proposed wire or an amendment, and the answer is <code>conditional</code> on it.</td></tr></tbody></table></div><h3>What it is for</h3><p>Pick the mode from the question: "who works at Alpha?" is <code>select</code>; "is Lyon in France?" is <code>exists</code>; "how many?" is <code>count</code> (a lower bound over an open relation); "is everyone certified?" is <code>every</code> with a <code>scope</code>; "why?" is <code>explain</code>; "how do I...?" is <code>plan</code>. What-if needs no mode: the user's "if ..." is a <code>fact</code> or <code>stated</code> with <code>status supposed</code> linked by <code>if $id</code>, and the answer is conditional on it. The five reasoning modes <code>why_not</code>, <code>plan</code>, <code>abduce</code>, <code>conform</code> and <code>procedure</code> are described on <a href="query-modes.html">Query modes</a>.</p><h3>Examples</h3><pre data-sop="knowledge"><code>@located_in predicate
+  args subject:entity location:entity
+@f1 fact
+  holds located_in paris france
+@f2 fact
+  holds located_in lyon france
+@f3 fact
+  holds located_in rome italy</code></pre><pre data-sop="knowledge-query" data-status="supported" data-rows="city=lyon;city=paris"><code>@q query
+  where located_in ?city france
+  select ?city</code></pre><pre data-sop="knowledge-query" data-status="supported" data-count="2"><code>@q query
+  mode count
+  where located_in ?city france
+  select ?city</code></pre><p>The count is a lower bound (<code>located_in</code> is not declared <code>closed</code>).</p><p>A random sample ("name a French city"): the full answer set, shuffled with the request's seed, cut by <code>limit</code>; the packet reports <code>sample {order: random, limit: 1, of: 2, seed}</code>.</p><pre data-sop="knowledge-query" data-status="supported"><code>@q query
+  where located_in ?city france
+  select ?city
+  order random
+  limit 1</code></pre><pre data-sop="knowledge-query" data-status="supported"><code>@q query
+  mode exists
+  where located_in lyon france</code></pre><h3>Every, with an explicit counterexample</h3><pre data-sop="knowledge"><code>@member predicate
+  args subject:entity object:entity
+  closed true
+@works predicate
+  args subject:entity object:entity
+
+@m1 fact
+  holds member ann delta
+@m2 fact
+  holds member bob delta
+@w1 fact
+  holds works ann alpha
+@w2 fact
+  holds not works bob alpha</code></pre><pre data-sop="knowledge-query" data-status="refuted"><code>@q query
+  mode every
+  where member ?m delta
+  scope works ?m alpha</code></pre><h3>Explain</h3><pre data-sop="knowledge"><code>@parent predicate
+  args subject:entity object:entity
+@grandparent predicate
+  args subject:entity object:entity
+@f1 fact
+  holds parent ann bob
+@f2 fact
+  holds parent bob cy
+@r_grand rule
+  when parent ?x ?y
+  when parent ?y ?z
+  then grandparent ?x ?z</code></pre><pre data-sop="knowledge-query" data-status="supported"><code>@q query
+  mode explain
+  where grandparent ann cy</code></pre><h3>Time: throughout</h3><pre data-sop="knowledge"><code>@works_at predicate
+  args subject:entity object:entity
+
+@f1 fact
+  holds works_at ann alpha
+  valid 2020-01-01 2023-01-01
+@f2 fact
+  holds works_at ann beta
+  valid 2023-01-01 open</code></pre><pre data-sop="knowledge-query" data-status="supported" data-rows="c=alpha"><code>@q query
+  where works_at ann ?c
+  select ?c
+  during 2021-06-01 2023-01-01</code></pre><p><code>during</code> returns only <code>alpha</code>, because Ann worked at Beta only from 2023; <code>overlaps 2021-06-01 2024-01-01</code> would return both.</p><h3>What-if</h3><pre data-sop="knowledge"><code>@works predicate
+  args subject:entity object:entity
+@f1 fact
+  holds works bob alpha</code></pre><pre data-sop="knowledge-query" data-status="supported" data-rows="x=ann;x=bob" data-conditional="s1"><code>@s1 fact
+  holds works ann alpha
+  status supposed
+
+@q query
+  where works ?x alpha
+  select ?x
+  if $s1</code></pre><h3>Invalid: <code>every</code> without a scope</h3><pre data-sop="knowledge-invalid" data-error="missing_field" data-role="query"><code>@q query
+  mode every
+  where member ?m delta</code></pre><h3>Invalid: <code>order random</code> on a count</h3><pre data-sop="knowledge-invalid" data-error="order_random_mode" data-role="query"><code>@q query
+  mode count
+  where member ?m delta
+  order random</code></pre><h3>Common mistakes</h3><ol><li><code>every</code> without <code>scope</code>, or <code>scope</code> on another mode.</li><li>Selecting a variable that <code>where</code> does not mention (<code>select_unbound</code>).</li><li>More than one of <code>at</code>, <code>during</code>, <code>overlaps</code>; and reading <code>during</code> as "at some instant": it means throughout.</li><li><code>via</code> or <code>trace</code> outside the modes that take them; the model never writes them.</li><li>Expecting a count over an open relation to be exact: it is a lower bound (<code>bound at_least</code>).</li></ol></section><!--/knowledge-language--></main><script type="module" src="help-page.mjs"></script></body></html>

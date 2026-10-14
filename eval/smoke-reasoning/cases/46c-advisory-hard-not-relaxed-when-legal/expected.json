@@ -1,0 +1,36 @@
+{
+  "feature": "An advisory hard norm is used as a hard constraint while any plan satisfies it: the dearer legal plan wins and nothing is relaxed",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 6,
+    "steps": 2,
+    "names": [
+      "graceful_stop",
+      "start"
+    ]
+  },
+  "compliance": {
+    "hard": "ok",
+    "soft_violations": [],
+    "total_cost": 6
+  },
+  "used": [
+    {
+      "id": "restart",
+      "version": 1
+    },
+    {
+      "id": "no_force",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "norms_hard",
+    "binding_advisory",
+    "used"
+  ]
+}

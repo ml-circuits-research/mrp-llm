@@ -1,0 +1,3 @@
+@q query
+  mode plan
+  where router_reset r1

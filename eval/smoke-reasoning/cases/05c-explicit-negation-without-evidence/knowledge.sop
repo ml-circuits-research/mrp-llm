@@ -1,0 +1,12 @@
+@node predicate
+  args subject:entity
+@blocked predicate
+  args subject:entity
+  closed true
+
+@n1 fact
+  holds node a
+@n2 fact
+  holds node b
+@b1 fact
+  holds blocked b

@@ -1,0 +1,56 @@
+# Hand-written SOP of documents/ada-brennan-biography.md.
+
+@married predicate
+  args subject:entity
+  label en "married"
+@husband_of predicate
+  args subject:entity object:entity
+  label en "husband of"
+@ada_brennan entity
+  kind person
+  label en "Ada Brennan"
+@tom_brennan entity
+  kind person
+  label en "Tom Brennan"
+
+@ab_ref fact
+  holds as_of_year 2025
+  quote "This note was written in 2025."
+  source "ada-brennan-biography.md, line 3"
+@ab_born fact
+  holds born_in_year ada_brennan 1931
+  quote "Ada Brennan was born in 1931 in a small fishing town."
+  source "ada-brennan-biography.md, line 5"
+@ab_age fact
+  holds age_years ada_brennan 96
+  quote "As of 2025 she is 96 years old."
+  source "ada-brennan-biography.md, line 5"
+@ab_tom_born fact
+  holds born_in_year tom_brennan 1927
+  quote "Her elder brother Tom Brennan, born in 1927, is 141 years old according to the town register."
+  source "ada-brennan-biography.md, line 6"
+@ab_tom_age fact
+  holds age_years tom_brennan 141
+  quote "Her elder brother Tom Brennan, born in 1927, is 141 years old according to the town register."
+  source "ada-brennan-biography.md, line 6"
+@ab_never_married fact
+  holds not married ada_brennan
+  quote "Ada Brennan never married."
+  source "ada-brennan-biography.md, line 8"
+@ab_husband fact
+  holds husband_of leon_brennan ada_brennan
+  quote "She lived for forty years with her husband, the painter Leon Brennan."
+  source "ada-brennan-biography.md, line 9"
+@ab_r_married rule
+  when husband_of ?h ?p
+  then married ?p
+  quote "A person who has a husband is married."
+  source "ada-brennan-biography.md, line 10"
+@ab_founded fact
+  holds starts_on coastal_ecology_institute 19600601
+  quote "The institute was founded on 1960-06-01 and dissolved on 1958-09-01."
+  source "ada-brennan-biography.md, line 12"
+@ab_dissolved fact
+  holds ends_on coastal_ecology_institute 19580901
+  quote "The institute was founded on 1960-06-01 and dissolved on 1958-09-01."
+  source "ada-brennan-biography.md, line 12"

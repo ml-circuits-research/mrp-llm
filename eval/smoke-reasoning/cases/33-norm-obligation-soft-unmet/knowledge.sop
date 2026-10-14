@@ -1,0 +1,38 @@
+@incident predicate
+  args subject:entity
+@logbook_open predicate
+  args subject:entity
+  closed true
+@investigated predicate
+  args subject:entity
+@logged predicate
+  args subject:entity
+@resolved predicate
+  args subject:entity
+
+@f1 fact
+  holds incident i1
+
+@investigate action
+  params ?i
+  requires incident ?i
+  adds investigated ?i
+  cost 1
+@patch action
+  params ?i
+  requires investigated ?i
+  adds resolved ?i
+  cost 3
+@log_incident action
+  params ?i
+  requires incident ?i
+  requires logbook_open ?i
+  adds logged ?i
+  cost 1
+
+@log_promptly norm
+  oblige ~log_incident ?i
+  when incident ?i
+  within 2
+  severity soft
+  cost 10

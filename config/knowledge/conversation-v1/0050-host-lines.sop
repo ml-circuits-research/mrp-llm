@@ -1,0 +1,205 @@
+# conversation-v1: the host's status and notice sentences (sop/cnl.mjs, sop/declarative.mjs), part line.
+
+@cv_line_status_not_computable reply
+  situation line_status_not_computable
+  part line
+  language en
+  text "The question is understood, but the host cannot compute this answer from the values it has."
+
+@cv_line_status_hypotheses reply
+  situation line_status_hypotheses
+  part line
+  language en
+  text "Possible explanations; assumptions are not confirmed."
+
+@cv_line_status_candidates reply
+  situation line_status_candidates
+  part line
+  language en
+  text "Candidates for exploration, not proven facts."
+
+@cv_line_status_patterns reply
+  situation line_status_patterns
+  part line
+  language en
+  text "Candidate regularities measured on supplied cases."
+
+@cv_line_status_mappings reply
+  situation line_status_mappings
+  part line
+  language en
+  text "Candidate correspondences between structures; the transfer is not confirmed."
+
+@cv_line_status_budget_exhausted reply
+  situation line_status_budget_exhausted
+  part line
+  language en
+  text "The search was stopped by a limit (see the reason); this is not a negative answer."
+
+@cv_line_status_not_expressible reply
+  situation line_status_not_expressible
+  part line
+  language en
+  text "The problem cannot be expressed by the reasoning engine."
+
+@cv_line_status_plan_found reply
+  situation line_status_plan_found
+  part line
+  language en
+  text "A plan was found in the action model; it has not been executed."
+
+@cv_line_status_no_plan reply
+  situation line_status_no_plan
+  part line
+  language en
+  text "No plan was found in the explored finite state space."
+
+@cv_line_status_optimal reply
+  situation line_status_optimal
+  part line
+  language en
+  text "Optimal solution in the declared model and domains."
+
+@cv_line_status_feasible_bound reply
+  situation line_status_feasible_bound
+  part line
+  language en
+  text "A feasible solution was found; optimality is unproven."
+
+@cv_line_status_mixed_temporal reply
+  situation line_status_mixed_temporal
+  part line
+  language en
+  text "The claim and its negation are supported in different, non-overlapping intervals."
+
+@cv_line_status_supported reply
+  situation line_status_supported
+  part line
+  language en
+  text "The available evidence supports the claim."
+
+@cv_line_status_refuted reply
+  situation line_status_refuted
+  part line
+  language en
+  text "Explicit evidence supports the negated claim."
+
+@cv_line_status_both reply
+  situation line_status_both
+  part line
+  language en
+  text "Both the claim and its explicit negation have supporting evidence."
+
+@cv_line_status_unknown reply
+  situation line_status_unknown
+  part line
+  language en
+  text "The available information does not decide the question."
+
+@cv_line_status_entailed reply
+  situation line_status_entailed
+  part line
+  language en
+  text "The claim holds in every model of the constraints."
+
+@cv_line_status_possible reply
+  situation line_status_possible
+  part line
+  language en
+  text "At least one model satisfies the claim."
+
+@cv_line_status_impossible reply
+  situation line_status_impossible
+  part line
+  language en
+  text "No model of the stated conditions satisfies the claim."
+
+@cv_line_status_inconsistent reply
+  situation line_status_inconsistent
+  part line
+  language en
+  text "The stated conditions are inconsistent; no arbitrary conclusion is accepted."
+
+@cv_line_status_unsupported reply
+  situation line_status_unsupported
+  part line
+  language en
+  text "The available backend cannot execute this operation."
+
+@cv_line_status_stored reply
+  situation line_status_stored
+  part line
+  language en
+  text "The assertions have been recorded."
+
+@cv_line_status_incomplete reply
+  situation line_status_incomplete
+  part line
+  language en
+  text "Search is incomplete; more answers may exist."
+
+@cv_line_status_hypothetical reply
+  situation line_status_hypothetical
+  part line
+  language en
+  text "This result depends on the stated assumptions."
+
+@cv_line_retrieved_count reply
+  situation line_retrieved_count
+  part line
+  language en
+  text "Number of retrieved results: {{count}}."
+
+@cv_line_retrieved_at_least reply
+  situation line_retrieved_at_least
+  part line
+  language en
+  text "At least {{count}} results found; the exact number cannot be given from the retrieved memory."
+
+@cv_line_members_checked reply
+  situation line_members_checked
+  part line
+  language en
+  text "Known members checked: {{count}}."
+
+@cv_line_noted_statements reply
+  situation line_noted_statements
+  part line
+  language en
+  text "Noted {{count}} statement(s) for this conversation; they are not stored in the repository."
+
+@cv_line_conditional_only reply
+  situation line_conditional_only
+  part line
+  language en
+  text "Suppositions, hedged claims and reported claims apply only to a question in the same message."
+
+@cv_line_understood reply
+  situation line_understood
+  part line
+  language en
+  text "I understood the question as: {{reading}}. I cannot compute this kind of answer yet."
+
+@cv_line_assumption_branch reply
+  situation line_assumption_branch
+  part line
+  language en
+  text "Only under the model's assumptions: {{text}}"
+
+@cv_line_model_assumption reply
+  situation line_model_assumption
+  part line
+  language en
+  text "{{statement}}"
+
+@cv_line_condition reply
+  situation line_condition
+  part line
+  language en
+  text "Condition: {{statement}}"
+
+@cv_line_not_checked reply
+  situation line_not_checked
+  part line
+  language en
+  text "Not checked: {{link}}: {{target}}"

@@ -1,0 +1,38 @@
+@salary predicate
+  args subject:entity topic:entity object:integer
+  closed true
+@dept_total predicate
+  args subject:entity object:integer
+@dept_top predicate
+  args subject:entity object:integer
+@dept_size predicate
+  args subject:entity object:integer
+@s1 fact
+  holds salary ann dev 100
+@s2 fact
+  holds salary bob dev 120
+@s3 fact
+  holds salary cy dev 90
+@s4 fact
+  holds salary di ops 80
+@s5 fact
+  holds salary ed ops 95
+@s6 fact
+  holds salary fa lab 50
+@s7 fact
+  holds salary gi lab 50
+@a_total aggregate
+  over salary ?p ?d ?s
+  group ?d
+  sum ?s as ?t
+  yields dept_total ?d ?t
+@a_top aggregate
+  over salary ?p ?d ?s
+  group ?d
+  max ?s as ?m
+  yields dept_top ?d ?m
+@a_size aggregate
+  over salary ?p ?d ?s
+  group ?d
+  count ?p as ?n
+  yields dept_size ?d ?n

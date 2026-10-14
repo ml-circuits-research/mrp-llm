@@ -1,0 +1,4 @@
+@q query
+  mode count
+  where employee_of ?e dev
+  select ?e

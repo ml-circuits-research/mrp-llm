@@ -1,0 +1,44 @@
+{
+  "feature": "Aggregates over a large group and integer arithmetic (division truncates toward zero)",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "d": "d0",
+      "g": 7595
+    },
+    {
+      "d": "d1",
+      "g": 7452
+    },
+    {
+      "d": "d2",
+      "g": 7456
+    },
+    {
+      "d": "d3",
+      "g": 7432
+    },
+    {
+      "d": "d4",
+      "g": 7436
+    },
+    {
+      "d": "d5",
+      "g": 7444
+    },
+    {
+      "d": "d6",
+      "g": 7479
+    },
+    {
+      "d": "d7",
+      "g": 7483
+    }
+  ],
+  "requires": [
+    "aggregate",
+    "rules",
+    "compute_in_rules"
+  ]
+}

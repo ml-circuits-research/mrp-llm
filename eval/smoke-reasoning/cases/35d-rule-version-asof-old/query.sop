@@ -1,0 +1,4 @@
+@q query
+  mode exists
+  where taxable ann
+  asof 2026-01-01

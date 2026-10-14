@@ -1,0 +1,147 @@
+# conversation-v1: which situations apply to a turn (DS023 "Conversation layer"). The runtime writes the cv_turn_* facts of the result
+# packet; these rules derive cv_applies; the generic rule at the end makes every reply wire of an applicable situation, in the turn's
+# language, a candidate. The renderer uses, per part, the candidates of the situation with the highest cv_situation_priority (a random
+# variant among them) and reports the derivation.
+
+# --- the body of a computed turn
+@cv_r_answer_found rule
+  when cv_turn_computed
+  when cv_turn_answered
+  then cv_applies answer_found
+
+@cv_r_answer_open rule
+  when cv_turn_computed
+  when absent cv_turn_answered
+  then cv_applies answer_open
+
+# No answer, but a name of the message is close to an entity of the memory: offer it instead of a dry "I don't know".
+@cv_r_near_candidate rule
+  when cv_turn_candidate
+  when absent cv_turn_answered
+  when absent cv_turn_candidate_described
+  when absent cv_courtesy_only
+  when absent cv_turn_candidate_exact
+  then cv_applies near_candidate
+
+@cv_r_near_candidate_described rule
+  when cv_turn_candidate
+  when cv_turn_candidate_described
+  when absent cv_turn_answered
+  when absent cv_courtesy_only
+  when absent cv_turn_candidate_exact
+  then cv_applies near_candidate_described
+
+# A name the memory knows exactly, with a description, in a turn that computed nothing (the request was not formalized): say what it is.
+@cv_r_known_candidate_described rule
+  when cv_turn_candidate
+  when cv_turn_candidate_exact
+  when cv_turn_candidate_described
+  when absent cv_turn_computed
+  when absent cv_courtesy_only
+  then cv_applies known_candidate_described
+
+@cv_r_near_relations rule
+  when cv_turn_candidate
+  when cv_turn_candidate_relations
+  when absent cv_turn_answered
+  when absent cv_courtesy_only
+  then cv_applies near_relations
+
+# An open answer without a candidate: suggest what the memory holds most of.
+@cv_r_offer_topics rule
+  when cv_turn_computed
+  when absent cv_turn_answered
+  when absent cv_turn_status clarify
+  when absent cv_turn_candidate
+  when cv_turn_topics
+  then cv_applies offer_topics
+
+# --- unclear messages
+@cv_r_relation_missing rule
+  when cv_turn_unclear relation_not_in_memory
+  when absent cv_turn_topics
+  then cv_applies relation_missing
+
+@cv_r_relation_missing_topics rule
+  when cv_turn_unclear relation_not_in_memory
+  when cv_turn_topics
+  then cv_applies relation_missing_topics
+
+@cv_r_no_request rule
+  when cv_turn_unclear no_request
+  when absent cv_turn_topics
+  then cv_applies no_request
+
+@cv_r_no_request_topics rule
+  when cv_turn_unclear no_request
+  when cv_turn_topics
+  then cv_applies no_request_topics
+
+@cv_r_gibberish rule
+  when cv_turn_unclear gibberish
+  then cv_applies gibberish
+
+@cv_r_ambiguous rule
+  when cv_turn_unclear ambiguous
+  then cv_applies ambiguous
+
+@cv_r_ambiguous_readings rule
+  when cv_turn_unclear ambiguous
+  when cv_turn_readings
+  then cv_applies ambiguous_readings
+
+# --- a message of courtesy or emotion only
+@cv_r_courtesy_only rule
+  when cv_turn_status courtesy
+  then cv_courtesy_only
+
+@cv_r_courtesy rule
+  when cv_courtesy_only
+  when cv_turn_signal ?k
+  when cv_courtesy_situation ?k ?s
+  then cv_applies ?s
+
+@cv_r_courtesy_none rule
+  when cv_courtesy_only
+  when absent cv_turn_topics
+  then cv_applies courtesy_none
+
+@cv_r_courtesy_none_topics rule
+  when cv_courtesy_only
+  when cv_turn_topics
+  then cv_applies courtesy_none_topics
+
+# --- the tone of an answer: an opening and a closing from the message's signals
+@cv_r_opening rule
+  when cv_turn_signal ?k
+  when cv_opening_situation ?k ?s
+  when absent cv_courtesy_only
+  then cv_applies ?s
+
+@cv_r_closing rule
+  when cv_turn_signal ?k
+  when cv_closing_situation ?k ?s
+  when absent cv_courtesy_only
+  then cv_applies ?s
+
+@cv_r_short rule
+  when cv_turn_signal ?k
+  when cv_short_kind ?k
+  when absent cv_courtesy_only
+  when absent cv_style_detailed
+  then cv_style short
+
+# --- the candidates: a reply of an applicable situation, in the turn's language, whose slots the turn can fill (P-2.3: a reply that
+# names the user's name or the time of day is left out when the turn does not know them, instead of failing the turn)
+@cv_r_unfillable rule
+  when cv_reply_slot ?r ?x
+  when absent cv_turn_slot ?x
+  then cv_reply_unfillable ?r
+
+@cv_r_applicable rule
+  when cv_reply_for ?r ?s
+  when cv_applies ?s
+  when cv_reply_language ?r ?l
+  when cv_turn_language ?l
+  when absent cv_reply_unfillable ?r
+  then cv_applicable_reply ?r

@@ -1,0 +1,52 @@
+{
+  "feature": "A strict procedure checked as a Golog program: the trace takes the else branch of an `if` whose test holds in the state, so it is not a legal run of the method",
+  "status": "non_compliant",
+  "complete": true,
+  "compliance": {
+    "hard": "ok",
+    "violated": [],
+    "deviations": [
+      "deploy"
+    ],
+    "soft_violations": [],
+    "total_cost": 5
+  },
+  "obligations_triggered": [
+    "announce_promptly s1"
+  ],
+  "used": [
+    {
+      "id": "deploy",
+      "version": 1
+    },
+    {
+      "id": "announce_promptly",
+      "version": 1
+    },
+    {
+      "id": "backup_db",
+      "version": 1
+    },
+    {
+      "id": "smoke_test",
+      "version": 1
+    },
+    {
+      "id": "rollout_green",
+      "version": 1
+    },
+    {
+      "id": "announce",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "check_plan",
+    "norms_soft",
+    "temporal_norms",
+    "method",
+    "conform_deviation",
+    "used",
+    "zero_arity"
+  ]
+}

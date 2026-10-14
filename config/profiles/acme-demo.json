@@ -1,0 +1,83 @@
+{
+  "name": "Acme demo",
+  "description": "A support-style model over a small company memory (people, employers, offices, projects) and a FAQ answered by the reflex slot. Try: Who works at Acme? Where is Globex located? Who is on project Apollo? What are your opening hours?",
+  "createOnFirstStart": true,
+  "base": "acme-demo",
+  "language": {
+    "output": "auto"
+  },
+  "slots": {
+    "normalize": {
+      "strategy": "translate-llm",
+      "params": {
+        "tier": "fast"
+      }
+    },
+    "reflex": {
+      "strategy": "faq-feedback",
+      "params": {
+        "threshold": 0.6
+      }
+    },
+    "affect": {
+      "strategy": "formalizer-pragmatic"
+    },
+    "formalize": {
+      "strategy": "LocalLLMStepByStep",
+      "params": {
+        "tier": "fast"
+      }
+    },
+    "roundtrip": {
+      "strategy": "on-doubt",
+      "params": {
+        "onMismatch": "warn",
+        "tier": "fast"
+      }
+    },
+    "voice": {
+      "strategy": "natural-rephrase",
+      "params": {
+        "tier": "fast"
+      }
+    },
+    "commit": {
+      "strategy": "review-queue"
+    }
+  },
+  "faq": [
+    {
+      "id": "hours",
+      "q": "What are your opening hours?",
+      "a": "The Acme office in Cluj is open Monday to Friday, 9:00 to 17:00.",
+      "variants": [
+        "When is the office open?",
+        "What is your schedule?",
+        "What are the office hours?",
+        "When can I visit you?"
+      ]
+    },
+    {
+      "id": "contact",
+      "q": "How can I contact support?",
+      "a": "Write to support@acme.example or call +40 264 000 000 during office hours.",
+      "variants": [
+        "How do I reach support?",
+        "What is the support email or phone number?",
+        "How can I get in touch with you?"
+      ]
+    },
+    {
+      "id": "who-are-you",
+      "q": "Who are you and what can you do?",
+      "a": "I am the Acme demo model. I answer questions about Acme and Globex: who works where, who is on which project, where the offices are, and a small family tree. Every answer is computed from my memory, not guessed.",
+      "variants": [
+        "What can you do?",
+        "Who are you?",
+        "What do you know about?"
+      ]
+    }
+  ],
+  "allowOverrides": true,
+  "tiersNote": "Uses the Ploinky tier fast (configure it on /models > Model gateway, for example DeepSeek flash with thinking disabled); without it these slots report the tier as unavailable."
+}

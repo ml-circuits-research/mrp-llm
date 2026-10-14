@@ -1,0 +1,19 @@
+{
+  "feature": "Conditional answers name the assumptions they rest on (the two-run lowering), not a bare flag",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "ann"
+    },
+    {
+      "x": "bob"
+    }
+  ],
+  "conditional": [
+    "s1"
+  ],
+  "requires": [
+    "whatif"
+  ]
+}

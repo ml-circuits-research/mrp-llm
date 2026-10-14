@@ -1,0 +1,21 @@
+@can_enter predicate
+  args subject:entity
+@cleared predicate
+  args subject:entity
+@verified predicate
+  args subject:entity
+@id_checked predicate
+  args subject:entity
+
+@f1 fact
+  holds id_checked zoe
+
+@r1 rule
+  when cleared ?x
+  then can_enter ?x
+@r2 rule
+  when verified ?x
+  then cleared ?x
+@r3 rule
+  when id_checked ?x
+  then verified ?x

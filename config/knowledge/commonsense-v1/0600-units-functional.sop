@@ -1,0 +1,454 @@
+# commonsense-v1: units-functional (rules, defaults, integrity and facts written by a Claude Haiku subagent of commonsense-agent from its skeleton, 2026-10-02; reviewed and corrected by commonsense-agent; mechanically validated by tools/commonsense/check.mjs).
+# Part 1: unit entities (missing common units from core-en), Part 2: unit facts and conversion rules,
+# Part 3: functional/possession relation defaults
+
+# ---- PART 1: Missing common unit entities ----
+
+@cs_u_pound entity
+  kind unit
+  label en "pound"
+  alias en "lb"
+  alias en "lbs"
+  alias en "pounds"
+  source "authored (commonsense-v1, units): common imperial mass unit"
+
+@cs_u_ounce entity
+  kind unit
+  label en "ounce"
+  alias en "oz"
+  alias en "ozs"
+  alias en "ounces"
+  source "authored (commonsense-v1, units): common imperial mass unit"
+
+@cs_u_yard entity
+  kind unit
+  label en "yard"
+  alias en "yd"
+  alias en "yards"
+  source "authored (commonsense-v1, units): common imperial length unit"
+
+@cs_u_us_gallon entity
+  kind unit
+  label en "gallon"
+  alias en "gal"
+  alias en "gallons"
+  alias en "US gallon"
+  source "authored (commonsense-v1, units): common US volume unit"
+
+@cs_u_pint entity
+  kind unit
+  label en "pint"
+  alias en "pt"
+  alias en "pts"
+  alias en "pints"
+  source "authored (commonsense-v1, units): US liquid volume unit (472.176 millilitres)"
+
+@cs_u_hectare entity
+  kind unit
+  label en "hectare"
+  alias en "ha"
+  alias en "hectares"
+  source "authored (commonsense-v1, units): metric land area unit (10,000 square metres)"
+
+@cs_u_acre entity
+  kind unit
+  label en "acre"
+  alias en "acres"
+  source "authored (commonsense-v1, units): imperial land area unit"
+
+@cs_u_square_foot entity
+  kind unit
+  label en "square foot"
+  alias en "sq ft"
+  alias en "ft2"
+  alias en "ft²"
+  alias en "square feet"
+  source "authored (commonsense-v1, units): imperial area unit"
+
+# ---- PART 2: Unit facts and conversion rules ----
+
+# ---- Mass dimension (base unit: milligram) ----
+
+@cs_f_mass_gram fact
+  holds dimension_of grams mass
+  source "authored (commonsense-v1, units): gram measures mass"
+
+@cs_f_mass_kilogram fact
+  holds dimension_of kilogram mass
+  source "authored (commonsense-v1, units): kilogram measures mass"
+
+@cs_f_mass_milligram fact
+  holds dimension_of milligram mass
+  source "authored (commonsense-v1, units): milligram measures mass"
+
+@cs_f_mass_tonne fact
+  holds dimension_of tonne mass
+  source "authored (commonsense-v1, units): tonne measures mass"
+
+@cs_f_mass_pound fact
+  holds dimension_of cs_u_pound mass
+  source "authored (commonsense-v1, units): pound measures mass"
+
+@cs_f_mass_ounce fact
+  holds dimension_of cs_u_ounce mass
+  source "authored (commonsense-v1, units): ounce measures mass"
+
+# ---- Length dimension (base unit: micrometre) ----
+
+@cs_f_len_millimetre fact
+  holds dimension_of millimetre length
+  source "authored (commonsense-v1, units): millimetre measures length"
+
+@cs_f_len_centimetre fact
+  holds dimension_of centimetres length
+  source "authored (commonsense-v1, units): centimetre measures length"
+
+@cs_f_len_metre fact
+  holds dimension_of metres length
+  source "authored (commonsense-v1, units): metre measures length"
+
+@cs_f_len_km fact
+  holds dimension_of km length
+  source "authored (commonsense-v1, units): kilometre measures length"
+
+@cs_f_len_inch fact
+  holds dimension_of inch length
+  source "authored (commonsense-v1, units): inch measures length"
+
+@cs_f_len_foot fact
+  holds dimension_of foot length
+  source "authored (commonsense-v1, units): foot measures length"
+
+@cs_f_len_yard fact
+  holds dimension_of cs_u_yard length
+  source "authored (commonsense-v1, units): yard measures length"
+
+@cs_f_len_mile fact
+  holds dimension_of mile length
+  source "authored (commonsense-v1, units): mile measures length"
+
+# ---- Duration dimension (base unit: millisecond) ----
+
+@cs_f_dur_millisecond fact
+  holds dimension_of millisecond duration_dimension
+  source "authored (commonsense-v1, units): millisecond measures duration"
+
+@cs_f_dur_second fact
+  holds dimension_of second duration_dimension
+  source "authored (commonsense-v1, units): second measures duration"
+
+@cs_f_dur_minute fact
+  holds dimension_of minutes duration_dimension
+  source "authored (commonsense-v1, units): minute measures duration"
+
+@cs_f_dur_hour fact
+  holds dimension_of hour duration_dimension
+  source "authored (commonsense-v1, units): hour measures duration"
+
+@cs_f_dur_day fact
+  holds dimension_of day duration_dimension
+  source "authored (commonsense-v1, units): day measures duration"
+
+@cs_f_dur_week fact
+  holds dimension_of week duration_dimension
+  source "authored (commonsense-v1, units): week measures duration"
+
+@cs_f_dur_month fact
+  holds dimension_of month duration_dimension
+  source "authored (commonsense-v1, units): month measures duration (average Gregorian month)"
+
+@cs_f_dur_year fact
+  holds dimension_of years duration_dimension
+  source "authored (commonsense-v1, units): year measures duration (average Gregorian year)"
+
+# ---- Volume dimension (base unit: microlitre) ----
+
+@cs_f_vol_millilitre fact
+  holds dimension_of millilitre volume
+  source "authored (commonsense-v1, units): millilitre measures volume"
+
+@cs_f_vol_litre fact
+  holds dimension_of litre volume
+  source "authored (commonsense-v1, units): litre measures volume"
+
+@cs_f_vol_us_gallon fact
+  holds dimension_of cs_u_us_gallon volume
+  source "authored (commonsense-v1, units): US gallon measures volume"
+
+@cs_f_vol_pint fact
+  holds dimension_of cs_u_pint volume
+  source "authored (commonsense-v1, units): US pint measures volume"
+
+# ---- Area dimension (base unit: square millimetre) ----
+
+@cs_f_area_square_metre fact
+  holds dimension_of square_metre surface_area
+  source "authored (commonsense-v1, units): square metre measures area"
+
+@cs_f_area_km2 fact
+  holds dimension_of km2 surface_area
+  source "authored (commonsense-v1, units): square kilometre measures area"
+
+@cs_f_area_hectare fact
+  holds dimension_of cs_u_hectare surface_area
+  source "authored (commonsense-v1, units): hectare measures area"
+
+@cs_f_area_acre fact
+  holds dimension_of cs_u_acre surface_area
+  source "authored (commonsense-v1, units): acre measures area"
+
+@cs_f_area_square_foot fact
+  holds dimension_of cs_u_square_foot surface_area
+  source "authored (commonsense-v1, units): square foot measures area"
+
+# ---- Base amounts (in fine base units) ----
+
+# Mass (base: milligram)
+@cs_f_base_gram fact
+  holds base_amount grams 1000
+  source "authored (commonsense-v1, units): 1 gram = 1000 milligrams"
+
+@cs_f_base_kilogram fact
+  holds base_amount kilogram 1000000
+  source "authored (commonsense-v1, units): 1 kilogram = 1,000,000 milligrams"
+
+@cs_f_base_tonne fact
+  holds base_amount tonne 1000000000
+  source "authored (commonsense-v1, units): 1 tonne = 1,000,000,000 milligrams"
+
+@cs_f_base_milligram fact
+  holds base_amount milligram 1
+  source "authored (commonsense-v1, units): 1 milligram is the base unit of mass"
+
+@cs_f_base_pound fact
+  holds base_amount cs_u_pound 453592
+  source "authored (commonsense-v1, units): 1 pound = 453.592 grams (rounded to nearest milligram)"
+
+@cs_f_base_ounce fact
+  holds base_amount cs_u_ounce 28350
+  source "authored (commonsense-v1, units): 1 ounce = 28.350 grams (rounded to nearest milligram)"
+
+# Length (base: micrometre)
+@cs_f_base_millimetre fact
+  holds base_amount millimetre 1000
+  source "authored (commonsense-v1, units): 1 millimetre = 1000 micrometres"
+
+@cs_f_base_centimetre fact
+  holds base_amount centimetres 10000
+  source "authored (commonsense-v1, units): 1 centimetre = 10,000 micrometres"
+
+@cs_f_base_metre fact
+  holds base_amount metres 1000000
+  source "authored (commonsense-v1, units): 1 metre = 1,000,000 micrometres"
+
+@cs_f_base_km fact
+  holds base_amount km 1000000000
+  source "authored (commonsense-v1, units): 1 kilometre = 1,000,000,000 micrometres"
+
+@cs_f_base_inch fact
+  holds base_amount inch 25400
+  source "authored (commonsense-v1, units): 1 inch = 25.4 millimetres (rounded to nearest micrometre)"
+
+@cs_f_base_foot fact
+  holds base_amount foot 304800
+  source "authored (commonsense-v1, units): 1 foot = 304.8 millimetres (rounded to nearest micrometre)"
+
+@cs_f_base_yard fact
+  holds base_amount cs_u_yard 914400
+  source "authored (commonsense-v1, units): 1 yard = 914.4 millimetres (rounded to nearest micrometre)"
+
+@cs_f_base_mile fact
+  holds base_amount mile 1609344000
+  source "authored (commonsense-v1, units): 1 mile = 1609.344 metres (rounded to nearest micrometre)"
+
+# Duration (base: millisecond)
+@cs_f_base_millisecond fact
+  holds base_amount millisecond 1
+  source "authored (commonsense-v1, units): 1 millisecond is the base unit of duration"
+
+@cs_f_base_second fact
+  holds base_amount second 1000
+  source "authored (commonsense-v1, units): 1 second = 1000 milliseconds"
+
+@cs_f_base_minute fact
+  holds base_amount minutes 60000
+  source "authored (commonsense-v1, units): 1 minute = 60,000 milliseconds"
+
+@cs_f_base_hour fact
+  holds base_amount hour 3600000
+  source "authored (commonsense-v1, units): 1 hour = 3,600,000 milliseconds"
+
+@cs_f_base_day fact
+  holds base_amount day 86400000
+  source "authored (commonsense-v1, units): 1 day = 86,400,000 milliseconds"
+
+@cs_f_base_week fact
+  holds base_amount week 604800000
+  source "authored (commonsense-v1, units): 1 week = 604,800,000 milliseconds"
+
+@cs_f_base_month fact
+  holds base_amount month 2629746000
+  source "authored (commonsense-v1, units): 1 average Gregorian month = 2,629,746,000 milliseconds"
+
+@cs_f_base_year fact
+  holds base_amount years 31556952000
+  source "authored (commonsense-v1, units): 1 average Gregorian year = 31,556,952,000 milliseconds"
+
+# Volume (base: microlitre)
+@cs_f_base_millilitre fact
+  holds base_amount millilitre 1000
+  source "authored (commonsense-v1, units): 1 millilitre = 1000 microlitres"
+
+@cs_f_base_litre fact
+  holds base_amount litre 1000000
+  source "authored (commonsense-v1, units): 1 litre = 1,000,000 microlitres"
+
+@cs_f_base_us_gallon fact
+  holds base_amount cs_u_us_gallon 3785412
+  source "authored (commonsense-v1, units): 1 US gallon = 3,785.412 millilitres (rounded to nearest microlitre)"
+
+@cs_f_base_pint fact
+  holds base_amount cs_u_pint 473176
+  source "authored (commonsense-v1, units): 1 US pint = 473.176 millilitres (rounded to nearest microlitre)"
+
+# Area (base: square millimetre)
+@cs_f_base_square_metre fact
+  holds base_amount square_metre 1000000
+  source "authored (commonsense-v1, units): 1 square metre = 1,000,000 square millimetres"
+
+@cs_f_base_km2 fact
+  holds base_amount km2 1000000000000
+  source "authored (commonsense-v1, units): 1 square kilometre = 1,000,000,000,000 square millimetres"
+
+@cs_f_base_hectare fact
+  holds base_amount cs_u_hectare 10000000000
+  source "authored (commonsense-v1, units): 1 hectare = 10,000,000,000 square millimetres"
+
+@cs_f_base_acre fact
+  holds base_amount cs_u_acre 4046856422
+  source "authored (commonsense-v1, units): 1 acre = 4,046,856,422 square millimetres (rounded)"
+
+@cs_f_base_square_foot fact
+  holds base_amount cs_u_square_foot 92903
+  source "authored (commonsense-v1, units): 1 square foot = 92,903 square millimetres (rounded)"
+
+# ---- Same dimension rule ----
+
+@cs_r_same_dimension rule
+  when dimension_of ?a ?d
+  when dimension_of ?b ?d
+  then same_dimension ?a ?b
+  source "authored (commonsense-v1, units): two units with the same dimension have the same dimension"
+
+# ---- Conversion rules (only whole-number ratios: derives converts_to from base_amount) ----
+
+@cs_r_convert_gram_milligram rule
+  when base_amount grams ?x
+  when base_amount milligram ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to grams milligram ?ratio
+  source "authored (commonsense-v1, units): conversion factor from gram to milligram"
+
+@cs_r_convert_kilogram_gram rule
+  when base_amount kilogram ?x
+  when base_amount grams ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to kilogram grams ?ratio
+  source "authored (commonsense-v1, units): conversion factor from kilogram to gram"
+
+@cs_r_convert_kilogram_milligram rule
+  when base_amount kilogram ?x
+  when base_amount milligram ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to kilogram milligram ?ratio
+  source "authored (commonsense-v1, units): conversion factor from kilogram to milligram"
+
+@cs_r_convert_tonne_kilogram rule
+  when base_amount tonne ?x
+  when base_amount kilogram ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to tonne kilogram ?ratio
+  source "authored (commonsense-v1, units): conversion factor from tonne to kilogram"
+
+@cs_r_convert_metre_centimetre rule
+  when base_amount metres ?x
+  when base_amount centimetres ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to metres centimetres ?ratio
+  source "authored (commonsense-v1, units): conversion factor from metre to centimetre"
+
+@cs_r_convert_metre_millimetre rule
+  when base_amount metres ?x
+  when base_amount millimetre ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to metres millimetre ?ratio
+  source "authored (commonsense-v1, units): conversion factor from metre to millimetre"
+
+@cs_r_convert_km_metre rule
+  when base_amount km ?x
+  when base_amount metres ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to km metres ?ratio
+  source "authored (commonsense-v1, units): conversion factor from kilometre to metre"
+
+@cs_r_convert_minute_second rule
+  when base_amount minutes ?x
+  when base_amount second ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to minutes second ?ratio
+  source "authored (commonsense-v1, units): conversion factor from minute to second"
+
+@cs_r_convert_hour_minute rule
+  when base_amount hour ?x
+  when base_amount minutes ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to hour minutes ?ratio
+  source "authored (commonsense-v1, units): conversion factor from hour to minute"
+
+@cs_r_convert_day_hour rule
+  when base_amount day ?x
+  when base_amount hour ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to day hour ?ratio
+  source "authored (commonsense-v1, units): conversion factor from day to hour"
+
+@cs_r_convert_week_day rule
+  when base_amount week ?x
+  when base_amount day ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to week day ?ratio
+  source "authored (commonsense-v1, units): conversion factor from week to day"
+
+@cs_r_convert_litre_millilitre rule
+  when base_amount litre ?x
+  when base_amount millilitre ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to litre millilitre ?ratio
+  source "authored (commonsense-v1, units): conversion factor from litre to millilitre"
+
+@cs_r_convert_foot_inch rule
+  when base_amount foot ?x
+  when base_amount inch ?y
+  when compute ?ratio ?x divided_by ?y
+  then converts_to foot inch ?ratio
+  source "authored (commonsense-v1, units): conversion factor from foot to inch"
+
+# ---- PART 3: Functional and possession relations ----
+
+@cs_r_teaches_at_works_at rule
+  when teaches_at ?p ?s
+  then works_at ?p ?s
+  source "authored (commonsense-v1, functional): a teacher at a school works at that school"
+
+@cs_d_part_of_location default
+  when part_of ?a ?b
+  when located_in ?b ?c
+  then located_in ?a ?c
+  source "authored (commonsense-v1, functional): a part of a located entity is located in the same place"
+
+@cs_d_material_inheritance default
+  when is_a ?x ?class
+  when made_of_material ?class ?mat
+  then made_of_material ?x ?mat
+  source "authored (commonsense-v1, functional): substances inherit material composition from their class"
+

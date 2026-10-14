@@ -1,0 +1,41 @@
+@node predicate
+  args subject:entity
+@start predicate
+  args subject:entity
+@edge predicate
+  args source:entity destination:entity
+@reach predicate
+  args source:entity destination:entity
+  closed true
+@unreached predicate
+  args subject:entity
+
+@n1 fact
+  holds node a
+@n2 fact
+  holds node b
+@n3 fact
+  holds node c
+@n4 fact
+  holds node d
+@s1 fact
+  holds start a
+@e1 fact
+  holds edge a b
+@e2 fact
+  holds edge b c
+
+@r_base rule
+  when edge ?x ?y
+  then reach ?x ?y
+
+@r_step rule
+  when edge ?x ?m
+  when reach ?m ?y
+  then reach ?x ?y
+
+@r_un rule
+  when node ?y
+  when start ?x
+  when absent reach ?x ?y
+  then unreached ?y

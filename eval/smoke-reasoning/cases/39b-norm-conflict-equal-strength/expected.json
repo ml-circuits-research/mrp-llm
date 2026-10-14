@@ -1,0 +1,15 @@
+{
+  "feature": "Norms of equal strength in conflict (a prohibition and an obligation of the same action, no override): both under strict binding is blocked with both ids",
+  "status": "blocked",
+  "complete": true,
+  "blocked_by": [
+    "keep_running",
+    "must_stop"
+  ],
+  "requires": [
+    "plan",
+    "norms_hard",
+    "blocked_info",
+    "norm_conflict"
+  ]
+}

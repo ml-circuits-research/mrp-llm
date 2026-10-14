@@ -1,0 +1,6 @@
+# expect: sealed_test_in_knowledge
+@e1 test
+  of t1
+  call "f(1)"
+  expect "2"
+  kind sealed

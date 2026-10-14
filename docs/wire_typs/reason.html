@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#reason" target="_top">← Wire type index</a></p><h1><code>reason</code></h1><p>Runs a typed relational or numeric question with explicit inputs and returns a runtime result packet. It is the lower-level reasoning stage used by <code>solve</code>, which also creates link and output wires.</p><p><strong>Status and author:</strong> Only trusted host/tool circuits may author this operation. Small-model declarative input cannot emit it; host-approved orchestration supplies the required execution steps.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once at parse time. Other field names are rejected.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and current behavior</th></tr></thead><tbody><tr><th scope="row" id="field-query"><code>query</code></th><td>At most once; exactly one of query or constraint required</td><td><code>$query</code>; relational route, exclusive with <code>constraint</code>; evaluates the question against admitted evidence.</td></tr>
+<tr><th scope="row" id="field-constraint"><code>constraint</code></th><td>At most once; exactly one of query or constraint required</td><td><code>$constraint</code>; numeric route, exclusive with <code>query</code>; evaluates finite arithmetic conditions.</td></tr>
+<tr><th scope="row" id="field-memory"><code>memory</code></th><td>At most once; optional; query route</td><td><code>$link</code> retrieval result; supplies relational evidence, ignored for numeric constraints.</td></tr>
+<tr><th scope="row" id="field-data"><code>data</code></th><td>At most once; optional; query route</td><td><code>$value</code> or packed local facts/rules; contributes relational evidence, ignored for numeric constraints.</td></tr>
+<tr><th scope="row" id="field-backend"><code>backend</code></th><td>At most once; optional; default auto</td><td><code>auto</code>, <code>js</code>, <code>prolog</code> (relational) or <code>z3</code> (numeric); backend availability/strategy checked at runtime. An explicit non-JS backend without a <code>reasoning</code> field implicitly selects the <code>advanced</code> strategy; write <code>reasoning advanced</code> explicitly. A requested backend is never substituted: an unavailable one, or one requested under <code>reasoning reference</code>, yields <code>unsupported</code> with that backend named.</td></tr>
+<tr><th scope="row" id="field-assume"><code>assume</code></th><td>At most once; optional; query route</td><td><code>$fact</code> (typically <code>source assumption</code>) or a flat pack of facts; marks temporary relational assumptions, ignored on numeric route. Assumed facts stay conditional rather than becoming observed facts.</td></tr>
+<tr><th scope="row" id="field-reasoning"><code>reasoning</code></th><td>At most once; optional; default host strategy</td><td>Registered reasoning strategy name; default host <code>reasoningStrategy</code> (<code>reference</code> by default), except that an explicit non-JS <code>backend</code> makes the default <code>advanced</code>.</td></tr>
+<tr><th scope="row" id="field-mode"><code>mode</code></th><td>At most once; optional; default deduce</td><td><code>deduce</code> (default) or supported relational reasoning mode; not used on numeric route.</td></tr>
+<tr><th scope="row" id="field-after"><code>after</code></th><td>Repeatable; optional; default none</td><td><code>$wire</code> per line; orders evaluation after its producer, without making that value evidence.</td></tr></tbody></table></div></section><section><h2>Execution and result</h2><p>Numeric route supplies declared variables/requirements to a solver. <code>reference</code> requires finite integer domains; <code>advanced</code> chooses Z3 if available, else JS finite fallback. Relational route joins local facts and optional retrieval memory; <code>reference</code> uses bounded JS Horn, <code>advanced</code> chooses Prolog for point queries when installed and JS otherwise. Explicit Prolog cannot handle interval queries. The result packet reports status, completeness, evidence/proof as applicable, ignored inputs and effective route, plus <code>depth</code>: the number of rule applications in the minimal justification of the facts the answer actually used (an observed fact alone is <code>0</code>, one chained rule is <code>1</code>). No <code>output</code> keyword is accepted here; use <a href="solve.html">solve</a> for materialized ports.</p><p>One qualified side effect is possible: with a repository/session and a nonhypothetical proof, a previously admitted, metadata-verified observed claim used in that proof may be reinforced when both host policy (<code>policy.reinforce</code> is not false) and the memory retention configuration (<code>reinforceOnUse</code>) allow promotion. Mere retrieval or candidate hits never promote anything, hypothetical proofs never promote, and the reason packet reports the promotion count, so the effect is visible rather than hidden. Reasoning does not assert new world facts.</p></section><section><h2>Current SOP examples</h2><h3>Local relational deduction</h3><pre data-sop="current"><code>@evidence fact
+  holds parent ana bogdan
+  valid timeless
+
+@q query
+  where parent ana bogdan
+  mode exists
+
+@r reason
+  query $q
+  data $evidence
+  mode deduce</code></pre><p>The reason result reflects the local admitted fact; no repository session is required for this route.</p>
+<h3>Finite numeric possibility</h3><pre data-sop="current"><code>@limits constraint
+  var ?x int 1 4
+  require ?x &gt; 2
+  claim ?x == 3
+  task possible
+
+@r reason
+  constraint $limits
+  backend js</code></pre><p>The result reports possibility relative to domain 1–4 and requirement x &gt; 2; no output port is created.</p><h3>Invalid or unsafe example</h3><pre data-sop="invalid" data-check="parse" data-error="reason needs exactly query OR constraint"><code>@q query
+  where parent ana bogdan
+  mode exists
+
+@c constraint
+  claim 1 == 1
+  task prove
+
+@bad reason
+  query $q
+  constraint $c</code></pre><p>Exactly one of query or constraint is required. Runtime/parser shape validation rejects the combined route.</p></section><section><h2>Implementation sources</h2><ul><li><code>sop/parser.mjs:SPEC, validateShape, validateGraph</code></li><li><code>sop/runtime.mjs:Runtime.run</code></li><li><code>reasoning/registry.mjs:ReasoningRegistry.builtin</code></li><li><code>reasoning/bridge/solve.mjs:solveHorn</code></li><li><code>reasoning/bridge/solve.mjs:solveConstraint</code></li></ul><p>Related: <a href="link.html"><code>link</code></a>, <a href="constraint.html"><code>constraint</code></a>, <a href="binding.html"><code>binding</code></a>. See the <a href="../wiki.html#definition-sop" target="_top">SOP terminology</a> for wire/reference conventions.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

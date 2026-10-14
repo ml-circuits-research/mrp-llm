@@ -1,0 +1,828 @@
+# formalizer-protocol-v1: the vocabulary of the InternalReasoningStepByStep protocol (DS022 "InternalReasoningStepByStep").
+# Every predicate is closed: the protocol reasons in a closed world over its own slots, observations and questions. Every wire id of
+# this memory starts with fp_ (its own namespace); the code names the predicates without the prefix. `violation` is the relation
+# the integrity wires derive (DS004 "Desugaring").
+
+# Static protocol data: the questions, their texts and choices (0020-questions.sop)
+@fp_question_text predicate
+  args subject:entity object:text
+  closed true
+  description "the question (subject) is asked with this text (object); {{name}} placeholders are filled from text values"
+@fp_answer_format predicate
+  args subject:entity object:entity
+  closed true
+  description "the answer of the question (subject) is read with this structural reader (object)"
+@fp_asserts predicate
+  args subject:entity object:entity
+  closed true
+  description "a chosen value of the question (subject) is asserted as a fact of this predicate (object)"
+@fp_choice predicate
+  args subject:entity object:integer topic:entity
+  closed true
+  description "option number (object) of the question (subject) is the value (topic)"
+@fp_choice_text predicate
+  args subject:entity object:integer topic:text
+  closed true
+  description "option number (object) of the question (subject) is shown with this text (topic)"
+@fp_choice_asserts predicate
+  args subject:entity object:integer topic:entity
+  closed true
+  description "option number (object) of the question (subject) is asserted with this predicate (topic) instead of the question default"
+@fp_choices_from predicate
+  args subject:entity object:entity
+  closed true
+  description "the options of the question (subject) are the values of this observation or slot (object), computed for the request"
+@fp_zero_choice predicate
+  args subject:entity object:text
+  closed true
+  description "the question (subject) offers 0 with this text (object): none of the options"
+@fp_establishes predicate
+  args subject:entity object:entity
+  closed true
+  description "answering the question (subject) settles this slot (object)"
+@fp_slot_mode predicate
+  args subject:entity object:entity
+  closed true
+  description "the slot (subject) holds one value or many values (object)"
+@fp_priority predicate
+  args subject:entity object:integer
+  closed true
+  description "the greedy controller asks the askable question (subject) with the lowest priority (object) first"
+@fp_auto_single predicate
+  args subject:entity
+  closed true
+  description "the question (subject) is not asked when it has exactly one option: that option is the answer"
+@fp_auto_first_asked predicate
+  args subject:entity
+  closed true
+  description "the question (subject) is not asked when its first option is the asked unknown X: X is the answer"
+@fp_protocol_text predicate
+  args subject:entity object:text
+  closed true
+  description "a fixed text of the protocol (subject: system, request_start, request_end) (object)"
+@fp_prefix_section predicate
+  args subject:integer object:entity topic:integer
+  closed true
+  description "section number (subject) of the cached first turn lists the choices of the question (object) from option (topic)"
+@fp_prefix_section_end predicate
+  args subject:integer object:integer
+  closed true
+  description "section number (subject) of the cached first turn ends at option (object)"
+@fp_prefix_title predicate
+  args subject:integer object:text
+  closed true
+  description "section number (subject) of the cached first turn has this title (object)"
+@fp_plan_budget predicate
+  args subject:entity object:integer
+  closed true
+  description "the planner of every decision has this ceiling (subject: max_depth, max_nodes, timeout_ms) with this value (object)"
+@fp_question_budget predicate
+  args subject:entity object:integer
+  closed true
+  description "at most this many questions (object) per request; optional questions need more than the reserve (subject: total, reserve)"
+@fp_relational_kind predicate
+  args subject:entity
+  closed true
+  description "the kind of answer (subject) is built from statements of the memory and their places"
+@fp_asking_kind predicate
+  args subject:entity
+  closed true
+  description "the kind of answer (subject) asks for something: its circuit selects the asked unknown X"
+@fp_aspect_kind predicate
+  args subject:entity
+  closed true
+  description "a request of this kind (subject) has the checklist of aspects"
+@fp_counting_kind predicate
+  args subject:entity
+  closed true
+  description "the kind (subject) lists or counts things (a negation, a chain of links apply)"
+@fp_aspect_always predicate
+  args subject:entity
+  closed true
+  description "the aspect (subject) is possible in every request"
+@fp_unknown_text predicate
+  args subject:entity object:text
+  closed true
+  description "the unknown (subject) is offered with this text (object) as an option of a place"
+@fp_unknown predicate
+  args subject:entity
+  closed true
+  description "the symbol (subject) stands for an unknown of the circuit"
+@fp_yes_like_kind predicate
+  args subject:entity
+  closed true
+  description "the kind (subject) asks whether something holds (yes or no, why)"
+@fp_fewest_kind predicate
+  args subject:entity
+  closed true
+  description "a request of this kind (subject) with the aspect fewest asks for the fewest links"
+@fp_rank_kind predicate
+  args subject:entity
+  closed true
+  description "the kind (subject) ranks things by a compared value V (highest, lowest)"
+@fp_prelude_slot predicate
+  args subject:entity
+  closed true
+  description "the slot (subject) is settled before any statement is chosen (the details of the request)"
+@fp_problem_slot predicate
+  args subject:entity object:entity
+  closed true
+  description "the validator problem code (subject) is repaired through this slot (object)"
+@fp_only_kind_act predicate
+  args subject:entity object:entity
+  closed true
+  description "a message of the kind (subject) is only this act (object)"
+@fp_nothing_kind predicate
+  args subject:entity
+  closed true
+  description "a message of the kind (subject) has nothing to look up"
+@fp_follow_up predicate
+  args subject:entity object:entity
+  closed true
+  description "the question (subject) is asked by the handler of the question (object), never planned on its own"
+@fp_violation_note predicate
+  args subject:entity object:text
+  closed true
+  description "when places are asked again because of the violation or validator problem (subject), the question starts with this note (object)"
+@fp_kind_dependent predicate
+  args subject:entity
+  closed true
+  description "the answer of the question (subject) depends on the kind of answer and is asked again when the kind changes"
+@fp_statement_dependent predicate
+  args subject:entity
+  closed true
+  description "the answer of the question (subject) depends on the chosen statements and is asked again when they are asked again"
+@fp_heuristic predicate
+  args subject:entity
+  closed true
+  description "a structural early exit of the place filler that the protocol switches on (subject)"
+
+# Observations: asserted by code from structure and memory data, never from phrasing
+@fp_start predicate
+  args none
+  closed true
+  description "a request is being formalized"
+@fp_mention predicate
+  args subject:entity
+  closed true
+  description "a part of the request (subject) is a name of the memory"
+@fp_mention_candidate predicate
+  args subject:entity object:entity
+  closed true
+  description "the mention (subject) can mean the named thing (object)"
+@fp_single_candidate predicate
+  args subject:entity
+  closed true
+  description "the mention (subject) has exactly one candidate in the memory"
+@fp_name predicate
+  args subject:entity
+  closed true
+  description "the symbol (subject) stands for a named thing of the memory"
+@fp_number predicate
+  args subject:entity
+  closed true
+  description "the symbol (subject) stands for a standalone number of the request"
+@fp_limit_candidate predicate
+  args subject:entity
+  closed true
+  description "the number (subject) is one of the first two standalone numbers: it may set a limit"
+@fp_date predicate
+  args subject:entity
+  closed true
+  description "the symbol (subject) stands for a calendar date read from the request"
+@fp_date_count predicate
+  args subject:integer
+  closed true
+  description "the request holds this many readable dates (subject)"
+@fp_year_only predicate
+  args none
+  closed true
+  description "the request mentions a year but no readable date"
+@fp_candidate_statement predicate
+  args subject:entity
+  closed true
+  description "the statement of the memory (subject) is in the schema neighbourhood of the request"
+@fp_statement_role predicate
+  args subject:entity object:entity topic:entity
+  closed true
+  description "the statement (subject) has the place (object) of this type (topic: entity, number or other)"
+@fp_statement_arity predicate
+  args subject:entity object:integer
+  closed true
+  description "the statement (subject) has this many places (object)"
+@fp_statement_shape predicate
+  args subject:entity object:entity
+  closed true
+  description "the statement (subject) has this shape (object: unary_entity, binary_entity, entity_number, other)"
+@fp_derived_statement predicate
+  args subject:entity
+  closed true
+  description "the statement (subject) is worked out by the rules of the memory"
+@fp_closed_statement predicate
+  args subject:entity
+  closed true
+  description "the memory declares the statement (subject) complete (closed)"
+@fp_lexeme_hit predicate
+  args subject:entity
+  closed true
+  description "a content word of the request names the statement (subject) (the memory vocabulary)"
+@fp_single_hit predicate
+  args subject:entity
+  closed true
+  description "the statement (subject) is the only one a content word of the request names"
+@fp_observed_place predicate
+  args subject:entity object:entity topic:entity
+  closed true
+  description "the memory records the name (subject) in this place (topic) of the statement (object)"
+@fp_misfit predicate
+  args subject:entity object:entity topic:entity
+  closed true
+  description "the name (subject) does not fit this place (topic) of the statement (object) by the recorded facts or classes"
+@fp_procedure_head predicate
+  args subject:entity
+  closed true
+  description "a procedure of the memory (subject) is named by the request"
+@fp_validator_problem predicate
+  args subject:entity object:entity
+  closed true
+  description "the validator reported this problem code (subject) about this symbol (object)"
+@fp_disconnected predicate
+  args subject:entity
+  closed true
+  description "the statements of the query (subject) share no unknown or name"
+@fp_clause_single_hit predicate
+  args subject:entity object:entity
+  closed true
+  description "the clause (subject) names exactly one statement (object) by its content words"
+@fp_clause_own_name predicate
+  args subject:entity object:entity
+  closed true
+  description "the clause (subject) holds a mention of the name (object)"
+@fp_main_instance predicate
+  args subject:entity object:entity
+  closed true
+  description "the instance (object) is the first instance of the query (subject)"
+@fp_instance_after predicate
+  args subject:entity object:entity
+  closed true
+  description "the instance (subject) was chosen after the instance (object): its places are asked later"
+@fp_clause_instance predicate
+  args subject:entity object:entity
+  closed true
+  description "the statement of the clause (subject) is the instance (object)"
+@fp_sided_instance predicate
+  args subject:entity object:entity
+  closed true
+  description "the instance (object) of the query (subject) is the compared statement of a two-sided comparison"
+@fp_sided_pending predicate
+  args subject:entity
+  closed true
+  description "the compared statement of the query (subject) has two name places: which one the names take is asked"
+@fp_assembly_failed predicate
+  args none
+  closed true
+  description "the validator refused the assembled circuit; its problems are validator_problem facts"
+@fp_repair_target predicate
+  args subject:entity object:entity
+  closed true
+  description "the validator problem is repaired by asking the places of the instance (object) of the query (subject) again"
+@fp_budget_left predicate
+  args none
+  closed true
+  description "at least one question may still be asked"
+@fp_budget_ample predicate
+  args none
+  closed true
+  description "more questions than the reserve may still be asked (optional questions)"
+@fp_contrast_available predicate
+  args none
+  closed true
+  description "a reading with one slot changed differs from the assembled one (the forced contrast can be asked)"
+@fp_assembled predicate
+  args none
+  closed true
+  description "the established slots were assembled into a circuit the validator accepts"
+@fp_repairs_left predicate
+  args none
+  closed true
+  description "a validator-driven re-ask round may still be made"
+@fp_uncovered predicate
+  args subject:entity object:entity
+  closed true
+  description "a content word (topic of the payload) of the request that no chosen statement covers names exactly one other statement (object) of the query (subject)"
+@fp_avoid_hint predicate
+  args subject:entity object:entity
+  closed true
+  description "the words of the supposition (subject) name exactly one unary statement (object)"
+
+# Slots: what the protocol established about the request
+@fp_answered predicate
+  args subject:entity object:entity
+  closed true
+  description "the question (subject) about the symbol (object) was answered"
+@fp_kind predicate
+  args subject:entity
+  closed true
+  description "the request wants this kind of answer (subject)"
+@fp_act predicate
+  args subject:entity
+  closed true
+  description "the message also does this (subject): greeting, thanks, apology, closing, politeness, emotion"
+@fp_emotion predicate
+  args subject:entity
+  closed true
+  description "the message shows this feeling (subject)"
+@fp_linked predicate
+  args subject:entity object:entity
+  closed true
+  description "the mention (subject) means the named thing (object)"
+@fp_ticked predicate
+  args subject:entity
+  closed true
+  description "the model ticked the aspect (subject) in the checklist"
+@fp_has_aspect predicate
+  args subject:entity
+  closed true
+  description "the request has the aspect (subject), and the request holds what it needs"
+@fp_option_name predicate
+  args subject:entity
+  closed true
+  description "the name (subject) is one of the choices the request offers"
+@fp_excluded_name predicate
+  args subject:entity
+  closed true
+  description "the request leaves the name (subject) out"
+@fp_limit_kind predicate
+  args subject:entity object:entity
+  closed true
+  description "the number (subject) sets this limit (object: above, below, at_least, at_most, equal)"
+@fp_limit_target predicate
+  args subject:entity object:entity
+  closed true
+  description "the limit of the number (subject) applies to this target (object)"
+@fp_clause predicate
+  args subject:entity
+  closed true
+  description "a verbatim part of the request (subject) was copied by the model"
+@fp_clause_role predicate
+  args subject:entity object:entity
+  closed true
+  description "the clause (subject) is a supposition, a fact, a time limit or a second question (object)"
+@fp_clause_link predicate
+  args subject:entity object:entity
+  closed true
+  description "the clause (subject) is linked by this keyword (object: if, unless)"
+@fp_uses predicate
+  args subject:entity object:entity
+  closed true
+  description "the query or clause (subject) uses the statement instance (object)"
+@fp_instance_of predicate
+  args subject:entity object:entity
+  closed true
+  description "the statement instance (subject) is of the statement (object)"
+@fp_place predicate
+  args subject:entity object:entity topic:entity
+  closed true
+  description "the place (object) of the instance (subject) holds the value (topic): a name, a number or an unknown"
+@fp_polarity predicate
+  args subject:entity object:entity
+  closed true
+  description "the query (subject) asks whether it is true, false or absent (object)"
+@fp_negated_instance predicate
+  args subject:entity
+  closed true
+  description "the request says the statement instance (subject) does not hold"
+@fp_chained predicate
+  args subject:entity
+  closed true
+  description "the instance (subject) follows a chain of links, not one link"
+@fp_quantifier predicate
+  args subject:entity object:entity
+  closed true
+  description "the quantified query (subject) asks about this share of the members (object)"
+@fp_scope_instance predicate
+  args subject:entity
+  closed true
+  description "the instance (subject) must hold for every member of the group"
+@fp_measure predicate
+  args subject:entity object:entity
+  closed true
+  description "the when-query (subject) asks for this time measure (object: point, start, end, duration)"
+@fp_period predicate
+  args subject:entity object:entity
+  closed true
+  description "the query (subject) is about the period in this way (object: during, overlaps)"
+@fp_sided predicate
+  args subject:entity object:entity
+  closed true
+  description "the query (subject) compares two named things in this way (object)"
+@fp_sided_role predicate
+  args subject:entity object:entity
+  closed true
+  description "the two compared names take this place (object) in the compared statement of the query (subject)"
+@fp_reach_relation predicate
+  args subject:entity object:entity
+  closed true
+  description "a derived statement of the memory (object) already answers the chain query (subject)"
+@fp_reach_step predicate
+  args subject:entity object:entity
+  closed true
+  description "the chain query (subject) follows links of the statement (object)"
+@fp_reach_avoid predicate
+  args subject:entity object:entity
+  closed true
+  description "the chain of the query (subject) never enters a thing of which the statement (object) holds"
+@fp_reach_start predicate
+  args subject:entity object:entity
+  closed true
+  description "the chain of the query (subject) starts at the name (object)"
+@fp_reach_goal predicate
+  args subject:entity object:entity
+  closed true
+  description "the chain of the query (subject) must reach the name (object)"
+@fp_fewest_step predicate
+  args subject:entity object:entity
+  closed true
+  description "the fewest-links query (subject) counts links of the statement (object)"
+@fp_definition predicate
+  args subject:entity object:entity
+  closed true
+  description "no statement says it directly; the query (subject) is worked out by this definition (object)"
+@fp_puzzle_goal predicate
+  args subject:entity
+  closed true
+  description "the puzzle wants this (subject: possible, min, max, prove)"
+@fp_statements_none predicate
+  args subject:entity
+  closed true
+  description "the model said no statement fits the query (subject)"
+@fp_switched_yesno predicate
+  args subject:entity
+  closed true
+  description "every place of the query (subject) is a name: it is a yes/no question"
+@fp_rank_instance predicate
+  args subject:entity object:entity
+  closed true
+  description "the instance (object) holds the compared value of the query (subject)"
+@fp_options_target predicate
+  args subject:entity object:entity
+  closed true
+  description "the unknown (object) of the query (subject) must be one of the offered names"
+@fp_exclusion_target predicate
+  args subject:entity object:entity
+  closed true
+  description "the unknown (object) must not be the excluded name (subject)"
+@fp_link_choice predicate
+  args subject:entity object:entity
+  closed true
+  description "the statements of the query (subject) are linked by the shared thing chosen as option (object)"
+@fp_base_kind predicate
+  args subject:entity object:entity
+  closed true
+  description "the query or clause (subject) was answered with this kind (object)"
+@fp_clause_pick predicate
+  args subject:entity object:entity
+  closed true
+  description "the clause (subject) says the statement (object)"
+@fp_clause_name predicate
+  args subject:entity object:entity
+  closed true
+  description "the clause (subject) is about the name (object)"
+@fp_rank_dropped predicate
+  args subject:entity
+  closed true
+  description "no statement holds the compared value of the query (subject): the ranking is dropped"
+@fp_limit_on predicate
+  args subject:entity object:entity
+  closed true
+  description "the limit of the number (subject) compares the unknown (object)"
+@fp_connected predicate
+  args subject:entity
+  closed true
+  description "the statements of the query (subject) were linked"
+@fp_covered predicate
+  args subject:entity
+  closed true
+  description "the model said the request needs the statement (subject) its word names"
+@fp_doubt predicate
+  args subject:entity
+  closed true
+  description "after the forced contrast the model said this part (subject: kind, statements, places) is wrong"
+@fp_contrast_pick predicate
+  args subject:entity
+  closed true
+  description "the model picked this reading in the forced contrast (subject: reading, flipped, neither)"
+@fp_confirmed predicate
+  args none
+  closed true
+  description "the assembled reading is accepted"
+@fp_reasked predicate
+  args subject:entity
+  closed true
+  description "the places of the instance (subject) were asked again once"
+@fp_unused_statement predicate
+  args subject:entity object:entity
+  closed true
+  description "the name (subject) the circuit did not use belongs to the statement instance (object)"
+@fp_limit_statement predicate
+  args subject:entity object:entity
+  closed true
+  description "the limit of the number (subject) counts the things of the statement (object)"
+
+# Control: derived by the rules of 0010-slots.sop and 0030-actions.sop
+@fp_query_kind predicate
+  args subject:entity object:entity
+  closed true
+  description "the query or clause (subject) is built as this kind (object)"
+@fp_kind_changed predicate
+  args subject:entity
+  closed true
+  description "the query (subject) is built as a yes/no question instead of its answered kind"
+@fp_reach_impossible predicate
+  args none
+  closed true
+  description "no chain query can be built: the memory has no statement between two things, or the request names fewer than two things"
+@fp_binary_any predicate
+  args none
+  closed true
+  description "a candidate statement links two things"
+@fp_nonderived_binary_any predicate
+  args none
+  closed true
+  description "a candidate statement that the memory stores (not derived) links two things"
+@fp_unary_any predicate
+  args none
+  closed true
+  description "a candidate statement has one thing"
+@fp_has_reach_relation predicate
+  args none
+  closed true
+  description "a derived statement already answers the chain query"
+@fp_place_name predicate
+  args subject:entity object:entity
+  closed true
+  description "the name (object) may fill a place of the query or clause (subject)"
+@fp_has_place_name predicate
+  args subject:entity
+  closed true
+  description "some name may fill a place of the query (subject)"
+@fp_two_place_names predicate
+  args subject:entity
+  closed true
+  description "at least two names may fill places of the query (subject)"
+@fp_crowded_yesno predicate
+  args subject:entity
+  closed true
+  description "the yes/no instance (subject) has fewer places than the request has names"
+@fp_has_instances predicate
+  args subject:entity
+  closed true
+  description "the query (subject) uses at least one statement instance"
+@fp_some_mention predicate
+  args none
+  closed true
+  description "the request holds at least one name of the memory"
+@fp_clause_named predicate
+  args subject:entity
+  closed true
+  description "the clause (subject) has its name"
+@fp_clause_has_own predicate
+  args subject:entity
+  closed true
+  description "the clause (subject) holds a mention of its own"
+@fp_contrast_wanted predicate
+  args none
+  closed true
+  description "the forced contrast is available and the budget allows it"
+@fp_quantifier_at_least predicate
+  args subject:entity
+  closed true
+  description "the quantified query (subject) asks about at least a number of members"
+@fp_v_fixable predicate
+  args subject:entity
+  closed true
+  description "an instance of the query (subject) with a number place may still be asked again"
+@fp_waits predicate
+  args subject:entity
+  closed true
+  description "the places of the instance (subject) are asked after those of an earlier instance with open places"
+@fp_linking_open predicate
+  args none
+  closed true
+  description "a name of the request is not linked yet"
+@fp_places_open predicate
+  args none
+  closed true
+  description "some used statement has open places"
+@fp_prelude_open predicate
+  args none
+  closed true
+  description "some detail of the request is not settled yet"
+@fp_limit_open predicate
+  args none
+  closed true
+  description "some limit of the request is not attached yet"
+@fp_some_excluded predicate
+  args none
+  closed true
+  description "the model named at least one excluded name"
+@fp_wrong_part_wanted predicate
+  args none
+  closed true
+  description "the model rejected both readings of the forced contrast and the budget allows asking which part is wrong"
+@fp_reach_kind_open predicate
+  args none
+  closed true
+  description "the chain question has an open slot"
+@fp_date_many predicate
+  args none
+  closed true
+  description "the request holds at least two readable dates"
+@fp_date_one predicate
+  args none
+  closed true
+  description "the request holds exactly one readable date"
+@fp_settled predicate
+  args subject:entity object:entity
+  closed true
+  description "the slot (subject) for the symbol (object) has its value"
+@fp_needed predicate
+  args subject:entity object:entity
+  closed true
+  description "the request needs the slot (subject) for the symbol (object)"
+@fp_open_slot predicate
+  args subject:entity object:entity
+  closed true
+  description "the slot (subject) for the symbol (object) is needed and not settled"
+@fp_askable predicate
+  args subject:entity object:entity
+  closed true
+  description "the question (subject) about the symbol (object) may be asked now"
+@fp_any_open predicate
+  args none
+  closed true
+  description "some needed slot is not settled"
+@fp_any_violation predicate
+  args none
+  closed true
+  description "some integrity constraint of the protocol is violated"
+@fp_circuit_complete predicate
+  args none
+  closed true
+  description "the kind is known, nothing needed is open and nothing is inconsistent"
+@fp_formalized predicate
+  args none
+  closed true
+  description "the circuit is complete, assembled and confirmed (the goal)"
+@fp_route_possible predicate
+  args none
+  closed true
+  description "the memory or the request offers something to formalize (statements or numbers)"
+@fp_relational predicate
+  args none
+  closed true
+  description "the main query is built from statements of the memory"
+@fp_name_in_request predicate
+  args subject:entity
+  closed true
+  description "the named thing (subject) is meant by the request"
+@fp_reserved predicate
+  args subject:entity
+  closed true
+  description "the name (subject) is an option or an excluded name, not a place value"
+@fp_two_names predicate
+  args none
+  closed true
+  description "the request means at least two named things"
+@fp_three_names predicate
+  args none
+  closed true
+  description "the request means at least three named things"
+@fp_exactly_two_names predicate
+  args none
+  closed true
+  description "the request means exactly two named things"
+@fp_one_name predicate
+  args none
+  closed true
+  description "the request means at least one named thing"
+@fp_aspect_possible predicate
+  args subject:entity
+  closed true
+  description "the request holds what the aspect (subject) needs"
+@fp_offered predicate
+  args subject:entity object:entity
+  closed true
+  description "the unknown (object) is offered for the places of the query (subject)"
+@fp_placed predicate
+  args subject:entity object:entity
+  closed true
+  description "the place (object) of the instance (subject) holds a value"
+@fp_open_role predicate
+  args subject:entity object:entity
+  closed true
+  description "the place (object) of the used instance (subject) holds no value yet"
+@fp_claim predicate
+  args subject:entity object:entity topic:entity
+  closed true
+  description "the name (topic) is recorded in exactly one place (object) of the statement of the instance (subject)"
+@fp_observed_twice predicate
+  args subject:entity object:entity
+  closed true
+  description "the name (subject) is recorded in two places of the statement (object)"
+@fp_contested predicate
+  args subject:entity object:entity
+  closed true
+  description "two names claim the place (object) of the instance (subject)"
+@fp_more_names_than_roles predicate
+  args subject:entity
+  closed true
+  description "the request means more names than the statement (subject) has places"
+@fp_named_instance predicate
+  args subject:entity
+  closed true
+  description "a place of the instance (subject) holds a name"
+@fp_instance_pair predicate
+  args subject:entity
+  closed true
+  description "the query (subject) uses at least two statement instances"
+@fp_instance_triple predicate
+  args subject:entity
+  closed true
+  description "the query (subject) uses at least three statement instances"
+@fp_truth_doubtful predicate
+  args subject:entity
+  closed true
+  description "whether the query (subject) asks true, false or absent is not settled by default"
+@fp_asked_placed predicate
+  args subject:entity
+  closed true
+  description "a place of the query (subject) holds the asked unknown"
+@fp_v_placed predicate
+  args subject:entity
+  closed true
+  description "a place of the query (subject) holds the compared value V"
+@fp_places_done predicate
+  args subject:entity
+  closed true
+  description "every instance of the query (subject) has its places"
+@fp_places_pending predicate
+  args subject:entity
+  closed true
+  description "some instance of the query (subject) has open places"
+@fp_unknown_place predicate
+  args subject:entity
+  closed true
+  description "some place of the query (subject) holds an unknown"
+@fp_number_instance predicate
+  args subject:entity object:entity
+  closed true
+  description "the instance (object) of the query (subject) has a number place"
+@fp_chainable predicate
+  args subject:entity object:entity
+  closed true
+  description "the instance (object) of the query (subject) links a name to an unknown in a statement between two things"
+@fp_scope_split predicate
+  args subject:entity
+  closed true
+  description "the instances of the quantified query (subject) split into the group and the scope by their names"
+@fp_clause_kind_query predicate
+  args subject:entity
+  closed true
+  description "the clause (subject) is a second question with its own kind"
+@fp_statement_clause predicate
+  args subject:entity
+  closed true
+  description "the clause (subject) states or supposes something (one statement with names only)"
+@fp_clause_statement_known predicate
+  args subject:entity
+  closed true
+  description "the clause (subject) has its statement"
+@fp_main_query predicate
+  args subject:entity
+  closed true
+  description "the query (subject) is the main question of the request"
+@fp_binary_candidate predicate
+  args subject:entity
+  closed true
+  description "the candidate statement (subject) links two things"
+@fp_unary_candidate predicate
+  args subject:entity
+  closed true
+  description "the candidate statement (subject) has one thing"
+@fp_derived_binary_candidate predicate
+  args subject:entity
+  closed true
+  description "the candidate statement (subject) links two things and is worked out by rules"
+@fp_numeric_candidate predicate
+  args subject:entity
+  closed true
+  description "the candidate statement (subject) gives a number of a thing"
+@fp_has_candidates predicate
+  args none
+  closed true
+  description "the schema neighbourhood holds at least one statement"
+@fp_fewest_route predicate
+  args subject:entity
+  closed true
+  description "the query (subject) asks for the fewest links between two named things"

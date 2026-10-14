@@ -1,0 +1,14 @@
+{
+  "feature": "Constraints and arithmetic: optimisation with a proven optimum",
+  "status": "optimal",
+  "complete": true,
+  "objective": 5,
+  "witness": {
+    "x": 0,
+    "y": 5
+  },
+  "requires": [
+    "constraint",
+    "optimize"
+  ]
+}

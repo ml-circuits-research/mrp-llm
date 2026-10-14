@@ -1,0 +1,51 @@
+{
+  "name": "formalization-improve",
+  "description": "The formalization improver's automated loop (AGENTS.md \"Formalization improvement\"): the tier good proposes learned-layer wires (hints, examples, question texts as data, order and early exits of the problem questions) for one failure cluster of the regression baseline; checks.mjs validates them (allowed predicates, placeholders, protocol lint, no text copied from a case); the sink runs the regression gate on tier tiny and admits a change only if it fixes cases and loses none. Refusals and ESCALATE replies go to escalations.jsonl.",
+  "kind": "formalization-improve",
+  "inputs": {
+    "module": "inputs.mjs",
+    "idField": "id",
+    "promptFields": [
+      "cluster",
+      "size",
+      "description",
+      "protocol",
+      "learned",
+      "cases"
+    ],
+    "options": {
+      "maxCases": 6,
+      "clusters": null,
+      "skip": []
+    }
+  },
+  "packing": {
+    "itemsPerCall": 1
+  },
+  "models": "tier:good",
+  "fallbackOnFailure": false,
+  "output": {
+    "format": "text"
+  },
+  "checks": "checks.mjs",
+  "repairRounds": 2,
+  "concurrency": 1,
+  "budget": {
+    "usd": 0.3,
+    "calls": 30
+  },
+  "escalation": {
+    "nextModel": false
+  },
+  "sink": "sink.mjs",
+  "stages": [
+    {
+      "name": "all",
+      "items": null,
+      "stop": {
+        "maxRejectRate": 1,
+        "maxEmptyRate": 1
+      }
+    }
+  ]
+}

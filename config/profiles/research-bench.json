@@ -1,0 +1,14 @@
+{
+  "name": "Research bench",
+  "description": "For benchmarks of single slots: no reflex, no voice, no round trip; messages are used as typed. Not meant for users.",
+  "base": "default",
+  "language": {"output": "en"},
+  "slots": {
+    "normalize": {"strategy": "passthrough"},
+    "reflex": {"strategy": "off"},
+    "roundtrip": {"strategy": "off"},
+    "voice": {"strategy": "english-only"},
+    "commit": {"strategy": "never"}
+  },
+  "allowOverrides": true
+}

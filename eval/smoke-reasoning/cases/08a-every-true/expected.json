@@ -1,0 +1,9 @@
+{
+  "feature": "Quantifiers: every (universal question over a restriction)",
+  "status": "supported",
+  "complete": true,
+  "requires": [
+    "facts",
+    "every"
+  ]
+}

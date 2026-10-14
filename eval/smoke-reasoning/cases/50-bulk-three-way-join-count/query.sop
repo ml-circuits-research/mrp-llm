@@ -1,0 +1,4 @@
+@q query
+  mode count
+  where order_zone ?o z3
+  select ?o

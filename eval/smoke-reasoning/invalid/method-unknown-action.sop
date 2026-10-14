@@ -1,0 +1,4 @@
+# expect: unknown_ref
+@m method
+  achieves done ?r
+  step ~missing_action ?r

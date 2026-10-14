@@ -1,0 +1,6 @@
+@t3 trace
+  step ~hard_reset r7 at 2026-01-10
+  step ~verify_link r7 at 2026-01-10
+@q query
+  mode conform
+  trace $t3

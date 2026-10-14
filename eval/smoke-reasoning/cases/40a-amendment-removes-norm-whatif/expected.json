@@ -1,0 +1,42 @@
+{
+  "feature": "Amendment what-if by removal: a supposed amendment that removes an approved norm takes it out of force for that query",
+  "status": "plan_found",
+  "complete": true,
+  "conditional": [
+    "am_rm"
+  ],
+  "plan": {
+    "cost": 3,
+    "steps": 3,
+    "names": [
+      "notify_oncall",
+      "hard_reset",
+      "verify_link"
+    ]
+  },
+  "used": [
+    {
+      "id": "reset_router",
+      "version": 2
+    },
+    {
+      "id": "notify_promptly",
+      "version": 1
+    }
+  ],
+  "compliance": {
+    "hard": "ok",
+    "soft_violations": [],
+    "total_cost": 3
+  },
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "norms_hard",
+    "whatif",
+    "versions",
+    "amendment",
+    "zero_arity"
+  ]
+}

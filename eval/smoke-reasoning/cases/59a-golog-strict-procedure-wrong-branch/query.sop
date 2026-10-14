@@ -1,0 +1,9 @@
+@t1 trace
+  step ~backup_db s1
+  step ~smoke_test s1
+  step ~rollout_green s1
+  step ~announce s1
+
+@q query
+  mode conform
+  trace $t1

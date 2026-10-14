@@ -1,0 +1,19 @@
+{
+  "feature": "forbid ... at_most_once: the second occurrence of the same instance is the violation",
+  "status": "non_compliant",
+  "complete": true,
+  "compliance": {
+    "hard": "violated",
+    "violated": [
+      "one_restart"
+    ],
+    "soft_violations": [],
+    "total_cost": 4
+  },
+  "requires": [
+    "check_plan",
+    "norms_hard",
+    "temporal_norms",
+    "zero_arity"
+  ]
+}

@@ -1,0 +1,12 @@
+@parent predicate
+  args subject:entity object:entity
+@grandparent predicate
+  args subject:entity object:entity
+
+@f1 fact
+  holds parent ann bob
+
+@r_grand rule
+  when parent ?x ?y
+  when parent ?y ?z
+  then grandparent ?x ?z

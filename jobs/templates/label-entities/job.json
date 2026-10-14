@@ -1,0 +1,19 @@
+{
+  "name": "label-entities",
+  "description": "Label mentions in text chunks with the user's labels; every span is copied exactly from the chunk.",
+  "kind": "label-entities",
+  "inputs": {"attachments": {"chunkChars": "{{params.chunk_chars}}"}, "promptFields": ["text"]},
+  "packing": {"itemsPerCall": 1},
+  "ladder": ["tiny", "small", "medium"],
+  "quality": {"minPassRate": 0.9, "maxAuditPer100": 10},
+  "output": {"format": "jsonl", "fields": {"span": "string", "label": {"type": "string", "enum": "{{params.labels}}"}}, "minRecords": 0},
+  "checks": "checks.mjs",
+  "repairRounds": 1,
+  "concurrency": 3,
+  "budget": {"usd": 0.2, "credits": 30},
+  "stages": [
+    {"name": "pilot", "items": 5, "stop": {"maxEmptyRate": 0.3, "maxRejectRate": 0.4, "minItems": 5}},
+    {"name": "all", "items": null, "stop": {"maxRejectRate": 0.2}}
+  ],
+  "audit": {"rate": 0.1, "role": "auditor", "instructions": "audit.md", "severity": "high"}
+}

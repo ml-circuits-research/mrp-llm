@@ -1,0 +1,29 @@
+@alarm predicate
+  args subject:entity
+
+@r_smoke rule
+  when smoke_seen ?z
+  then alarm ?z
+@r_drill rule
+  when drill_running ?z
+  then alarm ?z
+@r_heat rule
+  when heat_high ?z
+  when motion_seen ?z
+  then alarm ?z
+
+@h1 hypothesis
+  holds smoke_seen lab
+  cost 1
+@h2 hypothesis
+  holds drill_running lab
+  cost 1
+@h3 hypothesis
+  holds heat_high lab
+  cost 1
+@h4 hypothesis
+  holds motion_seen lab
+  cost 1
+@h5 hypothesis
+  holds smoke_seen hall
+  cost 1

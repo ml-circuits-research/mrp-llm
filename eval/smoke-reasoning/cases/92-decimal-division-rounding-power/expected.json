@@ -1,0 +1,88 @@
+{
+  "feature": "Exact decimal words of compute: divided_by a constant, rounded_to, rounded_up_to, rounded_down_to, power, whole_divided_by and modulo over decimals and negative numbers",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "k": "down_quarter",
+      "v": -2.75
+    },
+    {
+      "k": "down_quarter",
+      "v": 0
+    },
+    {
+      "k": "down_quarter",
+      "v": 19.75
+    },
+    {
+      "k": "down_quarter",
+      "v": 7
+    },
+    {
+      "k": "nearest_half",
+      "v": -3
+    },
+    {
+      "k": "nearest_half",
+      "v": 0
+    },
+    {
+      "k": "nearest_half",
+      "v": 20
+    },
+    {
+      "k": "nearest_half",
+      "v": 7
+    },
+    {
+      "k": "quarter",
+      "v": -0.6875
+    },
+    {
+      "k": "quarter",
+      "v": 0.025
+    },
+    {
+      "k": "quarter",
+      "v": 1.75
+    },
+    {
+      "k": "quarter",
+      "v": 4.9975
+    },
+    {
+      "k": "remainder",
+      "v": 3
+    },
+    {
+      "k": "square_of_tenth",
+      "v": 0.01
+    },
+    {
+      "k": "up_whole",
+      "v": -2
+    },
+    {
+      "k": "up_whole",
+      "v": 1
+    },
+    {
+      "k": "up_whole",
+      "v": 20
+    },
+    {
+      "k": "up_whole",
+      "v": 7
+    },
+    {
+      "k": "whole_half",
+      "v": 3
+    }
+  ],
+  "requires": [
+    "rules",
+    "compute_in_rules",
+    "exact_arithmetic"
+  ]
+}

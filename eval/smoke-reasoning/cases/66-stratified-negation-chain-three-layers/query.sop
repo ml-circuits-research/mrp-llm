@@ -1,0 +1,3 @@
+@q query
+  where s3 ?x
+  select ?x

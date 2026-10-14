@@ -1,0 +1,30 @@
+{
+  "feature": "Memory at scale: negation as failure is valid only over fully retrieved closed predicates",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "n1"
+    },
+    {
+      "x": "n3"
+    },
+    {
+      "x": "n4"
+    },
+    {
+      "x": "n6"
+    }
+  ],
+  "retrieval": {
+    "max_wires": 40,
+    "needed_recall": 1,
+    "min_steps": 2
+  },
+  "requires": [
+    "rules",
+    "naf",
+    "closed_world",
+    "retrieval"
+  ]
+}

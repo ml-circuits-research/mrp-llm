@@ -1,0 +1,60 @@
+# Hand-written SOP of documents/meridian-leave-policy.md.
+
+@contractor entity
+  kind class
+  label en "contractor"
+@employee entity
+  kind class
+  label en "employee"
+@maria_lopez entity
+  kind person
+  label en "Maria Lopez"
+
+@ml_ref fact
+  holds as_of_year 2026
+  quote "This policy applies from 2026 and refers to the year 2026."
+  source "meridian-leave-policy.md, line 3"
+@ml_full fact
+  holds amount full_time_leave 25
+  quote "Full-time employees receive 25 days of annual leave."
+  source "meridian-leave-policy.md, line 7"
+@ml_full_unit fact
+  holds unit_of full_time_leave days
+  quote "Full-time employees receive 25 days of annual leave."
+  source "meridian-leave-policy.md, line 7"
+@ml_part fact
+  holds amount part_time_leave 15
+  quote "that is 15 days"
+  source "meridian-leave-policy.md, line 8"
+@ml_part_unit fact
+  holds unit_of part_time_leave days
+  quote "that is 15 days"
+  source "meridian-leave-policy.md, line 8"
+@ml_part_share fact
+  holds share_of part_time_leave full_time_leave 50
+  quote "Part-time employees receive 50% of the full-time entitlement"
+  source "meridian-leave-policy.md, line 8"
+@ml_disjoint fact
+  holds disjoint_classes contractor employee
+  quote "Contractors are not employees"
+  source "meridian-leave-policy.md, line 12"
+@ml_maria_contractor fact
+  holds is_a maria_lopez contractor
+  quote "Maria Lopez works as a contractor in the HR department."
+  source "meridian-leave-policy.md, line 13"
+@ml_maria_employee fact
+  holds is_a maria_lopez employee
+  quote "Maria Lopez is an employee of Meridian Logistics."
+  source "meridian-leave-policy.md, line 14"
+@ml_order fact
+  holds precedes leave_request leave_approval
+  quote "A leave request must be submitted before it is approved."
+  source "meridian-leave-policy.md, line 18"
+@ml_request_date fact
+  holds starts_on leave_request 20260205
+  quote "the request was submitted on 2026-02-05"
+  source "meridian-leave-policy.md, line 19"
+@ml_approval_date fact
+  holds starts_on leave_approval 20260201
+  quote "approved on 2026-02-01"
+  source "meridian-leave-policy.md, line 19"

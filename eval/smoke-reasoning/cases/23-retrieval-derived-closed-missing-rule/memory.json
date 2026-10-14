@@ -1,0 +1,14 @@
+{
+  "distractors": {
+    "seed": 7,
+    "facts": 600,
+    "rules": 300,
+    "predicates": 12
+  },
+  "start": {
+    "radius": 2,
+    "hops": 1,
+    "cap": 50,
+    "ruleCap": 1
+  }
+}

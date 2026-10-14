@@ -1,0 +1,146 @@
+@normal predicate
+  args none
+@service predicate
+  args none
+@state predicate
+  args subject:entity topic:entity object:rational
+
+@m0 fact
+  holds normal
+
+@s_q fact
+  holds state demo q 0
+
+@s_x0 fact
+  holds state demo x0 1
+
+@s_y0 fact
+  holds state demo y0 1
+
+@s_x1 fact
+  holds state demo x1 2
+
+@s_y1 fact
+  holds state demo y1 2
+
+@s_x2 fact
+  holds state demo x2 3
+
+@s_y2 fact
+  holds state demo y2 3
+
+@s_x3 fact
+  holds state demo x3 4
+
+@s_y3 fact
+  holds state demo y3 4
+
+@a0_normal action
+  requires normal
+  guard ?q below 1000000000
+  next q ?q + ?x0^2 + ?y0^2
+  next x0 ?y0
+  next y0 -1 * ?x0
+  next x1 -1 * ?y1
+  next y1 ?x1
+  next x2 -1 * ?x2
+  next y2 ?y2
+  next x3 ?x3
+  next y3 -1 * ?y3
+
+@a0_service action
+  requires service
+  removes service
+  adds normal
+  guard ?q below 1000000000
+  next q ?q + ?x0^2 + ?y0^2
+  next x0 ?y0
+  next y0 -1 * ?x0
+  next x1 -1 * ?y1
+  next y1 ?x1
+  next x2 -1 * ?x2
+  next y2 ?y2
+  next x3 ?x3
+  next y3 -1 * ?y3
+
+@a1_normal action
+  requires normal
+  guard ?q below 1000000000
+  next q ?q + ?x1^2 + ?y1^2
+  next x0 ?x0
+  next y0 -1 * ?y0
+  next x1 ?y1
+  next y1 -1 * ?x1
+  next x2 -1 * ?y2
+  next y2 ?x2
+  next x3 -1 * ?x3
+  next y3 ?y3
+
+@a1_service action
+  requires service
+  guard ?q below 1000000000
+  next q ?q + ?x1^2 + ?y1^2
+  next x0 ?x0
+  next y0 -1 * ?y0
+  next x1 ?y1
+  next y1 -1 * ?x1
+  next x2 -1 * ?y2
+  next y2 ?x2
+  next x3 -1 * ?x3
+  next y3 ?y3
+
+@a2_normal action
+  requires normal
+  removes normal
+  adds service
+  guard ?q below 1000000000
+  next q ?q + ?x2^2 + ?y2^2
+  next x0 -1 * ?x0
+  next y0 ?y0
+  next x1 ?x1
+  next y1 -1 * ?y1
+  next x2 ?y2
+  next y2 -1 * ?x2
+  next x3 -1 * ?y3
+  next y3 ?x3
+
+@a2_service action
+  requires service
+  guard ?q below 1000000000
+  next q ?q + ?x2^2 + ?y2^2
+  next x0 -1 * ?x0
+  next y0 ?y0
+  next x1 ?x1
+  next y1 -1 * ?y1
+  next x2 ?y2
+  next y2 -1 * ?x2
+  next x3 -1 * ?y3
+  next y3 ?x3
+
+@a3_normal action
+  requires normal
+  guard ?q below 1000000000
+  next q ?q + ?x3^2 + ?y3^2
+  next x0 -1 * ?y0
+  next y0 ?x0
+  next x1 -1 * ?x1
+  next y1 ?y1
+  next x2 ?x2
+  next y2 -1 * ?y2
+  next x3 ?y3
+  next y3 -1 * ?x3
+
+@a3_service action
+  requires service
+  removes service
+  adds normal
+  guard ?q below 1000000000
+  next q ?q + ?x3^2 + ?y3^2
+  next x0 -1 * ?y0
+  next y0 ?x0
+  next x1 -1 * ?x1
+  next y1 ?y1
+  next x2 ?x2
+  next y2 -1 * ?y2
+  next x3 ?y3
+  next y3 -1 * ?x3

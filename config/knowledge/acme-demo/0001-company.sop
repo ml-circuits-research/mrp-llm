@@ -1,0 +1,131 @@
+# The acme-demo company over core-en: two organizations, their people, projects and offices, and one family (core-en's rules derive grandparent_of).
+
+@project_member predicate
+  args subject:entity object:entity
+  role subject person
+  role object project
+  label en "member of project"
+  description "A person works on a project."
+
+@lx_project_member_en lexeme
+  of project_member
+  language en
+  pos verb
+  form "member of project"
+  form "works on"
+  frame subject object
+  source "acme-demo seed"
+
+@ana entity
+  kind person
+  label en "Ana Popescu"
+
+@bogdan entity
+  kind person
+  label en "Bogdan Popescu"
+
+@carina entity
+  kind person
+  label en "Carina Popescu"
+
+@dan entity
+  kind person
+  label en "Dan Ionescu"
+
+@elena entity
+  kind person
+  label en "Elena Ionescu"
+
+@acme entity
+  kind organization
+  label en "Acme"
+
+@globex entity
+  kind organization
+  label en "Globex"
+
+@cluj entity
+  kind city
+  label en "Cluj"
+
+@bucharest entity
+  kind city
+  label en "Bucharest"
+
+@apollo entity
+  kind project
+  label en "Apollo"
+
+@hermes entity
+  kind project
+  label en "Hermes"
+
+@f1 fact
+  holds works_at ana acme
+  valid timeless
+  source "acme-demo seed"
+
+@f2 fact
+  holds works_at bogdan acme
+  valid timeless
+  source "acme-demo seed"
+
+@f3 fact
+  holds works_at carina globex
+  valid timeless
+  source "acme-demo seed"
+
+@f4 fact
+  holds works_at dan acme
+  valid timeless
+  source "acme-demo seed"
+
+@f5 fact
+  holds works_at elena globex
+  valid timeless
+  source "acme-demo seed"
+
+@f6 fact
+  holds located_in acme cluj
+  valid timeless
+  source "acme-demo seed"
+
+@f7 fact
+  holds located_in globex bucharest
+  valid timeless
+  source "acme-demo seed"
+
+@f8 fact
+  holds project_member ana apollo
+  valid timeless
+  source "acme-demo seed"
+
+@f9 fact
+  holds project_member dan apollo
+  valid timeless
+  source "acme-demo seed"
+
+@f10 fact
+  holds project_member bogdan hermes
+  valid timeless
+  source "acme-demo seed"
+
+@f11 fact
+  holds project_member elena hermes
+  valid timeless
+  source "acme-demo seed"
+
+@f12 fact
+  holds parent_of ana bogdan
+  valid timeless
+  source "acme-demo seed"
+
+@f13 fact
+  holds parent_of bogdan carina
+  valid timeless
+  source "acme-demo seed"
+
+@f14 fact
+  holds parent_of dan elena
+  valid timeless
+  source "acme-demo seed"

@@ -1,0 +1,64 @@
+# Reviewed demonstration modules. Publish together with their approved rules.
+# No action here triggers a tool or external physical change.
+@network_outage rule
+  when network_down ?x
+  then outage ?x
+
+@disk_process rule
+  when disk_full ?x
+  then process_crashed ?x
+
+@process_outage rule
+  when process_crashed ?x
+  then outage ?x
+
+@diagnose_outage procedure
+  params device
+  description "Propune cauze și o verificare; nu execută verificarea."
+  cue "indisponibil"
+  cue "cauza"
+  yield answer
+  body |
+    @network hypothesis
+      holds network_down $device
+      cost 1
+    @disk hypothesis
+      holds disk_full $device
+      cost 2
+    @possible pack
+      items $network $disk
+    @q query
+      where outage $device
+    @test query
+      where network_down $device
+    @result diagnose
+      query $q
+      candidates $possible
+      tests $test
+    @answer cnl
+      result $result
+      language en
+
+@move action
+  params ?r ?from ?to
+  requires located_in ?r ?from
+  requires connected ?from ?to
+  removes located_in ?r ?from
+  adds located_in ?r ?to
+  cost 1
+
+@plan_route procedure
+  params robot destination
+  description "Plan în graful cunoscut, fără execuție fizică."
+  cue "plan"
+  cue "traseu"
+  yield answer
+  body |
+    @g goal
+      where located_in $robot $destination
+    @result plan
+      goal $g
+      actions ~move
+    @answer cnl
+      result $result
+      language en

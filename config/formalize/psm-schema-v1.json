@@ -1,0 +1,65 @@
+{
+  "_note": "PSM (Problem Structure Model) target schema v1 (owner decision 2026-10-03): the GLiNER-native extraction schema the structure tier (GLiNER2.5) is asked for, and the target of a later fine-tune. Labels and descriptions are model-facing schema data, not user-facing text. lib/formalize/structure/ reads this file; the deterministic converter turns the extraction into SOP-IR. No logic is extracted here: the LFM writes the logic. A relation`s render template (model-facing input, data) turns an extracted relation into one statement of the PSM-based sketch given to the LFM.",
+  "version": 1,
+  "entities": {
+    "entity": "a person, object, place, group or named thing the problem talks about",
+    "event": "an action or happening, such as buying, arriving, filling or meeting",
+    "state": "a property or situation that holds for a thing, such as open, wet, empty or late",
+    "quantity": "a number together with what it counts or measures, such as 24 muffins, 3 dollars or 15 minutes",
+    "condition": "a requirement or if-clause that must hold, such as if it rains or only when the door is open",
+    "rule": "a general statement that holds for every case, such as every bird can fly or each box holds 6 eggs",
+    "constraint": "a limit or restriction, such as at most 5 people or no two in the same seat",
+    "goal": "what the question asks to find, decide or compute",
+    "assumption": "something the problem says to assume or suppose"
+  },
+  "relations": {
+    "has_quantity": {
+      "head": [
+        "entity",
+        "event"
+      ],
+      "tail": [
+        "quantity"
+      ],
+      "description": "a thing or event and the quantity it has",
+      "render": "{head} has {tail}."
+    },
+    "before": {
+      "head": [
+        "event"
+      ],
+      "tail": [
+        "event"
+      ],
+      "description": "the first event happens before the second",
+      "render": "{head} happens before {tail}."
+    },
+    "causes": {
+      "head": [
+        "event",
+        "state",
+        "condition"
+      ],
+      "tail": [
+        "event",
+        "state"
+      ],
+      "description": "the first brings about the second",
+      "render": "{head} causes {tail}."
+    },
+    "applies_to": {
+      "head": [
+        "rule",
+        "condition",
+        "constraint"
+      ],
+      "tail": [
+        "entity",
+        "event"
+      ],
+      "description": "a rule, condition or constraint and what it is about"
+    }
+  },
+  "threshold": 0.4,
+  "relationThreshold": 0.5
+}

@@ -1,0 +1,29 @@
+@producing predicate
+  args subject:entity
+@failing predicate
+  args subject:entity
+@halted predicate
+  args subject:entity
+
+@f1 fact
+  holds producing s1
+@f2 fact
+  holds failing s1
+
+@shutdown action
+  params ?s
+  requires producing ?s
+  adds halted ?s
+  cost 1
+
+@keep_running norm
+  forbid ~shutdown ?s
+  when producing ?s
+  severity hard
+  binding strict
+@must_stop norm
+  oblige ~shutdown ?s
+  when failing ?s
+  sometime
+  severity hard
+  binding strict

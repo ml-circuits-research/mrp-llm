@@ -1,0 +1,37 @@
+{
+  "name": "books-triage",
+  "description": "Reasoning cycle of the books operating loop (TODO.md section 0): classifies by layer the failed problems that a deterministic rule could not attribute (tools/eval/books/triage.mjs). The model sees the problem, the gold answer, the circuit the formalizer wrote and the system's answer; it names the layer that must change: formalization, knowledge, engine, construct, gold or infrastructure.",
+  "kind": "classify-failure",
+  "inputs": {
+    "command": ["node", "../../tools/eval/books/triage.mjs", "--emit"],
+    "idField": "id",
+    "promptFields": ["problem", "gold", "status", "answer", "circuit"]
+  },
+  "packing": {
+    "itemsPerCall": 1
+  },
+  "models": "tier:good",
+  "output": {
+    "format": "jsonl",
+    "fields": {
+      "layer": {"type": "string", "enum": ["formalization", "knowledge", "engine", "construct", "gold", "infrastructure"], "required": true},
+      "faithful": {"type": "string", "enum": ["yes", "partly", "no"], "required": true},
+      "sub": {"type": "string", "required": true},
+      "reason": {"type": "string", "required": true},
+      "fix": {"type": "string", "required": true}
+    },
+    "stripFences": true
+  },
+  "checks": "checks.mjs",
+  "repairRounds": 1,
+  "concurrency": 6,
+  "budget": {
+    "usd": 0.6,
+    "calls": 400
+  },
+  "stages": [
+    {"name": "all", "items": null, "stop": {"maxRejectRate": 0.3, "maxEmptyRate": 0.2, "minItems": 8}}
+  ],
+  "decider": null,
+  "escalation": {"nextModel": false}
+}

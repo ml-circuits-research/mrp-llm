@@ -1,0 +1,16 @@
+{
+  "feature": "used by deletion verified by a replay run: every needed claim is in the set, the distractor is not",
+  "status": "supported",
+  "complete": true,
+  "used_support": [
+    [
+      "f1",
+      "f2",
+      "r_grand"
+    ]
+  ],
+  "used_incomplete": false,
+  "requires": [
+    "rules"
+  ]
+}

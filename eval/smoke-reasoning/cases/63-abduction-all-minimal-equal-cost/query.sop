@@ -1,0 +1,3 @@
+@q query
+  mode abduce
+  where alarm lab

@@ -1,0 +1,8 @@
+# expect: overrides_not_contrary
+@d1 default
+  when b ?x
+  then f ?x
+@d2 default
+  when c ?x
+  then g ?x
+  overrides $d1

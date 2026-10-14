@@ -1,0 +1,19 @@
+{
+  "feature": "Hypotheticals: a what-if supposition keeps the answer conditional",
+  "status": "supported",
+  "complete": true,
+  "conditional": [
+    "s1"
+  ],
+  "rows": [
+    {
+      "x": "ann"
+    },
+    {
+      "x": "bob"
+    }
+  ],
+  "requires": [
+    "whatif"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "feature": "Interval combination for non-boolean answers: a count under during (throughout) counts the rows present in every part of the interval",
+  "status": "supported",
+  "complete": true,
+  "count": 1,
+  "requires": [
+    "temporal",
+    "interval",
+    "throughout",
+    "count"
+  ]
+}

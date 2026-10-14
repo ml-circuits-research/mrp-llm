@@ -1,0 +1,12 @@
+@grandparent predicate
+  args subject:entity object:entity
+
+@f_bc fact
+  holds parent bob cy
+  source "Ann is the parent of Bob. Bob is the parent of Cy."
+
+@r_grand rule
+  when parent ?x ?y
+  when parent ?y ?z
+  then grandparent ?x ?z
+  source "A grandparent is a parent of a parent."

@@ -1,0 +1,9 @@
+{
+ "status": "failed",
+ "complete": true,
+ "feature": "Code sandbox: a program that fails a test is failed, with the failing test named",
+ "requires": [
+  "code_sandbox"
+ ],
+ "warnings": []
+}

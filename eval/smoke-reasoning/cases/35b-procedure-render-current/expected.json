@@ -1,0 +1,29 @@
+{
+  "feature": "Versioned procedure: the current approved version is rendered (a block is flattened step by step)",
+  "status": "procedure_found",
+  "complete": true,
+  "procedure": {
+    "id": "reset_router",
+    "version": 2,
+    "steps": [
+      "~notify_oncall ?r",
+      "choose",
+      "~soft_reset ?r",
+      "~hard_reset ?r",
+      "end",
+      "~verify_link ?r"
+    ]
+  },
+  "used": [
+    {
+      "id": "reset_router",
+      "version": 2
+    }
+  ],
+  "requires": [
+    "method",
+    "versions",
+    "procedure_render",
+    "used"
+  ]
+}

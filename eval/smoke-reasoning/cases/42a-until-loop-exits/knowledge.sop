@@ -1,0 +1,21 @@
+@door predicate
+  args subject:entity
+@door_open predicate
+  args subject:entity
+
+@f1 fact
+  holds door d1
+
+@knock action
+  params ?d
+  requires door ?d
+  adds door_open ?d
+  cost 1
+
+@open_door method
+  achieves door_open ?d
+  when door ?d
+  binding strict
+  step until door_open ?d max 3
+    ~knock ?d
+  end

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#link" target="_top">← Wire type index</a></p><h1><code>link</code></h1><p>Connects an already declared query to local facts/rules and, when configured, visible memory claims and approved stored rules. It returns a retrieval plan and candidates, not a verdict.</p><p><strong>Status and author:</strong> Only trusted host/tool circuits may author this operation. Small-model declarative input cannot emit it; host-approved orchestration supplies the required execution steps.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once at parse time. Other field names are rejected.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and current behavior</th></tr></thead><tbody><tr><th scope="row" id="field-query"><code>query</code></th><td>Exactly once; required</td><td><code>$query</code>; chooses query goals for relevant repository/local retrieval.</td></tr>
+<tr><th scope="row" id="field-data"><code>data</code></th><td>At most once; optional; default none</td><td><code>$value</code> or packed facts/rules; adds local evidence and approved rules to the link result.</td></tr>
+<tr><th scope="row" id="field-strategy"><code>strategy</code></th><td>At most once; optional; default host strategy</td><td>Registered retrieval strategy name, default host <code>retrievalStrategy</code> (<code>hybrid</code> by default); controls retrieval, subject to host allowlist.</td></tr>
+<tr><th scope="row" id="field-after"><code>after</code></th><td>Repeatable; optional; default none</td><td><code>$wire</code> per line; enforces dependency ordering, without adding evidence.</td></tr></tbody></table></div></section><section><h2>Execution and result</h2><p>Local facts are tagged local/observed for this query, filtered by valid time and assigned local IDs; they are not stored in the session. The linker walks eligible rule conclusions into subgoals, includes their negated counterparts for conflict checks, retrieves candidate facts when repository/session exist, and records <code>linkPlan</code>, rules, facts, coverage, probes and <code>complete</code>. Without a repository/session, local data still works. Rules supplied as values must be approved host declarations in a trusted tool circuit. A <code>hypothesis</code> or <code>pattern</code> is not silently promoted to deductive evidence.</p><p>Retrieval strategy selects the <a href="../wiki.html#definition-memory-engine" target="_top">memory engine</a> path, not the reasoning backend. Pass <code>$linked</code> as <code>reason.memory</code>; <code>solve.query</code> generates this link stage automatically.</p></section><section><h2>Current SOP examples</h2><h3>Local evidence without session</h3><pre data-sop="current"><code>@evidence fact
+  holds parent ana bogdan
+  valid timeless
+
+@question query
+  where parent ana bogdan
+  mode exists
+
+@linked link
+  query $question
+  data $evidence
+
+@answer reason
+  query $question
+  memory $linked</code></pre><p>The reasoner receives the local fact through the retrieval packet; no repository write occurs.</p>
+<h3>Pack several local facts</h3><pre data-sop="current"><code>@first fact
+  holds parent ana bogdan
+  valid timeless
+
+@second fact
+  holds parent bogdan carla
+  valid timeless
+
+@bundle pack
+  items $first $second
+
+@ask query
+  where parent ana ?child
+  select ?child
+  mode select
+
+@related link
+  query $ask
+  data $bundle</code></pre><p>The pack is flattened into two local fact inputs. <code>link</code> retrieves candidates; it does not choose a child itself.</p><h3>Invalid or unsafe example</h3><pre data-sop="invalid" data-check="runtime" data-error="link data must contain fact/rule wires"><code>@candidate hypothesis
+  holds parent ana bogdan
+
+@q query
+  where parent ana bogdan
+  mode exists
+
+@bad link
+  query $q
+  data $candidate</code></pre><p>Hypotheses are candidate assumptions, not fact/rule data. The text parses but the link runtime rejects this input kind.</p></section><section><h2>Implementation sources</h2><ul><li><code>sop/parser.mjs:SPEC, validateShape, validateGraph</code></li><li><code>sop/runtime.mjs:Runtime.run</code></li><li><code>reasoning/linker.mjs:planGoals, linkKnowledge</code></li><li><code>memory/strategies.mjs:StrategyRegistry</code></li></ul><p>Related: <a href="recall.html"><code>recall</code></a>, <a href="reason.html"><code>reason</code></a>, <a href="rule.html"><code>rule</code></a>. See the <a href="../wiki.html#definition-sop" target="_top">SOP terminology</a> for wire/reference conventions.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

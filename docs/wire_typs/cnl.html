@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#cnl" target="_top">Wire index</a> · <a href="solve.html">solve</a> · <a href="clarify.html">clarify</a> · <a href="remember.html">remember</a></p><h1><code>cnl</code></h1><p>A <code>cnl</code> wire renders a genuine runtime result into <a href="../wiki.html#definition-cnl" target="_top">controlled natural language</a>. This is deterministic explanation of a checked result, not a query, second inference stage, or authorization to manufacture evidence. In a model-authored declarative turn the host generates rendering; the model cannot author a <code>cnl</code> wire or invent a result packet. A CLI user can inspect the rendering and the attached packet; a <a href="../wiki.html#definition-verbalizer" target="_top">verbalizer</a> is a separate optional agent stage. The rendering is shared by trusted and model-origin circuits; in a model-origin turn the host also renders the conditions a hypothetical answer rests on, the separately reported assumption branch, the fixed <a href="unclear.html">unclear</a> replies and the "cannot compute this kind of answer yet" reply for an understood problem without an engine.</p><h2>Fields</h2><table><thead><tr><th>Field / multiplicity</th><th>Accepted value and behavior</th></tr></thead><tbody><tr><td id="field-result"><code>result</code> — exactly one, required</td><td><code>$id</code> value reference to a runtime-produced result packet. The runtime checks its object identity against packets produced by <code>reason</code>/<code>solve</code>, <code>clarify</code>, <code>remember</code>, or supported operation handlers; a copied object with <code>status</code>/<code>answers</code> is rejected. No <code>~id</code> definition handle or arbitrary quoted JSON is accepted here.</td></tr><tr><td id="field-language"><code>language</code> — zero or one, default <code>en</code></td><td>The core renders English only (owner decision of 2026-10-01, <a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a> "English-only core"): a <code>cnl</code> wire renders the English message table whatever <code>language</code> says, and the returned value records <code>language: "en"</code>. Another answer language (the chat API <code>language</code> field or an explicit request in the message such as "answer in Romanian") is produced by translating the finished English text at the output edge (TranslatorService), not by this wire.</td></tr></tbody></table><h2>Rendering and boundaries</h2><p>The resulting value contains <code>{kind:'cnl', language, text, packet}</code>. Text starts with a localized status message (or the <code>clarify.text</code> question). Count packets include a count; answer rows emit <code>ANSWER</code> with variable/value pairs and, for interval queries, <code>VALID [start, end)</code>. Bound output projections emit <code>VALUE</code>; proof facts emit <code>EVIDENCE</code> with atom, source or derivation, plus validity when appropriate. Other packets can emit objective, hypothesis, pattern, candidate, analogy, plan, suggested test, intervention or actual engine/fallback lines. <code>complete:false</code> appends an incomplete warning; hypothetical packets are marked. The formatter does not infer a negative answer from unknown status or convert candidate evidence into proof. <a href="../wiki.html#definition-repository" target="_top">Repository</a> writes are not made by rendering.</p><h2>Current syntax examples</h2><p>Local evidence and a genuine <code>solve</code> result; expected rendering describes a supported answer with its source, subject to the reasoning result:</p><pre data-sop="current"><code>@record fact
+  holds located book_a shelf_b
+  valid timeless
+  source "catalog item 41"
+
+@request query
+  where located book_a ?place
+  select ?place
+  mode select
+
+@check solve
+  query $request
+  data $record
+  output ?place one
+
+@report cnl
+  result $check
+  language en</code></pre><p>Clarification also produces a genuine packet. Here the rendering conveys the request for a missing distinction, not a fabricated answer:</p><pre data-sop="current"><code>@need_detail clarify
+  text "Which of the two rooms do you mean?"
+
+@question_to_user cnl
+  result $need_detail
+  language en</code></pre><p>This parses, but <code>value</code> creates a plain object, not a runtime-produced result packet, so CNL rejects it:</p><pre data-sop="invalid" data-check="runtime" data-error="cnl requires a runtime-produced result"><code>@forgery value
+  data {status: "supported", answers: []}
+
+@unsafe cnl
+  result $forgery
+  language en</code></pre><p><strong>Implementation sources:</strong> <code>sop/parser.mjs</code> (<code>SPEC.cnl</code>), <code>sop/runtime.mjs</code> (<code>case 'cnl'</code>, runtime packet <code>WeakSet</code>), <code>sop/cnl.mjs</code> (<code>cnl</code>, <code>messages</code>).</p></main><script type="module" src="help-page.mjs"></script></body></html>

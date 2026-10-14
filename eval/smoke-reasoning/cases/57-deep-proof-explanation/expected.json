@@ -1,0 +1,34 @@
+{
+  "feature": "A deep proof: the explanation is the SHORTEST derivation (height 6 through the shortcut, not 8 along the chain)",
+  "status": "supported",
+  "complete": true,
+  "explain": {
+    "depth": 6,
+    "uses": [
+      "parent p0 p3",
+      "parent p3 p4",
+      "parent p4 p5",
+      "parent p5 p6",
+      "parent p6 p7",
+      "parent p7 p8"
+    ]
+  },
+  "used_support": [
+    [
+      "f_short",
+      "f_34",
+      "f_45",
+      "f_56",
+      "f_67",
+      "f_78",
+      "r_base",
+      "r_step"
+    ]
+  ],
+  "requires": [
+    "rules",
+    "recursion",
+    "explain",
+    "used"
+  ]
+}

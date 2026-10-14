@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#default" target="_top">← Wire type index</a></p><h1><code>default</code></h1><p>A defeasible rule: a normal tendency with exceptions. "Usually", "normally", "as a rule ... except" are defaults; "always" and "never" are rules. The default concludes its head for every binding of its body unless an exception holds, a strict contrary is derivable, or a default that overrides it fires.</p><p><strong>Status and author:</strong> Knowledge wire, written by a model or the owner from a source and stored by the host after review. A model-origin program cannot author it (the model-origin compiler rejects it). Governed: its `version`, `supersedes` and `approval` fields decide which version binds. It is sugar: the program that <code>sop/knowledge/desugar.mjs</code> generates (stratified negation as failure over `x_` predicates) is its normative meaning, so an engine needs only negation as failure to support it.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="field-when"><code>when</code></th><td>Repeatable; required</td><td>The body, a conjunction of atoms or one <code>all</code>/<code>any</code> group of condition leaves (<code>not</code>, <code>absent</code>, <code>compare</code>, <code>compute</code>, <code>order</code>, <code>start_of</code>, <code>end_of</code>). Head variables must occur in a positive atom (<code>unsafe_head</code>).</td></tr>
+<tr><th scope="row" id="field-then"><code>then</code></th><td>At most once; required</td><td>One atom, possibly negative (<code>then not pacifist ?x</code>).</td></tr>
+<tr><th scope="row" id="field-except"><code>except</code></th><td>Repeatable; optional</td><td>A condition group; the default does not apply to a binding where any <code>except</code> holds. Repeatable. Its variables must be bound by the body (<code>unsafe_exception</code>). An exception predicate needs retrieval completeness for the candidates, not a closed world.</td></tr>
+<tr><th scope="row" id="field-priority"><code>priority</code></th><td>At most once; optional</td><td>An integer, default 0; sugar for <code>overrides</code> between defaults with contrary heads. Prefer <code>overrides</code>: global numbers do not compose across chapters written by different agents.</td></tr>
+<tr><th scope="row" id="field-overrides"><code>overrides</code></th><td>Repeatable; optional</td><td>A <code>$default</code> that this default blocks, for the same arguments, whenever this one FIRES. The two heads must be contrary atoms of one predicate (<code>overrides_not_contrary</code>); the override graph must be acyclic (<code>overrides_cycle</code>).</td></tr>
+<tr><th scope="row" id="field-source"><code>source</code></th><td>At most once; optional</td><td>Quoted citation of the sentence the default comes from.</td></tr>
+<tr><th scope="row" id="field-version"><code>version</code></th><td>At most once; optional</td><td>A positive integer. A revision is a new wire with <code>version N+1</code> and <code>supersedes $old</code>; the old wire is never edited.</td></tr>
+<tr><th scope="row" id="field-supersedes"><code>supersedes</code></th><td>At most once; optional</td><td>A <code>$id</code> of a wire of the same type with a lower version (<code>supersedes_type_mismatch</code>, <code>version_not_increasing</code>). An approved successor makes its predecessor <code>approval superseded</code>.</td></tr>
+<tr><th scope="row" id="field-approval"><code>approval</code></th><td>At most once; optional</td><td><code>proposed</code>, <code>approved</code>, <code>contested</code>, <code>rejected</code>, <code>superseded</code> or <code>retired</code>. Written by the host when it accepts the wire; an author never writes it (authoring mode ignores it with <code>governance_ignored</code>). Only approved wires bind, and so do contested ones, flagged.</td></tr>
+<tr><th scope="row" id="field-approved_by"><code>approved_by</code></th><td>At most once; optional</td><td>Text. Written by the host at approval; required with <code>approval approved</code> in memory (<code>approval_incomplete</code>).</td></tr>
+<tr><th scope="row" id="field-approved_at"><code>approved_at</code></th><td>At most once; optional</td><td>ISO date or timestamp. Written by the host; <code>asof</code> selects the version in force from this date. Required for every norm and every strict method.</td></tr>
+<tr><th scope="row" id="field-retired_at"><code>retired_at</code></th><td>At most once; optional</td><td>ISO date or timestamp after which the wire no longer binds.</td></tr>
+<tr><th scope="row" id="field-scope"><code>scope</code></th><td>At most once; optional</td><td>A quoted list of tags (<code>scope "ops, business_hours"</code>). A scoped wire binds when its tags intersect the query context; an unscoped wire always binds.</td></tr>
+<tr><th scope="row" id="field-quote"><code>quote</code></th><td>At most once; optional</td><td>The exact words of the source, copied byte for byte.</td></tr></tbody></table></div></section><section><h2>What it is for and how to write it</h2><p>Write a default when the source states a tendency that has exceptions. Give each exception as an <code>except</code> group, and resolve a conflict between two defaults with <code>overrides $other</code>. A default needs a contrary or an exception: without one, write a <a href="rule.html"><code>rule</code></a>. Do not declare the head predicate <code>closed</code> merely to make a default work; it is the exception and the strict contrary that must be looked up completely, not the head.</p></section><section><h2>What the engine does</h2><ol><li><b>Strict knowledge sits below every default.</b> If the contrary of the head is derivable by an explicit negative fact (<code>holds not flies tweety</code>) or by a strict rule whose body does not depend on a default, the default is blocked and the answer is <code>refuted</code>, not <code>both</code>.</li><li><b><code>overrides</code> blocks by fire, not by applicability.</b> A default that applies but is itself blocked by its own exception overrides nothing.</li><li>Two defaults of equal strength with contrary heads both fire: the status is <code>both</code> (the Nixon diamond), never a silent pick.</li><li>Before a default-derived row is accepted from a partial slice, the host looks up the strict contrary and each exception for each candidate; if the slice is incomplete the answer is widened or withheld.</li></ol><p>The packet reports the author's wire (<code>birds_fly</code>) in <code>used</code>, never a generated <code>x_</code> wire.</p></section><section><h2>Examples</h2><h3>A default with an exception</h3><pre data-sop="knowledge"><code>@bird predicate
+  args subject:entity
+@penguin predicate
+  args subject:entity
+@flies predicate
+  args subject:entity
+
+@f1 fact
+  holds bird tweety
+@f2 fact
+  holds bird pingu
+@f3 fact
+  holds penguin pingu
+
+@birds_fly default
+  when bird ?x
+  then flies ?x
+  except penguin ?x
+  source "Field guide 1.1: birds normally fly, except penguins"</code></pre><pre data-sop="knowledge-query" data-status="supported" data-rows="x=tweety"><code>@q query
+  where flies ?x
+  select ?x</code></pre><p>Tweety flies by default; pingu is a penguin, so the exception blocks the default and nothing is concluded about pingu.</p><h3>The Nixon diamond and its resolution</h3><pre data-sop="knowledge"><code>@quaker predicate
+  args subject:entity
+@republican predicate
+  args subject:entity
+@pacifist predicate
+  args subject:entity
+
+@f1 fact
+  holds quaker nixon
+@f2 fact
+  holds republican nixon
+
+@d_quaker default
+  when quaker ?x
+  then pacifist ?x
+@d_republican default
+  when republican ?x
+  then not pacifist ?x</code></pre><pre data-sop="knowledge-query" data-status="both"><code>@q query
+  mode exists
+  where pacifist nixon</code></pre><p>Both defaults fire, so the status is <code>both</code>. Adding <code>overrides $d_republican</code> to the quaker default resolves the conflict in favour of pacifism:</p><pre data-sop="knowledge"><code>@quaker predicate
+  args subject:entity
+@republican predicate
+  args subject:entity
+@pacifist predicate
+  args subject:entity
+
+@f1 fact
+  holds quaker nixon
+@f2 fact
+  holds republican nixon
+
+@d_quaker default
+  when quaker ?x
+  then pacifist ?x
+  overrides $d_republican
+@d_republican default
+  when republican ?x
+  then not pacifist ?x</code></pre><pre data-sop="knowledge-query" data-status="supported"><code>@q query
+  mode exists
+  where pacifist nixon</code></pre><h3>Invalid: overrides between defaults that are not contrary</h3><pre data-sop="knowledge-invalid" data-error="overrides_not_contrary"><code>@a predicate
+  args subject:entity
+@b predicate
+  args subject:entity
+@d1 default
+  when a ?x
+  then b ?x
+  overrides $d2
+@d2 default
+  when a ?x
+  then b ?x</code></pre><p>The validator reports <code>overrides_not_contrary</code>: overriding makes sense only between a conclusion and its contrary.</p></section><section><h2>Common mistakes</h2><ol><li>A default written for an exceptionless law, or a rule written for "usually" (a conflict then becomes <code>both</code>).</li><li>Global <code>priority</code> numbers instead of <code>overrides</code>.</li><li>Declaring the head <code>closed</code> to silence a retrieval question: the exception and strict-contrary predicates need keyed lookups, not a closed head.</li><li>An exception whose variable the body does not bind (<code>unsafe_exception</code>).</li><li>Recursion through an exception (<code>not_stratifiable</code>): the validator checks the desugared program.</li></ol></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.default</code></li><li><code>sop/knowledge/desugar.mjs:desugar</code></li><li><code>sop/knowledge/cross-checks.mjs (overrides checks)</code></li><li><code>reasoning/strategies/js-reference</code></li></ul><p>Related: <a href="rule.html"><code>rule</code></a>, <a href="integrity.html"><code>integrity</code></a>, <a href="norm.html"><code>norm</code></a>, <a href="fact.html"><code>fact</code></a>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>; the shared semantics are in <a href="knowledge-semantics.html">Knowledge semantics</a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

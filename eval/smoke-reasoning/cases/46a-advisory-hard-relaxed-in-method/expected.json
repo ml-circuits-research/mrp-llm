@@ -1,0 +1,39 @@
+{
+  "feature": "severity hard x binding advisory inside a strict method: with no legal alternative the engine relaxes the advisory norm and lists it",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 3,
+    "steps": 2,
+    "names": [
+      "force_stop",
+      "start"
+    ]
+  },
+  "relaxed": [
+    "no_force"
+  ],
+  "compliance": {
+    "hard": "relaxed",
+    "soft_violations": [],
+    "total_cost": 3
+  },
+  "used": [
+    {
+      "id": "restart",
+      "version": 1
+    },
+    {
+      "id": "no_force",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "norms_hard",
+    "binding_advisory",
+    "used"
+  ]
+}

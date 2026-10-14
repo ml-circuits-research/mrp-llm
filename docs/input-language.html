@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Input language</title><link rel="stylesheet" href="styles.css">
+<style>
+.chain{list-style:none;margin:1rem 0;padding:0;display:flex;flex-direction:column;gap:.35rem}
+.chain li{border:1px solid currentColor;border-radius:6px;padding:.5rem .75rem;background:rgba(127,127,127,.08)}
+.chain li+li::before{content:"\2193";display:block;text-align:center;margin:-.55rem 0 .1rem;opacity:.6}
+.chain b{display:block}.chain span{font-size:.92em;opacity:.85}
+.chain li.user,.chain li.out{border-style:dashed}
+.status-implemented{font-weight:600}.status-progress{font-style:italic}.status-planned{opacity:.8}
+.note{border-left:4px solid currentColor;padding:.1rem .8rem;opacity:.9}
+@media (prefers-color-scheme:dark){.chain li{background:rgba(255,255,255,.06)}}
+</style></head><body>
+<div data-include="partials/header.html"></div><main class="page"><article class="page__panel"><p class="breadcrumb"><a href="index.html">Overview</a> / Input language</p><h1>Input language: from what the user types to the circuit</h1>
+<p>Users write in any language, with typos and in several sentences. Since the owner decision of 2026-10-01 the system has no language pipeline of its own: the session's <a href="wiki.html#definition-formalization-strategy">formalization strategy</a> (by default <a href="wiki.html#definition-localllmstepbystep">LocalLLMStepByStep</a>: short questions answered by <a href="wiki.html#definition-pworker">Ploinky Workers</a> tiers, smallest first, and a circuit assembled by the system) reads the message, in whatever language, and writes only <a href="wiki.html#definition-circuit">circuits</a>. Everything after it is symbolic and English: the validator, the KnowledgeLinker, the StrategyRouter, the reasoning strategies and the answer rendering. The small-model chain that used to clean, translate and parse the input (language identification, translation, proofing models, Stanza parsing) is frozen and archived in <code>probably_obsolete/tinyLLMExperiments/</code>.</p>
+<section id="chain"><h2>1. The chain</h2>
+<ol class="chain" aria-label="Processing chain from user message to circuit">
+<li class="user"><b>User message</b><span>Any language, with typos; one or several sentences.</span></li>
+<li><b>Request parser</b><span>The formalization strategy receives the message and the <a href="wiki.html#definition-schema-neighbourhood">schema neighbourhood</a> of the memory (the named entities and the relations around them, with roles and examples) and writes circuits: queries, constraints, <code>unclear</code>/<code>unparsed</code> markers, labelled session definitions and <code>assumed</code> lines. <code>server/query-parser.mjs</code>, <code>lib/query-author/</code></span></li>
+<li><b>Admission and repair</b><span>Admits only what the circuit surface and the memory's declarations allow (<a href="specsLoader.html?spec=DS014-model-surface.md">DS014</a>; guards such as <code>condition_misuse</code> and <code>time_not_a_point</code>); bounded repair rounds, and at most two vocabulary-dialog expansions when a term is missing.</span></li>
+<li><b>KnowledgeLinker</b><span>Links entity strings to the base memory; asks when a name is ambiguous.</span></li>
+<li class="out"><b>Reasoning and English answer</b><span>Slice retrieval with the completeness guard; the StrategyRouter chooses the oracle or an engine and verifies a routed answer against the oracle; the result packet is rendered in English with the origin of each step.</span></li>
+</ol>
+<p class="note">There is no fallback parser. When no model of the chosen strategy can run the turn answers <code>parse_unavailable</code> (another strategy is never substituted); the system never guesses a reading.</p></section>
+<section id="behaviour"><h2>2. Behaviour on difficult input</h2>
+<ul>
+<li><b>Typos and mixed languages.</b> The author normalizes them while writing the circuit. A name stays as the user wrote it and is resolved by the KnowledgeLinker through the labels and aliases of the memory.</li>
+<li><b>Unknown words.</b> The query author handles an unknown word agentically (decision of 2026-10-01): it defines the word as a session definition marked <code>assumed</code>, asks the user, or assumes a reading and says so. The validator admits only what DS014 allows, and an assumption is reported, never used silently.</li>
+<li><b>Ambiguity.</b> Two equally good readings give one <code>unclear</code> wire with <code>kind ambiguous</code> and two to four <code>reading</code> lines; one clearly better reading is written as the query and the choice is reported. Gibberish and a message with no request are <code>unclear</code> too.</li>
+<li><b>What the user states.</b> A statement is turn-local evidence held in the caller's conversation context; a supposition, a hedge or reported speech is used only conditionally. Nothing a chat turn does writes to a repository.</li>
+<li><b>Several questions</b> become several query wires, answered together.</li>
+</ul></section>
+<section id="evaluation"><h2>3. How the input stage is evaluated</h2>
+<p>The author is measured, not trusted: the query-forms dev set (<code>tools/eval/formalization/query-forms</code>, one tier at a time with <code>--tier</code>) counts correct circuits, <b>wrong</b> circuits (a definite wrong answer after execution, the dangerous class) and honest unknowns apart, and the planned <a href="wiki.html#definition-benchmark">benchmark</a> (<code>experiments/proposal/symbolic-vs-llm-benchmark.md</code>) compares circuits written by small models against the same models answering from text. Evaluation is an engineering check: tests are lexically disjoint variants of the forms the system was built on, staged with a paired bootstrap interval and preregistered stopping rules (<a href="specsLoader.html?spec=DS007-experiment-preregistration.md">DS007</a>, <a href="specsLoader.html?spec=DS012-evaluation-metrics.md">DS012</a>).</p></section>
+</article></main></body></html>

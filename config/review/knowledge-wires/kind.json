@@ -1,0 +1,20 @@
+{
+  "description": "Knowledge wires written from a source passage (ingestion): each item is one wire with its quote; the context is the passage.",
+  "check": {
+    "validator": "sop-knowledge",
+    "role": "knowledge"
+  },
+  "policy": {
+    "repairAt": "high",
+    "confirmAt": "medium",
+    "secondOpinion": true,
+    "maxRepairRounds": 2
+  },
+  "defaults": {
+    "model": "deepseek/deepseek-v4-flash",
+    "reasoning": "low",
+    "budgetTokens": 20000,
+    "maxTokens": 32000,
+    "_note": "calibration-v1 (2026-10-02, 30 items, 10 planted): v4-flash reasoning low found 10/10 with 0/20 false alarms; v4-flash without reasoning 7/10 (missed hedges and a unit error), v4.1-flash without reasoning 9/10 with 2/20 false alarms. Reasoning needs small batches and a large max_tokens (one 18-item batch overflowed 8000 tokens)."
+  }
+}

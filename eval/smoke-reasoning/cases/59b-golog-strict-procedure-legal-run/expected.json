@@ -1,0 +1,50 @@
+{
+  "feature": "A strict procedure checked as a Golog program: a trace that is a legal run (canary branch, either rollout, announce) is compliant",
+  "status": "compliant",
+  "complete": true,
+  "compliance": {
+    "hard": "ok",
+    "violated": [],
+    "deviations": [],
+    "soft_violations": [],
+    "total_cost": 7
+  },
+  "obligations_triggered": [
+    "announce_promptly s1"
+  ],
+  "used": [
+    {
+      "id": "deploy",
+      "version": 1
+    },
+    {
+      "id": "announce_promptly",
+      "version": 1
+    },
+    {
+      "id": "backup_db",
+      "version": 1
+    },
+    {
+      "id": "canary",
+      "version": 1
+    },
+    {
+      "id": "rollout_blue",
+      "version": 1
+    },
+    {
+      "id": "announce",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "check_plan",
+    "norms_soft",
+    "temporal_norms",
+    "method",
+    "conform_deviation",
+    "used",
+    "zero_arity"
+  ]
+}

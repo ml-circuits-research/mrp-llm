@@ -1,0 +1,9 @@
+{
+  "feature": "Arity 0: a rule whose head has no variables (then alarm_on) is expressible",
+  "status": "supported",
+  "complete": true,
+  "requires": [
+    "rules",
+    "zero_arity"
+  ]
+}

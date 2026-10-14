@@ -1,0 +1,13 @@
+{
+  "feature": "Time for derived atoms: not throughout an interval that starts before the body holds",
+  "status": "unknown",
+  "complete": true,
+  "requires": [
+    "temporal",
+    "interval",
+    "throughout",
+    "snapshot_derived",
+    "rules",
+    "compare_in_rules"
+  ]
+}

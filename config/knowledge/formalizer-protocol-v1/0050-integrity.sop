@@ -1,0 +1,88 @@
+# formalizer-protocol-v1: consistency of the established slots (DS022 "InternalReasoningStepByStep"). A violation blocks the goal and
+# enables the re-ask action of 0030-actions.sop (cost 2) once per instance; a violation that cannot be repaired leaves no plan, and
+# the strategy then answers honestly that it could not formalize the request.
+
+# A question that asks for something has unknowns in its places but none of them is the asked one.
+@fp_asked_not_placed integrity
+  never all
+    fp_query_kind ?qq ?k
+    fp_asking_kind ?k
+    fp_places_done ?qq
+    absent fp_asked_placed ?qq
+    fp_main_instance ?qq ?i
+    absent fp_reasked ?i
+  end
+  witness ?qq
+  message "no place of the chosen statements holds the thing asked for"
+
+# A name in a place that holds a number.
+@fp_name_in_number_place integrity
+  never all
+    fp_place ?i ?r ?n
+    fp_name ?n
+    fp_instance_of ?i ?s
+    fp_statement_role ?s ?r number
+    absent fp_reasked ?i
+  end
+  witness ?i
+  message "a name fills a place that holds a number"
+
+# A number in a place that holds a name.
+@fp_number_in_name_place integrity
+  never all
+    fp_place ?i ?r ?n
+    fp_number ?n
+    fp_instance_of ?i ?s
+    fp_statement_role ?s ?r entity
+    absent fp_reasked ?i
+  end
+  witness ?i
+  message "a number fills a place that holds a name"
+
+# The compared value V in a place that holds a name.
+@fp_value_in_name_place integrity
+  never all
+    fp_place ?i ?r unknown_v
+    fp_instance_of ?i ?s
+    fp_statement_role ?s ?r entity
+    absent fp_reasked ?i
+  end
+  witness ?i
+  message "the compared value fills a place that holds a name"
+
+# A superlative whose statements hold no compared value while a statement with a number place may still be asked again.
+@fp_v_not_placed integrity
+  never all
+    fp_query_kind ?qq ?k
+    fp_rank_kind ?k
+    fp_places_done ?qq
+    absent fp_v_placed ?qq
+    fp_v_fixable ?qq
+  end
+  witness ?qq
+  message "no place holds the value to compare"
+
+# The model said that no statement fits and nothing can be worked out: the knowledge has no statement for the request.
+@fp_no_statement integrity
+  never all
+    fp_statements_none ?qq
+    fp_main_query ?qq
+    fp_settled definition ?qq
+    absent fp_has_instances ?qq
+    absent fp_fewest_route ?qq
+  end
+  witness ?qq
+  message "no statement of the knowledge fits the request"
+
+# A quantified question whose statements do not split into the group (with a name) and what each member must have: the kind of
+# answer is asked again.
+@fp_every_unsplit integrity
+  never all
+    fp_query_kind ?qq every
+    fp_main_query ?qq
+    fp_places_done ?qq
+    absent fp_scope_split ?qq
+    absent fp_answered ask_kind_again none
+  end
+  witness ?qq
+  message "the statements of a quantified question do not name a group and what each member must have"

@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#pragmatic" target="_top">Wire index</a> · <a href="unparsed.html">unparsed</a> · <a href="stated.html">stated</a> · <a href="clarify.html">clarify</a> · <a href="small-model.html">model/host roles</a></p><h1><code>pragmatic</code></h1>
+<p>A <code>pragmatic</code> wire says <strong>what a message does besides asking or stating</strong>: a greeting, thanks, an apology, a goodbye, a polite word, an emotion such as frustration, confusion or grief, small talk, or a request to the assistant itself (how are you, tell me a joke, do you have feelings). Its kinds are <strong>memory data</strong> (since 2026-10-03): the message acts the reply memory declares (<code>cv_act</code>, <code>cv_act_group</code>, <code>cv_act_description</code>, <code>cv_act_example</code>, <code>cv_act_standalone</code>, <code>cv_act_span</code>, <code>cv_act_sets_slot</code>; <code>config/knowledge/conversation-v1/0005-acts.sop</code> and the small-talk collections), so a new act is a few facts and no code change. The formalizer writes it in the same understanding step as the query (LocalLLMStepByStep from its first question), with <code>basis llm</code>; there is no separate word list or pattern system (AGENTS.md "No hardcoded understanding"). A signal is the system's <strong>perception</strong> of the message, never a fact about the world, never evidence, never stored and never carried to a later turn.</p>
+<p>A message of courtesy or emotion only ("Hello!", "Thanks a lot!") is written as its pragmatic wires and nothing else (or with <code>unclear kind no_request</code>); the host answers it with a short reply rendered from the kinds, with no computation and no memory change (the conversation layer, <code>lib/conversation/</code>). Next to a query, the wires only set the tone of the answer: a courtesy phrase, an apology for the trouble after frustration, an offer to explain after confusion, a shorter answer under urgency. The runtime reports each wire in the packet as <code>{id, kind, score, span, near, source, basis}</code> and changes nothing else.</p>
+<h2>Every accepted keyword</h2><table><thead><tr><th>Keyword</th><th>Cardinality / default</th><th>Accepted value and concrete effect</th></tr></thead><tbody><tr><td id="field-kind"><code>kind</code></td><td>Exactly once; required</td><td>One lowercase symbol (<code>pragmatic_kind_form</code>) that the reply memory in use declares as a message act (<code>pragmatic_kind_unknown</code> otherwise). <code>conversation-v1</code> declares <code>greeting</code>, <code>closing</code>, <code>thanks</code>, <code>apology</code>, <code>politeness</code>, <code>introduction</code> (the user tells their name; its <code>span</code> is the name and fills the slot <code>user_name</code>), <code>urgency</code>, <code>frustration</code>, <code>anger</code>, <code>confusion</code>, <code>curiosity</code>, <code>joy</code>, <code>sadness</code>, <code>fear</code>, <code>disappointment</code>, <code>offensive</code>, <code>profanity</code>, <code>irony_possible</code>, <code>confirmation_request</code>, <code>topic_shift</code>, and <code>hedge</code>, <code>emphasis</code>, <code>unclassified</code> (valid, not asked). The chat's default reply memory adds the acts of the small-talk collections, such as <code>how_are_you</code>, <code>small_talk_weather</code>, <code>compliment</code>, <code>ask_joke</code>, <code>ask_riddle</code>, <code>grief</code>, <code>crisis</code>, <code>loneliness</code>, <code>stress</code>, <code>ask_identity</code>, <code>ask_feelings</code>, <code>ask_internet</code>, <code>ask_opinion</code>, <code>out_of_scope_task</code>, <code>manipulation</code>, <code>paradox</code> and <code>false_premise</code>.</td></tr><tr><td id="field-score"><code>score</code></td><td>At most once; default 1</td><td>The confidence as a decimal from 0 to 1 with at most three digits (<code>0.8</code>, <code>1</code>); <code>pragmatic_score_form</code> otherwise. Signals under 0.5 do not change the reply.</td></tr><tr><td id="field-span"><code>span</code></td><td>At most once; optional</td><td>One nonempty JSON-quoted <strong>verbatim</strong> part of the message, at most 200 characters, that carries the signal (<code>pragmatic_span_form</code>; a span that is not in the message fails admission with <code>pragmatic_span_not_in_message</code>). Without <code>span</code> the signal describes the whole message.</td></tr><tr><td id="field-near"><code>near</code></td><td>At most once; optional</td><td><code>near $id</code>: the wire the signal concerns (for example the query the frustration is about); one <code>$id</code> naming another, non-pragmatic wire of the same program (<code>pragmatic_near_unknown</code> otherwise).</td></tr><tr><td id="field-source"><code>source</code></td><td>At most once; optional</td><td>The id of the strategy that wrote the signal, lowercase letters, digits and underscore (<code>local_llm_step_by_step</code>); descriptive only.</td></tr><tr><td id="field-basis"><code>basis</code></td><td>Exactly once; required</td><td>How the signal was found, from a closed set: <code>llm</code> (the formalizer; what every strategy writes now), <code>classifier</code>, <code>lexicon</code> or <code>pattern</code> (kept for archived experiments). Descriptive only; the host never uses <code>basis</code> for trust.</td></tr></tbody></table>
+<h2>Courtesy around a question</h2><p class="example-message"><span class="lang">EN</span> “Hi! Could you please tell me where Ana works? Thanks a lot!”</p><pre data-sop="current"><code>@p1 pragmatic
+  kind greeting
+  span "Hi"
+  basis llm
+
+@q query
+  select ?x
+  where match
+    relation "works at"
+    role subject "Ana"
+    role object ?x
+    polarity affirmed
+  end
+
+@p2 pragmatic
+  kind thanks
+  span "Thanks a lot"
+  basis llm</code></pre><p>The question is formalized as usual; the greeting and the thanks open the answer with a courtesy phrase and ask for no computation of their own.</p>
+<h2>A message that is only a greeting</h2><p class="example-message"><span class="lang">EN</span> “Hello!”</p><pre data-sop="current"><code>@p1 pragmatic
+  kind greeting
+  span "Hello"
+  basis llm</code></pre><p>No query and no <code>unclear</code>: the host replies "Hello! What would you like to know?" and the turn computes nothing.</p>
+<h2>An emotion about the question</h2><p class="example-message"><span class="lang">EN</span> “I already asked this twice: who manages Laura?”</p><pre data-sop="current"><code>@q query
+  select ?x
+  where match
+    relation "manages"
+    role subject ?x
+    role object "Laura"
+    polarity affirmed
+  end
+
+@p1 pragmatic
+  kind frustration
+  score 0.8
+  span "I already asked this twice"
+  near $q
+  source local_llm_step_by_step
+  basis llm</code></pre><p>The answer opens with an apology for the trouble; the question itself is unchanged.</p>
+<h2>The user's name</h2><p class="example-message"><span class="lang">EN</span> “Hi, I'm Ioana.”</p><pre data-sop="current"><code>@p1 pragmatic
+  kind greeting
+  basis llm
+
+@p2 pragmatic
+  kind introduction
+  span "Ioana"
+  basis llm</code></pre><p>The act <code>introduction</code> copies the name as its span; the conversation keeps it, and the replies that name <code>{{user_name}}</code> become applicable ("Nice to meet you, Ioana!"); without a known name they are simply left out.</p>
+<h2>An unknown kind is rejected</h2><p>A kind the reply memory does not declare, such as the free label <code>annoyed</code>, is not a kind: declare it as an act of a conversation layer first.</p><pre data-sop="invalid" data-check="parse" data-error="pragmatic_kind_unknown"><code>@p1 pragmatic
+  kind annoyed
+  basis llm</code></pre>
+<h2>A score is a decimal from 0 to 1</h2><p>A confidence above 1 is rejected by the parser.</p><pre data-sop="invalid" data-check="parse" data-error="pragmatic_score_form"><code>@p1 pragmatic
+  kind thanks
+  score 2
+  basis llm</code></pre>
+<p><strong>Implementation sources:</strong> <code>sop/parser.mjs</code> (<code>SPEC.pragmatic</code>), <code>sop/message-acts.mjs</code> (<code>messageActs</code>: the acts of the reply memory), <code>sop/enums.mjs</code> (<code>PRAGMATIC_KIND_FORM</code>, <code>PRAGMATIC_BASES</code>), <code>sop/declarative.mjs</code> (<code>compileDeclarative</code>, <code>courtesyResult</code>), <code>sop/pragmatic-text.mjs</code> (reply and tone templates), <code>lib/query-author/admit.mjs</code> (verbatim span), <code>lib/query-author/step-by-step/protocol.mjs</code> (<code>firstQuestion</code>, <code>actQuestions</code>: the coarse and fine act questions, texts in <code>config/knowledge/formalizer-protocol-v1/0070-acts.sop</code>).</p></main><script type="module" src="help-page.mjs"></script></body></html>

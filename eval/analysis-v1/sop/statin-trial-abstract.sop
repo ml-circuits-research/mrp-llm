@@ -1,0 +1,86 @@
+# Hand-written SOP of documents/statin-trial-abstract.md.
+
+@st_age_min fact
+  holds lower_limit oldest_patient_age 18
+  quote "they were aged 18 to 65 years"
+  source "statin-trial-abstract.md, line 3"
+@st_age_max fact
+  holds upper_limit oldest_patient_age 65
+  quote "they were aged 18 to 65 years"
+  source "statin-trial-abstract.md, line 3"
+@st_enrolled fact
+  holds amount enrolled_patients 240
+  quote "We enrolled 240 patients"
+  source "statin-trial-abstract.md, line 5"
+@st_enrolled_unit fact
+  holds unit_of enrolled_patients patients
+  quote "We enrolled 240 patients"
+  source "statin-trial-abstract.md, line 5"
+@st_split fact
+  holds breakdown_complete enrolled_patients
+  quote "130 were assigned to the treatment group and 120 to the control group"
+  source "statin-trial-abstract.md, line 5"
+@st_treat_part fact
+  holds component_of treatment_group enrolled_patients
+  quote "130 were assigned to the treatment group"
+  source "statin-trial-abstract.md, line 5"
+@st_treat fact
+  holds amount treatment_group 130
+  quote "130 were assigned to the treatment group"
+  source "statin-trial-abstract.md, line 5"
+@st_treat_unit fact
+  holds unit_of treatment_group patients
+  quote "130 were assigned to the treatment group"
+  source "statin-trial-abstract.md, line 5"
+@st_ctrl_part fact
+  holds component_of control_group enrolled_patients
+  quote "120 to the control group"
+  source "statin-trial-abstract.md, line 5"
+@st_ctrl fact
+  holds amount control_group 120
+  quote "120 to the control group"
+  source "statin-trial-abstract.md, line 5"
+@st_ctrl_unit fact
+  holds unit_of control_group patients
+  quote "120 to the control group"
+  source "statin-trial-abstract.md, line 5"
+@st_treat_share fact
+  holds share_of treatment_group enrolled_patients 54
+  quote "Treatment-group patients made up 54% of the enrolled patients."
+  source "statin-trial-abstract.md, line 6"
+@st_start fact
+  holds starts_on trial 20230301
+  quote "The trial ran from 2023-03-01 to 2022-11-30."
+  source "statin-trial-abstract.md, line 7"
+@st_end fact
+  holds ends_on trial 20221130
+  quote "The trial ran from 2023-03-01 to 2022-11-30."
+  source "statin-trial-abstract.md, line 7"
+@st_oldest fact
+  holds amount oldest_patient_age 71
+  quote "The oldest enrolled patient was 71 years old."
+  source "statin-trial-abstract.md, line 7"
+@st_oldest_unit fact
+  holds unit_of oldest_patient_age years
+  quote "The oldest enrolled patient was 71 years old."
+  source "statin-trial-abstract.md, line 7"
+@st_resp_treat fact
+  holds amount response_rate_treatment 45
+  quote "The response rate was 45% in the treatment group"
+  source "statin-trial-abstract.md, line 9"
+@st_resp_treat_unit fact
+  holds unit_of response_rate_treatment percent
+  quote "The response rate was 45% in the treatment group"
+  source "statin-trial-abstract.md, line 9"
+@st_resp_ctrl fact
+  holds amount response_rate_control 30
+  quote "30% in the control group"
+  source "statin-trial-abstract.md, line 9"
+@st_resp_ctrl_unit fact
+  holds unit_of response_rate_control percent
+  quote "30% in the control group"
+  source "statin-trial-abstract.md, line 9"
+@st_claim fact
+  holds claim_rests_on varostatin_reduces_mortality lower_mortality_in_treatment
+  quote "Since mortality was lower in the treatment group, this demonstrates that Varostatin reduces mortality after infarction."
+  source "statin-trial-abstract.md, line 11"

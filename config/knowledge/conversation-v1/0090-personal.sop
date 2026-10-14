@@ -1,0 +1,181 @@
+# conversation-v1: personalisation and register (P-2.2 and P-2.3, owner request of 2026-10-03; DS023 "Conversation layer").
+# - The user's name: the act `introduction` copies the name the user gives (0005-acts.sop: cv_act_span, cv_act_sets_slot user_name); the
+#   runtime keeps it in the conversation's behaviour state and writes cv_turn_user_name and the slot user_name on every later turn.
+# - The time of day: the runtime writes cv_turn_time_of_day PART from the turn's clock and the cv_day_part_starts data below, and the
+#   slot time_of_day.
+# - A reply that names a slot the turn cannot fill is not applicable (0010-situations.sop cv_r_unfillable): the personal variants are
+#   left out when the name or the time is unknown, and the turn never fails for them.
+# - The register: an instruction of a register kind (formal, playful) makes cv_register hold for the conversation; the register
+#   collections (smalltalk-professional-v1, smalltalk-playful-v1) derive their variant situations only while it holds. A deployment
+#   that always wants one register adds a layer with a rule `when cv_turn_language ?l` `then cv_register formal`.
+# - Ties: a personal variant has the priority of the situation it refines and outranks it (cv_situation_outranks).
+
+# --- the parts of the day (hours of the turn's clock) and the ones a greeting may name
+@cv_dp1 fact
+  holds cv_day_part_starts morning 5
+@cv_dp2 fact
+  holds cv_day_part_starts afternoon 12
+@cv_dp3 fact
+  holds cv_day_part_starts evening 18
+@cv_dp4 fact
+  holds cv_day_part_starts night 22
+@cv_dg1 fact
+  holds cv_greeting_day_part morning
+@cv_dg2 fact
+  holds cv_greeting_day_part afternoon
+@cv_dg3 fact
+  holds cv_greeting_day_part evening
+
+# --- the register of the conversation
+@cv_rk1 fact
+  holds cv_register_kind formal
+@cv_rk2 fact
+  holds cv_register_kind playful
+
+@cv_r_register rule
+  when cv_instruction_active ?k
+  when cv_register_kind ?k
+  then cv_register ?k
+
+# --- the user's name
+@cv_p_introduction fact
+  holds cv_courtesy_situation introduction courtesy_introduction
+@cv_p_introduction_named fact
+  holds cv_courtesy_situation introduction courtesy_introduction_named
+@cv_pp1 fact
+  holds cv_situation_priority courtesy_introduction 69
+@cv_pp2 fact
+  holds cv_situation_priority courtesy_introduction_named 70
+
+@cv_r_greeting_named rule
+  when cv_courtesy_only
+  when cv_turn_signal greeting
+  when cv_turn_user_name
+  then cv_applies courtesy_greeting_named
+@cv_pp3 fact
+  holds cv_situation_priority courtesy_greeting_named 69
+@cv_po2 fact
+  holds cv_situation_outranks courtesy_greeting_named courtesy_introduction
+
+@cv_r_open_greeting_named rule
+  when cv_turn_signal greeting
+  when absent cv_courtesy_only
+  when cv_turn_user_name
+  then cv_applies open_greeting_named
+@cv_pp4 fact
+  holds cv_situation_priority open_greeting_named 31
+@cv_po3 fact
+  holds cv_situation_outranks open_greeting_named open_greeting_again
+
+@cv_r_closing_named rule
+  when cv_courtesy_only
+  when cv_turn_signal closing
+  when cv_turn_user_name
+  then cv_applies courtesy_closing_named
+@cv_pp5 fact
+  holds cv_situation_priority courtesy_closing_named 65
+@cv_po4 fact
+  holds cv_situation_outranks courtesy_closing_named courtesy_closing
+
+@cv_r_close_goodbye_named rule
+  when cv_turn_signal closing
+  when absent cv_courtesy_only
+  when cv_turn_user_name
+  then cv_applies close_goodbye_named
+@cv_pp6 fact
+  holds cv_situation_priority close_goodbye_named 30
+@cv_po5 fact
+  holds cv_situation_outranks close_goodbye_named close_goodbye
+
+# --- the time of day in the first greeting of a conversation (morning, afternoon, evening; never "good night" as a greeting)
+@cv_r_greeting_first_timed rule
+  when cv_courtesy_only
+  when cv_turn_signal greeting
+  when cv_turn_number 1
+  when cv_turn_topics
+  when cv_turn_time_of_day ?p
+  when cv_greeting_day_part ?p
+  then cv_applies courtesy_greeting_first_timed
+@cv_pp7 fact
+  holds cv_situation_priority courtesy_greeting_first_timed 68
+@cv_po6 fact
+  holds cv_situation_outranks courtesy_greeting_first_timed courtesy_greeting_first
+
+
+# --- reaction kinds: the personal greetings count as greetings for "greeting again"
+@cv_prk1 fact
+  holds cv_reaction_kind courtesy_greeting_named greeting
+@cv_prk2 fact
+  holds cv_reaction_kind courtesy_introduction_named greeting
+@cv_prk3 fact
+  holds cv_reaction_kind open_greeting_named greeting
+@cv_prk4 fact
+  holds cv_reaction_kind courtesy_greeting_first_timed greeting
+
+# --- replies
+@cv_courtesy_introduction_1 reply
+  situation courtesy_introduction
+  part body
+  language en
+  text "Nice to meet you! I'm MRP-LLM. What would you like to know?"
+
+@cv_courtesy_introduction_named_1 reply
+  situation courtesy_introduction_named
+  part body
+  language en
+  text "Nice to meet you, {{user_name}}! I'm MRP-LLM; I answer from a memory of facts and rules. What would you like to know?"
+
+@cv_courtesy_introduction_named_2 reply
+  situation courtesy_introduction_named
+  part body
+  language en
+  text "Hello, {{user_name}}, nice to meet you. I'm MRP-LLM. What can I look up for you?"
+
+@cv_courtesy_greeting_named_1 reply
+  situation courtesy_greeting_named
+  part body
+  language en
+  text "Hello, {{user_name}}! What would you like to know?"
+
+@cv_courtesy_greeting_named_2 reply
+  situation courtesy_greeting_named
+  part body
+  language en
+  text "Hi {{user_name}}! What can I do for you?"
+
+@cv_open_greeting_named_1 reply
+  situation open_greeting_named
+  part opening
+  language en
+  text "Hello, {{user_name}}!"
+
+@cv_courtesy_closing_named_1 reply
+  situation courtesy_closing_named
+  part body
+  language en
+  text "Goodbye, {{user_name}}! Come back any time."
+
+@cv_close_goodbye_named_1 reply
+  situation close_goodbye_named
+  part closing
+  language en
+  text "Goodbye, {{user_name}}!"
+
+@cv_courtesy_greeting_first_timed_1 reply
+  situation courtesy_greeting_first_timed
+  part body
+  language en
+  text "Good {{time_of_day}}! I'm MRP-LLM. I answer from a memory of facts and rules; I know most about {{topics}}. What would you like to know?"
+
+# --- the register instructions as the renderer names them (instruction set, cancelled, listed)
+@cv_line_instruction_formal reply
+  situation line_instruction_formal
+  part line
+  language en
+  text "answer in a formal, professional tone"
+
+@cv_line_instruction_playful reply
+  situation line_instruction_playful
+  part line
+  language en
+  text "answer in a playful, light tone"

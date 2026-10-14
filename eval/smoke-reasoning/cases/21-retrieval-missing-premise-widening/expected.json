@@ -1,0 +1,14 @@
+{
+  "feature": "Memory at scale: the first slice fails, the missing predicate is named and retrieved",
+  "status": "supported",
+  "complete": true,
+  "retrieval": {
+    "max_wires": 40,
+    "needed_recall": 1,
+    "min_steps": 2
+  },
+  "requires": [
+    "rules",
+    "retrieval"
+  ]
+}

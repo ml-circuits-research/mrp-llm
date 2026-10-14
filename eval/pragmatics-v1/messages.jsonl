@@ -1,0 +1,300 @@
+{"id":"emo-001","source":"bad_english","message":"Mersi anticipat. With at most 38 orders and a minimum of 5, must there be over 7?","positive":["thanks"],"disputed":[]}
+{"id":"emo-002","source":"bad_english","message":"Afla, te rog, cine e antrenorul de la CS Arad.","positive":["politeness"],"disputed":[]}
+{"id":"emo-003","source":"bad_english","message":"Spune-mi dacă Tisa Textile nu vinde mâncare pentru bebeluși.","positive":[],"disputed":[]}
+{"id":"emo-004","source":"bad_english","message":"we need more paperbags for the till","positive":[],"disputed":[]}
+{"id":"emo-005","source":"bad_english","message":"Pregătesc onboarding-ul de luni. Cine antrenează echipa la care joacă Ștefania Mureșan?","positive":[],"disputed":[]}
+{"id":"emo-006","source":"bad_english","message":"Întrebare rapidă: câte cărți a împrumutat Laura?","positive":["urgency"],"disputed":[]}
+{"id":"emo-007","source":"bad_english","message":"Am nevoie să știu dacă Małgorzata vrea să se mute în Vaslui.","positive":[],"disputed":[]}
+{"id":"emo-008","source":"bad_english","message":"Haruka is tteated by Jürgen. Honestly, is she treated by Jürgen?","positive":[],"disputed":["curiosity","confirmation_request"]}
+{"id":"emo-009","source":"bad_english","message":"Chioma și Rohan au cumpărat împreună Dacia roșie. Chioma o deține pe Dacia roșie?","positive":[],"disputed":[]}
+{"id":"emo-010","source":"bad_english","message":"Hypotetically, if Ștefania wasn't trainee, does she have access to the lab?","positive":[],"disputed":[]}
+{"id":"emo-011","source":"bad_english","message":"Who treats a patient with an allergy to căpșuni?","positive":[],"disputed":[]}
+{"id":"emo-012","source":"bad_english","message":"Is it correct thsat Pablo is allergic to gluten? Also,is it correct that he is the author of Winter in Maramureș ?","positive":[],"disputed":["confirmation_request"]}
+{"id":"emo-013","source":"bad_english","message":"Se poate confirma că Harry nu are grijă de baza de date de salarizare?","positive":[],"disputed":["confirmation_request"]}
+{"id":"emo-014","source":"bad_english","message":"Background: Bianca raises Dragoș. Question: Just checing: is Floarea a parent of Dragoș ?","positive":[],"disputed":["hedge"]}
+{"id":"emo-015","source":"bad_english","message":"De câte ori în total a fost Roxana Stan bolnavă?","positive":[],"disputed":[]}
+{"id":"emo-016","source":"bad_english","message":"Când anume a fost Dimitra căsătorită cu Youssef Mansour?","positive":[],"disputed":[]}
+{"id":"emo-017","source":"bad_english","message":"Din ce an se Sophie ocula de Beetle-ul de epoca","positive":[],"disputed":[]}
+{"id":"emo-018","source":"bad_english","message":"Agnieszka Krawczyk zice că vrea să se mute în Bacău. She plans to leave Tisa Textiles?","positive":[],"disputed":[]}
+{"id":"emo-019","source":"bad_english","message":"Deci, Diana e antrenoarea de la Soimii din Slatina. Verifica, te rog, dafa e certificata .","positive":["politeness"],"disputed":["confirmation_request"]}
+{"id":"emo-020","source":"bad_english","message":"API-ul de inventar e căzut. Vreau să știu din cauza cărui sistem a căzut.","positive":[],"disputed":["urgency","frustration"]}
+{"id":"emo-021","source":"bad_english","message":"Ogher tuan Hassan Mansour, telll me who has a job at Carpathia Energy.","positive":[],"disputed":[]}
+{"id":"emo-022","source":"bad_english","message":"Is their somebody at Delta Print who works there and lives in Botoșani","positive":[],"disputed":[]}
+{"id":"emo-023","source":"bad_english","message":"Ok super, merdci","positive":["thanks"],"disputed":["joy"]}
+{"id":"emo-024","source":"bad_english","message":"Dat fiind că Kenji predă chimie, Aurel ține ore de chimie?","positive":[],"disputed":[]}
+{"id":"emo-025","source":"bad_english","message":"Dar cu Viorica Moldovan cum rămâne?","positive":[],"disputed":[]}
+{"id":"emo-026","source":"bad_english","message":"Is everybody wrking for Delta Print traied?","positive":[],"disputed":[]}
+{"id":"emo-027","source":"bad_english","message":"Ipotetic, dacă Javier a fost instruit, he is cleared for thelab?","positive":["hedge"],"disputed":[]}
+{"id":"emo-028","source":"bad_english","message":"Toti ele vii de la Scoala Primara Kovacs nu s-au vaccinat?","positive":[],"disputed":[]}
+{"id":"emo-029","source":"bad_english","message":"Vasile când a stat în Chișinău?","positive":[],"disputed":[]}
+{"id":"emo-030","source":"bad_english","message":"Există cineva care învață la Liceul de Arte din Vaslui și nu e vaccinat?","positive":[],"disputed":[]}
+{"id":"emo-031","source":"neuro_english","message":"Hi! Ruxandra handed in her notice. Who did she quit because of?","positive":["greeting"],"disputed":[]}
+{"id":"emo-032","source":"neuro_english","message":"Can you tell me where Carpathia Energy is?","positive":[],"disputed":["politeness"]}
+{"id":"emo-033","source":"neuro_english","message":"Could you check if Petru attends classes at Craiova Arts High School?","positive":["politeness"],"disputed":[]}
+{"id":"emo-034","source":"neuro_english","message":"Does Eden Park have the folder A Day at Home?","positive":[],"disputed":[]}
+{"id":"emo-035","source":"neuro_english","message":"Are all the students at the Oradea Language School not vaccinated?","positive":[],"disputed":[]}
+{"id":"emo-036","source":"neuro_english","message":"Paweł Nowak works under Emil Ionescu. — he works under Emil Ionescu?","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-037","source":"neuro_english","message":"Does Quang not take part in the spring book fair?","positive":[],"disputed":[]}
+{"id":"emo-038","source":"neuro_english","message":"Since the junior semifinal and our training slot overlap on Tuesday, I asked Oskar Kowalski to move the cones off court 2 before the visiting team arrives, but he has not replied yet.","positive":[],"disputed":[]}
+{"id":"emo-039","source":"neuro_english","message":"flat tasks: 1. photograph the cracked window 2. tell the agent about the loose handle","positive":[],"disputed":[]}
+{"id":"emo-040","source":"neuro_english","message":"Can you check whether Cristina coaches the Zalău Falcons and she visits Slatina?","positive":[],"disputed":["politeness"]}
+{"id":"emo-041","source":"neuro_english","message":"did CI pass and who merged","positive":[],"disputed":[]}
+{"id":"emo-042","source":"neuro_english","message":"What is 5% of 5600 lei?","positive":[],"disputed":[]}
+{"id":"emo-043","source":"neuro_english","message":"Some of the cabbage heads arrived wet, but the outer leaves are dry now and Yasmin has not decided whether to display them.","positive":[],"disputed":[]}
+{"id":"emo-044","source":"neuro_english","message":"Okay so Sorin is the doctor of Jun. Tell me whether he is the coach of Cluj-Napoca United.","positive":[],"disputed":[]}
+{"id":"emo-045","source":"neuro_english","message":"Is anyone who reports to Chioma based in Bacău?","positive":[],"disputed":[]}
+{"id":"emo-046","source":"neuro_english","message":"Just checking: did Marius take part in the spring book fair?","positive":[],"disputed":[]}
+{"id":"emo-047","source":"neuro_english","message":"Liam and Mateo bought the flat on Mihai Viteazu Street together. Does Liam own the flat on Mihai Viteazu Street?","positive":[],"disputed":[]}
+{"id":"emo-048","source":"neuro_english","message":"none of the minibar items were ours is that correct","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-049","source":"neuro_english","message":"who did Sorin borrow the mill plan from?","positive":[],"disputed":[]}
+{"id":"emo-050","source":"neuro_english","message":"Does the fort open at 08:30 on 15 August or at 09:30?","positive":[],"disputed":[]}
+{"id":"emo-051","source":"neuro_english","message":"equipment plan: unpack Zara's receivers; count the batteries; return the borrowed monitor","positive":[],"disputed":[]}
+{"id":"emo-052","source":"neuro_english","message":"This purple looks closer to the approved swatch, but what reference did Octavian match it against when he prepared the final proof for the retailer?","positive":[],"disputed":[]}
+{"id":"emo-053","source":"neuro_english","message":"Can you explain why Beatriz qualifies for the bonus?","positive":[],"disputed":[]}
+{"id":"emo-054","source":"neuro_english","message":"After the rain stopped, Dalia checked the outdoor sculpture route for our visitors.","positive":[],"disputed":[]}
+{"id":"emo-055","source":"neuro_english","message":"I use a wheelchair, and I can cross the courtyard when the tactile paving is clear, but a parked van currently blocks the crossing near reception.","positive":[],"disputed":[]}
+{"id":"emo-056","source":"neuro_english","message":"who was the family update written by last night","positive":[],"disputed":[]}
+{"id":"emo-057","source":"neuro_english","message":"Given that the Botanical Garden in Nairobi is closed, do you know what it is closed for?","positive":[],"disputed":[]}
+{"id":"emo-058","source":"neuro_english","message":"Given that Rubina studies at Constanța Arts High School, and Léa studies at Iași Music Academy, is it correct that she is the owner of the bakery on the corner?","positive":[],"disputed":[]}
+{"id":"emo-059","source":"neuro_english","message":"The limitation period for a simple breach of contract claim is six years, right?","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-060","source":"neuro_english","message":"Just checking: does Ayşe get the flu shot?","positive":[],"disputed":["curiosity"]}
+{"id":"emo-061","source":"symbolic_english","message":"Is there somebody at Greenline Transport who works there and lives in Leeds?","positive":[],"disputed":[]}
+{"id":"emo-062","source":"symbolic_english","message":"I was wondering whether Réka Kovács works under Mircea Enache.","positive":["curiosity"],"disputed":[]}
+{"id":"emo-063","source":"symbolic_english","message":"And Layla Constantinescu?","positive":[],"disputed":[]}
+{"id":"emo-064","source":"symbolic_english","message":"Tell me when Xiaoling taught biology.","positive":[],"disputed":[]}
+{"id":"emo-065","source":"symbolic_english","message":"How often was the photography workshop postponed?","positive":[],"disputed":[]}
+{"id":"emo-066","source":"symbolic_english","message":"Can you count how many times Iurie was absent from work?","positive":[],"disputed":["politeness"]}
+{"id":"emo-067","source":"symbolic_english","message":"I wonder why Moritz handed in his notice.","positive":["curiosity"],"disputed":[]}
+{"id":"emo-068","source":"symbolic_english","message":"After Victor handed over the access keys, I compared the seal numbers with the log, locked the cabinet, and told Samira that one tag was missing.","positive":[],"disputed":[]}
+{"id":"emo-069","source":"symbolic_english","message":"Tell me whether Takumi Sato plays for the Leeds Falcons. Also, was The Last Ferry written by Takumi Sato?","positive":[],"disputed":[]}
+{"id":"emo-070","source":"symbolic_english","message":"I need to know if Linh is treated by Ionuț.","positive":[],"disputed":[]}
+{"id":"emo-071","source":"symbolic_english","message":"Can you confirm that Seo-yeon is the spouse of Dimitra Papadopoulos?","positive":[],"disputed":["politeness","confirmation_request"]}
+{"id":"emo-072","source":"symbolic_english","message":"Does João manage anyone who lives in Pitești?","positive":[],"disputed":[]}
+{"id":"emo-073","source":"symbolic_english","message":"Who has The Clockmaker's Daughter?","positive":[],"disputed":[]}
+{"id":"emo-074","source":"symbolic_english","message":"Did Stefan order the leaflets, and has Bianca booked the outreach room?","positive":[],"disputed":[]}
+{"id":"emo-075","source":"symbolic_english","message":"before the spelling test starts will the children see an example","positive":[],"disputed":[]}
+{"id":"emo-076","source":"symbolic_english","message":"not all of the cousins have replied to the reunion invitation right","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-077","source":"symbolic_english","message":"Javier handed in his notice. — he quit because of Layla Nasser?","positive":[],"disputed":["curiosity"]}
+{"id":"emo-078","source":"symbolic_english","message":"Lavinia approved the gallery.","positive":[],"disputed":[]}
+{"id":"emo-079","source":"symbolic_english","message":"Paweł and Dorin bought the blue van together. Does Paweł own the blue van?","positive":[],"disputed":[]}
+{"id":"emo-080","source":"symbolic_english","message":"Omar is responsible for the backup cluster. Is it correct that he maintains the backup cluster?","positive":[],"disputed":["confirmation_request"]}
+{"id":"emo-081","source":"symbolic_english","message":"Hi! Olena checked out Notes from the Night Train; she does not borrow Notes from the Night Train. I need to know if she borrowed Notes from the Night Train.","positive":["greeting"],"disputed":[]}
+{"id":"emo-082","source":"symbolic_english","message":"Is there anyone who works at Delta Print and lives in Lyon?","positive":[],"disputed":[]}
+{"id":"emo-083","source":"symbolic_english","message":"Please ask Dimitra Pappas to cover the 8 a.m. Pilates class.","positive":["politeness"],"disputed":[]}
+{"id":"emo-084","source":"symbolic_english","message":"Good evening, this is fun!","positive":["greeting","joy"],"disputed":[]}
+{"id":"emo-085","source":"symbolic_english","message":"Can Bojan enter the hall and can he use the rear lift?","positive":[],"disputed":[]}
+{"id":"emo-086","source":"symbolic_english","message":"Given that Aurel is a parent of Quang, can you confirm that he has an allergy to bee stings?","positive":[],"disputed":["confirmation_request"]}
+{"id":"emo-087","source":"symbolic_english","message":"How does Emre go to work?","positive":[],"disputed":[]}
+{"id":"emo-088","source":"symbolic_english","message":"because the first proof was printed on smooth paper and the final order uses rough paper, can the shop show Kiran a test of the small grey text before running all the pages?","positive":[],"disputed":[]}
+{"id":"emo-089","source":"symbolic_english","message":"Is Oluwaseun still playing for the Slatina Wolves?","positive":[],"disputed":[]}
+{"id":"emo-090","source":"symbolic_english","message":"Out of curiosity, where did Hiroshi travel?","positive":["curiosity"],"disputed":[]}
+{"id":"emo-091","source":"new_cases","message":"quick q did Radu approve the glossary","positive":[],"disputed":["urgency"]}
+{"id":"emo-092","source":"new_cases","message":"lol camera went black","positive":[],"disputed":[]}
+{"id":"emo-093","source":"new_cases","message":"pls leave the keys here thx","positive":["thanks","politeness"],"disputed":[]}
+{"id":"emo-094","source":"new_cases","message":"so i guess Arman left his rain boots by the garden gate","positive":[],"disputed":["hedge"]}
+{"id":"emo-095","source":"new_cases","message":"quick q does Zara want the stamped translation today","positive":["urgency"],"disputed":["curiosity"]}
+{"id":"emo-096","source":"new_cases","message":"just checking did Nadia give you the coins for the class trip","positive":[],"disputed":[]}
+{"id":"emo-097","source":"new_cases","message":"quick q is the meter on","positive":["urgency"],"disputed":[]}
+{"id":"emo-098","source":"new_cases","message":"hiya can you check if the clinic has spare consent forms","positive":["greeting"],"disputed":[]}
+{"id":"emo-099","source":"new_cases","message":"pls keep this cheese chilled","positive":["politeness"],"disputed":[]}
+{"id":"emo-100","source":"new_cases","message":"so uh is the toll already in Denise's fare or nah?","positive":[],"disputed":[]}
+{"id":"emo-101","source":"new_cases","message":"quick thing does the excess go up if i claim twice","positive":["urgency"],"disputed":[]}
+{"id":"emo-102","source":"new_cases","message":"pls send the orange mockup","positive":["politeness"],"disputed":[]}
+{"id":"emo-103","source":"new_cases","message":"hey did Delia get the class photo today","positive":["greeting"],"disputed":[]}
+{"id":"emo-104","source":"new_cases","message":"hey my passenger Yelena left a hat in the rear seat after the station trip and the next rider found it, so can someone keep the hat at the dispatch office?","positive":[],"disputed":["greeting","politeness"]}
+{"id":"emo-105","source":"new_cases","message":"fyi the small boxes are sold out till next week","positive":[],"disputed":[]}
+{"id":"emo-106","source":"new_cases","message":"Please tell Yara the temparature reading is in the blue notebook.","positive":["politeness"],"disputed":[]}
+{"id":"emo-107","source":"new_cases","message":"The room is reserved and the chairs arrived but the projector is still missing.","positive":[],"disputed":[]}
+{"id":"emo-108","source":"new_cases","message":"The vacination record for Ștefan wasnt attached to the clinic file.","positive":[],"disputed":[]}
+{"id":"emo-109","source":"new_cases","message":"Blue or silver backdrop.","positive":[],"disputed":[]}
+{"id":"emo-110","source":"new_cases","message":"No volunteer said that the desk was closed.","positive":[],"disputed":[]}
+{"id":"emo-111","source":"new_cases","message":"Does Amira know whether the service berth by the north gate has reliable shore power? Can she check the breaker before Ilyas brings the survey boat alongside?","positive":[],"disputed":[]}
+{"id":"emo-112","source":"new_cases","message":"Before the afternoon appointments begin, please check the spare gloves in every room, especially the boxes beside the examination beds, and tell the shift lead if any box is nearly empty.","positive":["politeness"],"disputed":["urgency"]}
+{"id":"emo-113","source":"new_cases","message":"the account is unlocked but the token is expired and the sign-in screen still says \"Try again\" and Gábor requested another code and the code never reached his phone","positive":[],"disputed":["frustration"]}
+{"id":"emo-114","source":"new_cases","message":"For Thursday's visit, does the fossil workshop start before the regular tour; does the workshop begin at 11:00, can the pupils store their bags, and who is their guide?","positive":[],"disputed":[]}
+{"id":"emo-115","source":"new_cases","message":"Version 3.8 writes the audit event before the transaction commits.","positive":[],"disputed":[]}
+{"id":"emo-116","source":"new_cases","message":"unless Elif finds her card she will miss the game","positive":[],"disputed":[]}
+{"id":"emo-117","source":"new_cases","message":"Can Şahin asked whether the new bottle needs a child-resistant cap.","positive":[],"disputed":[]}
+{"id":"emo-118","source":"new_cases","message":"Elif scanned package ZQ-12.","positive":[],"disputed":[]}
+{"id":"emo-119","source":"new_cases","message":"Elena asked for a duplicate certificate and the clerk gave her a payment slip and the bank confirmed her transfer, yet the email says the fee is missing and she cannot book a collection slot.","positive":[],"disputed":[]}
+{"id":"emo-120","source":"handwritten","message":"Hello! Does Maria still work at Alpha Lab?","positive":["greeting"],"disputed":[]}
+{"id":"emo-121","source":"handwritten","message":"Good morning, could you tell me who manages the Delta Project?","positive":["greeting","politeness"],"disputed":[]}
+{"id":"emo-122","source":"handwritten","message":"Hey there, quick one: where is the ECG cart kept?","positive":["greeting","urgency"],"disputed":[]}
+{"id":"emo-123","source":"handwritten","message":"Thanks, that helps. Now, who leads the choir?","positive":["thanks","topic_shift"],"disputed":[]}
+{"id":"emo-124","source":"handwritten","message":"Thank you so much for the answer, I really appreciate it.","positive":["thanks"],"disputed":["joy","emphasis"]}
+{"id":"emo-125","source":"handwritten","message":"Many thanks! Bye for now.","positive":["closing","thanks"],"disputed":[]}
+{"id":"emo-126","source":"handwritten","message":"Sorry to bother you again, but which town is Elif based in?","positive":["apology"],"disputed":["politeness"]}
+{"id":"emo-127","source":"handwritten","message":"My apologies, I meant the other Sibiu. Does Ana live there?","positive":["apology"],"disputed":["confirmation_request"]}
+{"id":"emo-128","source":"handwritten","message":"Excuse me, is Nils a member of the Madrigal choir?","positive":["politeness"],"disputed":["curiosity"]}
+{"id":"emo-129","source":"handwritten","message":"Please tell me when the clinic opens.","positive":["politeness"],"disputed":[]}
+{"id":"emo-130","source":"handwritten","message":"Would you mind checking whether Jack manages Laura?","positive":["politeness"],"disputed":[]}
+{"id":"emo-131","source":"handwritten","message":"If you do not mind, which team does Karim belong to?","positive":["politeness"],"disputed":[]}
+{"id":"emo-132","source":"handwritten","message":"Good night, see you tomorrow.","positive":["closing"],"disputed":[]}
+{"id":"emo-133","source":"handwritten","message":"That is all for now, take care!","positive":["closing"],"disputed":[]}
+{"id":"emo-134","source":"handwritten","message":"Cheers, talk to you later.","positive":["closing"],"disputed":[]}
+{"id":"emo-135","source":"handwritten","message":"I need the delivery address ASAP, the truck leaves in ten minutes.","positive":["urgency"],"disputed":[]}
+{"id":"emo-136","source":"handwritten","message":"Urgent: who is on call at the pharmacy right now?","positive":["urgency"],"disputed":[]}
+{"id":"emo-137","source":"handwritten","message":"Quickly, which gate is flight 220 leaving from?","positive":["urgency"],"disputed":["politeness"]}
+{"id":"emo-138","source":"handwritten","message":"Hurry up, the deadline is in an hour and I still need the budget owner.","positive":["urgency"],"disputed":[]}
+{"id":"emo-139","source":"handwritten","message":"Please answer immediately: is the warehouse open today?","positive":["politeness","urgency"],"disputed":[]}
+{"id":"emo-140","source":"handwritten","message":"This is an emergency, where is the nearest defibrillator?","positive":["urgency"],"disputed":["politeness"]}
+{"id":"emo-141","source":"handwritten","message":"I think Maria works at Alpha Lab.","positive":["hedge"],"disputed":[]}
+{"id":"emo-142","source":"handwritten","message":"Maybe Jack manages Laura, I am not sure.","positive":["hedge"],"disputed":[]}
+{"id":"emo-143","source":"handwritten","message":"Perhaps the meeting is on Tuesday?","positive":[],"disputed":["hedge"]}
+{"id":"emo-144","source":"handwritten","message":"It seems that Nils rents the blue van.","positive":[],"disputed":["hedge"]}
+{"id":"emo-145","source":"handwritten","message":"I guess Ana lives in Cluj, but I could be wrong.","positive":["hedge"],"disputed":[]}
+{"id":"emo-146","source":"handwritten","message":"Probably the clinic opens at nine.","positive":["hedge"],"disputed":[]}
+{"id":"emo-147","source":"handwritten","message":"As far as I know, Karim leads the Delta Project.","positive":["hedge"],"disputed":[]}
+{"id":"emo-148","source":"handwritten","message":"Apparently the bakery closed last year.","positive":[],"disputed":["hedge"]}
+{"id":"emo-149","source":"handwritten","message":"Ugh, again? Why does it still not show the schedule?","positive":["frustration"],"disputed":[]}
+{"id":"emo-150","source":"handwritten","message":"This is so frustrating, I already asked this three times!","positive":["frustration"],"disputed":["emphasis"]}
+{"id":"emo-151","source":"handwritten","message":"Come on, I told you the name was Elif, not Elisa.","positive":["frustration"],"disputed":[]}
+{"id":"emo-152","source":"handwritten","message":"I am furious, you got it wrong again.","positive":["frustration","anger"],"disputed":[]}
+{"id":"emo-153","source":"handwritten","message":"This is unacceptable, the answer contradicts what I said a minute ago.","positive":["frustration"],"disputed":["anger","emphasis"]}
+{"id":"emo-154","source":"handwritten","message":"I expected better from this assistant, honestly.","positive":["disappointment"],"disputed":[]}
+{"id":"emo-155","source":"handwritten","message":"What a pity, I hoped the clinic would be open on Sunday.","positive":["disappointment"],"disputed":["sadness"]}
+{"id":"emo-156","source":"handwritten","message":"I am disappointed, the list is still incomplete.","positive":["disappointment"],"disputed":[]}
+{"id":"emo-157","source":"handwritten","message":"For the last time, Nils works at Alpha Lab!!","positive":["frustration","emphasis"],"disputed":[]}
+{"id":"emo-158","source":"handwritten","message":"I am confused, what do you mean by \"reports to\"?","positive":["confusion"],"disputed":[]}
+{"id":"emo-159","source":"handwritten","message":"I do not understand why Ana appears twice in the answer.","positive":["confusion"],"disputed":[]}
+{"id":"emo-160","source":"handwritten","message":"Huh? That makes no sense.","positive":["confusion"],"disputed":[]}
+{"id":"emo-161","source":"handwritten","message":"Just curious, how many people sing in the choir?","positive":["curiosity"],"disputed":[]}
+{"id":"emo-162","source":"handwritten","message":"I wonder who founded the Madrigal choir.","positive":["curiosity"],"disputed":[]}
+{"id":"emo-163","source":"handwritten","message":"Out of curiosity, what is the oldest building in Sibiu?","positive":["curiosity"],"disputed":[]}
+{"id":"emo-164","source":"handwritten","message":"Yay, the clinic is open on Sunday!","positive":["joy"],"disputed":[]}
+{"id":"emo-165","source":"handwritten","message":"I am so happy, Ana got the job at Alpha Lab!","positive":["joy"],"disputed":[]}
+{"id":"emo-166","source":"handwritten","message":"That is great news, congratulations to the whole team.","positive":["joy"],"disputed":[]}
+{"id":"emo-167","source":"handwritten","message":"I am so sad, my dog passed away this morning. Can you recommend a quiet park?","positive":["sadness"],"disputed":[]}
+{"id":"emo-168","source":"handwritten","message":"I feel lonely since I moved to Cluj; which clubs are nearby?","positive":["sadness"],"disputed":["curiosity"]}
+{"id":"emo-169","source":"handwritten","message":"I am scared that the exam results are wrong, who can check them?","positive":["fear"],"disputed":[]}
+{"id":"emo-170","source":"handwritten","message":"I am really worried about the flood, which roads are closed?","positive":["fear"],"disputed":["urgency"]}
+{"id":"emo-171","source":"handwritten","message":"Help me, I think I am lost, where is the station?","positive":["hedge"],"disputed":["politeness"]}
+{"id":"emo-172","source":"handwritten","message":"What the hell is wrong with this schedule?","positive":["frustration","profanity"],"disputed":[]}
+{"id":"emo-173","source":"handwritten","message":"This is bullshit, Nils never worked there.","positive":["frustration"],"disputed":["profanity","offensive"]}
+{"id":"emo-174","source":"handwritten","message":"Damn it, the file is missing again.","positive":["frustration"],"disputed":["profanity"]}
+{"id":"emo-175","source":"handwritten","message":"Who the fuck approved this budget?","positive":["frustration","profanity"],"disputed":[]}
+{"id":"emo-176","source":"handwritten","message":"You are useless, stupid bot, answer the question.","positive":["offensive"],"disputed":["emphasis"]}
+{"id":"emo-177","source":"handwritten","message":"Shut up and just tell me the address.","positive":["offensive"],"disputed":["urgency","emphasis"]}
+{"id":"emo-178","source":"handwritten","message":"You are an idiot, that is not what I asked.","positive":["offensive"],"disputed":["frustration"]}
+{"id":"emo-179","source":"handwritten","message":"Oh great, another meeting at seven in the morning.","positive":["frustration","irony_possible"],"disputed":[]}
+{"id":"emo-180","source":"handwritten","message":"Yeah right, the train is always on time.","positive":["irony_possible"],"disputed":["emphasis"]}
+{"id":"emo-181","source":"handwritten","message":"Thanks for nothing, the answer was wrong.","positive":["frustration","irony_possible"],"disputed":["thanks"]}
+{"id":"emo-182","source":"handwritten","message":"Nice job, you managed to lose the whole list. Genius.","positive":["irony_possible"],"disputed":["frustration","offensive"]}
+{"id":"emo-183","source":"handwritten","message":"Sure, because everybody loves waiting in line for two hours.","positive":["irony_possible"],"disputed":[]}
+{"id":"emo-184","source":"handwritten","message":"Wow, what a surprise, the printer is broken again.","positive":["frustration","irony_possible"],"disputed":[]}
+{"id":"emo-185","source":"handwritten","message":"Brilliant, just brilliant. Who moved my files?","positive":["frustration","irony_possible"],"disputed":[]}
+{"id":"emo-186","source":"handwritten","message":"Maria works at Alpha Lab, right?","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-187","source":"handwritten","message":"Jack manages Laura, doesn't he?","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-188","source":"handwritten","message":"The clinic opens at nine, correct?","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-189","source":"handwritten","message":"Karim leads the Delta Project, no?","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-190","source":"handwritten","message":"You are open on Sunday, aren't you?","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-191","source":"handwritten","message":"Ana lives in Cluj, yes?","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-192","source":"handwritten","message":"By the way, who leads the choir?","positive":["topic_shift"],"disputed":[]}
+{"id":"emo-193","source":"handwritten","message":"Anyway, where were we? Which team does Karim belong to?","positive":["topic_shift"],"disputed":[]}
+{"id":"emo-194","source":"handwritten","message":"One more thing: is Nils a member of the choir?","positive":["topic_shift"],"disputed":[]}
+{"id":"emo-195","source":"handwritten","message":"On another note, when does the pharmacy close?","positive":["topic_shift"],"disputed":[]}
+{"id":"emo-196","source":"handwritten","message":"Speaking of the clinic, what are its opening hours?","positive":["topic_shift"],"disputed":[]}
+{"id":"emo-197","source":"handwritten","message":"Another question: who owns the blue van?","positive":["topic_shift"],"disputed":[]}
+{"id":"emo-198","source":"handwritten","message":"WHERE IS THE DELIVERY ADDRESS","positive":["urgency","emphasis"],"disputed":[]}
+{"id":"emo-199","source":"handwritten","message":"Who manages the Delta Project?!","positive":[],"disputed":["emphasis"]}
+{"id":"emo-200","source":"handwritten","message":"Is the warehouse open today??!","positive":["emphasis"],"disputed":["urgency"]}
+{"id":"emo-201","source":"handwritten","message":"I really, really need to know who owns the van!!!","positive":["urgency","emphasis"],"disputed":[]}
+{"id":"emo-202","source":"handwritten","message":"Pleeease tell me where the clinic is.","positive":["politeness","emphasis"],"disputed":[]}
+{"id":"emo-203","source":"handwritten","message":"Absolutely everyone must know who leads the choir.","positive":["emphasis"],"disputed":[]}
+{"id":"emo-204","source":"handwritten","message":"Tell me NOW who approved the budget.","positive":["urgency","emphasis"],"disputed":[]}
+{"id":"emo-205","source":"handwritten","message":"Where does Ana work?","positive":[],"disputed":[]}
+{"id":"emo-206","source":"handwritten","message":"Who manages the Delta Project?","positive":[],"disputed":[]}
+{"id":"emo-207","source":"handwritten","message":"Is Nils a member of the Madrigal choir?","positive":[],"disputed":[]}
+{"id":"emo-208","source":"handwritten","message":"The warehouse closes at six on Fridays.","positive":[],"disputed":[]}
+{"id":"emo-209","source":"handwritten","message":"Karim leads the Delta Project and Jack manages Laura.","positive":[],"disputed":[]}
+{"id":"emo-210","source":"handwritten","message":"How many people sing in the youth choir?","positive":[],"disputed":[]}
+{"id":"emo-211","source":"handwritten","message":"List the employees of Alpha Lab hired after 2020.","positive":[],"disputed":[]}
+{"id":"emo-212","source":"handwritten","message":"Which flights land in Cluj before noon?","positive":[],"disputed":[]}
+{"id":"emo-213","source":"handwritten","message":"Maria does not work at Beta Lab.","positive":[],"disputed":[]}
+{"id":"emo-214","source":"handwritten","message":"When did the clinic move to Strada Ulmilor?","positive":[],"disputed":[]}
+{"id":"emo-215","source":"handwritten","message":"If Ana leaves Alpha Lab, who becomes the team lead?","positive":[],"disputed":[]}
+{"id":"emo-216","source":"handwritten","message":"Does the pharmacy deliver to Sibiu or only to Cluj?","positive":[],"disputed":[]}
+{"id":"emo-217","source":"handwritten","message":"Marie Curie died in 1934, and she won two Nobel Prizes.","positive":[],"disputed":[]}
+{"id":"emo-218","source":"handwritten","message":"The meeting is on Tuesday at nine.","positive":[],"disputed":[]}
+{"id":"emo-219","source":"handwritten","message":"Bună ziua! Ana mai lucrează la Alpha Lab?","positive":["greeting"],"disputed":["curiosity"]}
+{"id":"emo-220","source":"handwritten","message":"Salut, cine conduce corul Madrigal?","positive":["greeting"],"disputed":[]}
+{"id":"emo-221","source":"handwritten","message":"Neața! Unde este căruciorul de ECG?","positive":["greeting"],"disputed":[]}
+{"id":"emo-222","source":"handwritten","message":"Mulțumesc mult pentru răspuns!","positive":["thanks"],"disputed":["emphasis"]}
+{"id":"emo-223","source":"handwritten","message":"Mersi, mi-a fost de folos. Acum, cine conduce echipa Delta?","positive":["thanks"],"disputed":["topic_shift"]}
+{"id":"emo-224","source":"handwritten","message":"Scuze de deranj, în ce oraș locuiește Elif?","positive":["apology"],"disputed":["politeness"]}
+{"id":"emo-225","source":"handwritten","message":"Vă rog să-mi spuneți când se deschide clinica.","positive":["politeness"],"disputed":[]}
+{"id":"emo-226","source":"handwritten","message":"Te rog, verifică dacă Jack o conduce pe Laura.","positive":["politeness"],"disputed":[]}
+{"id":"emo-227","source":"handwritten","message":"Dacă nu vă deranjează, la ce echipă este Karim?","positive":["politeness"],"disputed":[]}
+{"id":"emo-228","source":"handwritten","message":"La revedere, ne auzim mâine!","positive":["closing"],"disputed":[]}
+{"id":"emo-229","source":"handwritten","message":"Am nevoie urgent de adresa de livrare, camionul pleacă imediat.","positive":["urgency"],"disputed":[]}
+{"id":"emo-230","source":"handwritten","message":"Repede, de la ce poartă pleacă zborul 220?","positive":["urgency"],"disputed":["politeness"]}
+{"id":"emo-231","source":"handwritten","message":"Este urgent: cine este de gardă la farmacie chiar acum?","positive":["urgency"],"disputed":["politeness"]}
+{"id":"emo-232","source":"handwritten","message":"Cred că Maria lucrează la Alpha Lab.","positive":["hedge"],"disputed":[]}
+{"id":"emo-233","source":"handwritten","message":"Poate că Jack o conduce pe Laura, nu sunt sigur.","positive":["hedge"],"disputed":[]}
+{"id":"emo-234","source":"handwritten","message":"Probabil clinica se deschide la nouă.","positive":["hedge"],"disputed":[]}
+{"id":"emo-235","source":"handwritten","message":"Se pare că Nils închiriază duba albastră.","positive":["hedge"],"disputed":[]}
+{"id":"emo-236","source":"handwritten","message":"Din câte știu, Karim conduce proiectul Delta.","positive":["hedge"],"disputed":[]}
+{"id":"emo-237","source":"handwritten","message":"Iar nu merge? De ce nu apare programul?","positive":["frustration"],"disputed":["confusion"]}
+{"id":"emo-238","source":"handwritten","message":"Nu mai pot, am întrebat deja de trei ori!","positive":["frustration"],"disputed":["urgency"]}
+{"id":"emo-239","source":"handwritten","message":"M-am săturat, ai greșit din nou.","positive":["frustration"],"disputed":["offensive"]}
+{"id":"emo-240","source":"handwritten","message":"Este inacceptabil, răspunsul contrazice ce am spus adineauri.","positive":["frustration","anger"],"disputed":[]}
+{"id":"emo-241","source":"handwritten","message":"Ce păcat, speram că clinica e deschisă duminica.","positive":["disappointment"],"disputed":["sadness"]}
+{"id":"emo-242","source":"handwritten","message":"Sunt dezamăgit, lista tot nu e completă.","positive":["frustration","disappointment"],"disputed":[]}
+{"id":"emo-243","source":"handwritten","message":"Nu înțeleg de ce apare Ana de două ori.","positive":["confusion"],"disputed":[]}
+{"id":"emo-244","source":"handwritten","message":"Cum adică \"raportează către\"? Sunt confuz.","positive":["confusion"],"disputed":[]}
+{"id":"emo-245","source":"handwritten","message":"Sunt curios câți oameni cântă în cor.","positive":["curiosity"],"disputed":[]}
+{"id":"emo-246","source":"handwritten","message":"Mă întreb cine a înființat corul Madrigal.","positive":["curiosity"],"disputed":[]}
+{"id":"emo-247","source":"handwritten","message":"Ura, clinica e deschisă duminică!","positive":["joy"],"disputed":[]}
+{"id":"emo-248","source":"handwritten","message":"Sunt foarte fericit, Ana a primit postul la Alpha Lab!","positive":["joy"],"disputed":[]}
+{"id":"emo-249","source":"handwritten","message":"Mi-e frică de rezultatele examenului, cine le poate verifica?","positive":["fear"],"disputed":[]}
+{"id":"emo-250","source":"handwritten","message":"Sunt trist, mi-a murit câinele azi dimineață.","positive":["sadness"],"disputed":[]}
+{"id":"emo-251","source":"handwritten","message":"Ajutor, m-am pierdut, unde e gara?","positive":["urgency","fear"],"disputed":[]}
+{"id":"emo-252","source":"handwritten","message":"Ce naiba se întâmplă cu programul ăsta?","positive":["profanity"],"disputed":["frustration","confusion"]}
+{"id":"emo-253","source":"handwritten","message":"La dracu, iar lipsește fișierul.","positive":["frustration"],"disputed":["profanity"]}
+{"id":"emo-254","source":"handwritten","message":"Ești un prost, nu asta am întrebat.","positive":["frustration","offensive"],"disputed":[]}
+{"id":"emo-255","source":"handwritten","message":"Taci și spune-mi adresa.","positive":["offensive"],"disputed":["urgency"]}
+{"id":"emo-256","source":"handwritten","message":"Ești complet inutil, bot prost.","positive":["offensive"],"disputed":["frustration","emphasis"]}
+{"id":"emo-257","source":"handwritten","message":"Da, sigur, trenul vine mereu la timp.","positive":["irony_possible"],"disputed":[]}
+{"id":"emo-258","source":"handwritten","message":"Bravo, ai reușit să pierzi toată lista.","positive":["irony_possible"],"disputed":["frustration"]}
+{"id":"emo-259","source":"handwritten","message":"Ce surpriză, imprimanta s-a stricat iar.","positive":["frustration"],"disputed":["irony_possible"]}
+{"id":"emo-260","source":"handwritten","message":"Maria lucrează la Alpha Lab, nu-i așa?","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-261","source":"handwritten","message":"Jack o conduce pe Laura, corect?","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-262","source":"handwritten","message":"Clinica se deschide la nouă, da?","positive":["confirmation_request"],"disputed":[]}
+{"id":"emo-263","source":"handwritten","message":"Apropo, cine conduce corul?","positive":["topic_shift"],"disputed":[]}
+{"id":"emo-264","source":"handwritten","message":"Încă ceva: Nils face parte din cor?","positive":["topic_shift"],"disputed":[]}
+{"id":"emo-265","source":"handwritten","message":"Oricum, în ce echipă este Karim?","positive":["topic_shift"],"disputed":[]}
+{"id":"emo-266","source":"handwritten","message":"Altă întrebare: cine deține duba albastră?","positive":["topic_shift"],"disputed":[]}
+{"id":"emo-267","source":"handwritten","message":"CINE CONDUCE PROIECTUL DELTA","positive":[],"disputed":["emphasis"]}
+{"id":"emo-268","source":"handwritten","message":"Cine conduce corul?!","positive":[],"disputed":["emphasis"]}
+{"id":"emo-269","source":"handwritten","message":"Foarte, foarte urgent să aflu cine a aprobat bugetul!!!","positive":["urgency","emphasis"],"disputed":[]}
+{"id":"emo-270","source":"handwritten","message":"Unde lucrează Ana?","positive":[],"disputed":[]}
+{"id":"emo-271","source":"handwritten","message":"Cine conduce proiectul Delta?","positive":[],"disputed":[]}
+{"id":"emo-272","source":"handwritten","message":"Nils face parte din corul Madrigal?","positive":[],"disputed":[]}
+{"id":"emo-273","source":"handwritten","message":"Depozitul se închide la șase vineri.","positive":[],"disputed":[]}
+{"id":"emo-274","source":"handwritten","message":"Karim conduce proiectul Delta, iar Jack o conduce pe Laura.","positive":[],"disputed":[]}
+{"id":"emo-275","source":"handwritten","message":"Când s-a mutat clinica pe strada Ulmilor?","positive":[],"disputed":[]}
+{"id":"emo-276","source":"handwritten","message":"hi, unde lucrează Ana la Alpha Lab pls","positive":["politeness"],"disputed":["greeting"]}
+{"id":"emo-277","source":"handwritten","message":"thx mult, dar cine conduce corul ?","positive":["thanks"],"disputed":["curiosity"]}
+{"id":"emo-278","source":"handwritten","message":"sorry, am uitat: Jack manages Laura, right?","positive":["apology","confirmation_request"],"disputed":[]}
+{"id":"emo-279","source":"handwritten","message":"ugh iar nu merge, why is the schedule empty","positive":["frustration"],"disputed":["confusion"]}
+{"id":"emo-280","source":"handwritten","message":"hello!! cine e de gardă la farmacie asap","positive":["greeting","urgency"],"disputed":["emphasis"]}
+{"id":"emo-281","source":"handwritten","message":"maybe Nils lucrează la Alpha, idk","positive":["hedge"],"disputed":[]}
+{"id":"emo-282","source":"handwritten","message":"btw cine conduce echipa Delta lol","positive":["topic_shift"],"disputed":["curiosity"]}
+{"id":"emo-283","source":"handwritten","message":"omg ce naiba, again the same error?!","positive":["frustration","emphasis","profanity"],"disputed":[]}
+{"id":"emo-284","source":"handwritten","message":"plz tell me când se deschide clinica","positive":["politeness"],"disputed":["curiosity"]}
+{"id":"emo-285","source":"handwritten","message":"i dont understand de ce apare Ana de doua ori","positive":["confusion"],"disputed":["hedge"]}
+{"id":"emo-286","source":"handwritten","message":"wher is the clinic, repede te rog","positive":["politeness","urgency"],"disputed":[]}
+{"id":"emo-287","source":"handwritten","message":"cred ca Maria works at Beta Lab, nu sunt sigur","positive":["hedge"],"disputed":[]}
+{"id":"emo-288","source":"handwritten","message":"Tell me where Ana works. Thank you.","positive":["thanks"],"disputed":[]}
+{"id":"emo-289","source":"handwritten","message":"Where is the clinic? Thanks!","positive":["thanks"],"disputed":[]}
+{"id":"emo-290","source":"handwritten","message":"Who leads the choir? Sorry, I forgot to say hello.","positive":["apology"],"disputed":["greeting"]}
+{"id":"emo-291","source":"handwritten","message":"Is the pharmacy open? (I hope so!)","positive":[],"disputed":["curiosity","joy","hedge"]}
+{"id":"emo-292","source":"handwritten","message":"Where is the station :( I am late","positive":["urgency","sadness"],"disputed":[]}
+{"id":"emo-293","source":"handwritten","message":"So, who manages Laura?","positive":[],"disputed":["topic_shift"]}
+{"id":"emo-294","source":"handwritten","message":"Right, so who owns the van?","positive":[],"disputed":["topic_shift"]}
+{"id":"emo-295","source":"handwritten","message":"Well, I guess the clinic is closed on Sundays.","positive":["hedge"],"disputed":["disappointment"]}
+{"id":"emo-296","source":"handwritten","message":"Honestly, I do not care who leads the choir, just tell me the budget.","positive":["frustration"],"disputed":["urgency"]}
+{"id":"emo-297","source":"handwritten","message":"Okay okay, calm down, just answer the question.","positive":["frustration"],"disputed":["urgency"]}
+{"id":"emo-298","source":"handwritten","message":"Wow, that was fast, thanks!","positive":["thanks","joy"],"disputed":[]}
+{"id":"emo-299","source":"handwritten","message":"Lol, that is a funny answer. Who leads the choir?","positive":["joy"],"disputed":[]}
+{"id":"emo-300","source":"handwritten","message":"Hmm, that is not what I expected. Who approved the budget?","positive":["disappointment"],"disputed":["curiosity"]}

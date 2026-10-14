@@ -1,0 +1,25 @@
+{
+  "feature": "LLM stress: a derived fact throughout a period: adjacent shifts, a one-day gap, expiry inside the period, an exclusive end",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "ann"
+    },
+    {
+      "x": "di"
+    },
+    {
+      "x": "flo"
+    },
+    {
+      "x": "gus"
+    }
+  ],
+  "requires": [
+    "temporal",
+    "interval",
+    "throughout",
+    "snapshot_derived"
+  ]
+}

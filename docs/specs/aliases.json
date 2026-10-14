@@ -1,0 +1,408 @@
+{
+  "description": "Specification renumberings. `ids` maps every former DS id of the renumbering of 2026-09-28 to the spec it became, the spec it was merged into, or its archive location; `renumbered_2026_10_01` maps the ids of the numbering before 2026-10-01 to the live DS000-DS023 or to the archive. Old ids remain valid only in frozen files (probably_obsolete/**, the project journal status/journal.jsonl, the append-only topic notes status/notes/*.jsonl and historical reports eval/reports/history/**), which keep the numbering of their date; tools/check-spec-refs.mjs enforces this.",
+  "date": "2026-10-01",
+  "ids": {
+    "DS000": {
+      "to": "DS000",
+      "file": "DS000-vision.md",
+      "was": "DS000-vision.md"
+    },
+    "DS001": {
+      "to": "DS001",
+      "file": "DS001-coding-style.md",
+      "was": "DS001-coding-style.md"
+    },
+    "DS002": {
+      "to": "DS002",
+      "file": "DS002-architecture.md",
+      "was": "DS002-architecture.md"
+    },
+    "DS003": {
+      "to": "DS003",
+      "file": "DS003-main-behavior.md",
+      "was": "DS003-main-behavior.md"
+    },
+    "DS004": {
+      "to": "DS004",
+      "file": "DS004-sop.md",
+      "was": "DS004-sop.md"
+    },
+    "DS005": {
+      "to": "DS005",
+      "file": "DS005-memory.md",
+      "was": "DS005-memory.md"
+    },
+    "DS006": {
+      "to": "DS006",
+      "file": "DS006-reasoning.md",
+      "was": "DS006-reasoning.md"
+    },
+    "DS007": {
+      "was": "DS007-training.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS007-training.md"
+    },
+    "DS008": {
+      "was": "DS008-data-evaluation.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS008-data-evaluation.md"
+    },
+    "DS009": {
+      "was": "DS009-query-curriculum.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS009-query-curriculum.md"
+    },
+    "DS010": {
+      "merged": "DS006",
+      "also": [
+        "DS004",
+        "DS008",
+        "DS010"
+      ],
+      "was": "DS010-common-contracts.md",
+      "note": "SOP language row to DS004, decision table to DS006, semantic case to DS008, experiment identity to DS010"
+    },
+    "DS011": {
+      "to": "DS007",
+      "file": "DS007-experiment-preregistration.md",
+      "was": "DS011-experiment-preregistration.md"
+    },
+    "DS012": {
+      "merged": "DS006",
+      "section": "strategy-backend-matrix",
+      "was": "DS012-strategy-backend-matrix.md"
+    },
+    "DS013": {
+      "also": [
+        "DS009"
+      ],
+      "was": "DS013-case-authoring.md",
+      "note": "authoring contract and split policy to DS008, family/operator inventory to DS009",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS008-data-evaluation.md"
+    },
+    "DS014": {
+      "to": "DS008",
+      "file": "DS008-material-sources.md",
+      "was": "DS014-material-sources.md"
+    },
+    "DS015": {
+      "merged": "DS010",
+      "section": "solver-qualification",
+      "was": "DS015-solver-qualification.md"
+    },
+    "DS016": {
+      "to": "DS009",
+      "file": "DS009-local-server.md",
+      "was": "DS016-local-server.md"
+    },
+    "DS017": {
+      "to": "DS010",
+      "file": "DS010-engine-and-solver-comparison.md",
+      "was": "DS017-engine-comparison.md"
+    },
+    "DS018": {
+      "to": "DS011",
+      "file": "DS011-source-rights.md",
+      "was": "DS018-source-rights.md"
+    },
+    "DS019": {
+      "was": "DS019-independent-corpus.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS015-independent-corpus.md"
+    },
+    "DS020": {
+      "to": "DS012",
+      "file": "DS012-evaluation-metrics.md",
+      "was": "DS020-evaluation-metrics.md"
+    },
+    "DS021": {
+      "to": "DS013",
+      "file": "DS013-skill-systems.md",
+      "was": "DS021-skill-systems.md"
+    },
+    "DS022": {
+      "section": "question-curriculum-generator",
+      "was": "DS022-question-curriculum-generator.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS009-query-curriculum.md"
+    },
+    "DS023": {
+      "archived": "probably_obsolete/specs/vision/DS023-nl-sop-dataset.md",
+      "was": "DS023-nl-sop-dataset.md"
+    },
+    "DS024": {
+      "merged": "DS014",
+      "section": "scope-non-goals-and-extension-checklist",
+      "was": "DS024-small-language-scope.md",
+      "archivedSections": "probably_obsolete/specs/sections/DS024-proposals-considered.md"
+    },
+    "DS025": {
+      "merged": "DS007",
+      "also": [
+        "DS000"
+      ],
+      "was": "DS025-research-direction-and-publication.md",
+      "archivedSections": "probably_obsolete/specs/sections/DS025-verdict-register.md"
+    },
+    "DS026": {
+      "section": "query-corpus-v2",
+      "was": "DS026-query-corpus-v2.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS009-query-curriculum.md"
+    },
+    "DS027": {
+      "archived": "probably_obsolete/specs/legacy-registers/DS027-legacy-architecture-language.md",
+      "was": "DS027-legacy-architecture-language.md"
+    },
+    "DS028": {
+      "archived": "probably_obsolete/specs/legacy-registers/DS028-legacy-reasoning-and-operations.md",
+      "was": "DS028-legacy-reasoning-and-operations.md"
+    },
+    "DS029": {
+      "archived": "probably_obsolete/specs/legacy-registers/DS029-legacy-data-memory-and-release.md",
+      "was": "DS029-legacy-data-memory-and-release.md"
+    },
+    "DS030": {
+      "archived": "probably_obsolete/specs/legacy-registers/DS030-legacy-index-and-contracts.md",
+      "was": "DS030-legacy-index-and-contracts.md"
+    },
+    "DS031": {
+      "section": "qa-proposition-corpus",
+      "was": "DS031-qa-proposition-corpus.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS018-research-corpora.md"
+    },
+    "DS032": {
+      "section": "proof-structure-corpus",
+      "was": "DS032-proof-structure-corpus.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS018-research-corpora.md"
+    },
+    "DS033": {
+      "section": "paraphrase-contrast-corpus",
+      "was": "DS033-paraphrase-contrast-corpus.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS018-research-corpora.md"
+    },
+    "DS034": {
+      "section": "ambiguity-resolve-corpus",
+      "was": "DS034-ambiguity-resolve-corpus.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS018-research-corpora.md"
+    },
+    "DS035": {
+      "was": "DS035-research-experiment-corpus.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS018-research-corpora.md"
+    },
+    "DS036": {
+      "was": "DS036-grounded-proof.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS019-grounded-corpora.md"
+    },
+    "DS037": {
+      "section": "proposition",
+      "was": "DS037-grounded-proposition.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS019-grounded-corpora.md"
+    },
+    "DS038": {
+      "section": "paraphrase",
+      "was": "DS038-grounded-paraphrase.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS019-grounded-corpora.md"
+    },
+    "DS039": {
+      "section": "ambiguity",
+      "was": "DS039-grounded-ambiguity.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS019-grounded-corpora.md"
+    },
+    "DS040": {
+      "was": "DS040-corpus-audit-tool.md",
+      "archived": "probably_obsolete/tinyLLMExperiments/specs/DS020-corpus-audit-tool.md"
+    },
+    "DS041": {
+      "to": "DS014",
+      "file": "DS014-model-surface.md",
+      "was": "DS041-stated-assumed-unclear.md"
+    },
+    "DS042": {
+      "to": "DS015",
+      "file": "DS015-diversity-generator.md",
+      "was": "DS042-diversity-generator.md"
+    }
+  },
+  "proposals": {
+    "wire-redesign-2026-09-28.md": {
+      "archived": "probably_obsolete/specs/proposals/wire-redesign-2026-09-28.md"
+    }
+  },
+  "legacyGeneratedNote": "Generated artifacts of legacy corpora that tools/check-spec-refs.mjs treats as frozen files. The legacy corpora were deleted with the regeneration of 2026-09-28 (DS022), so the list is empty; add an entry only for a generated artifact that must keep historical spec paths.",
+  "legacyGenerated": [],
+  "reassigned": {
+    "date": "2026-10-01",
+    "note": "Ids DS023-DS028 and DS031 name different specifications in different periods. In frozen files an id keeps the meaning of the date of the file (see `ids` for 2026-09-28 and `renumbered_2026_10_01` for 2026-10-01); in live files the ids name the current specifications DS000-DS022 only.",
+    "current": {
+      "DS000": "DS000-vision.md",
+      "DS001": "DS001-coding-style.md",
+      "DS002": "DS002-architecture.md",
+      "DS003": "DS003-main-behavior.md",
+      "DS004": "DS004-sop.md",
+      "DS005": "DS005-memory.md",
+      "DS006": "DS006-reasoning.md",
+      "DS007": "DS007-experiment-preregistration.md",
+      "DS008": "DS008-material-sources.md",
+      "DS009": "DS009-local-server.md",
+      "DS010": "DS010-engine-and-solver-comparison.md",
+      "DS011": "DS011-source-rights.md",
+      "DS012": "DS012-evaluation-metrics.md",
+      "DS013": "DS013-skill-systems.md",
+      "DS014": "DS014-model-surface.md",
+      "DS015": "DS015-diversity-generator.md",
+      "DS016": "DS016-recall-memory.md",
+      "DS017": "DS017-holo-memory.md",
+      "DS018": "DS018-sqlite-memory.md",
+      "DS019": "DS019-exact-reference-memory.md",
+      "DS020": "DS020-hybrid-memory.md",
+      "DS021": "DS021-memory-retention-and-generations.md",
+      "DS022": "DS022-sessions-and-base-memories.md",
+      "DS023": "DS023-courtesy-and-emotion.md"
+    }
+  },
+  "renumbered_2026_10_01": {
+    "description": "Renumbering of 2026-10-01: the live specifications are DS000 to DS023 without gaps. Each id of the numbering before that date maps to its new live id and file (`to`, `file`) or to its archive path (`archived`). References in frozen files (the journal, topic notes, history reports, probably_obsolete/**) keep the numbering of their date and are never rewritten.",
+    "ids": {
+      "DS000": {
+        "to": "DS000",
+        "file": "DS000-vision.md"
+      },
+      "DS001": {
+        "to": "DS001",
+        "file": "DS001-coding-style.md"
+      },
+      "DS002": {
+        "to": "DS002",
+        "file": "DS002-architecture.md"
+      },
+      "DS003": {
+        "to": "DS003",
+        "file": "DS003-main-behavior.md"
+      },
+      "DS004": {
+        "to": "DS004",
+        "file": "DS004-sop.md"
+      },
+      "DS005": {
+        "to": "DS005",
+        "file": "DS005-memory.md"
+      },
+      "DS006": {
+        "to": "DS006",
+        "file": "DS006-reasoning.md"
+      },
+      "DS007": {
+        "archived": "probably_obsolete/tinyLLMExperiments/specs/DS007-training.md"
+      },
+      "DS008": {
+        "archived": "probably_obsolete/tinyLLMExperiments/specs/DS008-data-evaluation.md"
+      },
+      "DS009": {
+        "archived": "probably_obsolete/tinyLLMExperiments/specs/DS009-query-curriculum.md"
+      },
+      "DS010": {
+        "to": "DS007",
+        "file": "DS007-experiment-preregistration.md"
+      },
+      "DS011": {
+        "to": "DS008",
+        "file": "DS008-material-sources.md"
+      },
+      "DS012": {
+        "to": "DS009",
+        "file": "DS009-local-server.md"
+      },
+      "DS013": {
+        "to": "DS010",
+        "file": "DS010-engine-and-solver-comparison.md"
+      },
+      "DS014": {
+        "to": "DS011",
+        "file": "DS011-source-rights.md"
+      },
+      "DS015": {
+        "archived": "probably_obsolete/tinyLLMExperiments/specs/DS015-independent-corpus.md"
+      },
+      "DS016": {
+        "to": "DS012",
+        "file": "DS012-evaluation-metrics.md"
+      },
+      "DS017": {
+        "to": "DS013",
+        "file": "DS013-skill-systems.md"
+      },
+      "DS018": {
+        "archived": "probably_obsolete/tinyLLMExperiments/specs/DS018-research-corpora.md"
+      },
+      "DS019": {
+        "archived": "probably_obsolete/tinyLLMExperiments/specs/DS019-grounded-corpora.md"
+      },
+      "DS020": {
+        "archived": "probably_obsolete/tinyLLMExperiments/specs/DS020-corpus-audit-tool.md"
+      },
+      "DS021": {
+        "to": "DS014",
+        "file": "DS014-model-surface.md"
+      },
+      "DS022": {
+        "to": "DS015",
+        "file": "DS015-diversity-generator.md"
+      },
+      "DS023": {
+        "to": "DS016",
+        "file": "DS016-recall-memory.md"
+      },
+      "DS024": {
+        "to": "DS017",
+        "file": "DS017-holo-memory.md"
+      },
+      "DS025": {
+        "to": "DS018",
+        "file": "DS018-sqlite-memory.md"
+      },
+      "DS026": {
+        "to": "DS019",
+        "file": "DS019-exact-reference-memory.md"
+      },
+      "DS027": {
+        "to": "DS020",
+        "file": "DS020-hybrid-memory.md"
+      },
+      "DS028": {
+        "to": "DS021",
+        "file": "DS021-memory-retention-and-generations.md"
+      },
+      "DS029": {
+        "to": "DS023",
+        "file": "DS023-courtesy-and-emotion.md",
+        "note": "The symbolic EmotionDetectionSystem was restored to the product on 2026-10-02; DS029 was its former id. Later on 2026-10-02 the lexicon pre-step was archived again (owner rule: no hardcoded understanding) and the file DS023-emotion-detection.md became DS023-courtesy-and-emotion.md: courtesy and emotion are pragmatic wires written by the formalizer."
+      },
+      "DS030": {
+        "archived": "probably_obsolete/tinyLLMExperiments/specs/DS030-capability-apis.md"
+      },
+      "DS031": {
+        "to": "DS022",
+        "file": "DS022-sessions-and-base-memories.md"
+      }
+    }
+  },
+  "sections_removed_2026_10_02": {
+    "description": "Owner request of 2026-10-02 to remove the small-model training rules: sections and sentences that only served model training were moved out of live specifications into the archive file below; the specification ids and files did not change. No model is trained in this project.",
+    "archive": "probably_obsolete/tinyLLMExperiments/specs/removed-sections-2026-10-02.md",
+    "from": {
+      "DS007": [
+        "Pre-run record: the formalizer-change hypothesis row, the checkpoint budget and the single-GPU-worker rule",
+        "Promotion gates to freeze, not observations (replaced by \"Reporting a result\")",
+        "Planned study arms: Romanian-anchor ablations, quantization invariance, shared versus role-specific models, the qualified-small-model baseline and teacher cost, checkpoint selection",
+        "Observed rights boundary: the training-approval sentence"
+      ],
+      "DS011": [
+        "LLM-authored text (D2)",
+        "New cases",
+        "Other LLM-authored project text",
+        "Owner chat messages",
+        "Jargon term sources for translate-jargon-v1",
+        "Model weights table and the LanguageTool note (replaced by a short Model weights paragraph)",
+        "the training-approval consequence and rule 4"
+      ],
+      "DS012": [
+        "\"or a training script\" in the sealed-tests obligation"
+      ]
+    }
+  }
+}

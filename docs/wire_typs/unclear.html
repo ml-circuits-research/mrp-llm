@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#unclear" target="_top">Wire index</a> · <a href="stated.html">stated</a> · <a href="assumed.html">assumed</a> · <a href="clarify.html">clarify</a> · <a href="small-model.html">model/host roles</a></p><h1><code>unclear</code></h1>
+<p>The small model emits <code>unclear</code> only for what it can recognise from the text itself, without context and without reasoning: an <strong>unintelligible</strong> message, a message with <strong>neither a statement nor a question</strong>, or a <strong>visible ambiguity</strong> it prefers not to resolve (<code>kind ambiguous</code> with one <code>reading</code> line per candidate reading). It belongs to the model language and must be the <strong>only</strong> wire of the output: mixing it with any other wire is rejected (<code>unclear_not_alone</code>). The host runs no circuit; it renders a fixed controlled-language reply for the kind, in English (another answer language is the translation of that reply at the output edge), and the packet has <code>status: unclear</code>. A semantically odd but readable message is formalized normally: the model does not judge contradictions, completeness or relevance. The normative contract is <a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a>.</p>
+<p><strong><code>unclear</code> is not <a href="clarify.html">clarify</a>.</strong> <code>clarify</code> stays host-generated: the message was formalized, and the host could not link or resolve a specific relation, entity, date or scalar (for example two people named Maria). <code>unclear</code> is the model's report that there is nothing to formalize. It is also not a refusal: the model always formalizes a readable request.</p>
+<h2>Every accepted keyword</h2><table><thead><tr><th>Keyword</th><th>Cardinality / default</th><th>Accepted value and concrete effect</th></tr></thead><tbody><tr><td id="field-kind"><code>kind</code></td><td>Exactly once; required</td><td>One of <code>gibberish</code>, <code>no_request</code>, <code>ambiguous</code> or <code>relation_not_in_memory</code> (written only by the formalizer, which sees the memory's vocabulary); the table below gives their use and replies. The kinds and their replies live in one table (<code>UNCLEAR_KINDS</code> in <code>sop/unclear.mjs</code>) so they are easy to change.</td></tr><tr><td id="field-reading"><code>reading</code></td><td>Repeatable; 2 to 4 lines with <code>kind ambiguous</code>, none otherwise</td><td>One JSON-quoted short paraphrase of one candidate reading, in English (<code>reading "Ana used the telescope"</code>, <code>reading "Ana lives in Cluj"</code>); names stay as written. The host lists the readings, numbered, after the fixed reply and returns <code>next: choose_reading</code>. Fewer than two or more than four readings, a repeated reading, an empty or unquoted reading, or a reading on another kind is rejected (<code>unclear_readings</code>).</td></tr><tr><td id="field-language"><code>language</code></td><td>At most once; optional</td><td>Only <code>en</code>: the core renders English (owner decision of 2026-10-01). The field has no effect; the answer language is selected by the caller (API <code>language</code> field or an explicit request in the message) and applied by translating the English reply.</td></tr></tbody></table>
+<h2>Kinds and host replies</h2><div class="table-wrap"><table><thead><tr><th>Kind</th><th>Use when</th><th>English reply</th></tr></thead><tbody class="kinds">
+<tr><td><code>gibberish</code> </td><td>The text is unintelligible.</td><td>I did not understand the message. Could you rephrase?</td></tr>
+<tr><td><code>no_request</code> </td><td>No statement and no question: "ok", "thanks", a greeting, or a request for something unrelated such as "write a poem".</td><td>I did not find a statement or a question in the message. What would you like to know?</td></tr>
+<tr><td><code>ambiguous</code> </td><td>The text itself shows two or more readings and none is clearly preferable: a pronoun after two parallel clauses, a bare homonym ("Is the court free?"), the scope of "all … not", a prepositional-phrase attachment. When one reading is preferable the model resolves it instead, with an <a href="assumed.html"><code>assumed</code></a> wire (<code>basis disambiguation</code>); the scope of "all … not" is always ambiguous.</td><td>Your message can be read in more than one way. Which do you mean? (then the readings, numbered)</td></tr>
+<tr><td><code>relation_not_in_memory</code> </td><td>Only the request parser that knows the memory's predicates (codingAgentQuery, <a href="../specsLoader.html?spec=DS022-sessions-and-base-memories.md">DS022</a>): the question is clear but none of the memory's predicates expresses it. The gap (message and closest predicates) is logged for the approved authoring path; the answer is an honest unknown, never an invented relation. The formalizer never writes it.</td><td>The memory of this chat has no relation that expresses this question. Could you ask it in other words, or add the knowledge first?</td></tr>
+</tbody></table></div>
+<h2>Valid output</h2><pre data-sop="current"><code>@u unclear
+  kind gibberish</code></pre><p>"asdf qwer zxcv": the reply is <em>I did not understand the message. Could you rephrase?</em></p>
+<pre data-sop="current"><code>@u unclear
+  kind ambiguous
+  reading "Ana saw the man who had the telescope"
+  reading "Ana used the telescope to see the man"</code></pre><p>"Did Ana see the man with the telescope?": no attachment is preferable, so the model lists both readings; the host asks which one is meant.</p>
+<pre data-sop="current"><code>@u unclear
+  kind ambiguous
+  reading "Ana lives in Cluj"
+  reading "Irina lives in Cluj"</code></pre><p>"Ana works at Acme and Irina at Zeta. Does she live in Cluj?": two parallel clauses, so "she" has no preferable antecedent. The readings are written in English. Compare "Ana manages Irina. Does she live in Cluj?", where the convention prefers the subject and the model writes an <a href="assumed.html"><code>assumed</code></a> <code>relation "refer to"</code> instead (<code>relation "refer to"</code> and <code>relation "mean"</code> are the fixed English phrases of that convention). A phrasing whose readings the model may choose between ("what for": "why" or "for what") is formalized with one plausible reading rather than <code>unclear</code>; evaluation accepts each plausible reading (<code>sop_targets_accepted</code>, DS014).</p>
+<pre data-sop="current"><code>@u unclear
+  kind ambiguous
+  reading "none of the invoices from Brenner GmbH were paid"
+  reading "not all the invoices from Brenner GmbH were paid"</code></pre><p>"All the invoices from Brenner GmbH were not paid, can I ask for a refund?": the scope of "all … not" is <strong>always</strong> ambiguous, even when the rest of the message makes one reading likely, because choosing would need reasoning about the situation (owner answer to Q-SYM-3). An explicit "not all" or "none" is not ambiguous: it is a <a href="query.html"><code>query</code></a> with <code>quantifier not_all</code> or <code>quantifier none</code>.</p>
+<h2>Invalid model output</h2><pre data-sop="invalid" data-check="compile" data-error="unclear_not_alone"><code>@u unclear
+  kind gibberish
+
+@q query
+  where match
+    relation "works at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>If a question can be formalized, the message is not unclear.</p>
+<pre data-sop="invalid" data-check="parse" data-error="unclear kind must be one of"><code>@u unclear
+  kind contradictory</code></pre><p>The model does not reason, so it cannot report contradictions or incompleteness; such a message is formalized as written.</p>
+<pre data-sop="invalid" data-check="parse" data-error="unclear language must be one of en"><code>@u unclear
+  kind gibberish
+  language de</code></pre><p>The reply table is English only; there is no language to choose.</p>
+<pre data-sop="invalid" data-check="parse" data-error="unclear_readings"><code>@u unclear
+  kind ambiguous
+  reading "the tennis court"</code></pre><p>An ambiguity has at least two readings; with one reading the message is not ambiguous.</p>
+<pre data-sop="invalid" data-check="parse" data-error="reading lines belong to kind ambiguous"><code>@u unclear
+  kind no_request
+  reading "a greeting"
+  reading "a thank-you"</code></pre><p>Only <code>ambiguous</code> carries readings.</p>
+<h2>Sources</h2><p><code>sop/unclear.mjs</code> (the kind table), <code>sop/parser.mjs</code> (<code>SPEC.unclear</code>), <code>sop/declarative.mjs</code> (host reply), <code>probably_obsolete/tinyLLMExperiments/server/language.mjs</code> (answer language), <a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a>.</p></main><script type="module" src="help-page.mjs"></script></body></html>

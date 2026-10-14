@@ -1,0 +1,13 @@
+{
+  "feature": "Rules and chaining (two derived relations in a row)",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "who": "ann"
+    }
+  ],
+  "requires": [
+    "rules"
+  ]
+}

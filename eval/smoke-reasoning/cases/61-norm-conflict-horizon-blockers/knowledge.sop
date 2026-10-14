@@ -1,0 +1,60 @@
+@urgent predicate
+  args subject:entity
+@freeze predicate
+  args none
+@built predicate
+  args subject:entity
+  closed true
+@tested predicate
+  args subject:entity
+  closed true
+@released predicate
+  args subject:entity
+  closed true
+@wiped predicate
+  args subject:entity
+  closed true
+
+@f1 fact
+  holds urgent svc1
+@f2 fact
+  holds freeze
+
+@build action
+  params ?s
+  requires urgent ?s
+  adds built ?s
+  cost 2
+@test action
+  params ?s
+  requires built ?s
+  adds tested ?s
+  cost 3
+@deploy action
+  params ?s
+  requires tested ?s
+  adds released ?s
+  cost 2
+@wipe_db action
+  params ?s
+  requires urgent ?s
+  adds wiped ?s
+  cost 1
+
+@freeze_hold norm
+  forbid ~deploy ?s
+  when freeze
+  severity hard
+  binding strict
+  message "no deployment during a change freeze"
+@urgent_release norm
+  oblige ~deploy ?s
+  when urgent ?s
+  within 3
+  severity hard
+  binding strict
+  message "an urgent service must be released within three steps"
+@no_wipe norm
+  forbid ~wipe_db ?s
+  severity hard
+  binding strict

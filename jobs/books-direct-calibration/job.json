@@ -1,0 +1,59 @@
+{
+  "name": "books-direct-calibration",
+  "description": "Calibration of the worker tier on the owner's problem books: the model answers each problem directly (brief steps, then one 'Final answer:' line). The prompt sees only the question; gold answers are read only by checks.mjs score().",
+  "inputs": {
+    "path": "../../datasets_sources/books/eval/items.jsonl",
+    "idField": "id",
+    "promptFields": [
+      "question"
+    ],
+    "select": {
+      "n": 20,
+      "seed": "books-calibration-2026-10-02"
+    }
+  },
+  "packing": {
+    "itemsPerCall": 1
+  },
+  "models": "role:worker",
+  "fallbackOnFailure": false,
+  "output": {
+    "format": "text"
+  },
+  "checks": "checks.mjs",
+  "repairRounds": 1,
+  "concurrency": 3,
+  "budget": {
+    "credits": 5,
+    "usd": 0.05
+  },
+  "stages": [
+    {
+      "name": "pilot",
+      "items": 5,
+      "stop": {
+        "maxEmptyRate": 0.2,
+        "maxRejectRate": 0.4,
+        "minItems": 5
+      }
+    },
+    {
+      "name": "all",
+      "items": 20,
+      "stop": {
+        "maxEmptyRate": 0.2,
+        "maxRejectRate": 0.2
+      }
+    }
+  ],
+  "audit": {
+    "rate": 0.25,
+    "role": "auditor",
+    "instructions": "audit.md",
+    "severity": "high",
+    "budgetTokens": 20000
+  },
+  "escalation": {
+    "nextModel": false
+  }
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "url": "https://github.com/AssistOS-AI/AchillesCopilotBasicSkills.git",
+    "name": "AchillesCopilotBasicSkills",
+    "branch": null,
+    "skills": []
+  },
+  {
+    "url": "https://github.com/AssistOS-AI/DocumentationSkills.git",
+    "name": "DocumentationSkills",
+    "branch": null,
+    "skills": [
+      "achilles-specs",
+      "article-build",
+      "detect-main-behaviors",
+      "gamp-specs",
+      "human-report",
+      "node-coding-style",
+      "review-specs",
+      "unslop",
+      "web-design"
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "name": "Companion (edge)",
+  "description": "Small devices: the cheapest tiers, translation only for non-English messages, no round trip, the English answer translated only when needed.",
+  "base": "default",
+  "slots": {
+    "normalize": {"strategy": "translate-if-foreign", "params": {"tier": "tiny"}},
+    "reflex": {"strategy": "faq-fixed"},
+    "formalize": {"strategy": "LocalLLMStepByStep", "params": {"tier": "tiny"}},
+    "roundtrip": {"strategy": "off"},
+    "voice": {"strategy": "translate-only", "params": {"tier": "tiny"}},
+    "commit": {"strategy": "auto-validated"}
+  },
+  "allowOverrides": true
+}

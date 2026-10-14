@@ -1,0 +1,17 @@
+@q query
+  select ?total
+  where all
+    match
+      relation "department_total"
+      role subject "department_sanziana_dev_267"
+      role object ?total
+      polarity affirmed
+    end
+    match
+      relation "department_pay"
+      role subject "department_sanziana_dev_267"
+      role object "firm_sanziana_dev_267"
+      polarity affirmed
+    end
+  end
+  except ?total "department_ruxandra_dev_268"

@@ -1,0 +1,21 @@
+{
+  "benchmark": "simplequestions",
+  "title": "SimpleQuestions-Wikidata (answerable test)",
+  "url": "https://github.com/askplatypus/wikidata-simplequestions",
+  "license": "CC-BY-3.0",
+  "citation": "Diefenbach, Pellissier Tanon, Singh, Maret. Question Answering Benchmarks for Wikidata. ISWC 2017 (Posters & Demos); SimpleQuestions: Bordes et al. 2015.",
+  "files": {
+    "annotated_wd_data_test_answerable.txt": "https://raw.githubusercontent.com/askplatypus/wikidata-simplequestions/master/annotated_wd_data_test_answerable.txt",
+    "LICENSE.txt": "https://raw.githubusercontent.com/askplatypus/wikidata-simplequestions/master/LICENSE.txt"
+  },
+  "seed": "kbqa-v1",
+  "population": 5622,
+  "sampled": 1000,
+  "dropped_no_gold": 14,
+  "dropped_error": 0,
+  "built_at": "2026-10-01T15:21:31.575Z",
+  "gold_source": "gold SPARQL executed on query.wikidata.org at build time (answers capped at 2000)",
+  "types": {
+    "simple": 1000
+  }
+}

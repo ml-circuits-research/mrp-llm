@@ -1,0 +1,10 @@
+{
+  "feature": "A plan-length horizon that cuts the search is budget_exhausted (reason horizon), never no_plan",
+  "status": "budget_exhausted",
+  "complete": false,
+  "reason": "horizon",
+  "requires": [
+    "plan",
+    "budget"
+  ]
+}

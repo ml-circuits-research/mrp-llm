@@ -1,0 +1,10 @@
+{
+  "name": "ConceptNet 5.7 CC BY-SA edges (ShareAlike layer)",
+  "description": "ShareAlike layer imported by the chat's default base (world-v1) after commonsense-v1 (owner decision of 2026-10-02): class hierarchy (is_a), parts and typical places between the common-noun classes from the ConceptNet 5.7 edges whose own licence is CC BY-SA 4.0 (Wiktionary imports). ConceptNet 5 by Robyn Speer, Joshua Chin and Catherine Havasi; data from Wiktionary contributors. Licence CC BY-SA 4.0: this layer and any adaptation of it may be shared only under CC BY-SA 4.0 or a compatible licence, with attribution; modified (relations mapped onto MRP-LLM predicates, filtered). Raw source data stays in the gitignored cache and is not redistributed. Attribution in README.md of this folder; sources and licences in docs/specs/DS011-source-rights.md.",
+  "imports": [
+    "core-min",
+    "core-en",
+    "commonsense-v1"
+  ],
+  "licence": "CC BY-SA 4.0"
+}

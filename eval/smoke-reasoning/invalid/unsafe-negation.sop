@@ -1,0 +1,8 @@
+# expect: unsafe_negation
+@b predicate
+  args entity
+  closed true
+@r rule
+  when node ?x
+  when absent b ?y
+  then ok ?x

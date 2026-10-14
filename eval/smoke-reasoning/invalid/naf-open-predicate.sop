@@ -1,0 +1,9 @@
+# expect: absent_needs_closed
+@node predicate
+  args entity
+@blocked predicate
+  args entity
+@r rule
+  when node ?x
+  when absent blocked ?x
+  then open_node ?x

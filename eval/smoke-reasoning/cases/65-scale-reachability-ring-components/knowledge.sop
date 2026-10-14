@@ -1,0 +1,41 @@
+@edge predicate
+  args source:entity destination:entity
+@reach predicate
+  args source:entity destination:entity
+@f0 fact
+  holds edge n0_0 n0_1
+@f1 fact
+  holds edge n0_1 n0_2
+@f2 fact
+  holds edge n0_2 n0_3
+@f3 fact
+  holds edge n0_3 n0_4
+@f4 fact
+  holds edge n0_4 n0_0
+@f5 fact
+  holds edge n1_0 n1_1
+@f6 fact
+  holds edge n1_1 n1_2
+@f7 fact
+  holds edge n1_2 n1_3
+@f8 fact
+  holds edge n1_3 n1_4
+@f9 fact
+  holds edge n1_4 n1_0
+@f10 fact
+  holds edge n2_0 n2_1
+@f11 fact
+  holds edge n2_1 n2_2
+@f12 fact
+  holds edge n2_2 n2_3
+@f13 fact
+  holds edge n2_3 n2_4
+@f14 fact
+  holds edge n2_4 n2_0
+@r_base rule
+  when edge ?a ?b
+  then reach ?a ?b
+@r_step rule
+  when reach ?a ?b
+  when edge ?b ?c
+  then reach ?a ?c

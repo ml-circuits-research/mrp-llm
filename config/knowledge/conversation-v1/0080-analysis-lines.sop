@@ -1,0 +1,118 @@
+# conversation-v1: the sentences of the analysis report (lib/analysis/report.mjs, DS022 "Analysis procedures"), part line. The report
+# chooses the line from the structure of the analysis packet and fills its slots: a finding by its rule (line_finding_<integrity id> when
+# the layer has one, else line_finding with the rule's own message), a measure by its report predicate (line_report_<predicate>, else
+# line_report_row). A domain procedure adds its own report lines here, as data.
+
+@cv_line_analysis_header reply
+  situation line_analysis_header
+  part line
+  language en
+  text "Analysis of {{documents}} with {{procedures}}."
+
+@cv_line_analysis_counts reply
+  situation line_analysis_counts
+  part line
+  language en
+  text "Findings: {{findings}} ({{errors}} errors, {{warnings}} warnings)."
+
+@cv_line_analysis_no_findings reply
+  situation line_analysis_no_findings
+  part line
+  language en
+  text "No finding: the selected procedures found no issue in the document."
+
+@cv_line_analysis_procedure reply
+  situation line_analysis_procedure
+  part line
+  language en
+  text "{{procedure}}:"
+
+@cv_line_severity_error reply
+  situation line_severity_error
+  part line
+  language en
+  text "Error"
+
+@cv_line_severity_warning reply
+  situation line_severity_warning
+  part line
+  language en
+  text "Warning"
+
+@cv_line_finding reply
+  situation line_finding
+  part line
+  language en
+  text "{{severity}}: {{message}} ({{witness}}; rule {{rule}} of {{procedure}})."
+
+@cv_line_finding_evidence reply
+  situation line_finding_evidence
+  part line
+  language en
+  text "  {{document}}, {{location}}: \"{{quote}}\""
+
+@cv_line_finding_evidence_no_quote reply
+  situation line_finding_evidence_no_quote
+  part line
+  language en
+  text "  {{document}}, {{location}}: wire {{wire}} (no quote)"
+
+@cv_line_report_row reply
+  situation line_report_row
+  part line
+  language en
+  text "{{predicate}}: {{values}}."
+
+@cv_line_report_kpi_share reply
+  situation line_report_kpi_share
+  part line
+  language en
+  text "Share of {{part}} in {{whole}}: {{percent}}%."
+
+@cv_line_report_kpi_growth reply
+  situation line_report_kpi_growth
+  part line
+  language en
+  text "Growth of {{quantity}} in {{period}}: {{percent}}%."
+
+@cv_line_report_kpi_average reply
+  situation line_report_kpi_average
+  part line
+  language en
+  text "Average of the parts of {{whole}}: {{average}}."
+
+@cv_line_report_kpi_ratio reply
+  situation line_report_kpi_ratio
+  part line
+  language en
+  text "Ratio {{name}}: {{ratio}}."
+
+@cv_line_report_rubric_score reply
+  situation line_report_rubric_score
+  part line
+  language en
+  text "Score of {{rubric}}: {{score}}."
+
+@cv_line_report_rubric_max reply
+  situation line_report_rubric_max
+  part line
+  language en
+  text "Maximum score of {{rubric}}: {{maximum}}."
+
+@cv_line_report_criterion_met reply
+  situation line_report_criterion_met
+  part line
+  language en
+  text "Met ({{rubric}}): {{criterion}}."
+
+@cv_line_report_criterion_failed reply
+  situation line_report_criterion_failed
+  part line
+  language en
+  text "Not met ({{rubric}}): {{criterion}}."
+
+@cv_line_analysis_unsupported reply
+  situation line_analysis_unsupported
+  part line
+  language en
+  text "{{count}} of the procedures' queries could not run on the requested engine {{engine}}; their findings and measures are missing from this report (the engine is never replaced)."

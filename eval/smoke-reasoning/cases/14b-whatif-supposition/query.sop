@@ -1,0 +1,8 @@
+@s1 fact
+  holds works ann alpha
+  status supposed
+
+@q query
+  where works ?x alpha
+  select ?x
+  if $s1

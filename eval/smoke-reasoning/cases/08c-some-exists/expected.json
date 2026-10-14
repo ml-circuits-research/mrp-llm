@@ -1,0 +1,9 @@
+{
+  "feature": "Quantifiers: some (existential question over a conjunction)",
+  "status": "supported",
+  "complete": true,
+  "requires": [
+    "facts",
+    "exists"
+  ]
+}

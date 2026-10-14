@@ -1,0 +1,18 @@
+{
+  "feature": "used is ONE sufficient support set: with two facts that are each sufficient, deletion gives an empty set and must say used_incomplete (or the strategy returns one proof's leaves)",
+  "status": "supported",
+  "complete": true,
+  "used_support": [
+    [
+      "fa",
+      "r1"
+    ],
+    [
+      "fb",
+      "r2"
+    ]
+  ],
+  "requires": [
+    "rules"
+  ]
+}

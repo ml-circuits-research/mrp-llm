@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Analysis procedures</title><link rel="stylesheet" href="styles.css">
+<style>
+.note{border-left:4px solid currentColor;padding:.1rem .8rem;opacity:.9}
+pre{overflow-x:auto}
+</style></head><body>
+<div data-include="partials/header.html"></div><main class="page"><article class="page__panel"><p class="breadcrumb"><a href="index.html">Overview</a> / Analysis procedures</p><h1>Analysis procedures: checking a document with rules kept in memory</h1>
+<p>An <b>analysis procedure</b> is a set of rules stored in a base memory that the reasoners apply to the wires a document left in a session or a base memory. Typical uses are finding contradictions in a scientific paper, a book or a manual; detecting statements that cannot be right; computing KPIs and other indicators; and scoring a document against a quality rubric. Each result comes with the rule that produced it, the oracle's proof, and the document's own words: the document, the location and the exact quote. The normative contract is <a href="specsLoader.html?spec=DS022-sessions-and-base-memories.md">DS022</a> "Analysis procedures"; the wire is <a href="wire_typs/procedure.html#knowledge-language"><code>procedure</code></a> (<a href="specsLoader.html?spec=DS004-sop.md">DS004</a>).</p>
+<p class="note">No model is called by an analysis. A model may have written the document's wires (ingestion v2); the analysis itself is exact reasoning over those wires. Its quality therefore depends on the procedures, which are data you can read, and on how faithfully the document was formalized.</p>
+
+<section id="what"><h2>1. What a procedure is</h2>
+<p>A procedure is a <code>procedure</code> bundle wire whose <code>scope</code> carries the tag <code>analysis</code>. It holds:</p>
+<ul>
+<li><b>members</b>: the wires the procedure runs. These are <code>integrity</code> constraints that detect an issue, <code>rule</code>, <code>default</code> and <code>aggregate</code> wires that compute what the constraints and KPIs need, and <code>fact</code> wires for parameters, weights and reference data. <b>A procedure is exactly its members.</b> The analyzer runs these wires and nothing else from the memory, so a helper rule that two procedures share is a member of both. A member that reads a predicate which only a non-member rule derives would never fire; the analyzer reports it as <code>member_dependency_missing</code>.</li>
+<li><b>findings</b>: every violation of an <code>integrity</code> member, <code>violation ID WITNESS</code>. The integrity wire's <code>message</code> describes the issue and its <code>severity</code> (<code>error</code> or <code>warning</code>) grades it.</li>
+<li><b>measures</b>: the rows of its <code>report</code> lines (an atom pattern per line, such as <code>report kpi_share ?part ?whole ?percent</code>). KPIs and rubric scores are measures.</li>
+<li><b>parameters</b>: member facts of <code>analysis_parameter NAME VALUE</code>, such as a tolerance or a threshold. A run may override any of them by name.</li>
+<li><b>description</b>: what the procedure checks, in words.</li>
+</ul>
+</section>
+
+<section id="document-layer"><h2>2. The document layer and its view</h2>
+<p>The <b>document layer</b> is made of the circuits a document ingestion stored, identified by their provenance (<code>kind: document</code>, written by ingestion v1 and v2). It can also be named explicitly, by circuit name, by document name, or by the document's SHA-256. Each document wire keeps its <code>quote</code> and its <code>source</code> (for example "title, section, line N"), and the circuit's provenance gives the document's name and line range. A finding reports all three.</p>
+<p>Some checks have to look at statements in general, whatever their predicate. Two examples: "an atom that is both asserted and denied" and "two values for one key". For these the analyzer builds the <b>document view</b>. It closes the document layer under the run's rules with the oracle, then writes one fact for each literal that rests on a document wire:</p>
+<ul>
+<li><code>asserted_atom "TEXT"</code>: the atom has positive evidence, either stated or derived by the document's own rules.</li>
+<li><code>denied_atom "TEXT"</code>: the atom has negative evidence, an explicit <code>not</code>.</li>
+<li><code>keyed_value "P KEY" "REST"</code>: an atom of a predicate declared <code>key N</code>, written as its key and its remaining values.</li>
+</ul>
+<p>The view is structure, not language understanding: it holds the canonical SOP text of each literal. Each view fact remembers the document wires behind it, so a contradiction found through the document's own rules is reported with the fact, the rule and the denial that make it up.</p>
+</section>
+
+<section id="writing"><h2>3. Writing a procedure as data</h2>
+<p>A procedure is added like any other knowledge: as SOP circuits, in a base memory layer or in a session, with no code. The library's document-analysis vocabulary is <code>amount</code>, <code>unit_of</code>, <code>component_of</code>, <code>breakdown_complete</code>, <code>share_of</code>, <code>lower_limit</code>, <code>upper_limit</code>, <code>measure_of</code>, <code>starts_on</code>, <code>ends_on</code>, <code>precedes</code>, <code>born_in_year</code>, <code>age_years</code>, <code>as_of_year</code>, <code>claim_rests_on</code>, <code>premise_stated</code>, <code>disjoint_classes</code>, <code>period_amount</code>, <code>period_follows</code> and <code>ratio_definition</code>. Dates are the integer YYYYMMDD, the date value ingestion v2 writes. A domain whose documents use relations of their own bridges them with a rule that is a member of its procedure.</p>
+<h3>A finding: an integrity constraint</h3>
+<pre><code>@hr_min_leave integrity
+  never all
+    leave_days ?c ?d
+    compare ?d below 20
+  end
+  witness ?c
+  message "the legal minimum is 20 days of leave"
+  severity error
+
+@hr_policy procedure
+  members $hr_min_leave
+  description "Analysis: the HR rules of the domain."
+  scope "analysis, findings"</code></pre>
+<h3>A KPI: a rule and a report line</h3>
+<pre><code>@q_margin fact
+  holds ratio_definition net_margin net_profit revenue
+
+@finance_ratios procedure
+  members $an_k_ratio $q_margin
+  description "Analysis: the net margin the analyst asks for."
+  scope "analysis, kpis"
+  report kpi_ratio ?name ?ratio</code></pre>
+<p>The rule <code>an_k_ratio</code> of the library computes <code>numerator / denominator</code> for every <code>ratio_definition</code> that is a member of the run. A zero denominator gives no value; it never causes a division by zero.</p>
+<h3>A rubric: rules plus weights</h3>
+<pre><code>@an_w_consistent fact
+  holds rubric_weight document_quality_v1 consistent 3
+
+@an_q_consistent rule
+  when rubric_weight document_quality_v1 consistent ?w
+  when absent has_contradiction
+  then criterion_met document_quality_v1 consistent</code></pre>
+<p>A criterion is a rule that concludes <code>criterion_met RUBRIC CRITERION</code>, and its weight is a fact. The aggregates <code>an_q_score</code> and <code>an_q_max</code> sum the weights of the criteria met and of all criteria, and <code>criterion_failed</code> names the rest. The rubric's report lines are <code>rubric_score</code>, <code>rubric_max</code>, <code>criterion_met</code> and <code>criterion_failed</code>.</p>
+<h3>A bridge from a domain's own relations</h3>
+<pre><code>@fin_revenue_amount rule
+  when revenue_of ?company ?year ?value
+  then amount ?company ?value</code></pre>
+<p>Make the bridge a member of the domain's procedure. The library's checks and KPIs then apply to the domain's documents unchanged.</p>
+</section>
+
+<section id="library"><h2>4. The starter library <code>analysis-core-v1</code></h2>
+<p>The library is the seed memory <code>config/knowledge/analysis-core-v1/</code> and imports <code>core-min</code>. To analyse a document, start a session on it, or on a memory that imports it.</p>
+<div class="table-wrap"><table><thead><tr><th>Procedure</th><th>What it reports</th></tr></thead><tbody>
+<tr><td><code>analysis_contradictions</code></td><td><code>an_contradicted_atom</code>: a statement asserted and denied, directly or through the document's own rules. <code>an_conflicting_values</code>: two values under one key of a functional relation. <code>an_disjoint_membership</code>: a thing in two classes that exclude each other.</td></tr>
+<tr><td><code>analysis_numeric_consistency</code></td><td>Parts that exceed their total. A complete breakdown that does not add up. Percentage shares above 100, or below 100 when the breakdown is complete. A stated percentage that does not match the amounts it is a percentage of. A part in another unit than its whole (a warning). Values outside the document's own limits. Values outside the plausible range of their kind of measurement (percentage, age, duration, count, price, temperature, probability). Parameters: <code>total_tolerance</code> (0) and <code>share_tolerance</code> (0.5 points).</td></tr>
+<tr><td><code>analysis_temporal_consistency</code></td><td>An end before its start. A stated order of events that contradicts their dates. An age that does not match the birth year at the reference year (parameter <code>age_tolerance</code>, 1 year). An impossible age. A birth after the reference year.</td></tr>
+<tr><td><code>analysis_claim_support</code></td><td>A claim that rests on a premise the document never states (a warning).</td></tr>
+<tr><td><code>analysis_kpis</code></td><td>The share of each component in its whole (in percent). The growth of a quantity from one period to the next. The average of the components of a whole. Ratios defined as data. A whole whose parts are in another unit gets no share and no average.</td></tr>
+<tr><td><code>analysis_quality_rubric</code></td><td><code>document_quality_v1</code>: units stated (2), consistent (3), totals add up (2), dates consistent (1), claims supported (2), reference year stated (1). The score is the sum of the weights of the criteria met, out of 11.</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="running"><h2>5. Running an analysis</h2>
+<ul>
+<li><b>JavaScript.</b> <code>analyzeSession(source, procedures, options)</code> from <code>lib/analysis/index.mjs</code>. The source is a session <code>{sessions, id}</code>, a base memory <code>{memories, id}</code> or circuits <code>{circuits}</code>. <code>procedures</code> is null (every analysis procedure) or a list of ids. The options are <code>documents</code>, <code>parameters</code>, <code>reasoning</code> (<code>auto</code> or one engine id, run exactly), <code>verify</code> and <code>budget</code>. <code>listProcedures(source)</code> lists the procedures without running them.</li>
+<li><b>HTTP.</b> <code>POST /v1/sessions/{id}/analyze</code> and <code>POST /v1/memories/{id}/analyze</code> take the body <code>{procedures?, parameters?, documents?, reasoning?, verify?, proofs?}</code>. <code>GET /v1/sessions/{id}/analysis-procedures</code> and <code>GET /v1/memories/{id}/analysis-procedures</code> list the procedures (<a href="api.html">API</a>).
+<pre><code>curl -s -X POST localhost:9999/v1/sessions/$SESSION/analyze -H "authorization: Bearer $TOKEN" \
+  -H 'content-type: application/json' -d '{"procedures": ["analysis_numeric_consistency"], "parameters": {"total_tolerance": 0.05}}'</code></pre></li>
+<li><b>ChatSOPAdapter.</b> The mode <code>analysis</code>, registered through the adapter's extension point (<code>lib/analysis/adapter.mjs</code>). Call <code>adapter.answer({message, mode: 'analysis', options: {analysis: {source, procedures?, parameters?, documents?}}})</code>. The answer packet carries the report text, the findings and measures, and the proofs.</li>
+<li><b>Ploinky Workers task.</b> The template <code>analyze-document</code> (<code>jobs/templates/analyze-document/</code>) runs three steps. It ingests each attachment with ingestion v2 into the target: a base memory, a session, or, with target <code>none</code>, a new session on <code>analysis-core-v1</code>. It then analyses that document's circuits and writes <code>analysis/&lt;document&gt;/analysis.json</code> and <code>report.md</code> into the task folder.
+<pre><code>pworker task --instructions "Check this report" \
+  --attach report.md --target none --template analyze-document --params '{"rights": "owner-provided"}'</code></pre></li>
+</ul>
+<p>An analysis builds a single theory from four parts: the selected procedures' members, the declarations they and the document use, the document wires, and the document view. Each query of a procedure runs through the <a href="wiki.html#definition-strategy-router">StrategyRouter</a>; a small document stays on the oracle. Each row is then explained by the oracle (<code>mode explain</code>), which gives its proof and the document wires it rests on. An engine named explicitly runs exactly. A query that engine cannot express is listed under <code>routes.unsupported</code> and announced in the report. It is never answered by another engine.</p>
+</section>
+
+<section id="report"><h2>6. Reading the report</h2>
+<p>The packet (<code>object: chatsop.analysis</code>) has these fields:</p>
+<ul>
+<li><code>findings</code>: each finding has its <code>procedure</code>, the <code>rule</code> that fired (id, message, severity, source), the <code>witness</code> and its label, and the <code>evidence</code>. The evidence lists the document wires with <code>document</code>, <code>location</code>, the exact <code>quote</code> and the wire's SOP. Each finding also has the other <code>rules</code> applied, the <code>view</code> atoms involved, the oracle <code>proof</code> and the <code>route</code>.</li>
+<li><code>measures</code>: KPI and rubric rows, each with its values, evidence, rules and proof.</li>
+<li><code>counts</code>, <code>procedures</code> (with the parameters in force), <code>view</code> (the number of view facts), <code>routes</code> (the engines, and any query an explicit engine could not run), and <code>lint</code>.</li>
+<li><code>text</code>: the report in English. Every sentence is a <code>line_*</code> reply wire of the conversation layer (<code>config/knowledge/conversation-v1/0080-analysis-lines.sop</code>), and the code holds no phrasing. A finding uses <code>line_finding_&lt;integrity id&gt;</code> when the layer has one, otherwise <code>line_finding</code> with the rule's own message. A measure uses <code>line_report_&lt;predicate&gt;</code>, otherwise <code>line_report_row</code>. A domain adds its own lines as data. If the conversation layer in use lacks these lines, for example a stored copy older than the shipped layer (renew it with <code>node tools/refresh-seed-memories.mjs --apply</code>), <code>text</code> is null and <code>render_error</code> says why. The findings and measures are unaffected.</li>
+</ul>
+<pre><code>Analysis of northwind-annual-2025.md with analysis_contradictions, ...
+Findings: 4 (3 errors, 1 warnings).
+Error: the document both asserts and denies the same statement (has_debt northwind; rule an_contradicted_atom of analysis_contradictions).
+  northwind-annual-2025.md, line 16: "A company that holds a bank loan has debt."
+  northwind-annual-2025.md, line 15: "In March 2024 the company took a bank loan of 2.0 million EUR to finance the new plant."
+  northwind-annual-2025.md, line 14: "Northwind Tools has no debt."
+...
+Growth of revenue in fy2025: 12.73%.</code></pre>
+</section>
+
+<section id="evaluation"><h2>7. Evaluation</h2>
+<p>The test set <code>eval/analysis-v1/</code> has eight short documents we wrote for this purpose, so no third-party text is used. They cover a business report, a technical manual, a scientific abstract, a policy, a biography, a project status report, a lab note, and a control document with no planted issue. Together they plant 27 issues and give 23 KPI values to compute, with the ground truth in <code>truth.json</code>. <code>node tools/eval/analysis/run.mjs</code> measures (a) the procedures in isolation over hand-written SOP of each document. <code>--mode analyses --dir DIR</code> measures (b) end to end, over the packets of the <code>analyze-document</code> template. The procedures were written together with this set, so level (a) checks coverage and correctness; it does not show that the procedures generalise.</p>
+<p><b>Results of 2026-10-03.</b> At level (a) all 27 planted issues were found with no spurious finding, and all 23 KPI values and all 8 rubric scores were correct. Level (b) stopped after four documents. It found 2 of 15 planted issues and made 4 spurious findings, with every quote verified. The procedures fired correctly on the wires the ingestion wrote; ingestion v2 is the bottleneck. It wrote document-specific predicates instead of the library vocabulary, distributed statements about a whole to its parts, and wrote negations as separate predicates. Details are in <code>eval/analysis-v1/README.md</code>.</p>
+</section>
+
+<section id="limits"><h2>8. Limits</h2>
+<ul>
+<li>A procedure sees the document layer and its own members, not the rest of the memory. Background knowledge a check needs, such as disjoint classes or plausible ranges, is a member fact.</li>
+<li>The generic checks need the document's wires in the library's vocabulary, or bridged to it. What ingestion v2 writes in a document's own relations is checked only by the view-based procedures (contradictions and keyed values) until a domain bridge exists.</li>
+<li>Class membership is read from <code>is_a</code> facts. The <code>kind</code> line of an <code>entity</code> wire is not a fact the engines see.</li>
+<li>The fixed-point engines (<code>sql-sqlite</code>, <code>datalog-souffle</code>, <code>asp-clingo</code>) decline the library's decimal divisions as <code>not_expressible</code>. <code>prolog-tabling</code> runs the whole library and agrees with the oracle on the test set.</li>
+</ul>
+</section>
+</article></main><script type="module" src="partials-loader.mjs"></script></body></html>

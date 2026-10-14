@@ -1,0 +1,88 @@
+# core-en: measures. The gradable adjectives of comparisons and superlatives ("the largest country", "the most populous city")
+# and the derived measure "years lived" ("How old was X when she died?"). The question rules of SymbolicLM write the adjective as
+# a relation phrase with a value (`relation "be large"`, `role object ?v`, `rank highest ?v`); which measure it stands for is
+# declared here, in the knowledge, never in the language layer. English only (owner decision 2026-10-01).
+@lx_area_of_en_copula lexeme
+  of area_of
+  language en
+  pos copula
+  form "be large"
+  form "be big"
+  frame subject object
+  source "authored (query-surface-agent); the measure of 'large' and 'big' for places"
+
+@lx_population_of_en_copula lexeme
+  of population_of
+  language en
+  pos copula
+  form "be populous"
+  frame subject object
+  source "authored (query-surface-agent); the measure of 'populous'"
+
+@lived_years predicate
+  args subject:entity object:integer
+  role subject person
+  role object integer
+  label en "years lived"
+  description "Approximate years lived: the year of death minus the year of birth (the true age is one year less when the death came before the birthday of that year). Derived by the rule r_lived_years, never stated."
+  unit "years"
+
+@r_lived_years rule
+  when born_on ?p ?b
+  when died_on ?p ?d
+  when compute ?years ?d minus ?b
+  then lived_years ?p ?years
+  source "authored (query-surface-agent): years lived from the birth year and the death year"
+
+@lx_lived_years_en_verb lexeme
+  of lived_years
+  language en
+  pos verb
+  form "live for"
+  form "live to the age of"
+  form "die at the age of"
+  frame subject object
+  source "authored (query-surface-agent); 'How old was X when she died?' is 'X died at the age of ?age'"
+
+@lx_population_of_en_noun_of lexeme
+  of population_of
+  language en
+  pos noun
+  form "be the population of"
+  frame object subject
+  source "authored (query-surface-agent); 'What is the population of the capital of France?' asks the number (subject) of the place (object)"
+
+@lx_area_of_en_noun_of lexeme
+  of area_of
+  language en
+  pos noun
+  form "be the area of"
+  frame object subject
+  source "authored (query-surface-agent); the number is the subject of the noun phrase, the place its object"
+
+@lx_population_of_en_have_people lexeme
+  of population_of
+  language en
+  pos verb
+  form "have people"
+  form "have residents"
+  form "have citizens"
+  frame subject object
+  source "authored (query-surface-agent); 'Which has more people, A or B?' compares the population"
+
+@lx_born_in_en_noun_place lexeme
+  of born_in
+  language en
+  pos noun
+  form "be the birthplace of"
+  form "be the place of birth of"
+  frame location subject
+  source "authored (query-surface-agent); 'the birthplace of X': the place is the surface subject, the person its object"
+
+@lx_died_in_en_noun_place lexeme
+  of died_in
+  language en
+  pos noun
+  form "be the place of death of"
+  frame location subject
+  source "authored (query-surface-agent); the place is the surface subject, the person its object"

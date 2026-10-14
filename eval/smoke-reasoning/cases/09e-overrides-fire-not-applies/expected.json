@@ -1,0 +1,9 @@
+{
+  "feature": "Defaults: overrides blocks by FIRE, so a default that is blocked by its own exception overrides nothing",
+  "status": "supported",
+  "complete": true,
+  "requires": [
+    "default",
+    "overrides"
+  ]
+}

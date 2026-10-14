@@ -1,0 +1,5 @@
+@maria_work fact
+  holds works_at maria lab_alpha
+  valid 2024-01-01 open
+  source example_source
+  quote "Maria lucrează la Alfa din 2024."

@@ -1,0 +1,20 @@
+{
+  "feature": "Method control forms: if/else on a state, a choice the engine optimises, an optional step it may skip",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 7,
+    "steps": 4,
+    "names": [
+      "lock_db",
+      "snapshot",
+      "upload_s3",
+      "unlock_db"
+    ]
+  },
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice"
+  ]
+}

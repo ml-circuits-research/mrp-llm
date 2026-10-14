@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "note": "Language data of the KnowledgeLinker (DS014): the words of the copula and the nouns and adjectives it classifies. It names no predicate: which predicates carry a copula reading is declared by the base memory (`reading` on a predicate wire). A base memory may ship its own file of the same shape; `relations` maps extra relation phrases to predicates of that memory.",
+  "copula": {
+    "verbs": ["be", "is", "are", "was", "were", "been", "fi", "este", "e", "sunt", "era", "a fi"],
+    "indefinite": ["a", "an", "un", "o", "niste"],
+    "definite": ["the", "cel", "cea"],
+    "locative": ["in", "located in", "situated in", "lie in", "lies in", "aflat in", "aflata in", "situat in", "situata in"]
+  },
+  "occupations": {
+    "en": ["doctor", "physician", "nurse", "surgeon", "dentist", "teacher", "professor", "lecturer", "engineer", "architect", "lawyer", "judge", "scientist", "physicist", "chemist", "mathematician", "biologist", "astronomer", "philosopher", "economist", "historian", "theologian", "inventor", "computer scientist", "programmer", "developer", "writer", "author", "poet", "novelist", "playwright", "journalist", "painter", "sculptor", "artist", "composer", "musician", "singer", "actor", "actress", "film director", "director", "explorer", "politician", "president", "monarch", "king", "queen", "soldier", "military leader", "farmer", "baker", "cook", "chef", "driver", "pilot", "electrician", "plumber", "carpenter", "mechanic", "accountant", "librarian", "pharmacist", "researcher"],
+    "ro": ["medic", "doctor", "doctorita", "asistent", "asistenta", "chirurg", "stomatolog", "profesor", "profesoara", "invatator", "invatatoare", "inginer", "inginera", "arhitect", "avocat", "judecator", "om de stiinta", "fizician", "chimist", "matematician", "biolog", "astronom", "filosof", "economist", "istoric", "teolog", "inventator", "informatician", "programator", "scriitor", "scriitoare", "autor", "poet", "poeta", "romancier", "dramaturg", "jurnalist", "pictor", "pictorita", "sculptor", "artist", "compozitor", "muzician", "cantaret", "cantareata", "actor", "actrita", "regizor", "explorator", "politician", "presedinte", "monarh", "rege", "regina", "soldat", "fermier", "brutar", "bucatar", "sofer", "pilot", "electrician", "instalator", "tamplar", "mecanic", "contabil", "bibliotecar", "farmacist", "cercetator"]
+  },
+  "attributes": {
+    "en": ["happy", "sad", "tall", "short", "old", "young", "rich", "poor", "famous", "alive", "dead", "married", "single", "tired", "ill", "sick", "healthy", "angry", "kind", "smart", "clever", "busy", "free", "ready", "late", "early", "big", "small", "large", "fast", "slow", "hot", "cold", "red", "blue", "green", "black", "white", "open", "closed", "hungry", "thirsty", "safe", "dangerous", "available", "expensive", "cheap"],
+    "ro": ["fericit", "fericita", "trist", "trista", "inalt", "inalta", "scund", "batran", "batrana", "tanar", "tanara", "bogat", "bogata", "sarac", "saraca", "faimos", "faimoasa", "viu", "vie", "mort", "moarta", "casatorit", "casatorita", "obosit", "obosita", "bolnav", "bolnava", "sanatos", "sanatoasa", "suparat", "suparata", "bun", "buna", "destept", "desteapta", "ocupat", "ocupata", "liber", "libera", "gata", "mare", "mic", "mica", "rapid", "rapida", "lent", "lenta", "cald", "calda", "rece", "rosu", "rosie", "albastru", "albastra", "verde", "negru", "neagra", "alb", "alba", "deschis", "deschisa", "inchis", "inchisa", "flamand", "flamanda", "periculos", "periculoasa", "scump", "scumpa", "ieftin", "ieftina"]
+  },
+  "relations": []
+}

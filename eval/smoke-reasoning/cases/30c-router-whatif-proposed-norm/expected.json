@@ -1,0 +1,44 @@
+{
+  "feature": "Mode of work: what would the plan be if a proposed norm version were approved (conditional on the proposed wire)",
+  "status": "plan_found",
+  "complete": true,
+  "conditional": [
+    "relax_hours"
+  ],
+  "plan": {
+    "cost": 3,
+    "steps": 3,
+    "names": [
+      "notify_oncall",
+      "hard_reset",
+      "verify_link"
+    ]
+  },
+  "used": [
+    {
+      "id": "reset_router",
+      "version": 2
+    },
+    {
+      "id": "notify_promptly",
+      "version": 1
+    }
+  ],
+  "compliance": {
+    "hard": "ok",
+    "soft_violations": [],
+    "total_cost": 3
+  },
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "norms_hard",
+    "whatif",
+    "versions",
+    "used",
+    "zero_arity",
+    "naf",
+    "closed_world"
+  ]
+}

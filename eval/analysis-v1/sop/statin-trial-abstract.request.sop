@@ -1,0 +1,12 @@
+# The analysis request for statin-trial-abstract: the response ratio of the two groups, as a domain procedure written as data.
+
+@st_def_response_ratio fact
+  holds ratio_definition response_ratio response_rate_treatment response_rate_control
+  source "analysis request: response ratio = treatment response rate / control response rate"
+
+@statin_ratios procedure
+  members $an_k_ratio $st_def_response_ratio
+  description "Analysis: the ratios the analyst asks for in the trial abstract (response ratio)."
+  scope "analysis, kpis"
+  source "eval/analysis-v1 analysis request"
+  report kpi_ratio ?name ?ratio

@@ -1,0 +1,30 @@
+{
+  "feature": "A sub-task step: the step names a task atom, and an approved method that achieves it is decomposed in its place",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 3,
+    "steps": 3,
+    "names": [
+      "lint",
+      "unit",
+      "deploy"
+    ]
+  },
+  "used": [
+    {
+      "id": "release",
+      "version": 1
+    },
+    {
+      "id": "run_tests",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "used"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "name": "Conversation (English)",
+  "description": "The assistant's own phrasing as data (DS023 \"Conversation layer\"): reply wires per situation (courtesy and small talk, the reply to a message without a request, unclear messages, near-miss suggestions, tone openings and closings, and the sentences of the answer renderer), the situation priorities and the rules that derive, from the facts of a turn's result packet, which situations apply. The chat renderer asks the JS oracle which replies apply and fills their slots from the packet; the code holds no phrasing. Not imported by the knowledge memories: its predicates describe the dialogue, not the world. Imports core-min.",
+  "imports": ["core-min"]
+}

@@ -1,0 +1,9 @@
+@t2 trace
+  step ~backup_db s1
+  step ~canary s1
+  step ~rollout_blue s1
+  step ~announce s1
+
+@q query
+  mode conform
+  trace $t2

@@ -1,0 +1,67 @@
+# core-min: the smallest shared vocabulary every base memory imports (linking proposal M1). It declares the relation `is_a`
+# and the upper classes; the English core of the next milestone (`core-en`) extends it and never redeclares these ids.
+# A class is an entity of kind class; class membership is an `is_a` fact or the `kind` line of an entity.
+
+@is_a predicate
+  args subject:entity object:entity
+  label en "is a"
+  description "the subject belongs to the class named by the object; between two classes it is subclass of"
+  reading class
+  reading describe
+  describe_rank 1
+  transitive true
+
+@lx_is_a_en lexeme
+  of is_a
+  language en
+  pos copula
+  form "be a"
+  form "be an"
+  form "be a kind of"
+  frame subject object
+  source "core-min: the copula reading of is_a (DS014 The copula)"
+
+@class entity
+  kind class
+  label en "class"
+  alias en "category"
+  alias en "type"
+
+@entity entity
+  kind class
+  label en "entity"
+  alias en "thing"
+
+@person entity
+  kind class
+  label en "person"
+  alias en "human"
+  alias en "individual"
+
+@organization entity
+  kind class
+  label en "organization"
+  alias en "organisation"
+  alias en "institution"
+
+@place entity
+  kind class
+  label en "place"
+  alias en "location"
+
+@occupation entity
+  kind class
+  label en "occupation"
+  alias en "profession"
+  alias en "job"
+
+@property entity
+  kind class
+  label en "property"
+  alias en "attribute"
+  alias en "quality"
+
+@unit entity
+  kind class
+  label en "unit"
+  alias en "unit of measure"

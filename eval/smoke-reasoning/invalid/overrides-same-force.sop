@@ -1,0 +1,9 @@
+# expect: overrides_target_mismatch
+@a action
+  requires p
+  adds q
+@n1 norm
+  forbid ~a
+@n2 norm
+  forbid ~a
+  overrides $n1

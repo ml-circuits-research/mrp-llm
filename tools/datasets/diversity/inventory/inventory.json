@@ -1,0 +1,5794 @@
+{
+  "format": "chatsop-diversity-inventory-v1",
+  "generated_by": "node tools/datasets/diversity/mine-sources.mjs",
+  "generated_on": "2026-09-28",
+  "rights": {
+    "license": "MIT (repository LICENSE); original ChatSOP authored text",
+    "rights_decision": "owner-released-inspired-by",
+    "rights_decision_date": "2026-09-28",
+    "inspired_by": [
+      {
+        "id": "qqp",
+        "name": "Quora Question Pairs (GLUE QQP)",
+        "url": "https://quoradata.quora.com/First-Quora-Dataset-Release-Question-Pairs",
+        "licence": "Quora first release terms (non-commercial research use with attribution); no SPDX licence identified"
+      },
+      {
+        "id": "paws",
+        "name": "PAWS-Wiki labeled final",
+        "url": "https://github.com/google-research-datasets/paws",
+        "licence": "PAWS LICENSE: may be freely used for any purpose, acknowledgement of Google LLC appreciated; underlying Wikipedia text CC BY-SA 4.0"
+      },
+      {
+        "id": "proofwriter",
+        "name": "ProofWriter (OWA structured)",
+        "url": "https://allenai.org/data/proofwriter",
+        "licence": "No dataset licence file in the official release; secondary sources report CC BY 4.0 (unconfirmed)"
+      },
+      {
+        "id": "ambignq",
+        "name": "AmbigNQ (AmbigQA)",
+        "url": "https://nlp.cs.washington.edu/ambigqa/",
+        "licence": "CC BY-SA 3.0 (notice bundled in the publisher release ZIP); underlying Natural Questions CC BY-SA 3.0"
+      },
+      {
+        "id": "qa2d",
+        "name": "QA2D (question to declarative)",
+        "url": "https://github.com/kelvinguu/qanli",
+        "licence": "Code MIT (Demszky 2019); dataset licence not stated (mirror card: Needs More Information); upstream SQuAD CC BY-SA 4.0 plus RACE/NewsQA/QAMR/MovieQA terms"
+      },
+      {
+        "id": "squad",
+        "name": "SQuAD v2.0 (dev)",
+        "url": "https://rajpurkar.github.io/SQuAD-explorer/",
+        "licence": "CC BY-SA 4.0"
+      }
+    ],
+    "text_copied": false,
+    "never_taken": [
+      "source sentences, questions, passages, answers or declarative rewrites (verbatim, translated or lightly edited)",
+      "source entity names, titles or row identifiers in any natural-language field",
+      "source labels as gold: every ChatSOP target is authored and executed independently"
+    ],
+    "no_copy_check": "node tools/datasets/no-copy.mjs",
+    "spec": "docs/specs/DS011-source-rights.md"
+  },
+  "method": "Deterministic lexical heuristics over the cached source files in datasets_sources/. Counts are measurements of surface phenomena, not semantic annotations. Skeletons keep closed-class words and mask every content word as X and numbers as N; no source sentence, name, answer or id is stored.",
+  "row_limit_per_file": null,
+  "sources_mined": {
+    "question_types": [
+      "qqp (both questions)",
+      "qa2d (questions)",
+      "ambignq (original questions)"
+    ],
+    "paraphrase_operations": [
+      "qqp pairs",
+      "paws pairs"
+    ],
+    "ambiguity_types": [
+      "ambignq multiple-QA annotations"
+    ],
+    "reasoning": [
+      "proofwriter OWA train/validation/test"
+    ],
+    "declarative_rewrites": [
+      "qa2d train/dev"
+    ],
+    "noise": [
+      "qqp",
+      "paws (clean baseline)",
+      "qa2d",
+      "ambignq"
+    ]
+  },
+  "question_types": {
+    "qqp": {
+      "what": 225129,
+      "how_do": 72034,
+      "why": 64904,
+      "yes_no_be": 57532,
+      "how_can": 49498,
+      "how": 47470,
+      "wh_in_situ_or_embedded": 42864,
+      "yes_no_modal": 39736,
+      "declarative_question": 35900,
+      "what_is_the_best": 34853,
+      "which": 34395,
+      "yes_no_do": 26212,
+      "who": 15311,
+      "where": 13130,
+      "what_is_the_difference": 9060,
+      "how_much": 7648,
+      "when": 6425,
+      "how_many": 6117,
+      "statement_or_fragment": 4086,
+      "yes_no_have": 3942,
+      "how_long": 2873,
+      "preposition_fronted_wh": 2564,
+      "what_is_the_meaning": 2020,
+      "how_to": 910,
+      "what_is_the_reason": 601,
+      "what_is_the_purpose": 542,
+      "how_often": 531,
+      "imperative_request": 405,
+      "what_is_the_way": 331,
+      "what_is_the_role": 323,
+      "what_is_the_name": 303,
+      "how_old": 210,
+      "how_far": 205,
+      "how_big": 201,
+      "whom": 103,
+      "what_is_the_cause": 93,
+      "whose": 73,
+      "empty": 18
+    },
+    "qa2d": {
+      "what": 30203,
+      "wh_in_situ_or_embedded": 9101,
+      "who": 7161,
+      "preposition_fronted_wh": 4367,
+      "when": 4127,
+      "which": 3568,
+      "how_many": 3328,
+      "where": 2763,
+      "how": 1605,
+      "why": 1229,
+      "what_is_the_name": 1199,
+      "how_much": 744,
+      "how_long": 443,
+      "declarative_question": 211,
+      "whose": 171,
+      "how_do": 148,
+      "how_old": 101,
+      "how_can": 87,
+      "how_far": 77,
+      "what_is_the_purpose": 72,
+      "statement_or_fragment": 63,
+      "how_often": 54,
+      "what_is_the_best": 42,
+      "what_is_the_reason": 32,
+      "how_big": 22,
+      "what_is_the_cause": 22,
+      "whom": 21,
+      "what_is_the_meaning": 20,
+      "yes_no_be": 17,
+      "what_is_the_difference": 13,
+      "yes_no_do": 13,
+      "imperative_request": 10,
+      "what_is_the_way": 9,
+      "what_is_the_role": 6,
+      "yes_no_have": 3,
+      "yes_no_modal": 2
+    },
+    "ambignq": {
+      "who": 4944,
+      "when": 2443,
+      "what": 1240,
+      "where": 978,
+      "declarative_question": 929,
+      "how_many": 514,
+      "wh_in_situ_or_embedded": 318,
+      "which": 230,
+      "what_is_the_name": 111,
+      "preposition_fronted_wh": 70,
+      "how_long": 36,
+      "yes_no_be": 36,
+      "imperative_request": 35,
+      "what_is_the_meaning": 30,
+      "how_much": 29,
+      "how": 20,
+      "how_old": 18,
+      "why": 13,
+      "how_far": 12,
+      "yes_no_do": 12,
+      "how_do": 6,
+      "what_is_the_purpose": 5,
+      "how_often": 3,
+      "whose": 3,
+      "what_is_the_cause": 1,
+      "what_is_the_difference": 1,
+      "what_is_the_role": 1
+    }
+  },
+  "question_skeletons": {
+    "qqp": {
+      "how": [
+        {
+          "pattern": "how does X ?",
+          "count": 1252
+        },
+        {
+          "pattern": "how is X ?",
+          "count": 813
+        },
+        {
+          "pattern": "how X is X ?",
+          "count": 736
+        },
+        {
+          "pattern": "how is the X in a X ?",
+          "count": 667
+        },
+        {
+          "pattern": "how did X ?",
+          "count": 422
+        },
+        {
+          "pattern": "how are X ?",
+          "count": 413
+        },
+        {
+          "pattern": "how should i X ?",
+          "count": 398
+        },
+        {
+          "pattern": "how does a X ?",
+          "count": 393
+        }
+      ],
+      "which": [
+        {
+          "pattern": "which is the best X in X ?",
+          "count": 1217
+        },
+        {
+          "pattern": "which is the best X ?",
+          "count": 919
+        },
+        {
+          "pattern": "which is the best X for X ?",
+          "count": 856
+        },
+        {
+          "pattern": "which is the best X for X in X ?",
+          "count": 411
+        },
+        {
+          "pattern": "which is the best X to X ?",
+          "count": 376
+        },
+        {
+          "pattern": "which are the best X in X ?",
+          "count": 341
+        },
+        {
+          "pattern": "which is a X and X in X ?",
+          "count": 290
+        },
+        {
+          "pattern": "which is a X and X ?",
+          "count": 280
+        }
+      ],
+      "how_do": [
+        {
+          "pattern": "how do i X ?",
+          "count": 4430
+        },
+        {
+          "pattern": "how do i X a X ?",
+          "count": 2325
+        },
+        {
+          "pattern": "how do i X my X ?",
+          "count": 2260
+        },
+        {
+          "pattern": "how do you X ?",
+          "count": 1403
+        },
+        {
+          "pattern": "how do X ?",
+          "count": 1215
+        },
+        {
+          "pattern": "how do you X a X ?",
+          "count": 1164
+        },
+        {
+          "pattern": "how do i X in X ?",
+          "count": 1055
+        },
+        {
+          "pattern": "how do i X for X ?",
+          "count": 918
+        }
+      ],
+      "what": [
+        {
+          "pattern": "what is X ?",
+          "count": 8067
+        },
+        {
+          "pattern": "what is the X of X ?",
+          "count": 3695
+        },
+        {
+          "pattern": "what are the X of X ?",
+          "count": 2882
+        },
+        {
+          "pattern": "what is a X ?",
+          "count": 2781
+        },
+        {
+          "pattern": "what is the X ?",
+          "count": 2181
+        },
+        {
+          "pattern": "what are some X ?",
+          "count": 2078
+        },
+        {
+          "pattern": "what are X ?",
+          "count": 1542
+        },
+        {
+          "pattern": "what are some X of X ?",
+          "count": 1506
+        }
+      ],
+      "where": [
+        {
+          "pattern": "where can i X ?",
+          "count": 657
+        },
+        {
+          "pattern": "where can i X in X ?",
+          "count": 544
+        },
+        {
+          "pattern": "where can i get X in X ?",
+          "count": 322
+        },
+        {
+          "pattern": "where can i X a X ?",
+          "count": 301
+        },
+        {
+          "pattern": "where is X ?",
+          "count": 184
+        },
+        {
+          "pattern": "where can i X for X ?",
+          "count": 159
+        },
+        {
+          "pattern": "where can i get best X in X ?",
+          "count": 149
+        },
+        {
+          "pattern": "where can i X best X in X ?",
+          "count": 131
+        }
+      ],
+      "yes_no_modal": [
+        {
+          "pattern": "can X ?",
+          "count": 745
+        },
+        {
+          "pattern": "can X be X ?",
+          "count": 330
+        },
+        {
+          "pattern": "will X ?",
+          "count": 317
+        },
+        {
+          "pattern": "can i X ?",
+          "count": 202
+        },
+        {
+          "pattern": "should i X ?",
+          "count": 192
+        },
+        {
+          "pattern": "can i X in X ?",
+          "count": 172
+        },
+        {
+          "pattern": "can we X ?",
+          "count": 168
+        },
+        {
+          "pattern": "should X over N not be X to X ?",
+          "count": 168
+        }
+      ],
+      "wh_in_situ_or_embedded": [
+        {
+          "pattern": "X : what is X for X ?",
+          "count": 112
+        },
+        {
+          "pattern": "i X my X and X . how can i X into X ?",
+          "count": 68
+        },
+        {
+          "pattern": "X your X and why ?",
+          "count": 63
+        },
+        {
+          "pattern": "X : what is the X between X and X ?",
+          "count": 62
+        },
+        {
+          "pattern": "X : when is X to X ?",
+          "count": 46
+        },
+        {
+          "pattern": "X : have you X on a X in X ? what made it X ?",
+          "count": 42
+        },
+        {
+          "pattern": "X : what are the best X ?",
+          "count": 41
+        },
+        {
+          "pattern": "X : what is X ?",
+          "count": 41
+        }
+      ],
+      "what_is_the_best": [
+        {
+          "pattern": "what are the best X ?",
+          "count": 1916
+        },
+        {
+          "pattern": "what is the best X ?",
+          "count": 1853
+        },
+        {
+          "pattern": "what is the best X for X ?",
+          "count": 1594
+        },
+        {
+          "pattern": "what is the best way to X ?",
+          "count": 1468
+        },
+        {
+          "pattern": "what are the best X for X ?",
+          "count": 1247
+        },
+        {
+          "pattern": "what are the best X to X ?",
+          "count": 1187
+        },
+        {
+          "pattern": "what is the best X to X ?",
+          "count": 826
+        },
+        {
+          "pattern": "what are the best X in X ?",
+          "count": 796
+        }
+      ],
+      "declarative_question": [
+        {
+          "pattern": "X ?",
+          "count": 1204
+        },
+        {
+          "pattern": "X the X between X and X ?",
+          "count": 616
+        },
+        {
+          "pattern": "X in X ?",
+          "count": 397
+        },
+        {
+          "pattern": "X of X ?",
+          "count": 358
+        },
+        {
+          "pattern": "X your X ?",
+          "count": 356
+        },
+        {
+          "pattern": "X the best way to X ?",
+          "count": 277
+        },
+        {
+          "pattern": "X the X of X ?",
+          "count": 257
+        },
+        {
+          "pattern": "X the best X ?",
+          "count": 242
+        }
+      ],
+      "yes_no_do": [
+        {
+          "pattern": "does X ?",
+          "count": 1329
+        },
+        {
+          "pattern": "do X ?",
+          "count": 1062
+        },
+        {
+          "pattern": "do X at X have a X ? does this X and X ?",
+          "count": 608
+        },
+        {
+          "pattern": "do X like X ?",
+          "count": 250
+        },
+        {
+          "pattern": "does X in X ?",
+          "count": 174
+        },
+        {
+          "pattern": "do X have X ?",
+          "count": 170
+        },
+        {
+          "pattern": "do X in X ?",
+          "count": 166
+        },
+        {
+          "pattern": "does X have X ?",
+          "count": 161
+        }
+      ],
+      "how_can": [
+        {
+          "pattern": "how can i X ?",
+          "count": 3605
+        },
+        {
+          "pattern": "how can i X my X ?",
+          "count": 2684
+        },
+        {
+          "pattern": "how can i X a X ?",
+          "count": 1250
+        },
+        {
+          "pattern": "how can i X in X ?",
+          "count": 732
+        },
+        {
+          "pattern": "how can we X ?",
+          "count": 351
+        },
+        {
+          "pattern": "how can you X ?",
+          "count": 347
+        },
+        {
+          "pattern": "how can i X to X ?",
+          "count": 343
+        },
+        {
+          "pattern": "how can i X for X ?",
+          "count": 333
+        }
+      ],
+      "why": [
+        {
+          "pattern": "why do X ?",
+          "count": 1406
+        },
+        {
+          "pattern": "why is X ?",
+          "count": 995
+        },
+        {
+          "pattern": "why is X in X ?",
+          "count": 879
+        },
+        {
+          "pattern": "why are X ?",
+          "count": 559
+        },
+        {
+          "pattern": "why is X so X ?",
+          "count": 555
+        },
+        {
+          "pattern": "why does X ?",
+          "count": 498
+        },
+        {
+          "pattern": "why did X ?",
+          "count": 410
+        },
+        {
+          "pattern": "why are X so X ?",
+          "count": 336
+        }
+      ],
+      "yes_no_be": [
+        {
+          "pattern": "is X ?",
+          "count": 2449
+        },
+        {
+          "pattern": "is X a X ?",
+          "count": 1547
+        },
+        {
+          "pattern": "are X ?",
+          "count": 738
+        },
+        {
+          "pattern": "is X in X ?",
+          "count": 548
+        },
+        {
+          "pattern": "is it X to X ?",
+          "count": 522
+        },
+        {
+          "pattern": "is X for X ?",
+          "count": 493
+        },
+        {
+          "pattern": "is the X ?",
+          "count": 350
+        },
+        {
+          "pattern": "is X . X ?",
+          "count": 262
+        }
+      ],
+      "how_much": [
+        {
+          "pattern": "how much does X ?",
+          "count": 134
+        },
+        {
+          "pattern": "how much does it X to X a X ?",
+          "count": 127
+        },
+        {
+          "pattern": "how much does a X ?",
+          "count": 83
+        },
+        {
+          "pattern": "how much do X ?",
+          "count": 76
+        },
+        {
+          "pattern": "how much X do X make ?",
+          "count": 54
+        },
+        {
+          "pattern": "how much does a X in X ?",
+          "count": 53
+        },
+        {
+          "pattern": "how much X is X ?",
+          "count": 48
+        },
+        {
+          "pattern": "how much does it X to X a X in X ?",
+          "count": 41
+        }
+      ],
+      "yes_no_have": [
+        {
+          "pattern": "has X been X ?",
+          "count": 129
+        },
+        {
+          "pattern": "have the X been X ?",
+          "count": 70
+        },
+        {
+          "pattern": "have X been X ?",
+          "count": 64
+        },
+        {
+          "pattern": "has X ?",
+          "count": 63
+        },
+        {
+          "pattern": "have you X a X ?",
+          "count": 62
+        },
+        {
+          "pattern": "have you X ?",
+          "count": 55
+        },
+        {
+          "pattern": "has anyone X ?",
+          "count": 32
+        },
+        {
+          "pattern": "has anyone X . X ?",
+          "count": 28
+        }
+      ],
+      "who": [
+        {
+          "pattern": "who is X ?",
+          "count": 676
+        },
+        {
+          "pattern": "who X ?",
+          "count": 326
+        },
+        {
+          "pattern": "who is the X of X ?",
+          "count": 260
+        },
+        {
+          "pattern": "who are some X of X and what should X know about them ?",
+          "count": 244
+        },
+        {
+          "pattern": "who X the X ?",
+          "count": 238
+        },
+        {
+          "pattern": "who is the best X in X ?",
+          "count": 232
+        },
+        {
+          "pattern": "who is the X ?",
+          "count": 221
+        },
+        {
+          "pattern": "who is the most X ?",
+          "count": 170
+        }
+      ],
+      "what_is_the_difference": [
+        {
+          "pattern": "what is the X between X and X ?",
+          "count": 3975
+        },
+        {
+          "pattern": "what is the X between a X and a X ?",
+          "count": 748
+        },
+        {
+          "pattern": "what is the X between X , X and X ?",
+          "count": 276
+        },
+        {
+          "pattern": "what is the X between X and X in X ?",
+          "count": 171
+        },
+        {
+          "pattern": "what is the X between a X and X ?",
+          "count": 170
+        },
+        {
+          "pattern": "what is the X between a X and an X ?",
+          "count": 147
+        },
+        {
+          "pattern": "what is the X between an X and a X ?",
+          "count": 133
+        },
+        {
+          "pattern": "what is the X between X ?",
+          "count": 93
+        }
+      ],
+      "when": [
+        {
+          "pattern": "when will X ?",
+          "count": 99
+        },
+        {
+          "pattern": "when will X in X ?",
+          "count": 72
+        },
+        {
+          "pattern": "when is X on X in X in X and how X does it go ?",
+          "count": 70
+        },
+        {
+          "pattern": "when did X ?",
+          "count": 61
+        },
+        {
+          "pattern": "when was X ?",
+          "count": 48
+        },
+        {
+          "pattern": "when is X ?",
+          "count": 46
+        },
+        {
+          "pattern": "when was the X ?",
+          "count": 39
+        },
+        {
+          "pattern": "when do X ?",
+          "count": 39
+        }
+      ],
+      "how_many": [
+        {
+          "pattern": "how many X are there in X ?",
+          "count": 164
+        },
+        {
+          "pattern": "how many X are there in the X ?",
+          "count": 120
+        },
+        {
+          "pattern": "how many X does X have ?",
+          "count": 102
+        },
+        {
+          "pattern": "how many X are there in X in the X ?",
+          "count": 93
+        },
+        {
+          "pattern": "how many X in X ?",
+          "count": 86
+        },
+        {
+          "pattern": "how many X ?",
+          "count": 79
+        },
+        {
+          "pattern": "how many X are there ?",
+          "count": 74
+        },
+        {
+          "pattern": "how many X are X in X ?",
+          "count": 55
+        }
+      ],
+      "statement_or_fragment": [
+        {
+          "pattern": "X",
+          "count": 52
+        },
+        {
+          "pattern": "in X , how do you say X ?",
+          "count": 31
+        },
+        {
+          "pattern": "X the X between X and X ?",
+          "count": 27
+        },
+        {
+          "pattern": "X the X of X ?",
+          "count": 17
+        },
+        {
+          "pattern": "X the X of X ? X and X",
+          "count": 15
+        },
+        {
+          "pattern": "if X N X N X and X N X N X and X N X N X then what is X N X ? X",
+          "count": 14
+        },
+        {
+          "pattern": "X : is it X that X is X at N X like this ? X",
+          "count": 13
+        },
+        {
+          "pattern": "all of my X are X . why ?",
+          "count": 10
+        }
+      ],
+      "how_long": [
+        {
+          "pattern": "how X does it X to X a X ?",
+          "count": 78
+        },
+        {
+          "pattern": "how X does it X to X ?",
+          "count": 75
+        },
+        {
+          "pattern": "how X does X in your X ?",
+          "count": 68
+        },
+        {
+          "pattern": "how X does it X for a X to X ?",
+          "count": 34
+        },
+        {
+          "pattern": "how X does a X ?",
+          "count": 32
+        },
+        {
+          "pattern": "how X do X ?",
+          "count": 28
+        },
+        {
+          "pattern": "how X does X in the X ?",
+          "count": 25
+        },
+        {
+          "pattern": "how X does it X for X to X ?",
+          "count": 24
+        }
+      ],
+      "what_is_the_purpose": [
+        {
+          "pattern": "what is the X of X ?",
+          "count": 137
+        },
+        {
+          "pattern": "what is the X of your X ?",
+          "count": 41
+        },
+        {
+          "pattern": "what is the X of X ? why are we here ?",
+          "count": 25
+        },
+        {
+          "pattern": "what is the X of X , if not X ?",
+          "count": 16
+        },
+        {
+          "pattern": "what is the X of a X ?",
+          "count": 15
+        },
+        {
+          "pattern": "what is the X of X in X ?",
+          "count": 14
+        },
+        {
+          "pattern": "what is the X of X to you ?",
+          "count": 12
+        },
+        {
+          "pattern": "what is the X of X on X ?",
+          "count": 10
+        }
+      ],
+      "what_is_the_role": [
+        {
+          "pattern": "what is the X of X in X ?",
+          "count": 70
+        },
+        {
+          "pattern": "what is the X of X ?",
+          "count": 23
+        },
+        {
+          "pattern": "what is the X of a X ?",
+          "count": 22
+        },
+        {
+          "pattern": "what is the X of X in the X ?",
+          "count": 16
+        },
+        {
+          "pattern": "what is the X of a X in X ?",
+          "count": 12
+        },
+        {
+          "pattern": "what is the X of a X at X ?",
+          "count": 9
+        },
+        {
+          "pattern": "what is the X of X in a X ?",
+          "count": 7
+        },
+        {
+          "pattern": "what is the X of a X in an it X ?",
+          "count": 6
+        }
+      ],
+      "preposition_fronted_wh": [
+        {
+          "pattern": "in what X is X better than X ?",
+          "count": 28
+        },
+        {
+          "pattern": "in X , what is the X of X ?",
+          "count": 28
+        },
+        {
+          "pattern": "from your X , what is the X of X ?",
+          "count": 22
+        },
+        {
+          "pattern": "for you what is the X of X ?",
+          "count": 22
+        },
+        {
+          "pattern": "in X , what is X ?",
+          "count": 22
+        },
+        {
+          "pattern": "in X , what is the X of the X ?",
+          "count": 20
+        },
+        {
+          "pattern": "in your X , who X the X . X . X ?",
+          "count": 17
+        },
+        {
+          "pattern": "at what X should i X to be X ?",
+          "count": 16
+        }
+      ],
+      "how_to": [
+        {
+          "pattern": "how to X ?",
+          "count": 160
+        },
+        {
+          "pattern": "how to X a X ?",
+          "count": 35
+        },
+        {
+          "pattern": "how to X my X ?",
+          "count": 31
+        },
+        {
+          "pattern": "how to X in X ?",
+          "count": 25
+        },
+        {
+          "pattern": "how to X for X ?",
+          "count": 24
+        },
+        {
+          "pattern": "how to X for ca X ?",
+          "count": 20
+        },
+        {
+          "pattern": "how to X to X ?",
+          "count": 18
+        },
+        {
+          "pattern": "how to X on X ?",
+          "count": 16
+        }
+      ],
+      "what_is_the_meaning": [
+        {
+          "pattern": "what is the X of X ?",
+          "count": 728
+        },
+        {
+          "pattern": "what is the X of the X ?",
+          "count": 157
+        },
+        {
+          "pattern": "what is the X of X in X ?",
+          "count": 81
+        },
+        {
+          "pattern": "what is the X of this X ?",
+          "count": 39
+        },
+        {
+          "pattern": "what is the X of X and X ?",
+          "count": 39
+        },
+        {
+          "pattern": "what is the X of my X ?",
+          "count": 28
+        },
+        {
+          "pattern": "what is the X of X ? X our X on X ?",
+          "count": 24
+        },
+        {
+          "pattern": "what is a X of X ?",
+          "count": 22
+        }
+      ],
+      "what_is_the_reason": [
+        {
+          "pattern": "what is the X ?",
+          "count": 35
+        },
+        {
+          "pattern": "what is the X of X from X ?",
+          "count": 27
+        },
+        {
+          "pattern": "what is the X of X ?",
+          "count": 23
+        },
+        {
+          "pattern": "what is the X the X of X ?",
+          "count": 19
+        },
+        {
+          "pattern": "what is the X for X ?",
+          "count": 17
+        },
+        {
+          "pattern": "what is the X of the X of X in the X ?",
+          "count": 17
+        },
+        {
+          "pattern": "what is the X why X ?",
+          "count": 15
+        },
+        {
+          "pattern": "what was the X the X of X . X from the X of X of the X ?",
+          "count": 15
+        }
+      ],
+      "what_is_the_way": [
+        {
+          "pattern": "what is a way to make X ?",
+          "count": 44
+        },
+        {
+          "pattern": "what is the way to X ?",
+          "count": 34
+        },
+        {
+          "pattern": "what is the way to X the X on X ?",
+          "count": 14
+        },
+        {
+          "pattern": "what is the way to X the X at the X of N X ?",
+          "count": 13
+        },
+        {
+          "pattern": "what is a way to X many X without X ?",
+          "count": 11
+        },
+        {
+          "pattern": "what is a way to X a X of X at X from X ?",
+          "count": 9
+        },
+        {
+          "pattern": "what is the way to get X of X ?",
+          "count": 9
+        },
+        {
+          "pattern": "what is the way to X a X ?",
+          "count": 9
+        }
+      ],
+      "imperative_request": [
+        {
+          "pattern": "tell a X that the X you have X ?",
+          "count": 19
+        },
+        {
+          "pattern": "X of X ?",
+          "count": 14
+        },
+        {
+          "pattern": "X of some of the best X ?",
+          "count": 11
+        },
+        {
+          "pattern": "X ?",
+          "count": 9
+        },
+        {
+          "pattern": "X the X of X ?",
+          "count": 9
+        },
+        {
+          "pattern": "X the X of X and X of X ?",
+          "count": 8
+        },
+        {
+          "pattern": "X your best X you have X ?",
+          "count": 8
+        },
+        {
+          "pattern": "X some X for X ?",
+          "count": 6
+        }
+      ],
+      "how_often": [
+        {
+          "pattern": "how X do you X ?",
+          "count": 28
+        },
+        {
+          "pattern": "how X do X ?",
+          "count": 27
+        },
+        {
+          "pattern": "how X should i X my X ?",
+          "count": 15
+        },
+        {
+          "pattern": "how X should you X your X ?",
+          "count": 15
+        },
+        {
+          "pattern": "how X do X have X ?",
+          "count": 12
+        },
+        {
+          "pattern": "how X do you X as X on X ?",
+          "count": 11
+        },
+        {
+          "pattern": "how X ?",
+          "count": 10
+        },
+        {
+          "pattern": "how X do you X your X ?",
+          "count": 10
+        }
+      ],
+      "how_old": [
+        {
+          "pattern": "how X is X ?",
+          "count": 31
+        },
+        {
+          "pattern": "how X is the X ?",
+          "count": 16
+        },
+        {
+          "pattern": "how X is too X to X ?",
+          "count": 15
+        },
+        {
+          "pattern": "how X was X when he X ?",
+          "count": 6
+        },
+        {
+          "pattern": "how X is X in the X ?",
+          "count": 6
+        },
+        {
+          "pattern": "how X is X in X ?",
+          "count": 6
+        },
+        {
+          "pattern": "how X is too X for X ? or X ?",
+          "count": 5
+        },
+        {
+          "pattern": "how X is ne X ?",
+          "count": 4
+        }
+      ],
+      "what_is_the_name": [
+        {
+          "pattern": "what is the X of this X ?",
+          "count": 26
+        },
+        {
+          "pattern": "what is the X of the X ?",
+          "count": 20
+        },
+        {
+          "pattern": "what is the X of X ?",
+          "count": 14
+        },
+        {
+          "pattern": "what are the X of the X for X ?",
+          "count": 11
+        },
+        {
+          "pattern": "what is the X of the X in X ?",
+          "count": 7
+        },
+        {
+          "pattern": "what is the X of the X of X ?",
+          "count": 7
+        },
+        {
+          "pattern": "what is the X of the X in this X ?",
+          "count": 6
+        },
+        {
+          "pattern": "what is the X of the X ? which was the X ?",
+          "count": 6
+        }
+      ],
+      "whose": [
+        {
+          "pattern": "whose going to X the X after all the X this X ?",
+          "count": 8
+        },
+        {
+          "pattern": "whose X is better X or X ?",
+          "count": 7
+        },
+        {
+          "pattern": "whose X will be X for X or X ?",
+          "count": 5
+        },
+        {
+          "pattern": "whose X in us X will X , X or X and how ?",
+          "count": 5
+        },
+        {
+          "pattern": "whose X is in better X in N : X or X ?",
+          "count": 2
+        },
+        {
+          "pattern": "whose X is the X of N and N X ?",
+          "count": 2
+        },
+        {
+          "pattern": "whose X on ca X is best ?",
+          "count": 2
+        },
+        {
+          "pattern": "whose X do you think are the most X ?",
+          "count": 2
+        }
+      ],
+      "how_far": [
+        {
+          "pattern": "how X is X from the X and how does its X the X ?",
+          "count": 10
+        },
+        {
+          "pattern": "how X is X from X ?",
+          "count": 7
+        },
+        {
+          "pattern": "how X could i go X in X before i would not be X to X an X ?",
+          "count": 6
+        },
+        {
+          "pattern": "how X will X the X N X ?",
+          "count": 5
+        },
+        {
+          "pattern": "how X in X could we go in the X before we would X to be X to X the X of the X ?",
+          "count": 5
+        },
+        {
+          "pattern": "how X are we from X ?",
+          "count": 5
+        },
+        {
+          "pattern": "how X is X from the X ?",
+          "count": 4
+        },
+        {
+          "pattern": "how X is X from X ? how many X , X , X , or X would it X to get there ?",
+          "count": 4
+        }
+      ],
+      "whom": [
+        {
+          "pattern": "whom should one X on X ? why ?",
+          "count": 11
+        },
+        {
+          "pattern": "whom do you X to X the X of the X : X or X and why ?",
+          "count": 10
+        },
+        {
+          "pattern": "whom should one X on X ? and why ?",
+          "count": 9
+        },
+        {
+          "pattern": "whom should i X on X ? why ?",
+          "count": 5
+        },
+        {
+          "pattern": "whom and what has it X in the X on the X on X by a X in X ?",
+          "count": 3
+        },
+        {
+          "pattern": "whom do you think are the X in X to X for the X in N ?",
+          "count": 3
+        },
+        {
+          "pattern": "whom should i X on X to X my X ?",
+          "count": 3
+        },
+        {
+          "pattern": "whom do you X the most and why ?",
+          "count": 3
+        }
+      ],
+      "how_big": [
+        {
+          "pattern": "how X is the X ?",
+          "count": 40
+        },
+        {
+          "pattern": "how X is X ?",
+          "count": 16
+        },
+        {
+          "pattern": "how X is a X ?",
+          "count": 11
+        },
+        {
+          "pattern": "how X are X ?",
+          "count": 6
+        },
+        {
+          "pattern": "how X is the X between X and X ?",
+          "count": 5
+        },
+        {
+          "pattern": "how X can X get ? how are X ?",
+          "count": 3
+        },
+        {
+          "pattern": "how X can a X get ?",
+          "count": 3
+        },
+        {
+          "pattern": "how X is the X by the N X ?",
+          "count": 3
+        }
+      ],
+      "empty": [
+        {
+          "pattern": "?",
+          "count": 12
+        },
+        {
+          "pattern": ". .",
+          "count": 3
+        },
+        {
+          "pattern": ".",
+          "count": 1
+        },
+        {
+          "pattern": "? ? ? ?",
+          "count": 1
+        },
+        {
+          "pattern": "",
+          "count": 1
+        }
+      ],
+      "what_is_the_cause": [
+        {
+          "pattern": "what is the X of X ?",
+          "count": 35
+        },
+        {
+          "pattern": "what is the X of X its X ?",
+          "count": 6
+        },
+        {
+          "pattern": "what is the X of X of X ?",
+          "count": 5
+        },
+        {
+          "pattern": "what is the X for X ?",
+          "count": 4
+        },
+        {
+          "pattern": "what was the X of X ?",
+          "count": 4
+        },
+        {
+          "pattern": "what is the X of X between X and X ?",
+          "count": 3
+        },
+        {
+          "pattern": "what is the X of an X ?",
+          "count": 2
+        },
+        {
+          "pattern": "what is the X of X N X ?",
+          "count": 2
+        }
+      ]
+    },
+    "qa2d": {
+      "what": [
+        {
+          "pattern": "what is X ?",
+          "count": 423
+        },
+        {
+          "pattern": "what is the X of X ?",
+          "count": 324
+        },
+        {
+          "pattern": "what X ?",
+          "count": 314
+        },
+        {
+          "pattern": "what was X ?",
+          "count": 281
+        },
+        {
+          "pattern": "what X did X ?",
+          "count": 259
+        },
+        {
+          "pattern": "what is the X ?",
+          "count": 226
+        },
+        {
+          "pattern": "what X the X ?",
+          "count": 212
+        },
+        {
+          "pattern": "what is the X of the X ?",
+          "count": 176
+        }
+      ],
+      "where": [
+        {
+          "pattern": "where is the X ?",
+          "count": 143
+        },
+        {
+          "pattern": "where is X ?",
+          "count": 136
+        },
+        {
+          "pattern": "where was the X ?",
+          "count": 83
+        },
+        {
+          "pattern": "where was X ?",
+          "count": 83
+        },
+        {
+          "pattern": "where did X ?",
+          "count": 77
+        },
+        {
+          "pattern": "where does X ?",
+          "count": 49
+        },
+        {
+          "pattern": "where did the X ?",
+          "count": 47
+        },
+        {
+          "pattern": "where are X ?",
+          "count": 40
+        }
+      ],
+      "who": [
+        {
+          "pattern": "who X the X ?",
+          "count": 425
+        },
+        {
+          "pattern": "who X ?",
+          "count": 334
+        },
+        {
+          "pattern": "who was X ?",
+          "count": 144
+        },
+        {
+          "pattern": "who X the X of X ?",
+          "count": 122
+        },
+        {
+          "pattern": "who is X ?",
+          "count": 110
+        },
+        {
+          "pattern": "who was the X of X ?",
+          "count": 73
+        },
+        {
+          "pattern": "who was the X of the X ?",
+          "count": 70
+        },
+        {
+          "pattern": "who X the X of the X ?",
+          "count": 58
+        }
+      ],
+      "wh_in_situ_or_embedded": [
+        {
+          "pattern": "X what X ?",
+          "count": 24
+        },
+        {
+          "pattern": "X what X of X ?",
+          "count": 21
+        },
+        {
+          "pattern": "X what ?",
+          "count": 20
+        },
+        {
+          "pattern": "the X was X in what X ?",
+          "count": 16
+        },
+        {
+          "pattern": "X was X in what X ?",
+          "count": 14
+        },
+        {
+          "pattern": "X in what X ?",
+          "count": 13
+        },
+        {
+          "pattern": "X is the X of what X ?",
+          "count": 12
+        },
+        {
+          "pattern": "X to the X , which of the X is X ?",
+          "count": 12
+        }
+      ],
+      "when": [
+        {
+          "pattern": "when was the X ?",
+          "count": 361
+        },
+        {
+          "pattern": "when did X ?",
+          "count": 275
+        },
+        {
+          "pattern": "when was X ?",
+          "count": 256
+        },
+        {
+          "pattern": "when did the X ?",
+          "count": 227
+        },
+        {
+          "pattern": "when was the X of X ?",
+          "count": 118
+        },
+        {
+          "pattern": "when did X the X ?",
+          "count": 71
+        },
+        {
+          "pattern": "when did the X of X ?",
+          "count": 44
+        },
+        {
+          "pattern": "when were the X ?",
+          "count": 39
+        }
+      ],
+      "which": [
+        {
+          "pattern": "which X ?",
+          "count": 101
+        },
+        {
+          "pattern": "which X the X ?",
+          "count": 67
+        },
+        {
+          "pattern": "which of the X is X to the X ?",
+          "count": 44
+        },
+        {
+          "pattern": "which of the X is X ?",
+          "count": 43
+        },
+        {
+          "pattern": "which X did X ?",
+          "count": 35
+        },
+        {
+          "pattern": "which of the X is not X ?",
+          "count": 26
+        },
+        {
+          "pattern": "which X the X of X ?",
+          "count": 25
+        },
+        {
+          "pattern": "which X to X ?",
+          "count": 23
+        }
+      ],
+      "how": [
+        {
+          "pattern": "how did X ?",
+          "count": 48
+        },
+        {
+          "pattern": "how is X ?",
+          "count": 42
+        },
+        {
+          "pattern": "how does X ?",
+          "count": 32
+        },
+        {
+          "pattern": "how are X ?",
+          "count": 31
+        },
+        {
+          "pattern": "how did the X ?",
+          "count": 27
+        },
+        {
+          "pattern": "how did X the X ?",
+          "count": 23
+        },
+        {
+          "pattern": "how is the X ?",
+          "count": 17
+        },
+        {
+          "pattern": "how X is the X ?",
+          "count": 15
+        }
+      ],
+      "how_much": [
+        {
+          "pattern": "how much of X is X ?",
+          "count": 9
+        },
+        {
+          "pattern": "how much of the X is X ?",
+          "count": 8
+        },
+        {
+          "pattern": "how much X does the X ?",
+          "count": 6
+        },
+        {
+          "pattern": "how much did the X ?",
+          "count": 6
+        },
+        {
+          "pattern": "how much did X ?",
+          "count": 6
+        },
+        {
+          "pattern": "how much X is X by X ?",
+          "count": 6
+        },
+        {
+          "pattern": "how much did X for X ?",
+          "count": 5
+        },
+        {
+          "pattern": "how much of the X at X ?",
+          "count": 4
+        }
+      ],
+      "why": [
+        {
+          "pattern": "why did X ?",
+          "count": 22
+        },
+        {
+          "pattern": "why does X ?",
+          "count": 20
+        },
+        {
+          "pattern": "why was the X ?",
+          "count": 17
+        },
+        {
+          "pattern": "why did the X ?",
+          "count": 15
+        },
+        {
+          "pattern": "why was X ?",
+          "count": 13
+        },
+        {
+          "pattern": "why are X ?",
+          "count": 13
+        },
+        {
+          "pattern": "why do X ?",
+          "count": 12
+        },
+        {
+          "pattern": "why is X ?",
+          "count": 9
+        }
+      ],
+      "how_many": [
+        {
+          "pattern": "how many X does X have ?",
+          "count": 63
+        },
+        {
+          "pattern": "how many X are in X ?",
+          "count": 51
+        },
+        {
+          "pattern": "how many X in X ?",
+          "count": 50
+        },
+        {
+          "pattern": "how many X ?",
+          "count": 50
+        },
+        {
+          "pattern": "how many X did X ?",
+          "count": 40
+        },
+        {
+          "pattern": "how many X were X ?",
+          "count": 39
+        },
+        {
+          "pattern": "how many X in the X ?",
+          "count": 39
+        },
+        {
+          "pattern": "how many X does the X have ?",
+          "count": 39
+        }
+      ],
+      "what_is_the_name": [
+        {
+          "pattern": "what was the X of X ?",
+          "count": 76
+        },
+        {
+          "pattern": "what is the X of X ?",
+          "count": 68
+        },
+        {
+          "pattern": "what is the X of the X ?",
+          "count": 63
+        },
+        {
+          "pattern": "what is the X of the X in X ?",
+          "count": 57
+        },
+        {
+          "pattern": "what was the X of the X ?",
+          "count": 46
+        },
+        {
+          "pattern": "what is the X of the X of X ?",
+          "count": 19
+        },
+        {
+          "pattern": "what was the X of the X that X ?",
+          "count": 15
+        },
+        {
+          "pattern": "what was the X of the X by X ?",
+          "count": 13
+        }
+      ],
+      "whose": [
+        {
+          "pattern": "whose X ?",
+          "count": 7
+        },
+        {
+          "pattern": "whose X was X ?",
+          "count": 5
+        },
+        {
+          "pattern": "whose X is it ?",
+          "count": 4
+        },
+        {
+          "pattern": "whose X did X ?",
+          "count": 4
+        },
+        {
+          "pattern": "whose X the X ?",
+          "count": 3
+        },
+        {
+          "pattern": "whose X were X by X ?",
+          "count": 2
+        },
+        {
+          "pattern": "whose X of X did X ?",
+          "count": 2
+        },
+        {
+          "pattern": "whose X were X ?",
+          "count": 2
+        }
+      ],
+      "preposition_fronted_wh": [
+        {
+          "pattern": "in what X did the X ?",
+          "count": 112
+        },
+        {
+          "pattern": "in what X was X ?",
+          "count": 111
+        },
+        {
+          "pattern": "in what X did X ?",
+          "count": 110
+        },
+        {
+          "pattern": "in what X was the X ?",
+          "count": 105
+        },
+        {
+          "pattern": "in what X did X the X ?",
+          "count": 32
+        },
+        {
+          "pattern": "in what X was the X of X ?",
+          "count": 29
+        },
+        {
+          "pattern": "in what X is X ?",
+          "count": 28
+        },
+        {
+          "pattern": "in what X is the X ?",
+          "count": 27
+        }
+      ],
+      "how_long": [
+        {
+          "pattern": "how X did the X ?",
+          "count": 18
+        },
+        {
+          "pattern": "how X is the X ?",
+          "count": 13
+        },
+        {
+          "pattern": "how X did X ?",
+          "count": 12
+        },
+        {
+          "pattern": "how X was X ?",
+          "count": 11
+        },
+        {
+          "pattern": "how X does X ?",
+          "count": 7
+        },
+        {
+          "pattern": "how X was the X ?",
+          "count": 6
+        },
+        {
+          "pattern": "how X is X ?",
+          "count": 6
+        },
+        {
+          "pattern": "how X did X in X ?",
+          "count": 5
+        }
+      ],
+      "how_can": [
+        {
+          "pattern": "how can X be X ?",
+          "count": 10
+        },
+        {
+          "pattern": "how can X ?",
+          "count": 4
+        },
+        {
+          "pattern": "how can a X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how can X of X be X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how can a X be X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how can the X of X be X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how can X be X from X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how can the X be X ?",
+          "count": 2
+        }
+      ],
+      "statement_or_fragment": [
+        {
+          "pattern": "the X in what X in the X",
+          "count": 1
+        },
+        {
+          "pattern": "the X is X as what X",
+          "count": 1
+        },
+        {
+          "pattern": "several X of X which X .",
+          "count": 1
+        },
+        {
+          "pattern": "X , what other X to the X",
+          "count": 1
+        },
+        {
+          "pattern": "as a X of the X what did the X",
+          "count": 1
+        },
+        {
+          "pattern": "since N what has X",
+          "count": 1
+        },
+        {
+          "pattern": "X how many X in the X",
+          "count": 1
+        },
+        {
+          "pattern": "it X how X for the X to X the X",
+          "count": 1
+        }
+      ],
+      "how_old": [
+        {
+          "pattern": "how X was X when she X ?",
+          "count": 9
+        },
+        {
+          "pattern": "how X is X ?",
+          "count": 7
+        },
+        {
+          "pattern": "how X was X when he X ?",
+          "count": 6
+        },
+        {
+          "pattern": "how X was the X ?",
+          "count": 3
+        },
+        {
+          "pattern": "how X was X in N ?",
+          "count": 3
+        },
+        {
+          "pattern": "how X was X when he X to X ?",
+          "count": 3
+        },
+        {
+          "pattern": "how X is the X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how X was X ?",
+          "count": 2
+        }
+      ],
+      "how_do": [
+        {
+          "pattern": "how do X ?",
+          "count": 31
+        },
+        {
+          "pattern": "how do X from X ?",
+          "count": 5
+        },
+        {
+          "pattern": "how do X their X ?",
+          "count": 5
+        },
+        {
+          "pattern": "how do the X ?",
+          "count": 3
+        },
+        {
+          "pattern": "how do X to X ?",
+          "count": 3
+        },
+        {
+          "pattern": "how do X in X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how do X and X from X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how do X the X ?",
+          "count": 2
+        }
+      ],
+      "how_far": [
+        {
+          "pattern": "how X is X from X ?",
+          "count": 4
+        },
+        {
+          "pattern": "how X is the X from X ?",
+          "count": 3
+        },
+        {
+          "pattern": "how X is it from X to X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how X do X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how X did the X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how X from X is the X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how X does the X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how X from the X was the X ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_reason": [
+        {
+          "pattern": "what was the X for the X of the X ?",
+          "count": 3
+        },
+        {
+          "pattern": "what was the X the X ?",
+          "count": 2
+        },
+        {
+          "pattern": "what is the X for the X into X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what was the X he was X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X for the X in X , X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what was the X for X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is a X a X would X to X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X for the X of X in the us X ?",
+          "count": 1
+        }
+      ],
+      "declarative_question": [
+        {
+          "pattern": "X was X by whom ?",
+          "count": 3
+        },
+        {
+          "pattern": "the X of X was X by whom ?",
+          "count": 2
+        },
+        {
+          "pattern": "X to whom ?",
+          "count": 2
+        },
+        {
+          "pattern": "the X was X by whom ?",
+          "count": 2
+        },
+        {
+          "pattern": "the X that X are X to whom ?",
+          "count": 1
+        },
+        {
+          "pattern": "X is to X the X and X of whom ?",
+          "count": 1
+        },
+        {
+          "pattern": "X , X or X were X for whom ?",
+          "count": 1
+        },
+        {
+          "pattern": "X in X the X of whom in X ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_best": [
+        {
+          "pattern": "what is the best X for this X ?",
+          "count": 11
+        },
+        {
+          "pattern": "what is the best X for the X ?",
+          "count": 9
+        },
+        {
+          "pattern": "what is the best X of the X ?",
+          "count": 9
+        },
+        {
+          "pattern": "what is the best X of this X ?",
+          "count": 2
+        },
+        {
+          "pattern": "what is the best X ?",
+          "count": 2
+        },
+        {
+          "pattern": "what is the best way to X of X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the best X as ?",
+          "count": 1
+        },
+        {
+          "pattern": "what are the best X ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_purpose": [
+        {
+          "pattern": "what is the X of the X ?",
+          "count": 12
+        },
+        {
+          "pattern": "what is the X of X ?",
+          "count": 10
+        },
+        {
+          "pattern": "what was the X of the X ?",
+          "count": 10
+        },
+        {
+          "pattern": "what is the X of a X ?",
+          "count": 6
+        },
+        {
+          "pattern": "what was the X of X the X ?",
+          "count": 3
+        },
+        {
+          "pattern": "what is the X of this X ?",
+          "count": 3
+        },
+        {
+          "pattern": "what is the X of an X ?",
+          "count": 3
+        },
+        {
+          "pattern": "what was the X of X ?",
+          "count": 2
+        }
+      ],
+      "whom": [
+        {
+          "pattern": "whom is the X for ?",
+          "count": 1
+        },
+        {
+          "pattern": "whom did X against ?",
+          "count": 1
+        },
+        {
+          "pattern": "whom were the X for X to X by ?",
+          "count": 1
+        },
+        {
+          "pattern": "whom is X this X to ?",
+          "count": 1
+        },
+        {
+          "pattern": "whom did X say X in a X on the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "whom did X the X in to X a X on ?",
+          "count": 1
+        },
+        {
+          "pattern": "whom , X with X and X , did X to be one of the X that X ?",
+          "count": 1
+        },
+        {
+          "pattern": "whom does X and X for X one X ?",
+          "count": 1
+        }
+      ],
+      "how_often": [
+        {
+          "pattern": "how X is the X ?",
+          "count": 5
+        },
+        {
+          "pattern": "how X does the X ?",
+          "count": 3
+        },
+        {
+          "pattern": "how X do X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how X was X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how X could the X be X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X does the X N X",
+          "count": 1
+        },
+        {
+          "pattern": "how X does X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X do X their X ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_meaning": [
+        {
+          "pattern": "what is the X of X ?",
+          "count": 8
+        },
+        {
+          "pattern": "what is the X of the X in X ?",
+          "count": 3
+        },
+        {
+          "pattern": "what is the X of the X ?",
+          "count": 3
+        },
+        {
+          "pattern": "what is the X of X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X of X in X and X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X of the X of X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X the X of X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X of the X on X ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_difference": [
+        {
+          "pattern": "what is the X between X and X ?",
+          "count": 4
+        },
+        {
+          "pattern": "what is the X between the i X on X and X and the X of X ca and X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X in X between the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X in X between an X and a X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X between a X and a X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X of X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what was the X between X and X in the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X in the X of the X in X to X ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_way": [
+        {
+          "pattern": "what was a way that X with the X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is a way of X for those X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what was a way X got X such X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what was a way to X the X of the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is a way for X to X the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the way X to X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what was a way in which a X might X an X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is a way to X the X in X ?",
+          "count": 1
+        }
+      ],
+      "imperative_request": [
+        {
+          "pattern": "X one of the X who X in the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "X an X who X from N ?",
+          "count": 1
+        },
+        {
+          "pattern": "X why X an X .",
+          "count": 1
+        },
+        {
+          "pattern": "X the N X who X the X",
+          "count": 1
+        },
+        {
+          "pattern": "X the X who were in X for the X of X between N and N .",
+          "count": 1
+        },
+        {
+          "pattern": "X the X who were X in the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "X the X which could be X .",
+          "count": 1
+        },
+        {
+          "pattern": "X a X which X their X from the X at an X .",
+          "count": 1
+        }
+      ],
+      "yes_no_be": [
+        {
+          "pattern": "is it X that X no X which would X ?",
+          "count": 1
+        },
+        {
+          "pattern": "are there any X of X when X to a X ?",
+          "count": 1
+        },
+        {
+          "pattern": "was there anything in X that X in the X of the X ? if so who was it X by ?",
+          "count": 1
+        },
+        {
+          "pattern": "are X of an X on what X they are X",
+          "count": 1
+        },
+        {
+          "pattern": "is X to X of the X when X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "is it the X or X of X who say it X ?",
+          "count": 1
+        },
+        {
+          "pattern": "is there a X where X of the X are X to X some of its best X ?",
+          "count": 1
+        },
+        {
+          "pattern": "are the X who X the X the same ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_cause": [
+        {
+          "pattern": "what was the X of the X ?",
+          "count": 3
+        },
+        {
+          "pattern": "what is the X of X ?",
+          "count": 2
+        },
+        {
+          "pattern": "what was the X of the X of the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what was the X of the X of many of the X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what was the X of this ?",
+          "count": 1
+        },
+        {
+          "pattern": "what was the X for the X between X and X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X of X in X for X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what was the X of X to X ?",
+          "count": 1
+        }
+      ],
+      "how_big": [
+        {
+          "pattern": "how X is X ?",
+          "count": 5
+        },
+        {
+          "pattern": "how X is the X of the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X are the X in the X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X is the X going to be ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X were the X in the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X was the X in X by the X as X of the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X is a X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X was the X the X had on the X and X of the X and X ?",
+          "count": 1
+        }
+      ],
+      "yes_no_do": [
+        {
+          "pattern": "did they do when they X a X ?",
+          "count": 1
+        },
+        {
+          "pattern": "do those who X say X would X have an X of X before or after their X ?",
+          "count": 1
+        },
+        {
+          "pattern": "do X on X when X ?",
+          "count": 1
+        },
+        {
+          "pattern": "did X to X a X , or to X one X most X ?",
+          "count": 1
+        },
+        {
+          "pattern": "did it X how much X a X had to X ?",
+          "count": 1
+        },
+        {
+          "pattern": "do X when in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "do X who are X or X than those with X ?",
+          "count": 1
+        },
+        {
+          "pattern": "do X know what can X ?",
+          "count": 1
+        }
+      ],
+      "yes_no_have": [
+        {
+          "pattern": "have X been any X of X who were really X at X ?",
+          "count": 1
+        },
+        {
+          "pattern": "had X not X , what X might he have been X of ?",
+          "count": 1
+        },
+        {
+          "pattern": "had there X been a X where an X for the same X to be both X and X ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_role": [
+        {
+          "pattern": "what is the X of X ?",
+          "count": 2
+        },
+        {
+          "pattern": "what is the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what was the X the X was X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X of the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X of the X who X something ?",
+          "count": 1
+        }
+      ],
+      "yes_no_modal": [
+        {
+          "pattern": "would X have a X or X on how X it is during the X in X at X ?",
+          "count": 1
+        },
+        {
+          "pattern": "would would a X in a X when X to a X ?",
+          "count": 1
+        }
+      ]
+    },
+    "ambignq": {
+      "when": [
+        {
+          "pattern": "when did the X out ?",
+          "count": 95
+        },
+        {
+          "pattern": "when was the X ?",
+          "count": 70
+        },
+        {
+          "pattern": "when did X the X ?",
+          "count": 44
+        },
+        {
+          "pattern": "when was the X of X ?",
+          "count": 41
+        },
+        {
+          "pattern": "when did the X ?",
+          "count": 41
+        },
+        {
+          "pattern": "when was the X in X ?",
+          "count": 38
+        },
+        {
+          "pattern": "when did the X of X ?",
+          "count": 36
+        },
+        {
+          "pattern": "when did the X the X ?",
+          "count": 35
+        }
+      ],
+      "who": [
+        {
+          "pattern": "who X in the X ?",
+          "count": 150
+        },
+        {
+          "pattern": "who X in X ?",
+          "count": 108
+        },
+        {
+          "pattern": "who X the X in X ?",
+          "count": 97
+        },
+        {
+          "pattern": "who X the X in the X ?",
+          "count": 86
+        },
+        {
+          "pattern": "who X on X ?",
+          "count": 68
+        },
+        {
+          "pattern": "who is the X of X ?",
+          "count": 64
+        },
+        {
+          "pattern": "who X the X of X ?",
+          "count": 51
+        },
+        {
+          "pattern": "who X on the X ?",
+          "count": 45
+        }
+      ],
+      "what": [
+        {
+          "pattern": "what is the X of X ?",
+          "count": 55
+        },
+        {
+          "pattern": "what is the X in X ?",
+          "count": 41
+        },
+        {
+          "pattern": "what is the X of the X ?",
+          "count": 35
+        },
+        {
+          "pattern": "what is the X in the X ?",
+          "count": 24
+        },
+        {
+          "pattern": "what is the X of X in X ?",
+          "count": 17
+        },
+        {
+          "pattern": "what are the X of X ?",
+          "count": 12
+        },
+        {
+          "pattern": "what was the X of the X ?",
+          "count": 11
+        },
+        {
+          "pattern": "what are the X of the X ?",
+          "count": 10
+        }
+      ],
+      "imperative_request": [
+        {
+          "pattern": "X the X that X the X of the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "X of X N X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "X of X from X ?",
+          "count": 1
+        },
+        {
+          "pattern": "X of X in to X a X ?",
+          "count": 1
+        },
+        {
+          "pattern": "X of X in X to the X of the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "X of the X in X the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "X of the N X in a X ?",
+          "count": 1
+        },
+        {
+          "pattern": "X the X of X in the X ?",
+          "count": 1
+        }
+      ],
+      "wh_in_situ_or_embedded": [
+        {
+          "pattern": "X how many X ?",
+          "count": 3
+        },
+        {
+          "pattern": "X is the X of which X ?",
+          "count": 3
+        },
+        {
+          "pattern": "X N how many X ?",
+          "count": 3
+        },
+        {
+          "pattern": "the X is X to which X ?",
+          "count": 2
+        },
+        {
+          "pattern": "the X is X in which X ?",
+          "count": 2
+        },
+        {
+          "pattern": "X is X on the X of which X ?",
+          "count": 2
+        },
+        {
+          "pattern": "X who is the X of X ?",
+          "count": 2
+        },
+        {
+          "pattern": "X and X to what X ?",
+          "count": 2
+        }
+      ],
+      "declarative_question": [
+        {
+          "pattern": "X the X of the X ?",
+          "count": 10
+        },
+        {
+          "pattern": "X ?",
+          "count": 9
+        },
+        {
+          "pattern": "X of X in the X ?",
+          "count": 8
+        },
+        {
+          "pattern": "X to X ?",
+          "count": 7
+        },
+        {
+          "pattern": "X of X of X ?",
+          "count": 7
+        },
+        {
+          "pattern": "X the X in X ?",
+          "count": 6
+        },
+        {
+          "pattern": "X in the X ?",
+          "count": 6
+        },
+        {
+          "pattern": "X the X of X ?",
+          "count": 6
+        }
+      ],
+      "where": [
+        {
+          "pattern": "where does the X from ?",
+          "count": 32
+        },
+        {
+          "pattern": "where is the X in the X ?",
+          "count": 30
+        },
+        {
+          "pattern": "where is the X in X ?",
+          "count": 21
+        },
+        {
+          "pattern": "where was the X ?",
+          "count": 21
+        },
+        {
+          "pattern": "where is the X ?",
+          "count": 19
+        },
+        {
+          "pattern": "where did the X ?",
+          "count": 18
+        },
+        {
+          "pattern": "where did the X from ?",
+          "count": 16
+        },
+        {
+          "pattern": "where did the X of X ?",
+          "count": 15
+        }
+      ],
+      "which": [
+        {
+          "pattern": "which is the X in X ?",
+          "count": 8
+        },
+        {
+          "pattern": "which X has the X in X ?",
+          "count": 4
+        },
+        {
+          "pattern": "which is the X in the X ?",
+          "count": 4
+        },
+        {
+          "pattern": "which X has X the most X ?",
+          "count": 3
+        },
+        {
+          "pattern": "which X of X in X ?",
+          "count": 3
+        },
+        {
+          "pattern": "which is the X of X ?",
+          "count": 3
+        },
+        {
+          "pattern": "which is X or X ?",
+          "count": 3
+        },
+        {
+          "pattern": "which X is the X in the X ?",
+          "count": 2
+        }
+      ],
+      "how_many": [
+        {
+          "pattern": "how many X of X are there ?",
+          "count": 19
+        },
+        {
+          "pattern": "how many X are there in X ?",
+          "count": 17
+        },
+        {
+          "pattern": "how many X are in the X ?",
+          "count": 15
+        },
+        {
+          "pattern": "how many X are there in the X ?",
+          "count": 14
+        },
+        {
+          "pattern": "how many X in X ?",
+          "count": 13
+        },
+        {
+          "pattern": "how many X in X N ?",
+          "count": 12
+        },
+        {
+          "pattern": "how many X does X have ?",
+          "count": 11
+        },
+        {
+          "pattern": "how many X in X N of X ?",
+          "count": 9
+        }
+      ],
+      "preposition_fronted_wh": [
+        {
+          "pattern": "in which X is the X ?",
+          "count": 3
+        },
+        {
+          "pattern": "in which X did X ?",
+          "count": 2
+        },
+        {
+          "pattern": "with what are the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "in which X are the X of X and X ?",
+          "count": 1
+        },
+        {
+          "pattern": "in which X his X ?",
+          "count": 1
+        },
+        {
+          "pattern": "by what X do we X the X of X by a X of X ?",
+          "count": 1
+        },
+        {
+          "pattern": "in what X did X the most X ?",
+          "count": 1
+        },
+        {
+          "pattern": "by whom the X of X is X ?",
+          "count": 1
+        }
+      ],
+      "how_far": [
+        {
+          "pattern": "how X is X from X ?",
+          "count": 4
+        },
+        {
+          "pattern": "how X is it from X to X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X does the X in a X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X has X in the X before ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X is X ma from X ma ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X has the X made it in the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X is X from the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X is the X from X in X ?",
+          "count": 1
+        }
+      ],
+      "yes_no_be": [
+        {
+          "pattern": "is X a X or X ?",
+          "count": 4
+        },
+        {
+          "pattern": "is X one a X or X ?",
+          "count": 1
+        },
+        {
+          "pattern": "is there any X in the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "is the X a X or X ?",
+          "count": 1
+        },
+        {
+          "pattern": "is an X by X ?",
+          "count": 1
+        },
+        {
+          "pattern": "is X in X or X ?",
+          "count": 1
+        },
+        {
+          "pattern": "is X that is X to a X ?",
+          "count": 1
+        },
+        {
+          "pattern": "is X for X or X ?",
+          "count": 1
+        }
+      ],
+      "how_do": [
+        {
+          "pattern": "how do you say X in X ?",
+          "count": 3
+        },
+        {
+          "pattern": "how do they X for X at the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how do you X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how do you X the X of X ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_name": [
+        {
+          "pattern": "what is the X of the X in X ?",
+          "count": 22
+        },
+        {
+          "pattern": "what is the X of the X ?",
+          "count": 14
+        },
+        {
+          "pattern": "what is the X of X ?",
+          "count": 12
+        },
+        {
+          "pattern": "what was the X of the X in X ?",
+          "count": 5
+        },
+        {
+          "pattern": "what is the X of X of X ?",
+          "count": 5
+        },
+        {
+          "pattern": "what was the X of X ?",
+          "count": 5
+        },
+        {
+          "pattern": "what is the X of the X in X and the X ?",
+          "count": 3
+        },
+        {
+          "pattern": "what is the X of the X at the X ?",
+          "count": 2
+        }
+      ],
+      "how_old": [
+        {
+          "pattern": "how X do you have to be to X in X ?",
+          "count": 5
+        },
+        {
+          "pattern": "how X do you have to be to get a X in X ?",
+          "count": 2
+        },
+        {
+          "pattern": "how X is X at the X of X with the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X is was the X to X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X do X have to be to get a X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X do you have to be to X a X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X was X when he X the X de X in N ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X was X when he X into the X ?",
+          "count": 1
+        }
+      ],
+      "how": [
+        {
+          "pattern": "how X is the X of X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how does X our X and X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X was X when it X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how is X to X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X is the X at X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how does the X of the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how did will X his X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X was the X of X ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_meaning": [
+        {
+          "pattern": "what is the X of X in X ?",
+          "count": 17
+        },
+        {
+          "pattern": "what is the X of the X ?",
+          "count": 9
+        },
+        {
+          "pattern": "what is the X of X ?",
+          "count": 2
+        },
+        {
+          "pattern": "what is the X of ci in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X of the X in the X ?",
+          "count": 1
+        }
+      ],
+      "how_long": [
+        {
+          "pattern": "how X is the X in X ?",
+          "count": 3
+        },
+        {
+          "pattern": "how X does a X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X is the X N ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X did the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X is the X of X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X do you have to X in X to X a X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X has X been X of the us ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X has X been with the X ?",
+          "count": 1
+        }
+      ],
+      "yes_no_do": [
+        {
+          "pattern": "do X need a X for X ?",
+          "count": 1
+        },
+        {
+          "pattern": "do X or X ?",
+          "count": 1
+        },
+        {
+          "pattern": "does X i am like X and X ?",
+          "count": 1
+        },
+        {
+          "pattern": "did X in X or X ?",
+          "count": 1
+        },
+        {
+          "pattern": "do X have X or X ?",
+          "count": 1
+        },
+        {
+          "pattern": "do you need a X to X a X in va ?",
+          "count": 1
+        },
+        {
+          "pattern": "do X to the X or X ?",
+          "count": 1
+        },
+        {
+          "pattern": "do i need a X to X a X in X ?",
+          "count": 1
+        }
+      ],
+      "whose": [
+        {
+          "pattern": "whose going to be the X of X ?",
+          "count": 1
+        },
+        {
+          "pattern": "whose X the X of X ?",
+          "count": 1
+        },
+        {
+          "pattern": "whose X as X ?",
+          "count": 1
+        }
+      ],
+      "how_much": [
+        {
+          "pattern": "how much did X to make ?",
+          "count": 2
+        },
+        {
+          "pattern": "how much X in a X of X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how much does a N X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how much of the X is made in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how much of the X . X . X is X to X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how much X is the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how much X did X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how much X is X in X ?",
+          "count": 1
+        }
+      ],
+      "why": [
+        {
+          "pattern": "why did the X a X of X ?",
+          "count": 2
+        },
+        {
+          "pattern": "why was the X in X and X ?",
+          "count": 1
+        },
+        {
+          "pattern": "why do they X and X ?",
+          "count": 1
+        },
+        {
+          "pattern": "why did X a X on the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "why is there a X on the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "why was the X on X ?",
+          "count": 1
+        },
+        {
+          "pattern": "why is there a X out on X ?",
+          "count": 1
+        },
+        {
+          "pattern": "why would a X need to be done ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_purpose": [
+        {
+          "pattern": "what is the X of a X ?",
+          "count": 2
+        },
+        {
+          "pattern": "what is the X of the X for our X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X of the X ?",
+          "count": 1
+        },
+        {
+          "pattern": "what is the X of X in X ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_role": [
+        {
+          "pattern": "what is the X of X in X ?",
+          "count": 1
+        }
+      ],
+      "how_often": [
+        {
+          "pattern": "how X does it X in X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X does X the X of X ?",
+          "count": 1
+        },
+        {
+          "pattern": "how X do we have a X in the X ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_difference": [
+        {
+          "pattern": "what is the X between X and X ?",
+          "count": 1
+        }
+      ],
+      "what_is_the_cause": [
+        {
+          "pattern": "what were the X of the X ?",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "discourse_forms": {
+    "qqp": {
+      "single_sentence": 731385,
+      "multi_sentence": 77167,
+      "comparison_or_alternative": 59152,
+      "multiple_questions": 41857,
+      "context_then_question": 30762,
+      "first_person_background": 29947,
+      "parenthetical": 23022,
+      "conditional_frame": 21149,
+      "question_without_question_mark": 19988,
+      "quoted_material": 17502,
+      "question_then_elaboration": 7080,
+      "embedded_question": 2139,
+      "presupposition_clause": 1612,
+      "imperative_request": 412
+    },
+    "qa2d": {
+      "single_sentence": 70247,
+      "multi_sentence": 807,
+      "context_then_question": 785,
+      "question_without_question_mark": 775,
+      "comparison_or_alternative": 723,
+      "conditional_frame": 408,
+      "presupposition_clause": 205,
+      "parenthetical": 105,
+      "multiple_questions": 36,
+      "imperative_request": 10,
+      "question_then_elaboration": 6,
+      "embedded_question": 3,
+      "first_person_background": 1,
+      "quoted_material": 1
+    },
+    "ambignq": {
+      "single_sentence": 11986,
+      "comparison_or_alternative": 160,
+      "context_then_question": 52,
+      "multi_sentence": 52,
+      "imperative_request": 35,
+      "parenthetical": 32,
+      "presupposition_clause": 5,
+      "embedded_question": 2,
+      "first_person_background": 2
+    }
+  },
+  "length_bands_tokens": {
+    "qqp": {
+      "6-10": 409688,
+      "11-15": 202708,
+      "16-25": 106448,
+      "1-5": 63449,
+      "26-40": 24047,
+      "41+": 2212
+    },
+    "paws": {
+      "16-25": 71764,
+      "11-15": 28925,
+      "26-40": 10039,
+      "6-10": 4003,
+      "1-5": 71
+    },
+    "qa2d": {
+      "6-10": 38107,
+      "11-15": 22257,
+      "16-25": 5424,
+      "1-5": 5132,
+      "26-40": 133,
+      "41+": 1
+    },
+    "ambignq": {
+      "6-10": 10362,
+      "11-15": 1573,
+      "16-25": 103
+    }
+  },
+  "paraphrase_operations": {
+    "qqp": {
+      "labels": {
+        "different": 255013,
+        "same": 149263
+      },
+      "operations_by_label": {
+        "same": {
+          "heavy_rewrite": 62258,
+          "question_frame_change": 54049,
+          "reordering_with_edits": 50285,
+          "spelling_variant": 43082,
+          "lexical_substitution": 17184,
+          "person_switch": 13286,
+          "contraction_change": 13150,
+          "function_word_change": 12299,
+          "other_edit": 11233,
+          "number_change": 10143,
+          "deletion": 7665,
+          "addition": 7589,
+          "negation_change": 7509,
+          "punctuation_or_case_only": 808,
+          "two_word_swap": 249,
+          "word_movement": 131,
+          "multi_reordering": 64,
+          "clause_or_phrase_movement": 20
+        },
+        "different": {
+          "heavy_rewrite": 180976,
+          "question_frame_change": 139757,
+          "spelling_variant": 101985,
+          "reordering_with_edits": 97454,
+          "number_change": 39861,
+          "contraction_change": 35310,
+          "negation_change": 29511,
+          "lexical_substitution": 27018,
+          "person_switch": 26380,
+          "other_edit": 8659,
+          "deletion": 5537,
+          "function_word_change": 5341,
+          "addition": 4062,
+          "punctuation_or_case_only": 124,
+          "two_word_swap": 114,
+          "multi_reordering": 51,
+          "word_movement": 24,
+          "clause_or_phrase_movement": 3
+        }
+      },
+      "token_jaccard_bands": {
+        "same": {
+          "0.2": 52353,
+          "0.4": 46046,
+          "0.6": 27533,
+          "0.0": 9905,
+          "0.8": 11692,
+          "1.0": 1734
+        },
+        "different": {
+          "0.0": 104626,
+          "0.2": 76350,
+          "0.6": 22736,
+          "0.4": 35427,
+          "0.8": 15471,
+          "1.0": 403
+        }
+      }
+    },
+    "paws": {
+      "labels": {
+        "different": 32033,
+        "same": 25368
+      },
+      "operations_by_label": {
+        "same": {
+          "reordering_with_edits": 17058,
+          "lexical_substitution": 11501,
+          "deletion": 3254,
+          "addition": 3226,
+          "function_word_change": 2966,
+          "spelling_variant": 2371,
+          "two_word_swap": 531,
+          "multi_reordering": 509,
+          "word_movement": 504,
+          "number_change": 322,
+          "punctuation_or_case_only": 252,
+          "other_edit": 165,
+          "clause_or_phrase_movement": 159,
+          "question_frame_change": 88,
+          "contraction_change": 32,
+          "negation_change": 30,
+          "person_switch": 14
+        },
+        "different": {
+          "reordering_with_edits": 27529,
+          "lexical_substitution": 13094,
+          "addition": 3673,
+          "deletion": 3632,
+          "function_word_change": 3420,
+          "spelling_variant": 3175,
+          "multi_reordering": 2960,
+          "two_word_swap": 1042,
+          "number_change": 561,
+          "question_frame_change": 135,
+          "word_movement": 108,
+          "negation_change": 46,
+          "contraction_change": 40,
+          "other_edit": 31,
+          "person_switch": 17,
+          "punctuation_or_case_only": 17,
+          "clause_or_phrase_movement": 4,
+          "heavy_rewrite": 2
+        }
+      },
+      "token_jaccard_bands": {
+        "same": {
+          "1.0": 3946,
+          "0.8": 20768,
+          "0.6": 644,
+          "0.4": 10
+        },
+        "different": {
+          "0.8": 23442,
+          "1.0": 6433,
+          "0.6": 2145,
+          "0.4": 11,
+          "0.2": 1,
+          "0.0": 1
+        }
+      }
+    }
+  },
+  "ambiguity_types": {
+    "questions": 12038,
+    "single_answer": 7235,
+    "multiple_qa": 6328,
+    "interpretations_per_multiple_qa": {
+      "2": 3117,
+      "3": 1797,
+      "4": 658,
+      "5": 310,
+      "6": 446
+    },
+    "operations": {
+      "event_or_other_qualifier": 3066,
+      "time_dependency": 2871,
+      "location_or_named_qualifier": 2211,
+      "entity_reference": 2028,
+      "answer_type": 1057,
+      "property_or_role": 672
+    },
+    "operation_sets": {
+      "event_or_other_qualifier": 1416,
+      "time_dependency": 655,
+      "event_or_other_qualifier+time_dependency": 390,
+      "location_or_named_qualifier+time_dependency": 347,
+      "event_or_other_qualifier+location_or_named_qualifier": 340,
+      "entity_reference+time_dependency": 306,
+      "location_or_named_qualifier": 268,
+      "entity_reference+location_or_named_qualifier+time_dependency": 260,
+      "entity_reference+event_or_other_qualifier": 196,
+      "answer_type": 141,
+      "entity_reference+event_or_other_qualifier+time_dependency": 135,
+      "entity_reference": 124,
+      "entity_reference+location_or_named_qualifier": 124,
+      "event_or_other_qualifier+location_or_named_qualifier+time_dependency": 111,
+      "answer_type+location_or_named_qualifier": 97
+    },
+    "taxonomy_note": "Operations are lexical proxies for the AmbigNQ categories (event reference, property, entity reference, answer type, time dependency); counted once per multiple-QA annotation."
+  },
+  "reasoning_depth_and_negation": {
+    "theories": 60636,
+    "by_family": {
+      "AttNeg": 15768,
+      "AttNoneg": 16414,
+      "RelNoneg": 14245,
+      "RelNeg": 14209
+    },
+    "theory_depth": {
+      "0": 26978,
+      "1": 12933,
+      "2": 9033,
+      "3": 6940,
+      "5": 4752
+    },
+    "questions": 500090,
+    "status": {
+      "True": 136215,
+      "False": 136215,
+      "Unknown": 227660
+    },
+    "status_by_qdep": {
+      "0": {
+        "True": 60636,
+        "False": 60636,
+        "Unknown": 139812
+      },
+      "1": {
+        "Unknown": 66738,
+        "True": 33658,
+        "False": 33658
+      },
+      "2": {
+        "Unknown": 14153,
+        "True": 20725,
+        "False": 20725
+      },
+      "3": {
+        "Unknown": 4750,
+        "True": 11692,
+        "False": 11692
+      },
+      "4": {
+        "Unknown": 1640,
+        "True": 4752,
+        "False": 4752
+      },
+      "5": {
+        "Unknown": 443,
+        "True": 4752,
+        "False": 4752
+      },
+      "6": {
+        "Unknown": 107
+      },
+      "7": {
+        "Unknown": 16
+      },
+      "8": {
+        "Unknown": 1
+      }
+    },
+    "question_polarity": {
+      "+": 250032,
+      "-": 250058
+    },
+    "strategies": {
+      "proof": 136215,
+      "inv-proof": 136215,
+      "inv-rconc": 57043,
+      "random": 83025,
+      "inv-random": 56787,
+      "rconc": 30805
+    },
+    "fact_polarity": {
+      "+": 464600,
+      "-": 46770
+    },
+    "rule_body_sizes": {
+      "1": 154001,
+      "2": 138618
+    },
+    "rules_with_negated_body": 30995,
+    "rules_with_negated_head": 33353,
+    "rules": 292619,
+    "rule_forms": [
+      {
+        "pattern": "X are X .",
+        "count": 22822
+      },
+      {
+        "pattern": "all X are X .",
+        "count": 22484
+      },
+      {
+        "pattern": "all X , X are X .",
+        "count": 16891
+      },
+      {
+        "pattern": "X , X are X .",
+        "count": 16790
+      },
+      {
+        "pattern": "if X is X then X is X .",
+        "count": 12503
+      },
+      {
+        "pattern": "if someone is X then they are X .",
+        "count": 11684
+      },
+      {
+        "pattern": "if something is X then it is X .",
+        "count": 11666
+      },
+      {
+        "pattern": "if X is X and X is X then X is X .",
+        "count": 10064
+      },
+      {
+        "pattern": "if something is X and X then it is X .",
+        "count": 8685
+      },
+      {
+        "pattern": "if someone is X and X then they are X .",
+        "count": 8677
+      },
+      {
+        "pattern": "if something X the X then it X the X .",
+        "count": 4890
+      },
+      {
+        "pattern": "if something is X then it X the X .",
+        "count": 4843
+      },
+      {
+        "pattern": "if something is X and not X then it is X .",
+        "count": 4589
+      },
+      {
+        "pattern": "if someone is X and not X then they are X .",
+        "count": 4471
+      },
+      {
+        "pattern": "if someone X the X then the X the X .",
+        "count": 4238
+      },
+      {
+        "pattern": "if something X the X then the X the X .",
+        "count": 4132
+      },
+      {
+        "pattern": "if someone X the X then they X the X .",
+        "count": 3279
+      },
+      {
+        "pattern": "if someone is X then they X the X .",
+        "count": 3272
+      },
+      {
+        "pattern": "if the X the X then the X the X .",
+        "count": 3235
+      },
+      {
+        "pattern": "if someone X the X then they are X .",
+        "count": 2570
+      }
+    ],
+    "relation_kinds": {
+      "attribute": 367634,
+      "relation": 143736
+    },
+    "note": "Rule forms are masked skeletons (closed-class words kept, the synthetic attribute and name vocabulary masked). \"~\" and \"-\" are formal polarity markers."
+  },
+  "declarative_rewrites": {
+    "source": "qa2d",
+    "operations": {
+      "wh_fronting_undone": 40608,
+      "auxiliary_inversion_undone": 18837,
+      "subject_wh_in_place": 16486,
+      "answer_in_prepositional_phrase": 11320,
+      "do_support_removed": 9486,
+      "other_rewrite": 9251,
+      "quantity_slot_filled": 4072,
+      "passive_declarative": 1184,
+      "yes_no_to_statement": 35,
+      "missing": 2
+    },
+    "answer_position": {
+      "end": 31516,
+      "start": 18924,
+      "middle": 15855,
+      "not_verbatim": 4757,
+      "none": 2
+    },
+    "declarative_to_question_length_ratio": {
+      "1.0-1.25": 34304,
+      ">=2.0": 4396,
+      "1.25-1.5": 10582,
+      "<1.0": 14962,
+      "1.5-2.0": 6808
+    }
+  },
+  "noise_rates": {
+    "qqp": {
+      "all_caps_word": 0.0872,
+      "space_before_punctuation": 0.0063,
+      "chat_spelling": 0.0058,
+      "no_space_after_comma": 0.0039,
+      "no_terminal_punctuation": 0.0032,
+      "lowercase_i": 0.0025,
+      "letter_repetition": 0.002,
+      "missing_apostrophe": 0.0016,
+      "double_space": 0.0016,
+      "lowercase_start": 0.0006,
+      "repeated_punctuation": 0.0002
+    },
+    "paws": {
+      "space_before_punctuation": 0.9912,
+      "all_caps_word": 0.0739,
+      "no_terminal_punctuation": 0.024,
+      "chat_spelling": 0.0082,
+      "no_space_after_comma": 0.0071,
+      "letter_repetition": 0.0027,
+      "lowercase_start": 0.002,
+      "lowercase_i": 0.0016,
+      "missing_apostrophe": 0.0003
+    },
+    "qa2d": {
+      "space_before_punctuation": 0.9909,
+      "all_caps_word": 0.0549,
+      "no_terminal_punctuation": 0.009,
+      "lowercase_start": 0.009,
+      "chat_spelling": 0.0056,
+      "letter_repetition": 0.0018,
+      "no_space_after_comma": 0.0015,
+      "repeated_punctuation": 0.0004,
+      "lowercase_i": 0.0002,
+      "missing_apostrophe": 0.0002
+    },
+    "ambignq": {
+      "lowercase_i": 0.0268,
+      "chat_spelling": 0.0042,
+      "missing_apostrophe": 0.0036,
+      "letter_repetition": 0.0002,
+      "space_before_punctuation": 0.0001
+    }
+  },
+  "typo_model_measured": {
+    "method": "QQP hapax tokens (length >= 4) within edit distance 1 of a token seen >= 50 times; a lower bound on real typos, lexical heuristic",
+    "qqp_token_occurrences": 9024533,
+    "hapax_tokens": 28713,
+    "likely_typo_types": 5544,
+    "likely_typo_type_rate_among_hapax": 0.1931,
+    "operations": {
+      "substitution": 2350,
+      "deletion": 1271,
+      "duplication_or_insertion_edge": 1082,
+      "insertion": 727,
+      "duplication": 114
+    }
+  },
+  "authored": {
+    "names": {
+      "given_names": 242,
+      "by_culture": {
+        "romanian": 80,
+        "hungarian": 12,
+        "english": 22,
+        "spanish": 11,
+        "french": 10,
+        "german": 8,
+        "polish": 7,
+        "ukrainian": 6,
+        "greek": 5,
+        "turkish": 7,
+        "arabic": 9,
+        "persian": 4,
+        "indian": 9,
+        "chinese": 8,
+        "japanese": 6,
+        "korean": 4,
+        "vietnamese": 4,
+        "nigerian": 7,
+        "kenyan": 4,
+        "brazilian": 5,
+        "scandinavian": 6,
+        "roma": 4,
+        "moldovan": 4
+      },
+      "cultures": 23,
+      "surnames": 142,
+      "surname_cultures": 23,
+      "places": {
+        "romanian": 30,
+        "moldovan": 4,
+        "world": 27
+      },
+      "organization_patterns": {
+        "company": 12,
+        "school": 5,
+        "clinic": 4,
+        "office": 4,
+        "team": 4,
+        "venue": 5
+      },
+      "with_diacritics": 65,
+      "diacritic_examples": [
+        "Mădălina",
+        "Ștefania",
+        "Brândușa",
+        "Sânziana",
+        "Luminița",
+        "Ștefan",
+        "Răzvan",
+        "Dragoș",
+        "Cătălin",
+        "Bogdan-Ionuț",
+        "Ionuț",
+        "Réka"
+      ],
+      "person_full_name_combinations": 34364,
+      "rule": "Natural names only: no counters, hashes or ids in text; a quarter of names are reserved for the sealed test split."
+    },
+    "lexicon": {
+      "predicates": 46,
+      "constructions": 184,
+      "closed_roles": [
+        "subject",
+        "object",
+        "recipient",
+        "location",
+        "source",
+        "destination",
+        "instrument",
+        "time",
+        "topic"
+      ],
+      "constructions_by_predicate": {
+        "works_at": {
+          "en": [
+            "work at",
+            "work for",
+            "be employed by",
+            "employ",
+            "have a job at"
+          ],
+          "ro": [
+            "lucra la",
+            "fi angajat la",
+            "munci la"
+          ],
+          "converse": [
+            "employ"
+          ]
+        },
+        "manages": {
+          "en": [
+            "manage",
+            "report to",
+            "be the boss of",
+            "work under"
+          ],
+          "ro": [
+            "coordona",
+            "raporta către",
+            "fi șeful lui"
+          ],
+          "converse": [
+            "report to",
+            "work under",
+            "raporta către"
+          ]
+        },
+        "parent_of": {
+          "en": [
+            "be a parent of",
+            "be a child of",
+            "raise"
+          ],
+          "ro": [
+            "fi părintele lui",
+            "fi copilul lui",
+            "crește"
+          ],
+          "converse": [
+            "be a child of",
+            "fi copilul lui"
+          ]
+        },
+        "married_to": {
+          "en": [
+            "be married to",
+            "be the spouse of"
+          ],
+          "ro": [
+            "fi căsătorit cu"
+          ],
+          "converse": []
+        },
+        "studies_at": {
+          "en": [
+            "study at",
+            "be enrolled at",
+            "go to"
+          ],
+          "ro": [
+            "învăța la",
+            "fi înscris la"
+          ],
+          "converse": []
+        },
+        "teaches": {
+          "en": [
+            "teach",
+            "give classes in"
+          ],
+          "ro": [
+            "preda",
+            "ține ore de"
+          ],
+          "converse": []
+        },
+        "treats": {
+          "en": [
+            "treat",
+            "be the doctor of",
+            "be treated by"
+          ],
+          "ro": [
+            "trata",
+            "fi medicul lui",
+            "se trata la"
+          ],
+          "converse": [
+            "be treated by",
+            "se trata la"
+          ]
+        },
+        "allergic_to": {
+          "en": [
+            "be allergic to",
+            "have an allergy to"
+          ],
+          "ro": [
+            "fi alergic la",
+            "avea alergie la",
+            "face alergie la"
+          ],
+          "converse": []
+        },
+        "lives_in": {
+          "en": [
+            "live in",
+            "be based in"
+          ],
+          "ro": [
+            "locui în",
+            "sta în"
+          ],
+          "converse": []
+        },
+        "owns": {
+          "en": [
+            "own",
+            "belong to",
+            "be the owner of"
+          ],
+          "ro": [
+            "deține"
+          ],
+          "converse": [
+            "belong to"
+          ]
+        },
+        "sells": {
+          "en": [
+            "sell",
+            "carry"
+          ],
+          "ro": [
+            "vinde",
+            "avea de vânzare"
+          ],
+          "converse": []
+        },
+        "supplies": {
+          "en": [
+            "supply",
+            "buy from",
+            "be a supplier of"
+          ],
+          "ro": [
+            "aproviziona",
+            "cumpăra de la"
+          ],
+          "converse": [
+            "buy from",
+            "cumpăra de la"
+          ]
+        },
+        "attended": {
+          "en": [
+            "attend",
+            "go to",
+            "take part in"
+          ],
+          "ro": [
+            "participa la",
+            "merge la"
+          ],
+          "converse": []
+        },
+        "held_at": {
+          "en": [
+            "take place at",
+            "be held at",
+            "host"
+          ],
+          "ro": [
+            "avea loc la",
+            "găzdui"
+          ],
+          "converse": [
+            "host",
+            "găzdui"
+          ]
+        },
+        "wrote": {
+          "en": [
+            "write",
+            "be written by",
+            "be the author of"
+          ],
+          "ro": [
+            "scrie",
+            "fi autorul"
+          ],
+          "converse": [
+            "be written by"
+          ]
+        },
+        "published": {
+          "en": [
+            "publish"
+          ],
+          "ro": [
+            "publica"
+          ],
+          "converse": []
+        },
+        "borrowed": {
+          "en": [
+            "borrow",
+            "check out"
+          ],
+          "ro": [
+            "împrumuta"
+          ],
+          "converse": []
+        },
+        "plays_for": {
+          "en": [
+            "play for",
+            "be on"
+          ],
+          "ro": [
+            "juca la",
+            "fi în lotul"
+          ],
+          "converse": []
+        },
+        "coaches": {
+          "en": [
+            "coach",
+            "be the coach of",
+            "train"
+          ],
+          "ro": [
+            "antrena",
+            "fi antrenorul"
+          ],
+          "converse": []
+        },
+        "maintains": {
+          "en": [
+            "maintain",
+            "be responsible for",
+            "look after"
+          ],
+          "ro": [
+            "întreține",
+            "răspunde de",
+            "se ocupa de"
+          ],
+          "converse": []
+        },
+        "depends_on": {
+          "en": [
+            "depend on",
+            "rely on"
+          ],
+          "ro": [
+            "depinde de",
+            "se baza pe"
+          ],
+          "converse": []
+        },
+        "issued": {
+          "en": [
+            "issue",
+            "be issued by"
+          ],
+          "ro": [
+            "elibera",
+            "se elibera la"
+          ],
+          "converse": [
+            "be issued by",
+            "se elibera la"
+          ]
+        },
+        "requires": {
+          "en": [
+            "require",
+            "be required for"
+          ],
+          "ro": [
+            "necesita",
+            "cere"
+          ],
+          "converse": [
+            "be required for"
+          ]
+        },
+        "located_in": {
+          "en": [
+            "be in",
+            "be located in",
+            "be based in"
+          ],
+          "ro": [
+            "se afla în",
+            "fi în",
+            "avea sediul în"
+          ],
+          "converse": []
+        },
+        "travelled_to": {
+          "en": [
+            "travel to",
+            "visit",
+            "fly to"
+          ],
+          "ro": [
+            "călători la",
+            "vizita"
+          ],
+          "converse": []
+        },
+        "certified": {
+          "en": [
+            "be certified",
+            "have a valid certificate"
+          ],
+          "ro": [
+            "fi certificat",
+            "avea certificat valabil"
+          ],
+          "converse": []
+        },
+        "trained": {
+          "en": [
+            "complete the safety training",
+            "be trained"
+          ],
+          "ro": [
+            "termina instruirea de siguranță",
+            "fi instruit"
+          ],
+          "converse": []
+        },
+        "authorized": {
+          "en": [
+            "have access to the lab",
+            "be cleared for the lab"
+          ],
+          "ro": [
+            "avea acces în laborator"
+          ],
+          "converse": []
+        },
+        "eligible": {
+          "en": [
+            "be eligible for the bonus",
+            "qualify for the bonus"
+          ],
+          "ro": [
+            "fi eligibil pentru bonus",
+            "lua bonusul"
+          ],
+          "converse": []
+        },
+        "vaccinated": {
+          "en": [
+            "be vaccinated against the flu",
+            "get the flu shot"
+          ],
+          "ro": [
+            "se vaccina antigripal",
+            "fi vaccinat"
+          ],
+          "converse": []
+        },
+        "absent": {
+          "en": [
+            "be absent from work",
+            "stay home"
+          ],
+          "ro": [
+            "lipsi de la serviciu"
+          ],
+          "converse": []
+        },
+        "ill": {
+          "en": [
+            "be ill",
+            "be sick",
+            "have the flu"
+          ],
+          "ro": [
+            "fi bolnav",
+            "avea gripă"
+          ],
+          "converse": []
+        },
+        "down": {
+          "en": [
+            "be down",
+            "be out of service"
+          ],
+          "ro": [
+            "fi căzut",
+            "pica"
+          ],
+          "converse": []
+        },
+        "overloaded": {
+          "en": [
+            "be overloaded",
+            "be under too much load"
+          ],
+          "ro": [
+            "fi supraîncărcat"
+          ],
+          "converse": []
+        },
+        "caused_outage": {
+          "en": [
+            "bring down",
+            "cause the outage of"
+          ],
+          "ro": [
+            "cădea din cauza"
+          ],
+          "converse": [
+            "cădea din cauza"
+          ]
+        },
+        "wants_to_move": {
+          "en": [
+            "want to move to",
+            "plan to relocate to"
+          ],
+          "ro": [
+            "vrea să se mute în"
+          ],
+          "converse": []
+        },
+        "plans_to_leave": {
+          "en": [
+            "plan to leave",
+            "intend to quit"
+          ],
+          "ro": [
+            "vrea să plece de la"
+          ],
+          "converse": []
+        },
+        "sick_from": {
+          "en": [
+            "get sick from",
+            "make sick"
+          ],
+          "ro": [
+            "se îmbolnăvi de la"
+          ],
+          "converse": [
+            "make sick"
+          ]
+        },
+        "closed_for": {
+          "en": [
+            "be closed for"
+          ],
+          "ro": [
+            "fi închis pentru"
+          ],
+          "converse": []
+        },
+        "delayed_by": {
+          "en": [
+            "be postponed because of"
+          ],
+          "ro": [
+            "fi amânat din cauza"
+          ],
+          "converse": []
+        },
+        "quit_over": {
+          "en": [
+            "quit because of"
+          ],
+          "ro": [
+            "demisiona din cauza"
+          ],
+          "converse": []
+        },
+        "closed_today": {
+          "en": [
+            "be closed"
+          ],
+          "ro": [
+            "fi închis"
+          ],
+          "converse": []
+        },
+        "postponed": {
+          "en": [
+            "be postponed"
+          ],
+          "ro": [
+            "fi amânat"
+          ],
+          "converse": []
+        },
+        "resigned": {
+          "en": [
+            "resign"
+          ],
+          "ro": [
+            "demisiona"
+          ],
+          "converse": []
+        },
+        "wants_to_learn": {
+          "en": [
+            "want to learn",
+            "plan to study"
+          ],
+          "ro": [
+            "vrea să învețe"
+          ],
+          "converse": []
+        },
+        "plans_to_attend": {
+          "en": [
+            "plan to go to",
+            "intend to attend"
+          ],
+          "ro": [
+            "vrea să meargă la",
+            "plănui să participe la"
+          ],
+          "converse": []
+        }
+      },
+      "entity_pools": {
+        "course": 12,
+        "substance": 12,
+        "food": 8,
+        "asset": 10,
+        "product": 12,
+        "event": 12,
+        "work": 10,
+        "system": 12,
+        "document": 12
+      }
+    },
+    "frames": {
+      "yes_no": {
+        "en": 24,
+        "ro": 18
+      },
+      "wh": {
+        "en": 16,
+        "ro": 14
+      },
+      "claim_check": {
+        "en": 6,
+        "ro": 5
+      },
+      "discourse": {
+        "en": 19,
+        "ro": 17,
+        "by_shape": {
+          "context_then_question": 5,
+          "presupposition_clause": 4,
+          "question_then_elaboration": 2,
+          "labelled_sections": 2,
+          "greeting_then_context": 2,
+          "colloquial_context": 2,
+          "parenthetical": 1,
+          "supposition": 4,
+          "conditional_frame": 2,
+          "hedge": 6,
+          "reported_speech": 6
+        },
+        "by_certainty": {
+          "asserted": 24,
+          "supposed": 6,
+          "hedged": 6
+        }
+      },
+      "joiners": {
+        "en": 5,
+        "ro": 5
+      }
+    },
+    "noise_model": {
+      "operations_en": [
+        "typo",
+        "lowercase_start",
+        "drop_question_mark",
+        "missing_apostrophe",
+        "chat_spelling",
+        "lowercase_i",
+        "repeated_punctuation",
+        "space_before_punctuation",
+        "no_space_after_comma"
+      ],
+      "operations_ro": [
+        "strip_diacritics",
+        "typo",
+        "lowercase_start",
+        "drop_question_mark",
+        "chat_spelling",
+        "repeated_punctuation",
+        "space_before_punctuation",
+        "no_space_after_comma"
+      ],
+      "typo_operation_weights": {
+        "substitution": 0.4239,
+        "deletion": 0.2293,
+        "transposition": 0,
+        "duplication": 0.0206,
+        "insertion": 0.3263
+      },
+      "typo_weights_source": "measured QQP hapax typos (typo_model_measured)",
+      "measured_rates_qqp": {
+        "all_caps_word": 0.0872,
+        "space_before_punctuation": 0.0063,
+        "chat_spelling": 0.0058,
+        "no_space_after_comma": 0.0039,
+        "no_terminal_punctuation": 0.0032,
+        "lowercase_i": 0.0025,
+        "letter_repetition": 0.002,
+        "missing_apostrophe": 0.0016,
+        "double_space": 0.0016,
+        "lowercase_start": 0.0006,
+        "repeated_punctuation": 0.0002
+      },
+      "clean_baseline_paws": {
+        "space_before_punctuation": 0.9912,
+        "all_caps_word": 0.0739,
+        "no_terminal_punctuation": 0.024,
+        "chat_spelling": 0.0082,
+        "no_space_after_comma": 0.0071,
+        "letter_repetition": 0.0027,
+        "lowercase_start": 0.002,
+        "lowercase_i": 0.0016,
+        "missing_apostrophe": 0.0003
+      },
+      "row_rate": 0.22,
+      "entity_surfaces_protected_from_character_typos": true,
+      "example": {
+        "text": "Does Maria still work at Nordwind Systems?",
+        "ops": []
+      }
+    },
+    "code_switching_model": {
+      "kinds": {
+        "clause_switch": "assertions in one language, question in the other (inter-sentential)",
+        "ro_matrix_en_insertion": "Romanian sentence with an English word or chunk inside it (intra-sentential)",
+        "en_matrix_ro_insertion": "English sentence with a Romanian word or chunk inside it (intra-sentential)",
+        "ro_matrix_en_tag": "Romanian sentence with an English opener or tag at its edge",
+        "en_matrix_ro_tag": "English sentence with a Romanian opener or tag at its edge"
+      },
+      "row_rate": 0.15,
+      "labelled_as": "row.code_switch {kind, matrix, embedded, inserted}",
+      "examples": [
+        {
+          "text": "Actualizez dashboard-ul intern. Ana lucrează la Nordwind Systems din Cluj-Napoca. Poți să verifici dacă e încă acolo?",
+          "switch": {
+            "kind": "ro_matrix_en_insertion",
+            "matrix": "ro",
+            "embedded": "en",
+            "inserted": [
+              "dashboard"
+            ],
+            "position": "inside"
+          }
+        },
+        {
+          "text": "Does Ana still work at Nordwind Systems, știi?",
+          "switch": {
+            "kind": "en_matrix_ro_tag",
+            "matrix": "en",
+            "embedded": "ro",
+            "inserted": [
+              "știi?"
+            ],
+            "position": "end"
+          }
+        }
+      ]
+    },
+    "unclear_generators": {
+      "gibberish": {
+        "methods": [
+          "keyboard_mash",
+          "pseudo_words",
+          "mash_with_punctuation",
+          "repeated_letters",
+          "syllable_soup",
+          "mixed_script_mash"
+        ],
+        "examples": [
+          "hjkhjk zxcv vbn",
+          "kjh și lkj"
+        ]
+      },
+      "no_request": {
+        "methods": [
+          "greeting",
+          "greeting_and_phatic",
+          "acknowledgement",
+          "general_request",
+          "polite_general_request",
+          "mixed_language_phatic"
+        ],
+        "examples": [
+          "Sorry, greșeala mea.",
+          "O întrebare: tradu „bună dimineața” în japoneză."
+        ]
+      }
+    },
+    "families": {
+      "lookup": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "supported",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "located_in",
+                  "args": [
+                    "montreal_arena",
+                    "cahul"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "supported",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "wrote",
+                  "args": [
+                    "seo_yeon_kim",
+                    "a_short_history_of_bridges"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "wh_select": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "parent_family",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "parent_of",
+                  "args": [
+                    "?x",
+                    "lukas_schmidt"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "event_events",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "attended",
+                  "args": [
+                    "lucian_ionescu",
+                    "?x"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "count": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "event_events",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "count",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "held_at",
+                  "args": [
+                    "?x",
+                    "community_centre_on_elm_street"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "report_work",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "count",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "manages",
+                  "args": [
+                    "wanjiru_kariuki",
+                    "?x"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "filter": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "besides",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "travelled_to",
+                  "args": [
+                    "?x",
+                    "bacau"
+                  ],
+                  "negated": false
+                }
+              ],
+              "filter": [
+                "?x != \"raluca_ciobanu\""
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "besides",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "works_at",
+                  "args": [
+                    "?x",
+                    "delta_print"
+                  ],
+                  "negated": false
+                }
+              ],
+              "filter": [
+                "?x != \"lea_martin\""
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "join": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "grandparents",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "parent_of",
+                  "args": [
+                    "?x",
+                    "?m"
+                  ],
+                  "negated": false
+                },
+                {
+                  "relation": "parent_of",
+                  "args": [
+                    "?m",
+                    "diego_romero"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "doctor_of_allergic",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "treats",
+                  "args": [
+                    "?x",
+                    "?p"
+                  ],
+                  "negated": false
+                },
+                {
+                  "relation": "allergic_to",
+                  "args": [
+                    "?p",
+                    "shellfish"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "temporal": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "stated_interval_start",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "lives_in",
+                  "args": [
+                    "diana_florea",
+                    "bergen"
+                  ],
+                  "negated": false
+                }
+              ],
+              "at": "2019-05-01"
+            },
+            "stated": 1,
+            "assumed": 0
+          },
+          {
+            "variant": "at_inside",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "works_at",
+                  "args": [
+                    "min_jun_choi",
+                    "nordwind_systems"
+                  ],
+                  "negated": false
+                }
+              ],
+              "at": "2020-11-13"
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "attached": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "asserted_speaker_other_filler",
+            "expect": "unknown",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "borrowed",
+                  "args": [
+                    "ruxandra_neagu",
+                    "a_short_history_of_bridges"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 0
+          },
+          {
+            "variant": "asserted_same",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "works_at",
+                  "args": [
+                    "wojciech_wojcik",
+                    "carpathia_energy"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 0
+          }
+        ]
+      },
+      "negation": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "negative_query_supported",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "manages",
+                  "args": [
+                    "viorel_craciun",
+                    "sofia_navarro"
+                  ],
+                  "negated": true
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "denied_in_world",
+            "expect": "refuted",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "requires",
+                  "args": [
+                    "a_residence_certificate",
+                    "a_criminal_record_certificate"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "closure_assumption": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "health",
+            "expect": "unknown",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "vaccinated",
+                  "args": [
+                    "samuel_hughes"
+                  ],
+                  "negated": true
+                }
+              ]
+            },
+            "stated": 2,
+            "assumed": 1
+          },
+          {
+            "variant": "arts",
+            "expect": "unknown",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "borrowed",
+                  "args": [
+                    "chinedu_okafor",
+                    "soups_of_transylvania"
+                  ],
+                  "negated": true
+                }
+              ]
+            },
+            "stated": 3,
+            "assumed": 1
+          }
+        ]
+      },
+      "world_assumption": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "tech",
+            "expect": "unknown",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "depends_on",
+                  "args": [
+                    "booking_app",
+                    "analytics_pipeline"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 1
+          },
+          {
+            "variant": "tech",
+            "expect": "unknown",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "depends_on",
+                  "args": [
+                    "analytics_pipeline",
+                    "search_index"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 1
+          }
+        ]
+      },
+      "proof_depth": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "depth_1_supported",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "authorized",
+                  "args": [
+                    "wei_zhang"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 0
+          },
+          {
+            "variant": "depth_0_unknown",
+            "expect": "unknown",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "authorized",
+                  "args": [
+                    "hao_zhao"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "ambiguity": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "property_or_role",
+            "expect": "clarify",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "wrote",
+                  "args": [
+                    "?x",
+                    "letters_to_a_young_engineer"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "location_qualifier",
+            "expect": "clarify",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "works_at",
+                  "args": [
+                    "madalina_tanase",
+                    "\"Riverside Medical Centre\""
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "claim_check": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "refuted",
+            "expect": "refuted",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "published",
+                  "args": [
+                    "vertex_analytics",
+                    "winter_in_maramures"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "negated_refuted",
+            "expect": "refuted",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "works_at",
+                  "args": [
+                    "wanjiru_kariuki",
+                    "nordwind_systems"
+                  ],
+                  "negated": true
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "statement_only": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "1_statements",
+            "expect": "stated",
+            "canonical_query": null,
+            "stated": 1,
+            "assumed": 0
+          },
+          {
+            "variant": "2_statements",
+            "expect": "stated",
+            "canonical_query": null,
+            "stated": 2,
+            "assumed": 0
+          }
+        ]
+      },
+      "constraint": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "minimum_entailed",
+            "expect": "entailed",
+            "canonical_query": null,
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "minimum_entailed",
+            "expect": "entailed",
+            "canonical_query": null,
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "abduction": {
+        "formerly_blocked": true,
+        "examples": [
+          {
+            "variant": "ill_explained",
+            "expect": "unknown",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "sick_from",
+                  "args": [
+                    "gheorghe_munteanu",
+                    "potato_salad"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 0
+          },
+          {
+            "variant": "ill_explained",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "sick_from",
+                  "args": [
+                    "roxana_lazar",
+                    "street_food_kebab"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 0
+          }
+        ]
+      },
+      "default_exception": {
+        "formerly_blocked": true,
+        "examples": [
+          {
+            "variant": "plays_for_trained_exception",
+            "expect": "refuted",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "trained",
+                  "args": [
+                    "levente_szabo"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 2,
+            "assumed": 0
+          },
+          {
+            "variant": "maintains_authorized_exception",
+            "expect": "refuted",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "authorized",
+                  "args": [
+                    "katalin_nagy"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 2,
+            "assumed": 0
+          }
+        ]
+      },
+      "counterfactual": {
+        "formerly_blocked": true,
+        "examples": [
+          {
+            "variant": "studies_at_certified_negated",
+            "expect": "refuted",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "certified",
+                  "args": [
+                    "costin_popescu"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 0
+          },
+          {
+            "variant": "certified_eligible",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "eligible",
+                  "args": [
+                    "seo_yeon_kim"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 0
+          }
+        ]
+      },
+      "planning": {
+        "formerly_blocked": true,
+        "examples": [
+          {
+            "variant": "who_coaches",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "coaches",
+                  "args": [
+                    "?x",
+                    "galati_united"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "who_teaches",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "teaches",
+                  "args": [
+                    "?x",
+                    "chemistry"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "causal": {
+        "formerly_blocked": true,
+        "examples": [
+          {
+            "variant": "delayed_by_which",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "delayed_by",
+                  "args": [
+                    "regional_chess_tournament",
+                    "?x"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 0
+          },
+          {
+            "variant": "closed_for_which",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "closed_for",
+                  "args": [
+                    "old_mill_hall",
+                    "?x"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 0
+          }
+        ]
+      },
+      "intention": {
+        "formerly_blocked": true,
+        "examples": [
+          {
+            "variant": "reported_wants_to_move_asked_plans_to_leave",
+            "expect": "unknown",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "plans_to_leave",
+                  "args": [
+                    "dragos_patrascu",
+                    "blue_harbor_media"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 0
+          },
+          {
+            "variant": "reported_wants_to_move_asked_plans_to_leave",
+            "expect": "unknown",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "plans_to_leave",
+                  "args": [
+                    "ukasz_kaczmarek",
+                    "orion_robotics"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 1,
+            "assumed": 0
+          }
+        ]
+      },
+      "general_quantification": {
+        "formerly_blocked": true,
+        "examples": [
+          {
+            "variant": "staff-vaccinated-anyone-not",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "works_at",
+                  "args": [
+                    "?x",
+                    "novi_sad_logistics"
+                  ],
+                  "negated": false
+                },
+                {
+                  "relation": "vaccinated",
+                  "args": [
+                    "?x"
+                  ],
+                  "negated": true
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "attendees-vaccinated-anyone-not",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "which",
+              "select": [
+                "?x"
+              ],
+              "where": [
+                {
+                  "relation": "attended",
+                  "args": [
+                    "?x",
+                    "town_hall_debate"
+                  ],
+                  "negated": false
+                },
+                {
+                  "relation": "vaccinated",
+                  "args": [
+                    "?x"
+                  ],
+                  "negated": true
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "contrast": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "argument_swap_pair",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "manages",
+                  "args": [
+                    "jonas_becker",
+                    "thiago_souza"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "argument_swap_pair",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "parent_of",
+                  "args": [
+                    "horia_ionescu",
+                    "ilinca_tanase"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      },
+      "multi_question": {
+        "formerly_blocked": false,
+        "examples": [
+          {
+            "variant": "arts+arts",
+            "expect": "supported",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "borrowed",
+                  "args": [
+                    "amira_mansour",
+                    "glass_orchard"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          },
+          {
+            "variant": "arts+sports",
+            "expect": "unknown",
+            "canonical_query": {
+              "ask": "whether",
+              "where": [
+                {
+                  "relation": "wrote",
+                  "args": [
+                    "dimitra_georgiou",
+                    "salt_road"
+                  ],
+                  "negated": false
+                }
+              ]
+            },
+            "stated": 0,
+            "assumed": 0
+          }
+        ]
+      }
+    },
+    "quotas": {
+      "max_masked_template_share": 0.02,
+      "max_top10_template_share": 0.12,
+      "max_question_frame_share": 0.08,
+      "max_family_share": 0.15,
+      "min_target_skeletons_total": 40,
+      "min_target_skeletons_per_family": 2,
+      "language_shares": {
+        "en": [
+          0.4,
+          0.6
+        ],
+        "ro": [
+          0.25,
+          0.45
+        ],
+        "mixed": [
+          0.08,
+          0.22
+        ]
+      },
+      "noise_share": [
+        0.12,
+        0.35
+      ],
+      "unclear_share": [
+        0.05,
+        0.12
+      ],
+      "max_near_duplicate_share": 0.05
+    }
+  },
+  "mining_elapsed_ms": 16486
+}

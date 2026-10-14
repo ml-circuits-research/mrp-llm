@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#norm" target="_top">← Wire type index</a></p><h1><code>norm</code></h1><p>What may and must be done: a prohibition, an obligation or a permission over an action or a state, with one temporal qualifier. "Do not hard-reset a router during business hours." "Notify the on-call engineer within 10 minutes." "In an emergency a hard reset is allowed."</p><p><strong>Status and author:</strong> Knowledge wire, written by a model or the owner from a source and stored by the host after review. A model-origin program cannot author it (the model-origin compiler rejects it). Governed: its `version`, `supersedes` and `approval` fields decide which version binds. A norm is to actions and trajectories what <a href="integrity.html"><code>integrity</code></a> is to states.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="field-forbid"><code>forbid</code></th><td>At most once; optional</td><td>The forbidden pattern: <code>~action term...</code> or a state atom. Exactly one of <code>forbid</code>, <code>oblige</code>, <code>permit</code> (<code>norm_one_modality</code>).</td></tr>
+<tr><th scope="row" id="field-oblige"><code>oblige</code></th><td>At most once; optional</td><td>The required pattern. A variable of the pattern must be bound by a <code>when</code> atom (<code>unsafe_variable</code>).</td></tr>
+<tr><th scope="row" id="field-permit"><code>permit</code></th><td>At most once; optional</td><td>The permitted pattern; it must name the prohibition it excepts in <code>overrides</code> (warning <code>permit_without_target</code>).</td></tr>
+<tr><th scope="row" id="field-when"><code>when</code></th><td>Repeatable; optional</td><td>The condition under which the norm applies; the pattern's variables count as bound.</td></tr>
+<tr><th scope="row" id="field-within"><code>within</code></th><td>At most once; optional</td><td>A positive integer: an obligation met within N steps (time units in a timestamped trace) of its trigger. At most one temporal qualifier (<code>norm_qualifier_conflict</code>).</td></tr>
+<tr><th scope="row" id="field-before"><code>before</code></th><td>At most once; optional</td><td><code>~b</code>: a prohibition before <code>b</code> has occurred, or an obligation to occur before <code>b</code> occurs.</td></tr>
+<tr><th scope="row" id="field-after"><code>after</code></th><td>At most once; optional</td><td><code>~b</code>: a prohibition once <code>b</code> has occurred, or a required follow-up after <code>b</code>.</td></tr>
+<tr><th scope="row" id="field-always"><code>always</code></th><td>At most once; optional</td><td>A flag. Prohibition (default): the pattern holds at no step. Obligation: the state atom is maintained at every step from the trigger.</td></tr>
+<tr><th scope="row" id="field-sometime"><code>sometime</code></th><td>At most once; optional</td><td>A flag, obligations only: the pattern occurs at some step after the trigger.</td></tr>
+<tr><th scope="row" id="field-at_most_once"><code>at_most_once</code></th><td>At most once; optional</td><td>A flag, prohibitions only: at most one occurrence in the run.</td></tr>
+<tr><th scope="row" id="field-standing"><code>standing</code></th><td>At most once; optional</td><td>A flag, obligations only: the duty holds for every binding of the <code>when</code>, whatever the goal (<code>standing_needs_oblige</code> elsewhere). The validator warns <code>obligation_unscoped</code> once so that the author confirms the intent.</td></tr>
+<tr><th scope="row" id="field-severity"><code>severity</code></th><td>At most once; optional</td><td><code>hard</code> (default: a violating plan is invalid) or <code>soft</code> (a violation costs <code>cost</code> and is reported).</td></tr>
+<tr><th scope="row" id="field-cost"><code>cost</code></th><td>At most once; optional</td><td>A positive integer price of violating a soft norm (<code>cost_needs_soft</code>).</td></tr>
+<tr><th scope="row" id="field-priority"><code>priority</code></th><td>At most once; optional</td><td>An integer; prefer <code>overrides</code>.</td></tr>
+<tr><th scope="row" id="field-overrides"><code>overrides</code></th><td>Repeatable; optional</td><td>A <code>$norm</code> this norm excepts: the same subject and opposite force (<code>overrides_target_mismatch</code>), no cycles (<code>overrides_cycle</code>).</td></tr>
+<tr><th scope="row" id="field-binding"><code>binding</code></th><td>At most once; optional</td><td><code>strict</code> (default: the engine never relaxes it; the answer is <code>blocked</code> with <code>blocked_by</code>) or <code>advisory</code> (may be relaxed when the goal is otherwise blocked, and then listed in <code>relaxed</code>). Vacuous on a soft norm (<code>binding_on_soft_norm</code>).</td></tr>
+<tr><th scope="row" id="field-message"><code>message</code></th><td>At most once; optional</td><td>The reason string returned when the norm blocks a plan.</td></tr>
+<tr><th scope="row" id="field-source"><code>source</code></th><td>At most once; optional</td><td>Quoted citation of the sentence the norm comes from.</td></tr>
+<tr><th scope="row" id="field-version"><code>version</code></th><td>At most once; optional</td><td>A positive integer. A revision is a new wire with <code>version N+1</code> and <code>supersedes $old</code>; the old wire is never edited.</td></tr>
+<tr><th scope="row" id="field-supersedes"><code>supersedes</code></th><td>At most once; optional</td><td>A <code>$id</code> of a wire of the same type with a lower version (<code>supersedes_type_mismatch</code>, <code>version_not_increasing</code>). An approved successor makes its predecessor <code>approval superseded</code>.</td></tr>
+<tr><th scope="row" id="field-approval"><code>approval</code></th><td>At most once; optional</td><td><code>proposed</code>, <code>approved</code>, <code>contested</code>, <code>rejected</code>, <code>superseded</code> or <code>retired</code>. Written by the host when it accepts the wire; an author never writes it (authoring mode ignores it with <code>governance_ignored</code>). Only approved wires bind, and so do contested ones, flagged.</td></tr>
+<tr><th scope="row" id="field-approved_by"><code>approved_by</code></th><td>At most once; optional</td><td>Text. Written by the host at approval; required with <code>approval approved</code> in memory (<code>approval_incomplete</code>).</td></tr>
+<tr><th scope="row" id="field-approved_at"><code>approved_at</code></th><td>At most once; optional</td><td>ISO date or timestamp. Written by the host; <code>asof</code> selects the version in force from this date. Required for every norm and every strict method.</td></tr>
+<tr><th scope="row" id="field-retired_at"><code>retired_at</code></th><td>At most once; optional</td><td>ISO date or timestamp after which the wire no longer binds.</td></tr>
+<tr><th scope="row" id="field-scope"><code>scope</code></th><td>At most once; optional</td><td>A quoted list of tags (<code>scope "ops, business_hours"</code>). A scoped wire binds when its tags intersect the query context; an unscoped wire always binds.</td></tr>
+<tr><th scope="row" id="field-quote"><code>quote</code></th><td>At most once; optional</td><td>The exact words of the source, copied byte for byte.</td></tr></tbody></table></div></section><section><h2>What it is for and how to write it</h2><p>Pick the modality from the source's verb: "must not" is <code>forbid</code>, "must" is <code>oblige</code>, "may" is <code>permit</code>. State the pattern as <code>~action term...</code> (an <a href="action.html"><code>action</code></a> must exist) or as a state atom, add the <code>when</code> that scopes it, and at most one qualifier. Say <code>binding advisory</code> only when the source says "recommended" or "should"; an omitted <code>binding</code> is strict, which is the fail-safe choice. A permission must name the prohibition it excepts.</p><table><thead><tr><th>Modality</th><th>Qualifier</th><th>Violated when</th></tr></thead><tbody><tr><td><code>forbid</code></td><td><code>always</code> (default)</td><td>the pattern holds at some step</td></tr><tr><td><code>forbid</code></td><td><code>before ~b</code> / <code>after ~b</code></td><td>the pattern occurs before any <code>b</code> / after a <code>b</code></td></tr><tr><td><code>forbid</code></td><td><code>at_most_once</code></td><td>the pattern occurs a second time</td></tr><tr><td><code>oblige</code></td><td><code>sometime</code></td><td>the run ends with the trigger raised and no occurrence</td></tr><tr><td><code>oblige</code></td><td><code>always</code></td><td>the state atom fails at a step from the trigger</td></tr><tr><td><code>oblige</code></td><td><code>within N</code></td><td>N steps pass after the trigger with no occurrence</td></tr><tr><td><code>oblige</code></td><td><code>before ~b</code> / <code>after ~b</code></td><td><code>b</code> occurs first / the run ends after <code>b</code> with no later occurrence</td></tr><tr><td><code>permit</code></td><td>none</td><td>never; it blocks the <code>forbid</code> it overrides where its <code>when</code> holds</td></tr></tbody></table></section><section><h2>What the engine does</h2><p><b>Obligation instances.</b> An obligation is triggered per instance: the first step at which its <code>when</code> holds for a binding that comes from the goal's arguments or from an executed action. A binding that exists only because a row of memory satisfies the <code>when</code> creates no instance, so "notify router r7" binds to the router the question or a step concerns, not to every router in memory; <code>standing</code> says otherwise and is reported. <b>Severity and binding are independent.</b> <code>hard</code> makes a violating plan invalid, <code>soft</code> adds its cost; <code>strict</code> is never relaxed, <code>advisory</code> may be and is then listed in <code>relaxed</code>. A hard strict violation with no alternative gives <code>blocked</code> with <code>blocked_by [norm id]</code>. <b>Conflicts.</b> Two norms of equal strength in conflict give <code>blocked</code> with both ids under <code>strict</code>, never a silent pick. A <code>permit</code> blocks the prohibition it names for the arguments where its <code>when</code> holds. <b>Audit.</b> <code>mode conform</code> judges a performed <a href="trace.html"><code>trace</code></a> against the versions in force at the time of each step.</p></section><section><h2>Examples</h2><pre data-sop="knowledge"><code>@router predicate
+  args subject:entity
+@business_hours predicate
+  args none
+@emergency predicate
+  args subject:entity
+@notified predicate
+  args subject:entity
+@reset_done predicate
+  args subject:entity
+
+@notify_oncall action
+  params ?r
+  requires router ?r
+  adds notified ?r
+  cost 1
+@hard_reset action
+  params ?r
+  requires router ?r
+  adds reset_done ?r
+  cost 1
+
+@no_hard_reset_in_hours norm
+  forbid ~hard_reset ?r
+  when business_hours
+  severity hard
+  binding strict
+  source "Ops manual 4.3"
+@notify_promptly norm
+  oblige ~notify_oncall ?r
+  when router ?r
+  within 10
+  severity soft
+  cost 50
+@emergency_hard_reset norm
+  permit ~hard_reset ?r
+  when emergency ?r
+  overrides $no_hard_reset_in_hours</code></pre><p>The prohibition is hard and strict, the obligation is soft with a cost, and the permission excepts the prohibition in an emergency. Norms are evaluated by the strategies that declare <code>norms_hard</code> and <code>norms_soft</code>; the oracle declares them <code>not_expressible</code>.</p><h3>Invalid: a norm with two modalities</h3><pre data-sop="knowledge-invalid" data-error="norm_one_modality"><code>@a predicate
+  args subject:entity
+@act action
+  params ?x
+  requires a ?x
+  adds a ?x
+@n norm
+  forbid ~act ?x
+  oblige ~act ?x</code></pre><h3>Warning: a permission that excepts nothing</h3><pre data-sop="knowledge-invalid" data-error="permit_without_target"><code>@a predicate
+  args subject:entity
+@act action
+  params ?x
+  requires a ?x
+  adds a ?x
+@p norm
+  permit ~act ?x</code></pre></section><section><h2>Common mistakes</h2><ol><li>Two modalities, or two temporal qualifiers, in one norm.</li><li>An <code>oblige</code> variable that no <code>when</code> atom binds, or a <code>standing</code> marker written only to silence the warning.</li><li>A <code>permit</code> without <code>overrides</code>, or overriding a norm of the same force.</li><li><code>cost</code> on a hard norm (<code>cost_needs_soft</code>) or <code>binding</code> on a soft one (vacuous).</li><li>Writing <code>binding advisory</code> for "must": an advisory norm can be relaxed.</li><li>A strict hard <code>forbid</code> of an action that a strict method requires (<code>strict_forbid_conflicts_method</code>).</li></ol></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.norm</code></li><li><code>sop/knowledge/validate.mjs (norm checks)</code></li><li><code>sop/knowledge/cross-checks.mjs (overrides, strict_forbid_conflicts_method)</code></li></ul><p>Related: <a href="method.html"><code>method</code></a>, <a href="action.html"><code>action</code></a>, <a href="procedure.html"><code>procedure</code></a>, <a href="integrity.html"><code>integrity</code></a>, <a href="amendment.html"><code>amendment</code></a>, <a href="trace.html"><code>trace</code></a>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>; the shared semantics are in <a href="knowledge-semantics.html">Knowledge semantics</a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

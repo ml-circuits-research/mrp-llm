@@ -1,0 +1,8 @@
+# expect: compare_on_entity
+@p predicate
+  args subject:entity
+@r rule
+  when p ?x
+  when p ?y
+  when compare ?x above ?y
+  then q ?x

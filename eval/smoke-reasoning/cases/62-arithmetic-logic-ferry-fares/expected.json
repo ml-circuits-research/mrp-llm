@@ -1,0 +1,20 @@
+{
+  "feature": "Arithmetic plus logic: fares computed with truncating integer division, a family-size aggregate, a threshold comparison and an exemption by negation as failure, in one stratified program",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {"p": "ann", "x": 18},
+    {"p": "bob", "x": 18},
+    {"p": "di", "x": 18},
+    {"p": "ed", "x": 19},
+    {"p": "flo", "x": 20}
+  ],
+  "requires": [
+    "rules",
+    "aggregate",
+    "compute_in_rules",
+    "compare_in_rules",
+    "naf",
+    "closed_world"
+  ]
+}

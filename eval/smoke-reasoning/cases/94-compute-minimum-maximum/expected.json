@@ -1,0 +1,16 @@
+{
+  "feature": "compute minimum_with and maximum_with: the smaller or larger of two values inside a rule body (a bottleneck over serial stages, the join of parallel branches, a floor at zero), over decimals",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {"k": "bottleneck", "v": 100},
+    {"k": "extra_needed", "v": 0},
+    {"k": "improved", "v": 130},
+    {"k": "join_finish", "v": 22}
+  ],
+  "requires": [
+    "rules",
+    "compute_in_rules",
+    "exact_arithmetic"
+  ]
+}

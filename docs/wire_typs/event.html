@@ -1,0 +1,52 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#event" target="_top">Wire index</a> · <a href="fact.html">fact</a> · <a href="remember.html">remember</a> · <a href="query.html">query</a></p><h1><code>event</code></h1><p>An <code>event</code> describes a revision of an existing claim in a <a href="../wiki.html#definition-repository" target="_top">repository</a>. The declaration produces a value, while an authorized <a href="remember.html">remember</a> applies it to the current session. It preserves a separate history of what was known and when: an end date changes valid time; a retraction changes which claims are visible to queries at a given <code>asof</code>. This is an advanced/review-sensitive authoring surface, not a way for a <a href="../wiki.html#definition-formalizer" target="_top">formalizer</a> to rewrite a user claim without identifying it.</p><h2>All supported fields</h2><table><thead><tr><th>Field / multiplicity</th><th>Value grammar and operational constraint</th></tr></thead><tbody><tr><td id="field-action"><code>action</code> — exactly one, required</td><td>One of <code>end</code>, <code>retract</code>, <code>correct</code>; unsupported names fail parser shape validation. <code>end</code> limits the target claim's exclusive validity endpoint; <code>retract</code> hides that claim in the later knowledge view; <code>correct</code> is expanded by remember into a retraction plus a new replacement fact.</td></tr><tr><td id="field-target"><code>target</code> — exactly one, required</td><td>Literal claim ID such as <code>c_...</code> or <code>$receipt</code> from an remember receipt with <code>ids</code> containing exactly one claim. At runtime a <code>$id</code> value that is itself a one-element array of claim IDs is also accepted; neither shape bypasses the visible-claim check. Text not starting with <code>$</code> is unquoted and passed to repository ID validation. A <code>$receipt</code> is a real dependency; a multi-claim receipt, event ID or arbitrary scalar is not a valid claim target. The claim must be visible in the current session/repository before its event is applied. If target comes from a newly written receipt, this dependency orders the operation.</td></tr><tr><td id="field-effective"><code>effective</code> — zero or one; required to apply <code>end</code></td><td>Literal ISO <code>YYYY-MM-DD</code> or UTC timestamp <code>YYYY-MM-DDTHH:mm:ssZ</code> (optional milliseconds), converted with <code>instant()</code>. <code>end</code> additionally requires a finite instant when the event is applied, so <code>open</code> and <code>beginning</code> are not usable as its effective cutoff. The parser does not enforce the action-specific requirement. For <code>retract</code>/<code>correct</code> the parsed effective value is not stored in the resulting retraction event; an effective date does not make retraction a dated <code>end</code>. This field is not a <code>$value</code> instant dereference.</td></tr><tr><td id="field-replacement"><code>replacement</code> — zero or one; required to apply <code>correct</code></td><td><code>$fact</code> of a replacement <a href="fact.html">fact</a>, including atom, validity and provenance; correction fails at remember if missing or of another kind. The old claim is retracted and the replacement fact is separately written. On <code>end</code>/<code>retract</code>, a supplied replacement is materialized but not consumed as a new claim; do not put it there expecting a write.</td></tr><tr><td id="field-source"><code>source</code> — zero or one, default <code>user</code></td><td>Literal or JSON double-quoted source string, decoded with <code>unquote</code>. It identifies provenance of the revision event, not of a replacement fact (which has its own source). It is not a <code>$</code> dependency nor a host-approved identity certificate. An omitted <code>source</code> silently records <code>user</code>, a trust class nobody wrote; write it explicitly.</td></tr></tbody></table><h2>Temporal history</h2><p>Applied events get their own event IDs and <code>knownAt</code> write time. Claim visibility at <code>query.asof</code> considers only events known by that cutoff. For a visible <code>end</code>, claim validity ends at the minimum of its original end and the event's <code>effective</code>; the interval remains half-open. <code>retract</code> removes its target from later knowledge views without proving the atom's explicit negation. <code>correct</code> returns two receipt IDs and requires the replacement fact's <code>retention pinned</code> to pass host <code>allowPin</code>. The repository validates target claim existence and applies the batch transactionally.</p><h2>Current syntax examples</h2><p>Given a writable session, the first receipt identifies exactly one claim, so <code>target $saved</code> is an accepted target. An <code>asof</code> before the end write sees the earlier view even when <code>at</code> asks about a later validity date.</p><pre data-sop="current"><code>@original fact
+  holds open gate_a
+  valid 2026-01-01 open
+  source "facility log"
+
+@saved remember
+  input $original
+
+@stop event
+  action end
+  target $saved
+  effective 2026-06-01
+  source "closure notice"
+
+@apply_stop remember
+  input $stop</code></pre><p>Correction retracts one claim and writes a distinct replacement fact; no assertion that <code>open gate_a</code> is explicitly false follows just from the retraction:</p><pre data-sop="current"><code>@old fact
+  holds located package_a room_a
+  valid timeless
+  source "initial scan"
+
+@receipt remember
+  input $old
+
+@new fact
+  holds located package_a room_b
+  valid timeless
+  source "verified rescan"
+
+@fix event
+  action correct
+  target $receipt
+  replacement $new
+  source "audit correction"
+
+@apply_fix remember
+  input $fix</code></pre><p>The next fragment parses, but the receipt identifies two claims; event materialization rejects an ambiguous receipt rather than selecting the first ID:</p><pre data-sop="invalid" data-check="runtime" data-error="Event target receipt must identify exactly one claim"><code>@a fact
+  holds open gate_a
+  valid timeless
+
+@b fact
+  holds open gate_b
+  valid timeless
+
+@both pack
+  items $a $b
+
+@receipt remember
+  input $both
+
+@bad event
+  action retract
+  target $receipt</code></pre><p><strong>Implementation sources:</strong> <code>sop/parser.mjs</code> (<code>SPEC.event</code>, <code>validateShape</code>), <code>sop/runtime.mjs</code> (<code>materializeEvent</code>, <code>case 'remember'</code>), <code>lib/time.mjs</code> (<code>instant</code>), <code>memory/repository.mjs</code> (<code>apply</code>), <code>memory/temporal.mjs</code> (<code>event</code>, <code>recallLayers</code>).</p></main><script type="module" src="help-page.mjs"></script></body></html>

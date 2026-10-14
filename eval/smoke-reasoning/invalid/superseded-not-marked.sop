@@ -1,0 +1,13 @@
+# expect: superseded_not_marked
+@r1 rule
+  when a ?x
+  then b ?x
+  version 1
+@r2 rule
+  when a ?x
+  then c ?x
+  version 2
+  supersedes $r1
+  approval approved
+  approved_by "o"
+  approved_at 2026-01-01

@@ -1,0 +1,17 @@
+{
+  "feature": "Recursion plus negation as failure on a cyclic graph: completion alone is unsound (Z3 must decline recursion)",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "y": "c"
+    }
+  ],
+  "requires": [
+    "rules",
+    "recursion",
+    "naf",
+    "closed_world",
+    "closed_derived"
+  ]
+}

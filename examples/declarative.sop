@@ -1,0 +1,30 @@
+# Declarative problem authored by the small model for
+# "Carina is a parent of Ana. Who is Carina a parent of?". The model saw only
+# the message: it writes strings, the host links them to the lexicon. One
+# statement the message asserts, one assumption the model added (parenthood
+# is asymmetric, so Ana is not a parent of Carina: general world knowledge,
+# written with the statement's own relation phrase), one question. No solve, cnl, resolve or remember appears here; the host compiles
+# those steps into an inspectable execution circuit and, by default, reports
+# the assumption without using it.
+@context stated
+  relation "parent of"
+  role subject "Carina"
+  role object "Ana"
+  polarity affirmed
+  certainty asserted
+
+@background assumed
+  relation "parent of"
+  role subject "Ana"
+  role object "Carina"
+  polarity negated
+  basis world
+
+@question query
+  where match
+    relation "parent of"
+    role subject "Carina"
+    role object ?who
+    polarity affirmed
+  end
+  select ?who

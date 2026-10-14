@@ -1,0 +1,3 @@
+# commonsense-books-v1: general knowledge mined from the owner's problem books by tools/knowledge-mining (do not edit by hand; a wrong
+# wire is corrected by a new mining run or removed with its group). Every wire carries its provenance: book, problem, proposing model,
+# reviewing model and date (a predicate declaration in the comment line above it). No book text is quoted.

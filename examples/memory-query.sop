@@ -1,0 +1,4 @@
+@q query
+  select ?who
+  where grandparent ?who carina
+  at 2026-09-26

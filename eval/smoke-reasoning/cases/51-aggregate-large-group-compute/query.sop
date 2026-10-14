@@ -1,0 +1,3 @@
+@q query
+  where gap ?d ?g
+  select ?d ?g

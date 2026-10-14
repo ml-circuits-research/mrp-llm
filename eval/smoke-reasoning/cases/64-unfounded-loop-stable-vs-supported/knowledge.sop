@@ -1,0 +1,32 @@
+@heater predicate
+  args subject:entity
+@room predicate
+  args subject:entity
+@warm predicate
+  args subject:entity
+  closed true
+@hot predicate
+  args subject:entity
+@cold predicate
+  args subject:entity
+
+@f1 fact
+  holds heater h1
+@f2 fact
+  holds room h1
+@f3 fact
+  holds room n2
+
+@r_heater rule
+  when heater ?x
+  then warm ?x
+@r_hot rule
+  when warm ?x
+  then hot ?x
+@r_warm rule
+  when hot ?x
+  then warm ?x
+@r_cold rule
+  when room ?x
+  when absent warm ?x
+  then cold ?x

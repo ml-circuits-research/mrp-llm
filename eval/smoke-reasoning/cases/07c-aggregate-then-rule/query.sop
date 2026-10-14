@@ -1,0 +1,3 @@
+@q query
+  where large_dept ?d
+  select ?d

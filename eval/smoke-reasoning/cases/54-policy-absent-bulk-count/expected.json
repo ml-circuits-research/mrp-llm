@@ -1,0 +1,12 @@
+{
+  "feature": "Stratified negation as failure (absent) over a 6,400-row bulk join",
+  "status": "supported",
+  "complete": true,
+  "count": 6171,
+  "requires": [
+    "rules",
+    "naf",
+    "closed_world",
+    "count"
+  ]
+}

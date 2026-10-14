@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#binding" target="_top">← Wire type index</a></p><h1><code>binding</code></h1><p>Internal result projection created by the runtime for an explicit output port. Authors declare <code>output ?name one</code> on <code>solve</code> or supported advanced operations; they cannot declare <code>@name binding</code> in executable source.</p><p><strong>Status and author:</strong> Runtime-generated only; model-origin and trusted source both fail if they contain an explicit binding wire.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once at parse time. Other field names are rejected.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and current behavior</th></tr></thead><tbody><tr><th scope="row" id="field-result"><code>result</code></th><td>At most once; required internally</td><td>Runtime-created result projection from a producing operation; never an author-supplied result packet.</td></tr>
+<tr><th scope="row" id="field-variable"><code>variable</code></th><td>At most once; required internally</td><td><code>?name</code> of the declared output port; identifies the projected variable or status/count port.</td></tr>
+<tr><th scope="row" id="field-mode"><code>mode</code></th><td>At most once; required internally</td><td>One of <code>one</code>, <code>many</code>, <code>rows</code>, <code>count</code>, <code>status</code>; enforces output cardinality and shape.</td></tr>
+<tr><th scope="row" id="field-owner"><code>owner</code></th><td>At most once; required internally</td><td>Producing operation wire ID; ties this internal binding to its result.</td></tr></tbody></table></div></section><section><h2>Execution and result</h2><p>The producer reserves <code>?name</code> and runtime generates an internal <code>@name binding</code>; downstream code reads <code>$name</code> only when bound. <code>one</code> needs exactly one distinct answer; none yields no_answer and several yield ambiguous. <code>many</code> yields the array (including an empty array for a complete empty result), <code>rows</code> yields binding rows, <code>count</code> requires a count result, and <code>status</code> yields the producer status. Unsupported/inconsistent/both/mixed temporal or incomplete packets cannot silently become a chosen value (status mode is the explicit status exception). Conflicted relational candidates block ordinary projection. Numeric projections use result-specific <code>outputProjection</code>; a missing projection is unsupported. Runtime stores outcome, owner, proof IDs and epoch in <code>outputs</code>; the bound scalar/array becomes the wire value.</p></section><section><h2>Current SOP examples</h2><h3>Unique value is consumable</h3><pre data-sop="current"><code>@q query
+  select ?parent
+  where parent ?parent bogdan
+  mode select
+
+@answer solve
+  query $q
+  output ?parent one
+
+@label value
+  data &quot;Parent: &quot; + $parent</code></pre><p>Requires a complete view with exactly one supported parent; then runtime creates the internal binding and label. With zero/multiple answers, the label is blocked.</p>
+<h3>Explicit status port survives unknown answers</h3><pre data-sop="current"><code>@q query
+  where parent ana bogdan
+  mode exists
+
+@answer solve
+  query $q
+  output ?state status
+
+@label value
+  data &quot;Result: &quot; + $state</code></pre><p>The generated status binding carries the reasoner status as data, even when there is no selected individual.</p><h3>Invalid or unsafe example</h3><pre data-sop="invalid" data-check="runtime" data-error="binding wires are runtime-generated"><code>@q query
+  where parent ana bogdan
+  mode exists
+
+@invented binding
+  result $q
+  variable ?x
+  mode one
+  owner q</code></pre><p>The parser recognizes the fields and every reference exists, but <code>Runtime.run</code> rejects all explicitly declared binding wires, including trusted-origin programs, with <code>binding wires are runtime-generated; declare solve output instead</code>. A binding whose <code>result</code> names a missing wire fails even earlier, at graph validation (<code>Unknown reference</code>).</p></section><section><h2>Implementation sources</h2><ul><li><code>sop/parser.mjs:SPEC, validateShape, validateGraph</code></li><li><code>sop/runtime.mjs:Runtime.run</code></li><li><code>sop/outputs.mjs:outputSpecs, outputRegistry, selectOutput</code></li><li><code>sop/runtime.mjs:Runtime.run</code></li></ul><p>Related: <a href="solve.html"><code>solve</code></a>, <a href="reason.html"><code>reason</code></a>, <a href="value.html"><code>value</code></a>. See the <a href="../wiki.html#definition-sop" target="_top">SOP terminology</a> for wire/reference conventions.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

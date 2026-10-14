@@ -1,0 +1,29 @@
+{
+  "benchmark": "mintaka",
+  "title": "Mintaka (Amazon Science), test split",
+  "url": "https://github.com/amazon-science/mintaka",
+  "license": "CC-BY-4.0",
+  "citation": "Sen, Aji, Saffari. Mintaka: A Complex, Natural, and Multilingual Dataset for End-to-End Question Answering. COLING 2022.",
+  "files": {
+    "mintaka_test.json": "https://raw.githubusercontent.com/amazon-science/mintaka/main/data/mintaka_test.json",
+    "LICENSE.md": "https://raw.githubusercontent.com/amazon-science/mintaka/main/LICENSE.md"
+  },
+  "seed": "kbqa-v1",
+  "population": 3933,
+  "sampled": 1000,
+  "dropped_no_gold": 0,
+  "dropped_error": 0,
+  "built_at": "2026-10-01T15:21:31.273Z",
+  "gold_source": "answers shipped with the benchmark",
+  "types": {
+    "comparative": 112,
+    "count": 111,
+    "difference": 111,
+    "intersection": 111,
+    "multihop": 111,
+    "ordinal": 111,
+    "simple": 111,
+    "superlative": 111,
+    "yesno": 111
+  }
+}

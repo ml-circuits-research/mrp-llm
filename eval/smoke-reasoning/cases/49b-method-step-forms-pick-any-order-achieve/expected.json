@@ -1,0 +1,29 @@
+{
+  "feature": "Method step forms: any_order (a partial order), pick (the engine chooses a binding) and achieve (the planner fills the gap from primitives)",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 7,
+    "steps": 6
+  },
+  "used": [
+    {
+      "id": "onboard",
+      "version": 1
+    },
+    {
+      "id": "print_badge",
+      "version": 1
+    },
+    {
+      "id": "laminate",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "used"
+  ]
+}

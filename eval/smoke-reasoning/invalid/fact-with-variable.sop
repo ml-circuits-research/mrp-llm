@@ -1,0 +1,3 @@
+# expect: bad_atom
+@f1 fact
+  holds parent ann ?x

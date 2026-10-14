@@ -1,0 +1,21 @@
+{
+  "feature": "Conformance under an advisory hard norm: the violation is reported as relaxed and the trace is compliant (a strict one would be non_compliant)",
+  "status": "compliant",
+  "complete": true,
+  "relaxed": [
+    "no_force"
+  ],
+  "compliance": {
+    "hard": "relaxed",
+    "violated": [],
+    "soft_violations": [],
+    "total_cost": 3
+  },
+  "requires": [
+    "check_plan",
+    "norms_hard",
+    "binding_advisory",
+    "method",
+    "zero_arity"
+  ]
+}

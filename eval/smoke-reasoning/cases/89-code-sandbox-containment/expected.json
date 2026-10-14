@@ -1,0 +1,9 @@
+{
+ "status": "verified",
+ "complete": true,
+ "feature": "Code sandbox containment: require, process, fetch and a constructor escape are all blocked inside the sandbox",
+ "requires": [
+  "code_sandbox"
+ ],
+ "warnings": []
+}

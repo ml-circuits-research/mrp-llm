@@ -1,0 +1,338 @@
+# conversation-v1: the replies of the chat (DS023 "Conversation layer"). Several reply wires of one situation and part are variants;
+# the renderer picks one at random and fills the {{slot}} placeholders from the result packet. Phrasing changes are made here, never in code.
+
+@cv_answer_found_1 reply
+  situation answer_found
+  part body
+  language en
+  text "{{answer}}"
+
+@cv_answer_open_1 reply
+  situation answer_open
+  part body
+  language en
+  text "{{answer}}"
+
+@cv_near_candidate_1 reply
+  situation near_candidate
+  part body
+  language en
+  text "I don't have {{mention}} in my memory. Did you mean {{candidate}}?"
+
+@cv_near_candidate_2 reply
+  situation near_candidate
+  part body
+  language en
+  text "I couldn't find {{mention}} in what I know. Perhaps you meant {{candidate}}?"
+
+@cv_near_candidate_described_1 reply
+  situation near_candidate_described
+  part body
+  language en
+  text "I don't have {{mention}} in my memory. Did you mean {{candidate}} ({{candidate_description}})?"
+
+@cv_near_candidate_described_2 reply
+  situation near_candidate_described
+  part body
+  language en
+  text "I couldn't find {{mention}}, but I know {{candidate}} ({{candidate_description}}). Is that who or what you meant?"
+
+@cv_near_relations_1 reply
+  situation near_relations
+  part closing
+  language en
+  text "About {{candidate}} my memory records: {{relations}}."
+
+@cv_near_relations_2 reply
+  situation near_relations
+  part closing
+  language en
+  text "I can tell you about {{candidate}} through these relations: {{relations}}."
+
+@cv_offer_topics_1 reply
+  situation offer_topics
+  part closing
+  language en
+  text "I know most about {{topics}}, if you want to try one of those."
+
+@cv_offer_topics_2 reply
+  situation offer_topics
+  part closing
+  language en
+  text "You could ask me about {{topics}} instead."
+
+@cv_relation_missing_1 reply
+  situation relation_missing
+  part body
+  language en
+  text "I understood the question, but my memory has no relation that answers it. You can ask it in other words, or add the knowledge first."
+
+@cv_relation_missing_topics_1 reply
+  situation relation_missing_topics
+  part body
+  language en
+  text "I understood the question, but my memory has nothing that answers it. I know most about {{topics}}; ask me about those, or add the knowledge first."
+
+@cv_relation_missing_topics_2 reply
+  situation relation_missing_topics
+  part body
+  language en
+  text "That is outside what my memory covers. I can help with {{topics}}, or you can add the knowledge first."
+
+@cv_no_request_1 reply
+  situation no_request
+  part body
+  language en
+  text "What would you like to know?"
+
+@cv_no_request_2 reply
+  situation no_request
+  part body
+  language en
+  text "How can I help? Ask me a question, or tell me something to remember for this conversation."
+
+@cv_no_request_topics_1 reply
+  situation no_request_topics
+  part body
+  language en
+  text "What would you like to know? I can answer questions about {{topics}}, give you a random fact, or tell you what my memory holds."
+
+@cv_no_request_topics_2 reply
+  situation no_request_topics
+  part body
+  language en
+  text "Ask me anything about {{topics}}. I can also give you a random fact or describe my memory."
+
+@cv_gibberish_1 reply
+  situation gibberish
+  part body
+  language en
+  text "I did not understand the message. Could you rephrase it?"
+
+@cv_gibberish_2 reply
+  situation gibberish
+  part body
+  language en
+  text "Sorry, I could not make sense of that. Could you say it in other words?"
+
+@cv_ambiguous_1 reply
+  situation ambiguous
+  part body
+  language en
+  text "Your message can be read in more than one way. Which do you mean?"
+
+@cv_ambiguous_readings_1 reply
+  situation ambiguous_readings
+  part body
+  language en
+  text "Your message can be read in more than one way. Which do you mean?\n{{readings}}"
+
+@cv_ambiguous_readings_2 reply
+  situation ambiguous_readings
+  part body
+  language en
+  text "I see more than one reading here. Which one do you mean?\n{{readings}}"
+
+@cv_courtesy_greeting_1 reply
+  situation courtesy_greeting
+  part body
+  language en
+  text "Hello! What would you like to know?"
+
+@cv_courtesy_greeting_2 reply
+  situation courtesy_greeting
+  part body
+  language en
+  text "Hi there! What can I look up for you?"
+
+@cv_courtesy_greeting_3 reply
+  situation courtesy_greeting
+  part body
+  language en
+  text "Hello! Ask me anything you like."
+
+@cv_courtesy_closing_1 reply
+  situation courtesy_closing
+  part body
+  language en
+  text "Goodbye!"
+
+@cv_courtesy_closing_2 reply
+  situation courtesy_closing
+  part body
+  language en
+  text "Goodbye, and come back any time."
+
+@cv_courtesy_thanks_1 reply
+  situation courtesy_thanks
+  part body
+  language en
+  text "You're welcome."
+
+@cv_courtesy_thanks_2 reply
+  situation courtesy_thanks
+  part body
+  language en
+  text "Glad I could help."
+
+@cv_courtesy_thanks_3 reply
+  situation courtesy_thanks
+  part body
+  language en
+  text "You're welcome. Anything else?"
+
+@cv_courtesy_apology_1 reply
+  situation courtesy_apology
+  part body
+  language en
+  text "No problem."
+
+@cv_courtesy_apology_2 reply
+  situation courtesy_apology
+  part body
+  language en
+  text "No problem at all."
+
+@cv_courtesy_politeness_1 reply
+  situation courtesy_politeness
+  part body
+  language en
+  text "How can I help?"
+
+@cv_courtesy_politeness_2 reply
+  situation courtesy_politeness
+  part body
+  language en
+  text "Of course. What do you need?"
+
+@cv_courtesy_confusion_1 reply
+  situation courtesy_confusion
+  part body
+  language en
+  text "Sorry for the confusion. Tell me which part is unclear, or ask a question, and I will explain it."
+
+@cv_courtesy_trouble_1 reply
+  situation courtesy_trouble
+  part body
+  language en
+  text "I am sorry about the trouble. Tell me what you need and I will go through it step by step."
+
+@cv_courtesy_trouble_2 reply
+  situation courtesy_trouble
+  part body
+  language en
+  text "Sorry that this has been frustrating. Tell me what you need and we will go through it together."
+
+@cv_courtesy_sadness_1 reply
+  situation courtesy_sadness
+  part body
+  language en
+  text "I am sorry to hear that. Ask me anything whenever you are ready."
+
+@cv_courtesy_joy_1 reply
+  situation courtesy_joy
+  part body
+  language en
+  text "Glad to hear it! What would you like to know?"
+
+@cv_courtesy_joy_2 reply
+  situation courtesy_joy
+  part body
+  language en
+  text "That's great! What can I do for you?"
+
+@cv_courtesy_urgency_1 reply
+  situation courtesy_urgency
+  part body
+  language en
+  text "I am here. What do you need?"
+
+@cv_courtesy_curiosity_1 reply
+  situation courtesy_curiosity
+  part body
+  language en
+  text "What would you like to know?"
+
+@cv_courtesy_curiosity_2 reply
+  situation courtesy_curiosity
+  part body
+  language en
+  text "Curious about something? Ask away."
+
+@cv_courtesy_none_1 reply
+  situation courtesy_none
+  part body
+  language en
+  text "What would you like to know?"
+
+@cv_courtesy_none_topics_1 reply
+  situation courtesy_none_topics
+  part body
+  language en
+  text "What would you like to know? I know most about {{topics}}."
+
+@cv_open_greeting_1 reply
+  situation open_greeting
+  part opening
+  language en
+  text "Hello!"
+
+@cv_open_greeting_2 reply
+  situation open_greeting
+  part opening
+  language en
+  text "Hi!"
+
+@cv_open_thanks_1 reply
+  situation open_thanks
+  part opening
+  language en
+  text "Happy to help."
+
+@cv_open_apology_1 reply
+  situation open_apology
+  part opening
+  language en
+  text "No problem."
+
+@cv_open_politeness_1 reply
+  situation open_politeness
+  part opening
+  language en
+  text "Of course."
+
+@cv_open_sorry_1 reply
+  situation open_sorry
+  part opening
+  language en
+  text "Sorry for the trouble."
+
+@cv_open_support_1 reply
+  situation open_support
+  part opening
+  language en
+  text "I am sorry to hear that."
+
+@cv_close_confusion_1 reply
+  situation close_confusion
+  part closing
+  language en
+  text "If something is still unclear, tell me which part and I will explain it differently."
+
+@cv_close_goodbye_1 reply
+  situation close_goodbye
+  part closing
+  language en
+  text "Goodbye!"
+
+@cv_known_candidate_described_1 reply
+  situation known_candidate_described
+  part body
+  language en
+  text "I know {{candidate}}: {{candidate_description}}."
+
+@cv_known_candidate_described_2 reply
+  situation known_candidate_described
+  part body
+  language en
+  text "{{candidate}}? In my memory: {{candidate_description}}."

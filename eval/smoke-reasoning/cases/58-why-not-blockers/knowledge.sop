@@ -1,0 +1,32 @@
+@badge predicate
+  args subject:entity object:entity
+@door_ok predicate
+  args subject:entity object:entity
+@suspended predicate
+  args subject:entity
+  closed true
+@escort predicate
+  args subject:entity object:entity
+@escort_authorized predicate
+  args subject:entity object:entity
+@can_enter predicate
+  args subject:entity object:entity
+
+@f1 fact
+  holds badge ann b7
+@f2 fact
+  holds suspended ann
+@f3 fact
+  holds escort ann cy
+@f4 fact
+  holds not escort_authorized cy vault
+
+@r_badge rule
+  when badge ?u ?b
+  when door_ok ?b ?d
+  when absent suspended ?u
+  then can_enter ?u ?d
+@r_escort rule
+  when escort ?u ?e
+  when escort_authorized ?e ?d
+  then can_enter ?u ?d

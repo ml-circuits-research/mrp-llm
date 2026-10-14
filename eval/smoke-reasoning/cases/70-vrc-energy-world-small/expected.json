@@ -1,0 +1,7 @@
+{
+  "feature": "Numeric planning with exact rationals and certified state compression: the VRC energy world (small instance)",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {"cost": 4, "steps": 4},
+  "requires": ["plan", "numeric_action", "zero_arity"]
+}

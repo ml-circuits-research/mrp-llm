@@ -1,0 +1,29 @@
+state/
+outputs/
+models/
+/vendor/
+.venv/
+*.gguf
+*.safetensors
+__pycache__/
+*.pyc
+work/
+.env
+datasets/generated/
+eval/reports/current/
+tools/.solvers/
+datasets_sources/
+
+# Chat data root (DS031): base memories, sessions and temporary request folders
+chat_data/
+
+# Benchmark dev cases: regenerable with node tools/datasets/diversity/build-benchmark.mjs (deterministic seeds); only manifest.jsonl is tracked
+eval/smoke-reasoning/bench/cases/
+
+# Model gateway (Ploinky Workers): keys, request logs, cache, audit store and runs live in ~/.pworker/, outside the repo; a key file never enters it
+.env
+.env.*
+Ploinky-Worker/data/
+# pworker run: run folders of a work folder (plans in .pworker/plans stay visible and may be committed)
+.pworker/runs/
+node_modules/

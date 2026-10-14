@@ -1,0 +1,6 @@
+@q query
+  where all
+    pays ?p ?x
+    compare ?x above 17
+  end
+  select ?p ?x

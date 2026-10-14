@@ -1,0 +1,5 @@
+{
+  "qwen27b-handbook": {
+    "h12": {"score": "correct", "why": "the answer lists every Workshop and Logistics person while reasoning and concludes 'Answer: Emma Patel'; the reject patterns fired on the reasoning"}
+  }
+}

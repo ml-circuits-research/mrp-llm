@@ -1,0 +1,23 @@
+{
+  "feature": "Recursion and transitive closure on a cyclic graph",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "t": "a"
+    },
+    {
+      "t": "b"
+    },
+    {
+      "t": "c"
+    },
+    {
+      "t": "d"
+    }
+  ],
+  "requires": [
+    "rules",
+    "recursion"
+  ]
+}

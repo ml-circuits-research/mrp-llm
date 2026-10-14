@@ -1,0 +1,9 @@
+# expect: standing_needs_oblige
+@a action
+  params ?r
+  requires p ?r
+  adds q ?r
+@n norm
+  forbid ~a ?r
+  when p ?r
+  standing

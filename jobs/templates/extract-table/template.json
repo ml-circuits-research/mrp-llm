@@ -1,0 +1,14 @@
+{
+  "name": "extract-table",
+  "description": "Extract records with the columns the user names (for example product, price, currency, date) from attached text, each record with the exact quote it comes from. Use for 'extract the prices', 'list every deadline', 'make a table of ...'.",
+  "kind": "prompt",
+  "targets": ["none", "session"],
+  "taskKind": "extract-table",
+  "params": {
+    "columns": {"type": "string[]", "min": 1, "max": 12, "description": "the column names, lowercase, as the user asked"},
+    "chunk_chars": {"type": "integer", "min": 500, "max": 12000, "default": 5000, "description": "characters per chunk"}
+  },
+  "ladder": ["small", "medium", "good"],
+  "ladderAllowed": ["tiny", "small", "medium", "good"],
+  "budget": {"usd": 0.3, "credits": 40}
+}

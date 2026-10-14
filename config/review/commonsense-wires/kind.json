@@ -1,0 +1,5 @@
+{
+  "description": "General common-sense knowledge wires mined from a school problem the system failed (tools/knowledge-mining): each item is one wire; the context is the problem that showed the gap and the declarations the wire uses. The wire must be true in general and must not encode the problem.",
+  "check": {"validator": "caller"},
+  "policy": {"repairAt": "high", "confirmAt": "medium", "secondOpinion": true, "maxRepairRounds": 1}
+}

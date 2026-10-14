@@ -1,0 +1,424 @@
+@project entity
+  kind class
+  label en "project"
+
+@parent predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  description "relație de părinte, fără presupunere despre gen"
+
+@lx_parent_en lexeme
+  of parent
+  language en
+  pos verb
+  form "parent"
+  form "parent of"
+  frame subject object
+  source "converted from the ontology aliases of parent"
+
+@mother predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  description "relație explicită de mamă"
+
+@lx_mother_en lexeme
+  of mother
+  language en
+  pos verb
+  form "mother"
+  frame subject object
+  source "converted from the ontology aliases of mother"
+
+@father predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  description "relație explicită de tată"
+
+@lx_father_en lexeme
+  of father
+  language en
+  pos verb
+  form "father"
+  frame subject object
+  source "converted from the ontology aliases of father"
+
+@grandparent predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  description "părintele unui părinte; fără gen dedus din nume"
+
+@lx_grandparent_en lexeme
+  of grandparent
+  language en
+  pos verb
+  form "grandparent"
+  frame subject object
+  source "converted from the ontology aliases of grandparent"
+
+@grandmother predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  description "bunică, derivată numai cu informație despre relația maternală"
+
+@lx_grandmother_en lexeme
+  of grandmother
+  language en
+  pos verb
+  form "grandmother"
+  frame subject object
+  source "converted from the ontology aliases of grandmother"
+
+@ancestor predicate
+  args subject:entity object:entity
+  role subject person
+  role object person
+  description "relație de ascendență prin părinți"
+
+@lx_ancestor_en lexeme
+  of ancestor
+  language en
+  pos verb
+  form "ancestor"
+  frame subject object
+  source "converted from the ontology aliases of ancestor"
+
+@works_at predicate
+  args subject:entity object:entity
+  role subject person
+  role object organization
+  description "lucrează la organizație; nu afirmă automat statut de angajat sau locație fizică"
+
+@lx_works_at_en lexeme
+  of works_at
+  language en
+  pos verb
+  form "works at"
+  frame subject object
+  source "converted from the ontology aliases of works_at"
+
+@employed_by predicate
+  args subject:entity object:entity
+  role subject person
+  role object organization
+  description "raport explicit de angajare"
+
+@lx_employed_by_en lexeme
+  of employed_by
+  language en
+  pos verb
+  form "employed by"
+  frame subject object
+  source "converted from the ontology aliases of employed_by"
+
+@contractor_for predicate
+  args subject:entity object:entity
+  role subject person
+  role object organization
+  description "prestator sau contractor, nu neapărat angajat"
+
+@lx_contractor_for_en lexeme
+  of contractor_for
+  language en
+  pos verb
+  form "contractor for"
+  frame subject object
+  source "converted from the ontology aliases of contractor_for"
+
+@located_in predicate
+  args subject:entity location:entity
+  role subject entity
+  role location place
+  description "localizare explicit afirmată; nu se deduce din locul de muncă"
+
+@lx_located_in_en lexeme
+  of located_in
+  language en
+  pos verb
+  form "located in"
+  frame subject location
+  source "converted from the ontology aliases of located_in"
+
+@project_member predicate
+  args subject:entity object:entity
+  role subject person
+  role object project
+  description "participare la proiect"
+
+@lx_project_member_en lexeme
+  of project_member
+  language en
+  pos verb
+  form "member of project"
+  frame subject object
+  source "converted from the ontology aliases of project_member"
+
+@duration predicate
+  args subject:entity object:integer
+  role subject entity
+  role object integer
+  description "durată numerică; unitatea este stabilită de schema aplicației, aici minute"
+
+@lx_duration_en lexeme
+  of duration
+  language en
+  pos verb
+  form "takes minutes"
+  frame subject object
+  source "converted from the ontology aliases of duration"
+
+@costs predicate
+  args subject:entity object:integer
+  role subject entity
+  role object integer
+  description "preț numeric în lei; valori de atribut pentru compare și rank (DS014 Q-LANG-1)"
+
+@lx_costs_en lexeme
+  of costs
+  language en
+  pos verb
+  form "cost"
+  frame subject object
+  source "converted from the ontology aliases of costs"
+
+@age predicate
+  args subject:entity object:integer
+  role subject person
+  role object integer
+  description "vârsta în ani; valoare de atribut pentru compare și rank (DS014 Q-LANG-1)"
+
+@lx_age_en lexeme
+  of age
+  language en
+  pos verb
+  form "be aged"
+  form "be old"
+  frame subject object
+  source "converted from the ontology aliases of age"
+
+@likes predicate
+  args subject:entity object:entity
+  role subject person
+  role object entity
+  description "preferință explicită"
+
+@lx_likes_en lexeme
+  of likes
+  language en
+  pos verb
+  form "likes"
+  frame subject object
+  source "converted from the ontology aliases of likes"
+
+@ana entity
+  kind person
+  label en "Ana"
+
+@bogdan entity
+  kind person
+  label en "Bogdan"
+
+@carina entity
+  kind person
+  label en "Carina"
+
+@maria entity
+  kind person
+  label en "Maria"
+
+@lab_alpha entity
+  kind organization
+  label en "Alpha Lab"
+
+@lab_beta entity
+  kind organization
+  label en "Beta Lab"
+
+@project_delta entity
+  kind project
+  label en "Delta Project"
+
+@network_down predicate
+  args subject:entity
+  role subject entity
+  description "rețea indisponibilă; predicat demonstrativ, fără reguli cauzale implicite"
+
+@lx_network_down_en lexeme
+  of network_down
+  language en
+  pos verb
+  form "network down"
+  frame subject
+  source "converted from the ontology aliases of network_down"
+
+@disk_full predicate
+  args subject:entity
+  role subject entity
+  description "disc plin; predicat demonstrativ, fără reguli cauzale implicite"
+
+@lx_disk_full_en lexeme
+  of disk_full
+  language en
+  pos verb
+  form "disk full"
+  frame subject
+  source "converted from the ontology aliases of disk_full"
+
+@outage predicate
+  args subject:entity
+  role subject entity
+  description "indisponibilitate; predicat demonstrativ, fără reguli cauzale implicite"
+
+@lx_outage_en lexeme
+  of outage
+  language en
+  pos verb
+  form "outage"
+  frame subject
+  source "converted from the ontology aliases of outage"
+
+@hot predicate
+  args subject:entity
+  role subject entity
+  description "fierbinte; predicat demonstrativ, fără reguli cauzale implicite"
+
+@lx_hot_en lexeme
+  of hot
+  language en
+  pos verb
+  form "hot"
+  frame subject
+  source "converted from the ontology aliases of hot"
+
+@dry predicate
+  args subject:entity
+  role subject entity
+  description "uscat; predicat demonstrativ, fără reguli cauzale implicite"
+
+@lx_dry_en lexeme
+  of dry
+  language en
+  pos verb
+  form "dry"
+  frame subject
+  source "converted from the ontology aliases of dry"
+
+@needs_attention predicate
+  args subject:entity
+  role subject entity
+  description "necesită atenție; predicat demonstrativ, fără reguli cauzale implicite"
+
+@lx_needs_attention_en lexeme
+  of needs_attention
+  language en
+  pos verb
+  form "needs attention"
+  frame subject
+  source "converted from the ontology aliases of needs_attention"
+
+@connected predicate
+  args source:entity destination:entity
+  role source entity
+  role destination entity
+  description "conectat la; predicat demonstrativ, fără reguli cauzale implicite"
+
+@lx_connected_en lexeme
+  of connected
+  language en
+  pos verb
+  form "connected"
+  frame source destination
+  source "converted from the ontology aliases of connected"
+
+@useful predicate
+  args subject:entity
+  role subject entity
+  description "util; predicat demonstrativ, fără reguli cauzale implicite"
+
+@lx_useful_en lexeme
+  of useful
+  language en
+  pos verb
+  form "useful"
+  frame subject
+  source "converted from the ontology aliases of useful"
+
+@supply predicate
+  args subject:entity
+  role subject entity
+  description "alimentare disponibilă; predicat demonstrativ, fără reguli cauzale implicite"
+
+@lx_supply_en lexeme
+  of supply
+  language en
+  pos verb
+  form "power supply"
+  frame subject
+  source "converted from the ontology aliases of supply"
+
+@switch_on predicate
+  args subject:entity
+  role subject entity
+  description "comutator pornit; predicat demonstrativ, fără reguli cauzale implicite"
+
+@lx_switch_on_en lexeme
+  of switch_on
+  language en
+  pos verb
+  form "switch on"
+  frame subject
+  source "converted from the ontology aliases of switch_on"
+
+@light_on predicate
+  args subject:entity
+  role subject entity
+  description "lumină pornită; predicat demonstrativ, fără reguli cauzale implicite"
+
+@lx_light_on_en lexeme
+  of light_on
+  language en
+  pos verb
+  form "light on"
+  frame subject
+  source "converted from the ontology aliases of light_on"
+
+@process_crashed predicate
+  args subject:entity
+  role subject entity
+  description "proces oprit neașteptat"
+
+@lx_process_crashed_en lexeme
+  of process_crashed
+  language en
+  pos verb
+  form "process crashed"
+  frame subject
+  source "converted from the ontology aliases of process_crashed"
+
+@door_open predicate
+  args source:entity destination:entity
+  role source entity
+  role destination entity
+  description "starea înregistrată a unei uși între două spații; nu implică accesibilitate"
+
+@lx_door_open_en lexeme
+  of door_open
+  language en
+  pos verb
+  form "door open"
+  frame source destination
+  source "converted from the ontology aliases of door_open"
+
+@room_a entity
+  kind entity
+  label en "Room A"
+  alias en "room A"
+
+@room_b entity
+  kind entity
+  label en "Room B"
+  alias en "room B"

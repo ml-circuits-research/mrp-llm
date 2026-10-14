@@ -1,0 +1,3 @@
+@q query
+  where department_total department_vlad_dev_285 ?total
+  select ?total

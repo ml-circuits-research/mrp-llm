@@ -1,0 +1,17 @@
+@pacifist predicate
+  args subject:entity
+
+@f1 fact
+  holds quaker nixon
+@f2 fact
+  holds republican nixon
+
+@d_quaker default
+  when quaker ?x
+  then pacifist ?x
+  priority 1
+
+@d_republican default
+  when republican ?x
+  then not pacifist ?x
+  priority 1

@@ -1,0 +1,110 @@
+# Hand-written SOP of documents/orion-project-status.md.
+
+@or_ref fact
+  holds as_of_year 2026
+  quote "Reference year of this report: 2026."
+  source "orion-project-status.md, line 3"
+@or_budget fact
+  holds amount budget 500
+  quote "The approved budget is 500 thousand EUR"
+  source "orion-project-status.md, line 7"
+@or_budget_unit fact
+  holds unit_of budget eur_thousand
+  quote "The approved budget is 500 thousand EUR"
+  source "orion-project-status.md, line 7"
+@or_split fact
+  holds breakdown_complete budget
+  quote "divided into design (120 thousand EUR), build (260 thousand EUR) and testing (90 thousand EUR)"
+  source "orion-project-status.md, line 7"
+@or_design_part fact
+  holds component_of design_budget budget
+  quote "design (120 thousand EUR)"
+  source "orion-project-status.md, line 7"
+@or_design fact
+  holds amount design_budget 120
+  quote "design (120 thousand EUR)"
+  source "orion-project-status.md, line 7"
+@or_design_unit fact
+  holds unit_of design_budget eur_thousand
+  quote "design (120 thousand EUR)"
+  source "orion-project-status.md, line 7"
+@or_build_part fact
+  holds component_of build_budget budget
+  quote "build (260 thousand EUR)"
+  source "orion-project-status.md, line 7"
+@or_build fact
+  holds amount build_budget 260
+  quote "build (260 thousand EUR)"
+  source "orion-project-status.md, line 7"
+@or_build_unit fact
+  holds unit_of build_budget eur_thousand
+  quote "build (260 thousand EUR)"
+  source "orion-project-status.md, line 7"
+@or_test_part fact
+  holds component_of testing_budget budget
+  quote "testing (90 thousand EUR)"
+  source "orion-project-status.md, line 7"
+@or_test fact
+  holds amount testing_budget 90
+  quote "testing (90 thousand EUR)"
+  source "orion-project-status.md, line 7"
+@or_test_unit fact
+  holds unit_of testing_budget eur_thousand
+  quote "testing (90 thousand EUR)"
+  source "orion-project-status.md, line 7"
+@or_spent fact
+  holds amount spending_to_date 310
+  quote "Spending to date is 310 thousand EUR."
+  source "orion-project-status.md, line 8"
+@or_spent_unit fact
+  holds unit_of spending_to_date eur_thousand
+  quote "Spending to date is 310 thousand EUR."
+  source "orion-project-status.md, line 8"
+@or_p1_start fact
+  holds starts_on phase_1 20260201
+  quote "Phase 1 runs from 2026-02-01 to 2026-04-30."
+  source "orion-project-status.md, line 12"
+@or_p1_end fact
+  holds ends_on phase_1 20260430
+  quote "Phase 1 runs from 2026-02-01 to 2026-04-30."
+  source "orion-project-status.md, line 12"
+@or_p2_start fact
+  holds starts_on phase_2 20260415
+  quote "Phase 2 starts on 2026-04-15."
+  source "orion-project-status.md, line 13"
+@or_order fact
+  holds precedes phase_3 phase_2
+  quote "Phase 3 must be completed before Phase 2 can begin"
+  source "orion-project-status.md, line 14"
+@or_p3_start fact
+  holds starts_on phase_3 20260601
+  quote "Phase 3 starts on 2026-06-01."
+  source "orion-project-status.md, line 14"
+@or_progress fact
+  holds amount overall_progress 135
+  quote "Overall progress is 135% of the planned scope."
+  source "orion-project-status.md, line 18"
+@or_progress_unit fact
+  holds unit_of overall_progress percent
+  quote "Overall progress is 135% of the planned scope."
+  source "orion-project-status.md, line 18"
+@or_progress_kind fact
+  holds measure_of overall_progress percentage
+  quote "Overall progress is 135% of the planned scope."
+  source "orion-project-status.md, line 18"
+@or_velocity fact
+  holds amount phase_1_velocity 42
+  quote "which averaged 42 story points per sprint"
+  source "orion-project-status.md, line 19"
+@or_velocity_unit fact
+  holds unit_of phase_1_velocity story_points_per_sprint
+  quote "which averaged 42 story points per sprint"
+  source "orion-project-status.md, line 19"
+@or_velocity_stated fact
+  holds premise_stated phase_1_velocity
+  quote "the velocity measured in Phase 1, which averaged 42 story points per sprint"
+  source "orion-project-status.md, line 19"
+@or_claim fact
+  holds claim_rests_on finish_on_time phase_1_velocity
+  quote "The team expects to finish on time, based on the velocity measured in Phase 1"
+  source "orion-project-status.md, line 19"

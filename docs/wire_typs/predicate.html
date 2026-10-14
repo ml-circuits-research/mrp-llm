@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#predicate" target="_top">← Wire type index</a></p><h1><code>predicate</code></h1><p>Declare a relation of the base memory: its arguments with roles and types, its display labels and the copula readings it carries. Its words in a language are <a href="lexeme.html">lexemes</a>; the classes it types are <a href="entity.html">entities of kind class</a>.</p><p><strong>Status and author:</strong> Knowledge wire. It lives in the circuits of a base memory (the vocabulary of <code>core-min</code>, <code>core-en</code> or a world) and is written by a person, a model or a mapping tool; the small model never authors it. The lexicon of a base memory is compiled from these wires and its imports (<code>Lexicon.fromCircuits</code>). The retired separate ontology grammar (<code>alias</code> lines, <code>concept</code>) is migrated by <code>tools/convert-ontology.mjs</code>.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody>
+<tr><th scope="row" id="field-args"><code>args</code></th><td>At most once; required unless <code>role</code> lines are given</td><td><code>role:type</code> entries in argument order, or <code>none</code> for arity 0 (a state flag). Types: <code>entity integer text time value rational</code>; roles: <code>subject object recipient location source destination instrument time topic</code>, at most one argument per role. At most six arguments. When <code>role</code> lines are also given both spellings must agree (<code>args_disagree_with_roles</code>).</td></tr>
+<tr><th scope="row" id="field-role"><code>role</code></th><td>Repeatable; one line per argument, in argument order</td><td><code>role NAME TYPE</code>: NAME is one of the closed role inventory (<code>ROLE_NAMES</code> in <code>sop/enums.mjs</code>); TYPE is a value type or a <b>class symbol</b> (an entity of kind <code>class</code> in this memory or its imports, <code>role_class_unknown</code> otherwise). The class types the argument: a lexeme <code>restrict</code> and the linker use it. Line order fixes the positional atom order.</td></tr>
+<tr><th scope="row" id="field-label"><code>label</code></th><td>Repeatable; at most one per language</td><td><code>label LANG "text"</code>: the display form of the relation, which is also a link form with the natural frame (<code>label_duplicate_language</code> for a second one in a language; further forms are <a href="lexeme.html">lexemes</a>).</td></tr>
+<tr><th scope="row" id="field-domain"><code>domain</code></th><td>At most once; optional</td><td>A lowercase symbol that scopes the relation (a topic the memory supplies).</td></tr>
+<tr><th scope="row" id="field-closed"><code>closed</code></th><td>At most once; optional</td><td><code>true</code> or <code>false</code> (default false). <code>true</code> says the retained view holds every fact of the relation; declare it only when the source says the list is exhaustive and quote that sentence in <code>description</code>.</td></tr>
+<tr><th scope="row" id="field-key"><code>key</code></th><td>At most once; optional</td><td>An argument position (1 to the arity) that determines the rest: a lint (<code>key_violation</code>).</td></tr>
+<tr><th scope="row" id="field-transitive"><code>transitive</code></th><td>At most once; optional</td><td><code>true</code> or <code>false</code>, arity 2 only: an advisory routing hint to a closure template.</td></tr>
+<tr><th scope="row" id="field-inverse"><code>inverse</code></th><td>At most once; optional</td><td>A lowercase symbol: the name of the inverse relation (an advisory hint).</td></tr>
+<tr><th scope="row" id="field-unit"><code>unit</code></th><td>At most once; optional</td><td>Text: the unit of a numeric argument.</td></tr>
+<tr><th scope="row" id="field-description"><code>description</code></th><td>At most once; optional</td><td>Text: what the relation means (and the source sentence for a <code>closed</code> relation).</td></tr>
+<tr><th scope="row" id="field-reading"><code>reading</code></th><td>Repeatable, each value at most once; optional</td><td>One of <code>class occupation attribute identity location describe unit_amount unit_dimension</code>: a copula reading the relation carries (<code>bad_enum</code>, <code>repeated_reading</code>, <code>reading_roles_mismatch</code>). It lets the base memory, not the engine, say which predicate answers "Ana is a doctor", "Paris is in France" or "Who is Ana?". The two unit readings are not copula readings: <code>unit_amount</code> marks the predicate that gives how many base units one of a unit is, <code>unit_dimension</code> the one that gives what a unit measures; a comparison of two quantities with units (<code>compare "1 hour" above "3000 seconds"</code>) is converted through their facts (<code>sop/quantities.mjs</code>).</td></tr>
+<tr><th scope="row" id="field-describe_rank"><code>describe_rank</code></th><td>At most once; optional</td><td>A positive integer: the order among the <code>describe</code> predicates (lowest first); needs <code>reading describe</code>.</td></tr></tbody></table></div></section><section><h2>What it is for and how to write it</h2><p>The declaration fixes the arity, the role of each position and its class. The roles are the bridge between the two surfaces: The formalizer writes <code>role subject "Ann"</code> and <code>role object "Alpha Lab"</code>, the KnowledgeLinker maps the relation phrase to a predicate through its labels and lexemes, and the roles place each string in its position. A predicate with no label and no lexeme cannot be reached from language (the authoring warning <code>predicate_without_lexeme</code>); an engine test world that refers to predicates by id does not need them.</p></section><section><h2>Examples</h2><p>Class symbols such as <code>person</code> come from the memory: <code>core-min</code> declares <code>class entity person organization place occupation property unit</code>; the example repeats the classes it uses.</p><pre data-sop="knowledge"><code>@person entity
+  kind class
+  label en "person"
+@organization entity
+  kind class
+  label en "organization"
+@place entity
+  kind class
+  label en "place"
+
+@works_at predicate
+  args subject:entity object:entity
+  role subject person
+  role object organization
+  label en "works at"
+  description "an employment relation"
+
+@lx_works_at_en lexeme
+  of works_at
+  language en
+  pos verb
+  form "work at"
+  frame subject object
+</code></pre><h3>Unit facts for comparisons of quantities</h3><pre data-sop="knowledge"><code>@unit entity
+  kind class
+  label en "unit"
+@dimension entity
+  kind class
+  label en "dimension"
+
+@base_amount predicate
+  args subject:entity object:integer
+  role subject unit
+  role object integer
+  label en "amount in base units"
+  reading unit_amount
+
+@dimension_of predicate
+  args subject:entity object:entity
+  role subject unit
+  role object dimension
+  label en "dimension of"
+  reading unit_dimension
+</code></pre><h3>Invalid: a role that names no class and no value type</h3><pre data-sop="knowledge-invalid" data-error="role_class_unknown"><code>@works_at predicate
+  args subject:entity object:entity
+  role subject person
+  role object organization
+</code></pre><h3>Invalid: a role name outside the closed inventory</h3><pre data-sop="knowledge-invalid" data-error="bad_role"><code>@p predicate
+  role employee entity
+</code></pre></section><section><h2>Common mistakes</h2><ol><li>A role typed with a class the memory does not declare.</li><li>Two labels in one language: the second form is a lexeme.</li><li>A predicate whose forms all collide with another predicate of the same frame: declare <code>restrict</code> or distinct weights on the lexemes.</li><li>Putting the relation phrase of a language into <code>description</code> instead of a label or lexeme.</li></ol></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.predicate</code></li><li><code>sop/knowledge/lexicon-checks.mjs</code></li><li><code>sop/lexicon.mjs:Lexicon.fromCircuits</code></li></ul><p>Related: <a href="lexeme.html"><code>lexeme</code></a>, <a href="entity.html"><code>entity</code></a>, <a href="fact.html"><code>fact</code></a>, <a href="resolve.html"><code>resolve</code></a>. The language manual is the section "Lexicon wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>; the base memory that holds these wires is described in <a href="../specsLoader.html?spec=DS022-sessions-and-base-memories.md" target="_top">DS022</a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

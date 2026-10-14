@@ -1,0 +1,5700 @@
+@member predicate
+  args subject:entity object:entity
+  closed true
+
+@grant predicate
+  args subject:entity object:entity
+  closed true
+
+@denied predicate
+  args subject:entity object:entity
+  closed true
+
+@can predicate
+  args subject:entity object:entity
+  closed true
+
+@f1 fact
+  holds member u0 r0
+
+@f2 fact
+  holds member u1 r1
+
+@f3 fact
+  holds member u2 r2
+
+@f4 fact
+  holds member u3 r3
+
+@f5 fact
+  holds member u4 r4
+
+@f6 fact
+  holds member u5 r5
+
+@f7 fact
+  holds member u6 r6
+
+@f8 fact
+  holds member u7 r7
+
+@f9 fact
+  holds member u8 r8
+
+@f10 fact
+  holds member u9 r9
+
+@f11 fact
+  holds member u10 r10
+
+@f12 fact
+  holds member u11 r11
+
+@f13 fact
+  holds member u12 r12
+
+@f14 fact
+  holds member u13 r13
+
+@f15 fact
+  holds member u14 r14
+
+@f16 fact
+  holds member u15 r15
+
+@f17 fact
+  holds member u16 r0
+
+@f18 fact
+  holds member u17 r1
+
+@f19 fact
+  holds member u18 r2
+
+@f20 fact
+  holds member u19 r3
+
+@f21 fact
+  holds member u20 r4
+
+@f22 fact
+  holds member u21 r5
+
+@f23 fact
+  holds member u22 r6
+
+@f24 fact
+  holds member u23 r7
+
+@f25 fact
+  holds member u24 r8
+
+@f26 fact
+  holds member u25 r9
+
+@f27 fact
+  holds member u26 r10
+
+@f28 fact
+  holds member u27 r11
+
+@f29 fact
+  holds member u28 r12
+
+@f30 fact
+  holds member u29 r13
+
+@f31 fact
+  holds member u30 r14
+
+@f32 fact
+  holds member u31 r15
+
+@f33 fact
+  holds member u32 r0
+
+@f34 fact
+  holds member u33 r1
+
+@f35 fact
+  holds member u34 r2
+
+@f36 fact
+  holds member u35 r3
+
+@f37 fact
+  holds member u36 r4
+
+@f38 fact
+  holds member u37 r5
+
+@f39 fact
+  holds member u38 r6
+
+@f40 fact
+  holds member u39 r7
+
+@f41 fact
+  holds member u40 r8
+
+@f42 fact
+  holds member u41 r9
+
+@f43 fact
+  holds member u42 r10
+
+@f44 fact
+  holds member u43 r11
+
+@f45 fact
+  holds member u44 r12
+
+@f46 fact
+  holds member u45 r13
+
+@f47 fact
+  holds member u46 r14
+
+@f48 fact
+  holds member u47 r15
+
+@f49 fact
+  holds member u48 r0
+
+@f50 fact
+  holds member u49 r1
+
+@f51 fact
+  holds member u50 r2
+
+@f52 fact
+  holds member u51 r3
+
+@f53 fact
+  holds member u52 r4
+
+@f54 fact
+  holds member u53 r5
+
+@f55 fact
+  holds member u54 r6
+
+@f56 fact
+  holds member u55 r7
+
+@f57 fact
+  holds member u56 r8
+
+@f58 fact
+  holds member u57 r9
+
+@f59 fact
+  holds member u58 r10
+
+@f60 fact
+  holds member u59 r11
+
+@f61 fact
+  holds member u60 r12
+
+@f62 fact
+  holds member u61 r13
+
+@f63 fact
+  holds member u62 r14
+
+@f64 fact
+  holds member u63 r15
+
+@f65 fact
+  holds member u64 r0
+
+@f66 fact
+  holds member u65 r1
+
+@f67 fact
+  holds member u66 r2
+
+@f68 fact
+  holds member u67 r3
+
+@f69 fact
+  holds member u68 r4
+
+@f70 fact
+  holds member u69 r5
+
+@f71 fact
+  holds member u70 r6
+
+@f72 fact
+  holds member u71 r7
+
+@f73 fact
+  holds member u72 r8
+
+@f74 fact
+  holds member u73 r9
+
+@f75 fact
+  holds member u74 r10
+
+@f76 fact
+  holds member u75 r11
+
+@f77 fact
+  holds member u76 r12
+
+@f78 fact
+  holds member u77 r13
+
+@f79 fact
+  holds member u78 r14
+
+@f80 fact
+  holds member u79 r15
+
+@f81 fact
+  holds member u80 r0
+
+@f82 fact
+  holds member u81 r1
+
+@f83 fact
+  holds member u82 r2
+
+@f84 fact
+  holds member u83 r3
+
+@f85 fact
+  holds member u84 r4
+
+@f86 fact
+  holds member u85 r5
+
+@f87 fact
+  holds member u86 r6
+
+@f88 fact
+  holds member u87 r7
+
+@f89 fact
+  holds member u88 r8
+
+@f90 fact
+  holds member u89 r9
+
+@f91 fact
+  holds member u90 r10
+
+@f92 fact
+  holds member u91 r11
+
+@f93 fact
+  holds member u92 r12
+
+@f94 fact
+  holds member u93 r13
+
+@f95 fact
+  holds member u94 r14
+
+@f96 fact
+  holds member u95 r15
+
+@f97 fact
+  holds member u96 r0
+
+@f98 fact
+  holds member u97 r1
+
+@f99 fact
+  holds member u98 r2
+
+@f100 fact
+  holds member u99 r3
+
+@f101 fact
+  holds member u100 r4
+
+@f102 fact
+  holds member u101 r5
+
+@f103 fact
+  holds member u102 r6
+
+@f104 fact
+  holds member u103 r7
+
+@f105 fact
+  holds member u104 r8
+
+@f106 fact
+  holds member u105 r9
+
+@f107 fact
+  holds member u106 r10
+
+@f108 fact
+  holds member u107 r11
+
+@f109 fact
+  holds member u108 r12
+
+@f110 fact
+  holds member u109 r13
+
+@f111 fact
+  holds member u110 r14
+
+@f112 fact
+  holds member u111 r15
+
+@f113 fact
+  holds member u112 r0
+
+@f114 fact
+  holds member u113 r1
+
+@f115 fact
+  holds member u114 r2
+
+@f116 fact
+  holds member u115 r3
+
+@f117 fact
+  holds member u116 r4
+
+@f118 fact
+  holds member u117 r5
+
+@f119 fact
+  holds member u118 r6
+
+@f120 fact
+  holds member u119 r7
+
+@f121 fact
+  holds member u120 r8
+
+@f122 fact
+  holds member u121 r9
+
+@f123 fact
+  holds member u122 r10
+
+@f124 fact
+  holds member u123 r11
+
+@f125 fact
+  holds member u124 r12
+
+@f126 fact
+  holds member u125 r13
+
+@f127 fact
+  holds member u126 r14
+
+@f128 fact
+  holds member u127 r15
+
+@f129 fact
+  holds member u128 r0
+
+@f130 fact
+  holds member u129 r1
+
+@f131 fact
+  holds member u130 r2
+
+@f132 fact
+  holds member u131 r3
+
+@f133 fact
+  holds member u132 r4
+
+@f134 fact
+  holds member u133 r5
+
+@f135 fact
+  holds member u134 r6
+
+@f136 fact
+  holds member u135 r7
+
+@f137 fact
+  holds member u136 r8
+
+@f138 fact
+  holds member u137 r9
+
+@f139 fact
+  holds member u138 r10
+
+@f140 fact
+  holds member u139 r11
+
+@f141 fact
+  holds member u140 r12
+
+@f142 fact
+  holds member u141 r13
+
+@f143 fact
+  holds member u142 r14
+
+@f144 fact
+  holds member u143 r15
+
+@f145 fact
+  holds member u144 r0
+
+@f146 fact
+  holds member u145 r1
+
+@f147 fact
+  holds member u146 r2
+
+@f148 fact
+  holds member u147 r3
+
+@f149 fact
+  holds member u148 r4
+
+@f150 fact
+  holds member u149 r5
+
+@f151 fact
+  holds member u150 r6
+
+@f152 fact
+  holds member u151 r7
+
+@f153 fact
+  holds member u152 r8
+
+@f154 fact
+  holds member u153 r9
+
+@f155 fact
+  holds member u154 r10
+
+@f156 fact
+  holds member u155 r11
+
+@f157 fact
+  holds member u156 r12
+
+@f158 fact
+  holds member u157 r13
+
+@f159 fact
+  holds member u158 r14
+
+@f160 fact
+  holds member u159 r15
+
+@f161 fact
+  holds member u160 r0
+
+@f162 fact
+  holds member u161 r1
+
+@f163 fact
+  holds member u162 r2
+
+@f164 fact
+  holds member u163 r3
+
+@f165 fact
+  holds member u164 r4
+
+@f166 fact
+  holds member u165 r5
+
+@f167 fact
+  holds member u166 r6
+
+@f168 fact
+  holds member u167 r7
+
+@f169 fact
+  holds member u168 r8
+
+@f170 fact
+  holds member u169 r9
+
+@f171 fact
+  holds member u170 r10
+
+@f172 fact
+  holds member u171 r11
+
+@f173 fact
+  holds member u172 r12
+
+@f174 fact
+  holds member u173 r13
+
+@f175 fact
+  holds member u174 r14
+
+@f176 fact
+  holds member u175 r15
+
+@f177 fact
+  holds member u176 r0
+
+@f178 fact
+  holds member u177 r1
+
+@f179 fact
+  holds member u178 r2
+
+@f180 fact
+  holds member u179 r3
+
+@f181 fact
+  holds member u180 r4
+
+@f182 fact
+  holds member u181 r5
+
+@f183 fact
+  holds member u182 r6
+
+@f184 fact
+  holds member u183 r7
+
+@f185 fact
+  holds member u184 r8
+
+@f186 fact
+  holds member u185 r9
+
+@f187 fact
+  holds member u186 r10
+
+@f188 fact
+  holds member u187 r11
+
+@f189 fact
+  holds member u188 r12
+
+@f190 fact
+  holds member u189 r13
+
+@f191 fact
+  holds member u190 r14
+
+@f192 fact
+  holds member u191 r15
+
+@f193 fact
+  holds member u192 r0
+
+@f194 fact
+  holds member u193 r1
+
+@f195 fact
+  holds member u194 r2
+
+@f196 fact
+  holds member u195 r3
+
+@f197 fact
+  holds member u196 r4
+
+@f198 fact
+  holds member u197 r5
+
+@f199 fact
+  holds member u198 r6
+
+@f200 fact
+  holds member u199 r7
+
+@f201 fact
+  holds member u200 r8
+
+@f202 fact
+  holds member u201 r9
+
+@f203 fact
+  holds member u202 r10
+
+@f204 fact
+  holds member u203 r11
+
+@f205 fact
+  holds member u204 r12
+
+@f206 fact
+  holds member u205 r13
+
+@f207 fact
+  holds member u206 r14
+
+@f208 fact
+  holds member u207 r15
+
+@f209 fact
+  holds member u208 r0
+
+@f210 fact
+  holds member u209 r1
+
+@f211 fact
+  holds member u210 r2
+
+@f212 fact
+  holds member u211 r3
+
+@f213 fact
+  holds member u212 r4
+
+@f214 fact
+  holds member u213 r5
+
+@f215 fact
+  holds member u214 r6
+
+@f216 fact
+  holds member u215 r7
+
+@f217 fact
+  holds member u216 r8
+
+@f218 fact
+  holds member u217 r9
+
+@f219 fact
+  holds member u218 r10
+
+@f220 fact
+  holds member u219 r11
+
+@f221 fact
+  holds member u220 r12
+
+@f222 fact
+  holds member u221 r13
+
+@f223 fact
+  holds member u222 r14
+
+@f224 fact
+  holds member u223 r15
+
+@f225 fact
+  holds member u224 r0
+
+@f226 fact
+  holds member u225 r1
+
+@f227 fact
+  holds member u226 r2
+
+@f228 fact
+  holds member u227 r3
+
+@f229 fact
+  holds member u228 r4
+
+@f230 fact
+  holds member u229 r5
+
+@f231 fact
+  holds member u230 r6
+
+@f232 fact
+  holds member u231 r7
+
+@f233 fact
+  holds member u232 r8
+
+@f234 fact
+  holds member u233 r9
+
+@f235 fact
+  holds member u234 r10
+
+@f236 fact
+  holds member u235 r11
+
+@f237 fact
+  holds member u236 r12
+
+@f238 fact
+  holds member u237 r13
+
+@f239 fact
+  holds member u238 r14
+
+@f240 fact
+  holds member u239 r15
+
+@f241 fact
+  holds member u240 r0
+
+@f242 fact
+  holds member u241 r1
+
+@f243 fact
+  holds member u242 r2
+
+@f244 fact
+  holds member u243 r3
+
+@f245 fact
+  holds member u244 r4
+
+@f246 fact
+  holds member u245 r5
+
+@f247 fact
+  holds member u246 r6
+
+@f248 fact
+  holds member u247 r7
+
+@f249 fact
+  holds member u248 r8
+
+@f250 fact
+  holds member u249 r9
+
+@f251 fact
+  holds member u250 r10
+
+@f252 fact
+  holds member u251 r11
+
+@f253 fact
+  holds member u252 r12
+
+@f254 fact
+  holds member u253 r13
+
+@f255 fact
+  holds member u254 r14
+
+@f256 fact
+  holds member u255 r15
+
+@f257 fact
+  holds member u256 r0
+
+@f258 fact
+  holds member u257 r1
+
+@f259 fact
+  holds member u258 r2
+
+@f260 fact
+  holds member u259 r3
+
+@f261 fact
+  holds member u260 r4
+
+@f262 fact
+  holds member u261 r5
+
+@f263 fact
+  holds member u262 r6
+
+@f264 fact
+  holds member u263 r7
+
+@f265 fact
+  holds member u264 r8
+
+@f266 fact
+  holds member u265 r9
+
+@f267 fact
+  holds member u266 r10
+
+@f268 fact
+  holds member u267 r11
+
+@f269 fact
+  holds member u268 r12
+
+@f270 fact
+  holds member u269 r13
+
+@f271 fact
+  holds member u270 r14
+
+@f272 fact
+  holds member u271 r15
+
+@f273 fact
+  holds member u272 r0
+
+@f274 fact
+  holds member u273 r1
+
+@f275 fact
+  holds member u274 r2
+
+@f276 fact
+  holds member u275 r3
+
+@f277 fact
+  holds member u276 r4
+
+@f278 fact
+  holds member u277 r5
+
+@f279 fact
+  holds member u278 r6
+
+@f280 fact
+  holds member u279 r7
+
+@f281 fact
+  holds member u280 r8
+
+@f282 fact
+  holds member u281 r9
+
+@f283 fact
+  holds member u282 r10
+
+@f284 fact
+  holds member u283 r11
+
+@f285 fact
+  holds member u284 r12
+
+@f286 fact
+  holds member u285 r13
+
+@f287 fact
+  holds member u286 r14
+
+@f288 fact
+  holds member u287 r15
+
+@f289 fact
+  holds member u288 r0
+
+@f290 fact
+  holds member u289 r1
+
+@f291 fact
+  holds member u290 r2
+
+@f292 fact
+  holds member u291 r3
+
+@f293 fact
+  holds member u292 r4
+
+@f294 fact
+  holds member u293 r5
+
+@f295 fact
+  holds member u294 r6
+
+@f296 fact
+  holds member u295 r7
+
+@f297 fact
+  holds member u296 r8
+
+@f298 fact
+  holds member u297 r9
+
+@f299 fact
+  holds member u298 r10
+
+@f300 fact
+  holds member u299 r11
+
+@f301 fact
+  holds member u300 r12
+
+@f302 fact
+  holds member u301 r13
+
+@f303 fact
+  holds member u302 r14
+
+@f304 fact
+  holds member u303 r15
+
+@f305 fact
+  holds member u304 r0
+
+@f306 fact
+  holds member u305 r1
+
+@f307 fact
+  holds member u306 r2
+
+@f308 fact
+  holds member u307 r3
+
+@f309 fact
+  holds member u308 r4
+
+@f310 fact
+  holds member u309 r5
+
+@f311 fact
+  holds member u310 r6
+
+@f312 fact
+  holds member u311 r7
+
+@f313 fact
+  holds member u312 r8
+
+@f314 fact
+  holds member u313 r9
+
+@f315 fact
+  holds member u314 r10
+
+@f316 fact
+  holds member u315 r11
+
+@f317 fact
+  holds member u316 r12
+
+@f318 fact
+  holds member u317 r13
+
+@f319 fact
+  holds member u318 r14
+
+@f320 fact
+  holds member u319 r15
+
+@f321 fact
+  holds member u320 r0
+
+@f322 fact
+  holds member u321 r1
+
+@f323 fact
+  holds member u322 r2
+
+@f324 fact
+  holds member u323 r3
+
+@f325 fact
+  holds member u324 r4
+
+@f326 fact
+  holds member u325 r5
+
+@f327 fact
+  holds member u326 r6
+
+@f328 fact
+  holds member u327 r7
+
+@f329 fact
+  holds member u328 r8
+
+@f330 fact
+  holds member u329 r9
+
+@f331 fact
+  holds member u330 r10
+
+@f332 fact
+  holds member u331 r11
+
+@f333 fact
+  holds member u332 r12
+
+@f334 fact
+  holds member u333 r13
+
+@f335 fact
+  holds member u334 r14
+
+@f336 fact
+  holds member u335 r15
+
+@f337 fact
+  holds member u336 r0
+
+@f338 fact
+  holds member u337 r1
+
+@f339 fact
+  holds member u338 r2
+
+@f340 fact
+  holds member u339 r3
+
+@f341 fact
+  holds member u340 r4
+
+@f342 fact
+  holds member u341 r5
+
+@f343 fact
+  holds member u342 r6
+
+@f344 fact
+  holds member u343 r7
+
+@f345 fact
+  holds member u344 r8
+
+@f346 fact
+  holds member u345 r9
+
+@f347 fact
+  holds member u346 r10
+
+@f348 fact
+  holds member u347 r11
+
+@f349 fact
+  holds member u348 r12
+
+@f350 fact
+  holds member u349 r13
+
+@f351 fact
+  holds member u350 r14
+
+@f352 fact
+  holds member u351 r15
+
+@f353 fact
+  holds member u352 r0
+
+@f354 fact
+  holds member u353 r1
+
+@f355 fact
+  holds member u354 r2
+
+@f356 fact
+  holds member u355 r3
+
+@f357 fact
+  holds member u356 r4
+
+@f358 fact
+  holds member u357 r5
+
+@f359 fact
+  holds member u358 r6
+
+@f360 fact
+  holds member u359 r7
+
+@f361 fact
+  holds member u360 r8
+
+@f362 fact
+  holds member u361 r9
+
+@f363 fact
+  holds member u362 r10
+
+@f364 fact
+  holds member u363 r11
+
+@f365 fact
+  holds member u364 r12
+
+@f366 fact
+  holds member u365 r13
+
+@f367 fact
+  holds member u366 r14
+
+@f368 fact
+  holds member u367 r15
+
+@f369 fact
+  holds member u368 r0
+
+@f370 fact
+  holds member u369 r1
+
+@f371 fact
+  holds member u370 r2
+
+@f372 fact
+  holds member u371 r3
+
+@f373 fact
+  holds member u372 r4
+
+@f374 fact
+  holds member u373 r5
+
+@f375 fact
+  holds member u374 r6
+
+@f376 fact
+  holds member u375 r7
+
+@f377 fact
+  holds member u376 r8
+
+@f378 fact
+  holds member u377 r9
+
+@f379 fact
+  holds member u378 r10
+
+@f380 fact
+  holds member u379 r11
+
+@f381 fact
+  holds member u380 r12
+
+@f382 fact
+  holds member u381 r13
+
+@f383 fact
+  holds member u382 r14
+
+@f384 fact
+  holds member u383 r15
+
+@f385 fact
+  holds member u384 r0
+
+@f386 fact
+  holds member u385 r1
+
+@f387 fact
+  holds member u386 r2
+
+@f388 fact
+  holds member u387 r3
+
+@f389 fact
+  holds member u388 r4
+
+@f390 fact
+  holds member u389 r5
+
+@f391 fact
+  holds member u390 r6
+
+@f392 fact
+  holds member u391 r7
+
+@f393 fact
+  holds member u392 r8
+
+@f394 fact
+  holds member u393 r9
+
+@f395 fact
+  holds member u394 r10
+
+@f396 fact
+  holds member u395 r11
+
+@f397 fact
+  holds member u396 r12
+
+@f398 fact
+  holds member u397 r13
+
+@f399 fact
+  holds member u398 r14
+
+@f400 fact
+  holds member u399 r15
+
+@f401 fact
+  holds member u400 r0
+
+@f402 fact
+  holds member u401 r1
+
+@f403 fact
+  holds member u402 r2
+
+@f404 fact
+  holds member u403 r3
+
+@f405 fact
+  holds member u404 r4
+
+@f406 fact
+  holds member u405 r5
+
+@f407 fact
+  holds member u406 r6
+
+@f408 fact
+  holds member u407 r7
+
+@f409 fact
+  holds member u408 r8
+
+@f410 fact
+  holds member u409 r9
+
+@f411 fact
+  holds member u410 r10
+
+@f412 fact
+  holds member u411 r11
+
+@f413 fact
+  holds member u412 r12
+
+@f414 fact
+  holds member u413 r13
+
+@f415 fact
+  holds member u414 r14
+
+@f416 fact
+  holds member u415 r15
+
+@f417 fact
+  holds member u416 r0
+
+@f418 fact
+  holds member u417 r1
+
+@f419 fact
+  holds member u418 r2
+
+@f420 fact
+  holds member u419 r3
+
+@f421 fact
+  holds member u420 r4
+
+@f422 fact
+  holds member u421 r5
+
+@f423 fact
+  holds member u422 r6
+
+@f424 fact
+  holds member u423 r7
+
+@f425 fact
+  holds member u424 r8
+
+@f426 fact
+  holds member u425 r9
+
+@f427 fact
+  holds member u426 r10
+
+@f428 fact
+  holds member u427 r11
+
+@f429 fact
+  holds member u428 r12
+
+@f430 fact
+  holds member u429 r13
+
+@f431 fact
+  holds member u430 r14
+
+@f432 fact
+  holds member u431 r15
+
+@f433 fact
+  holds member u432 r0
+
+@f434 fact
+  holds member u433 r1
+
+@f435 fact
+  holds member u434 r2
+
+@f436 fact
+  holds member u435 r3
+
+@f437 fact
+  holds member u436 r4
+
+@f438 fact
+  holds member u437 r5
+
+@f439 fact
+  holds member u438 r6
+
+@f440 fact
+  holds member u439 r7
+
+@f441 fact
+  holds member u440 r8
+
+@f442 fact
+  holds member u441 r9
+
+@f443 fact
+  holds member u442 r10
+
+@f444 fact
+  holds member u443 r11
+
+@f445 fact
+  holds member u444 r12
+
+@f446 fact
+  holds member u445 r13
+
+@f447 fact
+  holds member u446 r14
+
+@f448 fact
+  holds member u447 r15
+
+@f449 fact
+  holds member u448 r0
+
+@f450 fact
+  holds member u449 r1
+
+@f451 fact
+  holds member u450 r2
+
+@f452 fact
+  holds member u451 r3
+
+@f453 fact
+  holds member u452 r4
+
+@f454 fact
+  holds member u453 r5
+
+@f455 fact
+  holds member u454 r6
+
+@f456 fact
+  holds member u455 r7
+
+@f457 fact
+  holds member u456 r8
+
+@f458 fact
+  holds member u457 r9
+
+@f459 fact
+  holds member u458 r10
+
+@f460 fact
+  holds member u459 r11
+
+@f461 fact
+  holds member u460 r12
+
+@f462 fact
+  holds member u461 r13
+
+@f463 fact
+  holds member u462 r14
+
+@f464 fact
+  holds member u463 r15
+
+@f465 fact
+  holds member u464 r0
+
+@f466 fact
+  holds member u465 r1
+
+@f467 fact
+  holds member u466 r2
+
+@f468 fact
+  holds member u467 r3
+
+@f469 fact
+  holds member u468 r4
+
+@f470 fact
+  holds member u469 r5
+
+@f471 fact
+  holds member u470 r6
+
+@f472 fact
+  holds member u471 r7
+
+@f473 fact
+  holds member u472 r8
+
+@f474 fact
+  holds member u473 r9
+
+@f475 fact
+  holds member u474 r10
+
+@f476 fact
+  holds member u475 r11
+
+@f477 fact
+  holds member u476 r12
+
+@f478 fact
+  holds member u477 r13
+
+@f479 fact
+  holds member u478 r14
+
+@f480 fact
+  holds member u479 r15
+
+@f481 fact
+  holds member u480 r0
+
+@f482 fact
+  holds member u481 r1
+
+@f483 fact
+  holds member u482 r2
+
+@f484 fact
+  holds member u483 r3
+
+@f485 fact
+  holds member u484 r4
+
+@f486 fact
+  holds member u485 r5
+
+@f487 fact
+  holds member u486 r6
+
+@f488 fact
+  holds member u487 r7
+
+@f489 fact
+  holds member u488 r8
+
+@f490 fact
+  holds member u489 r9
+
+@f491 fact
+  holds member u490 r10
+
+@f492 fact
+  holds member u491 r11
+
+@f493 fact
+  holds member u492 r12
+
+@f494 fact
+  holds member u493 r13
+
+@f495 fact
+  holds member u494 r14
+
+@f496 fact
+  holds member u495 r15
+
+@f497 fact
+  holds member u496 r0
+
+@f498 fact
+  holds member u497 r1
+
+@f499 fact
+  holds member u498 r2
+
+@f500 fact
+  holds member u499 r3
+
+@f501 fact
+  holds member u500 r4
+
+@f502 fact
+  holds member u501 r5
+
+@f503 fact
+  holds member u502 r6
+
+@f504 fact
+  holds member u503 r7
+
+@f505 fact
+  holds member u504 r8
+
+@f506 fact
+  holds member u505 r9
+
+@f507 fact
+  holds member u506 r10
+
+@f508 fact
+  holds member u507 r11
+
+@f509 fact
+  holds member u508 r12
+
+@f510 fact
+  holds member u509 r13
+
+@f511 fact
+  holds member u510 r14
+
+@f512 fact
+  holds member u511 r15
+
+@f513 fact
+  holds member u512 r0
+
+@f514 fact
+  holds member u513 r1
+
+@f515 fact
+  holds member u514 r2
+
+@f516 fact
+  holds member u515 r3
+
+@f517 fact
+  holds member u516 r4
+
+@f518 fact
+  holds member u517 r5
+
+@f519 fact
+  holds member u518 r6
+
+@f520 fact
+  holds member u519 r7
+
+@f521 fact
+  holds member u520 r8
+
+@f522 fact
+  holds member u521 r9
+
+@f523 fact
+  holds member u522 r10
+
+@f524 fact
+  holds member u523 r11
+
+@f525 fact
+  holds member u524 r12
+
+@f526 fact
+  holds member u525 r13
+
+@f527 fact
+  holds member u526 r14
+
+@f528 fact
+  holds member u527 r15
+
+@f529 fact
+  holds member u528 r0
+
+@f530 fact
+  holds member u529 r1
+
+@f531 fact
+  holds member u530 r2
+
+@f532 fact
+  holds member u531 r3
+
+@f533 fact
+  holds member u532 r4
+
+@f534 fact
+  holds member u533 r5
+
+@f535 fact
+  holds member u534 r6
+
+@f536 fact
+  holds member u535 r7
+
+@f537 fact
+  holds member u536 r8
+
+@f538 fact
+  holds member u537 r9
+
+@f539 fact
+  holds member u538 r10
+
+@f540 fact
+  holds member u539 r11
+
+@f541 fact
+  holds member u540 r12
+
+@f542 fact
+  holds member u541 r13
+
+@f543 fact
+  holds member u542 r14
+
+@f544 fact
+  holds member u543 r15
+
+@f545 fact
+  holds member u544 r0
+
+@f546 fact
+  holds member u545 r1
+
+@f547 fact
+  holds member u546 r2
+
+@f548 fact
+  holds member u547 r3
+
+@f549 fact
+  holds member u548 r4
+
+@f550 fact
+  holds member u549 r5
+
+@f551 fact
+  holds member u550 r6
+
+@f552 fact
+  holds member u551 r7
+
+@f553 fact
+  holds member u552 r8
+
+@f554 fact
+  holds member u553 r9
+
+@f555 fact
+  holds member u554 r10
+
+@f556 fact
+  holds member u555 r11
+
+@f557 fact
+  holds member u556 r12
+
+@f558 fact
+  holds member u557 r13
+
+@f559 fact
+  holds member u558 r14
+
+@f560 fact
+  holds member u559 r15
+
+@f561 fact
+  holds member u560 r0
+
+@f562 fact
+  holds member u561 r1
+
+@f563 fact
+  holds member u562 r2
+
+@f564 fact
+  holds member u563 r3
+
+@f565 fact
+  holds member u564 r4
+
+@f566 fact
+  holds member u565 r5
+
+@f567 fact
+  holds member u566 r6
+
+@f568 fact
+  holds member u567 r7
+
+@f569 fact
+  holds member u568 r8
+
+@f570 fact
+  holds member u569 r9
+
+@f571 fact
+  holds member u570 r10
+
+@f572 fact
+  holds member u571 r11
+
+@f573 fact
+  holds member u572 r12
+
+@f574 fact
+  holds member u573 r13
+
+@f575 fact
+  holds member u574 r14
+
+@f576 fact
+  holds member u575 r15
+
+@f577 fact
+  holds member u576 r0
+
+@f578 fact
+  holds member u577 r1
+
+@f579 fact
+  holds member u578 r2
+
+@f580 fact
+  holds member u579 r3
+
+@f581 fact
+  holds member u580 r4
+
+@f582 fact
+  holds member u581 r5
+
+@f583 fact
+  holds member u582 r6
+
+@f584 fact
+  holds member u583 r7
+
+@f585 fact
+  holds member u584 r8
+
+@f586 fact
+  holds member u585 r9
+
+@f587 fact
+  holds member u586 r10
+
+@f588 fact
+  holds member u587 r11
+
+@f589 fact
+  holds member u588 r12
+
+@f590 fact
+  holds member u589 r13
+
+@f591 fact
+  holds member u590 r14
+
+@f592 fact
+  holds member u591 r15
+
+@f593 fact
+  holds member u592 r0
+
+@f594 fact
+  holds member u593 r1
+
+@f595 fact
+  holds member u594 r2
+
+@f596 fact
+  holds member u595 r3
+
+@f597 fact
+  holds member u596 r4
+
+@f598 fact
+  holds member u597 r5
+
+@f599 fact
+  holds member u598 r6
+
+@f600 fact
+  holds member u599 r7
+
+@f601 fact
+  holds member u600 r8
+
+@f602 fact
+  holds member u601 r9
+
+@f603 fact
+  holds member u602 r10
+
+@f604 fact
+  holds member u603 r11
+
+@f605 fact
+  holds member u604 r12
+
+@f606 fact
+  holds member u605 r13
+
+@f607 fact
+  holds member u606 r14
+
+@f608 fact
+  holds member u607 r15
+
+@f609 fact
+  holds member u608 r0
+
+@f610 fact
+  holds member u609 r1
+
+@f611 fact
+  holds member u610 r2
+
+@f612 fact
+  holds member u611 r3
+
+@f613 fact
+  holds member u612 r4
+
+@f614 fact
+  holds member u613 r5
+
+@f615 fact
+  holds member u614 r6
+
+@f616 fact
+  holds member u615 r7
+
+@f617 fact
+  holds member u616 r8
+
+@f618 fact
+  holds member u617 r9
+
+@f619 fact
+  holds member u618 r10
+
+@f620 fact
+  holds member u619 r11
+
+@f621 fact
+  holds member u620 r12
+
+@f622 fact
+  holds member u621 r13
+
+@f623 fact
+  holds member u622 r14
+
+@f624 fact
+  holds member u623 r15
+
+@f625 fact
+  holds member u624 r0
+
+@f626 fact
+  holds member u625 r1
+
+@f627 fact
+  holds member u626 r2
+
+@f628 fact
+  holds member u627 r3
+
+@f629 fact
+  holds member u628 r4
+
+@f630 fact
+  holds member u629 r5
+
+@f631 fact
+  holds member u630 r6
+
+@f632 fact
+  holds member u631 r7
+
+@f633 fact
+  holds member u632 r8
+
+@f634 fact
+  holds member u633 r9
+
+@f635 fact
+  holds member u634 r10
+
+@f636 fact
+  holds member u635 r11
+
+@f637 fact
+  holds member u636 r12
+
+@f638 fact
+  holds member u637 r13
+
+@f639 fact
+  holds member u638 r14
+
+@f640 fact
+  holds member u639 r15
+
+@f641 fact
+  holds member u640 r0
+
+@f642 fact
+  holds member u641 r1
+
+@f643 fact
+  holds member u642 r2
+
+@f644 fact
+  holds member u643 r3
+
+@f645 fact
+  holds member u644 r4
+
+@f646 fact
+  holds member u645 r5
+
+@f647 fact
+  holds member u646 r6
+
+@f648 fact
+  holds member u647 r7
+
+@f649 fact
+  holds member u648 r8
+
+@f650 fact
+  holds member u649 r9
+
+@f651 fact
+  holds member u650 r10
+
+@f652 fact
+  holds member u651 r11
+
+@f653 fact
+  holds member u652 r12
+
+@f654 fact
+  holds member u653 r13
+
+@f655 fact
+  holds member u654 r14
+
+@f656 fact
+  holds member u655 r15
+
+@f657 fact
+  holds member u656 r0
+
+@f658 fact
+  holds member u657 r1
+
+@f659 fact
+  holds member u658 r2
+
+@f660 fact
+  holds member u659 r3
+
+@f661 fact
+  holds member u660 r4
+
+@f662 fact
+  holds member u661 r5
+
+@f663 fact
+  holds member u662 r6
+
+@f664 fact
+  holds member u663 r7
+
+@f665 fact
+  holds member u664 r8
+
+@f666 fact
+  holds member u665 r9
+
+@f667 fact
+  holds member u666 r10
+
+@f668 fact
+  holds member u667 r11
+
+@f669 fact
+  holds member u668 r12
+
+@f670 fact
+  holds member u669 r13
+
+@f671 fact
+  holds member u670 r14
+
+@f672 fact
+  holds member u671 r15
+
+@f673 fact
+  holds member u672 r0
+
+@f674 fact
+  holds member u673 r1
+
+@f675 fact
+  holds member u674 r2
+
+@f676 fact
+  holds member u675 r3
+
+@f677 fact
+  holds member u676 r4
+
+@f678 fact
+  holds member u677 r5
+
+@f679 fact
+  holds member u678 r6
+
+@f680 fact
+  holds member u679 r7
+
+@f681 fact
+  holds member u680 r8
+
+@f682 fact
+  holds member u681 r9
+
+@f683 fact
+  holds member u682 r10
+
+@f684 fact
+  holds member u683 r11
+
+@f685 fact
+  holds member u684 r12
+
+@f686 fact
+  holds member u685 r13
+
+@f687 fact
+  holds member u686 r14
+
+@f688 fact
+  holds member u687 r15
+
+@f689 fact
+  holds member u688 r0
+
+@f690 fact
+  holds member u689 r1
+
+@f691 fact
+  holds member u690 r2
+
+@f692 fact
+  holds member u691 r3
+
+@f693 fact
+  holds member u692 r4
+
+@f694 fact
+  holds member u693 r5
+
+@f695 fact
+  holds member u694 r6
+
+@f696 fact
+  holds member u695 r7
+
+@f697 fact
+  holds member u696 r8
+
+@f698 fact
+  holds member u697 r9
+
+@f699 fact
+  holds member u698 r10
+
+@f700 fact
+  holds member u699 r11
+
+@f701 fact
+  holds member u700 r12
+
+@f702 fact
+  holds member u701 r13
+
+@f703 fact
+  holds member u702 r14
+
+@f704 fact
+  holds member u703 r15
+
+@f705 fact
+  holds member u704 r0
+
+@f706 fact
+  holds member u705 r1
+
+@f707 fact
+  holds member u706 r2
+
+@f708 fact
+  holds member u707 r3
+
+@f709 fact
+  holds member u708 r4
+
+@f710 fact
+  holds member u709 r5
+
+@f711 fact
+  holds member u710 r6
+
+@f712 fact
+  holds member u711 r7
+
+@f713 fact
+  holds member u712 r8
+
+@f714 fact
+  holds member u713 r9
+
+@f715 fact
+  holds member u714 r10
+
+@f716 fact
+  holds member u715 r11
+
+@f717 fact
+  holds member u716 r12
+
+@f718 fact
+  holds member u717 r13
+
+@f719 fact
+  holds member u718 r14
+
+@f720 fact
+  holds member u719 r15
+
+@f721 fact
+  holds member u720 r0
+
+@f722 fact
+  holds member u721 r1
+
+@f723 fact
+  holds member u722 r2
+
+@f724 fact
+  holds member u723 r3
+
+@f725 fact
+  holds member u724 r4
+
+@f726 fact
+  holds member u725 r5
+
+@f727 fact
+  holds member u726 r6
+
+@f728 fact
+  holds member u727 r7
+
+@f729 fact
+  holds member u728 r8
+
+@f730 fact
+  holds member u729 r9
+
+@f731 fact
+  holds member u730 r10
+
+@f732 fact
+  holds member u731 r11
+
+@f733 fact
+  holds member u732 r12
+
+@f734 fact
+  holds member u733 r13
+
+@f735 fact
+  holds member u734 r14
+
+@f736 fact
+  holds member u735 r15
+
+@f737 fact
+  holds member u736 r0
+
+@f738 fact
+  holds member u737 r1
+
+@f739 fact
+  holds member u738 r2
+
+@f740 fact
+  holds member u739 r3
+
+@f741 fact
+  holds member u740 r4
+
+@f742 fact
+  holds member u741 r5
+
+@f743 fact
+  holds member u742 r6
+
+@f744 fact
+  holds member u743 r7
+
+@f745 fact
+  holds member u744 r8
+
+@f746 fact
+  holds member u745 r9
+
+@f747 fact
+  holds member u746 r10
+
+@f748 fact
+  holds member u747 r11
+
+@f749 fact
+  holds member u748 r12
+
+@f750 fact
+  holds member u749 r13
+
+@f751 fact
+  holds member u750 r14
+
+@f752 fact
+  holds member u751 r15
+
+@f753 fact
+  holds member u752 r0
+
+@f754 fact
+  holds member u753 r1
+
+@f755 fact
+  holds member u754 r2
+
+@f756 fact
+  holds member u755 r3
+
+@f757 fact
+  holds member u756 r4
+
+@f758 fact
+  holds member u757 r5
+
+@f759 fact
+  holds member u758 r6
+
+@f760 fact
+  holds member u759 r7
+
+@f761 fact
+  holds member u760 r8
+
+@f762 fact
+  holds member u761 r9
+
+@f763 fact
+  holds member u762 r10
+
+@f764 fact
+  holds member u763 r11
+
+@f765 fact
+  holds member u764 r12
+
+@f766 fact
+  holds member u765 r13
+
+@f767 fact
+  holds member u766 r14
+
+@f768 fact
+  holds member u767 r15
+
+@f769 fact
+  holds member u768 r0
+
+@f770 fact
+  holds member u769 r1
+
+@f771 fact
+  holds member u770 r2
+
+@f772 fact
+  holds member u771 r3
+
+@f773 fact
+  holds member u772 r4
+
+@f774 fact
+  holds member u773 r5
+
+@f775 fact
+  holds member u774 r6
+
+@f776 fact
+  holds member u775 r7
+
+@f777 fact
+  holds member u776 r8
+
+@f778 fact
+  holds member u777 r9
+
+@f779 fact
+  holds member u778 r10
+
+@f780 fact
+  holds member u779 r11
+
+@f781 fact
+  holds member u780 r12
+
+@f782 fact
+  holds member u781 r13
+
+@f783 fact
+  holds member u782 r14
+
+@f784 fact
+  holds member u783 r15
+
+@f785 fact
+  holds member u784 r0
+
+@f786 fact
+  holds member u785 r1
+
+@f787 fact
+  holds member u786 r2
+
+@f788 fact
+  holds member u787 r3
+
+@f789 fact
+  holds member u788 r4
+
+@f790 fact
+  holds member u789 r5
+
+@f791 fact
+  holds member u790 r6
+
+@f792 fact
+  holds member u791 r7
+
+@f793 fact
+  holds member u792 r8
+
+@f794 fact
+  holds member u793 r9
+
+@f795 fact
+  holds member u794 r10
+
+@f796 fact
+  holds member u795 r11
+
+@f797 fact
+  holds member u796 r12
+
+@f798 fact
+  holds member u797 r13
+
+@f799 fact
+  holds member u798 r14
+
+@f800 fact
+  holds member u799 r15
+
+@f801 fact
+  holds member u800 r0
+
+@f802 fact
+  holds member u801 r1
+
+@f803 fact
+  holds member u802 r2
+
+@f804 fact
+  holds member u803 r3
+
+@f805 fact
+  holds member u804 r4
+
+@f806 fact
+  holds member u805 r5
+
+@f807 fact
+  holds member u806 r6
+
+@f808 fact
+  holds member u807 r7
+
+@f809 fact
+  holds member u808 r8
+
+@f810 fact
+  holds member u809 r9
+
+@f811 fact
+  holds member u810 r10
+
+@f812 fact
+  holds member u811 r11
+
+@f813 fact
+  holds member u812 r12
+
+@f814 fact
+  holds member u813 r13
+
+@f815 fact
+  holds member u814 r14
+
+@f816 fact
+  holds member u815 r15
+
+@f817 fact
+  holds member u816 r0
+
+@f818 fact
+  holds member u817 r1
+
+@f819 fact
+  holds member u818 r2
+
+@f820 fact
+  holds member u819 r3
+
+@f821 fact
+  holds member u820 r4
+
+@f822 fact
+  holds member u821 r5
+
+@f823 fact
+  holds member u822 r6
+
+@f824 fact
+  holds member u823 r7
+
+@f825 fact
+  holds member u824 r8
+
+@f826 fact
+  holds member u825 r9
+
+@f827 fact
+  holds member u826 r10
+
+@f828 fact
+  holds member u827 r11
+
+@f829 fact
+  holds member u828 r12
+
+@f830 fact
+  holds member u829 r13
+
+@f831 fact
+  holds member u830 r14
+
+@f832 fact
+  holds member u831 r15
+
+@f833 fact
+  holds member u832 r0
+
+@f834 fact
+  holds member u833 r1
+
+@f835 fact
+  holds member u834 r2
+
+@f836 fact
+  holds member u835 r3
+
+@f837 fact
+  holds member u836 r4
+
+@f838 fact
+  holds member u837 r5
+
+@f839 fact
+  holds member u838 r6
+
+@f840 fact
+  holds member u839 r7
+
+@f841 fact
+  holds member u840 r8
+
+@f842 fact
+  holds member u841 r9
+
+@f843 fact
+  holds member u842 r10
+
+@f844 fact
+  holds member u843 r11
+
+@f845 fact
+  holds member u844 r12
+
+@f846 fact
+  holds member u845 r13
+
+@f847 fact
+  holds member u846 r14
+
+@f848 fact
+  holds member u847 r15
+
+@f849 fact
+  holds member u848 r0
+
+@f850 fact
+  holds member u849 r1
+
+@f851 fact
+  holds member u850 r2
+
+@f852 fact
+  holds member u851 r3
+
+@f853 fact
+  holds member u852 r4
+
+@f854 fact
+  holds member u853 r5
+
+@f855 fact
+  holds member u854 r6
+
+@f856 fact
+  holds member u855 r7
+
+@f857 fact
+  holds member u856 r8
+
+@f858 fact
+  holds member u857 r9
+
+@f859 fact
+  holds member u858 r10
+
+@f860 fact
+  holds member u859 r11
+
+@f861 fact
+  holds member u860 r12
+
+@f862 fact
+  holds member u861 r13
+
+@f863 fact
+  holds member u862 r14
+
+@f864 fact
+  holds member u863 r15
+
+@f865 fact
+  holds member u864 r0
+
+@f866 fact
+  holds member u865 r1
+
+@f867 fact
+  holds member u866 r2
+
+@f868 fact
+  holds member u867 r3
+
+@f869 fact
+  holds member u868 r4
+
+@f870 fact
+  holds member u869 r5
+
+@f871 fact
+  holds member u870 r6
+
+@f872 fact
+  holds member u871 r7
+
+@f873 fact
+  holds member u872 r8
+
+@f874 fact
+  holds member u873 r9
+
+@f875 fact
+  holds member u874 r10
+
+@f876 fact
+  holds member u875 r11
+
+@f877 fact
+  holds member u876 r12
+
+@f878 fact
+  holds member u877 r13
+
+@f879 fact
+  holds member u878 r14
+
+@f880 fact
+  holds member u879 r15
+
+@f881 fact
+  holds member u880 r0
+
+@f882 fact
+  holds member u881 r1
+
+@f883 fact
+  holds member u882 r2
+
+@f884 fact
+  holds member u883 r3
+
+@f885 fact
+  holds member u884 r4
+
+@f886 fact
+  holds member u885 r5
+
+@f887 fact
+  holds member u886 r6
+
+@f888 fact
+  holds member u887 r7
+
+@f889 fact
+  holds member u888 r8
+
+@f890 fact
+  holds member u889 r9
+
+@f891 fact
+  holds member u890 r10
+
+@f892 fact
+  holds member u891 r11
+
+@f893 fact
+  holds member u892 r12
+
+@f894 fact
+  holds member u893 r13
+
+@f895 fact
+  holds member u894 r14
+
+@f896 fact
+  holds member u895 r15
+
+@f897 fact
+  holds member u896 r0
+
+@f898 fact
+  holds member u897 r1
+
+@f899 fact
+  holds member u898 r2
+
+@f900 fact
+  holds member u899 r3
+
+@f901 fact
+  holds member u900 r4
+
+@f902 fact
+  holds member u901 r5
+
+@f903 fact
+  holds member u902 r6
+
+@f904 fact
+  holds member u903 r7
+
+@f905 fact
+  holds member u904 r8
+
+@f906 fact
+  holds member u905 r9
+
+@f907 fact
+  holds member u906 r10
+
+@f908 fact
+  holds member u907 r11
+
+@f909 fact
+  holds member u908 r12
+
+@f910 fact
+  holds member u909 r13
+
+@f911 fact
+  holds member u910 r14
+
+@f912 fact
+  holds member u911 r15
+
+@f913 fact
+  holds member u912 r0
+
+@f914 fact
+  holds member u913 r1
+
+@f915 fact
+  holds member u914 r2
+
+@f916 fact
+  holds member u915 r3
+
+@f917 fact
+  holds member u916 r4
+
+@f918 fact
+  holds member u917 r5
+
+@f919 fact
+  holds member u918 r6
+
+@f920 fact
+  holds member u919 r7
+
+@f921 fact
+  holds member u920 r8
+
+@f922 fact
+  holds member u921 r9
+
+@f923 fact
+  holds member u922 r10
+
+@f924 fact
+  holds member u923 r11
+
+@f925 fact
+  holds member u924 r12
+
+@f926 fact
+  holds member u925 r13
+
+@f927 fact
+  holds member u926 r14
+
+@f928 fact
+  holds member u927 r15
+
+@f929 fact
+  holds member u928 r0
+
+@f930 fact
+  holds member u929 r1
+
+@f931 fact
+  holds member u930 r2
+
+@f932 fact
+  holds member u931 r3
+
+@f933 fact
+  holds member u932 r4
+
+@f934 fact
+  holds member u933 r5
+
+@f935 fact
+  holds member u934 r6
+
+@f936 fact
+  holds member u935 r7
+
+@f937 fact
+  holds member u936 r8
+
+@f938 fact
+  holds member u937 r9
+
+@f939 fact
+  holds member u938 r10
+
+@f940 fact
+  holds member u939 r11
+
+@f941 fact
+  holds member u940 r12
+
+@f942 fact
+  holds member u941 r13
+
+@f943 fact
+  holds member u942 r14
+
+@f944 fact
+  holds member u943 r15
+
+@f945 fact
+  holds member u944 r0
+
+@f946 fact
+  holds member u945 r1
+
+@f947 fact
+  holds member u946 r2
+
+@f948 fact
+  holds member u947 r3
+
+@f949 fact
+  holds member u948 r4
+
+@f950 fact
+  holds member u949 r5
+
+@f951 fact
+  holds member u950 r6
+
+@f952 fact
+  holds member u951 r7
+
+@f953 fact
+  holds member u952 r8
+
+@f954 fact
+  holds member u953 r9
+
+@f955 fact
+  holds member u954 r10
+
+@f956 fact
+  holds member u955 r11
+
+@f957 fact
+  holds member u956 r12
+
+@f958 fact
+  holds member u957 r13
+
+@f959 fact
+  holds member u958 r14
+
+@f960 fact
+  holds member u959 r15
+
+@f961 fact
+  holds member u960 r0
+
+@f962 fact
+  holds member u961 r1
+
+@f963 fact
+  holds member u962 r2
+
+@f964 fact
+  holds member u963 r3
+
+@f965 fact
+  holds member u964 r4
+
+@f966 fact
+  holds member u965 r5
+
+@f967 fact
+  holds member u966 r6
+
+@f968 fact
+  holds member u967 r7
+
+@f969 fact
+  holds member u968 r8
+
+@f970 fact
+  holds member u969 r9
+
+@f971 fact
+  holds member u970 r10
+
+@f972 fact
+  holds member u971 r11
+
+@f973 fact
+  holds member u972 r12
+
+@f974 fact
+  holds member u973 r13
+
+@f975 fact
+  holds member u974 r14
+
+@f976 fact
+  holds member u975 r15
+
+@f977 fact
+  holds member u976 r0
+
+@f978 fact
+  holds member u977 r1
+
+@f979 fact
+  holds member u978 r2
+
+@f980 fact
+  holds member u979 r3
+
+@f981 fact
+  holds member u980 r4
+
+@f982 fact
+  holds member u981 r5
+
+@f983 fact
+  holds member u982 r6
+
+@f984 fact
+  holds member u983 r7
+
+@f985 fact
+  holds member u984 r8
+
+@f986 fact
+  holds member u985 r9
+
+@f987 fact
+  holds member u986 r10
+
+@f988 fact
+  holds member u987 r11
+
+@f989 fact
+  holds member u988 r12
+
+@f990 fact
+  holds member u989 r13
+
+@f991 fact
+  holds member u990 r14
+
+@f992 fact
+  holds member u991 r15
+
+@f993 fact
+  holds member u992 r0
+
+@f994 fact
+  holds member u993 r1
+
+@f995 fact
+  holds member u994 r2
+
+@f996 fact
+  holds member u995 r3
+
+@f997 fact
+  holds member u996 r4
+
+@f998 fact
+  holds member u997 r5
+
+@f999 fact
+  holds member u998 r6
+
+@f1000 fact
+  holds member u999 r7
+
+@f1001 fact
+  holds member u1000 r8
+
+@f1002 fact
+  holds member u1001 r9
+
+@f1003 fact
+  holds member u1002 r10
+
+@f1004 fact
+  holds member u1003 r11
+
+@f1005 fact
+  holds member u1004 r12
+
+@f1006 fact
+  holds member u1005 r13
+
+@f1007 fact
+  holds member u1006 r14
+
+@f1008 fact
+  holds member u1007 r15
+
+@f1009 fact
+  holds member u1008 r0
+
+@f1010 fact
+  holds member u1009 r1
+
+@f1011 fact
+  holds member u1010 r2
+
+@f1012 fact
+  holds member u1011 r3
+
+@f1013 fact
+  holds member u1012 r4
+
+@f1014 fact
+  holds member u1013 r5
+
+@f1015 fact
+  holds member u1014 r6
+
+@f1016 fact
+  holds member u1015 r7
+
+@f1017 fact
+  holds member u1016 r8
+
+@f1018 fact
+  holds member u1017 r9
+
+@f1019 fact
+  holds member u1018 r10
+
+@f1020 fact
+  holds member u1019 r11
+
+@f1021 fact
+  holds member u1020 r12
+
+@f1022 fact
+  holds member u1021 r13
+
+@f1023 fact
+  holds member u1022 r14
+
+@f1024 fact
+  holds member u1023 r15
+
+@f1025 fact
+  holds member u1024 r0
+
+@f1026 fact
+  holds member u1025 r1
+
+@f1027 fact
+  holds member u1026 r2
+
+@f1028 fact
+  holds member u1027 r3
+
+@f1029 fact
+  holds member u1028 r4
+
+@f1030 fact
+  holds member u1029 r5
+
+@f1031 fact
+  holds member u1030 r6
+
+@f1032 fact
+  holds member u1031 r7
+
+@f1033 fact
+  holds member u1032 r8
+
+@f1034 fact
+  holds member u1033 r9
+
+@f1035 fact
+  holds member u1034 r10
+
+@f1036 fact
+  holds member u1035 r11
+
+@f1037 fact
+  holds member u1036 r12
+
+@f1038 fact
+  holds member u1037 r13
+
+@f1039 fact
+  holds member u1038 r14
+
+@f1040 fact
+  holds member u1039 r15
+
+@f1041 fact
+  holds member u1040 r0
+
+@f1042 fact
+  holds member u1041 r1
+
+@f1043 fact
+  holds member u1042 r2
+
+@f1044 fact
+  holds member u1043 r3
+
+@f1045 fact
+  holds member u1044 r4
+
+@f1046 fact
+  holds member u1045 r5
+
+@f1047 fact
+  holds member u1046 r6
+
+@f1048 fact
+  holds member u1047 r7
+
+@f1049 fact
+  holds member u1048 r8
+
+@f1050 fact
+  holds member u1049 r9
+
+@f1051 fact
+  holds member u1050 r10
+
+@f1052 fact
+  holds member u1051 r11
+
+@f1053 fact
+  holds member u1052 r12
+
+@f1054 fact
+  holds member u1053 r13
+
+@f1055 fact
+  holds member u1054 r14
+
+@f1056 fact
+  holds member u1055 r15
+
+@f1057 fact
+  holds member u1056 r0
+
+@f1058 fact
+  holds member u1057 r1
+
+@f1059 fact
+  holds member u1058 r2
+
+@f1060 fact
+  holds member u1059 r3
+
+@f1061 fact
+  holds member u1060 r4
+
+@f1062 fact
+  holds member u1061 r5
+
+@f1063 fact
+  holds member u1062 r6
+
+@f1064 fact
+  holds member u1063 r7
+
+@f1065 fact
+  holds member u1064 r8
+
+@f1066 fact
+  holds member u1065 r9
+
+@f1067 fact
+  holds member u1066 r10
+
+@f1068 fact
+  holds member u1067 r11
+
+@f1069 fact
+  holds member u1068 r12
+
+@f1070 fact
+  holds member u1069 r13
+
+@f1071 fact
+  holds member u1070 r14
+
+@f1072 fact
+  holds member u1071 r15
+
+@f1073 fact
+  holds member u1072 r0
+
+@f1074 fact
+  holds member u1073 r1
+
+@f1075 fact
+  holds member u1074 r2
+
+@f1076 fact
+  holds member u1075 r3
+
+@f1077 fact
+  holds member u1076 r4
+
+@f1078 fact
+  holds member u1077 r5
+
+@f1079 fact
+  holds member u1078 r6
+
+@f1080 fact
+  holds member u1079 r7
+
+@f1081 fact
+  holds member u1080 r8
+
+@f1082 fact
+  holds member u1081 r9
+
+@f1083 fact
+  holds member u1082 r10
+
+@f1084 fact
+  holds member u1083 r11
+
+@f1085 fact
+  holds member u1084 r12
+
+@f1086 fact
+  holds member u1085 r13
+
+@f1087 fact
+  holds member u1086 r14
+
+@f1088 fact
+  holds member u1087 r15
+
+@f1089 fact
+  holds member u1088 r0
+
+@f1090 fact
+  holds member u1089 r1
+
+@f1091 fact
+  holds member u1090 r2
+
+@f1092 fact
+  holds member u1091 r3
+
+@f1093 fact
+  holds member u1092 r4
+
+@f1094 fact
+  holds member u1093 r5
+
+@f1095 fact
+  holds member u1094 r6
+
+@f1096 fact
+  holds member u1095 r7
+
+@f1097 fact
+  holds member u1096 r8
+
+@f1098 fact
+  holds member u1097 r9
+
+@f1099 fact
+  holds member u1098 r10
+
+@f1100 fact
+  holds member u1099 r11
+
+@f1101 fact
+  holds member u1100 r12
+
+@f1102 fact
+  holds member u1101 r13
+
+@f1103 fact
+  holds member u1102 r14
+
+@f1104 fact
+  holds member u1103 r15
+
+@f1105 fact
+  holds member u1104 r0
+
+@f1106 fact
+  holds member u1105 r1
+
+@f1107 fact
+  holds member u1106 r2
+
+@f1108 fact
+  holds member u1107 r3
+
+@f1109 fact
+  holds member u1108 r4
+
+@f1110 fact
+  holds member u1109 r5
+
+@f1111 fact
+  holds member u1110 r6
+
+@f1112 fact
+  holds member u1111 r7
+
+@f1113 fact
+  holds member u1112 r8
+
+@f1114 fact
+  holds member u1113 r9
+
+@f1115 fact
+  holds member u1114 r10
+
+@f1116 fact
+  holds member u1115 r11
+
+@f1117 fact
+  holds member u1116 r12
+
+@f1118 fact
+  holds member u1117 r13
+
+@f1119 fact
+  holds member u1118 r14
+
+@f1120 fact
+  holds member u1119 r15
+
+@f1121 fact
+  holds member u1120 r0
+
+@f1122 fact
+  holds member u1121 r1
+
+@f1123 fact
+  holds member u1122 r2
+
+@f1124 fact
+  holds member u1123 r3
+
+@f1125 fact
+  holds member u1124 r4
+
+@f1126 fact
+  holds member u1125 r5
+
+@f1127 fact
+  holds member u1126 r6
+
+@f1128 fact
+  holds member u1127 r7
+
+@f1129 fact
+  holds member u1128 r8
+
+@f1130 fact
+  holds member u1129 r9
+
+@f1131 fact
+  holds member u1130 r10
+
+@f1132 fact
+  holds member u1131 r11
+
+@f1133 fact
+  holds member u1132 r12
+
+@f1134 fact
+  holds member u1133 r13
+
+@f1135 fact
+  holds member u1134 r14
+
+@f1136 fact
+  holds member u1135 r15
+
+@f1137 fact
+  holds member u1136 r0
+
+@f1138 fact
+  holds member u1137 r1
+
+@f1139 fact
+  holds member u1138 r2
+
+@f1140 fact
+  holds member u1139 r3
+
+@f1141 fact
+  holds member u1140 r4
+
+@f1142 fact
+  holds member u1141 r5
+
+@f1143 fact
+  holds member u1142 r6
+
+@f1144 fact
+  holds member u1143 r7
+
+@f1145 fact
+  holds member u1144 r8
+
+@f1146 fact
+  holds member u1145 r9
+
+@f1147 fact
+  holds member u1146 r10
+
+@f1148 fact
+  holds member u1147 r11
+
+@f1149 fact
+  holds member u1148 r12
+
+@f1150 fact
+  holds member u1149 r13
+
+@f1151 fact
+  holds member u1150 r14
+
+@f1152 fact
+  holds member u1151 r15
+
+@f1153 fact
+  holds member u1152 r0
+
+@f1154 fact
+  holds member u1153 r1
+
+@f1155 fact
+  holds member u1154 r2
+
+@f1156 fact
+  holds member u1155 r3
+
+@f1157 fact
+  holds member u1156 r4
+
+@f1158 fact
+  holds member u1157 r5
+
+@f1159 fact
+  holds member u1158 r6
+
+@f1160 fact
+  holds member u1159 r7
+
+@f1161 fact
+  holds member u1160 r8
+
+@f1162 fact
+  holds member u1161 r9
+
+@f1163 fact
+  holds member u1162 r10
+
+@f1164 fact
+  holds member u1163 r11
+
+@f1165 fact
+  holds member u1164 r12
+
+@f1166 fact
+  holds member u1165 r13
+
+@f1167 fact
+  holds member u1166 r14
+
+@f1168 fact
+  holds member u1167 r15
+
+@f1169 fact
+  holds member u1168 r0
+
+@f1170 fact
+  holds member u1169 r1
+
+@f1171 fact
+  holds member u1170 r2
+
+@f1172 fact
+  holds member u1171 r3
+
+@f1173 fact
+  holds member u1172 r4
+
+@f1174 fact
+  holds member u1173 r5
+
+@f1175 fact
+  holds member u1174 r6
+
+@f1176 fact
+  holds member u1175 r7
+
+@f1177 fact
+  holds member u1176 r8
+
+@f1178 fact
+  holds member u1177 r9
+
+@f1179 fact
+  holds member u1178 r10
+
+@f1180 fact
+  holds member u1179 r11
+
+@f1181 fact
+  holds member u1180 r12
+
+@f1182 fact
+  holds member u1181 r13
+
+@f1183 fact
+  holds member u1182 r14
+
+@f1184 fact
+  holds member u1183 r15
+
+@f1185 fact
+  holds member u1184 r0
+
+@f1186 fact
+  holds member u1185 r1
+
+@f1187 fact
+  holds member u1186 r2
+
+@f1188 fact
+  holds member u1187 r3
+
+@f1189 fact
+  holds member u1188 r4
+
+@f1190 fact
+  holds member u1189 r5
+
+@f1191 fact
+  holds member u1190 r6
+
+@f1192 fact
+  holds member u1191 r7
+
+@f1193 fact
+  holds member u1192 r8
+
+@f1194 fact
+  holds member u1193 r9
+
+@f1195 fact
+  holds member u1194 r10
+
+@f1196 fact
+  holds member u1195 r11
+
+@f1197 fact
+  holds member u1196 r12
+
+@f1198 fact
+  holds member u1197 r13
+
+@f1199 fact
+  holds member u1198 r14
+
+@f1200 fact
+  holds member u1199 r15
+
+@f1201 fact
+  holds member u1200 r0
+
+@f1202 fact
+  holds member u1201 r1
+
+@f1203 fact
+  holds member u1202 r2
+
+@f1204 fact
+  holds member u1203 r3
+
+@f1205 fact
+  holds member u1204 r4
+
+@f1206 fact
+  holds member u1205 r5
+
+@f1207 fact
+  holds member u1206 r6
+
+@f1208 fact
+  holds member u1207 r7
+
+@f1209 fact
+  holds member u1208 r8
+
+@f1210 fact
+  holds member u1209 r9
+
+@f1211 fact
+  holds member u1210 r10
+
+@f1212 fact
+  holds member u1211 r11
+
+@f1213 fact
+  holds member u1212 r12
+
+@f1214 fact
+  holds member u1213 r13
+
+@f1215 fact
+  holds member u1214 r14
+
+@f1216 fact
+  holds member u1215 r15
+
+@f1217 fact
+  holds member u1216 r0
+
+@f1218 fact
+  holds member u1217 r1
+
+@f1219 fact
+  holds member u1218 r2
+
+@f1220 fact
+  holds member u1219 r3
+
+@f1221 fact
+  holds member u1220 r4
+
+@f1222 fact
+  holds member u1221 r5
+
+@f1223 fact
+  holds member u1222 r6
+
+@f1224 fact
+  holds member u1223 r7
+
+@f1225 fact
+  holds member u1224 r8
+
+@f1226 fact
+  holds member u1225 r9
+
+@f1227 fact
+  holds member u1226 r10
+
+@f1228 fact
+  holds member u1227 r11
+
+@f1229 fact
+  holds member u1228 r12
+
+@f1230 fact
+  holds member u1229 r13
+
+@f1231 fact
+  holds member u1230 r14
+
+@f1232 fact
+  holds member u1231 r15
+
+@f1233 fact
+  holds member u1232 r0
+
+@f1234 fact
+  holds member u1233 r1
+
+@f1235 fact
+  holds member u1234 r2
+
+@f1236 fact
+  holds member u1235 r3
+
+@f1237 fact
+  holds member u1236 r4
+
+@f1238 fact
+  holds member u1237 r5
+
+@f1239 fact
+  holds member u1238 r6
+
+@f1240 fact
+  holds member u1239 r7
+
+@f1241 fact
+  holds member u1240 r8
+
+@f1242 fact
+  holds member u1241 r9
+
+@f1243 fact
+  holds member u1242 r10
+
+@f1244 fact
+  holds member u1243 r11
+
+@f1245 fact
+  holds member u1244 r12
+
+@f1246 fact
+  holds member u1245 r13
+
+@f1247 fact
+  holds member u1246 r14
+
+@f1248 fact
+  holds member u1247 r15
+
+@f1249 fact
+  holds member u1248 r0
+
+@f1250 fact
+  holds member u1249 r1
+
+@f1251 fact
+  holds member u1250 r2
+
+@f1252 fact
+  holds member u1251 r3
+
+@f1253 fact
+  holds member u1252 r4
+
+@f1254 fact
+  holds member u1253 r5
+
+@f1255 fact
+  holds member u1254 r6
+
+@f1256 fact
+  holds member u1255 r7
+
+@f1257 fact
+  holds member u1256 r8
+
+@f1258 fact
+  holds member u1257 r9
+
+@f1259 fact
+  holds member u1258 r10
+
+@f1260 fact
+  holds member u1259 r11
+
+@f1261 fact
+  holds member u1260 r12
+
+@f1262 fact
+  holds member u1261 r13
+
+@f1263 fact
+  holds member u1262 r14
+
+@f1264 fact
+  holds member u1263 r15
+
+@f1265 fact
+  holds member u1264 r0
+
+@f1266 fact
+  holds member u1265 r1
+
+@f1267 fact
+  holds member u1266 r2
+
+@f1268 fact
+  holds member u1267 r3
+
+@f1269 fact
+  holds member u1268 r4
+
+@f1270 fact
+  holds member u1269 r5
+
+@f1271 fact
+  holds member u1270 r6
+
+@f1272 fact
+  holds member u1271 r7
+
+@f1273 fact
+  holds member u1272 r8
+
+@f1274 fact
+  holds member u1273 r9
+
+@f1275 fact
+  holds member u1274 r10
+
+@f1276 fact
+  holds member u1275 r11
+
+@f1277 fact
+  holds member u1276 r12
+
+@f1278 fact
+  holds member u1277 r13
+
+@f1279 fact
+  holds member u1278 r14
+
+@f1280 fact
+  holds member u1279 r15
+
+@f1281 fact
+  holds member u1280 r0
+
+@f1282 fact
+  holds member u1281 r1
+
+@f1283 fact
+  holds member u1282 r2
+
+@f1284 fact
+  holds member u1283 r3
+
+@f1285 fact
+  holds member u1284 r4
+
+@f1286 fact
+  holds member u1285 r5
+
+@f1287 fact
+  holds member u1286 r6
+
+@f1288 fact
+  holds member u1287 r7
+
+@f1289 fact
+  holds member u1288 r8
+
+@f1290 fact
+  holds member u1289 r9
+
+@f1291 fact
+  holds member u1290 r10
+
+@f1292 fact
+  holds member u1291 r11
+
+@f1293 fact
+  holds member u1292 r12
+
+@f1294 fact
+  holds member u1293 r13
+
+@f1295 fact
+  holds member u1294 r14
+
+@f1296 fact
+  holds member u1295 r15
+
+@f1297 fact
+  holds member u1296 r0
+
+@f1298 fact
+  holds member u1297 r1
+
+@f1299 fact
+  holds member u1298 r2
+
+@f1300 fact
+  holds member u1299 r3
+
+@f1301 fact
+  holds member u1300 r4
+
+@f1302 fact
+  holds member u1301 r5
+
+@f1303 fact
+  holds member u1302 r6
+
+@f1304 fact
+  holds member u1303 r7
+
+@f1305 fact
+  holds member u1304 r8
+
+@f1306 fact
+  holds member u1305 r9
+
+@f1307 fact
+  holds member u1306 r10
+
+@f1308 fact
+  holds member u1307 r11
+
+@f1309 fact
+  holds member u1308 r12
+
+@f1310 fact
+  holds member u1309 r13
+
+@f1311 fact
+  holds member u1310 r14
+
+@f1312 fact
+  holds member u1311 r15
+
+@f1313 fact
+  holds member u1312 r0
+
+@f1314 fact
+  holds member u1313 r1
+
+@f1315 fact
+  holds member u1314 r2
+
+@f1316 fact
+  holds member u1315 r3
+
+@f1317 fact
+  holds member u1316 r4
+
+@f1318 fact
+  holds member u1317 r5
+
+@f1319 fact
+  holds member u1318 r6
+
+@f1320 fact
+  holds member u1319 r7
+
+@f1321 fact
+  holds member u1320 r8
+
+@f1322 fact
+  holds member u1321 r9
+
+@f1323 fact
+  holds member u1322 r10
+
+@f1324 fact
+  holds member u1323 r11
+
+@f1325 fact
+  holds member u1324 r12
+
+@f1326 fact
+  holds member u1325 r13
+
+@f1327 fact
+  holds member u1326 r14
+
+@f1328 fact
+  holds member u1327 r15
+
+@f1329 fact
+  holds member u1328 r0
+
+@f1330 fact
+  holds member u1329 r1
+
+@f1331 fact
+  holds member u1330 r2
+
+@f1332 fact
+  holds member u1331 r3
+
+@f1333 fact
+  holds member u1332 r4
+
+@f1334 fact
+  holds member u1333 r5
+
+@f1335 fact
+  holds member u1334 r6
+
+@f1336 fact
+  holds member u1335 r7
+
+@f1337 fact
+  holds member u1336 r8
+
+@f1338 fact
+  holds member u1337 r9
+
+@f1339 fact
+  holds member u1338 r10
+
+@f1340 fact
+  holds member u1339 r11
+
+@f1341 fact
+  holds member u1340 r12
+
+@f1342 fact
+  holds member u1341 r13
+
+@f1343 fact
+  holds member u1342 r14
+
+@f1344 fact
+  holds member u1343 r15
+
+@f1345 fact
+  holds member u1344 r0
+
+@f1346 fact
+  holds member u1345 r1
+
+@f1347 fact
+  holds member u1346 r2
+
+@f1348 fact
+  holds member u1347 r3
+
+@f1349 fact
+  holds member u1348 r4
+
+@f1350 fact
+  holds member u1349 r5
+
+@f1351 fact
+  holds member u1350 r6
+
+@f1352 fact
+  holds member u1351 r7
+
+@f1353 fact
+  holds member u1352 r8
+
+@f1354 fact
+  holds member u1353 r9
+
+@f1355 fact
+  holds member u1354 r10
+
+@f1356 fact
+  holds member u1355 r11
+
+@f1357 fact
+  holds member u1356 r12
+
+@f1358 fact
+  holds member u1357 r13
+
+@f1359 fact
+  holds member u1358 r14
+
+@f1360 fact
+  holds member u1359 r15
+
+@f1361 fact
+  holds member u1360 r0
+
+@f1362 fact
+  holds member u1361 r1
+
+@f1363 fact
+  holds member u1362 r2
+
+@f1364 fact
+  holds member u1363 r3
+
+@f1365 fact
+  holds member u1364 r4
+
+@f1366 fact
+  holds member u1365 r5
+
+@f1367 fact
+  holds member u1366 r6
+
+@f1368 fact
+  holds member u1367 r7
+
+@f1369 fact
+  holds member u1368 r8
+
+@f1370 fact
+  holds member u1369 r9
+
+@f1371 fact
+  holds member u1370 r10
+
+@f1372 fact
+  holds member u1371 r11
+
+@f1373 fact
+  holds member u1372 r12
+
+@f1374 fact
+  holds member u1373 r13
+
+@f1375 fact
+  holds member u1374 r14
+
+@f1376 fact
+  holds member u1375 r15
+
+@f1377 fact
+  holds member u1376 r0
+
+@f1378 fact
+  holds member u1377 r1
+
+@f1379 fact
+  holds member u1378 r2
+
+@f1380 fact
+  holds member u1379 r3
+
+@f1381 fact
+  holds member u1380 r4
+
+@f1382 fact
+  holds member u1381 r5
+
+@f1383 fact
+  holds member u1382 r6
+
+@f1384 fact
+  holds member u1383 r7
+
+@f1385 fact
+  holds member u1384 r8
+
+@f1386 fact
+  holds member u1385 r9
+
+@f1387 fact
+  holds member u1386 r10
+
+@f1388 fact
+  holds member u1387 r11
+
+@f1389 fact
+  holds member u1388 r12
+
+@f1390 fact
+  holds member u1389 r13
+
+@f1391 fact
+  holds member u1390 r14
+
+@f1392 fact
+  holds member u1391 r15
+
+@f1393 fact
+  holds member u1392 r0
+
+@f1394 fact
+  holds member u1393 r1
+
+@f1395 fact
+  holds member u1394 r2
+
+@f1396 fact
+  holds member u1395 r3
+
+@f1397 fact
+  holds member u1396 r4
+
+@f1398 fact
+  holds member u1397 r5
+
+@f1399 fact
+  holds member u1398 r6
+
+@f1400 fact
+  holds member u1399 r7
+
+@f1401 fact
+  holds member u1400 r8
+
+@f1402 fact
+  holds member u1401 r9
+
+@f1403 fact
+  holds member u1402 r10
+
+@f1404 fact
+  holds member u1403 r11
+
+@f1405 fact
+  holds member u1404 r12
+
+@f1406 fact
+  holds member u1405 r13
+
+@f1407 fact
+  holds member u1406 r14
+
+@f1408 fact
+  holds member u1407 r15
+
+@f1409 fact
+  holds member u1408 r0
+
+@f1410 fact
+  holds member u1409 r1
+
+@f1411 fact
+  holds member u1410 r2
+
+@f1412 fact
+  holds member u1411 r3
+
+@f1413 fact
+  holds member u1412 r4
+
+@f1414 fact
+  holds member u1413 r5
+
+@f1415 fact
+  holds member u1414 r6
+
+@f1416 fact
+  holds member u1415 r7
+
+@f1417 fact
+  holds member u1416 r8
+
+@f1418 fact
+  holds member u1417 r9
+
+@f1419 fact
+  holds member u1418 r10
+
+@f1420 fact
+  holds member u1419 r11
+
+@f1421 fact
+  holds member u1420 r12
+
+@f1422 fact
+  holds member u1421 r13
+
+@f1423 fact
+  holds member u1422 r14
+
+@f1424 fact
+  holds member u1423 r15
+
+@f1425 fact
+  holds member u1424 r0
+
+@f1426 fact
+  holds member u1425 r1
+
+@f1427 fact
+  holds member u1426 r2
+
+@f1428 fact
+  holds member u1427 r3
+
+@f1429 fact
+  holds member u1428 r4
+
+@f1430 fact
+  holds member u1429 r5
+
+@f1431 fact
+  holds member u1430 r6
+
+@f1432 fact
+  holds member u1431 r7
+
+@f1433 fact
+  holds member u1432 r8
+
+@f1434 fact
+  holds member u1433 r9
+
+@f1435 fact
+  holds member u1434 r10
+
+@f1436 fact
+  holds member u1435 r11
+
+@f1437 fact
+  holds member u1436 r12
+
+@f1438 fact
+  holds member u1437 r13
+
+@f1439 fact
+  holds member u1438 r14
+
+@f1440 fact
+  holds member u1439 r15
+
+@f1441 fact
+  holds member u1440 r0
+
+@f1442 fact
+  holds member u1441 r1
+
+@f1443 fact
+  holds member u1442 r2
+
+@f1444 fact
+  holds member u1443 r3
+
+@f1445 fact
+  holds member u1444 r4
+
+@f1446 fact
+  holds member u1445 r5
+
+@f1447 fact
+  holds member u1446 r6
+
+@f1448 fact
+  holds member u1447 r7
+
+@f1449 fact
+  holds member u1448 r8
+
+@f1450 fact
+  holds member u1449 r9
+
+@f1451 fact
+  holds member u1450 r10
+
+@f1452 fact
+  holds member u1451 r11
+
+@f1453 fact
+  holds member u1452 r12
+
+@f1454 fact
+  holds member u1453 r13
+
+@f1455 fact
+  holds member u1454 r14
+
+@f1456 fact
+  holds member u1455 r15
+
+@f1457 fact
+  holds member u1456 r0
+
+@f1458 fact
+  holds member u1457 r1
+
+@f1459 fact
+  holds member u1458 r2
+
+@f1460 fact
+  holds member u1459 r3
+
+@f1461 fact
+  holds member u1460 r4
+
+@f1462 fact
+  holds member u1461 r5
+
+@f1463 fact
+  holds member u1462 r6
+
+@f1464 fact
+  holds member u1463 r7
+
+@f1465 fact
+  holds member u1464 r8
+
+@f1466 fact
+  holds member u1465 r9
+
+@f1467 fact
+  holds member u1466 r10
+
+@f1468 fact
+  holds member u1467 r11
+
+@f1469 fact
+  holds member u1468 r12
+
+@f1470 fact
+  holds member u1469 r13
+
+@f1471 fact
+  holds member u1470 r14
+
+@f1472 fact
+  holds member u1471 r15
+
+@f1473 fact
+  holds member u1472 r0
+
+@f1474 fact
+  holds member u1473 r1
+
+@f1475 fact
+  holds member u1474 r2
+
+@f1476 fact
+  holds member u1475 r3
+
+@f1477 fact
+  holds member u1476 r4
+
+@f1478 fact
+  holds member u1477 r5
+
+@f1479 fact
+  holds member u1478 r6
+
+@f1480 fact
+  holds member u1479 r7
+
+@f1481 fact
+  holds member u1480 r8
+
+@f1482 fact
+  holds member u1481 r9
+
+@f1483 fact
+  holds member u1482 r10
+
+@f1484 fact
+  holds member u1483 r11
+
+@f1485 fact
+  holds member u1484 r12
+
+@f1486 fact
+  holds member u1485 r13
+
+@f1487 fact
+  holds member u1486 r14
+
+@f1488 fact
+  holds member u1487 r15
+
+@f1489 fact
+  holds member u1488 r0
+
+@f1490 fact
+  holds member u1489 r1
+
+@f1491 fact
+  holds member u1490 r2
+
+@f1492 fact
+  holds member u1491 r3
+
+@f1493 fact
+  holds member u1492 r4
+
+@f1494 fact
+  holds member u1493 r5
+
+@f1495 fact
+  holds member u1494 r6
+
+@f1496 fact
+  holds member u1495 r7
+
+@f1497 fact
+  holds member u1496 r8
+
+@f1498 fact
+  holds member u1497 r9
+
+@f1499 fact
+  holds member u1498 r10
+
+@f1500 fact
+  holds member u1499 r11
+
+@f1501 fact
+  holds member u1500 r12
+
+@f1502 fact
+  holds member u1501 r13
+
+@f1503 fact
+  holds member u1502 r14
+
+@f1504 fact
+  holds member u1503 r15
+
+@f1505 fact
+  holds member u1504 r0
+
+@f1506 fact
+  holds member u1505 r1
+
+@f1507 fact
+  holds member u1506 r2
+
+@f1508 fact
+  holds member u1507 r3
+
+@f1509 fact
+  holds member u1508 r4
+
+@f1510 fact
+  holds member u1509 r5
+
+@f1511 fact
+  holds member u1510 r6
+
+@f1512 fact
+  holds member u1511 r7
+
+@f1513 fact
+  holds member u1512 r8
+
+@f1514 fact
+  holds member u1513 r9
+
+@f1515 fact
+  holds member u1514 r10
+
+@f1516 fact
+  holds member u1515 r11
+
+@f1517 fact
+  holds member u1516 r12
+
+@f1518 fact
+  holds member u1517 r13
+
+@f1519 fact
+  holds member u1518 r14
+
+@f1520 fact
+  holds member u1519 r15
+
+@f1521 fact
+  holds member u1520 r0
+
+@f1522 fact
+  holds member u1521 r1
+
+@f1523 fact
+  holds member u1522 r2
+
+@f1524 fact
+  holds member u1523 r3
+
+@f1525 fact
+  holds member u1524 r4
+
+@f1526 fact
+  holds member u1525 r5
+
+@f1527 fact
+  holds member u1526 r6
+
+@f1528 fact
+  holds member u1527 r7
+
+@f1529 fact
+  holds member u1528 r8
+
+@f1530 fact
+  holds member u1529 r9
+
+@f1531 fact
+  holds member u1530 r10
+
+@f1532 fact
+  holds member u1531 r11
+
+@f1533 fact
+  holds member u1532 r12
+
+@f1534 fact
+  holds member u1533 r13
+
+@f1535 fact
+  holds member u1534 r14
+
+@f1536 fact
+  holds member u1535 r15
+
+@f1537 fact
+  holds member u1536 r0
+
+@f1538 fact
+  holds member u1537 r1
+
+@f1539 fact
+  holds member u1538 r2
+
+@f1540 fact
+  holds member u1539 r3
+
+@f1541 fact
+  holds member u1540 r4
+
+@f1542 fact
+  holds member u1541 r5
+
+@f1543 fact
+  holds member u1542 r6
+
+@f1544 fact
+  holds member u1543 r7
+
+@f1545 fact
+  holds member u1544 r8
+
+@f1546 fact
+  holds member u1545 r9
+
+@f1547 fact
+  holds member u1546 r10
+
+@f1548 fact
+  holds member u1547 r11
+
+@f1549 fact
+  holds member u1548 r12
+
+@f1550 fact
+  holds member u1549 r13
+
+@f1551 fact
+  holds member u1550 r14
+
+@f1552 fact
+  holds member u1551 r15
+
+@f1553 fact
+  holds member u1552 r0
+
+@f1554 fact
+  holds member u1553 r1
+
+@f1555 fact
+  holds member u1554 r2
+
+@f1556 fact
+  holds member u1555 r3
+
+@f1557 fact
+  holds member u1556 r4
+
+@f1558 fact
+  holds member u1557 r5
+
+@f1559 fact
+  holds member u1558 r6
+
+@f1560 fact
+  holds member u1559 r7
+
+@f1561 fact
+  holds member u1560 r8
+
+@f1562 fact
+  holds member u1561 r9
+
+@f1563 fact
+  holds member u1562 r10
+
+@f1564 fact
+  holds member u1563 r11
+
+@f1565 fact
+  holds member u1564 r12
+
+@f1566 fact
+  holds member u1565 r13
+
+@f1567 fact
+  holds member u1566 r14
+
+@f1568 fact
+  holds member u1567 r15
+
+@f1569 fact
+  holds member u1568 r0
+
+@f1570 fact
+  holds member u1569 r1
+
+@f1571 fact
+  holds member u1570 r2
+
+@f1572 fact
+  holds member u1571 r3
+
+@f1573 fact
+  holds member u1572 r4
+
+@f1574 fact
+  holds member u1573 r5
+
+@f1575 fact
+  holds member u1574 r6
+
+@f1576 fact
+  holds member u1575 r7
+
+@f1577 fact
+  holds member u1576 r8
+
+@f1578 fact
+  holds member u1577 r9
+
+@f1579 fact
+  holds member u1578 r10
+
+@f1580 fact
+  holds member u1579 r11
+
+@f1581 fact
+  holds member u1580 r12
+
+@f1582 fact
+  holds member u1581 r13
+
+@f1583 fact
+  holds member u1582 r14
+
+@f1584 fact
+  holds member u1583 r15
+
+@f1585 fact
+  holds member u1584 r0
+
+@f1586 fact
+  holds member u1585 r1
+
+@f1587 fact
+  holds member u1586 r2
+
+@f1588 fact
+  holds member u1587 r3
+
+@f1589 fact
+  holds member u1588 r4
+
+@f1590 fact
+  holds member u1589 r5
+
+@f1591 fact
+  holds member u1590 r6
+
+@f1592 fact
+  holds member u1591 r7
+
+@f1593 fact
+  holds member u1592 r8
+
+@f1594 fact
+  holds member u1593 r9
+
+@f1595 fact
+  holds member u1594 r10
+
+@f1596 fact
+  holds member u1595 r11
+
+@f1597 fact
+  holds member u1596 r12
+
+@f1598 fact
+  holds member u1597 r13
+
+@f1599 fact
+  holds member u1598 r14
+
+@f1600 fact
+  holds member u1599 r15
+
+@f1601 fact
+  holds grant r0 s0
+
+@f1602 fact
+  holds grant r0 s1
+
+@f1603 fact
+  holds grant r0 s2
+
+@f1604 fact
+  holds grant r0 s3
+
+@f1605 fact
+  holds grant r1 s0
+
+@f1606 fact
+  holds grant r1 s1
+
+@f1607 fact
+  holds grant r1 s2
+
+@f1608 fact
+  holds grant r1 s3
+
+@f1609 fact
+  holds grant r2 s0
+
+@f1610 fact
+  holds grant r2 s1
+
+@f1611 fact
+  holds grant r2 s2
+
+@f1612 fact
+  holds grant r2 s3
+
+@f1613 fact
+  holds grant r3 s0
+
+@f1614 fact
+  holds grant r3 s1
+
+@f1615 fact
+  holds grant r3 s2
+
+@f1616 fact
+  holds grant r3 s3
+
+@f1617 fact
+  holds grant r4 s0
+
+@f1618 fact
+  holds grant r4 s1
+
+@f1619 fact
+  holds grant r4 s2
+
+@f1620 fact
+  holds grant r4 s3
+
+@f1621 fact
+  holds grant r5 s0
+
+@f1622 fact
+  holds grant r5 s1
+
+@f1623 fact
+  holds grant r5 s2
+
+@f1624 fact
+  holds grant r5 s3
+
+@f1625 fact
+  holds grant r6 s0
+
+@f1626 fact
+  holds grant r6 s1
+
+@f1627 fact
+  holds grant r6 s2
+
+@f1628 fact
+  holds grant r6 s3
+
+@f1629 fact
+  holds grant r7 s0
+
+@f1630 fact
+  holds grant r7 s1
+
+@f1631 fact
+  holds grant r7 s2
+
+@f1632 fact
+  holds grant r7 s3
+
+@f1633 fact
+  holds grant r8 s0
+
+@f1634 fact
+  holds grant r8 s1
+
+@f1635 fact
+  holds grant r8 s2
+
+@f1636 fact
+  holds grant r8 s3
+
+@f1637 fact
+  holds grant r9 s0
+
+@f1638 fact
+  holds grant r9 s1
+
+@f1639 fact
+  holds grant r9 s2
+
+@f1640 fact
+  holds grant r9 s3
+
+@f1641 fact
+  holds grant r10 s0
+
+@f1642 fact
+  holds grant r10 s1
+
+@f1643 fact
+  holds grant r10 s2
+
+@f1644 fact
+  holds grant r10 s3
+
+@f1645 fact
+  holds grant r11 s0
+
+@f1646 fact
+  holds grant r11 s1
+
+@f1647 fact
+  holds grant r11 s2
+
+@f1648 fact
+  holds grant r11 s3
+
+@f1649 fact
+  holds grant r12 s0
+
+@f1650 fact
+  holds grant r12 s1
+
+@f1651 fact
+  holds grant r12 s2
+
+@f1652 fact
+  holds grant r12 s3
+
+@f1653 fact
+  holds grant r13 s0
+
+@f1654 fact
+  holds grant r13 s1
+
+@f1655 fact
+  holds grant r13 s2
+
+@f1656 fact
+  holds grant r13 s3
+
+@f1657 fact
+  holds grant r14 s0
+
+@f1658 fact
+  holds grant r14 s1
+
+@f1659 fact
+  holds grant r14 s2
+
+@f1660 fact
+  holds grant r14 s3
+
+@f1661 fact
+  holds grant r15 s0
+
+@f1662 fact
+  holds grant r15 s1
+
+@f1663 fact
+  holds grant r15 s2
+
+@f1664 fact
+  holds grant r15 s3
+
+@f1665 fact
+  holds denied u0 s0
+
+@f1666 fact
+  holds denied u7 s0
+
+@f1667 fact
+  holds denied u14 s0
+
+@f1668 fact
+  holds denied u21 s0
+
+@f1669 fact
+  holds denied u28 s0
+
+@f1670 fact
+  holds denied u35 s0
+
+@f1671 fact
+  holds denied u42 s0
+
+@f1672 fact
+  holds denied u49 s0
+
+@f1673 fact
+  holds denied u56 s0
+
+@f1674 fact
+  holds denied u63 s0
+
+@f1675 fact
+  holds denied u70 s0
+
+@f1676 fact
+  holds denied u77 s0
+
+@f1677 fact
+  holds denied u84 s0
+
+@f1678 fact
+  holds denied u91 s0
+
+@f1679 fact
+  holds denied u98 s0
+
+@f1680 fact
+  holds denied u105 s0
+
+@f1681 fact
+  holds denied u112 s0
+
+@f1682 fact
+  holds denied u119 s0
+
+@f1683 fact
+  holds denied u126 s0
+
+@f1684 fact
+  holds denied u133 s0
+
+@f1685 fact
+  holds denied u140 s0
+
+@f1686 fact
+  holds denied u147 s0
+
+@f1687 fact
+  holds denied u154 s0
+
+@f1688 fact
+  holds denied u161 s0
+
+@f1689 fact
+  holds denied u168 s0
+
+@f1690 fact
+  holds denied u175 s0
+
+@f1691 fact
+  holds denied u182 s0
+
+@f1692 fact
+  holds denied u189 s0
+
+@f1693 fact
+  holds denied u196 s0
+
+@f1694 fact
+  holds denied u203 s0
+
+@f1695 fact
+  holds denied u210 s0
+
+@f1696 fact
+  holds denied u217 s0
+
+@f1697 fact
+  holds denied u224 s0
+
+@f1698 fact
+  holds denied u231 s0
+
+@f1699 fact
+  holds denied u238 s0
+
+@f1700 fact
+  holds denied u245 s0
+
+@f1701 fact
+  holds denied u252 s0
+
+@f1702 fact
+  holds denied u259 s0
+
+@f1703 fact
+  holds denied u266 s0
+
+@f1704 fact
+  holds denied u273 s0
+
+@f1705 fact
+  holds denied u280 s0
+
+@f1706 fact
+  holds denied u287 s0
+
+@f1707 fact
+  holds denied u294 s0
+
+@f1708 fact
+  holds denied u301 s0
+
+@f1709 fact
+  holds denied u308 s0
+
+@f1710 fact
+  holds denied u315 s0
+
+@f1711 fact
+  holds denied u322 s0
+
+@f1712 fact
+  holds denied u329 s0
+
+@f1713 fact
+  holds denied u336 s0
+
+@f1714 fact
+  holds denied u343 s0
+
+@f1715 fact
+  holds denied u350 s0
+
+@f1716 fact
+  holds denied u357 s0
+
+@f1717 fact
+  holds denied u364 s0
+
+@f1718 fact
+  holds denied u371 s0
+
+@f1719 fact
+  holds denied u378 s0
+
+@f1720 fact
+  holds denied u385 s0
+
+@f1721 fact
+  holds denied u392 s0
+
+@f1722 fact
+  holds denied u399 s0
+
+@f1723 fact
+  holds denied u406 s0
+
+@f1724 fact
+  holds denied u413 s0
+
+@f1725 fact
+  holds denied u420 s0
+
+@f1726 fact
+  holds denied u427 s0
+
+@f1727 fact
+  holds denied u434 s0
+
+@f1728 fact
+  holds denied u441 s0
+
+@f1729 fact
+  holds denied u448 s0
+
+@f1730 fact
+  holds denied u455 s0
+
+@f1731 fact
+  holds denied u462 s0
+
+@f1732 fact
+  holds denied u469 s0
+
+@f1733 fact
+  holds denied u476 s0
+
+@f1734 fact
+  holds denied u483 s0
+
+@f1735 fact
+  holds denied u490 s0
+
+@f1736 fact
+  holds denied u497 s0
+
+@f1737 fact
+  holds denied u504 s0
+
+@f1738 fact
+  holds denied u511 s0
+
+@f1739 fact
+  holds denied u518 s0
+
+@f1740 fact
+  holds denied u525 s0
+
+@f1741 fact
+  holds denied u532 s0
+
+@f1742 fact
+  holds denied u539 s0
+
+@f1743 fact
+  holds denied u546 s0
+
+@f1744 fact
+  holds denied u553 s0
+
+@f1745 fact
+  holds denied u560 s0
+
+@f1746 fact
+  holds denied u567 s0
+
+@f1747 fact
+  holds denied u574 s0
+
+@f1748 fact
+  holds denied u581 s0
+
+@f1749 fact
+  holds denied u588 s0
+
+@f1750 fact
+  holds denied u595 s0
+
+@f1751 fact
+  holds denied u602 s0
+
+@f1752 fact
+  holds denied u609 s0
+
+@f1753 fact
+  holds denied u616 s0
+
+@f1754 fact
+  holds denied u623 s0
+
+@f1755 fact
+  holds denied u630 s0
+
+@f1756 fact
+  holds denied u637 s0
+
+@f1757 fact
+  holds denied u644 s0
+
+@f1758 fact
+  holds denied u651 s0
+
+@f1759 fact
+  holds denied u658 s0
+
+@f1760 fact
+  holds denied u665 s0
+
+@f1761 fact
+  holds denied u672 s0
+
+@f1762 fact
+  holds denied u679 s0
+
+@f1763 fact
+  holds denied u686 s0
+
+@f1764 fact
+  holds denied u693 s0
+
+@f1765 fact
+  holds denied u700 s0
+
+@f1766 fact
+  holds denied u707 s0
+
+@f1767 fact
+  holds denied u714 s0
+
+@f1768 fact
+  holds denied u721 s0
+
+@f1769 fact
+  holds denied u728 s0
+
+@f1770 fact
+  holds denied u735 s0
+
+@f1771 fact
+  holds denied u742 s0
+
+@f1772 fact
+  holds denied u749 s0
+
+@f1773 fact
+  holds denied u756 s0
+
+@f1774 fact
+  holds denied u763 s0
+
+@f1775 fact
+  holds denied u770 s0
+
+@f1776 fact
+  holds denied u777 s0
+
+@f1777 fact
+  holds denied u784 s0
+
+@f1778 fact
+  holds denied u791 s0
+
+@f1779 fact
+  holds denied u798 s0
+
+@f1780 fact
+  holds denied u805 s0
+
+@f1781 fact
+  holds denied u812 s0
+
+@f1782 fact
+  holds denied u819 s0
+
+@f1783 fact
+  holds denied u826 s0
+
+@f1784 fact
+  holds denied u833 s0
+
+@f1785 fact
+  holds denied u840 s0
+
+@f1786 fact
+  holds denied u847 s0
+
+@f1787 fact
+  holds denied u854 s0
+
+@f1788 fact
+  holds denied u861 s0
+
+@f1789 fact
+  holds denied u868 s0
+
+@f1790 fact
+  holds denied u875 s0
+
+@f1791 fact
+  holds denied u882 s0
+
+@f1792 fact
+  holds denied u889 s0
+
+@f1793 fact
+  holds denied u896 s0
+
+@f1794 fact
+  holds denied u903 s0
+
+@f1795 fact
+  holds denied u910 s0
+
+@f1796 fact
+  holds denied u917 s0
+
+@f1797 fact
+  holds denied u924 s0
+
+@f1798 fact
+  holds denied u931 s0
+
+@f1799 fact
+  holds denied u938 s0
+
+@f1800 fact
+  holds denied u945 s0
+
+@f1801 fact
+  holds denied u952 s0
+
+@f1802 fact
+  holds denied u959 s0
+
+@f1803 fact
+  holds denied u966 s0
+
+@f1804 fact
+  holds denied u973 s0
+
+@f1805 fact
+  holds denied u980 s0
+
+@f1806 fact
+  holds denied u987 s0
+
+@f1807 fact
+  holds denied u994 s0
+
+@f1808 fact
+  holds denied u1001 s0
+
+@f1809 fact
+  holds denied u1008 s0
+
+@f1810 fact
+  holds denied u1015 s0
+
+@f1811 fact
+  holds denied u1022 s0
+
+@f1812 fact
+  holds denied u1029 s0
+
+@f1813 fact
+  holds denied u1036 s0
+
+@f1814 fact
+  holds denied u1043 s0
+
+@f1815 fact
+  holds denied u1050 s0
+
+@f1816 fact
+  holds denied u1057 s0
+
+@f1817 fact
+  holds denied u1064 s0
+
+@f1818 fact
+  holds denied u1071 s0
+
+@f1819 fact
+  holds denied u1078 s0
+
+@f1820 fact
+  holds denied u1085 s0
+
+@f1821 fact
+  holds denied u1092 s0
+
+@f1822 fact
+  holds denied u1099 s0
+
+@f1823 fact
+  holds denied u1106 s0
+
+@f1824 fact
+  holds denied u1113 s0
+
+@f1825 fact
+  holds denied u1120 s0
+
+@f1826 fact
+  holds denied u1127 s0
+
+@f1827 fact
+  holds denied u1134 s0
+
+@f1828 fact
+  holds denied u1141 s0
+
+@f1829 fact
+  holds denied u1148 s0
+
+@f1830 fact
+  holds denied u1155 s0
+
+@f1831 fact
+  holds denied u1162 s0
+
+@f1832 fact
+  holds denied u1169 s0
+
+@f1833 fact
+  holds denied u1176 s0
+
+@f1834 fact
+  holds denied u1183 s0
+
+@f1835 fact
+  holds denied u1190 s0
+
+@f1836 fact
+  holds denied u1197 s0
+
+@f1837 fact
+  holds denied u1204 s0
+
+@f1838 fact
+  holds denied u1211 s0
+
+@f1839 fact
+  holds denied u1218 s0
+
+@f1840 fact
+  holds denied u1225 s0
+
+@f1841 fact
+  holds denied u1232 s0
+
+@f1842 fact
+  holds denied u1239 s0
+
+@f1843 fact
+  holds denied u1246 s0
+
+@f1844 fact
+  holds denied u1253 s0
+
+@f1845 fact
+  holds denied u1260 s0
+
+@f1846 fact
+  holds denied u1267 s0
+
+@f1847 fact
+  holds denied u1274 s0
+
+@f1848 fact
+  holds denied u1281 s0
+
+@f1849 fact
+  holds denied u1288 s0
+
+@f1850 fact
+  holds denied u1295 s0
+
+@f1851 fact
+  holds denied u1302 s0
+
+@f1852 fact
+  holds denied u1309 s0
+
+@f1853 fact
+  holds denied u1316 s0
+
+@f1854 fact
+  holds denied u1323 s0
+
+@f1855 fact
+  holds denied u1330 s0
+
+@f1856 fact
+  holds denied u1337 s0
+
+@f1857 fact
+  holds denied u1344 s0
+
+@f1858 fact
+  holds denied u1351 s0
+
+@f1859 fact
+  holds denied u1358 s0
+
+@f1860 fact
+  holds denied u1365 s0
+
+@f1861 fact
+  holds denied u1372 s0
+
+@f1862 fact
+  holds denied u1379 s0
+
+@f1863 fact
+  holds denied u1386 s0
+
+@f1864 fact
+  holds denied u1393 s0
+
+@f1865 fact
+  holds denied u1400 s0
+
+@f1866 fact
+  holds denied u1407 s0
+
+@f1867 fact
+  holds denied u1414 s0
+
+@f1868 fact
+  holds denied u1421 s0
+
+@f1869 fact
+  holds denied u1428 s0
+
+@f1870 fact
+  holds denied u1435 s0
+
+@f1871 fact
+  holds denied u1442 s0
+
+@f1872 fact
+  holds denied u1449 s0
+
+@f1873 fact
+  holds denied u1456 s0
+
+@f1874 fact
+  holds denied u1463 s0
+
+@f1875 fact
+  holds denied u1470 s0
+
+@f1876 fact
+  holds denied u1477 s0
+
+@f1877 fact
+  holds denied u1484 s0
+
+@f1878 fact
+  holds denied u1491 s0
+
+@f1879 fact
+  holds denied u1498 s0
+
+@f1880 fact
+  holds denied u1505 s0
+
+@f1881 fact
+  holds denied u1512 s0
+
+@f1882 fact
+  holds denied u1519 s0
+
+@f1883 fact
+  holds denied u1526 s0
+
+@f1884 fact
+  holds denied u1533 s0
+
+@f1885 fact
+  holds denied u1540 s0
+
+@f1886 fact
+  holds denied u1547 s0
+
+@f1887 fact
+  holds denied u1554 s0
+
+@f1888 fact
+  holds denied u1561 s0
+
+@f1889 fact
+  holds denied u1568 s0
+
+@f1890 fact
+  holds denied u1575 s0
+
+@f1891 fact
+  holds denied u1582 s0
+
+@f1892 fact
+  holds denied u1589 s0
+
+@f1893 fact
+  holds denied u1596 s0
+
+@r_can rule
+  when member ?u ?r
+  when grant ?r ?s
+  when absent denied ?u ?s
+  then can ?u ?s

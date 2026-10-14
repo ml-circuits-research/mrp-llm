@@ -1,0 +1,83 @@
+@server predicate
+  args subject:entity
+@big_db predicate
+  args subject:entity
+@network_up predicate
+  args subject:entity
+  closed true
+@locked predicate
+  args subject:entity
+@image predicate
+  args subject:entity
+@stored predicate
+  args subject:entity
+@verified predicate
+  args subject:entity
+@backup_done predicate
+  args subject:entity
+
+@lock_db action
+  params ?s
+  requires server ?s
+  adds locked ?s
+  cost 1
+@snapshot action
+  params ?s
+  requires locked ?s
+  adds image ?s
+  cost 2
+@dump action
+  params ?s
+  requires locked ?s
+  adds image ?s
+  cost 4
+@upload_s3 action
+  params ?s
+  requires image ?s
+  adds stored ?s
+  cost 3
+@upload_nas action
+  params ?s
+  requires image ?s
+  adds stored ?s
+  cost 5
+@verify_backup action
+  params ?s
+  requires stored ?s
+  adds verified ?s
+  cost 1
+@unlock_db action
+  params ?s
+  requires stored ?s
+  requires locked ?s
+  adds backup_done ?s
+  removes locked ?s
+  cost 1
+@copy_tape action
+  params ?s
+  requires server ?s
+  adds backup_done ?s
+  cost 20
+
+@f1 fact
+  holds server s1
+@f2 fact
+  holds big_db s1
+
+@do_backup method
+  achieves backup_done ?s
+  when server ?s
+  version 1
+  binding strict
+  step ~lock_db ?s
+  step if big_db ?s
+    ~snapshot ?s
+  else
+    ~dump ?s
+  end
+  step choose
+    ~upload_s3 ?s
+    ~upload_nas ?s
+  end
+  step optional ~verify_backup ?s
+  step ~unlock_db ?s

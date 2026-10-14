@@ -1,0 +1,4 @@
+@q query
+  mode abduce
+  where router_reset r7
+  via ~hard_reset r7

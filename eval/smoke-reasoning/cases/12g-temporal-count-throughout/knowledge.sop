@@ -1,0 +1,13 @@
+@works_at predicate
+  args subject:entity object:entity
+  closed true
+
+@f1 fact
+  holds works_at ann alpha
+  valid 2020-01-01 2023-01-01
+@f2 fact
+  holds works_at ann beta
+  valid 2023-01-01 open
+@f3 fact
+  holds works_at ann gamma
+  valid 2022-01-01 2022-06-01

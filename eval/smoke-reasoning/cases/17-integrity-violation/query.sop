@@ -1,0 +1,3 @@
+@q query
+  where violation ?c ?w
+  select ?c ?w

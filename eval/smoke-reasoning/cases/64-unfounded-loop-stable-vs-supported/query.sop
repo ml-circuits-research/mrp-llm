@@ -1,0 +1,3 @@
+@q query
+  where cold ?x
+  select ?x

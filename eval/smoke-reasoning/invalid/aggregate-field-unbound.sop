@@ -1,0 +1,6 @@
+# expect: unsafe_variable
+@s aggregate
+  over salary ?p ?d
+  group ?d
+  sum ?v as ?t
+  yields x ?d ?t

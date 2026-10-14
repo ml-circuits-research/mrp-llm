@@ -1,0 +1,22 @@
+{
+  "feature": "prefer ~a over ~b breaks ties between legal runs of equal cost; the choice is reported in choices",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 2,
+    "steps": 1,
+    "names": [
+      "wire_transfer"
+    ]
+  },
+  "choices": [
+    {
+      "chosen": "~wire_transfer p1"
+    }
+  ],
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice"
+  ]
+}

@@ -1,0 +1,9507 @@
+@orders predicate
+  args subject:entity object:entity
+  closed true
+
+@lives predicate
+  args subject:entity object:entity
+  closed true
+
+@zone_of predicate
+  args subject:entity object:entity
+  closed true
+
+@order_zone predicate
+  args subject:entity object:entity
+  closed true
+
+@f1 fact
+  holds orders o0 c3
+
+@f2 fact
+  holds orders o1 c10
+
+@f3 fact
+  holds orders o2 c17
+
+@f4 fact
+  holds orders o3 c24
+
+@f5 fact
+  holds orders o4 c31
+
+@f6 fact
+  holds orders o5 c38
+
+@f7 fact
+  holds orders o6 c45
+
+@f8 fact
+  holds orders o7 c52
+
+@f9 fact
+  holds orders o8 c59
+
+@f10 fact
+  holds orders o9 c66
+
+@f11 fact
+  holds orders o10 c73
+
+@f12 fact
+  holds orders o11 c80
+
+@f13 fact
+  holds orders o12 c87
+
+@f14 fact
+  holds orders o13 c94
+
+@f15 fact
+  holds orders o14 c101
+
+@f16 fact
+  holds orders o15 c108
+
+@f17 fact
+  holds orders o16 c115
+
+@f18 fact
+  holds orders o17 c122
+
+@f19 fact
+  holds orders o18 c129
+
+@f20 fact
+  holds orders o19 c136
+
+@f21 fact
+  holds orders o20 c143
+
+@f22 fact
+  holds orders o21 c0
+
+@f23 fact
+  holds orders o22 c7
+
+@f24 fact
+  holds orders o23 c14
+
+@f25 fact
+  holds orders o24 c21
+
+@f26 fact
+  holds orders o25 c28
+
+@f27 fact
+  holds orders o26 c35
+
+@f28 fact
+  holds orders o27 c42
+
+@f29 fact
+  holds orders o28 c49
+
+@f30 fact
+  holds orders o29 c56
+
+@f31 fact
+  holds orders o30 c63
+
+@f32 fact
+  holds orders o31 c70
+
+@f33 fact
+  holds orders o32 c77
+
+@f34 fact
+  holds orders o33 c84
+
+@f35 fact
+  holds orders o34 c91
+
+@f36 fact
+  holds orders o35 c98
+
+@f37 fact
+  holds orders o36 c105
+
+@f38 fact
+  holds orders o37 c112
+
+@f39 fact
+  holds orders o38 c119
+
+@f40 fact
+  holds orders o39 c126
+
+@f41 fact
+  holds orders o40 c133
+
+@f42 fact
+  holds orders o41 c140
+
+@f43 fact
+  holds orders o42 c147
+
+@f44 fact
+  holds orders o43 c4
+
+@f45 fact
+  holds orders o44 c11
+
+@f46 fact
+  holds orders o45 c18
+
+@f47 fact
+  holds orders o46 c25
+
+@f48 fact
+  holds orders o47 c32
+
+@f49 fact
+  holds orders o48 c39
+
+@f50 fact
+  holds orders o49 c46
+
+@f51 fact
+  holds orders o50 c53
+
+@f52 fact
+  holds orders o51 c60
+
+@f53 fact
+  holds orders o52 c67
+
+@f54 fact
+  holds orders o53 c74
+
+@f55 fact
+  holds orders o54 c81
+
+@f56 fact
+  holds orders o55 c88
+
+@f57 fact
+  holds orders o56 c95
+
+@f58 fact
+  holds orders o57 c102
+
+@f59 fact
+  holds orders o58 c109
+
+@f60 fact
+  holds orders o59 c116
+
+@f61 fact
+  holds orders o60 c123
+
+@f62 fact
+  holds orders o61 c130
+
+@f63 fact
+  holds orders o62 c137
+
+@f64 fact
+  holds orders o63 c144
+
+@f65 fact
+  holds orders o64 c1
+
+@f66 fact
+  holds orders o65 c8
+
+@f67 fact
+  holds orders o66 c15
+
+@f68 fact
+  holds orders o67 c22
+
+@f69 fact
+  holds orders o68 c29
+
+@f70 fact
+  holds orders o69 c36
+
+@f71 fact
+  holds orders o70 c43
+
+@f72 fact
+  holds orders o71 c50
+
+@f73 fact
+  holds orders o72 c57
+
+@f74 fact
+  holds orders o73 c64
+
+@f75 fact
+  holds orders o74 c71
+
+@f76 fact
+  holds orders o75 c78
+
+@f77 fact
+  holds orders o76 c85
+
+@f78 fact
+  holds orders o77 c92
+
+@f79 fact
+  holds orders o78 c99
+
+@f80 fact
+  holds orders o79 c106
+
+@f81 fact
+  holds orders o80 c113
+
+@f82 fact
+  holds orders o81 c120
+
+@f83 fact
+  holds orders o82 c127
+
+@f84 fact
+  holds orders o83 c134
+
+@f85 fact
+  holds orders o84 c141
+
+@f86 fact
+  holds orders o85 c148
+
+@f87 fact
+  holds orders o86 c5
+
+@f88 fact
+  holds orders o87 c12
+
+@f89 fact
+  holds orders o88 c19
+
+@f90 fact
+  holds orders o89 c26
+
+@f91 fact
+  holds orders o90 c33
+
+@f92 fact
+  holds orders o91 c40
+
+@f93 fact
+  holds orders o92 c47
+
+@f94 fact
+  holds orders o93 c54
+
+@f95 fact
+  holds orders o94 c61
+
+@f96 fact
+  holds orders o95 c68
+
+@f97 fact
+  holds orders o96 c75
+
+@f98 fact
+  holds orders o97 c82
+
+@f99 fact
+  holds orders o98 c89
+
+@f100 fact
+  holds orders o99 c96
+
+@f101 fact
+  holds orders o100 c103
+
+@f102 fact
+  holds orders o101 c110
+
+@f103 fact
+  holds orders o102 c117
+
+@f104 fact
+  holds orders o103 c124
+
+@f105 fact
+  holds orders o104 c131
+
+@f106 fact
+  holds orders o105 c138
+
+@f107 fact
+  holds orders o106 c145
+
+@f108 fact
+  holds orders o107 c2
+
+@f109 fact
+  holds orders o108 c9
+
+@f110 fact
+  holds orders o109 c16
+
+@f111 fact
+  holds orders o110 c23
+
+@f112 fact
+  holds orders o111 c30
+
+@f113 fact
+  holds orders o112 c37
+
+@f114 fact
+  holds orders o113 c44
+
+@f115 fact
+  holds orders o114 c51
+
+@f116 fact
+  holds orders o115 c58
+
+@f117 fact
+  holds orders o116 c65
+
+@f118 fact
+  holds orders o117 c72
+
+@f119 fact
+  holds orders o118 c79
+
+@f120 fact
+  holds orders o119 c86
+
+@f121 fact
+  holds orders o120 c93
+
+@f122 fact
+  holds orders o121 c100
+
+@f123 fact
+  holds orders o122 c107
+
+@f124 fact
+  holds orders o123 c114
+
+@f125 fact
+  holds orders o124 c121
+
+@f126 fact
+  holds orders o125 c128
+
+@f127 fact
+  holds orders o126 c135
+
+@f128 fact
+  holds orders o127 c142
+
+@f129 fact
+  holds orders o128 c149
+
+@f130 fact
+  holds orders o129 c6
+
+@f131 fact
+  holds orders o130 c13
+
+@f132 fact
+  holds orders o131 c20
+
+@f133 fact
+  holds orders o132 c27
+
+@f134 fact
+  holds orders o133 c34
+
+@f135 fact
+  holds orders o134 c41
+
+@f136 fact
+  holds orders o135 c48
+
+@f137 fact
+  holds orders o136 c55
+
+@f138 fact
+  holds orders o137 c62
+
+@f139 fact
+  holds orders o138 c69
+
+@f140 fact
+  holds orders o139 c76
+
+@f141 fact
+  holds orders o140 c83
+
+@f142 fact
+  holds orders o141 c90
+
+@f143 fact
+  holds orders o142 c97
+
+@f144 fact
+  holds orders o143 c104
+
+@f145 fact
+  holds orders o144 c111
+
+@f146 fact
+  holds orders o145 c118
+
+@f147 fact
+  holds orders o146 c125
+
+@f148 fact
+  holds orders o147 c132
+
+@f149 fact
+  holds orders o148 c139
+
+@f150 fact
+  holds orders o149 c146
+
+@f151 fact
+  holds orders o150 c3
+
+@f152 fact
+  holds orders o151 c10
+
+@f153 fact
+  holds orders o152 c17
+
+@f154 fact
+  holds orders o153 c24
+
+@f155 fact
+  holds orders o154 c31
+
+@f156 fact
+  holds orders o155 c38
+
+@f157 fact
+  holds orders o156 c45
+
+@f158 fact
+  holds orders o157 c52
+
+@f159 fact
+  holds orders o158 c59
+
+@f160 fact
+  holds orders o159 c66
+
+@f161 fact
+  holds orders o160 c73
+
+@f162 fact
+  holds orders o161 c80
+
+@f163 fact
+  holds orders o162 c87
+
+@f164 fact
+  holds orders o163 c94
+
+@f165 fact
+  holds orders o164 c101
+
+@f166 fact
+  holds orders o165 c108
+
+@f167 fact
+  holds orders o166 c115
+
+@f168 fact
+  holds orders o167 c122
+
+@f169 fact
+  holds orders o168 c129
+
+@f170 fact
+  holds orders o169 c136
+
+@f171 fact
+  holds orders o170 c143
+
+@f172 fact
+  holds orders o171 c0
+
+@f173 fact
+  holds orders o172 c7
+
+@f174 fact
+  holds orders o173 c14
+
+@f175 fact
+  holds orders o174 c21
+
+@f176 fact
+  holds orders o175 c28
+
+@f177 fact
+  holds orders o176 c35
+
+@f178 fact
+  holds orders o177 c42
+
+@f179 fact
+  holds orders o178 c49
+
+@f180 fact
+  holds orders o179 c56
+
+@f181 fact
+  holds orders o180 c63
+
+@f182 fact
+  holds orders o181 c70
+
+@f183 fact
+  holds orders o182 c77
+
+@f184 fact
+  holds orders o183 c84
+
+@f185 fact
+  holds orders o184 c91
+
+@f186 fact
+  holds orders o185 c98
+
+@f187 fact
+  holds orders o186 c105
+
+@f188 fact
+  holds orders o187 c112
+
+@f189 fact
+  holds orders o188 c119
+
+@f190 fact
+  holds orders o189 c126
+
+@f191 fact
+  holds orders o190 c133
+
+@f192 fact
+  holds orders o191 c140
+
+@f193 fact
+  holds orders o192 c147
+
+@f194 fact
+  holds orders o193 c4
+
+@f195 fact
+  holds orders o194 c11
+
+@f196 fact
+  holds orders o195 c18
+
+@f197 fact
+  holds orders o196 c25
+
+@f198 fact
+  holds orders o197 c32
+
+@f199 fact
+  holds orders o198 c39
+
+@f200 fact
+  holds orders o199 c46
+
+@f201 fact
+  holds orders o200 c53
+
+@f202 fact
+  holds orders o201 c60
+
+@f203 fact
+  holds orders o202 c67
+
+@f204 fact
+  holds orders o203 c74
+
+@f205 fact
+  holds orders o204 c81
+
+@f206 fact
+  holds orders o205 c88
+
+@f207 fact
+  holds orders o206 c95
+
+@f208 fact
+  holds orders o207 c102
+
+@f209 fact
+  holds orders o208 c109
+
+@f210 fact
+  holds orders o209 c116
+
+@f211 fact
+  holds orders o210 c123
+
+@f212 fact
+  holds orders o211 c130
+
+@f213 fact
+  holds orders o212 c137
+
+@f214 fact
+  holds orders o213 c144
+
+@f215 fact
+  holds orders o214 c1
+
+@f216 fact
+  holds orders o215 c8
+
+@f217 fact
+  holds orders o216 c15
+
+@f218 fact
+  holds orders o217 c22
+
+@f219 fact
+  holds orders o218 c29
+
+@f220 fact
+  holds orders o219 c36
+
+@f221 fact
+  holds orders o220 c43
+
+@f222 fact
+  holds orders o221 c50
+
+@f223 fact
+  holds orders o222 c57
+
+@f224 fact
+  holds orders o223 c64
+
+@f225 fact
+  holds orders o224 c71
+
+@f226 fact
+  holds orders o225 c78
+
+@f227 fact
+  holds orders o226 c85
+
+@f228 fact
+  holds orders o227 c92
+
+@f229 fact
+  holds orders o228 c99
+
+@f230 fact
+  holds orders o229 c106
+
+@f231 fact
+  holds orders o230 c113
+
+@f232 fact
+  holds orders o231 c120
+
+@f233 fact
+  holds orders o232 c127
+
+@f234 fact
+  holds orders o233 c134
+
+@f235 fact
+  holds orders o234 c141
+
+@f236 fact
+  holds orders o235 c148
+
+@f237 fact
+  holds orders o236 c5
+
+@f238 fact
+  holds orders o237 c12
+
+@f239 fact
+  holds orders o238 c19
+
+@f240 fact
+  holds orders o239 c26
+
+@f241 fact
+  holds orders o240 c33
+
+@f242 fact
+  holds orders o241 c40
+
+@f243 fact
+  holds orders o242 c47
+
+@f244 fact
+  holds orders o243 c54
+
+@f245 fact
+  holds orders o244 c61
+
+@f246 fact
+  holds orders o245 c68
+
+@f247 fact
+  holds orders o246 c75
+
+@f248 fact
+  holds orders o247 c82
+
+@f249 fact
+  holds orders o248 c89
+
+@f250 fact
+  holds orders o249 c96
+
+@f251 fact
+  holds orders o250 c103
+
+@f252 fact
+  holds orders o251 c110
+
+@f253 fact
+  holds orders o252 c117
+
+@f254 fact
+  holds orders o253 c124
+
+@f255 fact
+  holds orders o254 c131
+
+@f256 fact
+  holds orders o255 c138
+
+@f257 fact
+  holds orders o256 c145
+
+@f258 fact
+  holds orders o257 c2
+
+@f259 fact
+  holds orders o258 c9
+
+@f260 fact
+  holds orders o259 c16
+
+@f261 fact
+  holds orders o260 c23
+
+@f262 fact
+  holds orders o261 c30
+
+@f263 fact
+  holds orders o262 c37
+
+@f264 fact
+  holds orders o263 c44
+
+@f265 fact
+  holds orders o264 c51
+
+@f266 fact
+  holds orders o265 c58
+
+@f267 fact
+  holds orders o266 c65
+
+@f268 fact
+  holds orders o267 c72
+
+@f269 fact
+  holds orders o268 c79
+
+@f270 fact
+  holds orders o269 c86
+
+@f271 fact
+  holds orders o270 c93
+
+@f272 fact
+  holds orders o271 c100
+
+@f273 fact
+  holds orders o272 c107
+
+@f274 fact
+  holds orders o273 c114
+
+@f275 fact
+  holds orders o274 c121
+
+@f276 fact
+  holds orders o275 c128
+
+@f277 fact
+  holds orders o276 c135
+
+@f278 fact
+  holds orders o277 c142
+
+@f279 fact
+  holds orders o278 c149
+
+@f280 fact
+  holds orders o279 c6
+
+@f281 fact
+  holds orders o280 c13
+
+@f282 fact
+  holds orders o281 c20
+
+@f283 fact
+  holds orders o282 c27
+
+@f284 fact
+  holds orders o283 c34
+
+@f285 fact
+  holds orders o284 c41
+
+@f286 fact
+  holds orders o285 c48
+
+@f287 fact
+  holds orders o286 c55
+
+@f288 fact
+  holds orders o287 c62
+
+@f289 fact
+  holds orders o288 c69
+
+@f290 fact
+  holds orders o289 c76
+
+@f291 fact
+  holds orders o290 c83
+
+@f292 fact
+  holds orders o291 c90
+
+@f293 fact
+  holds orders o292 c97
+
+@f294 fact
+  holds orders o293 c104
+
+@f295 fact
+  holds orders o294 c111
+
+@f296 fact
+  holds orders o295 c118
+
+@f297 fact
+  holds orders o296 c125
+
+@f298 fact
+  holds orders o297 c132
+
+@f299 fact
+  holds orders o298 c139
+
+@f300 fact
+  holds orders o299 c146
+
+@f301 fact
+  holds orders o300 c3
+
+@f302 fact
+  holds orders o301 c10
+
+@f303 fact
+  holds orders o302 c17
+
+@f304 fact
+  holds orders o303 c24
+
+@f305 fact
+  holds orders o304 c31
+
+@f306 fact
+  holds orders o305 c38
+
+@f307 fact
+  holds orders o306 c45
+
+@f308 fact
+  holds orders o307 c52
+
+@f309 fact
+  holds orders o308 c59
+
+@f310 fact
+  holds orders o309 c66
+
+@f311 fact
+  holds orders o310 c73
+
+@f312 fact
+  holds orders o311 c80
+
+@f313 fact
+  holds orders o312 c87
+
+@f314 fact
+  holds orders o313 c94
+
+@f315 fact
+  holds orders o314 c101
+
+@f316 fact
+  holds orders o315 c108
+
+@f317 fact
+  holds orders o316 c115
+
+@f318 fact
+  holds orders o317 c122
+
+@f319 fact
+  holds orders o318 c129
+
+@f320 fact
+  holds orders o319 c136
+
+@f321 fact
+  holds orders o320 c143
+
+@f322 fact
+  holds orders o321 c0
+
+@f323 fact
+  holds orders o322 c7
+
+@f324 fact
+  holds orders o323 c14
+
+@f325 fact
+  holds orders o324 c21
+
+@f326 fact
+  holds orders o325 c28
+
+@f327 fact
+  holds orders o326 c35
+
+@f328 fact
+  holds orders o327 c42
+
+@f329 fact
+  holds orders o328 c49
+
+@f330 fact
+  holds orders o329 c56
+
+@f331 fact
+  holds orders o330 c63
+
+@f332 fact
+  holds orders o331 c70
+
+@f333 fact
+  holds orders o332 c77
+
+@f334 fact
+  holds orders o333 c84
+
+@f335 fact
+  holds orders o334 c91
+
+@f336 fact
+  holds orders o335 c98
+
+@f337 fact
+  holds orders o336 c105
+
+@f338 fact
+  holds orders o337 c112
+
+@f339 fact
+  holds orders o338 c119
+
+@f340 fact
+  holds orders o339 c126
+
+@f341 fact
+  holds orders o340 c133
+
+@f342 fact
+  holds orders o341 c140
+
+@f343 fact
+  holds orders o342 c147
+
+@f344 fact
+  holds orders o343 c4
+
+@f345 fact
+  holds orders o344 c11
+
+@f346 fact
+  holds orders o345 c18
+
+@f347 fact
+  holds orders o346 c25
+
+@f348 fact
+  holds orders o347 c32
+
+@f349 fact
+  holds orders o348 c39
+
+@f350 fact
+  holds orders o349 c46
+
+@f351 fact
+  holds orders o350 c53
+
+@f352 fact
+  holds orders o351 c60
+
+@f353 fact
+  holds orders o352 c67
+
+@f354 fact
+  holds orders o353 c74
+
+@f355 fact
+  holds orders o354 c81
+
+@f356 fact
+  holds orders o355 c88
+
+@f357 fact
+  holds orders o356 c95
+
+@f358 fact
+  holds orders o357 c102
+
+@f359 fact
+  holds orders o358 c109
+
+@f360 fact
+  holds orders o359 c116
+
+@f361 fact
+  holds orders o360 c123
+
+@f362 fact
+  holds orders o361 c130
+
+@f363 fact
+  holds orders o362 c137
+
+@f364 fact
+  holds orders o363 c144
+
+@f365 fact
+  holds orders o364 c1
+
+@f366 fact
+  holds orders o365 c8
+
+@f367 fact
+  holds orders o366 c15
+
+@f368 fact
+  holds orders o367 c22
+
+@f369 fact
+  holds orders o368 c29
+
+@f370 fact
+  holds orders o369 c36
+
+@f371 fact
+  holds orders o370 c43
+
+@f372 fact
+  holds orders o371 c50
+
+@f373 fact
+  holds orders o372 c57
+
+@f374 fact
+  holds orders o373 c64
+
+@f375 fact
+  holds orders o374 c71
+
+@f376 fact
+  holds orders o375 c78
+
+@f377 fact
+  holds orders o376 c85
+
+@f378 fact
+  holds orders o377 c92
+
+@f379 fact
+  holds orders o378 c99
+
+@f380 fact
+  holds orders o379 c106
+
+@f381 fact
+  holds orders o380 c113
+
+@f382 fact
+  holds orders o381 c120
+
+@f383 fact
+  holds orders o382 c127
+
+@f384 fact
+  holds orders o383 c134
+
+@f385 fact
+  holds orders o384 c141
+
+@f386 fact
+  holds orders o385 c148
+
+@f387 fact
+  holds orders o386 c5
+
+@f388 fact
+  holds orders o387 c12
+
+@f389 fact
+  holds orders o388 c19
+
+@f390 fact
+  holds orders o389 c26
+
+@f391 fact
+  holds orders o390 c33
+
+@f392 fact
+  holds orders o391 c40
+
+@f393 fact
+  holds orders o392 c47
+
+@f394 fact
+  holds orders o393 c54
+
+@f395 fact
+  holds orders o394 c61
+
+@f396 fact
+  holds orders o395 c68
+
+@f397 fact
+  holds orders o396 c75
+
+@f398 fact
+  holds orders o397 c82
+
+@f399 fact
+  holds orders o398 c89
+
+@f400 fact
+  holds orders o399 c96
+
+@f401 fact
+  holds orders o400 c103
+
+@f402 fact
+  holds orders o401 c110
+
+@f403 fact
+  holds orders o402 c117
+
+@f404 fact
+  holds orders o403 c124
+
+@f405 fact
+  holds orders o404 c131
+
+@f406 fact
+  holds orders o405 c138
+
+@f407 fact
+  holds orders o406 c145
+
+@f408 fact
+  holds orders o407 c2
+
+@f409 fact
+  holds orders o408 c9
+
+@f410 fact
+  holds orders o409 c16
+
+@f411 fact
+  holds orders o410 c23
+
+@f412 fact
+  holds orders o411 c30
+
+@f413 fact
+  holds orders o412 c37
+
+@f414 fact
+  holds orders o413 c44
+
+@f415 fact
+  holds orders o414 c51
+
+@f416 fact
+  holds orders o415 c58
+
+@f417 fact
+  holds orders o416 c65
+
+@f418 fact
+  holds orders o417 c72
+
+@f419 fact
+  holds orders o418 c79
+
+@f420 fact
+  holds orders o419 c86
+
+@f421 fact
+  holds orders o420 c93
+
+@f422 fact
+  holds orders o421 c100
+
+@f423 fact
+  holds orders o422 c107
+
+@f424 fact
+  holds orders o423 c114
+
+@f425 fact
+  holds orders o424 c121
+
+@f426 fact
+  holds orders o425 c128
+
+@f427 fact
+  holds orders o426 c135
+
+@f428 fact
+  holds orders o427 c142
+
+@f429 fact
+  holds orders o428 c149
+
+@f430 fact
+  holds orders o429 c6
+
+@f431 fact
+  holds orders o430 c13
+
+@f432 fact
+  holds orders o431 c20
+
+@f433 fact
+  holds orders o432 c27
+
+@f434 fact
+  holds orders o433 c34
+
+@f435 fact
+  holds orders o434 c41
+
+@f436 fact
+  holds orders o435 c48
+
+@f437 fact
+  holds orders o436 c55
+
+@f438 fact
+  holds orders o437 c62
+
+@f439 fact
+  holds orders o438 c69
+
+@f440 fact
+  holds orders o439 c76
+
+@f441 fact
+  holds orders o440 c83
+
+@f442 fact
+  holds orders o441 c90
+
+@f443 fact
+  holds orders o442 c97
+
+@f444 fact
+  holds orders o443 c104
+
+@f445 fact
+  holds orders o444 c111
+
+@f446 fact
+  holds orders o445 c118
+
+@f447 fact
+  holds orders o446 c125
+
+@f448 fact
+  holds orders o447 c132
+
+@f449 fact
+  holds orders o448 c139
+
+@f450 fact
+  holds orders o449 c146
+
+@f451 fact
+  holds orders o450 c3
+
+@f452 fact
+  holds orders o451 c10
+
+@f453 fact
+  holds orders o452 c17
+
+@f454 fact
+  holds orders o453 c24
+
+@f455 fact
+  holds orders o454 c31
+
+@f456 fact
+  holds orders o455 c38
+
+@f457 fact
+  holds orders o456 c45
+
+@f458 fact
+  holds orders o457 c52
+
+@f459 fact
+  holds orders o458 c59
+
+@f460 fact
+  holds orders o459 c66
+
+@f461 fact
+  holds orders o460 c73
+
+@f462 fact
+  holds orders o461 c80
+
+@f463 fact
+  holds orders o462 c87
+
+@f464 fact
+  holds orders o463 c94
+
+@f465 fact
+  holds orders o464 c101
+
+@f466 fact
+  holds orders o465 c108
+
+@f467 fact
+  holds orders o466 c115
+
+@f468 fact
+  holds orders o467 c122
+
+@f469 fact
+  holds orders o468 c129
+
+@f470 fact
+  holds orders o469 c136
+
+@f471 fact
+  holds orders o470 c143
+
+@f472 fact
+  holds orders o471 c0
+
+@f473 fact
+  holds orders o472 c7
+
+@f474 fact
+  holds orders o473 c14
+
+@f475 fact
+  holds orders o474 c21
+
+@f476 fact
+  holds orders o475 c28
+
+@f477 fact
+  holds orders o476 c35
+
+@f478 fact
+  holds orders o477 c42
+
+@f479 fact
+  holds orders o478 c49
+
+@f480 fact
+  holds orders o479 c56
+
+@f481 fact
+  holds orders o480 c63
+
+@f482 fact
+  holds orders o481 c70
+
+@f483 fact
+  holds orders o482 c77
+
+@f484 fact
+  holds orders o483 c84
+
+@f485 fact
+  holds orders o484 c91
+
+@f486 fact
+  holds orders o485 c98
+
+@f487 fact
+  holds orders o486 c105
+
+@f488 fact
+  holds orders o487 c112
+
+@f489 fact
+  holds orders o488 c119
+
+@f490 fact
+  holds orders o489 c126
+
+@f491 fact
+  holds orders o490 c133
+
+@f492 fact
+  holds orders o491 c140
+
+@f493 fact
+  holds orders o492 c147
+
+@f494 fact
+  holds orders o493 c4
+
+@f495 fact
+  holds orders o494 c11
+
+@f496 fact
+  holds orders o495 c18
+
+@f497 fact
+  holds orders o496 c25
+
+@f498 fact
+  holds orders o497 c32
+
+@f499 fact
+  holds orders o498 c39
+
+@f500 fact
+  holds orders o499 c46
+
+@f501 fact
+  holds orders o500 c53
+
+@f502 fact
+  holds orders o501 c60
+
+@f503 fact
+  holds orders o502 c67
+
+@f504 fact
+  holds orders o503 c74
+
+@f505 fact
+  holds orders o504 c81
+
+@f506 fact
+  holds orders o505 c88
+
+@f507 fact
+  holds orders o506 c95
+
+@f508 fact
+  holds orders o507 c102
+
+@f509 fact
+  holds orders o508 c109
+
+@f510 fact
+  holds orders o509 c116
+
+@f511 fact
+  holds orders o510 c123
+
+@f512 fact
+  holds orders o511 c130
+
+@f513 fact
+  holds orders o512 c137
+
+@f514 fact
+  holds orders o513 c144
+
+@f515 fact
+  holds orders o514 c1
+
+@f516 fact
+  holds orders o515 c8
+
+@f517 fact
+  holds orders o516 c15
+
+@f518 fact
+  holds orders o517 c22
+
+@f519 fact
+  holds orders o518 c29
+
+@f520 fact
+  holds orders o519 c36
+
+@f521 fact
+  holds orders o520 c43
+
+@f522 fact
+  holds orders o521 c50
+
+@f523 fact
+  holds orders o522 c57
+
+@f524 fact
+  holds orders o523 c64
+
+@f525 fact
+  holds orders o524 c71
+
+@f526 fact
+  holds orders o525 c78
+
+@f527 fact
+  holds orders o526 c85
+
+@f528 fact
+  holds orders o527 c92
+
+@f529 fact
+  holds orders o528 c99
+
+@f530 fact
+  holds orders o529 c106
+
+@f531 fact
+  holds orders o530 c113
+
+@f532 fact
+  holds orders o531 c120
+
+@f533 fact
+  holds orders o532 c127
+
+@f534 fact
+  holds orders o533 c134
+
+@f535 fact
+  holds orders o534 c141
+
+@f536 fact
+  holds orders o535 c148
+
+@f537 fact
+  holds orders o536 c5
+
+@f538 fact
+  holds orders o537 c12
+
+@f539 fact
+  holds orders o538 c19
+
+@f540 fact
+  holds orders o539 c26
+
+@f541 fact
+  holds orders o540 c33
+
+@f542 fact
+  holds orders o541 c40
+
+@f543 fact
+  holds orders o542 c47
+
+@f544 fact
+  holds orders o543 c54
+
+@f545 fact
+  holds orders o544 c61
+
+@f546 fact
+  holds orders o545 c68
+
+@f547 fact
+  holds orders o546 c75
+
+@f548 fact
+  holds orders o547 c82
+
+@f549 fact
+  holds orders o548 c89
+
+@f550 fact
+  holds orders o549 c96
+
+@f551 fact
+  holds orders o550 c103
+
+@f552 fact
+  holds orders o551 c110
+
+@f553 fact
+  holds orders o552 c117
+
+@f554 fact
+  holds orders o553 c124
+
+@f555 fact
+  holds orders o554 c131
+
+@f556 fact
+  holds orders o555 c138
+
+@f557 fact
+  holds orders o556 c145
+
+@f558 fact
+  holds orders o557 c2
+
+@f559 fact
+  holds orders o558 c9
+
+@f560 fact
+  holds orders o559 c16
+
+@f561 fact
+  holds orders o560 c23
+
+@f562 fact
+  holds orders o561 c30
+
+@f563 fact
+  holds orders o562 c37
+
+@f564 fact
+  holds orders o563 c44
+
+@f565 fact
+  holds orders o564 c51
+
+@f566 fact
+  holds orders o565 c58
+
+@f567 fact
+  holds orders o566 c65
+
+@f568 fact
+  holds orders o567 c72
+
+@f569 fact
+  holds orders o568 c79
+
+@f570 fact
+  holds orders o569 c86
+
+@f571 fact
+  holds orders o570 c93
+
+@f572 fact
+  holds orders o571 c100
+
+@f573 fact
+  holds orders o572 c107
+
+@f574 fact
+  holds orders o573 c114
+
+@f575 fact
+  holds orders o574 c121
+
+@f576 fact
+  holds orders o575 c128
+
+@f577 fact
+  holds orders o576 c135
+
+@f578 fact
+  holds orders o577 c142
+
+@f579 fact
+  holds orders o578 c149
+
+@f580 fact
+  holds orders o579 c6
+
+@f581 fact
+  holds orders o580 c13
+
+@f582 fact
+  holds orders o581 c20
+
+@f583 fact
+  holds orders o582 c27
+
+@f584 fact
+  holds orders o583 c34
+
+@f585 fact
+  holds orders o584 c41
+
+@f586 fact
+  holds orders o585 c48
+
+@f587 fact
+  holds orders o586 c55
+
+@f588 fact
+  holds orders o587 c62
+
+@f589 fact
+  holds orders o588 c69
+
+@f590 fact
+  holds orders o589 c76
+
+@f591 fact
+  holds orders o590 c83
+
+@f592 fact
+  holds orders o591 c90
+
+@f593 fact
+  holds orders o592 c97
+
+@f594 fact
+  holds orders o593 c104
+
+@f595 fact
+  holds orders o594 c111
+
+@f596 fact
+  holds orders o595 c118
+
+@f597 fact
+  holds orders o596 c125
+
+@f598 fact
+  holds orders o597 c132
+
+@f599 fact
+  holds orders o598 c139
+
+@f600 fact
+  holds orders o599 c146
+
+@f601 fact
+  holds orders o600 c3
+
+@f602 fact
+  holds orders o601 c10
+
+@f603 fact
+  holds orders o602 c17
+
+@f604 fact
+  holds orders o603 c24
+
+@f605 fact
+  holds orders o604 c31
+
+@f606 fact
+  holds orders o605 c38
+
+@f607 fact
+  holds orders o606 c45
+
+@f608 fact
+  holds orders o607 c52
+
+@f609 fact
+  holds orders o608 c59
+
+@f610 fact
+  holds orders o609 c66
+
+@f611 fact
+  holds orders o610 c73
+
+@f612 fact
+  holds orders o611 c80
+
+@f613 fact
+  holds orders o612 c87
+
+@f614 fact
+  holds orders o613 c94
+
+@f615 fact
+  holds orders o614 c101
+
+@f616 fact
+  holds orders o615 c108
+
+@f617 fact
+  holds orders o616 c115
+
+@f618 fact
+  holds orders o617 c122
+
+@f619 fact
+  holds orders o618 c129
+
+@f620 fact
+  holds orders o619 c136
+
+@f621 fact
+  holds orders o620 c143
+
+@f622 fact
+  holds orders o621 c0
+
+@f623 fact
+  holds orders o622 c7
+
+@f624 fact
+  holds orders o623 c14
+
+@f625 fact
+  holds orders o624 c21
+
+@f626 fact
+  holds orders o625 c28
+
+@f627 fact
+  holds orders o626 c35
+
+@f628 fact
+  holds orders o627 c42
+
+@f629 fact
+  holds orders o628 c49
+
+@f630 fact
+  holds orders o629 c56
+
+@f631 fact
+  holds orders o630 c63
+
+@f632 fact
+  holds orders o631 c70
+
+@f633 fact
+  holds orders o632 c77
+
+@f634 fact
+  holds orders o633 c84
+
+@f635 fact
+  holds orders o634 c91
+
+@f636 fact
+  holds orders o635 c98
+
+@f637 fact
+  holds orders o636 c105
+
+@f638 fact
+  holds orders o637 c112
+
+@f639 fact
+  holds orders o638 c119
+
+@f640 fact
+  holds orders o639 c126
+
+@f641 fact
+  holds orders o640 c133
+
+@f642 fact
+  holds orders o641 c140
+
+@f643 fact
+  holds orders o642 c147
+
+@f644 fact
+  holds orders o643 c4
+
+@f645 fact
+  holds orders o644 c11
+
+@f646 fact
+  holds orders o645 c18
+
+@f647 fact
+  holds orders o646 c25
+
+@f648 fact
+  holds orders o647 c32
+
+@f649 fact
+  holds orders o648 c39
+
+@f650 fact
+  holds orders o649 c46
+
+@f651 fact
+  holds orders o650 c53
+
+@f652 fact
+  holds orders o651 c60
+
+@f653 fact
+  holds orders o652 c67
+
+@f654 fact
+  holds orders o653 c74
+
+@f655 fact
+  holds orders o654 c81
+
+@f656 fact
+  holds orders o655 c88
+
+@f657 fact
+  holds orders o656 c95
+
+@f658 fact
+  holds orders o657 c102
+
+@f659 fact
+  holds orders o658 c109
+
+@f660 fact
+  holds orders o659 c116
+
+@f661 fact
+  holds orders o660 c123
+
+@f662 fact
+  holds orders o661 c130
+
+@f663 fact
+  holds orders o662 c137
+
+@f664 fact
+  holds orders o663 c144
+
+@f665 fact
+  holds orders o664 c1
+
+@f666 fact
+  holds orders o665 c8
+
+@f667 fact
+  holds orders o666 c15
+
+@f668 fact
+  holds orders o667 c22
+
+@f669 fact
+  holds orders o668 c29
+
+@f670 fact
+  holds orders o669 c36
+
+@f671 fact
+  holds orders o670 c43
+
+@f672 fact
+  holds orders o671 c50
+
+@f673 fact
+  holds orders o672 c57
+
+@f674 fact
+  holds orders o673 c64
+
+@f675 fact
+  holds orders o674 c71
+
+@f676 fact
+  holds orders o675 c78
+
+@f677 fact
+  holds orders o676 c85
+
+@f678 fact
+  holds orders o677 c92
+
+@f679 fact
+  holds orders o678 c99
+
+@f680 fact
+  holds orders o679 c106
+
+@f681 fact
+  holds orders o680 c113
+
+@f682 fact
+  holds orders o681 c120
+
+@f683 fact
+  holds orders o682 c127
+
+@f684 fact
+  holds orders o683 c134
+
+@f685 fact
+  holds orders o684 c141
+
+@f686 fact
+  holds orders o685 c148
+
+@f687 fact
+  holds orders o686 c5
+
+@f688 fact
+  holds orders o687 c12
+
+@f689 fact
+  holds orders o688 c19
+
+@f690 fact
+  holds orders o689 c26
+
+@f691 fact
+  holds orders o690 c33
+
+@f692 fact
+  holds orders o691 c40
+
+@f693 fact
+  holds orders o692 c47
+
+@f694 fact
+  holds orders o693 c54
+
+@f695 fact
+  holds orders o694 c61
+
+@f696 fact
+  holds orders o695 c68
+
+@f697 fact
+  holds orders o696 c75
+
+@f698 fact
+  holds orders o697 c82
+
+@f699 fact
+  holds orders o698 c89
+
+@f700 fact
+  holds orders o699 c96
+
+@f701 fact
+  holds orders o700 c103
+
+@f702 fact
+  holds orders o701 c110
+
+@f703 fact
+  holds orders o702 c117
+
+@f704 fact
+  holds orders o703 c124
+
+@f705 fact
+  holds orders o704 c131
+
+@f706 fact
+  holds orders o705 c138
+
+@f707 fact
+  holds orders o706 c145
+
+@f708 fact
+  holds orders o707 c2
+
+@f709 fact
+  holds orders o708 c9
+
+@f710 fact
+  holds orders o709 c16
+
+@f711 fact
+  holds orders o710 c23
+
+@f712 fact
+  holds orders o711 c30
+
+@f713 fact
+  holds orders o712 c37
+
+@f714 fact
+  holds orders o713 c44
+
+@f715 fact
+  holds orders o714 c51
+
+@f716 fact
+  holds orders o715 c58
+
+@f717 fact
+  holds orders o716 c65
+
+@f718 fact
+  holds orders o717 c72
+
+@f719 fact
+  holds orders o718 c79
+
+@f720 fact
+  holds orders o719 c86
+
+@f721 fact
+  holds orders o720 c93
+
+@f722 fact
+  holds orders o721 c100
+
+@f723 fact
+  holds orders o722 c107
+
+@f724 fact
+  holds orders o723 c114
+
+@f725 fact
+  holds orders o724 c121
+
+@f726 fact
+  holds orders o725 c128
+
+@f727 fact
+  holds orders o726 c135
+
+@f728 fact
+  holds orders o727 c142
+
+@f729 fact
+  holds orders o728 c149
+
+@f730 fact
+  holds orders o729 c6
+
+@f731 fact
+  holds orders o730 c13
+
+@f732 fact
+  holds orders o731 c20
+
+@f733 fact
+  holds orders o732 c27
+
+@f734 fact
+  holds orders o733 c34
+
+@f735 fact
+  holds orders o734 c41
+
+@f736 fact
+  holds orders o735 c48
+
+@f737 fact
+  holds orders o736 c55
+
+@f738 fact
+  holds orders o737 c62
+
+@f739 fact
+  holds orders o738 c69
+
+@f740 fact
+  holds orders o739 c76
+
+@f741 fact
+  holds orders o740 c83
+
+@f742 fact
+  holds orders o741 c90
+
+@f743 fact
+  holds orders o742 c97
+
+@f744 fact
+  holds orders o743 c104
+
+@f745 fact
+  holds orders o744 c111
+
+@f746 fact
+  holds orders o745 c118
+
+@f747 fact
+  holds orders o746 c125
+
+@f748 fact
+  holds orders o747 c132
+
+@f749 fact
+  holds orders o748 c139
+
+@f750 fact
+  holds orders o749 c146
+
+@f751 fact
+  holds orders o750 c3
+
+@f752 fact
+  holds orders o751 c10
+
+@f753 fact
+  holds orders o752 c17
+
+@f754 fact
+  holds orders o753 c24
+
+@f755 fact
+  holds orders o754 c31
+
+@f756 fact
+  holds orders o755 c38
+
+@f757 fact
+  holds orders o756 c45
+
+@f758 fact
+  holds orders o757 c52
+
+@f759 fact
+  holds orders o758 c59
+
+@f760 fact
+  holds orders o759 c66
+
+@f761 fact
+  holds orders o760 c73
+
+@f762 fact
+  holds orders o761 c80
+
+@f763 fact
+  holds orders o762 c87
+
+@f764 fact
+  holds orders o763 c94
+
+@f765 fact
+  holds orders o764 c101
+
+@f766 fact
+  holds orders o765 c108
+
+@f767 fact
+  holds orders o766 c115
+
+@f768 fact
+  holds orders o767 c122
+
+@f769 fact
+  holds orders o768 c129
+
+@f770 fact
+  holds orders o769 c136
+
+@f771 fact
+  holds orders o770 c143
+
+@f772 fact
+  holds orders o771 c0
+
+@f773 fact
+  holds orders o772 c7
+
+@f774 fact
+  holds orders o773 c14
+
+@f775 fact
+  holds orders o774 c21
+
+@f776 fact
+  holds orders o775 c28
+
+@f777 fact
+  holds orders o776 c35
+
+@f778 fact
+  holds orders o777 c42
+
+@f779 fact
+  holds orders o778 c49
+
+@f780 fact
+  holds orders o779 c56
+
+@f781 fact
+  holds orders o780 c63
+
+@f782 fact
+  holds orders o781 c70
+
+@f783 fact
+  holds orders o782 c77
+
+@f784 fact
+  holds orders o783 c84
+
+@f785 fact
+  holds orders o784 c91
+
+@f786 fact
+  holds orders o785 c98
+
+@f787 fact
+  holds orders o786 c105
+
+@f788 fact
+  holds orders o787 c112
+
+@f789 fact
+  holds orders o788 c119
+
+@f790 fact
+  holds orders o789 c126
+
+@f791 fact
+  holds orders o790 c133
+
+@f792 fact
+  holds orders o791 c140
+
+@f793 fact
+  holds orders o792 c147
+
+@f794 fact
+  holds orders o793 c4
+
+@f795 fact
+  holds orders o794 c11
+
+@f796 fact
+  holds orders o795 c18
+
+@f797 fact
+  holds orders o796 c25
+
+@f798 fact
+  holds orders o797 c32
+
+@f799 fact
+  holds orders o798 c39
+
+@f800 fact
+  holds orders o799 c46
+
+@f801 fact
+  holds orders o800 c53
+
+@f802 fact
+  holds orders o801 c60
+
+@f803 fact
+  holds orders o802 c67
+
+@f804 fact
+  holds orders o803 c74
+
+@f805 fact
+  holds orders o804 c81
+
+@f806 fact
+  holds orders o805 c88
+
+@f807 fact
+  holds orders o806 c95
+
+@f808 fact
+  holds orders o807 c102
+
+@f809 fact
+  holds orders o808 c109
+
+@f810 fact
+  holds orders o809 c116
+
+@f811 fact
+  holds orders o810 c123
+
+@f812 fact
+  holds orders o811 c130
+
+@f813 fact
+  holds orders o812 c137
+
+@f814 fact
+  holds orders o813 c144
+
+@f815 fact
+  holds orders o814 c1
+
+@f816 fact
+  holds orders o815 c8
+
+@f817 fact
+  holds orders o816 c15
+
+@f818 fact
+  holds orders o817 c22
+
+@f819 fact
+  holds orders o818 c29
+
+@f820 fact
+  holds orders o819 c36
+
+@f821 fact
+  holds orders o820 c43
+
+@f822 fact
+  holds orders o821 c50
+
+@f823 fact
+  holds orders o822 c57
+
+@f824 fact
+  holds orders o823 c64
+
+@f825 fact
+  holds orders o824 c71
+
+@f826 fact
+  holds orders o825 c78
+
+@f827 fact
+  holds orders o826 c85
+
+@f828 fact
+  holds orders o827 c92
+
+@f829 fact
+  holds orders o828 c99
+
+@f830 fact
+  holds orders o829 c106
+
+@f831 fact
+  holds orders o830 c113
+
+@f832 fact
+  holds orders o831 c120
+
+@f833 fact
+  holds orders o832 c127
+
+@f834 fact
+  holds orders o833 c134
+
+@f835 fact
+  holds orders o834 c141
+
+@f836 fact
+  holds orders o835 c148
+
+@f837 fact
+  holds orders o836 c5
+
+@f838 fact
+  holds orders o837 c12
+
+@f839 fact
+  holds orders o838 c19
+
+@f840 fact
+  holds orders o839 c26
+
+@f841 fact
+  holds orders o840 c33
+
+@f842 fact
+  holds orders o841 c40
+
+@f843 fact
+  holds orders o842 c47
+
+@f844 fact
+  holds orders o843 c54
+
+@f845 fact
+  holds orders o844 c61
+
+@f846 fact
+  holds orders o845 c68
+
+@f847 fact
+  holds orders o846 c75
+
+@f848 fact
+  holds orders o847 c82
+
+@f849 fact
+  holds orders o848 c89
+
+@f850 fact
+  holds orders o849 c96
+
+@f851 fact
+  holds orders o850 c103
+
+@f852 fact
+  holds orders o851 c110
+
+@f853 fact
+  holds orders o852 c117
+
+@f854 fact
+  holds orders o853 c124
+
+@f855 fact
+  holds orders o854 c131
+
+@f856 fact
+  holds orders o855 c138
+
+@f857 fact
+  holds orders o856 c145
+
+@f858 fact
+  holds orders o857 c2
+
+@f859 fact
+  holds orders o858 c9
+
+@f860 fact
+  holds orders o859 c16
+
+@f861 fact
+  holds orders o860 c23
+
+@f862 fact
+  holds orders o861 c30
+
+@f863 fact
+  holds orders o862 c37
+
+@f864 fact
+  holds orders o863 c44
+
+@f865 fact
+  holds orders o864 c51
+
+@f866 fact
+  holds orders o865 c58
+
+@f867 fact
+  holds orders o866 c65
+
+@f868 fact
+  holds orders o867 c72
+
+@f869 fact
+  holds orders o868 c79
+
+@f870 fact
+  holds orders o869 c86
+
+@f871 fact
+  holds orders o870 c93
+
+@f872 fact
+  holds orders o871 c100
+
+@f873 fact
+  holds orders o872 c107
+
+@f874 fact
+  holds orders o873 c114
+
+@f875 fact
+  holds orders o874 c121
+
+@f876 fact
+  holds orders o875 c128
+
+@f877 fact
+  holds orders o876 c135
+
+@f878 fact
+  holds orders o877 c142
+
+@f879 fact
+  holds orders o878 c149
+
+@f880 fact
+  holds orders o879 c6
+
+@f881 fact
+  holds orders o880 c13
+
+@f882 fact
+  holds orders o881 c20
+
+@f883 fact
+  holds orders o882 c27
+
+@f884 fact
+  holds orders o883 c34
+
+@f885 fact
+  holds orders o884 c41
+
+@f886 fact
+  holds orders o885 c48
+
+@f887 fact
+  holds orders o886 c55
+
+@f888 fact
+  holds orders o887 c62
+
+@f889 fact
+  holds orders o888 c69
+
+@f890 fact
+  holds orders o889 c76
+
+@f891 fact
+  holds orders o890 c83
+
+@f892 fact
+  holds orders o891 c90
+
+@f893 fact
+  holds orders o892 c97
+
+@f894 fact
+  holds orders o893 c104
+
+@f895 fact
+  holds orders o894 c111
+
+@f896 fact
+  holds orders o895 c118
+
+@f897 fact
+  holds orders o896 c125
+
+@f898 fact
+  holds orders o897 c132
+
+@f899 fact
+  holds orders o898 c139
+
+@f900 fact
+  holds orders o899 c146
+
+@f901 fact
+  holds orders o900 c3
+
+@f902 fact
+  holds orders o901 c10
+
+@f903 fact
+  holds orders o902 c17
+
+@f904 fact
+  holds orders o903 c24
+
+@f905 fact
+  holds orders o904 c31
+
+@f906 fact
+  holds orders o905 c38
+
+@f907 fact
+  holds orders o906 c45
+
+@f908 fact
+  holds orders o907 c52
+
+@f909 fact
+  holds orders o908 c59
+
+@f910 fact
+  holds orders o909 c66
+
+@f911 fact
+  holds orders o910 c73
+
+@f912 fact
+  holds orders o911 c80
+
+@f913 fact
+  holds orders o912 c87
+
+@f914 fact
+  holds orders o913 c94
+
+@f915 fact
+  holds orders o914 c101
+
+@f916 fact
+  holds orders o915 c108
+
+@f917 fact
+  holds orders o916 c115
+
+@f918 fact
+  holds orders o917 c122
+
+@f919 fact
+  holds orders o918 c129
+
+@f920 fact
+  holds orders o919 c136
+
+@f921 fact
+  holds orders o920 c143
+
+@f922 fact
+  holds orders o921 c0
+
+@f923 fact
+  holds orders o922 c7
+
+@f924 fact
+  holds orders o923 c14
+
+@f925 fact
+  holds orders o924 c21
+
+@f926 fact
+  holds orders o925 c28
+
+@f927 fact
+  holds orders o926 c35
+
+@f928 fact
+  holds orders o927 c42
+
+@f929 fact
+  holds orders o928 c49
+
+@f930 fact
+  holds orders o929 c56
+
+@f931 fact
+  holds orders o930 c63
+
+@f932 fact
+  holds orders o931 c70
+
+@f933 fact
+  holds orders o932 c77
+
+@f934 fact
+  holds orders o933 c84
+
+@f935 fact
+  holds orders o934 c91
+
+@f936 fact
+  holds orders o935 c98
+
+@f937 fact
+  holds orders o936 c105
+
+@f938 fact
+  holds orders o937 c112
+
+@f939 fact
+  holds orders o938 c119
+
+@f940 fact
+  holds orders o939 c126
+
+@f941 fact
+  holds orders o940 c133
+
+@f942 fact
+  holds orders o941 c140
+
+@f943 fact
+  holds orders o942 c147
+
+@f944 fact
+  holds orders o943 c4
+
+@f945 fact
+  holds orders o944 c11
+
+@f946 fact
+  holds orders o945 c18
+
+@f947 fact
+  holds orders o946 c25
+
+@f948 fact
+  holds orders o947 c32
+
+@f949 fact
+  holds orders o948 c39
+
+@f950 fact
+  holds orders o949 c46
+
+@f951 fact
+  holds orders o950 c53
+
+@f952 fact
+  holds orders o951 c60
+
+@f953 fact
+  holds orders o952 c67
+
+@f954 fact
+  holds orders o953 c74
+
+@f955 fact
+  holds orders o954 c81
+
+@f956 fact
+  holds orders o955 c88
+
+@f957 fact
+  holds orders o956 c95
+
+@f958 fact
+  holds orders o957 c102
+
+@f959 fact
+  holds orders o958 c109
+
+@f960 fact
+  holds orders o959 c116
+
+@f961 fact
+  holds orders o960 c123
+
+@f962 fact
+  holds orders o961 c130
+
+@f963 fact
+  holds orders o962 c137
+
+@f964 fact
+  holds orders o963 c144
+
+@f965 fact
+  holds orders o964 c1
+
+@f966 fact
+  holds orders o965 c8
+
+@f967 fact
+  holds orders o966 c15
+
+@f968 fact
+  holds orders o967 c22
+
+@f969 fact
+  holds orders o968 c29
+
+@f970 fact
+  holds orders o969 c36
+
+@f971 fact
+  holds orders o970 c43
+
+@f972 fact
+  holds orders o971 c50
+
+@f973 fact
+  holds orders o972 c57
+
+@f974 fact
+  holds orders o973 c64
+
+@f975 fact
+  holds orders o974 c71
+
+@f976 fact
+  holds orders o975 c78
+
+@f977 fact
+  holds orders o976 c85
+
+@f978 fact
+  holds orders o977 c92
+
+@f979 fact
+  holds orders o978 c99
+
+@f980 fact
+  holds orders o979 c106
+
+@f981 fact
+  holds orders o980 c113
+
+@f982 fact
+  holds orders o981 c120
+
+@f983 fact
+  holds orders o982 c127
+
+@f984 fact
+  holds orders o983 c134
+
+@f985 fact
+  holds orders o984 c141
+
+@f986 fact
+  holds orders o985 c148
+
+@f987 fact
+  holds orders o986 c5
+
+@f988 fact
+  holds orders o987 c12
+
+@f989 fact
+  holds orders o988 c19
+
+@f990 fact
+  holds orders o989 c26
+
+@f991 fact
+  holds orders o990 c33
+
+@f992 fact
+  holds orders o991 c40
+
+@f993 fact
+  holds orders o992 c47
+
+@f994 fact
+  holds orders o993 c54
+
+@f995 fact
+  holds orders o994 c61
+
+@f996 fact
+  holds orders o995 c68
+
+@f997 fact
+  holds orders o996 c75
+
+@f998 fact
+  holds orders o997 c82
+
+@f999 fact
+  holds orders o998 c89
+
+@f1000 fact
+  holds orders o999 c96
+
+@f1001 fact
+  holds orders o1000 c103
+
+@f1002 fact
+  holds orders o1001 c110
+
+@f1003 fact
+  holds orders o1002 c117
+
+@f1004 fact
+  holds orders o1003 c124
+
+@f1005 fact
+  holds orders o1004 c131
+
+@f1006 fact
+  holds orders o1005 c138
+
+@f1007 fact
+  holds orders o1006 c145
+
+@f1008 fact
+  holds orders o1007 c2
+
+@f1009 fact
+  holds orders o1008 c9
+
+@f1010 fact
+  holds orders o1009 c16
+
+@f1011 fact
+  holds orders o1010 c23
+
+@f1012 fact
+  holds orders o1011 c30
+
+@f1013 fact
+  holds orders o1012 c37
+
+@f1014 fact
+  holds orders o1013 c44
+
+@f1015 fact
+  holds orders o1014 c51
+
+@f1016 fact
+  holds orders o1015 c58
+
+@f1017 fact
+  holds orders o1016 c65
+
+@f1018 fact
+  holds orders o1017 c72
+
+@f1019 fact
+  holds orders o1018 c79
+
+@f1020 fact
+  holds orders o1019 c86
+
+@f1021 fact
+  holds orders o1020 c93
+
+@f1022 fact
+  holds orders o1021 c100
+
+@f1023 fact
+  holds orders o1022 c107
+
+@f1024 fact
+  holds orders o1023 c114
+
+@f1025 fact
+  holds orders o1024 c121
+
+@f1026 fact
+  holds orders o1025 c128
+
+@f1027 fact
+  holds orders o1026 c135
+
+@f1028 fact
+  holds orders o1027 c142
+
+@f1029 fact
+  holds orders o1028 c149
+
+@f1030 fact
+  holds orders o1029 c6
+
+@f1031 fact
+  holds orders o1030 c13
+
+@f1032 fact
+  holds orders o1031 c20
+
+@f1033 fact
+  holds orders o1032 c27
+
+@f1034 fact
+  holds orders o1033 c34
+
+@f1035 fact
+  holds orders o1034 c41
+
+@f1036 fact
+  holds orders o1035 c48
+
+@f1037 fact
+  holds orders o1036 c55
+
+@f1038 fact
+  holds orders o1037 c62
+
+@f1039 fact
+  holds orders o1038 c69
+
+@f1040 fact
+  holds orders o1039 c76
+
+@f1041 fact
+  holds orders o1040 c83
+
+@f1042 fact
+  holds orders o1041 c90
+
+@f1043 fact
+  holds orders o1042 c97
+
+@f1044 fact
+  holds orders o1043 c104
+
+@f1045 fact
+  holds orders o1044 c111
+
+@f1046 fact
+  holds orders o1045 c118
+
+@f1047 fact
+  holds orders o1046 c125
+
+@f1048 fact
+  holds orders o1047 c132
+
+@f1049 fact
+  holds orders o1048 c139
+
+@f1050 fact
+  holds orders o1049 c146
+
+@f1051 fact
+  holds orders o1050 c3
+
+@f1052 fact
+  holds orders o1051 c10
+
+@f1053 fact
+  holds orders o1052 c17
+
+@f1054 fact
+  holds orders o1053 c24
+
+@f1055 fact
+  holds orders o1054 c31
+
+@f1056 fact
+  holds orders o1055 c38
+
+@f1057 fact
+  holds orders o1056 c45
+
+@f1058 fact
+  holds orders o1057 c52
+
+@f1059 fact
+  holds orders o1058 c59
+
+@f1060 fact
+  holds orders o1059 c66
+
+@f1061 fact
+  holds orders o1060 c73
+
+@f1062 fact
+  holds orders o1061 c80
+
+@f1063 fact
+  holds orders o1062 c87
+
+@f1064 fact
+  holds orders o1063 c94
+
+@f1065 fact
+  holds orders o1064 c101
+
+@f1066 fact
+  holds orders o1065 c108
+
+@f1067 fact
+  holds orders o1066 c115
+
+@f1068 fact
+  holds orders o1067 c122
+
+@f1069 fact
+  holds orders o1068 c129
+
+@f1070 fact
+  holds orders o1069 c136
+
+@f1071 fact
+  holds orders o1070 c143
+
+@f1072 fact
+  holds orders o1071 c0
+
+@f1073 fact
+  holds orders o1072 c7
+
+@f1074 fact
+  holds orders o1073 c14
+
+@f1075 fact
+  holds orders o1074 c21
+
+@f1076 fact
+  holds orders o1075 c28
+
+@f1077 fact
+  holds orders o1076 c35
+
+@f1078 fact
+  holds orders o1077 c42
+
+@f1079 fact
+  holds orders o1078 c49
+
+@f1080 fact
+  holds orders o1079 c56
+
+@f1081 fact
+  holds orders o1080 c63
+
+@f1082 fact
+  holds orders o1081 c70
+
+@f1083 fact
+  holds orders o1082 c77
+
+@f1084 fact
+  holds orders o1083 c84
+
+@f1085 fact
+  holds orders o1084 c91
+
+@f1086 fact
+  holds orders o1085 c98
+
+@f1087 fact
+  holds orders o1086 c105
+
+@f1088 fact
+  holds orders o1087 c112
+
+@f1089 fact
+  holds orders o1088 c119
+
+@f1090 fact
+  holds orders o1089 c126
+
+@f1091 fact
+  holds orders o1090 c133
+
+@f1092 fact
+  holds orders o1091 c140
+
+@f1093 fact
+  holds orders o1092 c147
+
+@f1094 fact
+  holds orders o1093 c4
+
+@f1095 fact
+  holds orders o1094 c11
+
+@f1096 fact
+  holds orders o1095 c18
+
+@f1097 fact
+  holds orders o1096 c25
+
+@f1098 fact
+  holds orders o1097 c32
+
+@f1099 fact
+  holds orders o1098 c39
+
+@f1100 fact
+  holds orders o1099 c46
+
+@f1101 fact
+  holds orders o1100 c53
+
+@f1102 fact
+  holds orders o1101 c60
+
+@f1103 fact
+  holds orders o1102 c67
+
+@f1104 fact
+  holds orders o1103 c74
+
+@f1105 fact
+  holds orders o1104 c81
+
+@f1106 fact
+  holds orders o1105 c88
+
+@f1107 fact
+  holds orders o1106 c95
+
+@f1108 fact
+  holds orders o1107 c102
+
+@f1109 fact
+  holds orders o1108 c109
+
+@f1110 fact
+  holds orders o1109 c116
+
+@f1111 fact
+  holds orders o1110 c123
+
+@f1112 fact
+  holds orders o1111 c130
+
+@f1113 fact
+  holds orders o1112 c137
+
+@f1114 fact
+  holds orders o1113 c144
+
+@f1115 fact
+  holds orders o1114 c1
+
+@f1116 fact
+  holds orders o1115 c8
+
+@f1117 fact
+  holds orders o1116 c15
+
+@f1118 fact
+  holds orders o1117 c22
+
+@f1119 fact
+  holds orders o1118 c29
+
+@f1120 fact
+  holds orders o1119 c36
+
+@f1121 fact
+  holds orders o1120 c43
+
+@f1122 fact
+  holds orders o1121 c50
+
+@f1123 fact
+  holds orders o1122 c57
+
+@f1124 fact
+  holds orders o1123 c64
+
+@f1125 fact
+  holds orders o1124 c71
+
+@f1126 fact
+  holds orders o1125 c78
+
+@f1127 fact
+  holds orders o1126 c85
+
+@f1128 fact
+  holds orders o1127 c92
+
+@f1129 fact
+  holds orders o1128 c99
+
+@f1130 fact
+  holds orders o1129 c106
+
+@f1131 fact
+  holds orders o1130 c113
+
+@f1132 fact
+  holds orders o1131 c120
+
+@f1133 fact
+  holds orders o1132 c127
+
+@f1134 fact
+  holds orders o1133 c134
+
+@f1135 fact
+  holds orders o1134 c141
+
+@f1136 fact
+  holds orders o1135 c148
+
+@f1137 fact
+  holds orders o1136 c5
+
+@f1138 fact
+  holds orders o1137 c12
+
+@f1139 fact
+  holds orders o1138 c19
+
+@f1140 fact
+  holds orders o1139 c26
+
+@f1141 fact
+  holds orders o1140 c33
+
+@f1142 fact
+  holds orders o1141 c40
+
+@f1143 fact
+  holds orders o1142 c47
+
+@f1144 fact
+  holds orders o1143 c54
+
+@f1145 fact
+  holds orders o1144 c61
+
+@f1146 fact
+  holds orders o1145 c68
+
+@f1147 fact
+  holds orders o1146 c75
+
+@f1148 fact
+  holds orders o1147 c82
+
+@f1149 fact
+  holds orders o1148 c89
+
+@f1150 fact
+  holds orders o1149 c96
+
+@f1151 fact
+  holds orders o1150 c103
+
+@f1152 fact
+  holds orders o1151 c110
+
+@f1153 fact
+  holds orders o1152 c117
+
+@f1154 fact
+  holds orders o1153 c124
+
+@f1155 fact
+  holds orders o1154 c131
+
+@f1156 fact
+  holds orders o1155 c138
+
+@f1157 fact
+  holds orders o1156 c145
+
+@f1158 fact
+  holds orders o1157 c2
+
+@f1159 fact
+  holds orders o1158 c9
+
+@f1160 fact
+  holds orders o1159 c16
+
+@f1161 fact
+  holds orders o1160 c23
+
+@f1162 fact
+  holds orders o1161 c30
+
+@f1163 fact
+  holds orders o1162 c37
+
+@f1164 fact
+  holds orders o1163 c44
+
+@f1165 fact
+  holds orders o1164 c51
+
+@f1166 fact
+  holds orders o1165 c58
+
+@f1167 fact
+  holds orders o1166 c65
+
+@f1168 fact
+  holds orders o1167 c72
+
+@f1169 fact
+  holds orders o1168 c79
+
+@f1170 fact
+  holds orders o1169 c86
+
+@f1171 fact
+  holds orders o1170 c93
+
+@f1172 fact
+  holds orders o1171 c100
+
+@f1173 fact
+  holds orders o1172 c107
+
+@f1174 fact
+  holds orders o1173 c114
+
+@f1175 fact
+  holds orders o1174 c121
+
+@f1176 fact
+  holds orders o1175 c128
+
+@f1177 fact
+  holds orders o1176 c135
+
+@f1178 fact
+  holds orders o1177 c142
+
+@f1179 fact
+  holds orders o1178 c149
+
+@f1180 fact
+  holds orders o1179 c6
+
+@f1181 fact
+  holds orders o1180 c13
+
+@f1182 fact
+  holds orders o1181 c20
+
+@f1183 fact
+  holds orders o1182 c27
+
+@f1184 fact
+  holds orders o1183 c34
+
+@f1185 fact
+  holds orders o1184 c41
+
+@f1186 fact
+  holds orders o1185 c48
+
+@f1187 fact
+  holds orders o1186 c55
+
+@f1188 fact
+  holds orders o1187 c62
+
+@f1189 fact
+  holds orders o1188 c69
+
+@f1190 fact
+  holds orders o1189 c76
+
+@f1191 fact
+  holds orders o1190 c83
+
+@f1192 fact
+  holds orders o1191 c90
+
+@f1193 fact
+  holds orders o1192 c97
+
+@f1194 fact
+  holds orders o1193 c104
+
+@f1195 fact
+  holds orders o1194 c111
+
+@f1196 fact
+  holds orders o1195 c118
+
+@f1197 fact
+  holds orders o1196 c125
+
+@f1198 fact
+  holds orders o1197 c132
+
+@f1199 fact
+  holds orders o1198 c139
+
+@f1200 fact
+  holds orders o1199 c146
+
+@f1201 fact
+  holds orders o1200 c3
+
+@f1202 fact
+  holds orders o1201 c10
+
+@f1203 fact
+  holds orders o1202 c17
+
+@f1204 fact
+  holds orders o1203 c24
+
+@f1205 fact
+  holds orders o1204 c31
+
+@f1206 fact
+  holds orders o1205 c38
+
+@f1207 fact
+  holds orders o1206 c45
+
+@f1208 fact
+  holds orders o1207 c52
+
+@f1209 fact
+  holds orders o1208 c59
+
+@f1210 fact
+  holds orders o1209 c66
+
+@f1211 fact
+  holds orders o1210 c73
+
+@f1212 fact
+  holds orders o1211 c80
+
+@f1213 fact
+  holds orders o1212 c87
+
+@f1214 fact
+  holds orders o1213 c94
+
+@f1215 fact
+  holds orders o1214 c101
+
+@f1216 fact
+  holds orders o1215 c108
+
+@f1217 fact
+  holds orders o1216 c115
+
+@f1218 fact
+  holds orders o1217 c122
+
+@f1219 fact
+  holds orders o1218 c129
+
+@f1220 fact
+  holds orders o1219 c136
+
+@f1221 fact
+  holds orders o1220 c143
+
+@f1222 fact
+  holds orders o1221 c0
+
+@f1223 fact
+  holds orders o1222 c7
+
+@f1224 fact
+  holds orders o1223 c14
+
+@f1225 fact
+  holds orders o1224 c21
+
+@f1226 fact
+  holds orders o1225 c28
+
+@f1227 fact
+  holds orders o1226 c35
+
+@f1228 fact
+  holds orders o1227 c42
+
+@f1229 fact
+  holds orders o1228 c49
+
+@f1230 fact
+  holds orders o1229 c56
+
+@f1231 fact
+  holds orders o1230 c63
+
+@f1232 fact
+  holds orders o1231 c70
+
+@f1233 fact
+  holds orders o1232 c77
+
+@f1234 fact
+  holds orders o1233 c84
+
+@f1235 fact
+  holds orders o1234 c91
+
+@f1236 fact
+  holds orders o1235 c98
+
+@f1237 fact
+  holds orders o1236 c105
+
+@f1238 fact
+  holds orders o1237 c112
+
+@f1239 fact
+  holds orders o1238 c119
+
+@f1240 fact
+  holds orders o1239 c126
+
+@f1241 fact
+  holds orders o1240 c133
+
+@f1242 fact
+  holds orders o1241 c140
+
+@f1243 fact
+  holds orders o1242 c147
+
+@f1244 fact
+  holds orders o1243 c4
+
+@f1245 fact
+  holds orders o1244 c11
+
+@f1246 fact
+  holds orders o1245 c18
+
+@f1247 fact
+  holds orders o1246 c25
+
+@f1248 fact
+  holds orders o1247 c32
+
+@f1249 fact
+  holds orders o1248 c39
+
+@f1250 fact
+  holds orders o1249 c46
+
+@f1251 fact
+  holds orders o1250 c53
+
+@f1252 fact
+  holds orders o1251 c60
+
+@f1253 fact
+  holds orders o1252 c67
+
+@f1254 fact
+  holds orders o1253 c74
+
+@f1255 fact
+  holds orders o1254 c81
+
+@f1256 fact
+  holds orders o1255 c88
+
+@f1257 fact
+  holds orders o1256 c95
+
+@f1258 fact
+  holds orders o1257 c102
+
+@f1259 fact
+  holds orders o1258 c109
+
+@f1260 fact
+  holds orders o1259 c116
+
+@f1261 fact
+  holds orders o1260 c123
+
+@f1262 fact
+  holds orders o1261 c130
+
+@f1263 fact
+  holds orders o1262 c137
+
+@f1264 fact
+  holds orders o1263 c144
+
+@f1265 fact
+  holds orders o1264 c1
+
+@f1266 fact
+  holds orders o1265 c8
+
+@f1267 fact
+  holds orders o1266 c15
+
+@f1268 fact
+  holds orders o1267 c22
+
+@f1269 fact
+  holds orders o1268 c29
+
+@f1270 fact
+  holds orders o1269 c36
+
+@f1271 fact
+  holds orders o1270 c43
+
+@f1272 fact
+  holds orders o1271 c50
+
+@f1273 fact
+  holds orders o1272 c57
+
+@f1274 fact
+  holds orders o1273 c64
+
+@f1275 fact
+  holds orders o1274 c71
+
+@f1276 fact
+  holds orders o1275 c78
+
+@f1277 fact
+  holds orders o1276 c85
+
+@f1278 fact
+  holds orders o1277 c92
+
+@f1279 fact
+  holds orders o1278 c99
+
+@f1280 fact
+  holds orders o1279 c106
+
+@f1281 fact
+  holds orders o1280 c113
+
+@f1282 fact
+  holds orders o1281 c120
+
+@f1283 fact
+  holds orders o1282 c127
+
+@f1284 fact
+  holds orders o1283 c134
+
+@f1285 fact
+  holds orders o1284 c141
+
+@f1286 fact
+  holds orders o1285 c148
+
+@f1287 fact
+  holds orders o1286 c5
+
+@f1288 fact
+  holds orders o1287 c12
+
+@f1289 fact
+  holds orders o1288 c19
+
+@f1290 fact
+  holds orders o1289 c26
+
+@f1291 fact
+  holds orders o1290 c33
+
+@f1292 fact
+  holds orders o1291 c40
+
+@f1293 fact
+  holds orders o1292 c47
+
+@f1294 fact
+  holds orders o1293 c54
+
+@f1295 fact
+  holds orders o1294 c61
+
+@f1296 fact
+  holds orders o1295 c68
+
+@f1297 fact
+  holds orders o1296 c75
+
+@f1298 fact
+  holds orders o1297 c82
+
+@f1299 fact
+  holds orders o1298 c89
+
+@f1300 fact
+  holds orders o1299 c96
+
+@f1301 fact
+  holds orders o1300 c103
+
+@f1302 fact
+  holds orders o1301 c110
+
+@f1303 fact
+  holds orders o1302 c117
+
+@f1304 fact
+  holds orders o1303 c124
+
+@f1305 fact
+  holds orders o1304 c131
+
+@f1306 fact
+  holds orders o1305 c138
+
+@f1307 fact
+  holds orders o1306 c145
+
+@f1308 fact
+  holds orders o1307 c2
+
+@f1309 fact
+  holds orders o1308 c9
+
+@f1310 fact
+  holds orders o1309 c16
+
+@f1311 fact
+  holds orders o1310 c23
+
+@f1312 fact
+  holds orders o1311 c30
+
+@f1313 fact
+  holds orders o1312 c37
+
+@f1314 fact
+  holds orders o1313 c44
+
+@f1315 fact
+  holds orders o1314 c51
+
+@f1316 fact
+  holds orders o1315 c58
+
+@f1317 fact
+  holds orders o1316 c65
+
+@f1318 fact
+  holds orders o1317 c72
+
+@f1319 fact
+  holds orders o1318 c79
+
+@f1320 fact
+  holds orders o1319 c86
+
+@f1321 fact
+  holds orders o1320 c93
+
+@f1322 fact
+  holds orders o1321 c100
+
+@f1323 fact
+  holds orders o1322 c107
+
+@f1324 fact
+  holds orders o1323 c114
+
+@f1325 fact
+  holds orders o1324 c121
+
+@f1326 fact
+  holds orders o1325 c128
+
+@f1327 fact
+  holds orders o1326 c135
+
+@f1328 fact
+  holds orders o1327 c142
+
+@f1329 fact
+  holds orders o1328 c149
+
+@f1330 fact
+  holds orders o1329 c6
+
+@f1331 fact
+  holds orders o1330 c13
+
+@f1332 fact
+  holds orders o1331 c20
+
+@f1333 fact
+  holds orders o1332 c27
+
+@f1334 fact
+  holds orders o1333 c34
+
+@f1335 fact
+  holds orders o1334 c41
+
+@f1336 fact
+  holds orders o1335 c48
+
+@f1337 fact
+  holds orders o1336 c55
+
+@f1338 fact
+  holds orders o1337 c62
+
+@f1339 fact
+  holds orders o1338 c69
+
+@f1340 fact
+  holds orders o1339 c76
+
+@f1341 fact
+  holds orders o1340 c83
+
+@f1342 fact
+  holds orders o1341 c90
+
+@f1343 fact
+  holds orders o1342 c97
+
+@f1344 fact
+  holds orders o1343 c104
+
+@f1345 fact
+  holds orders o1344 c111
+
+@f1346 fact
+  holds orders o1345 c118
+
+@f1347 fact
+  holds orders o1346 c125
+
+@f1348 fact
+  holds orders o1347 c132
+
+@f1349 fact
+  holds orders o1348 c139
+
+@f1350 fact
+  holds orders o1349 c146
+
+@f1351 fact
+  holds orders o1350 c3
+
+@f1352 fact
+  holds orders o1351 c10
+
+@f1353 fact
+  holds orders o1352 c17
+
+@f1354 fact
+  holds orders o1353 c24
+
+@f1355 fact
+  holds orders o1354 c31
+
+@f1356 fact
+  holds orders o1355 c38
+
+@f1357 fact
+  holds orders o1356 c45
+
+@f1358 fact
+  holds orders o1357 c52
+
+@f1359 fact
+  holds orders o1358 c59
+
+@f1360 fact
+  holds orders o1359 c66
+
+@f1361 fact
+  holds orders o1360 c73
+
+@f1362 fact
+  holds orders o1361 c80
+
+@f1363 fact
+  holds orders o1362 c87
+
+@f1364 fact
+  holds orders o1363 c94
+
+@f1365 fact
+  holds orders o1364 c101
+
+@f1366 fact
+  holds orders o1365 c108
+
+@f1367 fact
+  holds orders o1366 c115
+
+@f1368 fact
+  holds orders o1367 c122
+
+@f1369 fact
+  holds orders o1368 c129
+
+@f1370 fact
+  holds orders o1369 c136
+
+@f1371 fact
+  holds orders o1370 c143
+
+@f1372 fact
+  holds orders o1371 c0
+
+@f1373 fact
+  holds orders o1372 c7
+
+@f1374 fact
+  holds orders o1373 c14
+
+@f1375 fact
+  holds orders o1374 c21
+
+@f1376 fact
+  holds orders o1375 c28
+
+@f1377 fact
+  holds orders o1376 c35
+
+@f1378 fact
+  holds orders o1377 c42
+
+@f1379 fact
+  holds orders o1378 c49
+
+@f1380 fact
+  holds orders o1379 c56
+
+@f1381 fact
+  holds orders o1380 c63
+
+@f1382 fact
+  holds orders o1381 c70
+
+@f1383 fact
+  holds orders o1382 c77
+
+@f1384 fact
+  holds orders o1383 c84
+
+@f1385 fact
+  holds orders o1384 c91
+
+@f1386 fact
+  holds orders o1385 c98
+
+@f1387 fact
+  holds orders o1386 c105
+
+@f1388 fact
+  holds orders o1387 c112
+
+@f1389 fact
+  holds orders o1388 c119
+
+@f1390 fact
+  holds orders o1389 c126
+
+@f1391 fact
+  holds orders o1390 c133
+
+@f1392 fact
+  holds orders o1391 c140
+
+@f1393 fact
+  holds orders o1392 c147
+
+@f1394 fact
+  holds orders o1393 c4
+
+@f1395 fact
+  holds orders o1394 c11
+
+@f1396 fact
+  holds orders o1395 c18
+
+@f1397 fact
+  holds orders o1396 c25
+
+@f1398 fact
+  holds orders o1397 c32
+
+@f1399 fact
+  holds orders o1398 c39
+
+@f1400 fact
+  holds orders o1399 c46
+
+@f1401 fact
+  holds orders o1400 c53
+
+@f1402 fact
+  holds orders o1401 c60
+
+@f1403 fact
+  holds orders o1402 c67
+
+@f1404 fact
+  holds orders o1403 c74
+
+@f1405 fact
+  holds orders o1404 c81
+
+@f1406 fact
+  holds orders o1405 c88
+
+@f1407 fact
+  holds orders o1406 c95
+
+@f1408 fact
+  holds orders o1407 c102
+
+@f1409 fact
+  holds orders o1408 c109
+
+@f1410 fact
+  holds orders o1409 c116
+
+@f1411 fact
+  holds orders o1410 c123
+
+@f1412 fact
+  holds orders o1411 c130
+
+@f1413 fact
+  holds orders o1412 c137
+
+@f1414 fact
+  holds orders o1413 c144
+
+@f1415 fact
+  holds orders o1414 c1
+
+@f1416 fact
+  holds orders o1415 c8
+
+@f1417 fact
+  holds orders o1416 c15
+
+@f1418 fact
+  holds orders o1417 c22
+
+@f1419 fact
+  holds orders o1418 c29
+
+@f1420 fact
+  holds orders o1419 c36
+
+@f1421 fact
+  holds orders o1420 c43
+
+@f1422 fact
+  holds orders o1421 c50
+
+@f1423 fact
+  holds orders o1422 c57
+
+@f1424 fact
+  holds orders o1423 c64
+
+@f1425 fact
+  holds orders o1424 c71
+
+@f1426 fact
+  holds orders o1425 c78
+
+@f1427 fact
+  holds orders o1426 c85
+
+@f1428 fact
+  holds orders o1427 c92
+
+@f1429 fact
+  holds orders o1428 c99
+
+@f1430 fact
+  holds orders o1429 c106
+
+@f1431 fact
+  holds orders o1430 c113
+
+@f1432 fact
+  holds orders o1431 c120
+
+@f1433 fact
+  holds orders o1432 c127
+
+@f1434 fact
+  holds orders o1433 c134
+
+@f1435 fact
+  holds orders o1434 c141
+
+@f1436 fact
+  holds orders o1435 c148
+
+@f1437 fact
+  holds orders o1436 c5
+
+@f1438 fact
+  holds orders o1437 c12
+
+@f1439 fact
+  holds orders o1438 c19
+
+@f1440 fact
+  holds orders o1439 c26
+
+@f1441 fact
+  holds orders o1440 c33
+
+@f1442 fact
+  holds orders o1441 c40
+
+@f1443 fact
+  holds orders o1442 c47
+
+@f1444 fact
+  holds orders o1443 c54
+
+@f1445 fact
+  holds orders o1444 c61
+
+@f1446 fact
+  holds orders o1445 c68
+
+@f1447 fact
+  holds orders o1446 c75
+
+@f1448 fact
+  holds orders o1447 c82
+
+@f1449 fact
+  holds orders o1448 c89
+
+@f1450 fact
+  holds orders o1449 c96
+
+@f1451 fact
+  holds orders o1450 c103
+
+@f1452 fact
+  holds orders o1451 c110
+
+@f1453 fact
+  holds orders o1452 c117
+
+@f1454 fact
+  holds orders o1453 c124
+
+@f1455 fact
+  holds orders o1454 c131
+
+@f1456 fact
+  holds orders o1455 c138
+
+@f1457 fact
+  holds orders o1456 c145
+
+@f1458 fact
+  holds orders o1457 c2
+
+@f1459 fact
+  holds orders o1458 c9
+
+@f1460 fact
+  holds orders o1459 c16
+
+@f1461 fact
+  holds orders o1460 c23
+
+@f1462 fact
+  holds orders o1461 c30
+
+@f1463 fact
+  holds orders o1462 c37
+
+@f1464 fact
+  holds orders o1463 c44
+
+@f1465 fact
+  holds orders o1464 c51
+
+@f1466 fact
+  holds orders o1465 c58
+
+@f1467 fact
+  holds orders o1466 c65
+
+@f1468 fact
+  holds orders o1467 c72
+
+@f1469 fact
+  holds orders o1468 c79
+
+@f1470 fact
+  holds orders o1469 c86
+
+@f1471 fact
+  holds orders o1470 c93
+
+@f1472 fact
+  holds orders o1471 c100
+
+@f1473 fact
+  holds orders o1472 c107
+
+@f1474 fact
+  holds orders o1473 c114
+
+@f1475 fact
+  holds orders o1474 c121
+
+@f1476 fact
+  holds orders o1475 c128
+
+@f1477 fact
+  holds orders o1476 c135
+
+@f1478 fact
+  holds orders o1477 c142
+
+@f1479 fact
+  holds orders o1478 c149
+
+@f1480 fact
+  holds orders o1479 c6
+
+@f1481 fact
+  holds orders o1480 c13
+
+@f1482 fact
+  holds orders o1481 c20
+
+@f1483 fact
+  holds orders o1482 c27
+
+@f1484 fact
+  holds orders o1483 c34
+
+@f1485 fact
+  holds orders o1484 c41
+
+@f1486 fact
+  holds orders o1485 c48
+
+@f1487 fact
+  holds orders o1486 c55
+
+@f1488 fact
+  holds orders o1487 c62
+
+@f1489 fact
+  holds orders o1488 c69
+
+@f1490 fact
+  holds orders o1489 c76
+
+@f1491 fact
+  holds orders o1490 c83
+
+@f1492 fact
+  holds orders o1491 c90
+
+@f1493 fact
+  holds orders o1492 c97
+
+@f1494 fact
+  holds orders o1493 c104
+
+@f1495 fact
+  holds orders o1494 c111
+
+@f1496 fact
+  holds orders o1495 c118
+
+@f1497 fact
+  holds orders o1496 c125
+
+@f1498 fact
+  holds orders o1497 c132
+
+@f1499 fact
+  holds orders o1498 c139
+
+@f1500 fact
+  holds orders o1499 c146
+
+@f1501 fact
+  holds orders o1500 c3
+
+@f1502 fact
+  holds orders o1501 c10
+
+@f1503 fact
+  holds orders o1502 c17
+
+@f1504 fact
+  holds orders o1503 c24
+
+@f1505 fact
+  holds orders o1504 c31
+
+@f1506 fact
+  holds orders o1505 c38
+
+@f1507 fact
+  holds orders o1506 c45
+
+@f1508 fact
+  holds orders o1507 c52
+
+@f1509 fact
+  holds orders o1508 c59
+
+@f1510 fact
+  holds orders o1509 c66
+
+@f1511 fact
+  holds orders o1510 c73
+
+@f1512 fact
+  holds orders o1511 c80
+
+@f1513 fact
+  holds orders o1512 c87
+
+@f1514 fact
+  holds orders o1513 c94
+
+@f1515 fact
+  holds orders o1514 c101
+
+@f1516 fact
+  holds orders o1515 c108
+
+@f1517 fact
+  holds orders o1516 c115
+
+@f1518 fact
+  holds orders o1517 c122
+
+@f1519 fact
+  holds orders o1518 c129
+
+@f1520 fact
+  holds orders o1519 c136
+
+@f1521 fact
+  holds orders o1520 c143
+
+@f1522 fact
+  holds orders o1521 c0
+
+@f1523 fact
+  holds orders o1522 c7
+
+@f1524 fact
+  holds orders o1523 c14
+
+@f1525 fact
+  holds orders o1524 c21
+
+@f1526 fact
+  holds orders o1525 c28
+
+@f1527 fact
+  holds orders o1526 c35
+
+@f1528 fact
+  holds orders o1527 c42
+
+@f1529 fact
+  holds orders o1528 c49
+
+@f1530 fact
+  holds orders o1529 c56
+
+@f1531 fact
+  holds orders o1530 c63
+
+@f1532 fact
+  holds orders o1531 c70
+
+@f1533 fact
+  holds orders o1532 c77
+
+@f1534 fact
+  holds orders o1533 c84
+
+@f1535 fact
+  holds orders o1534 c91
+
+@f1536 fact
+  holds orders o1535 c98
+
+@f1537 fact
+  holds orders o1536 c105
+
+@f1538 fact
+  holds orders o1537 c112
+
+@f1539 fact
+  holds orders o1538 c119
+
+@f1540 fact
+  holds orders o1539 c126
+
+@f1541 fact
+  holds orders o1540 c133
+
+@f1542 fact
+  holds orders o1541 c140
+
+@f1543 fact
+  holds orders o1542 c147
+
+@f1544 fact
+  holds orders o1543 c4
+
+@f1545 fact
+  holds orders o1544 c11
+
+@f1546 fact
+  holds orders o1545 c18
+
+@f1547 fact
+  holds orders o1546 c25
+
+@f1548 fact
+  holds orders o1547 c32
+
+@f1549 fact
+  holds orders o1548 c39
+
+@f1550 fact
+  holds orders o1549 c46
+
+@f1551 fact
+  holds orders o1550 c53
+
+@f1552 fact
+  holds orders o1551 c60
+
+@f1553 fact
+  holds orders o1552 c67
+
+@f1554 fact
+  holds orders o1553 c74
+
+@f1555 fact
+  holds orders o1554 c81
+
+@f1556 fact
+  holds orders o1555 c88
+
+@f1557 fact
+  holds orders o1556 c95
+
+@f1558 fact
+  holds orders o1557 c102
+
+@f1559 fact
+  holds orders o1558 c109
+
+@f1560 fact
+  holds orders o1559 c116
+
+@f1561 fact
+  holds orders o1560 c123
+
+@f1562 fact
+  holds orders o1561 c130
+
+@f1563 fact
+  holds orders o1562 c137
+
+@f1564 fact
+  holds orders o1563 c144
+
+@f1565 fact
+  holds orders o1564 c1
+
+@f1566 fact
+  holds orders o1565 c8
+
+@f1567 fact
+  holds orders o1566 c15
+
+@f1568 fact
+  holds orders o1567 c22
+
+@f1569 fact
+  holds orders o1568 c29
+
+@f1570 fact
+  holds orders o1569 c36
+
+@f1571 fact
+  holds orders o1570 c43
+
+@f1572 fact
+  holds orders o1571 c50
+
+@f1573 fact
+  holds orders o1572 c57
+
+@f1574 fact
+  holds orders o1573 c64
+
+@f1575 fact
+  holds orders o1574 c71
+
+@f1576 fact
+  holds orders o1575 c78
+
+@f1577 fact
+  holds orders o1576 c85
+
+@f1578 fact
+  holds orders o1577 c92
+
+@f1579 fact
+  holds orders o1578 c99
+
+@f1580 fact
+  holds orders o1579 c106
+
+@f1581 fact
+  holds orders o1580 c113
+
+@f1582 fact
+  holds orders o1581 c120
+
+@f1583 fact
+  holds orders o1582 c127
+
+@f1584 fact
+  holds orders o1583 c134
+
+@f1585 fact
+  holds orders o1584 c141
+
+@f1586 fact
+  holds orders o1585 c148
+
+@f1587 fact
+  holds orders o1586 c5
+
+@f1588 fact
+  holds orders o1587 c12
+
+@f1589 fact
+  holds orders o1588 c19
+
+@f1590 fact
+  holds orders o1589 c26
+
+@f1591 fact
+  holds orders o1590 c33
+
+@f1592 fact
+  holds orders o1591 c40
+
+@f1593 fact
+  holds orders o1592 c47
+
+@f1594 fact
+  holds orders o1593 c54
+
+@f1595 fact
+  holds orders o1594 c61
+
+@f1596 fact
+  holds orders o1595 c68
+
+@f1597 fact
+  holds orders o1596 c75
+
+@f1598 fact
+  holds orders o1597 c82
+
+@f1599 fact
+  holds orders o1598 c89
+
+@f1600 fact
+  holds orders o1599 c96
+
+@f1601 fact
+  holds orders o1600 c103
+
+@f1602 fact
+  holds orders o1601 c110
+
+@f1603 fact
+  holds orders o1602 c117
+
+@f1604 fact
+  holds orders o1603 c124
+
+@f1605 fact
+  holds orders o1604 c131
+
+@f1606 fact
+  holds orders o1605 c138
+
+@f1607 fact
+  holds orders o1606 c145
+
+@f1608 fact
+  holds orders o1607 c2
+
+@f1609 fact
+  holds orders o1608 c9
+
+@f1610 fact
+  holds orders o1609 c16
+
+@f1611 fact
+  holds orders o1610 c23
+
+@f1612 fact
+  holds orders o1611 c30
+
+@f1613 fact
+  holds orders o1612 c37
+
+@f1614 fact
+  holds orders o1613 c44
+
+@f1615 fact
+  holds orders o1614 c51
+
+@f1616 fact
+  holds orders o1615 c58
+
+@f1617 fact
+  holds orders o1616 c65
+
+@f1618 fact
+  holds orders o1617 c72
+
+@f1619 fact
+  holds orders o1618 c79
+
+@f1620 fact
+  holds orders o1619 c86
+
+@f1621 fact
+  holds orders o1620 c93
+
+@f1622 fact
+  holds orders o1621 c100
+
+@f1623 fact
+  holds orders o1622 c107
+
+@f1624 fact
+  holds orders o1623 c114
+
+@f1625 fact
+  holds orders o1624 c121
+
+@f1626 fact
+  holds orders o1625 c128
+
+@f1627 fact
+  holds orders o1626 c135
+
+@f1628 fact
+  holds orders o1627 c142
+
+@f1629 fact
+  holds orders o1628 c149
+
+@f1630 fact
+  holds orders o1629 c6
+
+@f1631 fact
+  holds orders o1630 c13
+
+@f1632 fact
+  holds orders o1631 c20
+
+@f1633 fact
+  holds orders o1632 c27
+
+@f1634 fact
+  holds orders o1633 c34
+
+@f1635 fact
+  holds orders o1634 c41
+
+@f1636 fact
+  holds orders o1635 c48
+
+@f1637 fact
+  holds orders o1636 c55
+
+@f1638 fact
+  holds orders o1637 c62
+
+@f1639 fact
+  holds orders o1638 c69
+
+@f1640 fact
+  holds orders o1639 c76
+
+@f1641 fact
+  holds orders o1640 c83
+
+@f1642 fact
+  holds orders o1641 c90
+
+@f1643 fact
+  holds orders o1642 c97
+
+@f1644 fact
+  holds orders o1643 c104
+
+@f1645 fact
+  holds orders o1644 c111
+
+@f1646 fact
+  holds orders o1645 c118
+
+@f1647 fact
+  holds orders o1646 c125
+
+@f1648 fact
+  holds orders o1647 c132
+
+@f1649 fact
+  holds orders o1648 c139
+
+@f1650 fact
+  holds orders o1649 c146
+
+@f1651 fact
+  holds orders o1650 c3
+
+@f1652 fact
+  holds orders o1651 c10
+
+@f1653 fact
+  holds orders o1652 c17
+
+@f1654 fact
+  holds orders o1653 c24
+
+@f1655 fact
+  holds orders o1654 c31
+
+@f1656 fact
+  holds orders o1655 c38
+
+@f1657 fact
+  holds orders o1656 c45
+
+@f1658 fact
+  holds orders o1657 c52
+
+@f1659 fact
+  holds orders o1658 c59
+
+@f1660 fact
+  holds orders o1659 c66
+
+@f1661 fact
+  holds orders o1660 c73
+
+@f1662 fact
+  holds orders o1661 c80
+
+@f1663 fact
+  holds orders o1662 c87
+
+@f1664 fact
+  holds orders o1663 c94
+
+@f1665 fact
+  holds orders o1664 c101
+
+@f1666 fact
+  holds orders o1665 c108
+
+@f1667 fact
+  holds orders o1666 c115
+
+@f1668 fact
+  holds orders o1667 c122
+
+@f1669 fact
+  holds orders o1668 c129
+
+@f1670 fact
+  holds orders o1669 c136
+
+@f1671 fact
+  holds orders o1670 c143
+
+@f1672 fact
+  holds orders o1671 c0
+
+@f1673 fact
+  holds orders o1672 c7
+
+@f1674 fact
+  holds orders o1673 c14
+
+@f1675 fact
+  holds orders o1674 c21
+
+@f1676 fact
+  holds orders o1675 c28
+
+@f1677 fact
+  holds orders o1676 c35
+
+@f1678 fact
+  holds orders o1677 c42
+
+@f1679 fact
+  holds orders o1678 c49
+
+@f1680 fact
+  holds orders o1679 c56
+
+@f1681 fact
+  holds orders o1680 c63
+
+@f1682 fact
+  holds orders o1681 c70
+
+@f1683 fact
+  holds orders o1682 c77
+
+@f1684 fact
+  holds orders o1683 c84
+
+@f1685 fact
+  holds orders o1684 c91
+
+@f1686 fact
+  holds orders o1685 c98
+
+@f1687 fact
+  holds orders o1686 c105
+
+@f1688 fact
+  holds orders o1687 c112
+
+@f1689 fact
+  holds orders o1688 c119
+
+@f1690 fact
+  holds orders o1689 c126
+
+@f1691 fact
+  holds orders o1690 c133
+
+@f1692 fact
+  holds orders o1691 c140
+
+@f1693 fact
+  holds orders o1692 c147
+
+@f1694 fact
+  holds orders o1693 c4
+
+@f1695 fact
+  holds orders o1694 c11
+
+@f1696 fact
+  holds orders o1695 c18
+
+@f1697 fact
+  holds orders o1696 c25
+
+@f1698 fact
+  holds orders o1697 c32
+
+@f1699 fact
+  holds orders o1698 c39
+
+@f1700 fact
+  holds orders o1699 c46
+
+@f1701 fact
+  holds orders o1700 c53
+
+@f1702 fact
+  holds orders o1701 c60
+
+@f1703 fact
+  holds orders o1702 c67
+
+@f1704 fact
+  holds orders o1703 c74
+
+@f1705 fact
+  holds orders o1704 c81
+
+@f1706 fact
+  holds orders o1705 c88
+
+@f1707 fact
+  holds orders o1706 c95
+
+@f1708 fact
+  holds orders o1707 c102
+
+@f1709 fact
+  holds orders o1708 c109
+
+@f1710 fact
+  holds orders o1709 c116
+
+@f1711 fact
+  holds orders o1710 c123
+
+@f1712 fact
+  holds orders o1711 c130
+
+@f1713 fact
+  holds orders o1712 c137
+
+@f1714 fact
+  holds orders o1713 c144
+
+@f1715 fact
+  holds orders o1714 c1
+
+@f1716 fact
+  holds orders o1715 c8
+
+@f1717 fact
+  holds orders o1716 c15
+
+@f1718 fact
+  holds orders o1717 c22
+
+@f1719 fact
+  holds orders o1718 c29
+
+@f1720 fact
+  holds orders o1719 c36
+
+@f1721 fact
+  holds orders o1720 c43
+
+@f1722 fact
+  holds orders o1721 c50
+
+@f1723 fact
+  holds orders o1722 c57
+
+@f1724 fact
+  holds orders o1723 c64
+
+@f1725 fact
+  holds orders o1724 c71
+
+@f1726 fact
+  holds orders o1725 c78
+
+@f1727 fact
+  holds orders o1726 c85
+
+@f1728 fact
+  holds orders o1727 c92
+
+@f1729 fact
+  holds orders o1728 c99
+
+@f1730 fact
+  holds orders o1729 c106
+
+@f1731 fact
+  holds orders o1730 c113
+
+@f1732 fact
+  holds orders o1731 c120
+
+@f1733 fact
+  holds orders o1732 c127
+
+@f1734 fact
+  holds orders o1733 c134
+
+@f1735 fact
+  holds orders o1734 c141
+
+@f1736 fact
+  holds orders o1735 c148
+
+@f1737 fact
+  holds orders o1736 c5
+
+@f1738 fact
+  holds orders o1737 c12
+
+@f1739 fact
+  holds orders o1738 c19
+
+@f1740 fact
+  holds orders o1739 c26
+
+@f1741 fact
+  holds orders o1740 c33
+
+@f1742 fact
+  holds orders o1741 c40
+
+@f1743 fact
+  holds orders o1742 c47
+
+@f1744 fact
+  holds orders o1743 c54
+
+@f1745 fact
+  holds orders o1744 c61
+
+@f1746 fact
+  holds orders o1745 c68
+
+@f1747 fact
+  holds orders o1746 c75
+
+@f1748 fact
+  holds orders o1747 c82
+
+@f1749 fact
+  holds orders o1748 c89
+
+@f1750 fact
+  holds orders o1749 c96
+
+@f1751 fact
+  holds orders o1750 c103
+
+@f1752 fact
+  holds orders o1751 c110
+
+@f1753 fact
+  holds orders o1752 c117
+
+@f1754 fact
+  holds orders o1753 c124
+
+@f1755 fact
+  holds orders o1754 c131
+
+@f1756 fact
+  holds orders o1755 c138
+
+@f1757 fact
+  holds orders o1756 c145
+
+@f1758 fact
+  holds orders o1757 c2
+
+@f1759 fact
+  holds orders o1758 c9
+
+@f1760 fact
+  holds orders o1759 c16
+
+@f1761 fact
+  holds orders o1760 c23
+
+@f1762 fact
+  holds orders o1761 c30
+
+@f1763 fact
+  holds orders o1762 c37
+
+@f1764 fact
+  holds orders o1763 c44
+
+@f1765 fact
+  holds orders o1764 c51
+
+@f1766 fact
+  holds orders o1765 c58
+
+@f1767 fact
+  holds orders o1766 c65
+
+@f1768 fact
+  holds orders o1767 c72
+
+@f1769 fact
+  holds orders o1768 c79
+
+@f1770 fact
+  holds orders o1769 c86
+
+@f1771 fact
+  holds orders o1770 c93
+
+@f1772 fact
+  holds orders o1771 c100
+
+@f1773 fact
+  holds orders o1772 c107
+
+@f1774 fact
+  holds orders o1773 c114
+
+@f1775 fact
+  holds orders o1774 c121
+
+@f1776 fact
+  holds orders o1775 c128
+
+@f1777 fact
+  holds orders o1776 c135
+
+@f1778 fact
+  holds orders o1777 c142
+
+@f1779 fact
+  holds orders o1778 c149
+
+@f1780 fact
+  holds orders o1779 c6
+
+@f1781 fact
+  holds orders o1780 c13
+
+@f1782 fact
+  holds orders o1781 c20
+
+@f1783 fact
+  holds orders o1782 c27
+
+@f1784 fact
+  holds orders o1783 c34
+
+@f1785 fact
+  holds orders o1784 c41
+
+@f1786 fact
+  holds orders o1785 c48
+
+@f1787 fact
+  holds orders o1786 c55
+
+@f1788 fact
+  holds orders o1787 c62
+
+@f1789 fact
+  holds orders o1788 c69
+
+@f1790 fact
+  holds orders o1789 c76
+
+@f1791 fact
+  holds orders o1790 c83
+
+@f1792 fact
+  holds orders o1791 c90
+
+@f1793 fact
+  holds orders o1792 c97
+
+@f1794 fact
+  holds orders o1793 c104
+
+@f1795 fact
+  holds orders o1794 c111
+
+@f1796 fact
+  holds orders o1795 c118
+
+@f1797 fact
+  holds orders o1796 c125
+
+@f1798 fact
+  holds orders o1797 c132
+
+@f1799 fact
+  holds orders o1798 c139
+
+@f1800 fact
+  holds orders o1799 c146
+
+@f1801 fact
+  holds orders o1800 c3
+
+@f1802 fact
+  holds orders o1801 c10
+
+@f1803 fact
+  holds orders o1802 c17
+
+@f1804 fact
+  holds orders o1803 c24
+
+@f1805 fact
+  holds orders o1804 c31
+
+@f1806 fact
+  holds orders o1805 c38
+
+@f1807 fact
+  holds orders o1806 c45
+
+@f1808 fact
+  holds orders o1807 c52
+
+@f1809 fact
+  holds orders o1808 c59
+
+@f1810 fact
+  holds orders o1809 c66
+
+@f1811 fact
+  holds orders o1810 c73
+
+@f1812 fact
+  holds orders o1811 c80
+
+@f1813 fact
+  holds orders o1812 c87
+
+@f1814 fact
+  holds orders o1813 c94
+
+@f1815 fact
+  holds orders o1814 c101
+
+@f1816 fact
+  holds orders o1815 c108
+
+@f1817 fact
+  holds orders o1816 c115
+
+@f1818 fact
+  holds orders o1817 c122
+
+@f1819 fact
+  holds orders o1818 c129
+
+@f1820 fact
+  holds orders o1819 c136
+
+@f1821 fact
+  holds orders o1820 c143
+
+@f1822 fact
+  holds orders o1821 c0
+
+@f1823 fact
+  holds orders o1822 c7
+
+@f1824 fact
+  holds orders o1823 c14
+
+@f1825 fact
+  holds orders o1824 c21
+
+@f1826 fact
+  holds orders o1825 c28
+
+@f1827 fact
+  holds orders o1826 c35
+
+@f1828 fact
+  holds orders o1827 c42
+
+@f1829 fact
+  holds orders o1828 c49
+
+@f1830 fact
+  holds orders o1829 c56
+
+@f1831 fact
+  holds orders o1830 c63
+
+@f1832 fact
+  holds orders o1831 c70
+
+@f1833 fact
+  holds orders o1832 c77
+
+@f1834 fact
+  holds orders o1833 c84
+
+@f1835 fact
+  holds orders o1834 c91
+
+@f1836 fact
+  holds orders o1835 c98
+
+@f1837 fact
+  holds orders o1836 c105
+
+@f1838 fact
+  holds orders o1837 c112
+
+@f1839 fact
+  holds orders o1838 c119
+
+@f1840 fact
+  holds orders o1839 c126
+
+@f1841 fact
+  holds orders o1840 c133
+
+@f1842 fact
+  holds orders o1841 c140
+
+@f1843 fact
+  holds orders o1842 c147
+
+@f1844 fact
+  holds orders o1843 c4
+
+@f1845 fact
+  holds orders o1844 c11
+
+@f1846 fact
+  holds orders o1845 c18
+
+@f1847 fact
+  holds orders o1846 c25
+
+@f1848 fact
+  holds orders o1847 c32
+
+@f1849 fact
+  holds orders o1848 c39
+
+@f1850 fact
+  holds orders o1849 c46
+
+@f1851 fact
+  holds orders o1850 c53
+
+@f1852 fact
+  holds orders o1851 c60
+
+@f1853 fact
+  holds orders o1852 c67
+
+@f1854 fact
+  holds orders o1853 c74
+
+@f1855 fact
+  holds orders o1854 c81
+
+@f1856 fact
+  holds orders o1855 c88
+
+@f1857 fact
+  holds orders o1856 c95
+
+@f1858 fact
+  holds orders o1857 c102
+
+@f1859 fact
+  holds orders o1858 c109
+
+@f1860 fact
+  holds orders o1859 c116
+
+@f1861 fact
+  holds orders o1860 c123
+
+@f1862 fact
+  holds orders o1861 c130
+
+@f1863 fact
+  holds orders o1862 c137
+
+@f1864 fact
+  holds orders o1863 c144
+
+@f1865 fact
+  holds orders o1864 c1
+
+@f1866 fact
+  holds orders o1865 c8
+
+@f1867 fact
+  holds orders o1866 c15
+
+@f1868 fact
+  holds orders o1867 c22
+
+@f1869 fact
+  holds orders o1868 c29
+
+@f1870 fact
+  holds orders o1869 c36
+
+@f1871 fact
+  holds orders o1870 c43
+
+@f1872 fact
+  holds orders o1871 c50
+
+@f1873 fact
+  holds orders o1872 c57
+
+@f1874 fact
+  holds orders o1873 c64
+
+@f1875 fact
+  holds orders o1874 c71
+
+@f1876 fact
+  holds orders o1875 c78
+
+@f1877 fact
+  holds orders o1876 c85
+
+@f1878 fact
+  holds orders o1877 c92
+
+@f1879 fact
+  holds orders o1878 c99
+
+@f1880 fact
+  holds orders o1879 c106
+
+@f1881 fact
+  holds orders o1880 c113
+
+@f1882 fact
+  holds orders o1881 c120
+
+@f1883 fact
+  holds orders o1882 c127
+
+@f1884 fact
+  holds orders o1883 c134
+
+@f1885 fact
+  holds orders o1884 c141
+
+@f1886 fact
+  holds orders o1885 c148
+
+@f1887 fact
+  holds orders o1886 c5
+
+@f1888 fact
+  holds orders o1887 c12
+
+@f1889 fact
+  holds orders o1888 c19
+
+@f1890 fact
+  holds orders o1889 c26
+
+@f1891 fact
+  holds orders o1890 c33
+
+@f1892 fact
+  holds orders o1891 c40
+
+@f1893 fact
+  holds orders o1892 c47
+
+@f1894 fact
+  holds orders o1893 c54
+
+@f1895 fact
+  holds orders o1894 c61
+
+@f1896 fact
+  holds orders o1895 c68
+
+@f1897 fact
+  holds orders o1896 c75
+
+@f1898 fact
+  holds orders o1897 c82
+
+@f1899 fact
+  holds orders o1898 c89
+
+@f1900 fact
+  holds orders o1899 c96
+
+@f1901 fact
+  holds orders o1900 c103
+
+@f1902 fact
+  holds orders o1901 c110
+
+@f1903 fact
+  holds orders o1902 c117
+
+@f1904 fact
+  holds orders o1903 c124
+
+@f1905 fact
+  holds orders o1904 c131
+
+@f1906 fact
+  holds orders o1905 c138
+
+@f1907 fact
+  holds orders o1906 c145
+
+@f1908 fact
+  holds orders o1907 c2
+
+@f1909 fact
+  holds orders o1908 c9
+
+@f1910 fact
+  holds orders o1909 c16
+
+@f1911 fact
+  holds orders o1910 c23
+
+@f1912 fact
+  holds orders o1911 c30
+
+@f1913 fact
+  holds orders o1912 c37
+
+@f1914 fact
+  holds orders o1913 c44
+
+@f1915 fact
+  holds orders o1914 c51
+
+@f1916 fact
+  holds orders o1915 c58
+
+@f1917 fact
+  holds orders o1916 c65
+
+@f1918 fact
+  holds orders o1917 c72
+
+@f1919 fact
+  holds orders o1918 c79
+
+@f1920 fact
+  holds orders o1919 c86
+
+@f1921 fact
+  holds orders o1920 c93
+
+@f1922 fact
+  holds orders o1921 c100
+
+@f1923 fact
+  holds orders o1922 c107
+
+@f1924 fact
+  holds orders o1923 c114
+
+@f1925 fact
+  holds orders o1924 c121
+
+@f1926 fact
+  holds orders o1925 c128
+
+@f1927 fact
+  holds orders o1926 c135
+
+@f1928 fact
+  holds orders o1927 c142
+
+@f1929 fact
+  holds orders o1928 c149
+
+@f1930 fact
+  holds orders o1929 c6
+
+@f1931 fact
+  holds orders o1930 c13
+
+@f1932 fact
+  holds orders o1931 c20
+
+@f1933 fact
+  holds orders o1932 c27
+
+@f1934 fact
+  holds orders o1933 c34
+
+@f1935 fact
+  holds orders o1934 c41
+
+@f1936 fact
+  holds orders o1935 c48
+
+@f1937 fact
+  holds orders o1936 c55
+
+@f1938 fact
+  holds orders o1937 c62
+
+@f1939 fact
+  holds orders o1938 c69
+
+@f1940 fact
+  holds orders o1939 c76
+
+@f1941 fact
+  holds orders o1940 c83
+
+@f1942 fact
+  holds orders o1941 c90
+
+@f1943 fact
+  holds orders o1942 c97
+
+@f1944 fact
+  holds orders o1943 c104
+
+@f1945 fact
+  holds orders o1944 c111
+
+@f1946 fact
+  holds orders o1945 c118
+
+@f1947 fact
+  holds orders o1946 c125
+
+@f1948 fact
+  holds orders o1947 c132
+
+@f1949 fact
+  holds orders o1948 c139
+
+@f1950 fact
+  holds orders o1949 c146
+
+@f1951 fact
+  holds orders o1950 c3
+
+@f1952 fact
+  holds orders o1951 c10
+
+@f1953 fact
+  holds orders o1952 c17
+
+@f1954 fact
+  holds orders o1953 c24
+
+@f1955 fact
+  holds orders o1954 c31
+
+@f1956 fact
+  holds orders o1955 c38
+
+@f1957 fact
+  holds orders o1956 c45
+
+@f1958 fact
+  holds orders o1957 c52
+
+@f1959 fact
+  holds orders o1958 c59
+
+@f1960 fact
+  holds orders o1959 c66
+
+@f1961 fact
+  holds orders o1960 c73
+
+@f1962 fact
+  holds orders o1961 c80
+
+@f1963 fact
+  holds orders o1962 c87
+
+@f1964 fact
+  holds orders o1963 c94
+
+@f1965 fact
+  holds orders o1964 c101
+
+@f1966 fact
+  holds orders o1965 c108
+
+@f1967 fact
+  holds orders o1966 c115
+
+@f1968 fact
+  holds orders o1967 c122
+
+@f1969 fact
+  holds orders o1968 c129
+
+@f1970 fact
+  holds orders o1969 c136
+
+@f1971 fact
+  holds orders o1970 c143
+
+@f1972 fact
+  holds orders o1971 c0
+
+@f1973 fact
+  holds orders o1972 c7
+
+@f1974 fact
+  holds orders o1973 c14
+
+@f1975 fact
+  holds orders o1974 c21
+
+@f1976 fact
+  holds orders o1975 c28
+
+@f1977 fact
+  holds orders o1976 c35
+
+@f1978 fact
+  holds orders o1977 c42
+
+@f1979 fact
+  holds orders o1978 c49
+
+@f1980 fact
+  holds orders o1979 c56
+
+@f1981 fact
+  holds orders o1980 c63
+
+@f1982 fact
+  holds orders o1981 c70
+
+@f1983 fact
+  holds orders o1982 c77
+
+@f1984 fact
+  holds orders o1983 c84
+
+@f1985 fact
+  holds orders o1984 c91
+
+@f1986 fact
+  holds orders o1985 c98
+
+@f1987 fact
+  holds orders o1986 c105
+
+@f1988 fact
+  holds orders o1987 c112
+
+@f1989 fact
+  holds orders o1988 c119
+
+@f1990 fact
+  holds orders o1989 c126
+
+@f1991 fact
+  holds orders o1990 c133
+
+@f1992 fact
+  holds orders o1991 c140
+
+@f1993 fact
+  holds orders o1992 c147
+
+@f1994 fact
+  holds orders o1993 c4
+
+@f1995 fact
+  holds orders o1994 c11
+
+@f1996 fact
+  holds orders o1995 c18
+
+@f1997 fact
+  holds orders o1996 c25
+
+@f1998 fact
+  holds orders o1997 c32
+
+@f1999 fact
+  holds orders o1998 c39
+
+@f2000 fact
+  holds orders o1999 c46
+
+@f2001 fact
+  holds orders o2000 c53
+
+@f2002 fact
+  holds orders o2001 c60
+
+@f2003 fact
+  holds orders o2002 c67
+
+@f2004 fact
+  holds orders o2003 c74
+
+@f2005 fact
+  holds orders o2004 c81
+
+@f2006 fact
+  holds orders o2005 c88
+
+@f2007 fact
+  holds orders o2006 c95
+
+@f2008 fact
+  holds orders o2007 c102
+
+@f2009 fact
+  holds orders o2008 c109
+
+@f2010 fact
+  holds orders o2009 c116
+
+@f2011 fact
+  holds orders o2010 c123
+
+@f2012 fact
+  holds orders o2011 c130
+
+@f2013 fact
+  holds orders o2012 c137
+
+@f2014 fact
+  holds orders o2013 c144
+
+@f2015 fact
+  holds orders o2014 c1
+
+@f2016 fact
+  holds orders o2015 c8
+
+@f2017 fact
+  holds orders o2016 c15
+
+@f2018 fact
+  holds orders o2017 c22
+
+@f2019 fact
+  holds orders o2018 c29
+
+@f2020 fact
+  holds orders o2019 c36
+
+@f2021 fact
+  holds orders o2020 c43
+
+@f2022 fact
+  holds orders o2021 c50
+
+@f2023 fact
+  holds orders o2022 c57
+
+@f2024 fact
+  holds orders o2023 c64
+
+@f2025 fact
+  holds orders o2024 c71
+
+@f2026 fact
+  holds orders o2025 c78
+
+@f2027 fact
+  holds orders o2026 c85
+
+@f2028 fact
+  holds orders o2027 c92
+
+@f2029 fact
+  holds orders o2028 c99
+
+@f2030 fact
+  holds orders o2029 c106
+
+@f2031 fact
+  holds orders o2030 c113
+
+@f2032 fact
+  holds orders o2031 c120
+
+@f2033 fact
+  holds orders o2032 c127
+
+@f2034 fact
+  holds orders o2033 c134
+
+@f2035 fact
+  holds orders o2034 c141
+
+@f2036 fact
+  holds orders o2035 c148
+
+@f2037 fact
+  holds orders o2036 c5
+
+@f2038 fact
+  holds orders o2037 c12
+
+@f2039 fact
+  holds orders o2038 c19
+
+@f2040 fact
+  holds orders o2039 c26
+
+@f2041 fact
+  holds orders o2040 c33
+
+@f2042 fact
+  holds orders o2041 c40
+
+@f2043 fact
+  holds orders o2042 c47
+
+@f2044 fact
+  holds orders o2043 c54
+
+@f2045 fact
+  holds orders o2044 c61
+
+@f2046 fact
+  holds orders o2045 c68
+
+@f2047 fact
+  holds orders o2046 c75
+
+@f2048 fact
+  holds orders o2047 c82
+
+@f2049 fact
+  holds orders o2048 c89
+
+@f2050 fact
+  holds orders o2049 c96
+
+@f2051 fact
+  holds orders o2050 c103
+
+@f2052 fact
+  holds orders o2051 c110
+
+@f2053 fact
+  holds orders o2052 c117
+
+@f2054 fact
+  holds orders o2053 c124
+
+@f2055 fact
+  holds orders o2054 c131
+
+@f2056 fact
+  holds orders o2055 c138
+
+@f2057 fact
+  holds orders o2056 c145
+
+@f2058 fact
+  holds orders o2057 c2
+
+@f2059 fact
+  holds orders o2058 c9
+
+@f2060 fact
+  holds orders o2059 c16
+
+@f2061 fact
+  holds orders o2060 c23
+
+@f2062 fact
+  holds orders o2061 c30
+
+@f2063 fact
+  holds orders o2062 c37
+
+@f2064 fact
+  holds orders o2063 c44
+
+@f2065 fact
+  holds orders o2064 c51
+
+@f2066 fact
+  holds orders o2065 c58
+
+@f2067 fact
+  holds orders o2066 c65
+
+@f2068 fact
+  holds orders o2067 c72
+
+@f2069 fact
+  holds orders o2068 c79
+
+@f2070 fact
+  holds orders o2069 c86
+
+@f2071 fact
+  holds orders o2070 c93
+
+@f2072 fact
+  holds orders o2071 c100
+
+@f2073 fact
+  holds orders o2072 c107
+
+@f2074 fact
+  holds orders o2073 c114
+
+@f2075 fact
+  holds orders o2074 c121
+
+@f2076 fact
+  holds orders o2075 c128
+
+@f2077 fact
+  holds orders o2076 c135
+
+@f2078 fact
+  holds orders o2077 c142
+
+@f2079 fact
+  holds orders o2078 c149
+
+@f2080 fact
+  holds orders o2079 c6
+
+@f2081 fact
+  holds orders o2080 c13
+
+@f2082 fact
+  holds orders o2081 c20
+
+@f2083 fact
+  holds orders o2082 c27
+
+@f2084 fact
+  holds orders o2083 c34
+
+@f2085 fact
+  holds orders o2084 c41
+
+@f2086 fact
+  holds orders o2085 c48
+
+@f2087 fact
+  holds orders o2086 c55
+
+@f2088 fact
+  holds orders o2087 c62
+
+@f2089 fact
+  holds orders o2088 c69
+
+@f2090 fact
+  holds orders o2089 c76
+
+@f2091 fact
+  holds orders o2090 c83
+
+@f2092 fact
+  holds orders o2091 c90
+
+@f2093 fact
+  holds orders o2092 c97
+
+@f2094 fact
+  holds orders o2093 c104
+
+@f2095 fact
+  holds orders o2094 c111
+
+@f2096 fact
+  holds orders o2095 c118
+
+@f2097 fact
+  holds orders o2096 c125
+
+@f2098 fact
+  holds orders o2097 c132
+
+@f2099 fact
+  holds orders o2098 c139
+
+@f2100 fact
+  holds orders o2099 c146
+
+@f2101 fact
+  holds orders o2100 c3
+
+@f2102 fact
+  holds orders o2101 c10
+
+@f2103 fact
+  holds orders o2102 c17
+
+@f2104 fact
+  holds orders o2103 c24
+
+@f2105 fact
+  holds orders o2104 c31
+
+@f2106 fact
+  holds orders o2105 c38
+
+@f2107 fact
+  holds orders o2106 c45
+
+@f2108 fact
+  holds orders o2107 c52
+
+@f2109 fact
+  holds orders o2108 c59
+
+@f2110 fact
+  holds orders o2109 c66
+
+@f2111 fact
+  holds orders o2110 c73
+
+@f2112 fact
+  holds orders o2111 c80
+
+@f2113 fact
+  holds orders o2112 c87
+
+@f2114 fact
+  holds orders o2113 c94
+
+@f2115 fact
+  holds orders o2114 c101
+
+@f2116 fact
+  holds orders o2115 c108
+
+@f2117 fact
+  holds orders o2116 c115
+
+@f2118 fact
+  holds orders o2117 c122
+
+@f2119 fact
+  holds orders o2118 c129
+
+@f2120 fact
+  holds orders o2119 c136
+
+@f2121 fact
+  holds orders o2120 c143
+
+@f2122 fact
+  holds orders o2121 c0
+
+@f2123 fact
+  holds orders o2122 c7
+
+@f2124 fact
+  holds orders o2123 c14
+
+@f2125 fact
+  holds orders o2124 c21
+
+@f2126 fact
+  holds orders o2125 c28
+
+@f2127 fact
+  holds orders o2126 c35
+
+@f2128 fact
+  holds orders o2127 c42
+
+@f2129 fact
+  holds orders o2128 c49
+
+@f2130 fact
+  holds orders o2129 c56
+
+@f2131 fact
+  holds orders o2130 c63
+
+@f2132 fact
+  holds orders o2131 c70
+
+@f2133 fact
+  holds orders o2132 c77
+
+@f2134 fact
+  holds orders o2133 c84
+
+@f2135 fact
+  holds orders o2134 c91
+
+@f2136 fact
+  holds orders o2135 c98
+
+@f2137 fact
+  holds orders o2136 c105
+
+@f2138 fact
+  holds orders o2137 c112
+
+@f2139 fact
+  holds orders o2138 c119
+
+@f2140 fact
+  holds orders o2139 c126
+
+@f2141 fact
+  holds orders o2140 c133
+
+@f2142 fact
+  holds orders o2141 c140
+
+@f2143 fact
+  holds orders o2142 c147
+
+@f2144 fact
+  holds orders o2143 c4
+
+@f2145 fact
+  holds orders o2144 c11
+
+@f2146 fact
+  holds orders o2145 c18
+
+@f2147 fact
+  holds orders o2146 c25
+
+@f2148 fact
+  holds orders o2147 c32
+
+@f2149 fact
+  holds orders o2148 c39
+
+@f2150 fact
+  holds orders o2149 c46
+
+@f2151 fact
+  holds orders o2150 c53
+
+@f2152 fact
+  holds orders o2151 c60
+
+@f2153 fact
+  holds orders o2152 c67
+
+@f2154 fact
+  holds orders o2153 c74
+
+@f2155 fact
+  holds orders o2154 c81
+
+@f2156 fact
+  holds orders o2155 c88
+
+@f2157 fact
+  holds orders o2156 c95
+
+@f2158 fact
+  holds orders o2157 c102
+
+@f2159 fact
+  holds orders o2158 c109
+
+@f2160 fact
+  holds orders o2159 c116
+
+@f2161 fact
+  holds orders o2160 c123
+
+@f2162 fact
+  holds orders o2161 c130
+
+@f2163 fact
+  holds orders o2162 c137
+
+@f2164 fact
+  holds orders o2163 c144
+
+@f2165 fact
+  holds orders o2164 c1
+
+@f2166 fact
+  holds orders o2165 c8
+
+@f2167 fact
+  holds orders o2166 c15
+
+@f2168 fact
+  holds orders o2167 c22
+
+@f2169 fact
+  holds orders o2168 c29
+
+@f2170 fact
+  holds orders o2169 c36
+
+@f2171 fact
+  holds orders o2170 c43
+
+@f2172 fact
+  holds orders o2171 c50
+
+@f2173 fact
+  holds orders o2172 c57
+
+@f2174 fact
+  holds orders o2173 c64
+
+@f2175 fact
+  holds orders o2174 c71
+
+@f2176 fact
+  holds orders o2175 c78
+
+@f2177 fact
+  holds orders o2176 c85
+
+@f2178 fact
+  holds orders o2177 c92
+
+@f2179 fact
+  holds orders o2178 c99
+
+@f2180 fact
+  holds orders o2179 c106
+
+@f2181 fact
+  holds orders o2180 c113
+
+@f2182 fact
+  holds orders o2181 c120
+
+@f2183 fact
+  holds orders o2182 c127
+
+@f2184 fact
+  holds orders o2183 c134
+
+@f2185 fact
+  holds orders o2184 c141
+
+@f2186 fact
+  holds orders o2185 c148
+
+@f2187 fact
+  holds orders o2186 c5
+
+@f2188 fact
+  holds orders o2187 c12
+
+@f2189 fact
+  holds orders o2188 c19
+
+@f2190 fact
+  holds orders o2189 c26
+
+@f2191 fact
+  holds orders o2190 c33
+
+@f2192 fact
+  holds orders o2191 c40
+
+@f2193 fact
+  holds orders o2192 c47
+
+@f2194 fact
+  holds orders o2193 c54
+
+@f2195 fact
+  holds orders o2194 c61
+
+@f2196 fact
+  holds orders o2195 c68
+
+@f2197 fact
+  holds orders o2196 c75
+
+@f2198 fact
+  holds orders o2197 c82
+
+@f2199 fact
+  holds orders o2198 c89
+
+@f2200 fact
+  holds orders o2199 c96
+
+@f2201 fact
+  holds orders o2200 c103
+
+@f2202 fact
+  holds orders o2201 c110
+
+@f2203 fact
+  holds orders o2202 c117
+
+@f2204 fact
+  holds orders o2203 c124
+
+@f2205 fact
+  holds orders o2204 c131
+
+@f2206 fact
+  holds orders o2205 c138
+
+@f2207 fact
+  holds orders o2206 c145
+
+@f2208 fact
+  holds orders o2207 c2
+
+@f2209 fact
+  holds orders o2208 c9
+
+@f2210 fact
+  holds orders o2209 c16
+
+@f2211 fact
+  holds orders o2210 c23
+
+@f2212 fact
+  holds orders o2211 c30
+
+@f2213 fact
+  holds orders o2212 c37
+
+@f2214 fact
+  holds orders o2213 c44
+
+@f2215 fact
+  holds orders o2214 c51
+
+@f2216 fact
+  holds orders o2215 c58
+
+@f2217 fact
+  holds orders o2216 c65
+
+@f2218 fact
+  holds orders o2217 c72
+
+@f2219 fact
+  holds orders o2218 c79
+
+@f2220 fact
+  holds orders o2219 c86
+
+@f2221 fact
+  holds orders o2220 c93
+
+@f2222 fact
+  holds orders o2221 c100
+
+@f2223 fact
+  holds orders o2222 c107
+
+@f2224 fact
+  holds orders o2223 c114
+
+@f2225 fact
+  holds orders o2224 c121
+
+@f2226 fact
+  holds orders o2225 c128
+
+@f2227 fact
+  holds orders o2226 c135
+
+@f2228 fact
+  holds orders o2227 c142
+
+@f2229 fact
+  holds orders o2228 c149
+
+@f2230 fact
+  holds orders o2229 c6
+
+@f2231 fact
+  holds orders o2230 c13
+
+@f2232 fact
+  holds orders o2231 c20
+
+@f2233 fact
+  holds orders o2232 c27
+
+@f2234 fact
+  holds orders o2233 c34
+
+@f2235 fact
+  holds orders o2234 c41
+
+@f2236 fact
+  holds orders o2235 c48
+
+@f2237 fact
+  holds orders o2236 c55
+
+@f2238 fact
+  holds orders o2237 c62
+
+@f2239 fact
+  holds orders o2238 c69
+
+@f2240 fact
+  holds orders o2239 c76
+
+@f2241 fact
+  holds orders o2240 c83
+
+@f2242 fact
+  holds orders o2241 c90
+
+@f2243 fact
+  holds orders o2242 c97
+
+@f2244 fact
+  holds orders o2243 c104
+
+@f2245 fact
+  holds orders o2244 c111
+
+@f2246 fact
+  holds orders o2245 c118
+
+@f2247 fact
+  holds orders o2246 c125
+
+@f2248 fact
+  holds orders o2247 c132
+
+@f2249 fact
+  holds orders o2248 c139
+
+@f2250 fact
+  holds orders o2249 c146
+
+@f2251 fact
+  holds orders o2250 c3
+
+@f2252 fact
+  holds orders o2251 c10
+
+@f2253 fact
+  holds orders o2252 c17
+
+@f2254 fact
+  holds orders o2253 c24
+
+@f2255 fact
+  holds orders o2254 c31
+
+@f2256 fact
+  holds orders o2255 c38
+
+@f2257 fact
+  holds orders o2256 c45
+
+@f2258 fact
+  holds orders o2257 c52
+
+@f2259 fact
+  holds orders o2258 c59
+
+@f2260 fact
+  holds orders o2259 c66
+
+@f2261 fact
+  holds orders o2260 c73
+
+@f2262 fact
+  holds orders o2261 c80
+
+@f2263 fact
+  holds orders o2262 c87
+
+@f2264 fact
+  holds orders o2263 c94
+
+@f2265 fact
+  holds orders o2264 c101
+
+@f2266 fact
+  holds orders o2265 c108
+
+@f2267 fact
+  holds orders o2266 c115
+
+@f2268 fact
+  holds orders o2267 c122
+
+@f2269 fact
+  holds orders o2268 c129
+
+@f2270 fact
+  holds orders o2269 c136
+
+@f2271 fact
+  holds orders o2270 c143
+
+@f2272 fact
+  holds orders o2271 c0
+
+@f2273 fact
+  holds orders o2272 c7
+
+@f2274 fact
+  holds orders o2273 c14
+
+@f2275 fact
+  holds orders o2274 c21
+
+@f2276 fact
+  holds orders o2275 c28
+
+@f2277 fact
+  holds orders o2276 c35
+
+@f2278 fact
+  holds orders o2277 c42
+
+@f2279 fact
+  holds orders o2278 c49
+
+@f2280 fact
+  holds orders o2279 c56
+
+@f2281 fact
+  holds orders o2280 c63
+
+@f2282 fact
+  holds orders o2281 c70
+
+@f2283 fact
+  holds orders o2282 c77
+
+@f2284 fact
+  holds orders o2283 c84
+
+@f2285 fact
+  holds orders o2284 c91
+
+@f2286 fact
+  holds orders o2285 c98
+
+@f2287 fact
+  holds orders o2286 c105
+
+@f2288 fact
+  holds orders o2287 c112
+
+@f2289 fact
+  holds orders o2288 c119
+
+@f2290 fact
+  holds orders o2289 c126
+
+@f2291 fact
+  holds orders o2290 c133
+
+@f2292 fact
+  holds orders o2291 c140
+
+@f2293 fact
+  holds orders o2292 c147
+
+@f2294 fact
+  holds orders o2293 c4
+
+@f2295 fact
+  holds orders o2294 c11
+
+@f2296 fact
+  holds orders o2295 c18
+
+@f2297 fact
+  holds orders o2296 c25
+
+@f2298 fact
+  holds orders o2297 c32
+
+@f2299 fact
+  holds orders o2298 c39
+
+@f2300 fact
+  holds orders o2299 c46
+
+@f2301 fact
+  holds orders o2300 c53
+
+@f2302 fact
+  holds orders o2301 c60
+
+@f2303 fact
+  holds orders o2302 c67
+
+@f2304 fact
+  holds orders o2303 c74
+
+@f2305 fact
+  holds orders o2304 c81
+
+@f2306 fact
+  holds orders o2305 c88
+
+@f2307 fact
+  holds orders o2306 c95
+
+@f2308 fact
+  holds orders o2307 c102
+
+@f2309 fact
+  holds orders o2308 c109
+
+@f2310 fact
+  holds orders o2309 c116
+
+@f2311 fact
+  holds orders o2310 c123
+
+@f2312 fact
+  holds orders o2311 c130
+
+@f2313 fact
+  holds orders o2312 c137
+
+@f2314 fact
+  holds orders o2313 c144
+
+@f2315 fact
+  holds orders o2314 c1
+
+@f2316 fact
+  holds orders o2315 c8
+
+@f2317 fact
+  holds orders o2316 c15
+
+@f2318 fact
+  holds orders o2317 c22
+
+@f2319 fact
+  holds orders o2318 c29
+
+@f2320 fact
+  holds orders o2319 c36
+
+@f2321 fact
+  holds orders o2320 c43
+
+@f2322 fact
+  holds orders o2321 c50
+
+@f2323 fact
+  holds orders o2322 c57
+
+@f2324 fact
+  holds orders o2323 c64
+
+@f2325 fact
+  holds orders o2324 c71
+
+@f2326 fact
+  holds orders o2325 c78
+
+@f2327 fact
+  holds orders o2326 c85
+
+@f2328 fact
+  holds orders o2327 c92
+
+@f2329 fact
+  holds orders o2328 c99
+
+@f2330 fact
+  holds orders o2329 c106
+
+@f2331 fact
+  holds orders o2330 c113
+
+@f2332 fact
+  holds orders o2331 c120
+
+@f2333 fact
+  holds orders o2332 c127
+
+@f2334 fact
+  holds orders o2333 c134
+
+@f2335 fact
+  holds orders o2334 c141
+
+@f2336 fact
+  holds orders o2335 c148
+
+@f2337 fact
+  holds orders o2336 c5
+
+@f2338 fact
+  holds orders o2337 c12
+
+@f2339 fact
+  holds orders o2338 c19
+
+@f2340 fact
+  holds orders o2339 c26
+
+@f2341 fact
+  holds orders o2340 c33
+
+@f2342 fact
+  holds orders o2341 c40
+
+@f2343 fact
+  holds orders o2342 c47
+
+@f2344 fact
+  holds orders o2343 c54
+
+@f2345 fact
+  holds orders o2344 c61
+
+@f2346 fact
+  holds orders o2345 c68
+
+@f2347 fact
+  holds orders o2346 c75
+
+@f2348 fact
+  holds orders o2347 c82
+
+@f2349 fact
+  holds orders o2348 c89
+
+@f2350 fact
+  holds orders o2349 c96
+
+@f2351 fact
+  holds orders o2350 c103
+
+@f2352 fact
+  holds orders o2351 c110
+
+@f2353 fact
+  holds orders o2352 c117
+
+@f2354 fact
+  holds orders o2353 c124
+
+@f2355 fact
+  holds orders o2354 c131
+
+@f2356 fact
+  holds orders o2355 c138
+
+@f2357 fact
+  holds orders o2356 c145
+
+@f2358 fact
+  holds orders o2357 c2
+
+@f2359 fact
+  holds orders o2358 c9
+
+@f2360 fact
+  holds orders o2359 c16
+
+@f2361 fact
+  holds orders o2360 c23
+
+@f2362 fact
+  holds orders o2361 c30
+
+@f2363 fact
+  holds orders o2362 c37
+
+@f2364 fact
+  holds orders o2363 c44
+
+@f2365 fact
+  holds orders o2364 c51
+
+@f2366 fact
+  holds orders o2365 c58
+
+@f2367 fact
+  holds orders o2366 c65
+
+@f2368 fact
+  holds orders o2367 c72
+
+@f2369 fact
+  holds orders o2368 c79
+
+@f2370 fact
+  holds orders o2369 c86
+
+@f2371 fact
+  holds orders o2370 c93
+
+@f2372 fact
+  holds orders o2371 c100
+
+@f2373 fact
+  holds orders o2372 c107
+
+@f2374 fact
+  holds orders o2373 c114
+
+@f2375 fact
+  holds orders o2374 c121
+
+@f2376 fact
+  holds orders o2375 c128
+
+@f2377 fact
+  holds orders o2376 c135
+
+@f2378 fact
+  holds orders o2377 c142
+
+@f2379 fact
+  holds orders o2378 c149
+
+@f2380 fact
+  holds orders o2379 c6
+
+@f2381 fact
+  holds orders o2380 c13
+
+@f2382 fact
+  holds orders o2381 c20
+
+@f2383 fact
+  holds orders o2382 c27
+
+@f2384 fact
+  holds orders o2383 c34
+
+@f2385 fact
+  holds orders o2384 c41
+
+@f2386 fact
+  holds orders o2385 c48
+
+@f2387 fact
+  holds orders o2386 c55
+
+@f2388 fact
+  holds orders o2387 c62
+
+@f2389 fact
+  holds orders o2388 c69
+
+@f2390 fact
+  holds orders o2389 c76
+
+@f2391 fact
+  holds orders o2390 c83
+
+@f2392 fact
+  holds orders o2391 c90
+
+@f2393 fact
+  holds orders o2392 c97
+
+@f2394 fact
+  holds orders o2393 c104
+
+@f2395 fact
+  holds orders o2394 c111
+
+@f2396 fact
+  holds orders o2395 c118
+
+@f2397 fact
+  holds orders o2396 c125
+
+@f2398 fact
+  holds orders o2397 c132
+
+@f2399 fact
+  holds orders o2398 c139
+
+@f2400 fact
+  holds orders o2399 c146
+
+@f2401 fact
+  holds orders o2400 c3
+
+@f2402 fact
+  holds orders o2401 c10
+
+@f2403 fact
+  holds orders o2402 c17
+
+@f2404 fact
+  holds orders o2403 c24
+
+@f2405 fact
+  holds orders o2404 c31
+
+@f2406 fact
+  holds orders o2405 c38
+
+@f2407 fact
+  holds orders o2406 c45
+
+@f2408 fact
+  holds orders o2407 c52
+
+@f2409 fact
+  holds orders o2408 c59
+
+@f2410 fact
+  holds orders o2409 c66
+
+@f2411 fact
+  holds orders o2410 c73
+
+@f2412 fact
+  holds orders o2411 c80
+
+@f2413 fact
+  holds orders o2412 c87
+
+@f2414 fact
+  holds orders o2413 c94
+
+@f2415 fact
+  holds orders o2414 c101
+
+@f2416 fact
+  holds orders o2415 c108
+
+@f2417 fact
+  holds orders o2416 c115
+
+@f2418 fact
+  holds orders o2417 c122
+
+@f2419 fact
+  holds orders o2418 c129
+
+@f2420 fact
+  holds orders o2419 c136
+
+@f2421 fact
+  holds orders o2420 c143
+
+@f2422 fact
+  holds orders o2421 c0
+
+@f2423 fact
+  holds orders o2422 c7
+
+@f2424 fact
+  holds orders o2423 c14
+
+@f2425 fact
+  holds orders o2424 c21
+
+@f2426 fact
+  holds orders o2425 c28
+
+@f2427 fact
+  holds orders o2426 c35
+
+@f2428 fact
+  holds orders o2427 c42
+
+@f2429 fact
+  holds orders o2428 c49
+
+@f2430 fact
+  holds orders o2429 c56
+
+@f2431 fact
+  holds orders o2430 c63
+
+@f2432 fact
+  holds orders o2431 c70
+
+@f2433 fact
+  holds orders o2432 c77
+
+@f2434 fact
+  holds orders o2433 c84
+
+@f2435 fact
+  holds orders o2434 c91
+
+@f2436 fact
+  holds orders o2435 c98
+
+@f2437 fact
+  holds orders o2436 c105
+
+@f2438 fact
+  holds orders o2437 c112
+
+@f2439 fact
+  holds orders o2438 c119
+
+@f2440 fact
+  holds orders o2439 c126
+
+@f2441 fact
+  holds orders o2440 c133
+
+@f2442 fact
+  holds orders o2441 c140
+
+@f2443 fact
+  holds orders o2442 c147
+
+@f2444 fact
+  holds orders o2443 c4
+
+@f2445 fact
+  holds orders o2444 c11
+
+@f2446 fact
+  holds orders o2445 c18
+
+@f2447 fact
+  holds orders o2446 c25
+
+@f2448 fact
+  holds orders o2447 c32
+
+@f2449 fact
+  holds orders o2448 c39
+
+@f2450 fact
+  holds orders o2449 c46
+
+@f2451 fact
+  holds orders o2450 c53
+
+@f2452 fact
+  holds orders o2451 c60
+
+@f2453 fact
+  holds orders o2452 c67
+
+@f2454 fact
+  holds orders o2453 c74
+
+@f2455 fact
+  holds orders o2454 c81
+
+@f2456 fact
+  holds orders o2455 c88
+
+@f2457 fact
+  holds orders o2456 c95
+
+@f2458 fact
+  holds orders o2457 c102
+
+@f2459 fact
+  holds orders o2458 c109
+
+@f2460 fact
+  holds orders o2459 c116
+
+@f2461 fact
+  holds orders o2460 c123
+
+@f2462 fact
+  holds orders o2461 c130
+
+@f2463 fact
+  holds orders o2462 c137
+
+@f2464 fact
+  holds orders o2463 c144
+
+@f2465 fact
+  holds orders o2464 c1
+
+@f2466 fact
+  holds orders o2465 c8
+
+@f2467 fact
+  holds orders o2466 c15
+
+@f2468 fact
+  holds orders o2467 c22
+
+@f2469 fact
+  holds orders o2468 c29
+
+@f2470 fact
+  holds orders o2469 c36
+
+@f2471 fact
+  holds orders o2470 c43
+
+@f2472 fact
+  holds orders o2471 c50
+
+@f2473 fact
+  holds orders o2472 c57
+
+@f2474 fact
+  holds orders o2473 c64
+
+@f2475 fact
+  holds orders o2474 c71
+
+@f2476 fact
+  holds orders o2475 c78
+
+@f2477 fact
+  holds orders o2476 c85
+
+@f2478 fact
+  holds orders o2477 c92
+
+@f2479 fact
+  holds orders o2478 c99
+
+@f2480 fact
+  holds orders o2479 c106
+
+@f2481 fact
+  holds orders o2480 c113
+
+@f2482 fact
+  holds orders o2481 c120
+
+@f2483 fact
+  holds orders o2482 c127
+
+@f2484 fact
+  holds orders o2483 c134
+
+@f2485 fact
+  holds orders o2484 c141
+
+@f2486 fact
+  holds orders o2485 c148
+
+@f2487 fact
+  holds orders o2486 c5
+
+@f2488 fact
+  holds orders o2487 c12
+
+@f2489 fact
+  holds orders o2488 c19
+
+@f2490 fact
+  holds orders o2489 c26
+
+@f2491 fact
+  holds orders o2490 c33
+
+@f2492 fact
+  holds orders o2491 c40
+
+@f2493 fact
+  holds orders o2492 c47
+
+@f2494 fact
+  holds orders o2493 c54
+
+@f2495 fact
+  holds orders o2494 c61
+
+@f2496 fact
+  holds orders o2495 c68
+
+@f2497 fact
+  holds orders o2496 c75
+
+@f2498 fact
+  holds orders o2497 c82
+
+@f2499 fact
+  holds orders o2498 c89
+
+@f2500 fact
+  holds orders o2499 c96
+
+@f2501 fact
+  holds orders o2500 c103
+
+@f2502 fact
+  holds orders o2501 c110
+
+@f2503 fact
+  holds orders o2502 c117
+
+@f2504 fact
+  holds orders o2503 c124
+
+@f2505 fact
+  holds orders o2504 c131
+
+@f2506 fact
+  holds orders o2505 c138
+
+@f2507 fact
+  holds orders o2506 c145
+
+@f2508 fact
+  holds orders o2507 c2
+
+@f2509 fact
+  holds orders o2508 c9
+
+@f2510 fact
+  holds orders o2509 c16
+
+@f2511 fact
+  holds orders o2510 c23
+
+@f2512 fact
+  holds orders o2511 c30
+
+@f2513 fact
+  holds orders o2512 c37
+
+@f2514 fact
+  holds orders o2513 c44
+
+@f2515 fact
+  holds orders o2514 c51
+
+@f2516 fact
+  holds orders o2515 c58
+
+@f2517 fact
+  holds orders o2516 c65
+
+@f2518 fact
+  holds orders o2517 c72
+
+@f2519 fact
+  holds orders o2518 c79
+
+@f2520 fact
+  holds orders o2519 c86
+
+@f2521 fact
+  holds orders o2520 c93
+
+@f2522 fact
+  holds orders o2521 c100
+
+@f2523 fact
+  holds orders o2522 c107
+
+@f2524 fact
+  holds orders o2523 c114
+
+@f2525 fact
+  holds orders o2524 c121
+
+@f2526 fact
+  holds orders o2525 c128
+
+@f2527 fact
+  holds orders o2526 c135
+
+@f2528 fact
+  holds orders o2527 c142
+
+@f2529 fact
+  holds orders o2528 c149
+
+@f2530 fact
+  holds orders o2529 c6
+
+@f2531 fact
+  holds orders o2530 c13
+
+@f2532 fact
+  holds orders o2531 c20
+
+@f2533 fact
+  holds orders o2532 c27
+
+@f2534 fact
+  holds orders o2533 c34
+
+@f2535 fact
+  holds orders o2534 c41
+
+@f2536 fact
+  holds orders o2535 c48
+
+@f2537 fact
+  holds orders o2536 c55
+
+@f2538 fact
+  holds orders o2537 c62
+
+@f2539 fact
+  holds orders o2538 c69
+
+@f2540 fact
+  holds orders o2539 c76
+
+@f2541 fact
+  holds orders o2540 c83
+
+@f2542 fact
+  holds orders o2541 c90
+
+@f2543 fact
+  holds orders o2542 c97
+
+@f2544 fact
+  holds orders o2543 c104
+
+@f2545 fact
+  holds orders o2544 c111
+
+@f2546 fact
+  holds orders o2545 c118
+
+@f2547 fact
+  holds orders o2546 c125
+
+@f2548 fact
+  holds orders o2547 c132
+
+@f2549 fact
+  holds orders o2548 c139
+
+@f2550 fact
+  holds orders o2549 c146
+
+@f2551 fact
+  holds orders o2550 c3
+
+@f2552 fact
+  holds orders o2551 c10
+
+@f2553 fact
+  holds orders o2552 c17
+
+@f2554 fact
+  holds orders o2553 c24
+
+@f2555 fact
+  holds orders o2554 c31
+
+@f2556 fact
+  holds orders o2555 c38
+
+@f2557 fact
+  holds orders o2556 c45
+
+@f2558 fact
+  holds orders o2557 c52
+
+@f2559 fact
+  holds orders o2558 c59
+
+@f2560 fact
+  holds orders o2559 c66
+
+@f2561 fact
+  holds orders o2560 c73
+
+@f2562 fact
+  holds orders o2561 c80
+
+@f2563 fact
+  holds orders o2562 c87
+
+@f2564 fact
+  holds orders o2563 c94
+
+@f2565 fact
+  holds orders o2564 c101
+
+@f2566 fact
+  holds orders o2565 c108
+
+@f2567 fact
+  holds orders o2566 c115
+
+@f2568 fact
+  holds orders o2567 c122
+
+@f2569 fact
+  holds orders o2568 c129
+
+@f2570 fact
+  holds orders o2569 c136
+
+@f2571 fact
+  holds orders o2570 c143
+
+@f2572 fact
+  holds orders o2571 c0
+
+@f2573 fact
+  holds orders o2572 c7
+
+@f2574 fact
+  holds orders o2573 c14
+
+@f2575 fact
+  holds orders o2574 c21
+
+@f2576 fact
+  holds orders o2575 c28
+
+@f2577 fact
+  holds orders o2576 c35
+
+@f2578 fact
+  holds orders o2577 c42
+
+@f2579 fact
+  holds orders o2578 c49
+
+@f2580 fact
+  holds orders o2579 c56
+
+@f2581 fact
+  holds orders o2580 c63
+
+@f2582 fact
+  holds orders o2581 c70
+
+@f2583 fact
+  holds orders o2582 c77
+
+@f2584 fact
+  holds orders o2583 c84
+
+@f2585 fact
+  holds orders o2584 c91
+
+@f2586 fact
+  holds orders o2585 c98
+
+@f2587 fact
+  holds orders o2586 c105
+
+@f2588 fact
+  holds orders o2587 c112
+
+@f2589 fact
+  holds orders o2588 c119
+
+@f2590 fact
+  holds orders o2589 c126
+
+@f2591 fact
+  holds orders o2590 c133
+
+@f2592 fact
+  holds orders o2591 c140
+
+@f2593 fact
+  holds orders o2592 c147
+
+@f2594 fact
+  holds orders o2593 c4
+
+@f2595 fact
+  holds orders o2594 c11
+
+@f2596 fact
+  holds orders o2595 c18
+
+@f2597 fact
+  holds orders o2596 c25
+
+@f2598 fact
+  holds orders o2597 c32
+
+@f2599 fact
+  holds orders o2598 c39
+
+@f2600 fact
+  holds orders o2599 c46
+
+@f2601 fact
+  holds orders o2600 c53
+
+@f2602 fact
+  holds orders o2601 c60
+
+@f2603 fact
+  holds orders o2602 c67
+
+@f2604 fact
+  holds orders o2603 c74
+
+@f2605 fact
+  holds orders o2604 c81
+
+@f2606 fact
+  holds orders o2605 c88
+
+@f2607 fact
+  holds orders o2606 c95
+
+@f2608 fact
+  holds orders o2607 c102
+
+@f2609 fact
+  holds orders o2608 c109
+
+@f2610 fact
+  holds orders o2609 c116
+
+@f2611 fact
+  holds orders o2610 c123
+
+@f2612 fact
+  holds orders o2611 c130
+
+@f2613 fact
+  holds orders o2612 c137
+
+@f2614 fact
+  holds orders o2613 c144
+
+@f2615 fact
+  holds orders o2614 c1
+
+@f2616 fact
+  holds orders o2615 c8
+
+@f2617 fact
+  holds orders o2616 c15
+
+@f2618 fact
+  holds orders o2617 c22
+
+@f2619 fact
+  holds orders o2618 c29
+
+@f2620 fact
+  holds orders o2619 c36
+
+@f2621 fact
+  holds orders o2620 c43
+
+@f2622 fact
+  holds orders o2621 c50
+
+@f2623 fact
+  holds orders o2622 c57
+
+@f2624 fact
+  holds orders o2623 c64
+
+@f2625 fact
+  holds orders o2624 c71
+
+@f2626 fact
+  holds orders o2625 c78
+
+@f2627 fact
+  holds orders o2626 c85
+
+@f2628 fact
+  holds orders o2627 c92
+
+@f2629 fact
+  holds orders o2628 c99
+
+@f2630 fact
+  holds orders o2629 c106
+
+@f2631 fact
+  holds orders o2630 c113
+
+@f2632 fact
+  holds orders o2631 c120
+
+@f2633 fact
+  holds orders o2632 c127
+
+@f2634 fact
+  holds orders o2633 c134
+
+@f2635 fact
+  holds orders o2634 c141
+
+@f2636 fact
+  holds orders o2635 c148
+
+@f2637 fact
+  holds orders o2636 c5
+
+@f2638 fact
+  holds orders o2637 c12
+
+@f2639 fact
+  holds orders o2638 c19
+
+@f2640 fact
+  holds orders o2639 c26
+
+@f2641 fact
+  holds orders o2640 c33
+
+@f2642 fact
+  holds orders o2641 c40
+
+@f2643 fact
+  holds orders o2642 c47
+
+@f2644 fact
+  holds orders o2643 c54
+
+@f2645 fact
+  holds orders o2644 c61
+
+@f2646 fact
+  holds orders o2645 c68
+
+@f2647 fact
+  holds orders o2646 c75
+
+@f2648 fact
+  holds orders o2647 c82
+
+@f2649 fact
+  holds orders o2648 c89
+
+@f2650 fact
+  holds orders o2649 c96
+
+@f2651 fact
+  holds orders o2650 c103
+
+@f2652 fact
+  holds orders o2651 c110
+
+@f2653 fact
+  holds orders o2652 c117
+
+@f2654 fact
+  holds orders o2653 c124
+
+@f2655 fact
+  holds orders o2654 c131
+
+@f2656 fact
+  holds orders o2655 c138
+
+@f2657 fact
+  holds orders o2656 c145
+
+@f2658 fact
+  holds orders o2657 c2
+
+@f2659 fact
+  holds orders o2658 c9
+
+@f2660 fact
+  holds orders o2659 c16
+
+@f2661 fact
+  holds orders o2660 c23
+
+@f2662 fact
+  holds orders o2661 c30
+
+@f2663 fact
+  holds orders o2662 c37
+
+@f2664 fact
+  holds orders o2663 c44
+
+@f2665 fact
+  holds orders o2664 c51
+
+@f2666 fact
+  holds orders o2665 c58
+
+@f2667 fact
+  holds orders o2666 c65
+
+@f2668 fact
+  holds orders o2667 c72
+
+@f2669 fact
+  holds orders o2668 c79
+
+@f2670 fact
+  holds orders o2669 c86
+
+@f2671 fact
+  holds orders o2670 c93
+
+@f2672 fact
+  holds orders o2671 c100
+
+@f2673 fact
+  holds orders o2672 c107
+
+@f2674 fact
+  holds orders o2673 c114
+
+@f2675 fact
+  holds orders o2674 c121
+
+@f2676 fact
+  holds orders o2675 c128
+
+@f2677 fact
+  holds orders o2676 c135
+
+@f2678 fact
+  holds orders o2677 c142
+
+@f2679 fact
+  holds orders o2678 c149
+
+@f2680 fact
+  holds orders o2679 c6
+
+@f2681 fact
+  holds orders o2680 c13
+
+@f2682 fact
+  holds orders o2681 c20
+
+@f2683 fact
+  holds orders o2682 c27
+
+@f2684 fact
+  holds orders o2683 c34
+
+@f2685 fact
+  holds orders o2684 c41
+
+@f2686 fact
+  holds orders o2685 c48
+
+@f2687 fact
+  holds orders o2686 c55
+
+@f2688 fact
+  holds orders o2687 c62
+
+@f2689 fact
+  holds orders o2688 c69
+
+@f2690 fact
+  holds orders o2689 c76
+
+@f2691 fact
+  holds orders o2690 c83
+
+@f2692 fact
+  holds orders o2691 c90
+
+@f2693 fact
+  holds orders o2692 c97
+
+@f2694 fact
+  holds orders o2693 c104
+
+@f2695 fact
+  holds orders o2694 c111
+
+@f2696 fact
+  holds orders o2695 c118
+
+@f2697 fact
+  holds orders o2696 c125
+
+@f2698 fact
+  holds orders o2697 c132
+
+@f2699 fact
+  holds orders o2698 c139
+
+@f2700 fact
+  holds orders o2699 c146
+
+@f2701 fact
+  holds orders o2700 c3
+
+@f2702 fact
+  holds orders o2701 c10
+
+@f2703 fact
+  holds orders o2702 c17
+
+@f2704 fact
+  holds orders o2703 c24
+
+@f2705 fact
+  holds orders o2704 c31
+
+@f2706 fact
+  holds orders o2705 c38
+
+@f2707 fact
+  holds orders o2706 c45
+
+@f2708 fact
+  holds orders o2707 c52
+
+@f2709 fact
+  holds orders o2708 c59
+
+@f2710 fact
+  holds orders o2709 c66
+
+@f2711 fact
+  holds orders o2710 c73
+
+@f2712 fact
+  holds orders o2711 c80
+
+@f2713 fact
+  holds orders o2712 c87
+
+@f2714 fact
+  holds orders o2713 c94
+
+@f2715 fact
+  holds orders o2714 c101
+
+@f2716 fact
+  holds orders o2715 c108
+
+@f2717 fact
+  holds orders o2716 c115
+
+@f2718 fact
+  holds orders o2717 c122
+
+@f2719 fact
+  holds orders o2718 c129
+
+@f2720 fact
+  holds orders o2719 c136
+
+@f2721 fact
+  holds orders o2720 c143
+
+@f2722 fact
+  holds orders o2721 c0
+
+@f2723 fact
+  holds orders o2722 c7
+
+@f2724 fact
+  holds orders o2723 c14
+
+@f2725 fact
+  holds orders o2724 c21
+
+@f2726 fact
+  holds orders o2725 c28
+
+@f2727 fact
+  holds orders o2726 c35
+
+@f2728 fact
+  holds orders o2727 c42
+
+@f2729 fact
+  holds orders o2728 c49
+
+@f2730 fact
+  holds orders o2729 c56
+
+@f2731 fact
+  holds orders o2730 c63
+
+@f2732 fact
+  holds orders o2731 c70
+
+@f2733 fact
+  holds orders o2732 c77
+
+@f2734 fact
+  holds orders o2733 c84
+
+@f2735 fact
+  holds orders o2734 c91
+
+@f2736 fact
+  holds orders o2735 c98
+
+@f2737 fact
+  holds orders o2736 c105
+
+@f2738 fact
+  holds orders o2737 c112
+
+@f2739 fact
+  holds orders o2738 c119
+
+@f2740 fact
+  holds orders o2739 c126
+
+@f2741 fact
+  holds orders o2740 c133
+
+@f2742 fact
+  holds orders o2741 c140
+
+@f2743 fact
+  holds orders o2742 c147
+
+@f2744 fact
+  holds orders o2743 c4
+
+@f2745 fact
+  holds orders o2744 c11
+
+@f2746 fact
+  holds orders o2745 c18
+
+@f2747 fact
+  holds orders o2746 c25
+
+@f2748 fact
+  holds orders o2747 c32
+
+@f2749 fact
+  holds orders o2748 c39
+
+@f2750 fact
+  holds orders o2749 c46
+
+@f2751 fact
+  holds orders o2750 c53
+
+@f2752 fact
+  holds orders o2751 c60
+
+@f2753 fact
+  holds orders o2752 c67
+
+@f2754 fact
+  holds orders o2753 c74
+
+@f2755 fact
+  holds orders o2754 c81
+
+@f2756 fact
+  holds orders o2755 c88
+
+@f2757 fact
+  holds orders o2756 c95
+
+@f2758 fact
+  holds orders o2757 c102
+
+@f2759 fact
+  holds orders o2758 c109
+
+@f2760 fact
+  holds orders o2759 c116
+
+@f2761 fact
+  holds orders o2760 c123
+
+@f2762 fact
+  holds orders o2761 c130
+
+@f2763 fact
+  holds orders o2762 c137
+
+@f2764 fact
+  holds orders o2763 c144
+
+@f2765 fact
+  holds orders o2764 c1
+
+@f2766 fact
+  holds orders o2765 c8
+
+@f2767 fact
+  holds orders o2766 c15
+
+@f2768 fact
+  holds orders o2767 c22
+
+@f2769 fact
+  holds orders o2768 c29
+
+@f2770 fact
+  holds orders o2769 c36
+
+@f2771 fact
+  holds orders o2770 c43
+
+@f2772 fact
+  holds orders o2771 c50
+
+@f2773 fact
+  holds orders o2772 c57
+
+@f2774 fact
+  holds orders o2773 c64
+
+@f2775 fact
+  holds orders o2774 c71
+
+@f2776 fact
+  holds orders o2775 c78
+
+@f2777 fact
+  holds orders o2776 c85
+
+@f2778 fact
+  holds orders o2777 c92
+
+@f2779 fact
+  holds orders o2778 c99
+
+@f2780 fact
+  holds orders o2779 c106
+
+@f2781 fact
+  holds orders o2780 c113
+
+@f2782 fact
+  holds orders o2781 c120
+
+@f2783 fact
+  holds orders o2782 c127
+
+@f2784 fact
+  holds orders o2783 c134
+
+@f2785 fact
+  holds orders o2784 c141
+
+@f2786 fact
+  holds orders o2785 c148
+
+@f2787 fact
+  holds orders o2786 c5
+
+@f2788 fact
+  holds orders o2787 c12
+
+@f2789 fact
+  holds orders o2788 c19
+
+@f2790 fact
+  holds orders o2789 c26
+
+@f2791 fact
+  holds orders o2790 c33
+
+@f2792 fact
+  holds orders o2791 c40
+
+@f2793 fact
+  holds orders o2792 c47
+
+@f2794 fact
+  holds orders o2793 c54
+
+@f2795 fact
+  holds orders o2794 c61
+
+@f2796 fact
+  holds orders o2795 c68
+
+@f2797 fact
+  holds orders o2796 c75
+
+@f2798 fact
+  holds orders o2797 c82
+
+@f2799 fact
+  holds orders o2798 c89
+
+@f2800 fact
+  holds orders o2799 c96
+
+@f2801 fact
+  holds orders o2800 c103
+
+@f2802 fact
+  holds orders o2801 c110
+
+@f2803 fact
+  holds orders o2802 c117
+
+@f2804 fact
+  holds orders o2803 c124
+
+@f2805 fact
+  holds orders o2804 c131
+
+@f2806 fact
+  holds orders o2805 c138
+
+@f2807 fact
+  holds orders o2806 c145
+
+@f2808 fact
+  holds orders o2807 c2
+
+@f2809 fact
+  holds orders o2808 c9
+
+@f2810 fact
+  holds orders o2809 c16
+
+@f2811 fact
+  holds orders o2810 c23
+
+@f2812 fact
+  holds orders o2811 c30
+
+@f2813 fact
+  holds orders o2812 c37
+
+@f2814 fact
+  holds orders o2813 c44
+
+@f2815 fact
+  holds orders o2814 c51
+
+@f2816 fact
+  holds orders o2815 c58
+
+@f2817 fact
+  holds orders o2816 c65
+
+@f2818 fact
+  holds orders o2817 c72
+
+@f2819 fact
+  holds orders o2818 c79
+
+@f2820 fact
+  holds orders o2819 c86
+
+@f2821 fact
+  holds orders o2820 c93
+
+@f2822 fact
+  holds orders o2821 c100
+
+@f2823 fact
+  holds orders o2822 c107
+
+@f2824 fact
+  holds orders o2823 c114
+
+@f2825 fact
+  holds orders o2824 c121
+
+@f2826 fact
+  holds orders o2825 c128
+
+@f2827 fact
+  holds orders o2826 c135
+
+@f2828 fact
+  holds orders o2827 c142
+
+@f2829 fact
+  holds orders o2828 c149
+
+@f2830 fact
+  holds orders o2829 c6
+
+@f2831 fact
+  holds orders o2830 c13
+
+@f2832 fact
+  holds orders o2831 c20
+
+@f2833 fact
+  holds orders o2832 c27
+
+@f2834 fact
+  holds orders o2833 c34
+
+@f2835 fact
+  holds orders o2834 c41
+
+@f2836 fact
+  holds orders o2835 c48
+
+@f2837 fact
+  holds orders o2836 c55
+
+@f2838 fact
+  holds orders o2837 c62
+
+@f2839 fact
+  holds orders o2838 c69
+
+@f2840 fact
+  holds orders o2839 c76
+
+@f2841 fact
+  holds orders o2840 c83
+
+@f2842 fact
+  holds orders o2841 c90
+
+@f2843 fact
+  holds orders o2842 c97
+
+@f2844 fact
+  holds orders o2843 c104
+
+@f2845 fact
+  holds orders o2844 c111
+
+@f2846 fact
+  holds orders o2845 c118
+
+@f2847 fact
+  holds orders o2846 c125
+
+@f2848 fact
+  holds orders o2847 c132
+
+@f2849 fact
+  holds orders o2848 c139
+
+@f2850 fact
+  holds orders o2849 c146
+
+@f2851 fact
+  holds orders o2850 c3
+
+@f2852 fact
+  holds orders o2851 c10
+
+@f2853 fact
+  holds orders o2852 c17
+
+@f2854 fact
+  holds orders o2853 c24
+
+@f2855 fact
+  holds orders o2854 c31
+
+@f2856 fact
+  holds orders o2855 c38
+
+@f2857 fact
+  holds orders o2856 c45
+
+@f2858 fact
+  holds orders o2857 c52
+
+@f2859 fact
+  holds orders o2858 c59
+
+@f2860 fact
+  holds orders o2859 c66
+
+@f2861 fact
+  holds orders o2860 c73
+
+@f2862 fact
+  holds orders o2861 c80
+
+@f2863 fact
+  holds orders o2862 c87
+
+@f2864 fact
+  holds orders o2863 c94
+
+@f2865 fact
+  holds orders o2864 c101
+
+@f2866 fact
+  holds orders o2865 c108
+
+@f2867 fact
+  holds orders o2866 c115
+
+@f2868 fact
+  holds orders o2867 c122
+
+@f2869 fact
+  holds orders o2868 c129
+
+@f2870 fact
+  holds orders o2869 c136
+
+@f2871 fact
+  holds orders o2870 c143
+
+@f2872 fact
+  holds orders o2871 c0
+
+@f2873 fact
+  holds orders o2872 c7
+
+@f2874 fact
+  holds orders o2873 c14
+
+@f2875 fact
+  holds orders o2874 c21
+
+@f2876 fact
+  holds orders o2875 c28
+
+@f2877 fact
+  holds orders o2876 c35
+
+@f2878 fact
+  holds orders o2877 c42
+
+@f2879 fact
+  holds orders o2878 c49
+
+@f2880 fact
+  holds orders o2879 c56
+
+@f2881 fact
+  holds orders o2880 c63
+
+@f2882 fact
+  holds orders o2881 c70
+
+@f2883 fact
+  holds orders o2882 c77
+
+@f2884 fact
+  holds orders o2883 c84
+
+@f2885 fact
+  holds orders o2884 c91
+
+@f2886 fact
+  holds orders o2885 c98
+
+@f2887 fact
+  holds orders o2886 c105
+
+@f2888 fact
+  holds orders o2887 c112
+
+@f2889 fact
+  holds orders o2888 c119
+
+@f2890 fact
+  holds orders o2889 c126
+
+@f2891 fact
+  holds orders o2890 c133
+
+@f2892 fact
+  holds orders o2891 c140
+
+@f2893 fact
+  holds orders o2892 c147
+
+@f2894 fact
+  holds orders o2893 c4
+
+@f2895 fact
+  holds orders o2894 c11
+
+@f2896 fact
+  holds orders o2895 c18
+
+@f2897 fact
+  holds orders o2896 c25
+
+@f2898 fact
+  holds orders o2897 c32
+
+@f2899 fact
+  holds orders o2898 c39
+
+@f2900 fact
+  holds orders o2899 c46
+
+@f2901 fact
+  holds orders o2900 c53
+
+@f2902 fact
+  holds orders o2901 c60
+
+@f2903 fact
+  holds orders o2902 c67
+
+@f2904 fact
+  holds orders o2903 c74
+
+@f2905 fact
+  holds orders o2904 c81
+
+@f2906 fact
+  holds orders o2905 c88
+
+@f2907 fact
+  holds orders o2906 c95
+
+@f2908 fact
+  holds orders o2907 c102
+
+@f2909 fact
+  holds orders o2908 c109
+
+@f2910 fact
+  holds orders o2909 c116
+
+@f2911 fact
+  holds orders o2910 c123
+
+@f2912 fact
+  holds orders o2911 c130
+
+@f2913 fact
+  holds orders o2912 c137
+
+@f2914 fact
+  holds orders o2913 c144
+
+@f2915 fact
+  holds orders o2914 c1
+
+@f2916 fact
+  holds orders o2915 c8
+
+@f2917 fact
+  holds orders o2916 c15
+
+@f2918 fact
+  holds orders o2917 c22
+
+@f2919 fact
+  holds orders o2918 c29
+
+@f2920 fact
+  holds orders o2919 c36
+
+@f2921 fact
+  holds orders o2920 c43
+
+@f2922 fact
+  holds orders o2921 c50
+
+@f2923 fact
+  holds orders o2922 c57
+
+@f2924 fact
+  holds orders o2923 c64
+
+@f2925 fact
+  holds orders o2924 c71
+
+@f2926 fact
+  holds orders o2925 c78
+
+@f2927 fact
+  holds orders o2926 c85
+
+@f2928 fact
+  holds orders o2927 c92
+
+@f2929 fact
+  holds orders o2928 c99
+
+@f2930 fact
+  holds orders o2929 c106
+
+@f2931 fact
+  holds orders o2930 c113
+
+@f2932 fact
+  holds orders o2931 c120
+
+@f2933 fact
+  holds orders o2932 c127
+
+@f2934 fact
+  holds orders o2933 c134
+
+@f2935 fact
+  holds orders o2934 c141
+
+@f2936 fact
+  holds orders o2935 c148
+
+@f2937 fact
+  holds orders o2936 c5
+
+@f2938 fact
+  holds orders o2937 c12
+
+@f2939 fact
+  holds orders o2938 c19
+
+@f2940 fact
+  holds orders o2939 c26
+
+@f2941 fact
+  holds orders o2940 c33
+
+@f2942 fact
+  holds orders o2941 c40
+
+@f2943 fact
+  holds orders o2942 c47
+
+@f2944 fact
+  holds orders o2943 c54
+
+@f2945 fact
+  holds orders o2944 c61
+
+@f2946 fact
+  holds orders o2945 c68
+
+@f2947 fact
+  holds orders o2946 c75
+
+@f2948 fact
+  holds orders o2947 c82
+
+@f2949 fact
+  holds orders o2948 c89
+
+@f2950 fact
+  holds orders o2949 c96
+
+@f2951 fact
+  holds orders o2950 c103
+
+@f2952 fact
+  holds orders o2951 c110
+
+@f2953 fact
+  holds orders o2952 c117
+
+@f2954 fact
+  holds orders o2953 c124
+
+@f2955 fact
+  holds orders o2954 c131
+
+@f2956 fact
+  holds orders o2955 c138
+
+@f2957 fact
+  holds orders o2956 c145
+
+@f2958 fact
+  holds orders o2957 c2
+
+@f2959 fact
+  holds orders o2958 c9
+
+@f2960 fact
+  holds orders o2959 c16
+
+@f2961 fact
+  holds orders o2960 c23
+
+@f2962 fact
+  holds orders o2961 c30
+
+@f2963 fact
+  holds orders o2962 c37
+
+@f2964 fact
+  holds orders o2963 c44
+
+@f2965 fact
+  holds orders o2964 c51
+
+@f2966 fact
+  holds orders o2965 c58
+
+@f2967 fact
+  holds orders o2966 c65
+
+@f2968 fact
+  holds orders o2967 c72
+
+@f2969 fact
+  holds orders o2968 c79
+
+@f2970 fact
+  holds orders o2969 c86
+
+@f2971 fact
+  holds orders o2970 c93
+
+@f2972 fact
+  holds orders o2971 c100
+
+@f2973 fact
+  holds orders o2972 c107
+
+@f2974 fact
+  holds orders o2973 c114
+
+@f2975 fact
+  holds orders o2974 c121
+
+@f2976 fact
+  holds orders o2975 c128
+
+@f2977 fact
+  holds orders o2976 c135
+
+@f2978 fact
+  holds orders o2977 c142
+
+@f2979 fact
+  holds orders o2978 c149
+
+@f2980 fact
+  holds orders o2979 c6
+
+@f2981 fact
+  holds orders o2980 c13
+
+@f2982 fact
+  holds orders o2981 c20
+
+@f2983 fact
+  holds orders o2982 c27
+
+@f2984 fact
+  holds orders o2983 c34
+
+@f2985 fact
+  holds orders o2984 c41
+
+@f2986 fact
+  holds orders o2985 c48
+
+@f2987 fact
+  holds orders o2986 c55
+
+@f2988 fact
+  holds orders o2987 c62
+
+@f2989 fact
+  holds orders o2988 c69
+
+@f2990 fact
+  holds orders o2989 c76
+
+@f2991 fact
+  holds orders o2990 c83
+
+@f2992 fact
+  holds orders o2991 c90
+
+@f2993 fact
+  holds orders o2992 c97
+
+@f2994 fact
+  holds orders o2993 c104
+
+@f2995 fact
+  holds orders o2994 c111
+
+@f2996 fact
+  holds orders o2995 c118
+
+@f2997 fact
+  holds orders o2996 c125
+
+@f2998 fact
+  holds orders o2997 c132
+
+@f2999 fact
+  holds orders o2998 c139
+
+@f3000 fact
+  holds orders o2999 c146
+
+@f3001 fact
+  holds lives c0 g0
+
+@f3002 fact
+  holds lives c1 g1
+
+@f3003 fact
+  holds lives c2 g2
+
+@f3004 fact
+  holds lives c3 g3
+
+@f3005 fact
+  holds lives c4 g4
+
+@f3006 fact
+  holds lives c5 g5
+
+@f3007 fact
+  holds lives c6 g6
+
+@f3008 fact
+  holds lives c7 g7
+
+@f3009 fact
+  holds lives c8 g8
+
+@f3010 fact
+  holds lives c9 g9
+
+@f3011 fact
+  holds lives c10 g10
+
+@f3012 fact
+  holds lives c11 g11
+
+@f3013 fact
+  holds lives c12 g0
+
+@f3014 fact
+  holds lives c13 g1
+
+@f3015 fact
+  holds lives c14 g2
+
+@f3016 fact
+  holds lives c15 g3
+
+@f3017 fact
+  holds lives c16 g4
+
+@f3018 fact
+  holds lives c17 g5
+
+@f3019 fact
+  holds lives c18 g6
+
+@f3020 fact
+  holds lives c19 g7
+
+@f3021 fact
+  holds lives c20 g8
+
+@f3022 fact
+  holds lives c21 g9
+
+@f3023 fact
+  holds lives c22 g10
+
+@f3024 fact
+  holds lives c23 g11
+
+@f3025 fact
+  holds lives c24 g0
+
+@f3026 fact
+  holds lives c25 g1
+
+@f3027 fact
+  holds lives c26 g2
+
+@f3028 fact
+  holds lives c27 g3
+
+@f3029 fact
+  holds lives c28 g4
+
+@f3030 fact
+  holds lives c29 g5
+
+@f3031 fact
+  holds lives c30 g6
+
+@f3032 fact
+  holds lives c31 g7
+
+@f3033 fact
+  holds lives c32 g8
+
+@f3034 fact
+  holds lives c33 g9
+
+@f3035 fact
+  holds lives c34 g10
+
+@f3036 fact
+  holds lives c35 g11
+
+@f3037 fact
+  holds lives c36 g0
+
+@f3038 fact
+  holds lives c37 g1
+
+@f3039 fact
+  holds lives c38 g2
+
+@f3040 fact
+  holds lives c39 g3
+
+@f3041 fact
+  holds lives c40 g4
+
+@f3042 fact
+  holds lives c41 g5
+
+@f3043 fact
+  holds lives c42 g6
+
+@f3044 fact
+  holds lives c43 g7
+
+@f3045 fact
+  holds lives c44 g8
+
+@f3046 fact
+  holds lives c45 g9
+
+@f3047 fact
+  holds lives c46 g10
+
+@f3048 fact
+  holds lives c47 g11
+
+@f3049 fact
+  holds lives c48 g0
+
+@f3050 fact
+  holds lives c49 g1
+
+@f3051 fact
+  holds lives c50 g2
+
+@f3052 fact
+  holds lives c51 g3
+
+@f3053 fact
+  holds lives c52 g4
+
+@f3054 fact
+  holds lives c53 g5
+
+@f3055 fact
+  holds lives c54 g6
+
+@f3056 fact
+  holds lives c55 g7
+
+@f3057 fact
+  holds lives c56 g8
+
+@f3058 fact
+  holds lives c57 g9
+
+@f3059 fact
+  holds lives c58 g10
+
+@f3060 fact
+  holds lives c59 g11
+
+@f3061 fact
+  holds lives c60 g0
+
+@f3062 fact
+  holds lives c61 g1
+
+@f3063 fact
+  holds lives c62 g2
+
+@f3064 fact
+  holds lives c63 g3
+
+@f3065 fact
+  holds lives c64 g4
+
+@f3066 fact
+  holds lives c65 g5
+
+@f3067 fact
+  holds lives c66 g6
+
+@f3068 fact
+  holds lives c67 g7
+
+@f3069 fact
+  holds lives c68 g8
+
+@f3070 fact
+  holds lives c69 g9
+
+@f3071 fact
+  holds lives c70 g10
+
+@f3072 fact
+  holds lives c71 g11
+
+@f3073 fact
+  holds lives c72 g0
+
+@f3074 fact
+  holds lives c73 g1
+
+@f3075 fact
+  holds lives c74 g2
+
+@f3076 fact
+  holds lives c75 g3
+
+@f3077 fact
+  holds lives c76 g4
+
+@f3078 fact
+  holds lives c77 g5
+
+@f3079 fact
+  holds lives c78 g6
+
+@f3080 fact
+  holds lives c79 g7
+
+@f3081 fact
+  holds lives c80 g8
+
+@f3082 fact
+  holds lives c81 g9
+
+@f3083 fact
+  holds lives c82 g10
+
+@f3084 fact
+  holds lives c83 g11
+
+@f3085 fact
+  holds lives c84 g0
+
+@f3086 fact
+  holds lives c85 g1
+
+@f3087 fact
+  holds lives c86 g2
+
+@f3088 fact
+  holds lives c87 g3
+
+@f3089 fact
+  holds lives c88 g4
+
+@f3090 fact
+  holds lives c89 g5
+
+@f3091 fact
+  holds lives c90 g6
+
+@f3092 fact
+  holds lives c91 g7
+
+@f3093 fact
+  holds lives c92 g8
+
+@f3094 fact
+  holds lives c93 g9
+
+@f3095 fact
+  holds lives c94 g10
+
+@f3096 fact
+  holds lives c95 g11
+
+@f3097 fact
+  holds lives c96 g0
+
+@f3098 fact
+  holds lives c97 g1
+
+@f3099 fact
+  holds lives c98 g2
+
+@f3100 fact
+  holds lives c99 g3
+
+@f3101 fact
+  holds lives c100 g4
+
+@f3102 fact
+  holds lives c101 g5
+
+@f3103 fact
+  holds lives c102 g6
+
+@f3104 fact
+  holds lives c103 g7
+
+@f3105 fact
+  holds lives c104 g8
+
+@f3106 fact
+  holds lives c105 g9
+
+@f3107 fact
+  holds lives c106 g10
+
+@f3108 fact
+  holds lives c107 g11
+
+@f3109 fact
+  holds lives c108 g0
+
+@f3110 fact
+  holds lives c109 g1
+
+@f3111 fact
+  holds lives c110 g2
+
+@f3112 fact
+  holds lives c111 g3
+
+@f3113 fact
+  holds lives c112 g4
+
+@f3114 fact
+  holds lives c113 g5
+
+@f3115 fact
+  holds lives c114 g6
+
+@f3116 fact
+  holds lives c115 g7
+
+@f3117 fact
+  holds lives c116 g8
+
+@f3118 fact
+  holds lives c117 g9
+
+@f3119 fact
+  holds lives c118 g10
+
+@f3120 fact
+  holds lives c119 g11
+
+@f3121 fact
+  holds lives c120 g0
+
+@f3122 fact
+  holds lives c121 g1
+
+@f3123 fact
+  holds lives c122 g2
+
+@f3124 fact
+  holds lives c123 g3
+
+@f3125 fact
+  holds lives c124 g4
+
+@f3126 fact
+  holds lives c125 g5
+
+@f3127 fact
+  holds lives c126 g6
+
+@f3128 fact
+  holds lives c127 g7
+
+@f3129 fact
+  holds lives c128 g8
+
+@f3130 fact
+  holds lives c129 g9
+
+@f3131 fact
+  holds lives c130 g10
+
+@f3132 fact
+  holds lives c131 g11
+
+@f3133 fact
+  holds lives c132 g0
+
+@f3134 fact
+  holds lives c133 g1
+
+@f3135 fact
+  holds lives c134 g2
+
+@f3136 fact
+  holds lives c135 g3
+
+@f3137 fact
+  holds lives c136 g4
+
+@f3138 fact
+  holds lives c137 g5
+
+@f3139 fact
+  holds lives c138 g6
+
+@f3140 fact
+  holds lives c139 g7
+
+@f3141 fact
+  holds lives c140 g8
+
+@f3142 fact
+  holds lives c141 g9
+
+@f3143 fact
+  holds lives c142 g10
+
+@f3144 fact
+  holds lives c143 g11
+
+@f3145 fact
+  holds lives c144 g0
+
+@f3146 fact
+  holds lives c145 g1
+
+@f3147 fact
+  holds lives c146 g2
+
+@f3148 fact
+  holds lives c147 g3
+
+@f3149 fact
+  holds lives c148 g4
+
+@f3150 fact
+  holds lives c149 g5
+
+@f3151 fact
+  holds zone_of g0 z0
+
+@f3152 fact
+  holds zone_of g1 z1
+
+@f3153 fact
+  holds zone_of g2 z2
+
+@f3154 fact
+  holds zone_of g3 z3
+
+@f3155 fact
+  holds zone_of g4 z0
+
+@f3156 fact
+  holds zone_of g5 z1
+
+@f3157 fact
+  holds zone_of g6 z2
+
+@f3158 fact
+  holds zone_of g7 z3
+
+@f3159 fact
+  holds zone_of g8 z0
+
+@f3160 fact
+  holds zone_of g9 z1
+
+@f3161 fact
+  holds zone_of g10 z2
+
+@f3162 fact
+  holds zone_of g11 z3
+
+@r_order_zone rule
+  when orders ?o ?c
+  when lives ?c ?g
+  when zone_of ?g ?z
+  then order_zone ?o ?z

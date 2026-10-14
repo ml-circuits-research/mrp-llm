@@ -1,0 +1,107 @@
+# analysis-core-v1: a sample quality rubric. Criteria are rules that conclude criterion_met; their weights are facts; the score is the
+# sum of the weights of the criteria met, out of the sum of all weights. A domain rubric is written the same way, as data.
+
+@rubric_weight predicate
+  args subject:entity object:entity topic:value
+  closed true
+  label en "rubric weight"
+  description "The weight of a criterion in a rubric."
+@criterion_met predicate
+  args subject:entity object:entity
+  closed true
+  label en "criterion met"
+  description "The document meets the criterion of the rubric."
+@criterion_failed predicate
+  args subject:entity object:entity
+  label en "criterion failed"
+  description "The document does not meet the criterion of the rubric."
+@rubric_score predicate
+  args subject:entity object:value
+  label en "rubric score"
+  description "The sum of the weights of the criteria the document meets."
+@rubric_max predicate
+  args subject:entity object:value
+  label en "rubric maximum"
+  description "The sum of the weights of all criteria of the rubric."
+@has_amount_without_unit predicate
+  args none
+  closed true
+  label en "has amount without unit"
+  description "Some amount of the document has no unit."
+
+@an_q_amount_without_unit rule
+  when amount ?q ?v
+  when absent has_unit ?q
+  then has_amount_without_unit
+
+@an_q_units_stated rule
+  when rubric_weight document_quality_v1 units_stated ?w
+  when absent has_amount_without_unit
+  then criterion_met document_quality_v1 units_stated
+  source "document_quality_v1: every amount of the document has a unit (met by a document without amounts)"
+@an_q_consistent rule
+  when rubric_weight document_quality_v1 consistent ?w
+  when absent has_contradiction
+  then criterion_met document_quality_v1 consistent
+  source "document_quality_v1: the document does not contradict itself"
+@an_q_totals_add_up rule
+  when rubric_weight document_quality_v1 totals_add_up ?w
+  when absent has_total_mismatch
+  then criterion_met document_quality_v1 totals_add_up
+  source "document_quality_v1: totals agree with their parts and shares"
+@an_q_dates_consistent rule
+  when rubric_weight document_quality_v1 dates_consistent ?w
+  when absent has_date_error
+  then criterion_met document_quality_v1 dates_consistent
+  source "document_quality_v1: dates, orders and ages agree"
+@an_q_claims_supported rule
+  when rubric_weight document_quality_v1 claims_supported ?w
+  when absent has_unsupported_claim
+  then criterion_met document_quality_v1 claims_supported
+  source "document_quality_v1: every claim rests on stated premises"
+@an_q_reference_year rule
+  when rubric_weight document_quality_v1 reference_year_stated ?w
+  when as_of_year ?y
+  then criterion_met document_quality_v1 reference_year_stated
+  source "document_quality_v1: the document states the year it refers to"
+
+@an_q_failed rule
+  when rubric_weight ?r ?c ?w
+  when absent criterion_met ?r ?c
+  then criterion_failed ?r ?c
+@an_q_score aggregate
+  over all
+    criterion_met ?r ?c
+    rubric_weight ?r ?c ?w
+  end
+  group ?r
+  sum ?w as ?s
+  yields rubric_score ?r ?s
+@an_q_max aggregate
+  over rubric_weight ?r ?c ?w
+  group ?r
+  sum ?w as ?s
+  yields rubric_max ?r ?s
+
+@an_w_units_stated fact
+  holds rubric_weight document_quality_v1 units_stated 2
+@an_w_consistent fact
+  holds rubric_weight document_quality_v1 consistent 3
+@an_w_totals_add_up fact
+  holds rubric_weight document_quality_v1 totals_add_up 2
+@an_w_dates_consistent fact
+  holds rubric_weight document_quality_v1 dates_consistent 1
+@an_w_claims_supported fact
+  holds rubric_weight document_quality_v1 claims_supported 2
+@an_w_reference_year fact
+  holds rubric_weight document_quality_v1 reference_year_stated 1
+
+@analysis_quality_rubric procedure
+  members $an_q_amount_without_unit $an_q_units_stated $an_q_consistent $an_q_totals_add_up $an_q_dates_consistent $an_q_claims_supported $an_q_reference_year $an_q_failed $an_q_score $an_q_max $an_w_units_stated $an_w_consistent $an_w_totals_add_up $an_w_dates_consistent $an_w_claims_supported $an_w_reference_year $an_r_has_unit $an_r_contradiction_atom $an_r_contradiction_value $an_r_contradiction_class $an_r_mismatch_exceed $an_r_mismatch_breakdown $an_r_mismatch_shares $an_r_mismatch_shares_below $an_r_has_share $an_r_share_missing $an_r_mismatch_share_amount $an_parts_total $an_shares_total $an_p_total_tolerance $an_p_share_tolerance $an_r_date_end $an_r_date_order $an_r_date_age $an_p_age_tolerance $an_r_unsupported $an_d_person_organization $an_d_person_place $an_d_organization_place
+  description "Analysis: a sample quality rubric (document_quality_v1) - weighted criteria (units stated, no contradiction, totals add up, dates consistent, claims supported, reference year stated); the score is the sum of the weights of the criteria met, out of the sum of all weights."
+  scope "analysis, rubric"
+  source "analysis-core-v1"
+  report rubric_score ?rubric ?score
+  report rubric_max ?rubric ?maximum
+  report criterion_met ?rubric ?criterion
+  report criterion_failed ?rubric ?criterion

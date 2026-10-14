@@ -1,0 +1,5 @@
+# expect: bad_compare
+@r rule
+  when n ?x
+  when compare ?x greater 3
+  then big ?x

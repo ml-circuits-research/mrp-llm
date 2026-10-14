@@ -1,0 +1,115 @@
+# conversation-v1: how an answer was obtained and whether it was verified (the symbolic core's adapter (lib/adapter), owner decision 2026-10-03). The adapter
+# (lib/adapter/reply.mjs) writes the facts cv_turn_verification and cv_turn_answer_source of a turn answered in the modes `routed` and
+# `direct-verified`; these rules choose the body that shows the answer with its verification status. The slots are filled from the
+# adapter's answer packet: answer, verified_by (the agreeing paths), model_answer (the model's own answer), alternatives (the values of
+# disagreeing formalizations). The stepwise mode writes no such facts and keeps the bodies of 0030-replies.sop.
+
+@cv_turn_verification predicate
+  args subject:entity
+  closed true
+  description "the adapter's verification status of the answer: verified, unverified, contradicted or unresolved"
+@cv_turn_answer_source predicate
+  args subject:entity
+  closed true
+  description "what produced the answer: formalized (a symbolic path executed on the engines) or model (the model's direct answer)"
+@cv_turn_alternatives predicate
+  args none
+  closed true
+  description "other formalizations answered differently (slot alternatives)"
+
+@cv_r_answer_verified rule
+  when cv_turn_computed
+  when cv_turn_verification verified
+  when cv_turn_answer_source formalized
+  then cv_applies answer_verified
+
+@cv_r_answer_model_verified rule
+  when cv_turn_computed
+  when cv_turn_verification verified
+  when cv_turn_answer_source model
+  then cv_applies answer_model_verified
+
+@cv_r_answer_contradicted rule
+  when cv_turn_computed
+  when cv_turn_verification contradicted
+  then cv_applies answer_contradicted
+
+@cv_r_answer_formalized_unverified rule
+  when cv_turn_computed
+  when cv_turn_verification unverified
+  when cv_turn_answer_source formalized
+  then cv_applies answer_formalized_unverified
+
+@cv_r_answer_model_unverified rule
+  when cv_turn_computed
+  when cv_turn_verification unverified
+  when cv_turn_answer_source model
+  then cv_applies answer_model_unverified
+
+@cv_r_answer_unresolved rule
+  when cv_turn_computed
+  when cv_turn_verification unresolved
+  when cv_turn_alternatives
+  then cv_applies answer_unresolved
+
+@cv_r_adapter_no_answer rule
+  when cv_turn_verification unresolved
+  when absent cv_turn_computed
+  then cv_applies adapter_no_answer
+
+@cv_p_answer_verified fact
+  holds cv_situation_priority answer_verified 106
+@cv_p_answer_model_verified fact
+  holds cv_situation_priority answer_model_verified 106
+@cv_p_answer_contradicted fact
+  holds cv_situation_priority answer_contradicted 106
+@cv_p_answer_formalized_unverified fact
+  holds cv_situation_priority answer_formalized_unverified 105
+@cv_p_answer_model_unverified fact
+  holds cv_situation_priority answer_model_unverified 105
+@cv_p_answer_unresolved fact
+  holds cv_situation_priority answer_unresolved 105
+@cv_p_adapter_no_answer fact
+  holds cv_situation_priority adapter_no_answer 104
+
+@cv_answer_verified_1 reply
+  situation answer_verified
+  part body
+  language en
+  text "{{answer}}\nVerified by two independent formalizations ({{verified_by}})."
+
+@cv_answer_model_verified_1 reply
+  situation answer_model_verified
+  part body
+  language en
+  text "{{answer}}\nThe model's answer, verified by a symbolic formalization ({{verified_by}})."
+
+@cv_answer_contradicted_1 reply
+  situation answer_contradicted
+  part body
+  language en
+  text "{{answer}}\nThe model answered {{model_answer}}, but two independent formalizations agree on this answer instead ({{verified_by}})."
+
+@cv_answer_formalized_unverified_1 reply
+  situation answer_formalized_unverified
+  part body
+  language en
+  text "{{answer}}\nFormalized and computed once; no second formalization confirmed it, so it is not verified."
+
+@cv_answer_model_unverified_1 reply
+  situation answer_model_unverified
+  part body
+  language en
+  text "{{answer}}\nComputed by the model; I could not verify it symbolically."
+
+@cv_answer_unresolved_1 reply
+  situation answer_unresolved
+  part body
+  language en
+  text "{{answer}}\nNot verified: the formalizations disagree (others gave {{alternatives}})."
+
+@cv_adapter_no_answer_1 reply
+  situation adapter_no_answer
+  part body
+  language en
+  text "I could not formalize this problem into a computation I can run, so I have no answer to give."

@@ -1,0 +1,244 @@
+@works_on predicate
+  args subject:entity object:entity
+  closed true
+@budget_of predicate
+  args subject:entity object:integer
+  closed true
+@on_leave predicate
+  args subject:entity
+  closed true
+@certified predicate
+  args subject:entity
+
+@f1 fact
+  holds budget_of p0 60
+@f2 fact
+  holds budget_of p1 150
+@f3 fact
+  holds budget_of p2 90
+@f4 fact
+  holds budget_of p3 200
+@f5 fact
+  holds budget_of p4 100
+@f6 fact
+  holds budget_of p5 101
+@f7 fact
+  holds budget_of p6 40
+@f8 fact
+  holds budget_of p7 300
+@f9 fact
+  holds works_on e0 p0
+@f10 fact
+  holds works_on e0 p1
+@f11 fact
+  holds works_on e0 p2
+@f12 fact
+  holds works_on e1 p3
+@f13 fact
+  holds works_on e1 p6
+@f14 fact
+  holds works_on e2 p6
+@f15 fact
+  holds works_on e2 p3
+@f16 fact
+  holds works_on e3 p1
+@f17 fact
+  holds works_on e3 p0
+@f18 fact
+  holds works_on e4 p4
+@f19 fact
+  holds works_on e4 p5
+@f20 fact
+  holds works_on e4 p6
+@f21 fact
+  holds works_on e5 p7
+@f22 fact
+  holds works_on e5 p2
+@f23 fact
+  holds works_on e6 p2
+@f24 fact
+  holds works_on e6 p7
+@f25 fact
+  holds works_on e7 p5
+@f26 fact
+  holds works_on e7 p4
+@f27 fact
+  holds works_on e8 p0
+@f28 fact
+  holds works_on e8 p1
+@f29 fact
+  holds works_on e8 p2
+@f30 fact
+  holds works_on e9 p3
+@f31 fact
+  holds works_on e9 p6
+@f32 fact
+  holds works_on e10 p6
+@f33 fact
+  holds works_on e10 p3
+@f34 fact
+  holds works_on e11 p1
+@f35 fact
+  holds works_on e11 p0
+@f36 fact
+  holds works_on e12 p4
+@f37 fact
+  holds works_on e12 p5
+@f38 fact
+  holds works_on e12 p6
+@f39 fact
+  holds works_on e13 p7
+@f40 fact
+  holds works_on e13 p2
+@f41 fact
+  holds works_on e14 p2
+@f42 fact
+  holds works_on e14 p7
+@f43 fact
+  holds works_on e15 p5
+@f44 fact
+  holds works_on e15 p4
+@f45 fact
+  holds works_on e16 p0
+@f46 fact
+  holds works_on e16 p1
+@f47 fact
+  holds works_on e16 p2
+@f48 fact
+  holds works_on e17 p3
+@f49 fact
+  holds works_on e17 p6
+@f50 fact
+  holds works_on e18 p6
+@f51 fact
+  holds works_on e18 p3
+@f52 fact
+  holds works_on e19 p1
+@f53 fact
+  holds works_on e19 p0
+@f54 fact
+  holds works_on e20 p4
+@f55 fact
+  holds works_on e20 p5
+@f56 fact
+  holds works_on e20 p6
+@f57 fact
+  holds works_on e21 p7
+@f58 fact
+  holds works_on e21 p2
+@f59 fact
+  holds works_on e22 p2
+@f60 fact
+  holds works_on e22 p7
+@f61 fact
+  holds works_on e23 p5
+@f62 fact
+  holds works_on e23 p4
+@f63 fact
+  holds works_on e24 p0
+@f64 fact
+  holds works_on e24 p1
+@f65 fact
+  holds works_on e24 p2
+@f66 fact
+  holds works_on e25 p3
+@f67 fact
+  holds works_on e25 p6
+@f68 fact
+  holds works_on e26 p6
+@f69 fact
+  holds works_on e26 p3
+@f70 fact
+  holds works_on e27 p1
+@f71 fact
+  holds works_on e27 p0
+@f72 fact
+  holds works_on e28 p4
+@f73 fact
+  holds works_on e28 p5
+@f74 fact
+  holds works_on e28 p6
+@f75 fact
+  holds works_on e29 p7
+@f76 fact
+  holds works_on e29 p2
+@f77 fact
+  holds works_on e30 p2
+@f78 fact
+  holds works_on e30 p7
+@f79 fact
+  holds works_on e31 p5
+@f80 fact
+  holds works_on e31 p4
+@f81 fact
+  holds works_on e32 p0
+@f82 fact
+  holds works_on e32 p1
+@f83 fact
+  holds works_on e32 p2
+@f84 fact
+  holds works_on e33 p3
+@f85 fact
+  holds works_on e33 p6
+@f86 fact
+  holds works_on e34 p6
+@f87 fact
+  holds works_on e34 p3
+@f88 fact
+  holds works_on e35 p1
+@f89 fact
+  holds works_on e35 p0
+@f90 fact
+  holds works_on e36 p4
+@f91 fact
+  holds works_on e36 p5
+@f92 fact
+  holds works_on e36 p6
+@f93 fact
+  holds works_on e37 p7
+@f94 fact
+  holds works_on e37 p2
+@f95 fact
+  holds works_on e38 p2
+@f96 fact
+  holds works_on e38 p7
+@f97 fact
+  holds works_on e39 p5
+@f98 fact
+  holds works_on e39 p4
+@f99 fact
+  holds on_leave e3
+@f100 fact
+  holds on_leave e8
+@f101 fact
+  holds on_leave e14
+@f102 fact
+  holds on_leave e21
+@f103 fact
+  holds on_leave e22
+@f104 fact
+  holds on_leave e30
+@f105 fact
+  holds certified e1
+@f106 fact
+  holds certified e2
+@f107 fact
+  holds certified e5
+@f108 fact
+  holds certified e9
+@f109 fact
+  holds certified e13
+@f110 fact
+  holds certified e14
+@f111 fact
+  holds certified e20
+@f112 fact
+  holds certified e22
+@f113 fact
+  holds certified e27
+@f114 fact
+  holds certified e31
+@f115 fact
+  holds certified e35
+@f116 fact
+  holds certified e38

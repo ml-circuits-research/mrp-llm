@@ -1,0 +1,13 @@
+{
+  "feature": "LLM stress: an exact count of distinct bindings over closed predicates with duplicates, a comparison and absence",
+  "status": "supported",
+  "complete": true,
+  "count": 34,
+  "requires": [
+    "facts",
+    "count",
+    "closed_world",
+    "naf",
+    "compare_in_rules"
+  ]
+}

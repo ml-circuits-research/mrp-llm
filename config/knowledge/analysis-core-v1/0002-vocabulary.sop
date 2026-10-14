@@ -1,0 +1,150 @@
+# analysis-core-v1: the document-analysis vocabulary. A document layer written in these relations (by hand, by the direct author or by
+# ingestion v2, which offers the memory's predicates to its models) is analysed by the starter procedures without any bridge; a document
+# in its own relations is bridged by domain rules written as data (a rule "when revenue_of ?q ?v then amount ?q ?v" in a domain layer,
+# member of the domain's procedure). A document is a closed record: what it does not state, it does not establish, so the relations
+# the procedures count, sum or test for absence are declared closed.
+
+@amount predicate
+  args subject:entity object:value
+  key 1
+  closed true
+  label en "amount"
+  description "The value of a named quantity of the document (a total, a part, a measurement, a count, a price). One value per quantity: key 1."
+
+@unit_of predicate
+  args subject:entity object:entity
+  key 1
+  closed true
+  label en "unit of"
+  description "The unit in which the document states a quantity (eur, percent, kg, days)."
+
+@component_of predicate
+  args subject:entity object:entity
+  closed true
+  label en "component of"
+  description "A quantity is one of the parts that make up a larger quantity (regional revenue of total revenue, a budget line of the budget)."
+
+@breakdown_complete predicate
+  args subject:entity
+  closed true
+  label en "breakdown complete"
+  description "The document says that the listed components are ALL the parts of the quantity (consists of, split into, broken down as), so they must add up to it."
+
+@share_of predicate
+  args subject:entity object:entity topic:value
+  closed true
+  label en "share of"
+  description "A part is the given percentage of a whole (share_of segment_a market 40: segment a is 40 percent of the market)."
+
+@lower_limit predicate
+  args subject:entity object:value
+  closed true
+  label en "lower limit"
+  description "The document's own lower bound for a quantity (at least, minimum, not below)."
+
+@upper_limit predicate
+  args subject:entity object:value
+  closed true
+  label en "upper limit"
+  description "The document's own upper bound for a quantity (at most, maximum, not above)."
+
+@measure_of predicate
+  args subject:entity object:entity
+  closed true
+  label en "measure of"
+  description "The kind of measurement a quantity is (age, percentage, duration, count, price), which carries a plausible range."
+
+@plausible_min predicate
+  args subject:entity object:value
+  closed true
+  label en "plausible minimum"
+  description "Library data: the smallest value a measurement of this kind can have (a percentage is not below 0)."
+
+@plausible_max predicate
+  args subject:entity object:value
+  closed true
+  label en "plausible maximum"
+  description "Library data: the largest value a measurement of this kind can have (an age in years is not above 130)."
+
+@starts_on predicate
+  args subject:entity time:time
+  key 1
+  closed true
+  label en "starts on"
+  description "The date an event, period, contract or project of the document starts, as the integer YYYYMMDD (the date value of ingestion v2)."
+
+@ends_on predicate
+  args subject:entity time:time
+  key 1
+  closed true
+  label en "ends on"
+  description "The date an event, period, contract or project of the document ends, as the integer YYYYMMDD (the date value of ingestion v2)."
+
+@precedes predicate
+  args subject:entity object:entity
+  closed true
+  label en "precedes"
+  description "The document says that the first event or step happens before the second."
+
+@born_in_year predicate
+  args subject:entity object:integer
+  key 1
+  closed true
+  label en "born in year"
+  description "The year a person of the document was born."
+
+@age_years predicate
+  args subject:entity object:integer
+  key 1
+  closed true
+  label en "age in years"
+  description "The age in years the document gives for a person (at the document's reference year)."
+
+@as_of_year predicate
+  args subject:integer
+  closed true
+  label en "as of year"
+  description "The reference year of the document: the year its ages, totals and states refer to."
+
+@claim_rests_on predicate
+  args subject:entity object:entity
+  closed true
+  label en "claim rests on"
+  description "A claim of the document is drawn from, or depends on, a premise (because, since, given that, based on, as shown by)."
+
+@premise_stated predicate
+  args subject:entity
+  closed true
+  label en "premise stated"
+  description "The premise is itself stated, shown or cited in the document."
+
+@disjoint_classes predicate
+  args subject:entity object:entity
+  closed true
+  label en "disjoint classes"
+  description "No thing belongs to both classes (library data, or the document's own definitions)."
+
+@period_amount predicate
+  args subject:entity time:entity object:value
+  closed true
+  label en "period amount"
+  description "The value of a quantity in a named period (period_amount revenue fy2025 120)."
+
+@period_follows predicate
+  args subject:entity object:entity
+  closed true
+  label en "period follows"
+  description "The first period directly follows the second (fy2025 follows fy2024): the pair over which growth is computed."
+
+@ratio_definition predicate
+  args subject:entity object:entity topic:entity
+  closed true
+  label en "ratio definition"
+  description "A KPI defined as a ratio: its name, the numerator quantity and the denominator quantity (data of a domain or of the owner)."
+
+@analysis_parameter predicate
+  args subject:entity object:value
+  key 1
+  closed true
+  label en "analysis parameter"
+  description "A parameter of an analysis procedure (a tolerance, a threshold), a member fact of the procedure; a run may override it by name."

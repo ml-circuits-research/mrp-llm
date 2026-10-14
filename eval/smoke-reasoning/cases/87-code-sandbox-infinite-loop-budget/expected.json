@@ -1,0 +1,10 @@
+{
+ "status": "budget_exhausted",
+ "complete": false,
+ "reason": "wall",
+ "feature": "Code sandbox: an infinite loop ends as budget_exhausted (wall), never verified",
+ "requires": [
+  "code_sandbox"
+ ],
+ "warnings": []
+}

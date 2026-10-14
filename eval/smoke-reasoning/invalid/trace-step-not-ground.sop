@@ -1,0 +1,7 @@
+# expect: trace_step_not_ground
+@a action
+  params ?r
+  requires at ?r
+  adds done ?r
+@t trace
+  step ~a ?r

@@ -1,0 +1,22 @@
+{
+  "feature": "Deviating from a strict method is non-compliance and is reported in deviations (under advisory binding it is only reported)",
+  "status": "non_compliant",
+  "complete": true,
+  "compliance": {
+    "hard": "ok",
+    "violated": [],
+    "deviations": [
+      "reset_router"
+    ],
+    "soft_violations": [],
+    "total_cost": 6
+  },
+  "requires": [
+    "check_plan",
+    "norms_hard",
+    "norms_soft",
+    "method",
+    "conform_deviation",
+    "zero_arity"
+  ]
+}

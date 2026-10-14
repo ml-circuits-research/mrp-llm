@@ -1,0 +1,12 @@
+# Only the situation is instantiated. The approved procedure supplies the plan.
+@route value
+  data "route_demo"
+@departure value
+  data 770
+@deadline value
+  data 840
+@answer expand
+  using ~check_arrival
+  with route $route
+  with start $departure
+  with deadline $deadline

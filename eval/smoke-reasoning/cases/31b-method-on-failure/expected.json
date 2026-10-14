@@ -1,0 +1,25 @@
+{
+  "feature": "Method failure handling: when the strict method cannot run, the declared fallback method is used (never primitives)",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 20,
+    "steps": 1,
+    "names": [
+      "copy_tape"
+    ]
+  },
+  "used": [
+    {
+      "id": "manual_backup",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "on_failure",
+    "used"
+  ]
+}

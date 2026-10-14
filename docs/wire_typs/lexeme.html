@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#lexeme" target="_top">← Wire type index</a></p><h1><code>lexeme</code></h1><p>One lexicalization of one predicate in one language: the relation phrases that name it, the part of speech and the roles the surface realizes. Lexemes are what the KnowledgeLinker matches a relation phrase of a circuit against.</p><p><strong>Status and author:</strong> Knowledge wire of a base memory, written next to the <a href="predicate.html">predicate</a> it realizes by a person, a model or a mapping tool. The small model never authors it. The validator checks every form by linking it back through the relation linker.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody>
+<tr><th scope="row" id="field-of"><code>of</code></th><td>Exactly once; required</td><td>The id of the predicate this form realizes (<code>unknown_predicate</code> when the memory and its imports declare none).</td></tr>
+<tr><th scope="row" id="field-language"><code>language</code></th><td>Exactly once; required</td><td>A language code of two or three lowercase letters (<code>bad_language</code>); only <code>en</code> is accepted, the knowledge is English only (<code>non_english_knowledge</code>).</td></tr>
+<tr><th scope="row" id="field-pos"><code>pos</code></th><td>At most once; optional</td><td>One of <code>verb noun adj prep copula</code> (default <code>verb</code>).</td></tr>
+<tr><th scope="row" id="field-form"><code>form</code></th><td>Repeatable; required</td><td>A JSON-quoted relation phrase in the convention of the model language: the lemma with its particles and prepositions, the copula included for copular phrases ("work at", "capital of", "be born in"). Every form must link back to its own predicate (<code>form_does_not_link</code>).</td></tr>
+<tr><th scope="row" id="field-frame"><code>frame</code></th><td>Exactly once; required</td><td>The roles the surface realizes, in surface order, space separated: the grammatical subject first; a converse form lists the object role first ("parent of": <code>object subject</code> for a <code>child</code> predicate). A frame shorter than the predicate gives the warning <code>frame_incomplete</code>; a role the predicate does not have is <code>frame_role_undeclared</code>.</td></tr>
+<tr><th scope="row" id="field-restrict"><code>restrict</code></th><td>Repeatable; optional</td><td><code>restrict ROLE CLASS</code>: the form applies only when the value of that role is of the class (<code>restrict_class_unknown</code> for an undeclared class). It separates predicates that share a form.</td></tr>
+<tr><th scope="row" id="field-weight"><code>weight</code></th><td>At most once; optional</td><td>An integer that orders two predicates sharing a form with the same frame when no restriction separates them.</td></tr>
+<tr><th scope="row" id="field-source"><code>source</code></th><td>At most once; optional</td><td>Text: where the form comes from.</td></tr>
+<tr><th scope="row" id="field-quote"><code>quote</code></th><td>At most once; optional</td><td>The exact words of the source, byte for byte.</td></tr></tbody></table></div></section><section><h2>What it is for and how to write it</h2><p>The formalizer writes a relation phrase in the circuit-language convention (a lemma with its particles, "work at") and role names. The linker normalizes the phrase and the frame and looks for the lexeme whose form and role set match. Two predicates that share a form with the same frame length must say how they differ: a <code>restrict</code> line or distinct <code>weight</code> lines (<code>ambiguous_form_undeclared</code>), or the linker reports the phrase as ambiguous and asks.</p></section><section><h2>Examples</h2><pre data-sop="knowledge"><code>@person entity
+  kind class
+  label en "person"
+@organization entity
+  kind class
+  label en "organization"
+@place entity
+  kind class
+  label en "place"
+
+@works_at predicate
+  args subject:entity object:entity
+  role subject person
+  role object organization
+  label en "works at"
+
+@lx_works_at_en lexeme
+  of works_at
+  language en
+  pos verb
+  form "work at"
+  form "work for"
+  frame subject object
+
+</code></pre><h3>Invalid: a language other than English</h3><pre data-sop="knowledge-invalid" data-error="non_english_knowledge"><code>@works_at predicate
+  args subject:entity object:entity
+@lx_bad lexeme
+  of works_at
+  language ro
+  form "lucra la"
+  frame subject object
+</code></pre><p>The knowledge is English only (DS014 "English-only core"): a message in another language is translated into English at the input edge, and answers are translated back at the output edge.</p><h3>Invalid: a frame role the predicate does not have</h3><pre data-sop="knowledge-invalid" data-error="frame_role_undeclared"><code>@works_at predicate
+  args subject:entity object:entity
+@lx_bad lexeme
+  of works_at
+  language en
+  form "work at"
+  frame subject location
+</code></pre><h3>Invalid: a lexeme of a predicate that does not exist</h3><pre data-sop="knowledge-invalid" data-error="unknown_predicate"><code>@lx_bad lexeme
+  of flies_to
+  language en
+  form "fly to"
+  frame subject object
+</code></pre></section><section><h2>Common mistakes</h2><ol><li>A frame that lists the roles in the wrong order for a converse phrase ("is the parent of" is subject first; "is a child of" for a <code>parent</code> predicate lists the object first).</li><li>Declaring one lexeme per surface inflection: list lemma forms; inflection is handled by normalization.</li><li>A shared form without <code>restrict</code> or <code>weight</code>.</li><li>Repeating the same form in two languages: forms are per language.</li></ol></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.lexeme</code></li><li><code>sop/knowledge/lexicon-checks.mjs</code></li><li><code>sop/lexicon.mjs:Lexicon.fromCircuits</code></li></ul><p>Related: <a href="predicate.html"><code>predicate</code></a>, <a href="entity.html"><code>entity</code></a>. The language manual is the section "Lexicon wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>; the base memory that holds these wires is described in <a href="../specsLoader.html?spec=DS022-sessions-and-base-memories.md" target="_top">DS022</a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

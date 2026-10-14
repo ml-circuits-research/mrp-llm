@@ -1,0 +1,10 @@
+{
+  "feature": "Classical negation: a derived claim and an explicit contrary coexist (no explosion)",
+  "status": "both",
+  "complete": true,
+  "requires": [
+    "rules",
+    "classical_negation",
+    "conflict"
+  ]
+}

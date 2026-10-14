@@ -1,0 +1,19 @@
+{
+  "distractors": {
+    "seed": 11,
+    "facts": 4000,
+    "rules": 300,
+    "predicates": 40,
+    "hard": {
+      "parent": {
+        "n": 5000,
+        "arity": 2
+      }
+    }
+  },
+  "start": {
+    "radius": 1,
+    "hops": 1,
+    "cap": 1000
+  }
+}

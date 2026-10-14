@@ -1,0 +1,9 @@
+@employee_of predicate
+  args subject:entity object:entity
+
+@f1 fact
+  holds employee_of ann dev
+@f2 fact
+  holds employee_of bob dev
+@f3 fact
+  holds employee_of cy dev

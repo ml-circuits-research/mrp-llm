@@ -1,0 +1,3 @@
+@q query
+  where reach n0_0 ?y
+  select ?y

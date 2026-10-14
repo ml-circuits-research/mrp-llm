@@ -1,0 +1,6 @@
+# expect: code_entry_not_defined bad_enum
+@c1 code
+  of t1
+  language python
+  entry total
+  body "function sumList(xs) { return 0; }"

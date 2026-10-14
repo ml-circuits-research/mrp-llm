@@ -1,0 +1,8 @@
+@t1 trace
+  step ~notify_oncall r7
+  step ~soft_reset r7
+  step ~verify_link r7
+
+@q query
+  mode conform
+  trace $t1

@@ -1,0 +1,12 @@
+# Usage example 5 — spatial containment question.
+# Authored here, no external rows copied. Domain: geography and travel.
+#
+# Message: "Which sites are located in the North Delta?"
+@question query
+  select ?site
+  where match
+    relation "located in"
+    role subject ?site
+    role location "North Delta"
+    polarity affirmed
+  end

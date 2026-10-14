@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#code" target="_top">← Wire type index</a></p><h1><code>code</code></h1><p>A program for a task: language, entry function, body and producer. It is opaque to every engine and runs only in the <code>code-sandbox</code> strategy, against the <a href="test.html"><code>test</code></a> wires of the same task.</p><p><strong>Status and author:</strong> Host or turn wire: written by a model (<code>llm-agent</code>), the user, a renderer or a dream pass. Never knowledge approved from a source, never on the small-model surface, never evidence. A verified body may become a library component through a host write (version, approval and provenance are then host-written; an author never writes <code>approval</code>).</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="field-of"><code>of</code></th><td>At most once; required</td><td>The task symbol the program is for; the <a href="test.html"><code>test</code></a> wires with the same symbol are its tests.</td></tr>
+<tr><th scope="row" id="field-language"><code>language</code></th><td>At most once; required</td><td><code>javascript</code> (the only language of the sandbox in P0).</td></tr>
+<tr><th scope="row" id="field-entry"><code>entry</code></th><td>At most once; required</td><td>The name of the function the tests call: a JavaScript identifier. The body must define it (<code>code_entry_not_defined</code>).</td></tr>
+<tr><th scope="row" id="field-body"><code>body</code></th><td>At most once; required</td><td>The whole program as ONE JSON string (<code>\n</code> for line breaks). Plain JavaScript: no <code>require</code>, <code>import</code>, network, filesystem, timers or <code>async</code>; the sandbox offers the ECMAScript built-ins only. <code>export function f</code> is accepted and stripped. The body is opaque to every engine.</td></tr>
+<tr><th scope="row" id="field-produced_by"><code>produced_by</code></th><td>At most once; optional</td><td><code>renderer|llm-agent|user|dream</code>: who wrote the program.</td></tr>
+<tr><th scope="row" id="field-version"><code>version</code></th><td>At most once; optional</td><td>A positive integer. A library component is versioned like a governed wire.</td></tr>
+<tr><th scope="row" id="field-supersedes"><code>supersedes</code></th><td>At most once; optional</td><td>The <code>$code</code> wire this one replaces (a new version, never an edit).</td></tr>
+<tr><th scope="row" id="field-approval"><code>approval</code></th><td>At most once; optional</td><td><code>proposed|approved|contested|rejected|superseded|retired</code>. Written by the host when the owner accepts a verified program into the library; an author never writes it.</td></tr>
+<tr><th scope="row" id="field-approved_by"><code>approved_by</code></th><td>At most once; optional</td><td>Text; written by the host.</td></tr>
+<tr><th scope="row" id="field-approved_at"><code>approved_at</code></th><td>At most once; optional</td><td>An ISO date; written by the host.</td></tr>
+<tr><th scope="row" id="field-retired_at"><code>retired_at</code></th><td>At most once; optional</td><td>An ISO date after which the component no longer binds.</td></tr>
+<tr><th scope="row" id="field-scope"><code>scope</code></th><td>At most once; optional</td><td>Text: where the component applies.</td></tr>
+<tr><th scope="row" id="field-quote"><code>quote</code></th><td>At most once; optional</td><td>Quoted source text, for a component taken from a reviewed source.</td></tr></tbody></table></div></section><section><h2>What it is for and how to write it</h2><p>One <code>code</code> wire per candidate program, in <code>candidate.sop</code> for the host loop. The body is a JSON string; the entry names the function the tests call. The program must be synchronous, deterministic for the tests and free of side effects: it runs in a fresh context with no <code>require</code>, no <code>process</code>, no network and no filesystem.</p></section><section><h2>What the engine does</h2><p>Nothing in a reasoning route. The <code>code-sandbox</code> strategy loads the body in a <code>vm</code> context inside a worker thread (empty environment, heap limit, wall-clock guard), runs each test and reports <code>verified</code>, <code>failed</code> or <code>budget_exhausted</code>. The packet of the host loop carries the program with its producer and the verification it passed, route <code>proposer</code> when a model wrote it.</p></section><section><h2>Examples</h2><p>A candidate and a test; the sandbox answers <code>verified</code>.</p><pre data-sop="knowledge" data-run="sandbox" data-status="verified"><code>@sum_list code
+  of t1
+  language javascript
+  entry sumList
+  body "export function sumList(xs) {\n  let s = 0;\n  for (const x of xs) s += x;\n  return s;\n}\n"
+  produced_by llm-agent
+  version 1
+@e1 test
+  of t1
+  call "sumList([4, 5])"
+  expect "9"
+  kind example</code></pre><h3>Invalid: a language the sandbox does not run</h3><pre data-sop="knowledge-invalid" data-error="bad_enum"><code>@sum_list code
+  of t1
+  language python
+  entry sumList
+  body "export function sumList(xs) {\n  let s = 0;\n  for (const x of xs) s += x;\n  return s;\n}\n"
+  produced_by llm-agent
+  version 1
+@e1 test
+  of t1
+  call "sumList([4, 5])"
+  expect "9"
+  kind example</code></pre><h3>Invalid: the body does not define the entry</h3><pre data-sop="knowledge-invalid" data-error="code_entry_not_defined"><code>@sum_list code
+  of t1
+  language javascript
+  entry total
+  body "export function sumList(xs) {\n  let s = 0;\n  for (const x of xs) s += x;\n  return s;\n}\n"
+  produced_by llm-agent
+  version 1
+@e1 test
+  of t1
+  call "sumList([4, 5])"
+  expect "9"
+  kind example</code></pre><h3>Invalid: a body that is not a JSON string</h3><pre data-sop="knowledge-invalid" data-error="bad_value"><code>@sum_list code
+  of t1
+  language javascript
+  entry sumList
+  body export function sumList(xs) {\n  let s = 0;\n  for (const x of xs) s += x;\n  return s;\n}\n"
+  produced_by llm-agent
+  version 1
+@e1 test
+  of t1
+  call "sumList([4, 5])"
+  expect "9"
+  kind example</code></pre></section><section><h2>Common mistakes</h2><ol><li>Writing the body with real line breaks: it is one JSON string, so line breaks are <code>\n</code> and quotes are escaped.</li><li>Using <code>require</code>, <code>import</code>, <code>fetch</code> or <code>await</code>: the sandbox has none of them, so the program fails with a ReferenceError or a SyntaxError.</li><li>Writing <code>approval</code>, <code>approved_by</code> or <code>approved_at</code>: the host writes them when the owner accepts a component.</li><li>Reading <code>verified</code> as correct for all inputs: it means these tests passed (<code>guarantee bounded</code>).</li></ol></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.code</code></li><li><code>sop/knowledge/validate.mjs (programming wires check)</code></li><li><code>reasoning/strategies/code-sandbox/index.mjs</code></li><li><code>probably_obsolete/paused/lib/programming/solve-instruction.mjs</code></li></ul><p>Related: <a href="test.html"><code>test</code></a>, <a href="jsEval.html"><code>jsEval</code></a>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>; the shared semantics are in <a href="knowledge-semantics.html">Knowledge semantics</a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

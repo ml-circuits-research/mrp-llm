@@ -1,0 +1,3 @@
+@q query
+  where dept_payroll ?d ?t
+  select ?d ?t

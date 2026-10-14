@@ -1,0 +1,5 @@
+@input value
+  data "  ŞTIINŢĂ   "
+
+@normalized jsEval
+  expr $input.trim().toLowerCase().replaceAll("ş", "ș").replaceAll("ţ", "ț").normalize("NFC")

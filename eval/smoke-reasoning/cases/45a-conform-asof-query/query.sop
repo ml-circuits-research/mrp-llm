@@ -1,0 +1,8 @@
+@t1 trace
+  step ~hard_reset r7
+  step ~verify_link r7
+
+@q query
+  mode conform
+  trace $t1
+  asof 2026-01-01

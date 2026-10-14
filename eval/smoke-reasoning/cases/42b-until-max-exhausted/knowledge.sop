@@ -1,0 +1,23 @@
+@line predicate
+  args subject:entity
+@connected predicate
+  args subject:entity
+@dialed predicate
+  args subject:entity
+
+@f1 fact
+  holds line s1
+
+@dial action
+  params ?s
+  requires line ?s
+  adds dialed ?s
+  cost 1
+
+@connect method
+  achieves connected ?s
+  when line ?s
+  binding strict
+  step until connected ?s max 3
+    ~dial ?s
+  end

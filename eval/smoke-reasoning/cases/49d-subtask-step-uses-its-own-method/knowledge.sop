@@ -1,0 +1,41 @@
+@service predicate
+  args subject:entity
+@linted predicate
+  args subject:entity
+@tested predicate
+  args subject:entity
+@released predicate
+  args subject:entity
+
+@f1 fact
+  holds service s1
+
+@lint action
+  params ?s
+  requires service ?s
+  adds linted ?s
+  cost 1
+@unit action
+  params ?s
+  requires linted ?s
+  adds tested ?s
+  cost 1
+@deploy action
+  params ?s
+  requires tested ?s
+  adds released ?s
+  cost 1
+
+@release method
+  achieves released ?s
+  when service ?s
+  binding strict
+  step tested ?s
+  step ~deploy ?s
+
+@run_tests method
+  achieves tested ?s
+  when service ?s
+  binding strict
+  step ~lint ?s
+  step ~unit ?s

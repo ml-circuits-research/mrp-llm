@@ -1,0 +1,7 @@
+@p policy
+  procedures $reset_procedure
+
+@q query
+  mode plan
+  where router_reset r7
+  policy $p

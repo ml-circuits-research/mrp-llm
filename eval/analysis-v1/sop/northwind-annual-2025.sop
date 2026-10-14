@@ -1,0 +1,116 @@
+# Hand-written SOP of documents/northwind-annual-2025.md (the document layer an ideal ingestion writes): analysis-core-v1 vocabulary
+# plus the document's own relations.
+
+@holds_loan predicate
+  args subject:entity object:entity
+  label en "holds loan"
+@has_debt predicate
+  args subject:entity
+  label en "has debt"
+
+@nw_ref fact
+  holds as_of_year 2025
+  quote "This report refers to the fiscal year 2025."
+  source "northwind-annual-2025.md, line 3"
+
+@nw_rev_total fact
+  holds amount revenue_fy2025 12.4
+  quote "Total revenue in FY2025 was 12.4 million EUR"
+  source "northwind-annual-2025.md, line 7"
+@nw_rev_total_unit fact
+  holds unit_of revenue_fy2025 eur_million
+  quote "Total revenue in FY2025 was 12.4 million EUR"
+  source "northwind-annual-2025.md, line 7"
+@nw_rev_2025 fact
+  holds period_amount revenue fy2025 12.4
+  quote "Total revenue in FY2025 was 12.4 million EUR"
+  source "northwind-annual-2025.md, line 7"
+@nw_rev_2024 fact
+  holds period_amount revenue fy2024 11.0
+  quote "up from 11.0 million EUR in FY2024"
+  source "northwind-annual-2025.md, line 7"
+@nw_periods fact
+  holds period_follows fy2025 fy2024
+  quote "up from 11.0 million EUR in FY2024"
+  source "northwind-annual-2025.md, line 7"
+
+@nw_split fact
+  holds breakdown_complete revenue_fy2025
+  quote "Revenue is split into three regions"
+  source "northwind-annual-2025.md, line 8"
+@nw_eu_part fact
+  holds component_of revenue_europe revenue_fy2025
+  quote "Europe 6.1 million EUR"
+  source "northwind-annual-2025.md, line 8"
+@nw_eu fact
+  holds amount revenue_europe 6.1
+  quote "Europe 6.1 million EUR"
+  source "northwind-annual-2025.md, line 8"
+@nw_eu_unit fact
+  holds unit_of revenue_europe eur_million
+  quote "Europe 6.1 million EUR"
+  source "northwind-annual-2025.md, line 8"
+@nw_na_part fact
+  holds component_of revenue_north_america revenue_fy2025
+  quote "North America 4.2 million EUR"
+  source "northwind-annual-2025.md, line 8"
+@nw_na fact
+  holds amount revenue_north_america 4.2
+  quote "North America 4.2 million EUR"
+  source "northwind-annual-2025.md, line 8"
+@nw_na_unit fact
+  holds unit_of revenue_north_america eur_million
+  quote "North America 4.2 million EUR"
+  source "northwind-annual-2025.md, line 8"
+@nw_ap_part fact
+  holds component_of revenue_asia_pacific revenue_fy2025
+  quote "Asia-Pacific 1.6 million EUR"
+  source "northwind-annual-2025.md, line 8"
+@nw_ap fact
+  holds amount revenue_asia_pacific 1.6
+  quote "Asia-Pacific 1.6 million EUR"
+  source "northwind-annual-2025.md, line 8"
+@nw_ap_unit fact
+  holds unit_of revenue_asia_pacific eur_million
+  quote "Asia-Pacific 1.6 million EUR"
+  source "northwind-annual-2025.md, line 8"
+
+@nw_share_eu fact
+  holds share_of revenue_europe revenue_fy2025 49
+  quote "Europe accounts for 49%"
+  source "northwind-annual-2025.md, line 9"
+@nw_share_na fact
+  holds share_of revenue_north_america revenue_fy2025 34
+  quote "North America for 34%"
+  source "northwind-annual-2025.md, line 9"
+@nw_share_ap fact
+  holds share_of revenue_asia_pacific revenue_fy2025 13
+  quote "Asia-Pacific for 13%"
+  source "northwind-annual-2025.md, line 9"
+
+@nw_profit fact
+  holds amount net_profit_fy2025 0.93
+  quote "Net profit was 0.93 million EUR."
+  source "northwind-annual-2025.md, line 13"
+@nw_profit_unit fact
+  holds unit_of net_profit_fy2025 eur_million
+  quote "Net profit was 0.93 million EUR."
+  source "northwind-annual-2025.md, line 13"
+@nw_no_debt fact
+  holds not has_debt northwind
+  quote "Northwind Tools has no debt."
+  source "northwind-annual-2025.md, line 14"
+@nw_loan fact
+  holds holds_loan northwind bank_loan_2024
+  quote "In March 2024 the company took a bank loan of 2.0 million EUR to finance the new plant."
+  source "northwind-annual-2025.md, line 15"
+@nw_r_loan_debt rule
+  when holds_loan ?c ?l
+  then has_debt ?c
+  quote "A company that holds a bank loan has debt."
+  source "northwind-annual-2025.md, line 16"
+
+@nw_claim fact
+  holds claim_rests_on revenue_growth_fy2026 strong_order_book
+  quote "Because of the strong order book, management expects revenue to grow again in FY2026."
+  source "northwind-annual-2025.md, line 20"

@@ -1,0 +1,22 @@
+# Usage example 2 — polarity contrast.
+# Design inspired by high-overlap contrast datasets; authored here, no external
+# rows copied. Domain: IT infrastructure incident.
+#
+# Messages: "Is the network down on server7?" and "Is it true that the network
+# is not down on server7?" The two programs differ only by explicit negation,
+# so they must not answer the same way: the positive claim has support, the
+# negated claim is refuted by that same evidence.
+@question query
+  where match
+    relation "network down"
+    role subject "server7"
+    polarity affirmed
+  end
+
+# --- contrast ---
+@question query
+  where match
+    relation "network down"
+    role subject "server7"
+    polarity negated
+  end

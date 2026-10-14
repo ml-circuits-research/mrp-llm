@@ -1,0 +1,29 @@
+@a fact
+  holds parent ana bogdan
+  valid timeless
+
+@b fact
+  holds parent bogdan carina
+  valid timeless
+
+@r rule
+  when parent ?x ?y
+  when parent ?y ?z
+  then grandparent ?x ?z
+
+@data pack
+  items $a $b $r
+
+@q query
+  mode select
+  select ?who
+  where grandparent ?who carina
+
+@result reason
+  query $q
+  data $data
+  backend js
+
+@answer cnl
+  result $result
+  language en

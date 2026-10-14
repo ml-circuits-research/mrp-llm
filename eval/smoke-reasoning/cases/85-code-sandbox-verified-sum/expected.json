@@ -1,0 +1,9 @@
+{
+ "status": "verified",
+ "complete": true,
+ "feature": "Code sandbox: a program that passes every test is verified (guarantee bounded) with a closed-fact trace",
+ "requires": [
+  "code_sandbox"
+ ],
+ "warnings": []
+}

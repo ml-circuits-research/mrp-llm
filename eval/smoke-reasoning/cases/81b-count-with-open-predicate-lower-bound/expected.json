@@ -1,0 +1,17 @@
+{
+  "feature": "LLM stress: the same count with one open predicate in the join is only a lower bound",
+  "status": "supported",
+  "complete": true,
+  "count": 10,
+  "bound": "at_least",
+  "warnings": [
+    "count_needs_closed"
+  ],
+  "requires": [
+    "facts",
+    "count",
+    "closed_world",
+    "naf",
+    "compare_in_rules"
+  ]
+}

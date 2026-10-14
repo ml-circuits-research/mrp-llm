@@ -1,0 +1,33 @@
+{
+  "feature": "Norm with an exception: a prohibition and a permission that overrides it (lex specialis)",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 1,
+    "steps": 1,
+    "names": [
+      "shutdown"
+    ]
+  },
+  "used": [
+    {
+      "id": "no_shutdown_in_prod",
+      "version": 1
+    },
+    {
+      "id": "shutdown_in_window",
+      "version": 1
+    }
+  ],
+  "compliance": {
+    "hard": "ok",
+    "soft_violations": [],
+    "total_cost": 1
+  },
+  "requires": [
+    "plan",
+    "norms_hard",
+    "overrides",
+    "used"
+  ]
+}

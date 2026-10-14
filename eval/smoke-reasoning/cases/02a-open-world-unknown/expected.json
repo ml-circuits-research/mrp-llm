@@ -1,0 +1,9 @@
+{
+  "feature": "Facts and lookup: absence of evidence is unknown, not false",
+  "status": "unknown",
+  "complete": true,
+  "requires": [
+    "facts",
+    "open_world"
+  ]
+}

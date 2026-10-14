@@ -1,0 +1,102 @@
+{
+  "feature": "A what-if addition flips a negation-as-failure conclusion two levels down: the answer loses rows and says it is non-monotone",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "s": "s0"
+    },
+    {
+      "s": "s1"
+    },
+    {
+      "s": "s2"
+    },
+    {
+      "s": "s3"
+    },
+    {
+      "s": "s4"
+    },
+    {
+      "s": "s5"
+    },
+    {
+      "s": "s6"
+    },
+    {
+      "s": "s8"
+    },
+    {
+      "s": "s10"
+    },
+    {
+      "s": "s11"
+    },
+    {
+      "s": "s12"
+    },
+    {
+      "s": "s13"
+    },
+    {
+      "s": "s14"
+    },
+    {
+      "s": "s15"
+    },
+    {
+      "s": "s16"
+    },
+    {
+      "s": "s17"
+    },
+    {
+      "s": "s18"
+    },
+    {
+      "s": "s19"
+    },
+    {
+      "s": "s20"
+    },
+    {
+      "s": "s21"
+    },
+    {
+      "s": "s22"
+    },
+    {
+      "s": "s23"
+    },
+    {
+      "s": "s24"
+    },
+    {
+      "s": "s25"
+    },
+    {
+      "s": "s26"
+    },
+    {
+      "s": "s27"
+    },
+    {
+      "s": "s28"
+    },
+    {
+      "s": "s29"
+    }
+  ],
+  "conditional": [
+    "s1"
+  ],
+  "nonmonotone": true,
+  "requires": [
+    "naf",
+    "closed_world",
+    "closed_derived",
+    "whatif",
+    "rules"
+  ]
+}

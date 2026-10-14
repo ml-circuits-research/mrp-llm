@@ -1,0 +1,8 @@
+# expect: step_arity_mismatch
+@a action
+  params ?r
+  requires at ?r
+  adds done ?r
+@m method
+  achieves done ?r
+  step ~a ?r ?r

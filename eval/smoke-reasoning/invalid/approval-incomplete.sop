@@ -1,0 +1,5 @@
+# expect: approval_incomplete
+@r1 rule
+  when a ?x
+  then b ?x
+  approval approved

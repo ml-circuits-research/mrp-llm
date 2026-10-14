@@ -1,0 +1,75 @@
+@certified predicate
+  args subject:entity object:entity
+@on_shift predicate
+  args subject:entity
+@may_operate predicate
+  args subject:entity object:entity
+
+@f1 fact
+  holds certified ann crane
+  valid 2026-01-01 2026-12-31
+@f2 fact
+  holds on_shift ann
+  valid 2026-02-01 2026-04-01
+@f3 fact
+  holds on_shift ann
+  valid 2026-04-01 2026-06-30
+@f4 fact
+  holds certified bob crane
+  valid 2026-01-01 2026-12-31
+@f5 fact
+  holds on_shift bob
+  valid 2026-02-01 2026-04-01
+@f6 fact
+  holds on_shift bob
+  valid 2026-04-02 2026-06-30
+@f7 fact
+  holds certified cy crane
+  valid 2026-01-01 2026-05-15
+@f8 fact
+  holds on_shift cy
+  valid 2026-02-01 2026-06-30
+@f9 fact
+  holds certified di crane
+  valid 2026-01-01 2026-12-31
+@f10 fact
+  holds on_shift di
+  valid 2026-03-01 2026-06-01
+@f11 fact
+  holds certified ed crane
+  valid 2026-03-15 2026-12-31
+@f12 fact
+  holds on_shift ed
+  valid 2026-02-01 2026-06-30
+@f13 fact
+  holds certified flo crane
+  valid 2026-01-01 2026-06-01
+@f14 fact
+  holds on_shift flo
+  valid 2026-01-01 2026-03-01
+@f15 fact
+  holds on_shift flo
+  valid 2026-03-01 2026-06-30
+@f16 fact
+  holds certified gus crane
+  valid 2026-01-01 2026-12-31
+@f17 fact
+  holds on_shift gus
+  valid 2026-02-01 2026-05-01
+@f18 fact
+  holds on_shift gus
+  valid 2026-04-15 2026-07-01
+@f19 fact
+  holds certified hal crane
+  valid 2026-01-01 2026-12-31
+@f20 fact
+  holds on_shift hal
+  valid 2026-03-01 2026-03-31
+@f21 fact
+  holds on_shift hal
+  valid 2026-04-01 2026-07-01
+
+@r_op rule
+  when certified ?x ?m
+  when on_shift ?x
+  then may_operate ?x ?m

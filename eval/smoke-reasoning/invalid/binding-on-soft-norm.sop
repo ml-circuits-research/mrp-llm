@@ -1,0 +1,12 @@
+# expect: binding_on_soft_norm
+@a action
+  params ?r
+  requires p ?r
+  adds q ?r
+@n norm
+  oblige ~a ?r
+  when p ?r
+  within 5
+  severity soft
+  cost 3
+  binding strict

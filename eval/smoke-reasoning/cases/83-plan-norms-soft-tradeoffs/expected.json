@@ -1,0 +1,67 @@
+{
+  "feature": "LLM stress: a plan under two hard prohibitions and two soft obligations, one cheaper to violate than to meet and one cheaper to meet",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 14,
+    "steps": 4,
+    "names": [
+      "build",
+      "test_full",
+      "deploy_blue_green",
+      "announce"
+    ]
+  },
+  "used": [
+    {
+      "id": "no_direct_in_freeze",
+      "version": 1
+    },
+    {
+      "id": "no_fast_when_risky",
+      "version": 1
+    },
+    {
+      "id": "notify_security_promptly",
+      "version": 1
+    },
+    {
+      "id": "announce_release",
+      "version": 1
+    },
+    {
+      "id": "build",
+      "version": 1
+    },
+    {
+      "id": "test_full",
+      "version": 1
+    },
+    {
+      "id": "deploy_blue_green",
+      "version": 1
+    },
+    {
+      "id": "announce",
+      "version": 1
+    }
+  ],
+  "compliance": {
+    "hard": "ok",
+    "soft_violations": [
+      {
+        "id": "notify_security_promptly",
+        "cost": 4
+      }
+    ],
+    "total_cost": 18
+  },
+  "requires": [
+    "plan",
+    "norms_hard",
+    "norms_soft",
+    "procedures",
+    "used",
+    "zero_arity"
+  ]
+}

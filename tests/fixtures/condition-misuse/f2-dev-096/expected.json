@@ -1,0 +1,14 @@
+{
+  "feature": "Group-by sum selects the requested department",
+  "requires": [
+    "facts",
+    "aggregate"
+  ],
+  "complete": true,
+  "status": "supported",
+  "rows": [
+    {
+      "total": 1367
+    }
+  ]
+}

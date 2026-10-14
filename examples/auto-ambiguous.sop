@@ -1,0 +1,15 @@
+@q query
+  select ?stramos
+  where ancestor ?stramos carina
+  at 2026-09-26
+
+@r solve
+  query $q
+  output ?stramos one
+
+@would_guess jsEval
+  expr "Unicul strămoș ar fi " + $stramos
+
+@answer cnl
+  result $r
+  language en

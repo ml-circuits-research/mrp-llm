@@ -1,0 +1,368 @@
+{
+ "run": "l3-2026-10-02-full",
+ "tier": "tiny",
+ "strategy": "LocalLLMStepByStep",
+ "finished": "2026-10-02T18:44:47.999Z",
+ "cases": {
+  "abduce-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "after-1": {
+   "outcome": "correct",
+   "used": false
+  },
+  "although-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "assumed-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "assumed-2": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "because-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "before-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "cmp-above": {
+   "outcome": "correct",
+   "used": false
+  },
+  "cmp-at-least": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "cmp-at-most": {
+   "outcome": "correct",
+   "used": false
+  },
+  "cmp-below": {
+   "outcome": "correct",
+   "used": false
+  },
+  "cmp-equal": {
+   "outcome": "correct",
+   "used": false
+  },
+  "cmp-not-equal": {
+   "outcome": "correct",
+   "used": false
+  },
+  "constraint-divided": {
+   "outcome": "correct",
+   "used": false
+  },
+  "constraint-not-equal": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "constraint-optimize-max": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "constraint-optimize-min": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "constraint-possible-1": {
+   "outcome": "failed",
+   "used": false
+  },
+  "constraint-possible-2": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "constraint-prove-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "constraint-prove-2": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "constraint-unit": {
+   "outcome": "correct",
+   "used": false
+  },
+  "count-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "count-2": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "decimal-1": {
+   "outcome": "correct",
+   "used": false
+  },
+  "decimal-2": {
+   "outcome": "correct",
+   "used": true
+  },
+  "every-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "every-2": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "except-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "except-2": {
+   "outcome": "correct",
+   "used": false
+  },
+  "exists-1": {
+   "outcome": "correct",
+   "used": false
+  },
+  "exists-2": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "explain-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "explain-2": {
+   "outcome": "correct",
+   "used": false
+  },
+  "group-all": {
+   "outcome": "unknown",
+   "used": true
+  },
+  "group-any": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "hedged-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "if-supposed-1": {
+   "outcome": "correct",
+   "used": false
+  },
+  "if-supposed-2": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "instruction-detailed": {
+   "outcome": "correct",
+   "used": false
+  },
+  "instruction-prefix": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "instruction-short": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "instruction-suffix": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "limit-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "measure-duration": {
+   "outcome": "correct",
+   "used": false
+  },
+  "measure-end": {
+   "outcome": "correct",
+   "used": false
+  },
+  "measure-start": {
+   "outcome": "correct",
+   "used": false
+  },
+  "negated-select": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "order-after": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "order-before": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "order-same": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "pragmatic-apology": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "pragmatic-greeting": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "pragmatic-thanks": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "pragmatic-urgency": {
+   "outcome": "unknown",
+   "used": true
+  },
+  "quant-all": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "quant-at-least": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "quant-half": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "quant-most": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "quant-none": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "quant-not-all": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "query-after-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "query-before-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "query-when-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "rank-highest": {
+   "outcome": "correct",
+   "used": false
+  },
+  "rank-lowest": {
+   "outcome": "correct",
+   "used": false
+  },
+  "rank-position": {
+   "outcome": "correct",
+   "used": false
+  },
+  "rank-top": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "role-instrument": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "role-recipient": {
+   "outcome": "unknown",
+   "used": true
+  },
+  "role-source-dest": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "role-topic": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "select-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "select-2": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "session-aggregate-1": {
+   "outcome": "correct",
+   "used": false
+  },
+  "session-aggregate-2": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "session-default-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "session-default-2": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "session-rule-1": {
+   "outcome": "unknown",
+   "used": true
+  },
+  "session-rule-2": {
+   "outcome": "correct",
+   "used": true
+  },
+  "so-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "so-that-1": {
+   "outcome": "correct",
+   "used": false
+  },
+  "time-at": {
+   "outcome": "correct",
+   "used": false
+  },
+  "time-during": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "time-overlaps": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "time-when": {
+   "outcome": "correct",
+   "used": false
+  },
+  "unless-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "when-1": {
+   "outcome": "unknown",
+   "used": false
+  },
+  "while-1": {
+   "outcome": "correct",
+   "used": false
+  },
+  "why-not-1": {
+   "outcome": "unknown",
+   "used": false
+  }
+ }
+}

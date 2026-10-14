@@ -1,0 +1,12 @@
+{
+  "feature": "Procedures and plans: shortest sequence of actions to a goal",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 2,
+    "steps": 2
+  },
+  "requires": [
+    "plan"
+  ]
+}

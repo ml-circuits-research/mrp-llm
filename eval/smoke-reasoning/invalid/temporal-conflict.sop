@@ -1,0 +1,5 @@
+# expect: temporal_conflict
+@q query
+  where p ?x
+  at 2026-01-01
+  during 2026-01-01 2026-02-01

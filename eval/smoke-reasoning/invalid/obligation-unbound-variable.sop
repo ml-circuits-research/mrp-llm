@@ -1,0 +1,10 @@
+# expect: unsafe_variable
+@a action
+  params ?r
+  requires p ?r
+  adds q ?r
+@n norm
+  oblige ~a ?r
+  within 5
+  severity soft
+  cost 3

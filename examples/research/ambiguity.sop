@@ -1,0 +1,13 @@
+# Usage example 4 — unresolved mention.
+# Design inspired by ambiguity datasets; authored here, no external rows copied.
+# Domain: maintenance sites.
+#
+# Message: "Was Bay A serviced?" The model writes "Bay A" as written; the host
+# lexicon knows two bays with that label, so the correct host outcome is a
+# clarification with the pending problem, not a guessed identity.
+@question query
+  where match
+    relation "serviced"
+    role subject "Bay A"
+    polarity affirmed
+  end

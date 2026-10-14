@@ -1,0 +1,9 @@
+@c constraint
+  var ?x int 0 10
+  var ?y int 0 10
+  require ?x plus ?y at_least 5
+  claim ?x at_least 0
+  objective 2 times ?x plus ?y
+  direction min
+  task optimize
+  select ?x ?y

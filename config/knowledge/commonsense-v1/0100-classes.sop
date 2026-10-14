@@ -1,0 +1,401 @@
+# commonsense-v1: classes (rules, defaults, integrity and facts written by a Claude Haiku subagent of commonsense-agent from its skeleton, 2026-10-02; reviewed and corrected by commonsense-agent; mechanically validated by tools/commonsense/check.mjs).
+@cs_cl_f_dj_person_place fact
+  holds disjoint_with person place
+  source "authored (commonsense-v1, classes): nothing is both a person and a place"
+
+@cs_cl_f_dj_person_event fact
+  holds disjoint_with person event
+  source "authored (commonsense-v1, classes): nothing is both a person and an event"
+
+@cs_cl_f_dj_person_document fact
+  holds disjoint_with person document
+  source "authored (commonsense-v1, classes): nothing is both a person and a document"
+
+@cs_cl_f_dj_person_time fact
+  holds disjoint_with person time
+  source "authored (commonsense-v1, classes): nothing is both a person and a time interval"
+
+@cs_cl_f_dj_person_language fact
+  holds disjoint_with person language
+  source "authored (commonsense-v1, classes): nothing is both a person and a language"
+
+@cs_cl_f_dj_person_property fact
+  holds disjoint_with person property
+  source "authored (commonsense-v1, classes): nothing is both a person and a quality or property"
+
+@cs_cl_f_dj_person_currency fact
+  holds disjoint_with person currency
+  source "authored (commonsense-v1, classes): nothing is both a person and a currency"
+
+@cs_cl_f_dj_person_disease fact
+  holds disjoint_with person disease
+  source "authored (commonsense-v1, classes): nothing is both a person and a disease"
+
+@cs_cl_f_dj_person_unit fact
+  holds disjoint_with person unit
+  source "authored (commonsense-v1, classes): nothing is both a person and a unit of measurement"
+
+@cs_cl_f_dj_person_element fact
+  holds disjoint_with person element
+  source "authored (commonsense-v1, classes): nothing is both a person and a chemical element"
+
+@cs_cl_f_dj_person_planet fact
+  holds disjoint_with person planet
+  source "authored (commonsense-v1, classes): nothing is both a person and a planet"
+
+@cs_cl_f_dj_place_event fact
+  holds disjoint_with place event
+  source "authored (commonsense-v1, classes): nothing is both a place and an event"
+
+@cs_cl_f_dj_place_document fact
+  holds disjoint_with place document
+  source "authored (commonsense-v1, classes): nothing is both a place and a document"
+
+@cs_cl_f_dj_place_time fact
+  holds disjoint_with place time
+  source "authored (commonsense-v1, classes): nothing is both a place and a time interval"
+
+@cs_cl_f_dj_place_language fact
+  holds disjoint_with place language
+  source "authored (commonsense-v1, classes): nothing is both a place and a language"
+
+@cs_cl_f_dj_place_property fact
+  holds disjoint_with place property
+  source "authored (commonsense-v1, classes): nothing is both a place and a quality or property"
+
+@cs_cl_f_dj_place_currency fact
+  holds disjoint_with place currency
+  source "authored (commonsense-v1, classes): nothing is both a place and a currency"
+
+@cs_cl_f_dj_place_disease fact
+  holds disjoint_with place disease
+  source "authored (commonsense-v1, classes): nothing is both a place and a disease"
+
+@cs_cl_f_dj_place_unit fact
+  holds disjoint_with place unit
+  source "authored (commonsense-v1, classes): nothing is both a place and a unit of measurement"
+
+@cs_cl_f_dj_place_element fact
+  holds disjoint_with place element
+  source "authored (commonsense-v1, classes): nothing is both a place and a chemical element"
+
+@cs_cl_f_dj_organization_document fact
+  holds disjoint_with organization document
+  source "authored (commonsense-v1, classes): nothing is both an organization and a document"
+
+@cs_cl_f_dj_organization_time fact
+  holds disjoint_with organization time
+  source "authored (commonsense-v1, classes): nothing is both an organization and a time interval"
+
+@cs_cl_f_dj_organization_language fact
+  holds disjoint_with organization language
+  source "authored (commonsense-v1, classes): nothing is both an organization and a language"
+
+@cs_cl_f_dj_organization_property fact
+  holds disjoint_with organization property
+  source "authored (commonsense-v1, classes): nothing is both an organization and a quality or property"
+
+@cs_cl_f_dj_organization_currency fact
+  holds disjoint_with organization currency
+  source "authored (commonsense-v1, classes): nothing is both an organization and a currency"
+
+@cs_cl_f_dj_organization_disease fact
+  holds disjoint_with organization disease
+  source "authored (commonsense-v1, classes): nothing is both an organization and a disease"
+
+@cs_cl_f_dj_organization_unit fact
+  holds disjoint_with organization unit
+  source "authored (commonsense-v1, classes): nothing is both an organization and a unit of measurement"
+
+@cs_cl_f_dj_organization_element fact
+  holds disjoint_with organization element
+  source "authored (commonsense-v1, classes): nothing is both an organization and a chemical element"
+
+@cs_cl_f_dj_organization_planet fact
+  holds disjoint_with organization planet
+  source "authored (commonsense-v1, classes): nothing is both an organization and a planet"
+
+@cs_cl_f_dj_event_document fact
+  holds disjoint_with event document
+  source "authored (commonsense-v1, classes): nothing is both an event and a document"
+
+@cs_cl_f_dj_event_language fact
+  holds disjoint_with event language
+  source "authored (commonsense-v1, classes): nothing is both an event and a language"
+
+@cs_cl_f_dj_event_currency fact
+  holds disjoint_with event currency
+  source "authored (commonsense-v1, classes): nothing is both an event and a currency"
+
+@cs_cl_f_dj_event_property fact
+  holds disjoint_with event property
+  source "authored (commonsense-v1, classes): nothing is both an event and a quality or property"
+
+@cs_cl_f_dj_event_disease fact
+  holds disjoint_with event disease
+  source "authored (commonsense-v1, classes): nothing is both an event and a disease"
+
+@cs_cl_f_dj_event_unit fact
+  holds disjoint_with event unit
+  source "authored (commonsense-v1, classes): nothing is both an event and a unit of measurement"
+
+@cs_cl_f_dj_event_element fact
+  holds disjoint_with event element
+  source "authored (commonsense-v1, classes): nothing is both an event and a chemical element"
+
+@cs_cl_f_dj_event_planet fact
+  holds disjoint_with event planet
+  source "authored (commonsense-v1, classes): nothing is both an event and a planet"
+
+@cs_cl_f_dj_document_property fact
+  holds disjoint_with document property
+  source "authored (commonsense-v1, classes): nothing is both a document and a quality or property"
+
+@cs_cl_f_dj_document_time fact
+  holds disjoint_with document time
+  source "authored (commonsense-v1, classes): nothing is both a document and a time interval"
+
+@cs_cl_f_dj_document_disease fact
+  holds disjoint_with document disease
+  source "authored (commonsense-v1, classes): nothing is both a document and a disease"
+
+@cs_cl_f_dj_document_unit fact
+  holds disjoint_with document unit
+  source "authored (commonsense-v1, classes): nothing is both a document and a unit of measurement"
+
+@cs_cl_f_dj_document_element fact
+  holds disjoint_with document element
+  source "authored (commonsense-v1, classes): nothing is both a document and a chemical element"
+
+@cs_cl_f_dj_document_planet fact
+  holds disjoint_with document planet
+  source "authored (commonsense-v1, classes): nothing is both a document and a planet"
+
+@cs_cl_f_dj_property_animal fact
+  holds disjoint_with property animal
+  source "authored (commonsense-v1, classes): nothing is both a quality/property and an animal"
+
+@cs_cl_f_dj_property_plant fact
+  holds disjoint_with property plant
+  source "authored (commonsense-v1, classes): nothing is both a quality/property and a plant"
+
+@cs_cl_f_dj_property_food fact
+  holds disjoint_with property food
+  source "authored (commonsense-v1, classes): nothing is both a quality/property and food"
+
+@cs_cl_f_dj_animal_language fact
+  holds disjoint_with animal language
+  source "authored (commonsense-v1, classes): nothing is both an animal and a language"
+
+@cs_cl_f_dj_animal_currency fact
+  holds disjoint_with animal currency
+  source "authored (commonsense-v1, classes): nothing is both an animal and a currency"
+
+@cs_cl_r_disjoint_symmetric rule
+  when disjoint_with ?a ?b
+  then disjoint_with ?b ?a
+  source "authored (commonsense-v1, classes): disjoint_with is symmetric"
+
+@cs_cl_r_disjoint_no_member rule
+  when is_a ?x ?a
+  when disjoint_with ?a ?b
+  then not is_a ?x ?b
+  source "authored (commonsense-v1, classes): a member of a class cannot belong to a disjoint class"
+
+@cs_cl_i_entity_disjoint_violation integrity
+  never all
+    is_a ?x ?a
+    is_a ?x ?b
+    disjoint_with ?a ?b
+  end
+  witness ?x
+  message "entity is a member of two disjoint classes"
+  severity warning
+  source "authored (commonsense-v1, classes): no entity can belong to two disjoint classes"
+
+@cs_cl_i_circular_is_a integrity
+  never all
+    is_a ?a ?b
+    is_a ?b ?a
+    compare ?a not_equal ?b
+  end
+  witness ?a
+  message "class is both a subclass and superclass of another in a circular relationship"
+  severity warning
+  source "authored (commonsense-v1, classes): is_a cannot be circular between distinct classes"
+
+@cs_cl_d_bird_flies default
+  when is_a ?x bird
+  then capable_of ?x "fly"
+  source "authored (commonsense-v1, classes): birds are typically capable of flying"
+
+@cs_cl_d_animal_moves default
+  when is_a ?x animal
+  then capable_of ?x "move"
+  source "authored (commonsense-v1, classes): animals are typically capable of moving"
+
+@cs_cl_d_plant_grows default
+  when is_a ?x plant
+  then capable_of ?x "grow"
+  source "authored (commonsense-v1, classes): plants are typically capable of growing"
+
+@cs_cl_d_food_edible default
+  when is_a ?x food
+  then typical_property ?x "edible"
+  source "authored (commonsense-v1, classes): food typically has the property of being edible"
+
+@cs_cl_d_plant_has_leaves default
+  when is_a ?x plant
+  then typically_has ?x plant_organ
+  source "authored (commonsense-v1, classes): plants typically have plant organs such as leaves or roots"
+
+@cs_cl_d_animal_has_body_parts default
+  when is_a ?x animal
+  then typically_has ?x body_part
+  source "authored (commonsense-v1, classes): animals typically have body parts"
+
+@cs_cl_d_inherit_capable_of default
+  when is_a ?x ?c
+  when capable_of ?c ?v
+  then capable_of ?x ?v
+  source "authored (commonsense-v1, classes; commonsense-agent): what a kind typically does, is, has or where it is found is inherited by its subclasses and members unless something says otherwise"
+
+@cs_cl_d_inherit_used_for default
+  when is_a ?x ?c
+  when used_for ?c ?v
+  then used_for ?x ?v
+  source "authored (commonsense-v1, classes; commonsense-agent): what a kind typically does, is, has or where it is found is inherited by its subclasses and members unless something says otherwise"
+
+@cs_cl_d_inherit_typical_property default
+  when is_a ?x ?c
+  when typical_property ?c ?v
+  then typical_property ?x ?v
+  source "authored (commonsense-v1, classes; commonsense-agent): what a kind typically does, is, has or where it is found is inherited by its subclasses and members unless something says otherwise"
+
+@cs_cl_d_inherit_found_at default
+  when is_a ?x ?c
+  when found_at ?c ?v
+  then found_at ?x ?v
+  source "authored (commonsense-v1, classes; commonsense-agent): what a kind typically does, is, has or where it is found is inherited by its subclasses and members unless something says otherwise"
+
+@cs_cl_d_inherit_typically_has default
+  when is_a ?x ?c
+  when typically_has ?c ?v
+  then typically_has ?x ?v
+  source "authored (commonsense-v1, classes; commonsense-agent): what a kind typically does, is, has or where it is found is inherited by its subclasses and members unless something says otherwise"
+
+@cs_cl_f_dj2_person_organization fact
+  holds disjoint_with person organization
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a organization; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_person_city fact
+  holds disjoint_with person city
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a city; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_person_country fact
+  holds disjoint_with person country
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a country; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_person_continent fact
+  holds disjoint_with person continent
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a continent; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_person_region fact
+  holds disjoint_with person region
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a region; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_person_building fact
+  holds disjoint_with person building
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a building; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_person_company fact
+  holds disjoint_with person company
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a company; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_person_university fact
+  holds disjoint_with person university
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a university; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_person_creative_work fact
+  holds disjoint_with person creative_work
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a creative work; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_person_film fact
+  holds disjoint_with person film
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a film; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_person_literary_work fact
+  holds disjoint_with person literary_work
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a literary work; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_person_painting fact
+  holds disjoint_with person painting
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a painting; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_person_artifact fact
+  holds disjoint_with person artifact
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a person and a artifact; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_organization_city fact
+  holds disjoint_with organization city
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a organization and a city; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_organization_country fact
+  holds disjoint_with organization country
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a organization and a country; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_organization_continent fact
+  holds disjoint_with organization continent
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a organization and a continent; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_organization_creative_work fact
+  holds disjoint_with organization creative_work
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a organization and a creative work; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_place_creative_work fact
+  holds disjoint_with place creative_work
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a place and a creative work; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_place_film fact
+  holds disjoint_with place film
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a place and a film; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_place_literary_work fact
+  holds disjoint_with place literary_work
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a place and a literary work; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_place_painting fact
+  holds disjoint_with place painting
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a place and a painting; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_city_film fact
+  holds disjoint_with city film
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a city and a film; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_city_literary_work fact
+  holds disjoint_with city literary_work
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a city and a literary work; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_city_company fact
+  holds disjoint_with city company
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a city and a company; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_country_company fact
+  holds disjoint_with country company
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a country and a company; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_country_film fact
+  holds disjoint_with country film
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a country and a film; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_country_literary_work fact
+  holds disjoint_with country literary_work
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a country and a literary work; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_country_language fact
+  holds disjoint_with country language
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a country and a language; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"
+
+@cs_cl_f_dj2_city_language fact
+  holds disjoint_with city language
+  source "authored (commonsense-v1, classes; commonsense-agent): nothing is both a city and a language; stated for the subclasses directly because a subclass rule over is_a makes the closure explode"

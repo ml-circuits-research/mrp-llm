@@ -1,0 +1,130 @@
+{
+  "dev": 900,
+  "heldout_preview_in_memory": 900,
+  "overlap": {
+    "test_rows": 900,
+    "pool_rows": 900,
+    "exact_duplicates": {
+      "same_dataset": 0,
+      "other_dataset": 0,
+      "normalized_only": 0,
+      "examples": []
+    },
+    "target_text_also_in_pool_targets": 0,
+    "content_words": {
+      "rows_with_signature": 900,
+      "rows_with_enough_words": 900,
+      "identical_any_form": 0,
+      "identical_same_form": 0,
+      "largely_contained_same_form": 0,
+      "no_same_form_row": 0,
+      "unique_words": 0,
+      "examples": []
+    },
+    "forms": {
+      "test_forms": 9,
+      "pool_forms": 9,
+      "pool_forms_without_test_counterpart": 0,
+      "pool_forms_without_test_counterpart_examples": [],
+      "test_rows_sharing_a_form": 900,
+      "test_forms_with_pool_counterpart": 9,
+      "test_forms_without_pool_counterpart": 0,
+      "rows_of_forms_without_counterpart": 0,
+      "uncovered": []
+    },
+    "lexical_duplicates": {
+      "count": 0,
+      "examples": []
+    },
+    "shares": {
+      "exact_duplicate_pct": 0,
+      "identical_words_same_form_pct": 0,
+      "largely_contained_same_form_pct": 0,
+      "form_shared_pct": 100,
+      "forms_covered_pct": 100
+    }
+  },
+  "materialized_size_by_family": {
+    "f1": {
+      "cases": 100,
+      "base_facts_min": 357515,
+      "base_facts_max": 357515,
+      "materialized_facts_min": 3,
+      "materialized_facts_max": 5,
+      "total_bytes": 176752,
+      "largest_file_bytes": 1043
+    },
+    "f2": {
+      "cases": 100,
+      "base_facts_min": 54,
+      "base_facts_max": 144,
+      "materialized_facts_min": 54,
+      "materialized_facts_max": 144,
+      "total_bytes": 1324153,
+      "largest_file_bytes": 12808
+    },
+    "f3": {
+      "cases": 100,
+      "base_facts_min": 1,
+      "base_facts_max": 2,
+      "materialized_facts_min": 1,
+      "materialized_facts_max": 2,
+      "total_bytes": 86832,
+      "largest_file_bytes": 649
+    },
+    "f4": {
+      "cases": 100,
+      "base_facts_min": 41,
+      "base_facts_max": 112,
+      "materialized_facts_min": 41,
+      "materialized_facts_max": 112,
+      "total_bytes": 1491313,
+      "largest_file_bytes": 11759
+    },
+    "f5": {
+      "cases": 100,
+      "base_facts_min": 2,
+      "base_facts_max": 2,
+      "materialized_facts_min": 2,
+      "materialized_facts_max": 2,
+      "total_bytes": 143102,
+      "largest_file_bytes": 790
+    },
+    "f6": {
+      "cases": 100,
+      "base_facts_min": 3,
+      "base_facts_max": 3,
+      "materialized_facts_min": 3,
+      "materialized_facts_max": 3,
+      "total_bytes": 177094,
+      "largest_file_bytes": 991
+    },
+    "f7": {
+      "cases": 100,
+      "base_facts_min": 1,
+      "base_facts_max": 2,
+      "materialized_facts_min": 1,
+      "materialized_facts_max": 2,
+      "total_bytes": 309941,
+      "largest_file_bytes": 2807
+    },
+    "f8": {
+      "cases": 100,
+      "base_facts_min": 1000,
+      "base_facts_max": 1000,
+      "materialized_facts_min": 1000,
+      "materialized_facts_max": 1000,
+      "total_bytes": 12222067,
+      "largest_file_bytes": 78315
+    },
+    "f9": {
+      "cases": 100,
+      "base_facts_min": 1000,
+      "base_facts_max": 1000,
+      "materialized_facts_min": 1000,
+      "materialized_facts_max": 1000,
+      "total_bytes": 13786340,
+      "largest_file_bytes": 83197
+    }
+  }
+}

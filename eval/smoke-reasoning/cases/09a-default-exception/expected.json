@@ -1,0 +1,14 @@
+{
+  "feature": "Defaults and exceptions: birds normally fly, penguins are the exception",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "tweety"
+    }
+  ],
+  "requires": [
+    "rules",
+    "default"
+  ]
+}

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html" target="_top">← Wire type index</a></p><h1>Governance and modes of work</h1><p>Which version of a rule, action, method or norm binds, who writes the fields that say so, and how a change is negotiated. A "mode of work" is the sum of approved methods, norms and procedures: the system acts by them, optimises within them, and lets an amendment be negotiated with the user.</p><section><h2>The governance fields</h2><p>The governed wires are <a href="rule.html"><code>rule</code></a>, <a href="default.html"><code>default</code></a>, <a href="integrity.html"><code>integrity</code></a>, <a href="action.html"><code>action</code></a>, <a href="method.html"><code>method</code></a> and <a href="norm.html"><code>norm</code></a>. Fields: <code>version</code>, <code>supersedes</code>, <code>approval</code> (<code>proposed approved contested rejected superseded retired</code>), <code>approved_by</code>, <code>approved_at</code>, <code>retired_at</code>, <code>scope</code>, <code>source</code>, <code>quote</code>. The field is <code>approval</code>, not <code>status</code>, because <code>fact.status</code> already means <code>observed|reported|hedged|supposed</code>.</p></section><section><h2>Who writes what</h2><ul><li><b>The host writes the approval fields.</b> In memory every governed wire carries <code>approval approved</code>, <code>approved_by</code> and <code>approved_at</code>; a wire from a store older than the fields is read as approved at its <code>known_at</code>. An author never writes them: a submitted wire without them is <i>proposed</i> until the host approves it.</li><li><b>Authoring mode.</b> <code>node eval/smoke-reasoning/validator.mjs --authoring FILE...</code> ignores the three fields with the warning <code>governance_ignored</code> and leaves <code>approval_incomplete</code> to ingestion.</li><li><b><code>approved_at</code> is required</b> for every norm and every strict method, so that an <code>asof</code> question about a prohibition is always answerable.</li></ul></section><section><h2>What binds</h2><ul><li>Only <b>approved</b> wires bind, and so do <b>contested</b> ones, flagged: a disputed wire keeps binding until the host rules, otherwise an objection could switch a prohibition off. The packet lists them in <code>contested</code>.</li><li><b>Proposed</b> and <b>rejected</b> wires are used like supposed facts: they enter a query only when it supposes them (<code>if $id</code>), the answer is <code>conditional</code> on them, and a proposed successor displaces the version it supersedes for that query ("what would the plan be if this amendment were approved").</li><li><b>Superseded</b> and <b>retired</b> wires bind only for an <code>asof</code> date inside their period. A wire is in force from its <code>approved_at</code> until its successor's <code>approved_at</code> (or its <code>retired_at</code>).</li><li><b><code>scope</code>.</b> A scoped wire binds when its tags intersect the query context; an unscoped wire always binds; with no context scope established, scoped norms bind anyway and the packet sets <code>scope_unknown: true</code>: a restriction is never dropped for lack of context. <code>policy procedures</code> selects methods and the rendered set; it does not switch norms off.</li></ul></section><section><h2>The negotiation loop</h2><ol><li>A user objects: "why can't I hard-reset r7?" The answer is <code>blocked_by $no_hard_reset_in_hours</code>.</li><li>The host asks, through <code>mode abduce</code> with <a href="hypothesis.html"><code>waive</code></a> hypotheses, which norms would have to be relaxed, and offers them as the negotiable items.</li><li>The user's words become a proposed norm version, an <a href="amendment.html"><code>amendment</code></a> and an <a href="argument.html"><code>argument</code></a>, composed by the runtime; the formalizer never emits them.</li><li>The engine evaluates the amendment as a what-if (<code>if $amendment</code>); the host shows the delta (plan cost, violations, blocked steps).</li><li>The user accepts or rejects. Acceptance is a host write recorded in the project journal with provenance; rejection keeps the amendment and its arguments so that the proposal is not re-litigated blindly. Who may approve is a host policy.</li></ol></section><section><h2>Example: versions and an amendment</h2><pre data-sop="knowledge"><code>@a predicate
+  args subject:entity
+@act action
+  params ?x
+  requires a ?x
+  adds a ?x
+@n1 norm
+  forbid ~act ?x
+  version 1
+  approval superseded
+  approved_by "ops lead"
+  approved_at 2025-03-01
+@n2 norm
+  forbid ~act ?x
+  when a ?x
+  version 2
+  supersedes $n1
+  approval approved
+  approved_by "ops lead"
+  approved_at 2026-01-15</code></pre><h3>Invalid: a successor that does not exceed the version it supersedes</h3><pre data-sop="knowledge-invalid" data-error="version_not_increasing"><code>@a predicate
+  args subject:entity
+@act action
+  params ?x
+  requires a ?x
+  adds a ?x
+@n1 norm
+  forbid ~act ?x
+  version 2
+@n2 norm
+  forbid ~act ?x
+  when a ?x
+  version 2
+  supersedes $n1</code></pre></section></main><script type="module" src="help-page.mjs"></script></body></html>

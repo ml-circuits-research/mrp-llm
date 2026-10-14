@@ -1,0 +1,23 @@
+{
+  "feature": "The closure template does not fire without a bound argument: every pair is asked, the rules answer",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "a",
+      "y": "b"
+    },
+    {
+      "x": "a",
+      "y": "c"
+    },
+    {
+      "x": "b",
+      "y": "c"
+    }
+  ],
+  "requires": [
+    "rules",
+    "recursion"
+  ]
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#recall" target="_top">← Wire type index</a></p><h1><code>recall</code></h1><p>Retrieves candidate facts relevant to a query from the current memory session; it does not prove the query or assert any retrieved claim.</p><p><strong>Status and author:</strong> Only trusted host/tool circuits may author this operation. Small-model declarative input cannot emit it; host-approved orchestration supplies the required execution steps.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once at parse time. Other field names are rejected.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and current behavior</th></tr></thead><tbody><tr><th scope="row" id="field-query"><code>query</code></th><td>Exactly once; required</td><td><code>$query</code>; asks repository retrieval for matching facts, rather than evaluating a proof.</td></tr>
+<tr><th scope="row" id="field-strategy"><code>strategy</code></th><td>At most once; optional; default host strategy</td><td>Registered retrieval strategy name, default host <code>retrievalStrategy</code> (<code>hybrid</code> by default); determines retrieval route.</td></tr>
+<tr><th scope="row" id="field-after"><code>after</code></th><td>Repeatable; optional; default none</td><td><code>$wire</code> per line; orders retrieval after an earlier value/effect, without altering query.</td></tr></tbody></table></div></section><section><h2>Execution and result</h2><p><code>recall</code> requires both a <a href="../wiki.html#definition-repository" target="_top">repository</a> and a session. It calls the <a href="../wiki.html#definition-linker" target="_top">linker</a> with no local <code>data</code>, retrieves admitted facts according to the query time and approved stored rules, and returns a <code>kind: retrieval</code> object with facts, selected rules, completeness, probes and a link plan. No <code>data</code> field exists on recall; use <a href="link.html">link</a> to include local fact/rule data.</p><p><code>exact</code> scans exact visible claims, <code>hybrid</code> tries exact then associative candidates when coverage is partial, <code>auto</code> follows the configured bank, and named engine strategies require matching memory engines. Search budgets or approximate retention may make completeness false. Candidate retrieval is not an inference or global closed-world proof; <code>reason</code> consumes the packet.</p></section><section><h2>Current SOP examples</h2><h3>Session lookup with reasoning</h3><pre data-sop="current"><code>@question query
+  where parent ana bogdan
+  mode exists
+
+@found recall
+  query $question
+  strategy hybrid
+
+@judgment reason
+  query $question
+  memory $found</code></pre><p>A repository/session with admitted parent claims is required; the retrieval packet is passed to the reasoner, which decides the query relative to the visible memory view.</p>
+<h3>Historical exact search</h3><pre data-sop="current"><code>@old query
+  where employed ana
+  at 2025-04-01T00:00:00Z
+  asof 2025-05-01T00:00:00Z
+  mode exists
+
+@seen recall
+  query $old
+  strategy exact</code></pre><p>The request asks which eligible facts were known by the as-of time and valid at the requested instant; exact coverage is still relative to the visible session and budgets.</p><h3>Invalid or unsafe example</h3><pre data-sop="invalid" data-check="runtime" data-error="Expected $wire value reference"><code>@bad recall
+  query &quot;parent ana bogdan&quot;</code></pre><p>The string is not a query-wire value. The parser accepts field text; runtime rejects it as the wrong input kind.</p></section><section><h2>Implementation sources</h2><ul><li><code>sop/parser.mjs:SPEC, validateShape, validateGraph</code></li><li><code>sop/runtime.mjs:Runtime.run</code></li><li><code>reasoning/linker.mjs:linkKnowledge, planGoals</code></li><li><code>memory/strategies.mjs:StrategyRegistry</code></li></ul><p>Related: <a href="query.html"><code>query</code></a>, <a href="link.html"><code>link</code></a>, <a href="reason.html"><code>reason</code></a>. See the <a href="../wiki.html#definition-sop" target="_top">SOP terminology</a> for wire/reference conventions.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

@@ -1,0 +1,4 @@
+# expect: unsafe_head
+@r rule
+  when parent ?x ?y
+  then ancestor ?x ?z

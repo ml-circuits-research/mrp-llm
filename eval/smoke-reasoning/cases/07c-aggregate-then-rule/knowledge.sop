@@ -1,0 +1,29 @@
+@employee_of predicate
+  args subject:entity object:entity
+  closed true
+@dept_size predicate
+  args subject:entity object:integer
+@large_dept predicate
+  args subject:entity
+
+@f1 fact
+  holds employee_of ann dev
+@f2 fact
+  holds employee_of bob dev
+@f3 fact
+  holds employee_of cy dev
+@f4 fact
+  holds employee_of di ops
+@f5 fact
+  holds employee_of ed ops
+
+@sizes aggregate
+  over employee_of ?e ?d
+  group ?d
+  count ?e as ?n
+  yields dept_size ?d ?n
+
+@r_large rule
+  when dept_size ?d ?n
+  when compare ?n at_least 3
+  then large_dept ?d

@@ -1,0 +1,5 @@
+{
+  "name": "Common sense from the problem books (English)",
+  "description": "General knowledge (facts, rules, units and conversions, formulas, part-whole and typical relations) that the owner's school problem books showed missing, mined unattended by tools/knowledge-mining: proposed by a cheap model from a failed problem, checked by the knowledge validator, the copy check, duplicate and contradiction checks and a bulk truth and generality review, and admitted only when rerunning the problem then succeeds (and a control rerun without it does not) while a fixed regression set loses no answer. Facts and general rules only, never book text. Provenance on every wire (book, problem, model, reviewer, date). English only; imports commonsense-v1.",
+  "imports": ["core-min", "core-en", "commonsense-v1"]
+}

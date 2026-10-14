@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#constraint" target="_top">← Wire type index</a></p><h1><code>constraint</code></h1><p>Declares an integer arithmetic question over specified variables and requirements. A host-generated or trusted <code>solve</code>/<code>reason</code> wire evaluates it; declaration alone proves nothing. The model may request scalar variables using <code>select</code>.</p><p><strong>Status and author:</strong> A <a href="../wiki.html#definition-formalizer" target="_top">formalizer</a> may propose this wire under host policy; it is not by itself a memory write.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once at parse time. Other field names are rejected.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and current behavior</th></tr></thead><tbody><tr><th scope="row" id="field-var"><code>var</code></th><td>repeatable; optional</td><td><code>?name int</code> or <code>?name int min max</code>. Name matches lowercase letter then lowercase letters/digits/underscore; distinct declarations. Bounds are safe integers (literal or scalar <code>$wire</code> values), inclusive with min ≤ max. The JS solver requires finite bounds.</td></tr>
+<tr><th scope="row" id="field-select"><code>select</code></th><td>At most once; optional; default no requested scalar projection</td><td>Whitespace-separated <code>?var</code> names declared by <code>var</code>. The model requests a checked scalar value from a numeric result; the host projects selected variables only when supported and unambiguous, rather than inventing assignments. An unresolved requested value produces host clarification even when the claim itself is entailed. Query projections feeding a later constraint are likewise generated as checked one-value outputs.</td></tr>
+<tr><th scope="row" id="field-require"><code>require</code></th><td>repeatable; optional</td><td>A comparison in words, <code>TERM COMPARATOR TERM</code>, or a native all/any/end block of them, over declared integer variables, integer constants and resolved <code>$wire</code> integer references. Comparators: <code>above</code>, <code>below</code>, <code>at_least</code>, <code>at_most</code>, <code>equal</code>, <code>not_equal</code>; between terms: <code>plus</code>, <code>minus</code>, <code>times</code>, <code>divided_by</code>. Repeated require fields are conjunctive restrictions on feasible assignments. <code>require ?v equal 2380 times 19</code>, with only numbers on the right, makes the host compute <code>?v</code> itself.</td></tr>
+<tr><th scope="row" id="field-claim"><code>claim</code></th><td>single; required unless <code>select</code> asks for result values</td><td>A comparison in words or a native all/any/end block over the same variables; tested against feasible assignments for prove/possible, and treated as a feasibility condition for optimize. A computation or a selected finite assignment may omit claim. Repeated simultaneous conditions belong in <code>require</code>, never repeated claim fields or independently solved constraint wires.</td></tr>
+<tr><th scope="row" id="field-task"><code>task</code></th><td>single; <strong>required in model output</strong> (<code>constraint_task_required</code>); optional in trusted circuits, default <code>prove</code></td><td>One of <code>prove</code> (all feasible models), <code>possible</code> (some feasible model), <code>optimize</code> (best objective among feasible models satisfying claim). Any other value fails lowering with <code>constraint task must be prove, possible or optimize</code>. <strong>The default is not neutral:</strong> an omitted <code>task</code> silently means <code>prove</code>, and <code>prove</code> and <code>possible</code> give opposite readings of the same claim. Always write <code>task</code> explicitly.</td></tr>
+<tr><th scope="row" id="field-unit"><code>unit</code></th><td>single; optional, default <code>scalar</code></td><td>Unquoted unit label carried in the problem/result for presentation; no automatic conversion or dimensional checking.</td></tr>
+<tr><th scope="row" id="field-objective"><code>objective</code></th><td>single; required if optimize; forbidden otherwise</td><td>Integer arithmetic expression defining value to minimize/maximize.</td></tr>
+<tr><th scope="row" id="field-direction"><code>direction</code></th><td>single; optional, default <code>min</code></td><td><code>min</code> or <code>max</code>; any other value fails lowering with <code>objective direction must be min or max</code>. It is meaningful only for <code>optimize</code>. For <code>prove</code> and <code>possible</code> a valid direction is accepted and has no effect; this is a known gap, not a feature, so do not write it outside <code>optimize</code>.</td></tr></tbody></table></div></section><section><h2>Execution and result</h2><p><strong>Words, not operators.</strong> A model-authored constraint writes every comparison and arithmetic step in words (DS014 "Words, not operators"); the model admission rejects an operator symbol with <code>operator_not_words</code>. The host maps <code>above below at_least at_most equal not_equal</code> to <code>&gt; &lt; &gt;= &lt;= == !=</code> and <code>plus minus times divided_by</code> to <code>+ - * /</code>. Quantities are integers scaled by the model when needed (19% of 2380 is <code>2380 times 19</code> hundredths); <code>divided_by</code> and decimal numbers are answered <code>not_computable</code>. Trusted circuits may still write the operator spelling. Portable Boolean syntax supports <code>!</code>, <code>&amp;&amp;</code>, <code>||</code>, <code>== === != !== &lt; &lt;= &gt; &gt;=</code>; integer expressions support constants, declared <code>?x</code>, unary minus, <code>+ -</code>, and multiplication only with a constant operand. No arbitrary JavaScript, division, remainder, function calls, string comparisons or non-linear variable products. <code>$wire</code> must resolve to a safe integer. The parser first accepts expression-shaped fields; <code>lowerConstraint</code> enforces the smaller numeric grammar.</p><p><a href="../wiki.html#definition-reasoning-strategy" target="_top">Reasoning strategy</a> <code>reference</code> uses JS finite enumeration, bounded by <code>maxAssignments</code> (default 100,000). <code>advanced</code> selects Z3 if available, otherwise JS finite fallback; an explicit non-JS <code>backend</code> (such as <code>z3</code>) on the evaluating <code>solve</code>/<code>reason</code> wire without a <code>reasoning</code> field implicitly selects the <code>advanced</code> strategy; write <code>reasoning advanced</code> explicitly so the route is visible. A requested backend is never substituted: if it is unavailable the result is <code>unsupported</code> with that backend named, and an explicit external backend with <code>reasoning reference</code> returns <code>unsupported</code> with code <code>reference_backend_mismatch</code>. <code>solve</code> can project declared variables via output ports; <code>reason</code> alone has no output fields. For prove: entailed/refuted/unknown/inconsistent; for possible: possible/impossible/unknown/inconsistent; optimization returns optimal, feasible_bound or inconsistent, subject to completeness. Neither SAT nor a witness alone means universal entailment. Constraint and solve do not write memory.</p></section><section><h2>Current SOP examples</h2><h3>Finite feasibility and projection</h3><pre data-sop="current"><code>@deadline constraint
+  var ?arrival int 0 100
+  require ?arrival equal 42
+  claim ?arrival at_most 45
+  task possible
+  unit minute
+  select ?arrival</code></pre><p>The model submits this declaration alone. With a complete finite search, the host-generated circuit establishes possible and projects the unique arrival value 42.</p>
+<h3>Nested alternatives without parenthesized Boolean formulas</h3><pre data-sop="current"><code>@pairs constraint
+  var ?xx int 0 3
+  var ?yy int 0 3
+  require any
+    ?xx plus ?yy equal 3
+    all
+      ?xx equal 3
+      ?yy equal 3
+    end
+  end
+  claim ?xx plus ?yy at_most 3
+  task possible
+
+@result solve
+  constraint $pairs
+  output ?solutions rows</code></pre><p>The finite backend exports one array containing <code>{xx: 0, yy: 3}</code>, <code>{xx: 1, yy: 2}</code>, <code>{xx: 2, yy: 1}</code>, <code>{xx: 3, yy: 0}</code>, and <code>{xx: 3, yy: 3}</code>. These are correlated assignments satisfying require. The last row does not satisfy claim: possible/prove checks claim separately rather than filtering the exported base models. Merely declaring the variables does not produce <code>$xx</code> or <code>$yy</code>. The explicit rows output produces <code>$solutions</code>; Z3 does not currently support this projection. See <a href="syntax.html#boolean-groups">group syntax</a> and <a href="overview.html#variable-results">result-shape intuition</a>.</p>
+<h3>Objective among models satisfying claim</h3><pre data-sop="current"><code>@slots constraint
+  var ?slot int 0 8
+  require ?slot at_least 3
+  claim ?slot at_most 6
+  task optimize
+  objective ?slot
+  direction max
+
+@choice solve
+  constraint $slots
+  output ?slot one</code></pre><p>The feasible objective candidates are 3–6, so a complete search has optimum 6 and a unique slot projection.</p>
+<h3>Arithmetic: a computed value ("What is 19% of 2380 lei?")</h3><pre data-sop="current"><code>@vat constraint
+  var ?vat_hundredths int
+  require ?vat_hundredths equal 2380 times 19
+  select ?vat_hundredths
+  task possible
+  unit hundredths_of_lei</code></pre><p>The model scales the percentage to integers (hundredths) and writes the arithmetic in words; it computes nothing. The host fixes <code>?vat_hundredths</code> to 45220 and projects it; the answer is 452.20 lei. The same message in English ("What is 19% of 2380 lei?") gives the same target.</p>
+<h3>One named assignment, simultaneous requirements</h3><p>"Let x be Ana's assignment and y be Bogdan's assignment. Both are integers from 0 to 6. Is there an assignment where x plus y equals 5, twice x plus y equals 7, and x is less than y? Give x and y if possible." The names label the declared unknowns, not string operands or separate participant queries.</p><pre data-sop="knowledge-query" data-status="possible"><code>@assignment constraint
+  var ?x int 0 6
+  var ?y int 0 6
+  require ?x plus ?y equal 5
+  require 2 times ?x plus ?y equal 7
+  require ?x below ?y
+  task possible
+  select ?x ?y</code></pre><p>The requirements hold together for the unique witness x = 2, y = 3. The author writes the original domains and conditions, never calculates this witness or narrows domains to an answer.</p>
+<h3>Division is not computed</h3><pre data-sop="invalid" data-check="lower" data-error="Unsupported constraint operator/type /"><code>@share constraint
+  var ?each int
+  require ?each equal 900 divided_by 4
+  select ?each
+  task possible</code></pre><p>"Split 900 lei between 4 people": the model writes the division literally, which is valid model output. The host compiler recognizes <code>divided_by</code> (or a decimal number) and answers <code>not_computable</code> before any lowering; a trusted circuit that tries to lower it fails as shown, because division and decimals are outside the integer profile.</p>
+<h3>Invalid: an operator symbol in model output</h3><pre data-sop="invalid" data-check="compile" data-error="operator_not_words"><code>@limit constraint
+  var ?x int 0 10
+  claim ?x &gt;= 3
+  task possible</code></pre><p>A model writes <code>claim ?x at_least 3</code>, never <code>&gt;=</code>.</p><h3>Invalid or unsafe example</h3><pre data-sop="invalid" data-check="lower" data-error="Only constant multiplication is in the portable constraint profile"><code>@bad constraint
+  var ?a int 0 10
+  var ?b int 0 10
+  require ?a times ?b equal 6
+  claim ?a above 0
+  task prove</code></pre><p>This parses (the words become <code>?a * ?b == 6</code>) but fails numeric lowering: multiplication of two variables is not in the portable linear profile.</p></section><section id="knowledge-language"><h2>Knowledge language: <code>constraint</code></h2><p class="note">In the knowledge language a <code>constraint</code> states a finite integer problem in words; the same wire is used on the model surface, where the model writes it from a message. The tables and examples of this section are about the <b>knowledge</b> form, written from a source and checked by <code>sop/knowledge/</code>; the sections above describe the host-circuit form. Anchors of this section's fields start with <code>kfield-</code>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>.</p><p>Other field names are rejected (<code>unknown_field</code>). The table is generated from <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table data-knowledge="fields"><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="kfield-var"><code>var</code></th><td>Repeatable; optional</td><td><code>?x int [MIN MAX]</code>, repeatable; every variable of an expression must be declared (<code>undeclared_variable</code>).</td></tr>
+<tr><th scope="row" id="kfield-require"><code>require</code></th><td>Repeatable; optional</td><td>A comparison <code>A [WORD A]... WORD B</code> over declared variables and integers: comparators <code>above below at_least at_most equal not_equal</code>, arithmetic <code>plus minus times divided_by</code>.</td></tr>
+<tr><th scope="row" id="kfield-claim"><code>claim</code></th><td>At most once; optional</td><td>The comparison to prove; required for <code>task prove</code>.</td></tr>
+<tr><th scope="row" id="kfield-objective"><code>objective</code></th><td>At most once; optional</td><td>An arithmetic expression to optimise; required with <code>direction</code> for <code>task optimize</code>.</td></tr>
+<tr><th scope="row" id="kfield-direction"><code>direction</code></th><td>At most once; optional</td><td><code>min</code> or <code>max</code>.</td></tr>
+<tr><th scope="row" id="kfield-task"><code>task</code></th><td>At most once; optional</td><td><code>prove</code> (default), <code>possible</code> or <code>optimize</code>.</td></tr>
+<tr><th scope="row" id="kfield-select"><code>select</code></th><td>At most once; optional</td><td>The <code>?variables</code> to report.</td></tr>
+<tr><th scope="row" id="kfield-unit"><code>unit</code></th><td>At most once; optional</td><td>Text: the unit of the result.</td></tr></tbody></table></div><h3>What it is for and what comes back</h3><p>Use a constraint for the arithmetic of a manual (totals, thresholds, tariffs, durations) that <code>compute</code>, <code>compare</code> and the aggregates cannot hold as a rule. The results are <code>entailed</code>, <code>possible</code>, <code>impossible</code>, <code>inconsistent</code>, <code>optimal</code> and <code>feasible_bound</code>. A mixed relational and numeric problem is a two-stage circuit: a query feeds a constraint through <code>$q</code>.</p><h3>Examples</h3><pre data-sop="knowledge-query" data-status="entailed"><code>@c constraint
+  var ?x int 0 20
+  var ?y int 0 20
+  require ?x plus ?y equal 10
+  require ?x minus ?y equal 2
+  claim ?x equal 6
+  task prove
+  select ?x ?y</code></pre><h3>Invalid: an undeclared variable</h3><pre data-sop="knowledge-invalid" data-error="undeclared_variable" data-role="query"><code>@c constraint
+  var ?x int 0 20
+  require ?x plus ?z equal 10
+  claim ?x equal 6
+  task prove</code></pre></section><!--/knowledge-language--><section><h2>Implementation sources</h2><ul><li><code>sop/parser.mjs:SPEC, validateShape, validateGraph</code></li><li><code>sop/runtime.mjs:Runtime.run</code></li><li><code>sop/lower.mjs:numericAST, lowerConstraint</code></li><li><code>reasoning/registry.mjs:ReasoningRegistry.builtin</code></li><li><code>reasoning/strategies/js-reference/constraint-ast.mjs:enumerateConstraint</code></li><li><code>reasoning/strategies/z3-smt-bounded/ast.mjs:z3Decide</code></li><li><code>js-reference/constraint-ast.mjs:optimizeConstraint</code>, <code>z3-smt-bounded/ast.mjs:z3Optimize</code></li></ul><p>Related: <a href="reason.html"><code>reason</code></a>, <a href="binding.html"><code>binding</code></a>, <a href="value.html"><code>value</code></a>. See the <a href="../wiki.html#definition-sop" target="_top">SOP terminology</a> for wire/reference conventions.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

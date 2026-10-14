@@ -1,0 +1,28 @@
+{
+  "feature": "Aggregation with groups: sum, max and count per department, joined in one query",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "d": "dev",
+      "t": 310,
+      "m": 120,
+      "n": 3
+    },
+    {
+      "d": "ops",
+      "t": 175,
+      "m": 95,
+      "n": 2
+    },
+    {
+      "d": "lab",
+      "t": 100,
+      "m": 50,
+      "n": 2
+    }
+  ],
+  "requires": [
+    "aggregate"
+  ]
+}

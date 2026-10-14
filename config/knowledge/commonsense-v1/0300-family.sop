@@ -1,0 +1,221 @@
+# commonsense-v1: family (rules, defaults, integrity and facts written by a Claude Haiku subagent of commonsense-agent from its skeleton, 2026-10-02; reviewed and corrected by commonsense-agent; mechanically validated by tools/commonsense/check.mjs).
+@cs_fam_father_of rule
+  when parent_of ?a ?b
+  when gender ?a male_q6581097
+  then father_of ?a ?b
+  source "authored (commonsense-v1, family): a parent with male gender is a father"
+
+@cs_fam_mother_of rule
+  when parent_of ?a ?b
+  when gender ?a female
+  then mother_of ?a ?b
+  source "authored (commonsense-v1, family): a parent with female gender is a mother"
+
+@cs_fam_male_child_of rule
+  when child_of ?a ?b
+  when gender ?a male_q6581097
+  then male_child_of ?a ?b
+  source "authored (commonsense-v1, family): a child with male gender is a son"
+
+@cs_fam_female_child_of rule
+  when child_of ?a ?b
+  when gender ?a female
+  then female_child_of ?a ?b
+  source "authored (commonsense-v1, family): a child with female gender is a daughter"
+
+@cs_fam_male_sibling_of rule
+  when sibling_of ?a ?b
+  when gender ?a male_q6581097
+  when compare ?a not_equal ?b
+  then male_sibling_of ?a ?b
+  source "authored (commonsense-v1, family): a sibling with male gender is a brother"
+
+@cs_fam_female_sibling_of rule
+  when sibling_of ?a ?b
+  when gender ?a female
+  when compare ?a not_equal ?b
+  then female_sibling_of ?a ?b
+  source "authored (commonsense-v1, family): a sibling with female gender is a sister"
+
+@cs_fam_uncle_of_sibling rule
+  when sibling_of ?uncle ?p
+  when parent_of ?p ?b
+  when gender ?uncle male_q6581097
+  when compare ?uncle not_equal ?p
+  then uncle_of ?uncle ?b
+  source "authored (commonsense-v1, family): a male sibling of a parent is an uncle"
+
+@cs_fam_uncle_of_spouse rule
+  when married_to ?uncle ?aunt
+  when aunt_of ?aunt ?b
+  when compare ?uncle not_equal ?b
+  then uncle_of ?uncle ?b
+  source "authored (commonsense-v1, family): a spouse of an aunt is an uncle"
+
+@cs_fam_aunt_of_sibling rule
+  when sibling_of ?aunt ?p
+  when parent_of ?p ?b
+  when gender ?aunt female
+  when compare ?aunt not_equal ?p
+  then aunt_of ?aunt ?b
+  source "authored (commonsense-v1, family): a female sibling of a parent is an aunt"
+
+@cs_fam_aunt_of_spouse rule
+  when married_to ?aunt ?uncle
+  when uncle_of ?uncle ?b
+  when compare ?aunt not_equal ?b
+  then aunt_of ?aunt ?b
+  source "authored (commonsense-v1, family): a spouse of an uncle is an aunt"
+
+@cs_fam_nibling_of rule
+  when parent_of ?c ?b
+  when sibling_of ?c ?a
+  when compare ?a not_equal ?c
+  then nibling_of ?b ?a
+  source "authored (commonsense-v1, family): a child of a sibling is a niece or nephew"
+
+@cs_fam_parent_in_law_of rule
+  when parent_of ?a ?spouse
+  when married_to ?spouse ?b
+  when compare ?a not_equal ?b
+  then parent_in_law_of ?a ?b
+  source "authored (commonsense-v1, family): a parent of one's spouse is a parent-in-law"
+
+@cs_fam_sibling_in_law_of_spouse_sibling rule
+  when sibling_of ?a ?spouse
+  when married_to ?spouse ?b
+  when compare ?a not_equal ?spouse
+  then sibling_in_law_of ?a ?b
+  source "authored (commonsense-v1, family): a sibling of one's spouse is a sibling-in-law"
+
+@cs_fam_sibling_in_law_of_own_sibling rule
+  when married_to ?a ?sibling
+  when sibling_of ?sibling ?b
+  when compare ?sibling not_equal ?b
+  then sibling_in_law_of ?a ?b
+  source "authored (commonsense-v1, family): a spouse of one's sibling is a sibling-in-law"
+
+@cs_fam_not_sibling_of_parent integrity
+  never all
+    parent_of ?a ?b
+    sibling_of ?a ?b
+  end
+  witness ?a
+  message "a person cannot be both a parent and a sibling of another person"
+  severity error
+  source "authored (commonsense-v1, family): parent and sibling roles are mutually exclusive"
+
+@cs_fam_ancestor_of_self integrity
+  never all
+    ancestor_of ?a ?a
+  end
+  witness ?a
+  message "a person cannot be their own ancestor"
+  severity error
+  source "authored (commonsense-v1, family): ancestry is irreflexive"
+
+@cs_fam_parent_of_circular integrity
+  never all
+    parent_of ?a ?b
+    parent_of ?b ?a
+  end
+  witness ?a
+  message "a person cannot be both parent and child of the same person"
+  severity error
+  source "authored (commonsense-v1, family): parent-child relations form a directed acyclic graph"
+
+@cs_fam_married_to_self integrity
+  never all
+    married_to ?a ?a
+  end
+  witness ?a
+  message "a person cannot be married to themselves"
+  severity error
+  source "authored (commonsense-v1, family): marriage requires two distinct persons"
+
+@cs_fam_two_different_mothers integrity
+  never all
+    mother_of ?m1 ?c
+    mother_of ?m2 ?c
+    compare ?m1 not_equal ?m2
+  end
+  witness ?c
+  message "a person has at most one biological mother"
+  severity warning
+  source "authored (commonsense-v1, family): biological mother is unique"
+
+@cs_fam_two_different_fathers integrity
+  never all
+    father_of ?f1 ?c
+    father_of ?f2 ?c
+    compare ?f1 not_equal ?f2
+  end
+  witness ?c
+  message "a person has at most one biological father"
+  severity warning
+  source "authored (commonsense-v1, family): biological father is unique"
+
+@cs_fam_mother_gender_male integrity
+  never all
+    mother_of ?m ?c
+    gender ?m male_q6581097
+  end
+  witness ?m
+  message "a biological mother should have female gender"
+  severity warning
+  source "authored (commonsense-v1, family): mother_of implies female gender"
+
+@cs_fam_father_gender_female integrity
+  never all
+    father_of ?f ?c
+    gender ?f female
+  end
+  witness ?f
+  message "a biological father should have male gender"
+  severity warning
+  source "authored (commonsense-v1, family): father_of implies male gender"
+
+@cs_fam_gender_father_of_male rule
+  when father_of ?a ?b
+  then gender ?a male_q6581097
+  source "authored (commonsense-v1, family): being a father implies male gender"
+
+@cs_fam_gender_mother_of_female rule
+  when mother_of ?a ?b
+  then gender ?a female
+  source "authored (commonsense-v1, family): being a mother implies female gender"
+
+@cs_fam_cousin_of rule
+  when parent_of ?pa ?a
+  when parent_of ?pb ?b
+  when sibling_of ?pa ?pb
+  when compare ?pa not_equal ?pb
+  when compare ?a not_equal ?b
+  then cousin_of ?a ?b
+  source "authored (commonsense-v1, family, reviewed by commonsense-agent): children of two siblings are first cousins"
+
+@cs_fam_relative_ancestor rule
+  when ancestor_of ?a ?b
+  then relative_of ?a ?b
+  source "authored (commonsense-v1, family, reviewed by commonsense-agent): an ancestor is a relative (relative_of is symmetric in core-en)"
+
+@cs_fam_relative_sibling rule
+  when sibling_of ?a ?b
+  when compare ?a not_equal ?b
+  then relative_of ?a ?b
+  source "authored (commonsense-v1, family, reviewed by commonsense-agent): a sibling is a relative"
+
+@cs_fam_relative_cousin rule
+  when cousin_of ?a ?b
+  then relative_of ?a ?b
+  source "authored (commonsense-v1, family, reviewed by commonsense-agent): a cousin is a relative"
+
+@cs_fam_relative_uncle rule
+  when uncle_of ?a ?b
+  then relative_of ?a ?b
+  source "authored (commonsense-v1, family, reviewed by commonsense-agent): an uncle is a relative"
+
+@cs_fam_relative_aunt rule
+  when aunt_of ?a ?b
+  then relative_of ?a ?b
+  source "authored (commonsense-v1, family, reviewed by commonsense-agent): an aunt is a relative"

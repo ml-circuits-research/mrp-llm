@@ -1,0 +1,50 @@
+@server predicate
+  args subject:entity
+@network_up predicate
+  args subject:entity
+  closed true
+@vpn_up predicate
+  args subject:entity
+  closed true
+@backup_done predicate
+  args subject:entity
+
+@f1 fact
+  holds server s1
+
+@upload_cloud action
+  params ?s
+  requires server ?s
+  requires network_up ?s
+  adds backup_done ?s
+  cost 2
+@upload_vpn action
+  params ?s
+  requires server ?s
+  requires vpn_up ?s
+  adds backup_done ?s
+  cost 4
+@copy_tape action
+  params ?s
+  requires server ?s
+  adds backup_done ?s
+  cost 30
+
+@cloud_backup method
+  achieves backup_done ?s
+  when server ?s
+  binding strict
+  step ~upload_cloud ?s
+  on_failure $vpn_backup
+
+@vpn_backup method
+  achieves backup_done ?s
+  when server ?s
+  binding strict
+  step ~upload_vpn ?s
+  on_failure $tape_backup
+
+@tape_backup method
+  achieves backup_done ?s
+  when server ?s
+  step ~copy_tape ?s

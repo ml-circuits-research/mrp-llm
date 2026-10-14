@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body>
+<div data-include="../partials/header.html" data-link-base="../"></div>
+<main class="wire-help"><p><a href="../wire_types.html#induce" target="_top">All wire types</a></p><h1><code>induce</code></h1><p>Induction evaluates proposed rule-shaped regularities on explicitly supplied cases, or generates bounded one-condition candidates with a shared variable. Results remain candidate patterns and are not approved rules. Trusted system/tool circuits can use this operation; model-authored declarative input cannot invoke it directly.</p><p><a href="../wiki.html#definition-sop">SOP</a> syntax: <code>@id type</code>, exactly two leading spaces on each field line, <code>$id</code> for a computed value, <code>~id</code> for a declaration handle, and <code>?x</code> for a local logic variable or an output name. Atoms use <code>[not ]predicate term1 [term2 [term3 [term4]]]</code> with one to four whitespace-separated terms; lowercase predicate names, canonical symbols, JSON-quoted strings or safe integers. Parenthesized <code>predicate(arg, …)</code> and comma-separated arguments are not executable syntax.</p><section><h2>Fields and inputs</h2><table><thead><tr><th scope="col">Keyword</th><th scope="col">Cardinality</th><th scope="col">Accepted value, default and effect</th></tr></thead><tbody><tr><th scope="row" id="field-data"><code>data</code></th><td>At most once; required</td><td>One <code>$trace</code>, <code>~trace</code> or packed $array of training traces. Required; every item must be a trace.</td></tr><tr><th scope="row" id="field-candidates"><code>candidates</code></th><td>At most once; optional</td><td>One <code>$pattern</code>, <code>~pattern</code> or packed $array of patterns. Omitted or empty means generate bounded one-condition shared-variable patterns from training traces.</td></tr><tr><th scope="row" id="field-holdout"><code>holdout</code></th><td>At most once; optional</td><td>One <code>$trace</code>, <code>~trace</code> or packed $array of validation traces. Optional, default empty; IDs must not overlap training IDs.</td></tr><tr><th scope="row" id="field-reasoning"><code>reasoning</code></th><td>At most once; optional</td><td>A strategy name (plain token), default host <code>policy.reasoningStrategy</code> (<code>reference</code> by default). Built-ins: <code>reference</code> (the <code>js-reference</code> oracle; <code>js-reference</code> and <code>js-oracle</code> are the same route) and the deprecated <code>advanced</code> (the oracle plus optional external backends for deduction and numeric constraints). The host may restrict allowed strategies.</td></tr><tr><th scope="row" id="field-policy"><code>policy</code></th><td>At most once; optional</td><td>One <code>$policy</code> value or <code>~policy</code> declaration handle. It must lower to a policy object; each specified positive integer budget caps the corresponding host budget by <code>min(host, wire)</code>. No policy reference means host limits alone.</td></tr><tr><th scope="row" id="field-output"><code>output</code></th><td>Repeatable; optional</td><td>Repeatable <code>?name [one|many|rows|count|status]</code> declaration, default <code>one</code>. Each output becomes a deferred <code>$name</code> value if bound; names must be unique and cannot collide with explicit wires. <code>status</code> binds result status even for incomplete results. Other modes require completeness; unusable/unselected modes become blocked, not arbitrary first answers.</td></tr><tr><th scope="row" id="field-after"><code>after</code></th><td>Repeatable; optional</td><td>Repeatable <code>$wire</code> value-dependency reference. Orders execution after that producer; it does not alter inputs, proofs or output. A <code>~definition</code> handle is graph-checked but is not a value-ordering dependency.</td></tr></tbody></table><p>Induction uses only trace features, never repository facts as implicit cases. For each matching condition assignment it checks explicit conclusion, explicit contrary evidence, or missing conclusion; missing counts as a counterexample only for <code>closed true</code> reviewed traces.</p></section><section><h2>Result and limits</h2><p>Returns <code>status approximate</code> (<code>unknown</code> when no pattern is found) with <code>guarantee approximate</code> and ranked <code>patterns</code> with training support/opportunities/counterexamples, optional holdout metrics and provenance requiring reviewed semantic validation (each pattern stays <code>status candidate</code>), <code>generator</code> and <code>generator_truncated</code>. Output one/many/rows projects patterns, count unsupported, status projects <code>approximate</code> or <code>unknown</code>. No fact or rule is installed.</p><p>All operations use bounded search (host defaults include maxNodes 5000, maxDepth 8, maxCandidates 512, timeoutMs 3000); a <code>~policy</code> can only tighten configured limits. The result records completeness and epistemic status relative to supplied finite inputs and the visible memory view, never calibrated truth probability. No operation here writes to the repository; <code>after</code> is only scheduling. At most the bounded candidate set is evaluated. Training and holdout IDs must be disjoint; closed traces are barred to model-origin authorship. Support is a ratio over observed condition opportunities, not proof or a calibrated probability.</p></section><section><h2>Executable examples</h2><h3>Evaluate supplied candidate</h3><pre data-sop="current"><code>@a trace
+  feature alert motor1
+  feature inspect motor1
+@b trace
+  feature alert motor2
+  feature not inspect motor2
+@p pattern
+  when alert ?x
+  then inspect ?x
+@train pack
+  items $a $b
+@result induce
+  data $train
+  candidates ~p</code></pre><p>One matching trace supports the conclusion and the other explicitly contradicts it; induction reports counts and keeps the candidate unapproved.</p><h3>Separate holdout</h3><pre data-sop="current"><code>@training trace
+  feature signal device1
+  feature inspect device1
+@validation trace
+  feature signal device2
+  feature inspect device2
+@p pattern
+  when signal ?x
+  then inspect ?x
+@result induce
+  data ~training
+  holdout ~validation
+  candidates ~p</code></pre><p>The two distinct trace IDs prevent training/holdout leakage; evaluation reports separate metrics.</p><h3>Invalid or unsafe use</h3><pre data-sop="invalid" data-check="runtime" data-error="Held-out traces overlap training IDs"><code>@same trace
+  feature signal device1
+@p pattern
+  when signal ?x
+  then inspect ?x
+@bad induce
+  data ~same
+  holdout ~same
+  candidates ~p</code></pre><p>The parser accepts the references, but induction rejects overlapping training and holdout trace IDs.</p></section><section><h2>Implementation references</h2><p><code>sop/parser.mjs</code> (<code>SPEC.induce</code>), <code>sop/runtime.mjs</code> (operation dispatch), <code>reasoning/learning.mjs</code> (<code>induce</code>, <code>evaluatePattern</code>, <code>generatePatterns</code>).</p><p>Related wires: <a href="pattern.html"><code>pattern</code></a> · <a href="trace.html"><code>trace</code></a> · <a href="rule.html"><code>rule</code></a>.</p></section></main>
+<script type="module" src="help-page.mjs"></script></body></html>

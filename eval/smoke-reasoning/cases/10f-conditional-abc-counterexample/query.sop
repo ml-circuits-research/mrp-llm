@@ -1,0 +1,16 @@
+@s_a fact
+  holds has_a z
+  status supposed
+@s_b fact
+  holds has_b z
+  status supposed
+@s_c fact
+  holds has_c z
+  status supposed
+
+@q query
+  where ok ?x
+  select ?x
+  if $s_a
+  if $s_b
+  if $s_c

@@ -1,0 +1,15 @@
+{
+  "feature": "Time: during means \"for every instant of the interval\" (end exclusive); overlaps is the separate word",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "c": "alpha"
+    }
+  ],
+  "requires": [
+    "temporal",
+    "interval",
+    "throughout"
+  ]
+}

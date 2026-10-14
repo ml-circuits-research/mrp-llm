@@ -1,0 +1,159 @@
+{
+  "root": "state",
+  "model": "mrp-llm",
+  "memory": {
+    "engine": "sqlite",
+    "power": 12,
+    "arity": 3,
+    "verification": "receipt",
+    "journal": false,
+    "retention": {
+      "mode": "none",
+      "safeOccupancy": 0.55,
+      "targetOccupancy": 0.42,
+      "writeStrength": 2,
+      "useStrength": 1,
+      "decayStep": 1,
+      "maxSweeps": 6,
+      "reinforceOnUse": true,
+      "pruneMetadata": true
+    },
+    "sharding": {
+      "enabled": true,
+      "mode": "bounded",
+      "safeOccupancy": 0.55,
+      "maxClaimsPerShard": 1024,
+      "maxShardMetadataBytes": 2097152,
+      "maxColdShards": 8,
+      "maxHotAgeMs": null,
+      "maxColdAgeMs": null,
+      "maxNormalBankBytes": null,
+      "maxPinnedBankBytes": null,
+      "maxArchiveShards": null,
+      "gcEveryWrites": 32
+    }
+  },
+  "policy": {
+    "allowWrite": true,
+    "allowPin": true,
+    "allowRules": false,
+    "modelAssumptions": "report",
+    "maxWires": 2048,
+    "maxEpochs": 16,
+    "maxProbes": 50000,
+    "maxFacts": 10000,
+    "maxJoins": 30000,
+    "maxAssignments": 100000,
+    "retrievalStrategy": "hybrid",
+    "maxGoals": 256,
+    "maxRules": 1024,
+    "maxShards": 256
+  },
+  "assistant": "mrp_llm",
+  "chatData": {
+    "root": "chat_data",
+    "defaultBase": "default",
+    "tmpTtlHours": 24,
+    "sessionTtlDays": 14,
+    "cleanupIntervalMinutes": 60
+  },
+  "conversation": {
+    "_note": "The chat's reply memory (DS022 \"Composing a base memory\", DS023 \"Conversation layer\"): composed from these layers when it is missing; rebuild it with other layers on /admin (base-memory composer).",
+    "memory": "conversation-default",
+    "name": "Conversation (default set)",
+    "layers": [
+      "conversation-v1",
+      "smalltalk-core-v1",
+      "smalltalk-empathy-v1",
+      "smalltalk-self-v1",
+      "smalltalk-playful-v1",
+      "smalltalk-professional-v1"
+    ]
+  },
+  "answerLanguage": {
+    "providers": [
+      "small",
+      "tiny"
+    ],
+    "natural": "all"
+  },
+  "llmProviders": {
+    "openference": {
+      "model": "Qwen3.8 27b",
+      "requestsPerMinute": 15,
+      "timeoutSeconds": 120,
+      "maxTokens": 4000,
+      "thinking": false,
+      "proxyFallback": false
+    },
+    "openrouter": {
+      "model": "deepseek/deepseek-v4-flash",
+      "timeoutSeconds": 120,
+      "maxTokens": 4000,
+      "thinking": false,
+      "proxyFallback": false
+    },
+    "local": {
+      "model": "Qwen3.6-35B-A3B",
+      "timeoutSeconds": 120,
+      "maxTokens": 1500,
+      "thinking": false,
+      "proxyFallback": false
+    }
+  },
+  "ingest": {
+    "author": "direct",
+    "tier": "small",
+    "reasoning": "off",
+    "concurrency": 3
+  },
+  "queryParser": {
+    "_note": "Owner decision 2026-10-02: formalization is step by step only (LLMDirect archived in probably_obsolete/one-shot-formalization/). Each question goes to the first tier of the ladder and escalates to the next only when its answer cannot be read or the tier does not answer. How a tier's model reasons (thinking off, a low reasoning effort, a minimum token budget) is set on the tier entry in Ploinky Workers, where the provider is known (DS027 \"Reasoning settings\"), not in these requests.",
+    "strategy": "LocalLLMStepByStep",
+    "timeoutSeconds": 120,
+    "maxConcurrent": 4,
+    "cacheEntries": 500,
+    "local": {
+      "tier": "tiny",
+      "ladder": [
+        "tiny",
+        "small",
+        "good"
+      ],
+      "maxTokens": 1500,
+      "thinking": false,
+      "method": "B"
+    }
+  },
+  "adapter": {
+    "_note": "ChatSOPAdapter (lib/adapter, owner decision 2026-10-03): the one backend of the chat, the API and every evaluation. mode: stepwise (the step-by-step formalizer, queryParser), routed (structure -> compute path B with jsEval and engineCode as second formalizations, FOL v2 otherwise; two formalizations that agree verify the answer) or direct-verified (the direct tier answers, the routed formalizations try to verify it). A session (setting adapter_mode) or a request (adapter: {mode, options}) may choose another mode. Tiers are proxy tiers.",
+    "mode": "stepwise",
+    "tiers": {
+      "structure": "structure",
+      "formalizer": "formalizer",
+      "compute": "tiny",
+      "direct": "tiny"
+    },
+    "routed": {
+      "second": [
+        "jsEval",
+        "engineCode"
+      ],
+      "engineCodeLanguages": [
+        "js",
+        "smt"
+      ],
+      "fallbackToFol": true,
+      "earlyStop": true
+    },
+    "timeoutSeconds": 300
+  },
+  "server": {
+    "warmup": true,
+    "warmMemories": []
+  },
+  "mrp": {
+    "_note": "MRP-LLM models (DS025): the model answering requests that name none. Models live under <chatData.root>/models; profiles in config/profiles.",
+    "defaultModel": "acme-demo"
+  }
+}

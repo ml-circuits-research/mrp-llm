@@ -1,0 +1,28 @@
+{
+  "feature": "Stratified negation as failure over three layers of closed derived predicates",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "n3"
+    },
+    {
+      "x": "n4"
+    },
+    {
+      "x": "n6"
+    },
+    {
+      "x": "n7"
+    },
+    {
+      "x": "n8"
+    }
+  ],
+  "requires": [
+    "rules",
+    "naf",
+    "closed_world",
+    "closed_derived"
+  ]
+}

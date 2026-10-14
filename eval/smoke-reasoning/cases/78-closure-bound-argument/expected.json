@@ -1,0 +1,32 @@
+{
+  "feature": "Native closure template: a left-linear transitive closure with the first argument bound (answers equal the rules, by one BFS)",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "t": "n1"
+    },
+    {
+      "t": "n2"
+    },
+    {
+      "t": "n3"
+    },
+    {
+      "t": "n4"
+    },
+    {
+      "t": "n5"
+    },
+    {
+      "t": "n6"
+    },
+    {
+      "t": "n7"
+    }
+  ],
+  "requires": [
+    "rules",
+    "recursion"
+  ]
+}

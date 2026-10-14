@@ -1,0 +1,36 @@
+@prod predicate
+  args subject:entity
+@deployed predicate
+  args subject:entity
+
+@f1 fact
+  holds prod s1
+@f2 fact
+  holds prod s2
+
+@deploy action
+  params ?s
+  requires prod ?s
+  adds deployed ?s
+  cost 2
+
+@freeze_v1 norm
+  forbid ~deploy ?s
+  when prod ?s
+  severity soft
+  cost 5
+  version 1
+  approval superseded
+  approved_by "release board"
+  approved_at 2026-01-01
+
+@freeze_v2 norm
+  forbid ~deploy ?s
+  when prod ?s
+  severity hard
+  binding strict
+  version 2
+  supersedes $freeze_v1
+  approval approved
+  approved_by "release board"
+  approved_at 2026-06-01

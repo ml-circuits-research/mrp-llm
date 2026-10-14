@@ -1,0 +1,10 @@
+{
+  "feature": "Versioned rules: only the approved version binds (a rule threshold changed from 100 to 80)",
+  "status": "supported",
+  "complete": true,
+  "requires": [
+    "rules",
+    "compare_in_rules",
+    "versions"
+  ]
+}

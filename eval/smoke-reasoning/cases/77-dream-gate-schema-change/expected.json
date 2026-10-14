@@ -1,0 +1,18 @@
+{
+  "feature": "Dream gate: a plan certified on the old schema is retired on re-certification when the rule changes, and the answer is the new schema's",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "z": "o0"
+    },
+    {
+      "z": "o20"
+    }
+  ],
+  "requires": [
+    "rules",
+    "conjunction",
+    "versions"
+  ]
+}

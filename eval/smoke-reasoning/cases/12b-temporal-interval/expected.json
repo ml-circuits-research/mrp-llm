@@ -1,0 +1,17 @@
+{
+  "feature": "Temporal facts: answers over an interval (overlaps, some instant of the interval)",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "c": "alpha"
+    },
+    {
+      "c": "beta"
+    }
+  ],
+  "requires": [
+    "temporal",
+    "interval"
+  ]
+}

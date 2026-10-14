@@ -1,0 +1,10 @@
+{
+  "feature": "Aggregation: counting the answers of a query",
+  "status": "supported",
+  "complete": true,
+  "count": 3,
+  "requires": [
+    "facts",
+    "count"
+  ]
+}

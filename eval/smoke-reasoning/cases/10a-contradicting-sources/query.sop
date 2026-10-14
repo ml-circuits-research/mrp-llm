@@ -1,0 +1,3 @@
+@q query
+  mode exists
+  where door_open lab

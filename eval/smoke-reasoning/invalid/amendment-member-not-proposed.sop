@@ -1,0 +1,10 @@
+# expect: amendment_member_not_proposed
+@r1 rule
+  when a ?x
+  then b ?x
+@p procedure
+  members $r1
+@am amendment
+  of $p
+  proposed_by user
+  members $r1

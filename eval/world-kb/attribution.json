@@ -1,0 +1,14 @@
+{
+  "q05": {"layer": "SymbolicLM", "note": "the Romanian reflexive 's-a nascut' is analysed as the relation 'se naste', not the lemma 'fi nascut' that the Romanian lexemes of born_on carry"},
+  "q09": {"layer": "KnowledgeLinker", "note": "'Braziliei' is the Romanian genitive of Brazilia; the lexicon holds the nominative label and the linker has no name inflection (the relation 'fi limba oficiala' bound to official_language_of)"},
+  "q10": {"layer": "KnowledgeLinker", "note": "'use' binds the general core-en predicate uses (object role artifact) instead of uses_currency; the class 'currency' of ?x is not in the SymbolicLM output, and uses_currency has no 'use' form because it is shared"},
+  "q11": {"layer": "KnowledgeLinker", "note": "'live in' with a counted subject binds lives_in, which has no facts; the memory answers this question with population_of (no bridge between the two in the vocabulary)"},
+  "q12": {"layer": "KnowledgeLinker", "note": "'Egiptul' is the Romanian definite form of Egipt; same name-inflection gap as q09"},
+  "q14": {"layer": "SymbolicLM", "note": "'head of state of France' is analysed as the relation 'be the head of' with the object 'state of France'"},
+  "q22": {"layer": "KnowledgeLinker", "note": "'regiza' (and 'direct') are forms of the core-en head_of (person, organization), so Inception is resolved as an organization and fails; the film predicate directed lost the shared form"},
+  "q26": {"layer": "KnowledgeLinker", "note": "'be born before' is a comparison of two born_on years; the vocabulary has no comparative relation (a rule over born_on and a link form are missing)"},
+  "q27": {"layer": "KnowledgeLinker", "note": "'be older' (comparative with two candidates) is not a relation of the vocabulary"},
+  "q28": {"layer": "SymbolicLM", "note": "the class noun 'countries' is dropped from the select (only ?x located in Europe), so the count mixes organizations and places; the engine honestly reports 'incomplete' (at least 50, retrieval bound)"},
+  "q29": {"layer": "core-en", "note": "no lexeme form 'win' (world-v1 states award facts on core-en's receives, whose forms lack 'win'); the linker asks for the relation"},
+  "q30": {"layer": "KnowledgeLinker", "note": "the stated clause 'he died' links the bare relation 'die' (core-en has 'die on' and 'die in'), and the age at death would need the rule lived_years over born_on and died_on"}
+}

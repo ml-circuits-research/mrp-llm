@@ -1,0 +1,29 @@
+{
+  "feature": "Mode of work: an amendment wire with an argument, evaluated as a what-if before anyone approves it",
+  "status": "plan_found",
+  "complete": true,
+  "conditional": [
+    "am1"
+  ],
+  "plan": {
+    "cost": 3,
+    "steps": 3,
+    "names": [
+      "notify_oncall",
+      "hard_reset",
+      "verify_link"
+    ]
+  },
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "norms_hard",
+    "whatif",
+    "versions",
+    "amendment",
+    "zero_arity",
+    "naf",
+    "closed_world"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "feature": "A rejected (or proposed) norm never binds on its own: the shutdown is legal and nothing is flagged",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 1,
+    "steps": 1,
+    "names": [
+      "shutdown"
+    ]
+  },
+  "compliance": {
+    "hard": "ok",
+    "soft_violations": [],
+    "total_cost": 1
+  },
+  "requires": [
+    "plan",
+    "norms_hard",
+    "versions",
+    "used"
+  ]
+}

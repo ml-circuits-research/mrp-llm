@@ -1,0 +1,13 @@
+{
+  "feature": "Temporal facts: which claim is valid at an instant",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "c": "alpha"
+    }
+  ],
+  "requires": [
+    "temporal"
+  ]
+}

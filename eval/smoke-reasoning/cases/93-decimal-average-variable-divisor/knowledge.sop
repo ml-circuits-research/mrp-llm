@@ -1,0 +1,38 @@
+@score predicate
+  args subject:entity topic:entity object:rational
+  closed true
+@team_total predicate
+  args subject:entity object:rational
+  closed true
+@team_size predicate
+  args subject:entity object:integer
+  closed true
+@team_average predicate
+  args subject:entity object:rational
+@s1 fact
+  holds score ann red 7.5
+@s2 fact
+  holds score bob red 8
+@s3 fact
+  holds score cy blue 6.5
+@s4 fact
+  holds score di blue 9.5
+@s5 fact
+  holds score ed blue 5
+@s6 fact
+  holds score fa green 4
+@a_total aggregate
+  over score ?p ?t ?s
+  group ?t
+  sum ?s as ?x
+  yields team_total ?t ?x
+@a_size aggregate
+  over score ?p ?t ?s
+  group ?t
+  count ?p as ?n
+  yields team_size ?t ?n
+@r_avg rule
+  when team_total ?t ?x
+  when team_size ?t ?n
+  when compute ?avg ?x divided_by ?n
+  then team_average ?t ?avg

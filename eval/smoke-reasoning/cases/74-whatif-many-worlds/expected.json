@@ -1,0 +1,145 @@
+{
+  "feature": "Many what-if worlds over one base: ten independent suppositions, each answer row names exactly the supposition it needs",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "z": "z0"
+    },
+    {
+      "z": "z1"
+    },
+    {
+      "z": "z2"
+    },
+    {
+      "z": "z3"
+    },
+    {
+      "z": "z4"
+    },
+    {
+      "z": "z5"
+    },
+    {
+      "z": "z6"
+    },
+    {
+      "z": "z7"
+    },
+    {
+      "z": "z8"
+    },
+    {
+      "z": "z9"
+    },
+    {
+      "z": "z10"
+    }
+  ],
+  "conditional": [
+    "s1",
+    "s2",
+    "s3",
+    "s4",
+    "s5",
+    "s6",
+    "s7",
+    "s8",
+    "s9",
+    "s10"
+  ],
+  "row_conditional": [
+    {
+      "row": {
+        "z": "z0"
+      },
+      "conditional": []
+    },
+    {
+      "row": {
+        "z": "z1"
+      },
+      "conditional": [
+        "s1"
+      ]
+    },
+    {
+      "row": {
+        "z": "z2"
+      },
+      "conditional": [
+        "s2"
+      ]
+    },
+    {
+      "row": {
+        "z": "z3"
+      },
+      "conditional": [
+        "s3"
+      ]
+    },
+    {
+      "row": {
+        "z": "z4"
+      },
+      "conditional": [
+        "s4"
+      ]
+    },
+    {
+      "row": {
+        "z": "z5"
+      },
+      "conditional": [
+        "s5"
+      ]
+    },
+    {
+      "row": {
+        "z": "z6"
+      },
+      "conditional": [
+        "s6"
+      ]
+    },
+    {
+      "row": {
+        "z": "z7"
+      },
+      "conditional": [
+        "s7"
+      ]
+    },
+    {
+      "row": {
+        "z": "z8"
+      },
+      "conditional": [
+        "s8"
+      ]
+    },
+    {
+      "row": {
+        "z": "z9"
+      },
+      "conditional": [
+        "s9"
+      ]
+    },
+    {
+      "row": {
+        "z": "z10"
+      },
+      "conditional": [
+        "s10"
+      ]
+    }
+  ],
+  "requires": [
+    "whatif",
+    "rules",
+    "conjunction"
+  ]
+}

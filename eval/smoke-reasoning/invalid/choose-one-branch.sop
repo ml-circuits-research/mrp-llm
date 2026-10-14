@@ -1,0 +1,9 @@
+# expect: choose_needs_alternatives
+@a action
+  requires p
+  adds q
+@m method
+  achieves q
+  step choose
+    ~a
+  end

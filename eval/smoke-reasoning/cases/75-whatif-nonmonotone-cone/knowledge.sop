@@ -1,0 +1,270 @@
+@shipment predicate
+  args subject:entity
+@paid predicate
+  args subject:entity
+@contains predicate
+  args subject:entity object:entity
+@dangerous predicate
+  args subject:entity
+@flagged predicate
+  args subject:entity
+  closed true
+@clear predicate
+  args subject:entity
+  closed true
+@shippable predicate
+  args subject:entity
+
+@sh0 fact
+  holds shipment s0
+@pd0 fact
+  holds paid s0
+@ct0 fact
+  holds contains s0 i0
+@cu0 fact
+  holds contains s0 extra0
+@sh1 fact
+  holds shipment s1
+@pd1 fact
+  holds paid s1
+@ct1 fact
+  holds contains s1 i1
+@cu1 fact
+  holds contains s1 extra1
+@sh2 fact
+  holds shipment s2
+@pd2 fact
+  holds paid s2
+@ct2 fact
+  holds contains s2 i2
+@cu2 fact
+  holds contains s2 extra2
+@sh3 fact
+  holds shipment s3
+@pd3 fact
+  holds paid s3
+@ct3 fact
+  holds contains s3 i3
+@cu3 fact
+  holds contains s3 extra3
+@sh4 fact
+  holds shipment s4
+@pd4 fact
+  holds paid s4
+@ct4 fact
+  holds contains s4 i4
+@cu4 fact
+  holds contains s4 extra4
+@sh5 fact
+  holds shipment s5
+@pd5 fact
+  holds paid s5
+@ct5 fact
+  holds contains s5 i5
+@cu5 fact
+  holds contains s5 extra5
+@sh6 fact
+  holds shipment s6
+@pd6 fact
+  holds paid s6
+@ct6 fact
+  holds contains s6 i6
+@cu6 fact
+  holds contains s6 extra6
+@sh7 fact
+  holds shipment s7
+@pd7 fact
+  holds paid s7
+@ct7 fact
+  holds contains s7 solvent
+@cu7 fact
+  holds contains s7 extra7
+@sh8 fact
+  holds shipment s8
+@pd8 fact
+  holds paid s8
+@ct8 fact
+  holds contains s8 i8
+@cu8 fact
+  holds contains s8 extra8
+@sh9 fact
+  holds shipment s9
+@pd9 fact
+  holds paid s9
+@ct9 fact
+  holds contains s9 solvent
+@cu9 fact
+  holds contains s9 extra9
+@sh10 fact
+  holds shipment s10
+@pd10 fact
+  holds paid s10
+@ct10 fact
+  holds contains s10 i10
+@cu10 fact
+  holds contains s10 extra10
+@sh11 fact
+  holds shipment s11
+@pd11 fact
+  holds paid s11
+@ct11 fact
+  holds contains s11 i11
+@cu11 fact
+  holds contains s11 extra11
+@sh12 fact
+  holds shipment s12
+@pd12 fact
+  holds paid s12
+@ct12 fact
+  holds contains s12 i12
+@cu12 fact
+  holds contains s12 extra12
+@sh13 fact
+  holds shipment s13
+@pd13 fact
+  holds paid s13
+@ct13 fact
+  holds contains s13 i13
+@cu13 fact
+  holds contains s13 extra13
+@sh14 fact
+  holds shipment s14
+@pd14 fact
+  holds paid s14
+@ct14 fact
+  holds contains s14 i14
+@cu14 fact
+  holds contains s14 extra14
+@sh15 fact
+  holds shipment s15
+@pd15 fact
+  holds paid s15
+@ct15 fact
+  holds contains s15 i15
+@cu15 fact
+  holds contains s15 extra15
+@sh16 fact
+  holds shipment s16
+@pd16 fact
+  holds paid s16
+@ct16 fact
+  holds contains s16 i16
+@cu16 fact
+  holds contains s16 extra16
+@sh17 fact
+  holds shipment s17
+@pd17 fact
+  holds paid s17
+@ct17 fact
+  holds contains s17 i17
+@cu17 fact
+  holds contains s17 extra17
+@sh18 fact
+  holds shipment s18
+@pd18 fact
+  holds paid s18
+@ct18 fact
+  holds contains s18 i18
+@cu18 fact
+  holds contains s18 extra18
+@sh19 fact
+  holds shipment s19
+@pd19 fact
+  holds paid s19
+@ct19 fact
+  holds contains s19 i19
+@cu19 fact
+  holds contains s19 extra19
+@sh20 fact
+  holds shipment s20
+@pd20 fact
+  holds paid s20
+@ct20 fact
+  holds contains s20 i20
+@cu20 fact
+  holds contains s20 extra20
+@sh21 fact
+  holds shipment s21
+@pd21 fact
+  holds paid s21
+@ct21 fact
+  holds contains s21 i21
+@cu21 fact
+  holds contains s21 extra21
+@sh22 fact
+  holds shipment s22
+@pd22 fact
+  holds paid s22
+@ct22 fact
+  holds contains s22 i22
+@cu22 fact
+  holds contains s22 extra22
+@sh23 fact
+  holds shipment s23
+@pd23 fact
+  holds paid s23
+@ct23 fact
+  holds contains s23 i23
+@cu23 fact
+  holds contains s23 extra23
+@sh24 fact
+  holds shipment s24
+@pd24 fact
+  holds paid s24
+@ct24 fact
+  holds contains s24 i24
+@cu24 fact
+  holds contains s24 extra24
+@sh25 fact
+  holds shipment s25
+@pd25 fact
+  holds paid s25
+@ct25 fact
+  holds contains s25 i25
+@cu25 fact
+  holds contains s25 extra25
+@sh26 fact
+  holds shipment s26
+@pd26 fact
+  holds paid s26
+@ct26 fact
+  holds contains s26 i26
+@cu26 fact
+  holds contains s26 extra26
+@sh27 fact
+  holds shipment s27
+@pd27 fact
+  holds paid s27
+@ct27 fact
+  holds contains s27 i27
+@cu27 fact
+  holds contains s27 extra27
+@sh28 fact
+  holds shipment s28
+@pd28 fact
+  holds paid s28
+@ct28 fact
+  holds contains s28 i28
+@cu28 fact
+  holds contains s28 extra28
+@sh29 fact
+  holds shipment s29
+@pd29 fact
+  holds paid s29
+@ct29 fact
+  holds contains s29 i29
+@cu29 fact
+  holds contains s29 extra29
+
+@r_flag rule
+  when contains ?s ?i
+  when dangerous ?i
+  then flagged ?s
+@r_clear rule
+  when shipment ?s
+  when absent flagged ?s
+  then clear ?s
+@r_ship rule
+  when clear ?s
+  when paid ?s
+  then shippable ?s

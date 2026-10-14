@@ -1,0 +1,24 @@
+{
+  "feature": "Bounded iteration: `until ATOM max N` tests before each pass and stops as soon as the condition holds",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 1,
+    "steps": 1,
+    "names": [
+      "knock"
+    ]
+  },
+  "used": [
+    {
+      "id": "open_door",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "used"
+  ]
+}

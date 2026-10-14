@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#unparsed" target="_top">Wire index</a> · <a href="stated.html">stated</a> · <a href="assumed.html">assumed</a> · <a href="query.html">query</a> · <a href="unclear.html">unclear</a> · <a href="clarify.html">clarify</a> · <a href="small-model.html">model/host roles</a></p><h1><code>unparsed</code></h1>
+<p>An <code>unparsed</code> wire is the small model's honest report of <strong>a part of the message it could not formalize</strong>: a verbatim span, the wire it belongs to and the slot it probably fills. It belongs to the model language (the sixth model wire type). The model formalizes everything else as usual and marks only the span; the host then tries deterministic repairs, and whatever stays unresolved becomes <strong>one targeted question per span</strong>, while the rest of the message is still answered. The model never drops, paraphrases or guesses a part it did not understand. The normative contract is <a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a> ("Honest partial formalization").</p>
+<p><code>unparsed</code> is not <a href="unclear.html"><code>unclear</code></a>: <code>unclear kind gibberish</code> or <code>no_request</code> describes the <em>whole</em> message and stays the only wire of the output, while any number of <code>unparsed</code> wires accompany the wires the model could write. It is also not <a href="clarify.html"><code>clarify</code></a>: the model never asks; the host generates the question.</p>
+<h2>Every accepted keyword</h2><table><thead><tr><th>Keyword</th><th>Cardinality / default</th><th>Accepted value and concrete effect</th></tr></thead><tbody><tr><td id="field-span"><code>span</code></td><td>Exactly once; required</td><td>One nonempty JSON-quoted <strong>verbatim</strong> part of the message, at most 200 characters (<code>unparsed_span_form</code>). The agent guard checks that it occurs in the message after case and whitespace folding (<code>unparsed_span_not_in_message</code>); it is never a paraphrase or a translation. Two <code>unparsed</code> wires never carry the same span (<code>unparsed_duplicate</code>).</td></tr><tr><td id="field-near"><code>near</code></td><td>At most once; optional</td><td><code>near $id</code>: the <code>stated</code>, <code>assumed</code>, <code>query</code> or <code>constraint</code> wire the span belongs to (<code>unparsed_near_type</code> for an <code>unparsed</code> or <code>unclear</code> wire or the wire itself; an unknown name fails the graph check). Without <code>near</code> the span belongs to the whole message: the host tries to repair it and otherwise asks, holding nothing back.</td></tr><tr><td id="field-hint"><code>hint</code></td><td>At most once; optional</td><td>The slot the span probably fills, from a closed set: a role name <code>subject</code>, <code>object</code>, <code>time</code> or <code>location</code>; <code>value</code> (a number, an amount, any other value); <code>relation</code> (the near wire's relation phrase is the model's best attempt and the host also tries the span); <code>reference</code> (something said earlier in the conversation); <code>other</code>. Any other word fails parsing. The hint pairs the span with a placeholder and chooses the repair and the wording of the question.</td></tr></tbody></table>
+<h2>Placeholders</h2><p>When the value of a role lies in an unparsed span, that role holds a fresh <strong>placeholder</strong> <code>?variable</code>, also in <code>stated</code> and <code>assumed</code>, and the <code>unparsed</code> wire carries <code>near $&lt;that wire&gt;</code> and <code>hint &lt;role name&gt;</code>. A generic hint (<code>value</code>, <code>reference</code>, <code>other</code>) or no hint pairs with the placeholder when it is the only such span near the wire. A placeholder in a statement without exactly one matching span is rejected (<code>proposition_not_ground</code>): a statement states what the message says. In a query, a span near the query with a role hint pairs with the one non-selected variable of that role; the question still asks what it asks.</p>
+<h2 id="repair">Host repair, in order</h2><p>Before linking, the host tries each span (<code>sop/repair.mjs</code> <code>repairSpan</code>), in this order, and stops at the first that succeeds:</p><ol><li><strong>dates and times</strong>, for a <code>time</code> hint or a span that reads as a date;</li><li><strong>numbers, money and units</strong> ("1.140 euro", "2380 lei", "12 km", number words up to twenty);</li><li><strong>a conversation reference</strong> ("that one", "him", "the earlier one"): resolved from the caller-owned context (the previous question's quoted values) only when exactly one candidate exists;</li><li><strong>a proper name</strong>: a surface the host lexicon knows as one entity, or a span of capitalized words;</li><li><strong>an English synonym</strong>: a common noun with exactly one synonym that the lexicon accepts.</li></ol><p>A <code>relation</code> span is tried by the compiler against the near wire: repaired when that wire links, through the span's English synonyms or its own phrase. A repaired span fills its placeholder. An unresolved span becomes one clarification question in English ("Who or what do you mean by "…"?", "Which date or period do you mean by "…"?"; the output edge translates it); the wire it is paired with is held back, and every other wire of the turn is answered. The packet reports both:</p><ul><li><code>repairs: [{unparsed, span, hint, near, wire, role, method, value, filled}]</code>, <code>method</code> one of <code>time</code>, <code>number</code>, <code>quantity</code>, <code>conversation</code>, <code>lexicon_entity</code>, <code>proper_name</code>, <code>dictionary</code>, <code>near_wire_linked</code>;</li><li><code>unresolved_spans: [{unparsed, span, hint, near, wire, role, blocking, question}]</code>; <code>blocking</code> is true when a held-back wire depends on it, and then the packet adds <code>next: "answer_clarification"</code>.</li></ul>
+<h2>A number the model left as written</h2><p>A span such as "twenty" with a number hint: the host reads it as 20 (<code>repairs: [{"method": "number", "value": 20, "filled": true, …}]</code>), fills the placeholder <code>?v</code> and links the rest as usual.</p>
+<h2>A span the host cannot repair</h2><p class="example-message"><span class="lang">EN</span> “Maria works at the new place near the station. Who works at Alpha Lab?”</p><pre data-sop="current"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object ?place
+  polarity affirmed
+  certainty asserted
+
+@u1 unparsed
+  span "the new place near the station"
+  near $s1
+  hint object
+
+@q query
+  select ?who
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>No repair applies, so <code>s1</code> is held back and the answer adds one question: "Who or what do you mean by "the new place near the station"?" (<code>unresolved_spans</code>, <code>blocking: true</code>). The question about Alpha Lab is still answered.</p>
+<h2>A time the question depends on</h2><p class="example-message"><span class="lang">EN</span> “Who worked at Alpha Lab on the day of the big outage?”</p><pre data-sop="current"><code>@q query
+  select ?who
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    role time ?t
+    polarity affirmed
+  end
+
+@u1 unparsed
+  span "the day of the big outage"
+  near $q
+  hint time</code></pre><p>The span pairs with the query's non-selected time variable <code>?t</code>. It is not a date the host can read, so the only output is the question "Which date or period do you mean by "the day of the big outage"?". A readable date ("pe 1 martie 2026") would be repaired by method <code>time</code>.</p>
+<h2>A relation the model was unsure of</h2><p class="example-message"><span class="lang">EN</span> “Does Maria moonlight at Alpha Lab?”</p><pre data-sop="current"><code>@q query
+  where match
+    relation "work at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+
+@u1 unparsed
+  span "moonlight"
+  near $q
+  hint relation</code></pre><p>The relation phrase is the model's best attempt; the span tells the host and the reader which word it did not map. The host also tries the span; here the query links, so the span is reported as repaired with <code>method: "near_wire_linked"</code>.</p>
+<h2>Invalid model output</h2><pre data-sop="invalid" data-check="parse" data-error="unparsed_span_form"><code>@u1 unparsed
+  span moonlight</code></pre><p>The span is one JSON-quoted string.</p>
+<pre data-sop="invalid" data-check="parse" data-error="unparsed hint must be one of"><code>@u1 unparsed
+  span "moonlight"
+  hint verb</code></pre><p>The hint comes from the closed set; the relation phrase is <code>hint relation</code>.</p>
+<pre data-sop="invalid" data-check="parse" data-error="Unsupported field reading on unparsed"><code>@u1 unparsed
+  span "moonlight"
+  reading "work at night"</code></pre><p>The model does not interpret the span: a reading would be an <code>assumed</code> or an <code>unclear kind ambiguous</code>.</p>
+<pre data-sop="invalid" data-check="graph" data-error="Unknown reference s9"><code>@u1 unparsed
+  span "moonlight"
+  near $s9
+  hint relation</code></pre><p><code>near</code> names a wire of this output.</p>
+<pre data-sop="invalid" data-check="compile" data-error="unparsed_near_type"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object ?place
+  polarity affirmed
+  certainty asserted
+
+@u1 unparsed
+  span "the new place"
+  near $s1
+  hint object
+
+@u2 unparsed
+  span "near the station"
+  near $u1</code></pre><p>A span belongs to a formalized wire, not to another span; one span covers the whole unformalized phrase.</p>
+<pre data-sop="invalid" data-check="compile" data-error="unparsed_duplicate"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object ?place
+  polarity affirmed
+  certainty asserted
+
+@u1 unparsed
+  span "the new place"
+  near $s1
+  hint object
+
+@u2 unparsed
+  span "The new place"</code></pre><p>The same span is reported once.</p>
+<pre data-sop="invalid" data-check="compile" data-error="proposition_not_ground"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object ?place
+  polarity affirmed
+  certainty asserted
+
+@u1 unparsed
+  span "the new place"
+  near $s1
+  hint subject</code></pre><p>The placeholder is the <code>object</code>; a span with <code>hint subject</code> does not pair with it, so the statement is not ground.</p>
+<h2>Sources</h2><p><code>sop/parser.mjs</code> (<code>SPEC.unparsed</code>), <code>sop/enums.mjs</code> (<code>UNPARSED_HINTS</code>, <code>MAX_SPAN</code>), <code>sop/clauses.mjs</code> (<code>pairPlaceholders</code>, admission), <code>sop/repair.mjs</code> (<code>repairSpan</code>, <code>spanQuestion</code>), <code>sop/declarative.mjs</code> (packet <code>repairs</code>, <code>unresolved_spans</code>), <code>server/agent.mjs</code> (anchoring guard), <a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a>.</p></main><script type="module" src="help-page.mjs"></script></body></html>

@@ -1,0 +1,252 @@
+@department_dragos_dev_286 entity
+  kind entity
+  label en "department dragos dev 286"
+  alias en "department_dragos_dev_286"
+@department_vlad_dev_285 entity
+  kind entity
+  label en "department vlad dev 285"
+  alias en "department_vlad_dev_285"
+@firm_vlad_dev_285 entity
+  kind entity
+  label en "firm vlad dev 285"
+  alias en "firm_vlad_dev_285"
+@assigned_to predicate
+  args subject:entity object:entity
+  closed true
+@compensation predicate
+  args subject:entity object:integer
+  closed true
+@f1 fact
+  holds assigned_to bogdan_dev_10000 firm_vlad_dev_285
+@f2 fact
+  holds assigned_to bogdan_dev_10000 project_bogdan_dev_10000
+@f3 fact
+  holds compensation bogdan_dev_10000 55
+@f4 fact
+  holds assigned_to razvan_dev_10001 firm_vlad_dev_285
+@f5 fact
+  holds assigned_to razvan_dev_10001 project_razvan_dev_10001
+@f6 fact
+  holds compensation razvan_dev_10001 72
+@f7 fact
+  holds assigned_to radu_dev_10002 firm_vlad_dev_285
+@f8 fact
+  holds assigned_to radu_dev_10002 project_radu_dev_10002
+@f9 fact
+  holds compensation radu_dev_10002 89
+@f10 fact
+  holds assigned_to vlad_dev_10003 firm_vlad_dev_285
+@f11 fact
+  holds assigned_to vlad_dev_10003 project_vlad_dev_10003
+@f12 fact
+  holds compensation vlad_dev_10003 106
+@f13 fact
+  holds assigned_to dragos_dev_10004 firm_vlad_dev_285
+@f14 fact
+  holds assigned_to dragos_dev_10004 project_dragos_dev_10004
+@f15 fact
+  holds compensation dragos_dev_10004 123
+@f16 fact
+  holds assigned_to catalin_dev_10005 firm_vlad_dev_285
+@f17 fact
+  holds assigned_to catalin_dev_10005 project_catalin_dev_10005
+@f18 fact
+  holds compensation catalin_dev_10005 140
+@f19 fact
+  holds assigned_to sorin_dev_10006 firm_vlad_dev_285
+@f20 fact
+  holds assigned_to sorin_dev_10006 project_sorin_dev_10006
+@f21 fact
+  holds compensation sorin_dev_10006 157
+@f22 fact
+  holds assigned_to florin_dev_10007 firm_vlad_dev_285
+@f23 fact
+  holds assigned_to florin_dev_10007 project_florin_dev_10007
+@f24 fact
+  holds compensation florin_dev_10007 64
+@f25 fact
+  holds assigned_to tudor_dev_10008 firm_vlad_dev_285
+@f26 fact
+  holds assigned_to tudor_dev_10008 project_tudor_dev_10008
+@f27 fact
+  holds compensation tudor_dev_10008 81
+@f28 fact
+  holds assigned_to matei_dev_10009 firm_vlad_dev_285
+@f29 fact
+  holds assigned_to matei_dev_10009 project_matei_dev_10009
+@f30 fact
+  holds compensation matei_dev_10009 98
+@f31 fact
+  holds assigned_to horia_dev_10010 firm_vlad_dev_285
+@f32 fact
+  holds assigned_to horia_dev_10010 project_horia_dev_10010
+@f33 fact
+  holds compensation horia_dev_10010 115
+@f34 fact
+  holds assigned_to costin_dev_10011 firm_vlad_dev_285
+@f35 fact
+  holds assigned_to costin_dev_10011 project_costin_dev_10011
+@f36 fact
+  holds compensation costin_dev_10011 55
+@f37 fact
+  holds assigned_to gheorghe_dev_10012 firm_vlad_dev_285
+@f38 fact
+  holds assigned_to gheorghe_dev_10012 project_gheorghe_dev_10012
+@f39 fact
+  holds compensation gheorghe_dev_10012 72
+@f40 fact
+  holds assigned_to nicolae_dev_10013 firm_vlad_dev_285
+@f41 fact
+  holds assigned_to nicolae_dev_10013 project_nicolae_dev_10013
+@f42 fact
+  holds compensation nicolae_dev_10013 89
+@f43 fact
+  holds assigned_to vasile_dev_10014 firm_vlad_dev_285
+@f44 fact
+  holds assigned_to vasile_dev_10014 project_vasile_dev_10014
+@f45 fact
+  holds compensation vasile_dev_10014 106
+@f46 fact
+  holds assigned_to alexandru_dev_10015 firm_vlad_dev_285
+@f47 fact
+  holds assigned_to alexandru_dev_10015 project_alexandru_dev_10015
+@f48 fact
+  holds compensation alexandru_dev_10015 123
+@f49 fact
+  holds assigned_to cosmin_dev_10016 firm_vlad_dev_285
+@f50 fact
+  holds assigned_to cosmin_dev_10016 project_cosmin_dev_10016
+@f51 fact
+  holds compensation cosmin_dev_10016 140
+@f52 fact
+  holds assigned_to lucian_dev_10017 firm_vlad_dev_285
+@f53 fact
+  holds assigned_to lucian_dev_10017 project_lucian_dev_10017
+@f54 fact
+  holds compensation lucian_dev_10017 157
+@f55 fact
+  holds assigned_to liviu_dev_10018 firm_vlad_dev_285
+@f56 fact
+  holds assigned_to liviu_dev_10018 project_liviu_dev_10018
+@f57 fact
+  holds compensation liviu_dev_10018 64
+@f58 fact
+  holds assigned_to marius_dev_10019 firm_vlad_dev_285
+@f59 fact
+  holds assigned_to marius_dev_10019 project_marius_dev_10019
+@f60 fact
+  holds compensation marius_dev_10019 81
+@f61 fact
+  holds assigned_to ovidiu_dev_10020 firm_vlad_dev_285
+@f62 fact
+  holds assigned_to ovidiu_dev_10020 project_ovidiu_dev_10020
+@f63 fact
+  holds compensation ovidiu_dev_10020 98
+@f64 fact
+  holds assigned_to petru_dev_10021 firm_vlad_dev_285
+@f65 fact
+  holds assigned_to petru_dev_10021 project_petru_dev_10021
+@f66 fact
+  holds compensation petru_dev_10021 115
+@f67 fact
+  holds assigned_to silviu_dev_10022 firm_vlad_dev_285
+@f68 fact
+  holds assigned_to silviu_dev_10022 project_silviu_dev_10022
+@f69 fact
+  holds compensation silviu_dev_10022 55
+@f70 fact
+  holds assigned_to traian_dev_10023 firm_vlad_dev_285
+@f71 fact
+  holds assigned_to traian_dev_10023 project_traian_dev_10023
+@f72 fact
+  holds compensation traian_dev_10023 72
+@f73 fact
+  holds assigned_to victor_dev_10024 firm_vlad_dev_285
+@f74 fact
+  holds assigned_to victor_dev_10024 project_victor_dev_10024
+@f75 fact
+  holds compensation victor_dev_10024 89
+@f76 fact
+  holds assigned_to aurel_dev_10025 firm_vlad_dev_285
+@f77 fact
+  holds assigned_to aurel_dev_10025 project_aurel_dev_10025
+@f78 fact
+  holds compensation aurel_dev_10025 106
+@f79 fact
+  holds assigned_to emil_dev_10026 firm_vlad_dev_285
+@f80 fact
+  holds assigned_to emil_dev_10026 project_emil_dev_10026
+@f81 fact
+  holds compensation emil_dev_10026 123
+@f82 fact
+  holds assigned_to iancu_dev_10027 firm_vlad_dev_285
+@f83 fact
+  holds assigned_to iancu_dev_10027 project_iancu_dev_10027
+@f84 fact
+  holds compensation iancu_dev_10027 140
+@department_pay predicate
+  args subject:entity object:entity topic:integer
+  closed true
+@department_total predicate
+  args subject:entity object:integer
+@f85 fact
+  holds department_pay bogdan_dev_10000 department_vlad_dev_285 55
+@f86 fact
+  holds department_pay razvan_dev_10001 department_dragos_dev_286 72
+@f87 fact
+  holds department_pay radu_dev_10002 department_vlad_dev_285 89
+@f88 fact
+  holds department_pay vlad_dev_10003 department_dragos_dev_286 106
+@f89 fact
+  holds department_pay dragos_dev_10004 department_vlad_dev_285 123
+@f90 fact
+  holds department_pay catalin_dev_10005 department_dragos_dev_286 140
+@f91 fact
+  holds department_pay sorin_dev_10006 department_vlad_dev_285 157
+@f92 fact
+  holds department_pay florin_dev_10007 department_dragos_dev_286 64
+@f93 fact
+  holds department_pay tudor_dev_10008 department_vlad_dev_285 81
+@f94 fact
+  holds department_pay matei_dev_10009 department_dragos_dev_286 98
+@f95 fact
+  holds department_pay horia_dev_10010 department_vlad_dev_285 115
+@f96 fact
+  holds department_pay costin_dev_10011 department_dragos_dev_286 55
+@f97 fact
+  holds department_pay gheorghe_dev_10012 department_vlad_dev_285 72
+@f98 fact
+  holds department_pay nicolae_dev_10013 department_dragos_dev_286 89
+@f99 fact
+  holds department_pay vasile_dev_10014 department_vlad_dev_285 106
+@f100 fact
+  holds department_pay alexandru_dev_10015 department_dragos_dev_286 123
+@f101 fact
+  holds department_pay cosmin_dev_10016 department_vlad_dev_285 140
+@f102 fact
+  holds department_pay lucian_dev_10017 department_dragos_dev_286 157
+@f103 fact
+  holds department_pay liviu_dev_10018 department_vlad_dev_285 64
+@f104 fact
+  holds department_pay marius_dev_10019 department_dragos_dev_286 81
+@f105 fact
+  holds department_pay ovidiu_dev_10020 department_vlad_dev_285 98
+@f106 fact
+  holds department_pay petru_dev_10021 department_dragos_dev_286 115
+@f107 fact
+  holds department_pay silviu_dev_10022 department_vlad_dev_285 55
+@f108 fact
+  holds department_pay traian_dev_10023 department_dragos_dev_286 72
+@f109 fact
+  holds department_pay victor_dev_10024 department_vlad_dev_285 89
+@f110 fact
+  holds department_pay aurel_dev_10025 department_dragos_dev_286 106
+@f111 fact
+  holds department_pay emil_dev_10026 department_vlad_dev_285 123
+@f112 fact
+  holds department_pay iancu_dev_10027 department_dragos_dev_286 140
+@by_department aggregate
+  over department_pay ?person ?dept ?amount
+  group ?dept
+  sum ?amount as ?total
+  yields department_total ?dept ?total

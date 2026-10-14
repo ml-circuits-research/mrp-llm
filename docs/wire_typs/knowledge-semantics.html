@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html" target="_top">← Wire type index</a></p><h1>Knowledge semantics</h1><p>What the engines do with the knowledge wires, the same for every strategy: two negations and <code>closed</code>, the paraconsistent <code>both</code>, defaults by fire and overrides, aggregates and open domains, snapshot time, <code>conditional</code> and <code>used</code>. Every example on this page is executed by the tests.</p><section><h2>Finite, function-free, set semantics</h2><p>Terms are constants, rules construct no new terms, duplicate derivations collapse, and <code>compute</code> is forbidden inside a recursive cycle, so evaluation terminates. A count counts distinct bindings of all variables of the counted group.</p></section><section><h2>Two evidence derivations, four statuses</h2><p>For a ground atom <code>p a</code> an engine derives <i>positive evidence</i> (<code>p a</code> is derivable) and <i>negative evidence</i> (<code>not p a</code> is derivable) independently (Belnap's four-valued logic). The status is <code>supported</code> (positive only), <code>refuted</code> (negative only), <code>both</code> (positive and negative) or <code>unknown</code> (neither). <b><code>both</code> is a reported status, not a state that stops propagation</b>: a body <code>p a</code> is satisfied by positive evidence whatever the negative evidence is, a body <code>not p a</code> by negative evidence whatever the positive is. Evidence is therefore monotone (adding a fact never retracts a derived atom, which makes answering from a partial slice safe) and a contradiction stays local: nothing unrelated becomes derivable.</p><pre data-sop="knowledge"><code>@bird predicate
+  args subject:entity
+@flies predicate
+  args subject:entity
+
+@f1 fact
+  holds bird tweety
+@f2 fact
+  holds not flies tweety
+@r1 rule
+  when bird ?x
+  then flies ?x</code></pre><pre data-sop="knowledge-query" data-status="both"><code>@q query
+  mode exists
+  where flies tweety</code></pre><p>The rule derives positive evidence and the fact gives negative evidence: the status is <code>both</code>, reported, and nothing breaks.</p></section><section><h2>Two negations and `closed`</h2><p><code>not p a</code> is explicit evidence that <code>p a</code> is false: the source says so. <code>absent p a</code> means "no record of it" and is allowed only for a predicate declared <code>closed true</code>; it is true when positive evidence is not derivable. Absence of evidence is <code>unknown</code>, never false. Closedness is a host review step: an author proposes it with the source sentence that asserts exhaustiveness, and the host accepts it only over an archived or pinned view so that forgetting can never turn a fact into a false <code>absent</code>.</p><pre data-sop="knowledge"><code>@node predicate
+  args subject:entity
+@blocked predicate
+  args subject:entity
+  closed true
+@open_node predicate
+  args subject:entity
+
+@n1 fact
+  holds node a
+@n2 fact
+  holds node b
+@b1 fact
+  holds blocked b
+
+@r_open rule
+  when node ?x
+  when absent blocked ?x
+  then open_node ?x</code></pre><pre data-sop="knowledge-query" data-status="supported" data-rows="x=a"><code>@q query
+  where open_node ?x
+  select ?x</code></pre><p>Wrong: <code>when not blocked ?x</code> where the source only lists blocked nodes (it never fires). Right: <code>closed true</code> and <code>absent</code>. A <code>select</code> or <code>exists</code> on a closed, non-derivable atom over a complete view is <code>refuted</code>; over an open one it is <code>unknown</code>.</p><h3>Invalid: <code>absent</code> over an open predicate</h3><pre data-sop="knowledge-invalid" data-error="absent_needs_closed"><code>@node predicate
+  args subject:entity
+@blocked predicate
+  args subject:entity
+@open_node predicate
+  args subject:entity
+@r rule
+  when node ?x
+  when absent blocked ?x
+  then open_node ?x</code></pre></section><section><h2>Stratification</h2><p>Negation as failure, exceptions and aggregates may not occur in a cycle of the predicate dependency graph (<code>not_stratifiable</code>). The check is conservative: it reads relation names and ignores polarity. Recursive aggregation is excluded; shortest-path and path-counting questions on cyclic graphs are planning or closure questions. The validator checks the desugared program, not the sugar.</p></section><section><h2>Defaults, by fire</h2><p>A strict contrary sits below every default (<code>refuted</code>, not <code>both</code>); <code>overrides</code> blocks by fire, not by applicability; two defaults of equal strength with contrary heads give <code>both</code>. See <a href="default.html"><code>default</code></a>.</p></section><section><h2>Aggregates, counts, `every` and open domains</h2><p>Over a predicate not declared <code>closed</code>, a count or aggregate is a lower bound (<code>bound at_least</code>), an <code>every</code> with no counterexample is <code>unknown</code> (reason <code>open_domain</code>), and a counterexample still refutes. The validator warns <code>aggregate_needs_closed</code>, <code>count_needs_closed</code> and <code>every_needs_closed_scope</code>. See <a href="aggregate.html"><code>aggregate</code></a> and <a href="query.html"><code>query</code></a>.</p></section><section><h2>Snapshot time</h2><p>A stored fact holds at an instant when its interval contains it (<code>valid START END</code>, start inclusive, end exclusive); a derived atom holds at an instant when some rule instance has its whole body holding at that same instant, so its validity is the intersection of its body facts' intervals. <code>at T</code> is one instant, <code>during S E</code> means <b>throughout</b>, <code>overlaps S E</code> means at some instant, <code>asof D</code> means as known at <code>D</code>. <code>start_of ?t ATOM</code> and <code>end_of ?t ATOM</code> bind the start or end of a stored fact's validity (base predicates only, <code>time_leaf_on_derived</code> otherwise) and <code>order ?t1 before ?t2</code> compares them. Under <code>during</code>, <code>select</code> returns the rows present in every part of the partition at the facts' endpoints and <code>count</code> the number of such rows; under <code>overlaps</code> only <code>select</code> is specified.</p></section><section><h2>Epistemic status and `conditional`</h2><p>A fact is <code>observed</code>, <code>reported</code> (with a speaker), <code>hedged</code> or <code>supposed</code>; everything but <code>observed</code>, and every <code>proposed</code> or <code>rejected</code> wire a query supposes, is an assumption. The host computes <code>conditional</code> per row: the assumption ids the row rests on, verified by a second run on the observed facts plus exactly that set. If the verification fails the row is conditional on all assumptions with <code>conditional_unknown</code>; under negation as failure the verification proves sufficiency only and the packet sets <code>nonmonotone</code>. A conditional answer is never promoted to evidence or stored.</p></section><section><h2>`used` and proofs</h2><p><code>used</code> is one <b>sufficient</b> support set: the ids and versions of the facts, rules, defaults, actions, methods and norms that together re-derive the answer. It is not "the claims whose deletion changes the answer" (two facts that are each sufficient would give an empty set). Where a strategy does not provide it, the host runs the deletion method and verifies it by replay on that set alone; if the replay fails the packet says <code>used_incomplete</code> and promotes nothing. The packet reports the wire the author wrote, never a generated <code>x_</code> wire.</p></section><section><h2>Planning state</h2><p>A planner state is polarity-explicit unless the fluent predicate is closed: with no evidence a precondition is unsatisfied (unknown is not true); with a closed fluent <code>requires not p</code> means <code>p</code> is absent.</p></section><section><h2>Budgets</h2><p>A strategy may stop early and never answers as if it had finished: an incomplete negative (<code>unknown</code>, <code>refuted</code> by failure, <code>no_plan</code>, an optimum) is <code>budget_exhausted</code> with a reason. See <a href="../specsLoader.html?spec=DS006-reasoning.md" target="_top">DS006</a> "Strategies".</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

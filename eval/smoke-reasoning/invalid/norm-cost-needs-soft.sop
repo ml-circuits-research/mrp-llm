@@ -1,0 +1,7 @@
+# expect: cost_needs_soft
+@a action
+  requires p
+  adds q
+@n norm
+  forbid ~a
+  cost 5

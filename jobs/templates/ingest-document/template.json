@@ -1,0 +1,20 @@
+{
+  "name": "ingest-document",
+  "description": "Learn attached documents (books, handbooks, policies, articles) into a base memory or a session: the facts, relations, rules and procedures they state, as validated knowledge wires with provenance (source, location, quote). Use when the user asks to learn, ingest, remember or add a document to a knowledge base or to the conversation.",
+  "kind": "adapter",
+  "adapter": "adapter.mjs",
+  "targets": ["memory", "session"],
+  "taskKind": "ingest-document",
+  "params": {
+    "rights": {"type": "string", "enum": ["cleared", "permissive-attribution", "owner-provided"], "description": "the source rights of the attachments, as the user stated them (DS011); required: without it nothing is ingested"},
+    "purpose": {"type": "string", "max": 500, "default": "", "description": "what the knowledge will be used for, in the user's words"},
+    "source_url": {"type": "string", "max": 500, "required": false, "description": "where the document comes from, when the user gave it"},
+    "version": {"type": "string", "enum": ["v1", "v2"], "default": "v1", "description": "v1: one authoring conversation per chunk (lib/ingest/direct-author.mjs); v2: structure pass, canonical vocabulary, FOL per sentence and the converter (lib/ingest/v2). A session target needs v2"},
+    "tier": {"type": "string", "enum": ["tiny", "small", "medium", "good"], "default": "small", "description": "v1: the tier that writes the knowledge wires; v2: the tier of the structure role"},
+    "fol_tier": {"type": "string", "enum": ["tiny", "small", "medium", "good"], "required": false, "description": "v2: the tier of the FOL role and its repair (default medium, with reasoning)"},
+    "merge_tier": {"type": "string", "enum": ["tiny", "small", "medium", "good"], "default": "medium", "description": "v2: the tier that decides the conflicts of the canonical vocabulary (one call per document)"},
+    "max_chunk_bytes": {"type": "integer", "min": 1000, "max": 7000, "required": false, "description": "the largest chunk of a document handled in one call (default 7000 for v1, 3000 for v2)"}
+  },
+  "budget": {"usd": 0.5, "credits": 60},
+  "_note": "Wraps the product's document ingestion: v1 = Ingestions.draft (lib/ingest/index.mjs: chunking, the sop-wire-authoring skill, the validator and source checks in the repair loop, memory conflict checks, storage with provenance); v2 = ingestV2 (lib/ingest/v2: structure role over all chunks, a canonical vocabulary layer, the FOL role fol-v2 per sentence over that vocabulary, the deterministic converter, the validator, the contradiction and quote checks, escalations.jsonl, storage with provenance into a base memory or a session). The adapter only routes its model calls through the endpoint's tiers, tagged with the task's purpose and run id."
+}

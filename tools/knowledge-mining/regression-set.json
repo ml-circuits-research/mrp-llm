@@ -1,0 +1,20 @@
+{
+ "description": "The fixed regression set of tools/knowledge-mining: book problems the system answered correctly in a mining baseline; admitted knowledge must not lose any of them. Ids only, grows, never shrinks.",
+ "ids": [
+  "science:19",
+  "adult:319",
+  "math:30.5",
+  "math:3.10",
+  "math:31.13",
+  "world:523",
+  "logic:130",
+  "commonsense:4.4.8",
+  "adult:700",
+  "science:514",
+  "commonsense:1.6.4",
+  "world:335",
+  "math:19.1",
+  "math:10.22",
+  "math:32.14"
+ ]
+}

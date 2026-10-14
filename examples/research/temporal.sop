@@ -1,0 +1,25 @@
+# Usage example 3 — temporal window contrast.
+# Authored here, no external rows copied. Domain: project staffing contracts.
+#
+# Messages: "Was Maria Ionescu a member of the Delta programme on 1 March
+# 2025?" and the same question for 1 August 2025. The dates are copied as
+# written; the host normalizes them. Inside the validity interval the claim is
+# supported; after the exclusive end it is no longer established.
+@question query
+  where match
+    relation "member of project"
+    role subject "Maria Ionescu"
+    role object "Delta programme"
+    polarity affirmed
+  end
+  at "1 March 2025"
+
+# --- contrast ---
+@question query
+  where match
+    relation "member of project"
+    role subject "Maria Ionescu"
+    role object "Delta programme"
+    polarity affirmed
+  end
+  at "1 August 2025"

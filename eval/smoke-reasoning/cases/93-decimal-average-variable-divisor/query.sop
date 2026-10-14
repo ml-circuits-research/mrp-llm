@@ -1,0 +1,4 @@
+@q query
+  mode select
+  select ?t ?avg
+  where team_average ?t ?avg

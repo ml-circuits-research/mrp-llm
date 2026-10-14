@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#fact" target="_top">Wire index</a> · <a href="query.html">query</a> · <a href="solve.html">solve</a> · <a href="remember.html">remember</a></p><h1><code>fact</code></h1>
+<p>In general-runtime and trusted host circuits, a <code>fact</code> describes one supplied ground claim, its valid time and optional provenance. It constructs a value: it does not prove the claim, add it to memory, or imply publication. <code>solve.data $claim</code> may use the value only for that evaluation; <a href="remember.html">remember</a> is the separate operation that records an admitted claim in the current session.</p>
+<h2>Every accepted keyword</h2><table><thead><tr><th>Keyword</th><th>Cardinality / default</th><th>Accepted value and concrete effect</th></tr></thead><tbody>
+<tr><td id="field-holds"><code>holds</code></td><td>Exactly once; required</td><td><code>[not ]predicate term1 [term2 [term3 [term4]]]</code>; 1–4 whitespace-separated terms, no argument punctuation. Terms: canonical lowercase symbol, safe integer, JSON double-quoted string, <code>$value</code> reference. A ground relation or explicit negative relation is constructed; <code>?variables</code> fail ground-fact lowering.</td></tr>
+<tr><td id="field-valid"><code>valid</code></td><td>Exactly once; required</td><td><code>timeless</code> or <code>START END</code> where endpoints are ISO dates, UTC timestamps, <code>beginning</code> or <code>open</code>. Inclusive start/exclusive end defines when the claim applies.</td></tr>
+<tr><td id="field-source"><code>source</code></td><td>At most once; default <code>user</code></td><td>Plain remainder or JSON-quoted text; stored as claim-source metadata, not automatically verified authority. <strong>An omitted source silently records <code>user</code></strong>, a trust class nobody wrote; write <code>source</code> explicitly. The exact value <code>assumption</code> is also a semantic switch, not only provenance text: such a fact may be consumed only through a <code>solve</code>/<code>reason</code> <code>assume</code> field (otherwise the run fails with <code>assumption_fact_unconsumed</code> or <code>assumption_fact_not_evidence</code>), is never used as evidence, is never stored (<code>assumption_fact_not_recordable</code>) and is never reinforced.</td></tr>
+<tr><td id="field-quote"><code>quote</code></td><td>At most once; default empty</td><td>Plain remainder or JSON-quoted source excerpt; preserved as provenance metadata when recorded, not independently verified.</td></tr>
+<tr><td id="field-retention"><code>retention</code></td><td>At most once; default <code>normal</code></td><td><code>normal</code> or <code>pinned</code>; pinned session recording requires host <code>allowPin</code> permission.</td></tr></tbody></table>
+<h2>Local fact: no memory write</h2><p>A supplied catalog card says book_a is on shelf_north. Each line has a different role: <code>holds</code> records the source claim in a value; <code>where</code> asks which book matches the shelf condition; <code>solve.data</code> passes the claim only to this evaluation; <code>output</code> requests a checked binding.</p><pre data-sop="current"><code>@catalog fact
+  holds on_shelf book_a shelf_north
+  valid timeless
+  source "catalog card 17"
+
+@question query
+  where on_shelf ?book shelf_north
+  select ?book
+  mode select
+
+@answer solve
+  query $question
+  data $catalog
+  output ?book one</code></pre><p>If the local claim is admitted, the unique result can bind <code>$book</code> to <code>book_a</code>; this is not independent verification and does not store the catalog card. An explicit negative claim has different meaning from absence of positive evidence:</p>
+<pre data-sop="current"><code>@missing fact
+  holds not on_shelf book_b shelf_north
+  valid timeless
+  source "catalog inventory"
+
+@record remember
+  input $missing
+  scope session</code></pre><p>This records the explicit negative statement in an authorized writable session. A missing positive fact alone would not establish the negative one.</p>
+<h2>Invalid: a fact is ground</h2><pre data-sop="invalid" data-check="lower" data-error="Ground fact required"><code>@unsafe fact
+  holds on_shelf ?book shelf_north
+  valid timeless</code></pre><p>The atom parses, but a fact cannot leave <code>?book</code> unbound; use a query for unknown books. See <a href="syntax.html">shared atom syntax</a>. The small model never writes a fact wire: it reports what the message says with <a href="stated.html"><code>stated</code></a> and what it adds with <a href="assumed.html"><code>assumed</code></a>; the host lowers an asserted statement to a turn-local <code>fact … source user</code> and a supposition to <code>fact … source assumption</code> consumed only through <code>assume</code>.</p><p><strong>Implementation sources:</strong> <code>sop/parser.mjs</code> (<code>SPEC.fact</code>, <code>parseAtom</code>), <code>sop/lower.mjs</code> (<code>lowerFact</code>), <code>sop/runtime.mjs</code> (<code>fact</code>, <code>remember</code>).</p><section id="knowledge-language"><h2>Knowledge language: <code>fact</code></h2><p class="note">In the knowledge language a <code>fact</code> is one ground claim with a validity, an epistemic status, a speaker and its source; the <code>valid</code> field is optional. The tables and examples of this section are about the <b>knowledge</b> form, written from a source and checked by <code>sop/knowledge/</code>; the sections above describe the host-circuit form. Anchors of this section's fields start with <code>kfield-</code>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>.</p><p>Other field names are rejected (<code>unknown_field</code>). The table is generated from <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table data-knowledge="fields"><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="kfield-holds"><code>holds</code></th><td>At most once; required</td><td>One ground atom <code>[not ]predicate term...</code> with no variables (<code>bad_atom</code>). <code>not</code> is explicit negative evidence ("the source says it is false"), never absence.</td></tr>
+<tr><th scope="row" id="kfield-valid"><code>valid</code></th><td>At most once; optional</td><td><code>timeless</code> (default) or <code>START END</code> (ISO date or timestamp; <code>beginning</code> and <code>open</code> are the open ends; start inclusive, end exclusive).</td></tr>
+<tr><th scope="row" id="kfield-status"><code>status</code></th><td>At most once; optional</td><td><code>observed</code> (default), <code>reported</code> (with <code>speaker</code>), <code>hedged</code> or <code>supposed</code>. Everything but <code>observed</code> is an assumption: an answer that rests on it is <code>conditional</code>.</td></tr>
+<tr><th scope="row" id="kfield-speaker"><code>speaker</code></th><td>At most once; optional</td><td>Text: who said it. Meaningful only with <code>status reported</code> (<code>speaker_needs_reported</code>).</td></tr>
+<tr><th scope="row" id="kfield-source"><code>source</code></th><td>At most once; optional</td><td>Quoted citation of the source, with its coordinates.</td></tr>
+<tr><th scope="row" id="kfield-quote"><code>quote</code></th><td>At most once; optional</td><td>The exact words of the source, copied byte for byte.</td></tr></tbody></table></div><h3>What it is for</h3><p>One idea per fact. Prefer one general <a href="rule.html"><code>rule</code></a> to many similar facts, and keep the sentence the claim comes from in <code>source</code> or <code>quote</code>. A reported or hedged claim says so, with the speaker; the answer then says "if". A fact true for a period carries <code>valid</code>; a derived atom holds at an instant when some rule instance has its whole body holding at that instant.</p><h3>Examples</h3><pre data-sop="knowledge"><code>@located_in predicate
+  args subject:entity location:entity
+
+@f9 fact
+  holds located_in atlantis atlantic_ocean
+  status reported
+  speaker "Plato"
+  quote "an island in front of the strait you call the Pillars of Hercules"
+@f10 fact
+  holds located_in paris france
+  valid 2020-01-01 open</code></pre><pre data-sop="knowledge-query" data-status="supported" data-rows="x=atlantis,y=atlantic_ocean;x=paris,y=france" data-conditional="f9"><code>@q query
+  where located_in ?x ?y
+  select ?x ?y</code></pre><p>The reported claim about Atlantis is an assumption: the row is conditional on it. (The oracle reports the conditional list per row; a renderer says "Atlantis, if Plato is right".)</p><h3>Invalid: a speaker on an observed fact</h3><pre data-sop="knowledge-invalid" data-error="speaker_needs_reported"><code>@located_in predicate
+  args subject:entity location:entity
+@f1 fact
+  holds located_in atlantis atlantic_ocean
+  speaker "Plato"</code></pre><h3>Common mistakes</h3><ol><li>A variable in <code>holds</code> (a fact is ground).</li><li>Writing <code>not</code> for "the source does not list it": <code>not</code> is explicit evidence that the source says it is false.</li><li><code>speaker</code> without <code>status reported</code>.</li><li>A paraphrase in <code>quote</code>.</li></ol></section><!--/knowledge-language--></main><script type="module" src="help-page.mjs"></script></body></html>

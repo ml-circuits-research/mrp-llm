@@ -1,0 +1,3 @@
+@q query
+  where free_even ?x
+  select ?x

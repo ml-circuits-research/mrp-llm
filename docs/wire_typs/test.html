@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#test" target="_top">← Wire type index</a></p><h1><code>test</code></h1><p>One executable check of a program: a call expression, the expected value and a kind. Run by the <code>code-sandbox</code> strategy against the <a href="code.html"><code>code</code></a> wire of the same task.</p><p><strong>Status and author:</strong> Host or turn wire (the user's examples, the examples a model writes, generated checks). It is never knowledge approved from a source, never on the small-model surface (the formalizer never writes or sees it) and never evidence: it is not a claim about the world, so it stays outside the four-valued evidence system. It is not governed.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="field-of"><code>of</code></th><td>At most once; required</td><td>The task symbol (a lowercase symbol such as <code>t1</code>) the test is about. A <code>code</code> wire for the same task is what the test runs against.</td></tr>
+<tr><th scope="row" id="field-call"><code>call</code></th><td>At most once; required</td><td>A JavaScript expression, JSON-quoted, that calls the entry function: <code>"mostFrequent([1, 2, 2, 3])"</code>. It is evaluated in the program's own sandbox context.</td></tr>
+<tr><th scope="row" id="field-expect"><code>expect</code></th><td>At most once; required</td><td>A JavaScript expression, JSON-quoted, for the expected value. It is evaluated in a separate clean context, never in the one that holds the program. Values are compared structurally: arrays, plain objects (key order ignored), Maps, Sets, Dates, <code>NaN</code>, <code>undefined</code> versus <code>null</code>.</td></tr>
+<tr><th scope="row" id="field-kind"><code>kind</code></th><td>At most once; optional</td><td><code>example|property|generated|sealed</code>. Metadata for reporting; every kind runs the same way. A test of kind <code>sealed</code> belongs to <code>eval/suites/</code> only and is refused everywhere else (<code>sealed_test_in_knowledge</code>).</td></tr>
+<tr><th scope="row" id="field-timeout"><code>timeout</code></th><td>At most once; optional</td><td>A positive integer: milliseconds for this test (the sandbox caps it at four times its per-test budget).</td></tr>
+<tr><th scope="row" id="field-source"><code>source</code></th><td>At most once; optional</td><td>Quoted citation: where the example comes from (the user's instruction, the agent's reading of it).</td></tr></tbody></table></div></section><section><h2>What it is for and how to write it</h2><p>Write one <code>test</code> per example of an instruction, one per implied edge case (the empty input, a boundary) and, in the host loop, nothing else. <code>call</code> and <code>expect</code> are JSON strings that hold a JavaScript expression each. A test that cannot evaluate its <code>expect</code> expression is reported as a bad test, never as a pass.</p><p><strong>Sealed tests.</strong> The hidden tests of an evaluation suite are written with <code>kind sealed</code> and live in <code>eval/suites/**</code> only. The validator refuses them in knowledge, task and candidate files (<code>sealed_test_in_knowledge</code>), the proposer and the repair loop never see them, and the evaluation harness runs them after the program has been committed, so that a <code>verified</code> program that fails one is counted as a false verification.</p></section><section><h2>What the engine does</h2><p>Nothing in a reasoning route: a <code>test</code> is opaque to every engine. The <code>code-sandbox</code> strategy runs the program of the task on each test (one fresh context per test, a CPU timeout per test, a heap limit and a wall-clock limit for the whole run) and answers <code>verified</code> (every test passed, <code>guarantee bounded</code>, never <code>exact</code>), <code>failed</code> (the failing tests with call, expected and actual value or error) or <code>budget_exhausted</code> (<code>reason wall</code> or <code>memory</code>). Its trace is a list of closed facts: <code>run r1</code>, <code>in_elem r1 3</code>, <code>out_elem r1 2</code>, <code>test_result r1 e1 passed</code>.</p></section><section><h2>Examples</h2><p>A program and two tests; the sandbox answers <code>verified</code>.</p><pre data-sop="knowledge" data-run="sandbox" data-status="verified"><code>@sum_list code
+  of t1
+  language javascript
+  entry sumList
+  body "function sumList(xs) {\n  let s = 0;\n  for (const x of xs) s += x;\n  return s;\n}\n"
+  produced_by user
+@e1 test
+  of t1
+  call "sumList([1, 2, 3])"
+  expect "6"
+  kind example
+  source "the user's example 1"
+@e2 test
+  of t1
+  call "sumList([])"
+  expect "0"
+  kind example</code></pre><p>The same tests on a wrong program: the sandbox answers <code>failed</code> and names <code>e1</code>.</p><pre data-sop="knowledge" data-run="sandbox" data-status="failed"><code>@sum_list code
+  of t1
+  language javascript
+  entry sumList
+  body "function sumList(xs) {\n  let s = 0;\n  for (const x of xs) s = x;\n  return s;\n}\n"
+  produced_by user
+@e1 test
+  of t1
+  call "sumList([1, 2, 3])"
+  expect "6"
+  kind example
+  source "the user's example 1"
+@e2 test
+  of t1
+  call "sumList([])"
+  expect "0"
+  kind example</code></pre><h3>Invalid: a sealed test in a knowledge file</h3><pre data-sop="knowledge-invalid" data-error="sealed_test_in_knowledge"><code>@e1 test
+  of t1
+  call "sumList([1, 2, 3])"
+  expect "6"
+  kind sealed</code></pre></section><section><h2>Common mistakes</h2><ol><li>Putting a hidden test in a task, candidate or knowledge file: the validator refuses <code>kind sealed</code> outside <code>eval/suites/</code>.</li><li>Writing <code>call</code> or <code>expect</code> as bare text instead of a JSON string.</li><li>Reading a passing test as a proof: a verified program passed these tests only (<code>guarantee bounded</code>).</li><li>Asserting an example of the world as a <code>fact</code>: a test checks a program, a fact states something about the world.</li></ol></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.test</code></li><li><code>sop/knowledge/validate.mjs (programming wires check)</code></li><li><code>reasoning/strategies/code-sandbox/index.mjs</code></li><li><code>eval/leakage.mjs:auditSealedTests</code></li></ul><p>Related: <a href="code.html"><code>code</code></a>, <a href="policy.html"><code>policy</code></a>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>; the shared semantics are in <a href="knowledge-semantics.html">Knowledge semantics</a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

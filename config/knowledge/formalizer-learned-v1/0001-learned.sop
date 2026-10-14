@@ -1,0 +1,6 @@
+# formalizer-learned-v1: learned protocol rules (AGENTS.md "Formalization improvement"; lib/formalize/protocol-data.mjs).
+# Every wire here was admitted by the regression gate (eval/formalization-regression, tier tiny): it fixed at least one case and lost
+# none. Allowed wire forms: `fp_hint QUESTION "line"`, `fp_example QUESTION "line"` (a generic invented example, never a test case),
+# `fp_question_text QUESTION "text"` (replaces the protocol text; the last text wins), `fp_choice_text QUESTION N "text"`, and the
+# problem-mode order and exits of 0060-problem.sop (fp_problem_step, fp_problem_step_when, fp_problem_required, fp_problem_exit_kind,
+# fp_own_data_kind). Each admitted change names its run in a comment line above it.

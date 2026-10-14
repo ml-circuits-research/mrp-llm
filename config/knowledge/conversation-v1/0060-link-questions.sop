@@ -1,0 +1,67 @@
+# conversation-v1: the clarification questions of the KnowledgeLinker (sop/linking.mjs linkQuestion), part line.
+
+@cv_line_ask_entity_options reply
+  situation line_ask_entity_options
+  part line
+  language en
+  text "Which entity do you mean by {{text}}: {{options}}?"
+
+@cv_line_ask_entity reply
+  situation line_ask_entity
+  part line
+  language en
+  text "Which entity do you mean by {{text}}?"
+
+@cv_line_option_described reply
+  situation line_option_described
+  part line
+  language en
+  text "{{label}} ({{description}})"
+
+@cv_line_options_separator reply
+  situation line_options_separator
+  part line
+  language en
+  text " or "
+
+@cv_line_ask_time_measure reply
+  situation line_ask_time_measure
+  part line
+  language en
+  text "The variable {{text}} is an argument of the relation, not a period; which time measure do you want?"
+
+@cv_line_ask_time reply
+  situation line_ask_time
+  part line
+  language en
+  text "Which date or period do you mean by {{text}}?"
+
+@cv_line_ask_relation_options reply
+  situation line_ask_relation_options
+  part line
+  language en
+  text "Which relation do you mean by {{text}}: {{options}}?"
+
+@cv_line_ask_relation_type reply
+  situation line_ask_relation_type
+  part line
+  language en
+  text "The relation {{text}} does not fit {{value}} in the role {{role}}. How else would you phrase it?"
+
+@cv_line_ask_relation_type_expected reply
+  situation line_ask_relation_type_expected
+  part line
+  language en
+  text "The relation {{text}} does not fit {{value}} in the role {{role}} (it takes {{expected}}). How else would you phrase it?"
+
+@cv_line_ask_relation_roles reply
+  situation line_ask_relation_roles
+  part line
+  language en
+  text "The relation {{text}} takes the roles {{options}}; which role is missing or extra?"
+
+@cv_line_ask_relation_unknown reply
+  situation line_ask_relation_unknown
+  part line
+  language en
+  text "I do not know the relation {{text}}. How else would you phrase it?"

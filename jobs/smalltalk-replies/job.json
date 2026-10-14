@@ -1,0 +1,99 @@
+{
+  "name": "smalltalk-replies",
+  "description": "Reply variants for the conversational situations of tools/smalltalk/taxonomy.json (owner request of 2026-10-02): per situation and tone register, several English phrasings that the conversation layer picks from at random. Slots are only the packet slots listed per situation; no invented facts. Bulk review by the auditor tier (rate 1: every item), fixes decided by the decider tier, the knowledge validator and the deterministic diversity filter of tools/smalltalk/build.mjs run when the collections are written.",
+  "inputs": {
+    "command": [
+      "node",
+      "../../tools/smalltalk/build.mjs",
+      "items"
+    ],
+    "idField": "id",
+    "promptFields": [
+      "situation",
+      "part",
+      "describe",
+      "context",
+      "registers",
+      "count",
+      "slots",
+      "length",
+      "shape",
+      "facts"
+    ]
+  },
+  "packing": {
+    "itemsPerCall": 1
+  },
+  "models": "role:worker-short",
+  "fallbackOnFailure": false,
+  "output": {
+    "format": "jsonl",
+    "idField": "id",
+    "minRecords": 2,
+    "fields": {
+      "register": {
+        "type": "string",
+        "enum": [
+          "neutral",
+          "warm",
+          "playful",
+          "formal"
+        ]
+      },
+      "text": "string"
+    }
+  },
+  "checks": "checks.mjs",
+  "repairRounds": 2,
+  "concurrency": 3,
+  "budget": {
+    "usd": 1.5,
+    "calls": 600
+  },
+  "stages": [
+    {
+      "name": "pilot",
+      "items": 8,
+      "stop": {
+        "maxEmptyRate": 0.3,
+        "maxRejectRate": 0.5,
+        "minItems": 8
+      }
+    },
+    {
+      "name": "all",
+      "items": null,
+      "stop": {
+        "maxEmptyRate": 0.2,
+        "maxRejectRate": 0.3
+      }
+    }
+  ],
+  "audit": {
+    "rate": 1,
+    "models": [
+      {
+        "viaProxyTier": true,
+        "tier": "medium",
+        "model": "medium",
+        "maxTokens": 24000,
+        "reasoning": "low"
+      }
+    ],
+    "instructions": "audit.md",
+    "severity": "medium",
+    "budgetTokens": 3000
+  },
+  "escalation": {
+    "nextModel": false
+  },
+  "decider": [
+    {
+      "viaProxyTier": true,
+      "tier": "good",
+      "model": "good",
+      "maxTokens": 12000,
+      "reasoning": "low"
+    }
+  ]
+}

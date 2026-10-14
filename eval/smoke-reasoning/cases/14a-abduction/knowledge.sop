@@ -1,0 +1,16 @@
+@wet predicate
+  args subject:entity
+
+@r_rain rule
+  when rained ?x
+  then wet ?x
+@r_sprinkler rule
+  when sprinkler_on ?x
+  then wet ?x
+
+@h1 hypothesis
+  holds rained grass
+  cost 1
+@h2 hypothesis
+  holds sprinkler_on grass
+  cost 1

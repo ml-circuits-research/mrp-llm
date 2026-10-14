@@ -1,0 +1,9 @@
+# expect: until_needs_max
+@a action
+  requires p
+  adds q
+@m method
+  achieves done
+  step until q
+    ~a
+  end

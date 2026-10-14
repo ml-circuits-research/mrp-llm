@@ -1,0 +1,180 @@
+# conversation-v1: the vocabulary of the conversation layer (DS023 "Conversation layer"). Every wire id and predicate starts with cv_
+# (its own namespace). The cv_turn_* predicates are the facts the chat runtime writes from a turn's result packet (lib/conversation/);
+# the other predicates are this layer's own data and conclusions. Every predicate is closed: the layer reasons in a closed world over
+# one turn.
+
+# --- facts of the turn (written by the runtime from the result packet, structure only)
+@cv_turn_status predicate
+  args subject:entity
+  closed true
+  description "the status of the turn's result packet (supported, refuted, unknown, incomplete, unclear, courtesy, clarify, stored, ...)"
+@cv_turn_unclear predicate
+  args subject:entity
+  closed true
+  description "the formalizer wrote an unclear wire of this kind (gibberish, no_request, ambiguous, relation_not_in_memory)"
+@cv_turn_signal predicate
+  args subject:entity
+  closed true
+  description "the message shows this pragmatic kind (greeting, thanks, frustration, ...) with a score of at least 0.5"
+@cv_turn_language predicate
+  args subject:entity
+  closed true
+  description "the language the reply is written in before the answer-formulation step (en)"
+@cv_turn_computed predicate
+  args none
+  closed true
+  description "the turn ran a query or noted statements: the renderer has an answer text (slot answer)"
+@cv_turn_answered predicate
+  args none
+  closed true
+  description "the computed answer decides the question: answer rows, a yes or no, or a count"
+@cv_turn_candidate predicate
+  args none
+  closed true
+  description "the near-miss search found an entity of the memory close to a name of the message (slots candidate, mention)"
+@cv_turn_candidate_exact predicate
+  args none
+  closed true
+  description "the closest candidate is the name of the message itself (distance 0): the memory knows it, the answer is missing"
+@cv_turn_candidate_described predicate
+  args none
+  closed true
+  description "the closest candidate has a description in the memory (slot candidate_description)"
+@cv_turn_candidate_relations predicate
+  args none
+  closed true
+  description "the memory holds relations around the closest candidate (slot relations)"
+@cv_turn_topics predicate
+  args none
+  closed true
+  description "the memory's statistics name the classes it holds most of (slot topics)"
+@cv_turn_readings predicate
+  args none
+  closed true
+  description "the formalizer listed readings of an ambiguous message (slot readings)"
+
+# --- data of the layer
+@cv_reply_for predicate
+  args subject:entity object:entity
+  closed true
+  description "the reply wire (subject) serves the situation (object); read from the reply wires"
+@cv_reply_part predicate
+  args subject:entity object:entity
+  closed true
+  description "the reply wire (subject) is the opening, body, closing or a renderer line (object); read from the reply wires"
+@cv_reply_language predicate
+  args subject:entity object:entity
+  closed true
+  description "the reply wire (subject) is written in this language (object); read from the reply wires"
+@cv_situation_priority predicate
+  args subject:entity object:integer
+  closed true
+  description "when several situations of the same part apply, the one with the highest priority (object) is used"
+@cv_courtesy_situation predicate
+  args subject:entity object:entity
+  closed true
+  description "a message that is only this pragmatic kind (subject) is answered in this situation (object)"
+@cv_opening_situation predicate
+  args subject:entity object:entity
+  closed true
+  description "an answer to a message showing this pragmatic kind (subject) opens in this situation (object)"
+@cv_closing_situation predicate
+  args subject:entity object:entity
+  closed true
+  description "an answer to a message showing this pragmatic kind (subject) closes in this situation (object)"
+@cv_short_kind predicate
+  args subject:entity
+  closed true
+  description "a message showing this pragmatic kind (subject) gets the first line of the answer only"
+
+# --- conclusions
+@cv_applies predicate
+  args subject:entity
+  closed true
+  description "the situation (subject) applies to this turn"
+@cv_applicable_reply predicate
+  args subject:entity
+  closed true
+  description "the reply wire (subject) can be used for this turn: its situation applies and its language is the turn's"
+@cv_style predicate
+  args subject:entity
+  closed true
+  description "the reply is rendered in this style (short: the first line of the answer)"
+@cv_courtesy_only predicate
+  args none
+  closed true
+  description "the message is courtesy or emotion only: nothing to look up"
+
+# --- message acts (P-2.1, 2026-10-03): what a message does besides asking or stating, declared as data. The formalizer may write a
+# `pragmatic` wire only with a kind declared here (or in another layer of the reply memory); the step-by-step protocol asks the groups
+# in a first, coarse question and the acts of each group the message shows in a second, fine one (sop/message-acts.mjs).
+@cv_act_group predicate
+  args subject:entity object:text
+  closed true
+  description "a group of message acts (subject), asked as this line (object) of the coarse question; groups are asked in file order"
+@cv_act predicate
+  args subject:entity object:entity
+  closed true
+  description "the message act (subject) belongs to the group (object); an act of a group without a line is valid but not asked"
+@cv_act_description predicate
+  args subject:entity object:text
+  closed true
+  description "what the message act (subject) means, as one line (object) of the fine question"
+@cv_act_example predicate
+  args subject:entity object:text
+  closed true
+  description "a short example message (object) that shows the act (subject); shown after its line"
+@cv_act_standalone predicate
+  args subject:entity
+  closed true
+  description "the act (subject) can be the whole request (how are you, tell me a joke): when the kind of answer asks for a lookup, the protocol asks whether the message also asks about the world"
+@cv_act_span predicate
+  args subject:entity object:text
+  closed true
+  description "for the act (subject) the protocol copies this part of the message (object) verbatim, as the span of the pragmatic wire"
+@cv_act_sets_slot predicate
+  args subject:entity object:entity
+  closed true
+  description "the span of the act (subject) fills this conversation slot (object) from this turn on (user_name)"
+
+# --- personalisation, register and ties (P-2.2 to P-2.4, 2026-10-03)
+@cv_turn_slot predicate
+  args subject:entity
+  closed true
+  description "the turn can fill this slot (subject): a reply that names another slot is not applicable"
+@cv_reply_slot predicate
+  args subject:entity object:entity
+  closed true
+  description "the reply wire (subject) names the slot (object) in its text; read from the reply wires"
+@cv_reply_unfillable predicate
+  args subject:entity
+  closed true
+  description "the reply wire (subject) names a slot the turn cannot fill"
+@cv_turn_user_name predicate
+  args none
+  closed true
+  description "the user told their name in this conversation (slot user_name)"
+@cv_turn_time_of_day predicate
+  args subject:entity
+  closed true
+  description "the part of the day (subject: morning, afternoon, evening, night) by the clock of the turn (slot time_of_day)"
+@cv_day_part_starts predicate
+  args subject:entity object:integer
+  closed true
+  description "the part of the day (subject) starts at this hour (object) of the turn's clock and lasts until the next part starts"
+@cv_greeting_day_part predicate
+  args subject:entity
+  closed true
+  description "a greeting may name this part of the day (subject): good morning, good afternoon, good evening"
+@cv_register_kind predicate
+  args subject:entity
+  closed true
+  description "an instruction of this kind (subject) chooses the register of the replies (formal, playful)"
+@cv_register predicate
+  args subject:entity
+  closed true
+  description "the replies of this conversation are in this register (subject); the register collections' variants test it"
+@cv_situation_outranks predicate
+  args subject:entity object:entity
+  closed true
+  description "when the situations (subject) and (object) apply to the same part with the same priority, the subject is used"

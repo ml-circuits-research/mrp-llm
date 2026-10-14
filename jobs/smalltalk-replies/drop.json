@@ -1,0 +1,16 @@
+[
+ "What's orange and sounds like a parrot? A carrot with a voice.",
+ "Why did the leaf go to therapy? It had deep roots.",
+ "What do you call a chicken that's always late? A rooster with a schedule!",
+ "The entity {{mention}} is not in my memory. Did you mean {{candidate}}? They are described as {{candidate_description}}.",
+ "I couldn't find {{mention}}. Did you mean {{candidate}}? They are described as {{candidate_description}}.",
+ "The name {{mention}} is not in my memory. Did you mean {{candidate}}? They are described as {{candidate_description}}.",
+ "I couldn't find {{mention}}. Might you have meant {{candidate}}? They are described as {{candidate_description}}.",
+ "Your memory records the relations {{relations}} about {{candidate}}.",
+ "Your memory lists the following relations about {{candidate}}: {{relations}}.",
+ "{{mention}} is not present in my memory. Did you mean {{candidate}}? They are described as {{candidate_description}}.",
+ "{{mention}} is not recognized in my memory. Did you mean {{candidate}}? They are described as {{candidate_description}}.",
+ "I don't have {{mention}} in my records. Could you have meant {{candidate}}? They're described as {{candidate_description}}.",
+ "The name {{mention}} isn't in my memory. Did you mean {{candidate}}? They're described as {{candidate_description}}.",
+ "Here's what your memory records about {{candidate}}: the relations {{relations}}."
+]

@@ -1,0 +1,3 @@
+@q query
+  mode count
+  where reach ?x ?y

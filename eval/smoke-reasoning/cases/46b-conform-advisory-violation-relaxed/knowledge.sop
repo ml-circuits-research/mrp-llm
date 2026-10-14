@@ -1,0 +1,49 @@
+@service predicate
+  args subject:entity
+@overloaded predicate
+  args subject:entity
+@drained predicate
+  args subject:entity
+@stopped predicate
+  args subject:entity
+@restarted predicate
+  args subject:entity
+
+@f_service fact
+  holds service s1
+@f_load fact
+  holds overloaded s1
+
+@graceful_stop action
+  params ?s
+  requires service ?s
+  requires drained ?s
+  adds stopped ?s
+  cost 5
+@force_stop action
+  params ?s
+  requires service ?s
+  adds stopped ?s
+  cost 2
+@start action
+  params ?s
+  requires stopped ?s
+  adds restarted ?s
+  cost 1
+
+@restart method
+  achieves restarted ?s
+  when service ?s
+  binding strict
+  step choose
+    ~graceful_stop ?s
+    ~force_stop ?s
+  end
+  step ~start ?s
+
+@no_force norm
+  forbid ~force_stop ?s
+  when overloaded ?s
+  severity hard
+  binding advisory
+  message "forced stops are discouraged under load"

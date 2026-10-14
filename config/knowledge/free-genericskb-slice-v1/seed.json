@@ -1,0 +1,11 @@
+{
+  "name": "GenericsKB slice (candidate)",
+  "description": "Candidate common-sense layer, not loaded by any chat base memory: typical properties, abilities, uses, parts, materials and places of common things reduced to typed facts from simple generic sentences of GenericsKB-Best (Bhakthavatsalam, Anastasiades and Clark, 2020, Allen Institute for AI), CC BY 4.0, attribution required; modified (sentences reduced to facts, filtered and selected; no sentence kept). Provenance on every wire; sources and licences in docs/specs/DS011-source-rights.md.",
+  "imports": [
+    "core-min",
+    "core-en",
+    "commonsense-v1"
+  ],
+  "chat": false,
+  "licence": "CC BY 4.0"
+}

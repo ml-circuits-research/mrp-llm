@@ -1,0 +1,4 @@
+@q query
+  mode plan
+  observe demo ?q at_least 12
+  horizon 6

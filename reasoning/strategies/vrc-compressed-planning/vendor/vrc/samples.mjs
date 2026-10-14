@@ -1,0 +1,9 @@
+// VENDORED: copied verbatim from vrc03r.zip vendor/vrc/src/samples.mjs
+import {parseSOP,stateFacts}from'./sop.mjs';
+/** Pair observations stored as ordinary SOP state claims, e.g. train.0.before. */
+export function samplesFromSOP(text,{variables,action='step',source='samples.sop'}={}){
+ if(!variables?.length)throw new TypeError('Specify the ordered observed STATE interface');const p=parseSOP(text,{source}),groups={train:new Map(),validation:new Map()};
+ for(const f of p.facts){const m=String(f.entity).match(/^(train|validation)\.(\d+)\.(before|after)$/);if(!m)throw new SyntaxError('Expected sample entity train.N.before/after or validation.N.before/after');const key=Number(m[2]);if(!groups[m[1]].has(key))groups[m[1]].set(key,{before:new Map(),after:new Map()});const map=groups[m[1]].get(key)[m[3]];if(map.has(f.variable))throw new Error('Duplicate/conflicting sample fact');map.set(f.variable,f.value.toNumber());}
+ const pair=split=>{const X=[],Y=[];for(const[,g]of [...groups[split]].sort(([a],[b])=>a-b)){for(const phase of ['before','after'])if(g[phase].size!==variables.length||variables.some(v=>!g[phase].has(v)))throw new Error('Incomplete sample pair');X.push(variables.map(v=>g.before.get(v)));Y.push(variables.map(v=>g.after.get(v)));}if(!X.length)throw new Error(`No ${split} samples`);return [X,Y];};const[X,Y]=pair('train'),[V,W]=pair('validation');return {id:action,X,Y,V,W};
+}
+export function sampleSOP(dataset,variables){let id=0,text='# Paired observations; no equations or hidden coordinates.\n';for(const[split,A,B]of [['train',dataset.X,dataset.Y],['validation',dataset.V,dataset.W]])for(let row=0;row<A.length;row++)for(const[phase,state]of [['before',A[row]],['after',B[row]]])for(let j=0;j<variables.length;j++)text+=`@sample_${id++} claim\nVALUE state ${split}.${row}.${phase} ${variables[j]} ${state[j]}\n`;return text;}

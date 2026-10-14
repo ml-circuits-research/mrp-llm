@@ -1,0 +1,9 @@
+@door_open predicate
+  args subject:entity
+
+@f1 fact
+  holds door_open lab
+  source "guard log"
+@f2 fact
+  holds not door_open lab
+  source "camera review"

@@ -1,0 +1,14 @@
+{
+  "feature": "A count over a predicate that is not declared closed is a lower bound, never an exact count",
+  "status": "supported",
+  "complete": true,
+  "count": 3,
+  "bound": "at_least",
+  "warnings": [
+    "count_needs_closed"
+  ],
+  "requires": [
+    "facts",
+    "count"
+  ]
+}

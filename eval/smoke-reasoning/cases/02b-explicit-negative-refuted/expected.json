@@ -1,0 +1,9 @@
+{
+  "feature": "Facts and lookup: explicit negative evidence refutes",
+  "status": "refuted",
+  "complete": true,
+  "requires": [
+    "facts",
+    "classical_negation"
+  ]
+}

@@ -1,0 +1,15 @@
+# expect: not_stratifiable
+@p predicate
+  args entity
+  closed true
+@q predicate
+  args entity
+  closed true
+@r1 rule
+  when base ?x
+  when absent q ?x
+  then p ?x
+@r2 rule
+  when base ?x
+  when absent p ?x
+  then q ?x

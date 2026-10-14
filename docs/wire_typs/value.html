@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#value" target="_top">← Wire type index</a></p><h1><code>value</code></h1><p>Creates a typed value from a literal or a bounded expression. It does not retrieve facts, decide a question, or put data in the repository.</p><p><strong>Status and author:</strong> Only trusted host/tool circuits may author this operation. Small-model declarative input cannot emit it; host-approved orchestration supplies the required execution steps.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once at parse time. Other field names are rejected.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and current behavior</th></tr></thead><tbody><tr><th scope="row" id="field-data"><code>data</code></th><td>At most once; required</td><td>Restricted expression: JSON string, finite number, boolean, null, array/object, <code>$id</code> or permitted operators/calls; computes one value. Bare free name alone is rejected.</td></tr></tbody></table></div></section><section><h2>Execution and result</h2><p>Strings use JSON quotes, not unquoted symbolic atoms. Expressions can compose values already produced by earlier wires. The result is the expression value; no world write occurs. A <code>$wire</code> that is unresolved blocks evaluation. This is not a proof packet and cannot impersonate a <a href="../wiki.html#definition-cnl" target="_top">CNL</a> source. Arithmetic, property access and calls obey the same bounded interpreter described on the <a href="jsEval.html">jsEval page</a>. Expressions in <code>value</code> are always allowed in trusted and host circuits; the small model cannot author <code>value</code>, and the sandbox limits <code>maxExprOps</code>/<code>maxExprBytes</code> apply.</p></section><section><h2>Current SOP examples</h2><h3>Literal and structured data</h3><pre data-sop="current"><code>@count value
+  data 12
+
+@description value
+  data {route:&quot;north&quot;, minutes:$count}</code></pre><p>The first value is 12; the second is an object with a route label and numeric minutes. These are values, not stored claims.</p>
+<h3>Composition from a unique solve output</h3><pre data-sop="current"><code>@trip query
+  select ?minutes
+  where duration route_a ?minutes
+  mode select
+
+@found solve
+  query $trip
+  output ?minutes one
+
+@adjusted value
+  data $minutes + 5</code></pre><p>The query needs an admitted duration fact and a complete unique answer. If none or several are available, the output port is unavailable and <code>@adjusted</code> is blocked; it never guesses a duration.</p><h3>Invalid or unsafe example</h3><pre data-sop="invalid" data-check="parse" data-error="value needs a literal or expression"><code>@bad value
+  data arbitraryName</code></pre><p>A free identifier is not a literal and is rejected by the value shape check.</p></section><section><h2>Implementation sources</h2><ul><li><code>sop/parser.mjs:SPEC, validateShape, validateGraph</code></li><li><code>sop/runtime.mjs:Runtime.run</code></li><li><code>sop/expression.mjs:parseExpression, evaluateExpression</code></li><li><code>sop/outputs.mjs:selectOutput</code></li></ul><p>Related: <a href="jsEval.html"><code>jsEval</code></a>, <a href="constraint.html"><code>constraint</code></a>, <a href="binding.html"><code>binding</code></a>. See the <a href="../wiki.html#definition-sop" target="_top">SOP terminology</a> for wire/reference conventions.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

@@ -1,0 +1,7 @@
+@t1 trace
+  step ~deploy s1 at 2026-03-01
+  step ~deploy s2 at 2026-07-01
+
+@q query
+  mode conform
+  trace $t1

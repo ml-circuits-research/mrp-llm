@@ -1,0 +1,4 @@
+@q query
+  mode exists
+  where colleague ann bob
+  during 2021-06-01 2022-06-01

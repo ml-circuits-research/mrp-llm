@@ -1,0 +1,25 @@
+{
+  "feature": "forbid ... before ~b: the step may not occur while b has not yet occurred, so the engine inserts b",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 3,
+    "steps": 2,
+    "names": [
+      "test",
+      "deploy"
+    ]
+  },
+  "used": [
+    {
+      "id": "test_first",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "plan",
+    "norms_hard",
+    "temporal_norms",
+    "used"
+  ]
+}

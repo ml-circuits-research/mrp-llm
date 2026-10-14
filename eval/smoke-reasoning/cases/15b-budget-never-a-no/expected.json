@@ -1,0 +1,12 @@
+{
+  "feature": "Budget exhaustion: running out of budget is never a negative answer",
+  "status": "supported",
+  "acceptable_if_incomplete": [
+    "budget_exhausted"
+  ],
+  "requires": [
+    "rules",
+    "recursion",
+    "budget"
+  ]
+}

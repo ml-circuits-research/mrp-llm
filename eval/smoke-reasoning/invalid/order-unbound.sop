@@ -1,0 +1,5 @@
+# expect: unsafe_variable
+@r rule
+  when p ?x
+  when order ?t1 before ?t2
+  then q ?x

@@ -1,0 +1,8 @@
+@s1 fact
+  holds dangerous solvent
+  status supposed
+
+@q query
+  where shippable ?s
+  select ?s
+  if $s1

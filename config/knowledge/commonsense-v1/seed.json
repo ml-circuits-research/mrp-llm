@@ -1,0 +1,5 @@
+{
+  "name": "Common sense (English)",
+  "description": "Common-sense knowledge for the chat's base memories: classes of common nouns and their hierarchy (WordNet 3.0), typical uses, abilities, places, properties and parts of things (ConceptNet 5.7, CC BY 4.0 edges only), class disjointness, lifetimes and ages, family relations, geography, units and quantities, as facts, rules, defaults and integrity constraints. English only; imports core-en. Provenance on every wire (source lines); sources and licences in docs/specs/DS011-source-rights.md.",
+  "imports": ["core-min", "core-en"]
+}

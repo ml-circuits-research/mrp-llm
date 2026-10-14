@@ -1,0 +1,5 @@
+# expect: unclosed_block
+@q query
+  where all
+    p ?x
+    q ?x

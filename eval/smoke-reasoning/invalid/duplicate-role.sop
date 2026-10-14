@@ -1,0 +1,3 @@
+# expect: duplicate_role
+@p predicate
+  args subject:entity subject:entity

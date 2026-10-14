@@ -1,0 +1,416 @@
+@edge predicate
+  args source:entity destination:entity
+  closed true
+
+@start predicate
+  args subject:entity
+  closed true
+
+@visited predicate
+  args subject:entity
+  closed true
+
+@f1 fact
+  holds edge n0 n1
+
+@f2 fact
+  holds edge n1 n2
+
+@f3 fact
+  holds edge n2 n3
+
+@f4 fact
+  holds edge n3 n4
+
+@f5 fact
+  holds edge n4 n5
+
+@f6 fact
+  holds edge n5 n6
+
+@f7 fact
+  holds edge n6 n7
+
+@f8 fact
+  holds edge n7 n8
+
+@f9 fact
+  holds edge n8 n9
+
+@f10 fact
+  holds edge n9 n10
+
+@f11 fact
+  holds edge n10 n11
+
+@f12 fact
+  holds edge n11 n12
+
+@f13 fact
+  holds edge n12 n13
+
+@f14 fact
+  holds edge n13 n14
+
+@f15 fact
+  holds edge n14 n15
+
+@f16 fact
+  holds edge n15 n16
+
+@f17 fact
+  holds edge n16 n17
+
+@f18 fact
+  holds edge n17 n18
+
+@f19 fact
+  holds edge n18 n19
+
+@f20 fact
+  holds edge n19 n20
+
+@f21 fact
+  holds edge n20 n21
+
+@f22 fact
+  holds edge n21 n22
+
+@f23 fact
+  holds edge n22 n23
+
+@f24 fact
+  holds edge n23 n24
+
+@f25 fact
+  holds edge n24 n25
+
+@f26 fact
+  holds edge n25 n26
+
+@f27 fact
+  holds edge n26 n27
+
+@f28 fact
+  holds edge n27 n28
+
+@f29 fact
+  holds edge n28 n29
+
+@f30 fact
+  holds edge n29 n30
+
+@f31 fact
+  holds edge n30 n31
+
+@f32 fact
+  holds edge n31 n32
+
+@f33 fact
+  holds edge n32 n33
+
+@f34 fact
+  holds edge n33 n34
+
+@f35 fact
+  holds edge n34 n35
+
+@f36 fact
+  holds edge n35 n36
+
+@f37 fact
+  holds edge n36 n37
+
+@f38 fact
+  holds edge n37 n38
+
+@f39 fact
+  holds edge n38 n39
+
+@f40 fact
+  holds edge n39 n40
+
+@f41 fact
+  holds edge n40 n41
+
+@f42 fact
+  holds edge n41 n42
+
+@f43 fact
+  holds edge n42 n43
+
+@f44 fact
+  holds edge n43 n44
+
+@f45 fact
+  holds edge n44 n45
+
+@f46 fact
+  holds edge n45 n46
+
+@f47 fact
+  holds edge n46 n47
+
+@f48 fact
+  holds edge n47 n48
+
+@f49 fact
+  holds edge n48 n49
+
+@f50 fact
+  holds edge n49 n50
+
+@f51 fact
+  holds edge n50 n51
+
+@f52 fact
+  holds edge n51 n52
+
+@f53 fact
+  holds edge n52 n53
+
+@f54 fact
+  holds edge n53 n54
+
+@f55 fact
+  holds edge n54 n55
+
+@f56 fact
+  holds edge n55 n56
+
+@f57 fact
+  holds edge n56 n57
+
+@f58 fact
+  holds edge n57 n58
+
+@f59 fact
+  holds edge n58 n59
+
+@f60 fact
+  holds edge n59 n60
+
+@f61 fact
+  holds edge n60 n61
+
+@f62 fact
+  holds edge n61 n62
+
+@f63 fact
+  holds edge n62 n63
+
+@f64 fact
+  holds edge n63 n64
+
+@f65 fact
+  holds edge n64 n65
+
+@f66 fact
+  holds edge n65 n66
+
+@f67 fact
+  holds edge n66 n67
+
+@f68 fact
+  holds edge n67 n68
+
+@f69 fact
+  holds edge n68 n69
+
+@f70 fact
+  holds edge n69 n70
+
+@f71 fact
+  holds edge n70 n71
+
+@f72 fact
+  holds edge n71 n72
+
+@f73 fact
+  holds edge n72 n73
+
+@f74 fact
+  holds edge n73 n74
+
+@f75 fact
+  holds edge n74 n75
+
+@f76 fact
+  holds edge n75 n76
+
+@f77 fact
+  holds edge n76 n77
+
+@f78 fact
+  holds edge n77 n78
+
+@f79 fact
+  holds edge n78 n79
+
+@f80 fact
+  holds edge n79 n80
+
+@f81 fact
+  holds edge n80 n81
+
+@f82 fact
+  holds edge n81 n82
+
+@f83 fact
+  holds edge n82 n83
+
+@f84 fact
+  holds edge n83 n84
+
+@f85 fact
+  holds edge n84 n85
+
+@f86 fact
+  holds edge n85 n86
+
+@f87 fact
+  holds edge n86 n87
+
+@f88 fact
+  holds edge n87 n88
+
+@f89 fact
+  holds edge n88 n89
+
+@f90 fact
+  holds edge n89 n90
+
+@f91 fact
+  holds edge n90 n91
+
+@f92 fact
+  holds edge n91 n92
+
+@f93 fact
+  holds edge n92 n93
+
+@f94 fact
+  holds edge n93 n94
+
+@f95 fact
+  holds edge n94 n95
+
+@f96 fact
+  holds edge n95 n96
+
+@f97 fact
+  holds edge n96 n97
+
+@f98 fact
+  holds edge n97 n98
+
+@f99 fact
+  holds edge n98 n99
+
+@f100 fact
+  holds edge n99 n100
+
+@f101 fact
+  holds edge n100 n101
+
+@f102 fact
+  holds edge n101 n102
+
+@f103 fact
+  holds edge n102 n103
+
+@f104 fact
+  holds edge n103 n104
+
+@f105 fact
+  holds edge n104 n105
+
+@f106 fact
+  holds edge n105 n106
+
+@f107 fact
+  holds edge n106 n107
+
+@f108 fact
+  holds edge n107 n108
+
+@f109 fact
+  holds edge n108 n109
+
+@f110 fact
+  holds edge n109 n110
+
+@f111 fact
+  holds edge m0 m1
+
+@f112 fact
+  holds edge m1 m2
+
+@f113 fact
+  holds edge m2 m3
+
+@f114 fact
+  holds edge m3 m4
+
+@f115 fact
+  holds edge m4 m5
+
+@f116 fact
+  holds edge m5 m6
+
+@f117 fact
+  holds edge m6 m7
+
+@f118 fact
+  holds edge m7 m8
+
+@f119 fact
+  holds edge m8 m9
+
+@f120 fact
+  holds edge m9 m10
+
+@f121 fact
+  holds edge m10 m11
+
+@f122 fact
+  holds edge m11 m12
+
+@f123 fact
+  holds edge m12 m13
+
+@f124 fact
+  holds edge m13 m14
+
+@f125 fact
+  holds edge m14 m15
+
+@f126 fact
+  holds edge m15 m16
+
+@f127 fact
+  holds edge m16 m17
+
+@f128 fact
+  holds edge m17 m18
+
+@f129 fact
+  holds edge m18 m19
+
+@f130 fact
+  holds edge m19 m20
+
+@f131 fact
+  holds edge n110 n50
+
+@f132 fact
+  holds start n0
+
+@r_start rule
+  when start ?x
+  then visited ?x
+
+@r_step rule
+  when visited ?x
+  when edge ?x ?y
+  then visited ?y

@@ -1,0 +1,5 @@
+@q query
+  mode count
+  where works_at ann ?c
+  select ?c
+  during 2021-06-01 2023-01-01

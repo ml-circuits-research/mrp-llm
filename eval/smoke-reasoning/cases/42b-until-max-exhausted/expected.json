@@ -1,0 +1,11 @@
+{
+  "feature": "A loop that reaches its max with the condition still false is a cap, not a plan and not a refutation: budget_exhausted",
+  "status": "budget_exhausted",
+  "complete": false,
+  "reason": "depth",
+  "requires": [
+    "plan",
+    "method",
+    "budget"
+  ]
+}

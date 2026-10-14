@@ -1,0 +1,8 @@
+@c constraint
+  var ?x int 0 20
+  var ?y int 0 20
+  require ?x plus ?y equal 10
+  require ?x minus ?y equal 2
+  claim ?x equal 6
+  task prove
+  select ?x ?y

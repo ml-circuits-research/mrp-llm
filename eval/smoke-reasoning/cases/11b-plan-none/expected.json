@@ -1,0 +1,8 @@
+{
+  "feature": "Procedures and plans: no plan within the model is not an impossibility proof",
+  "status": "no_plan",
+  "complete": true,
+  "requires": [
+    "plan"
+  ]
+}

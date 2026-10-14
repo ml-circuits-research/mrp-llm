@@ -1,0 +1,22 @@
+# Contrast usage example (design inspired by QQP/PAWS contrast ideas; authored
+# for this repository, no external rows copied).
+#
+# Messages: "Is Ana a parent of Bogdan?" and "Is Bogdan a parent of Ana?" The
+# two programs differ by one structural change, the roles of the same
+# relation, so they must not answer the same way.
+@question query
+  where match
+    relation "parent of"
+    role subject "Ana"
+    role object "Bogdan"
+    polarity affirmed
+  end
+
+# --- contrast ---
+@question query
+  where match
+    relation "parent of"
+    role subject "Bogdan"
+    role object "Ana"
+    polarity affirmed
+  end

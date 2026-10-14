@@ -1,0 +1,26 @@
+{
+  "feature": "A selective bound query where demand rewriting (magic sets) avoids the closure of the unasked components",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "y": "c1"
+    },
+    {
+      "y": "c2"
+    },
+    {
+      "y": "c3"
+    },
+    {
+      "y": "c4"
+    },
+    {
+      "y": "c5"
+    }
+  ],
+  "requires": [
+    "rules",
+    "recursion"
+  ]
+}

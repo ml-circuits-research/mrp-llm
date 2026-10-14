@@ -1,0 +1,11 @@
+{
+  "feature": "Epistemic status: a reported claim answers conditionally, never as a fact",
+  "status": "supported",
+  "complete": true,
+  "conditional": [
+    "f1"
+  ],
+  "requires": [
+    "epistemic_status"
+  ]
+}

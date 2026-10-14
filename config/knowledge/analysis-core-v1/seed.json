@@ -1,0 +1,5 @@
+{
+  "name": "Analysis procedures (core)",
+  "description": "The starter library of analysis procedures (DS022 \"Analysis procedures\"): procedure bundles of rules, integrity constraints, aggregates and parameter facts that the analyzer (lib/analysis) applies to the document layer of a session or a base memory — contradictions, numeric and temporal consistency, claims without support, a sample KPI set and a sample quality rubric — together with the document-analysis vocabulary they read and the document view the analyzer writes. Domain procedures are added as data in the same form. Imports core-min.",
+  "imports": ["core-min"]
+}

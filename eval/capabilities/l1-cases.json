@@ -1,0 +1,342 @@
+{
+ "note": "Hand-written L1 cases for validator rules (problem codes) the generated cases do not reach; read by tools/capabilities/l1.mjs. A case passes when the validator reports its expected code.",
+ "cases": [
+  {
+   "id": "k:check.args_disagree_with_roles",
+   "capability": "k.check.args_disagree_with_roles",
+   "expect": "args_disagree_with_roles",
+   "knowledge": "@w predicate\n  args subject:entity object:entity\n  role subject entity\n  role topic entity\n"
+  },
+  {
+   "id": "k:check.bad_field_line",
+   "capability": "k.check.bad_field_line",
+   "expect": "bad_field_line",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r2 predicate\n  args subject:entity object:entity\n@val predicate\n  args subject:entity object:integer\n@f0 fact\n  holds p a\n@w rule\n  1when p ?x\n  then q ?x\n"
+  },
+  {
+   "id": "k:check.bad_header",
+   "capability": "k.check.bad_header",
+   "expect": "bad_header",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r2 predicate\n  args subject:entity object:entity\n@val predicate\n  args subject:entity object:integer\n@f0 fact\n  holds p a\n@w\n  when p ?x\n"
+  },
+  {
+   "id": "k:check.bad_id",
+   "capability": "k.check.bad_id",
+   "expect": "bad_id",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r2 predicate\n  args subject:entity object:entity\n@val predicate\n  args subject:entity object:integer\n@f0 fact\n  holds p a\n@1w rule\n  when p ?x\n  then q ?x\n"
+  },
+  {
+   "id": "k:check.bad_match_line",
+   "capability": "k.check.bad_match_line",
+   "expect": "bad_match_line",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r2 predicate\n  args subject:entity object:entity\n@val predicate\n  args subject:entity object:integer\n@f0 fact\n  holds p a\n",
+   "query": "@w query\n  where match\n    relation \"p\"\n    frobnicate x\n    polarity affirmed\n  end\n"
+  },
+  {
+   "id": "k:check.bad_term",
+   "capability": "k.check.bad_term",
+   "expect": "bad_term",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r2 predicate\n  args subject:entity object:entity\n@val predicate\n  args subject:entity object:integer\n@f0 fact\n  holds p a\n@w rule\n  when val ?x ?n\n  when compare ?n above A-B\n  then q ?x\n"
+  },
+  {
+   "id": "k:check.bad_time_leaf",
+   "capability": "k.check.bad_time_leaf",
+   "expect": "bad_time_leaf",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r2 predicate\n  args subject:entity object:entity\n@val predicate\n  args subject:entity object:integer\n@f0 fact\n  holds p a\n@w rule\n  when start_of p ?x\n  then q ?x\n"
+  },
+  {
+   "id": "k:check.bad_transitive",
+   "capability": "k.check.bad_transitive",
+   "expect": "bad_transitive",
+   "knowledge": "@w predicate\n  args subject:entity\n  transitive true\n"
+  },
+  {
+   "id": "k:check.frame_incomplete",
+   "capability": "k.check.frame_incomplete",
+   "expect": "frame_incomplete",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r2 predicate\n  args subject:entity object:entity\n@val predicate\n  args subject:entity object:integer\n@f0 fact\n  holds p a\n@lx lexeme\n  of r2\n  language en\n  form \"relates\"\n  frame subject\n"
+  },
+  {
+   "id": "k:check.key_violation",
+   "capability": "k.check.key_violation",
+   "expect": "key_violation",
+   "knowledge": "@w predicate\n  args subject:entity object:entity\n  key 1\n@f1 fact\n  holds w a b\n@f2 fact\n  holds w a c\n"
+  },
+  {
+   "id": "k:check.match_needs_polarity",
+   "capability": "k.check.match_needs_polarity",
+   "expect": "match_needs_polarity",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r2 predicate\n  args subject:entity object:entity\n@val predicate\n  args subject:entity object:integer\n@f0 fact\n  holds p a\n",
+   "query": "@w query\n  where match\n    relation \"p\"\n    role subject ?x\n  end\n  select ?x\n"
+  },
+  {
+   "id": "k:check.norm_qualifier_conflict",
+   "capability": "k.check.norm_qualifier_conflict",
+   "expect": "norm_qualifier_conflict",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r2 predicate\n  args subject:entity object:entity\n@val predicate\n  args subject:entity object:integer\n@f0 fact\n  holds p a\n@act action\n  params ?x\n  requires p ?x\n  adds q ?x\n@w norm\n  forbid ~act ?x\n  within 3\n  always\n"
+  },
+  {
+   "id": "k:check.supersedes_type_mismatch",
+   "capability": "k.check.supersedes_type_mismatch",
+   "expect": "supersedes_type_mismatch",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r2 predicate\n  args subject:entity object:entity\n@val predicate\n  args subject:entity object:integer\n@f0 fact\n  holds p a\n@d_old default\n  when p ?x\n  then q ?x\n@w rule\n  when p ?x\n  then q ?x\n  version 2\n  supersedes $d_old\n"
+  },
+  {
+   "id": "k:check.unsafe_exception",
+   "capability": "k.check.unsafe_exception",
+   "expect": "unsafe_exception",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r2 predicate\n  args subject:entity object:entity\n@val predicate\n  args subject:entity object:integer\n@f0 fact\n  holds p a\n@w default\n  when p ?x\n  then q ?x\n  except r2 ?x ?z\n"
+  },
+  {
+   "id": "k:check.bad_order",
+   "capability": "k.check.bad_order",
+   "expect": "bad_order",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r2 predicate\n  args subject:entity object:entity\n@val predicate\n  args subject:entity object:integer\n@f0 fact\n  holds p a\n@w rule\n  when start_of ?t p ?x\n  when order ?t soon ?t\n  then q ?x\n"
+  },
+  {
+   "id": "m:check.constraint_task_required",
+   "capability": "m.check.constraint_task_required",
+   "surface": "model",
+   "expect": "constraint_task_required",
+   "text": "@c constraint\n  var ?x int 0 5\n  require ?x at_least 1\n  select ?x\n"
+  },
+  {
+   "id": "m:check.except_form",
+   "capability": "m.check.except_form",
+   "surface": "model",
+   "expect": "except_form",
+   "text": "@q query\n  where match\n    relation \"work at\"\n    role subject ?x\n    polarity affirmed\n  end\n  select ?x\n  except ?x\n"
+  },
+  {
+   "id": "m:check.instruction_span_form",
+   "capability": "m.check.instruction_span_form",
+   "surface": "model",
+   "expect": "instruction_span_form",
+   "text": "@i instruction\n  do list\n  span \"\"\n"
+  },
+  {
+   "id": "m:check.instruction_text_form",
+   "capability": "m.check.instruction_text_form",
+   "surface": "model",
+   "expect": "instruction_text_form",
+   "text": "@i instruction\n  do set\n  kind prefix\n  text \"\"\n"
+  },
+  {
+   "id": "m:check.order_form",
+   "capability": "m.check.order_form",
+   "surface": "model",
+   "expect": "order_form",
+   "text": "@q query\n  where match\n    relation \"work at\"\n    role subject ?x\n    polarity affirmed\n  end\n  select ?x\n  order ?t1 soon ?t2\n"
+  },
+  {
+   "id": "m:check.order_needs_two_times",
+   "capability": "m.check.order_needs_two_times",
+   "surface": "model",
+   "expect": "order_needs_two_times",
+   "text": "@q query\n  where match\n    relation \"work at\"\n    role subject \"Ann\"\n    role time ?t\n    polarity affirmed\n  end\n  select ?t\n  order ?t before ?u\n"
+  },
+  {
+   "id": "m:check.pragmatic_span_form",
+   "capability": "m.check.pragmatic_span_form",
+   "surface": "model",
+   "expect": "pragmatic_span_form",
+   "text": "@p pragmatic\n  kind greeting\n  basis llm\n  span \"\"\n"
+  },
+  {
+   "id": "m:check.quantifier_form",
+   "capability": "m.check.quantifier_form",
+   "surface": "model",
+   "expect": "quantifier_form",
+   "text": "@q query\n  where match\n    relation \"work at\"\n    role subject ?x\n    polarity affirmed\n  end\n  mode every\n  scope match\n    relation \"be certified\"\n    role subject ?x\n    polarity affirmed\n  end\n  quantifier at_least\n"
+  },
+  {
+   "id": "m:check.rank_form",
+   "capability": "m.check.rank_form",
+   "surface": "model",
+   "expect": "rank_form",
+   "text": "@q query\n  where match\n    relation \"work at\"\n    role subject ?x\n    polarity affirmed\n  end\n  select ?x\n  rank biggest ?x\n"
+  },
+  {
+   "id": "m:check.query_needs_match",
+   "capability": "m.check.query_needs_match",
+   "surface": "model",
+   "expect": "query_needs_match",
+   "text": "@q query\n  where p ?x\n  select ?x\n"
+  },
+  {
+   "id": "m:check.time_variable_multiple",
+   "capability": "m.check.time_variable_multiple",
+   "surface": "model",
+   "expect": "time_variable_multiple",
+   "text": "@q query\n  where all\n    match\n      relation \"a\"\n      role subject \"Ann\"\n      role time ?t\n      polarity affirmed\n    end\n    match\n      relation \"b\"\n      role subject \"Ann\"\n      role time ?u\n      polarity affirmed\n    end\n  end\n  select ?t\n"
+  },
+  {
+   "id": "m:check.measure_needs_time_variable",
+   "capability": "m.check.measure_needs_time_variable",
+   "surface": "model",
+   "expect": "measure_needs_time_variable",
+   "text": "@q query\n  where match\n    relation \"work at\"\n    role subject ?x\n    polarity affirmed\n  end\n  select ?x\n  measure start\n"
+  },
+  {
+   "id": "m:check.explain_no_select",
+   "capability": "m.check.explain_no_select",
+   "surface": "model",
+   "expect": "explain_no_select",
+   "text": "@q query\n  where match\n    relation \"work at\"\n    role subject ?x\n    polarity affirmed\n  end\n  mode explain\n  select ?x\n"
+  },
+  {
+   "id": "m:check.every_needs_scope",
+   "capability": "m.check.every_needs_scope",
+   "surface": "model",
+   "expect": "every_needs_scope",
+   "text": "@q query\n  where match\n    relation \"work at\"\n    role subject ?x\n    polarity affirmed\n  end\n  mode every\n"
+  },
+  {
+   "id": "m:check.scope_needs_every",
+   "capability": "m.check.scope_needs_every",
+   "surface": "model",
+   "expect": "scope_needs_every",
+   "text": "@q query\n  where match\n    relation \"work at\"\n    role subject ?x\n    polarity affirmed\n  end\n  select ?x\n  scope match\n    relation \"b\"\n    role subject ?x\n    polarity affirmed\n  end\n"
+  },
+  {
+   "id": "m:check.unclear_not_alone",
+   "capability": "m.check.unclear_not_alone",
+   "surface": "model",
+   "expect": "unclear_not_alone",
+   "text": "@u unclear\n  kind gibberish\n\n@q query\n  where match\n    relation \"work at\"\n    role subject ?x\n    polarity affirmed\n  end\n  select ?x\n"
+  },
+  {
+   "id": "m:check.operator_not_words",
+   "capability": "m.check.operator_not_words",
+   "surface": "model",
+   "expect": "operator_not_words",
+   "text": "@c constraint\n  var ?x int 0 5\n  require ?x >= 1\n  select ?x\n  task possible\n"
+  },
+  {
+   "id": "m:check.candidate_needs_mode",
+   "capability": "m.check.candidate_needs_mode",
+   "surface": "model",
+   "expect": "candidate_needs_mode",
+   "text": "@s1 stated\n  relation \"hire\"\n  role subject \"Acme\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@q query\n  where match\n    relation \"work at\"\n    role subject \"Ann\"\n    polarity affirmed\n  end\n  candidate $s1\n"
+  },
+  {
+   "id": "m:check.effect_needs_ground_claim",
+   "capability": "m.check.effect_needs_ground_claim",
+   "surface": "model",
+   "expect": "effect_needs_ground_claim",
+   "text": "@s1 stated\n  relation \"hire\"\n  role subject \"Acme\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@q query\n  mode effect\n  where match\n    relation \"work at\"\n    role subject ?x\n    polarity affirmed\n  end\n  candidate $s1\n"
+  },
+  {
+   "id": "m:check.effect_needs_ground_claim.no_candidate",
+   "capability": "m.check.effect_needs_ground_claim",
+   "surface": "model",
+   "expect": "effect_needs_ground_claim",
+   "text": "@q query\n  mode effect\n  where match\n    relation \"work at\"\n    role subject \"Ann\"\n    polarity affirmed\n  end\n"
+  },
+  {
+   "id": "m:check.candidate_target",
+   "capability": "m.check.candidate_target",
+   "surface": "model",
+   "expect": "candidate_target",
+   "text": "@s1 stated\n  relation \"hire\"\n  role subject \"Acme\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty asserted\n@q query\n  mode effect\n  where match\n    relation \"work at\"\n    role subject \"Ann\"\n    polarity affirmed\n  end\n  candidate $s1\n"
+  },
+  {
+   "id": "m:check.candidate_target.unknown",
+   "capability": "m.check.candidate_target",
+   "surface": "model",
+   "expect": "candidate_target",
+   "text": "@q query\n  mode effect\n  where match\n    relation \"work at\"\n    role subject \"Ann\"\n    polarity affirmed\n  end\n  candidate $r_none\n"
+  },
+  {
+   "id": "m:check.candidate_also_if",
+   "capability": "m.check.candidate_also_if",
+   "surface": "model",
+   "expect": "candidate_also_if",
+   "text": "@s1 stated\n  relation \"hire\"\n  role subject \"Acme\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@q query\n  mode effect\n  where match\n    relation \"work at\"\n    role subject \"Ann\"\n    polarity affirmed\n  end\n  candidate $s1\n  if $s1\n"
+  },
+  {
+   "id": "m:check.candidate_limit",
+   "capability": "m.check.candidate_limit",
+   "surface": "model",
+   "expect": "candidate_limit",
+   "text": "@s0 stated\n  relation \"hire\"\n  role subject \"Acme0\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@s1 stated\n  relation \"hire\"\n  role subject \"Acme1\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@s2 stated\n  relation \"hire\"\n  role subject \"Acme2\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@s3 stated\n  relation \"hire\"\n  role subject \"Acme3\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@s4 stated\n  relation \"hire\"\n  role subject \"Acme4\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@s5 stated\n  relation \"hire\"\n  role subject \"Acme5\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@s6 stated\n  relation \"hire\"\n  role subject \"Acme6\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@s7 stated\n  relation \"hire\"\n  role subject \"Acme7\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@s8 stated\n  relation \"hire\"\n  role subject \"Acme8\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@q query\n  mode abduce\n  where match\n    relation \"work at\"\n    role subject \"Ann\"\n    polarity affirmed\n  end\n  candidate $s0\n  candidate $s1\n  candidate $s2\n  candidate $s3\n  candidate $s4\n  candidate $s5\n  candidate $s6\n  candidate $s7\n  candidate $s8\n"
+  },
+  {
+   "id": "m:check.candidate_temporal_link",
+   "capability": "m.check.candidate_temporal_link",
+   "surface": "model",
+   "expect": "candidate_temporal_link",
+   "text": "@s1 stated\n  relation \"hire\"\n  role subject \"Acme\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@s9 stated\n  relation \"open\"\n  role subject \"Acme\"\n  role time \"2020\"\n  polarity affirmed\n  certainty asserted\n@q query\n  mode effect\n  where match\n    relation \"work at\"\n    role subject \"Ann\"\n    polarity affirmed\n  end\n  candidate $s1\n  before $s9\n"
+  },
+  {
+   "id": "m:session.candidate_rule",
+   "capability": "m.field.query.candidate",
+   "surface": "model",
+   "expect": "valid",
+   "text": "@works_at predicate\n  args subject:entity object:entity\n@hired predicate\n  args subject:entity object:entity\n@r_hire rule\n  when hired ?c ?p\n  then works_at ?p ?c\n@q query\n  mode effect\n  where match\n    relation \"work at\"\n    role subject \"Ann\"\n    polarity affirmed\n  end\n  candidate $r_hire\n"
+  },
+  {
+   "id": "m:session.if_rule",
+   "capability": "m.field.query.if",
+   "surface": "model",
+   "expect": "valid",
+   "text": "@works_at predicate\n  args subject:entity object:entity\n@hired predicate\n  args subject:entity object:entity\n@r_hire rule\n  when hired ?c ?p\n  then works_at ?p ?c\n@q query\n  mode exists\n  where match\n    relation \"work at\"\n    role subject \"Ann\"\n    polarity affirmed\n  end\n  if $r_hire\n"
+  },
+  {
+   "id": "m:session.rule_link_not_if",
+   "capability": "m.check.link_target_type",
+   "surface": "model",
+   "expect": "link_target_type",
+   "text": "@works_at predicate\n  args subject:entity object:entity\n@hired predicate\n  args subject:entity object:entity\n@r_hire rule\n  when hired ?c ?p\n  then works_at ?p ?c\n@s1 stated\n  relation \"hire\"\n  role subject \"Acme\"\n  role object \"Ann\"\n  polarity affirmed\n  certainty supposed\n@q query\n  mode exists\n  where match\n    relation \"work at\"\n    role subject \"Ann\"\n    polarity affirmed\n  end\n  because $r_hire\n"
+  },
+  {
+   "id": "k:check.candidate_needs_mode",
+   "capability": "k.check.candidate_needs_mode",
+   "expect": "candidate_needs_mode",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r1 rule\n  when p ?x\n  then q ?x\n  approval proposed\n",
+   "query": "@s1 fact\n  holds p a\n  status supposed\n@w query\n  where q a\n  candidate $s1\n"
+  },
+  {
+   "id": "k:check.effect_needs_ground_claim",
+   "capability": "k.check.effect_needs_ground_claim",
+   "expect": "effect_needs_ground_claim",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r1 rule\n  when p ?x\n  then q ?x\n  approval proposed\n",
+   "query": "@w query\n  mode effect\n  where q ?x\n  candidate $r1\n"
+  },
+  {
+   "id": "k:check.effect_needs_ground_claim.no_candidate",
+   "capability": "k.check.effect_needs_ground_claim",
+   "expect": "effect_needs_ground_claim",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r1 rule\n  when p ?x\n  then q ?x\n  approval proposed\n",
+   "query": "@w query\n  mode effect\n  where q a\n"
+  },
+  {
+   "id": "k:check.candidate_target",
+   "capability": "k.check.candidate_target",
+   "expect": "candidate_target",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r1 rule\n  when p ?x\n  then q ?x\n  approval proposed\n",
+   "query": "@w query\n  mode effect\n  where q a\n  candidate $p\n"
+  },
+  {
+   "id": "k:check.candidate_also_if",
+   "capability": "k.check.candidate_also_if",
+   "expect": "candidate_also_if",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r1 rule\n  when p ?x\n  then q ?x\n  approval proposed\n",
+   "query": "@w query\n  mode effect\n  where q a\n  candidate $r1\n  if $r1\n"
+  },
+  {
+   "id": "k:check.candidate_limit",
+   "capability": "k.check.candidate_limit",
+   "expect": "candidate_limit",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r1 rule\n  when p ?x\n  then q ?x\n  approval proposed\n",
+   "query": "@s0 fact\n  holds p e0\n  status supposed\n@s1 fact\n  holds p e1\n  status supposed\n@s2 fact\n  holds p e2\n  status supposed\n@s3 fact\n  holds p e3\n  status supposed\n@s4 fact\n  holds p e4\n  status supposed\n@s5 fact\n  holds p e5\n  status supposed\n@s6 fact\n  holds p e6\n  status supposed\n@s7 fact\n  holds p e7\n  status supposed\n@s8 fact\n  holds p e8\n  status supposed\n@w query\n  mode abduce\n  where q a\n  candidate $s0\n  candidate $s1\n  candidate $s2\n  candidate $s3\n  candidate $s4\n  candidate $s5\n  candidate $s6\n  candidate $s7\n  candidate $s8\n"
+  },
+  {
+   "id": "k:candidate.rule_valid",
+   "capability": "k.field.query.candidate",
+   "expect": "valid",
+   "knowledge": "@p predicate\n  args subject:entity\n@q predicate\n  args subject:entity\n@r1 rule\n  when p ?x\n  then q ?x\n  approval proposed\n",
+   "query": "@w query\n  mode effect\n  where q a\n  candidate $r1\n"
+  }
+ ]
+}

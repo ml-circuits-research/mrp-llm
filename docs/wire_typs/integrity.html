@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#integrity" target="_top">← Wire type index</a></p><h1><code>integrity</code></h1><p>A pattern that must never hold in a state: "a room has one booking per slot", "a person has one home". Each match is reported as data with its witness; nothing breaks and the rest of the knowledge stays usable.</p><p><strong>Status and author:</strong> Knowledge wire, written by a model or the owner from a source and stored by the host after review. A model-origin program cannot author it (the model-origin compiler rejects it). Governed: its `version`, `supersedes` and `approval` fields decide which version binds. It is sugar for one rule that derives `violation ID WITNESS`. Constraints on what may be done (actions, deadlines, trajectories) are <a href="norm.html"><code>norm</code></a> wires, not integrity wires.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="field-never"><code>never</code></th><td>Repeatable; required</td><td>The forbidden pattern, a condition group (an atom or an <code>all</code>/<code>any</code> block with <code>compare</code>, <code>not</code>, <code>absent</code>, ...).</td></tr>
+<tr><th scope="row" id="field-witness"><code>witness</code></th><td>At most once; required</td><td>The <code>?variables</code> that identify the violation; they must be bound by <code>never</code>.</td></tr>
+<tr><th scope="row" id="field-message"><code>message</code></th><td>At most once; optional</td><td>JSON-quoted reason shown with the violation.</td></tr>
+<tr><th scope="row" id="field-severity"><code>severity</code></th><td>At most once; optional</td><td><code>error</code> or <code>warning</code>.</td></tr>
+<tr><th scope="row" id="field-source"><code>source</code></th><td>At most once; optional</td><td>Quoted citation of the sentence the constraint comes from.</td></tr>
+<tr><th scope="row" id="field-version"><code>version</code></th><td>At most once; optional</td><td>A positive integer. A revision is a new wire with <code>version N+1</code> and <code>supersedes $old</code>; the old wire is never edited.</td></tr>
+<tr><th scope="row" id="field-supersedes"><code>supersedes</code></th><td>At most once; optional</td><td>A <code>$id</code> of a wire of the same type with a lower version (<code>supersedes_type_mismatch</code>, <code>version_not_increasing</code>). An approved successor makes its predecessor <code>approval superseded</code>.</td></tr>
+<tr><th scope="row" id="field-approval"><code>approval</code></th><td>At most once; optional</td><td><code>proposed</code>, <code>approved</code>, <code>contested</code>, <code>rejected</code>, <code>superseded</code> or <code>retired</code>. Written by the host when it accepts the wire; an author never writes it (authoring mode ignores it with <code>governance_ignored</code>). Only approved wires bind, and so do contested ones, flagged.</td></tr>
+<tr><th scope="row" id="field-approved_by"><code>approved_by</code></th><td>At most once; optional</td><td>Text. Written by the host at approval; required with <code>approval approved</code> in memory (<code>approval_incomplete</code>).</td></tr>
+<tr><th scope="row" id="field-approved_at"><code>approved_at</code></th><td>At most once; optional</td><td>ISO date or timestamp. Written by the host; <code>asof</code> selects the version in force from this date. Required for every norm and every strict method.</td></tr>
+<tr><th scope="row" id="field-retired_at"><code>retired_at</code></th><td>At most once; optional</td><td>ISO date or timestamp after which the wire no longer binds.</td></tr>
+<tr><th scope="row" id="field-scope"><code>scope</code></th><td>At most once; optional</td><td>A quoted list of tags (<code>scope "ops, business_hours"</code>). A scoped wire binds when its tags intersect the query context; an unscoped wire always binds.</td></tr>
+<tr><th scope="row" id="field-quote"><code>quote</code></th><td>At most once; optional</td><td>The exact words of the source, copied byte for byte.</td></tr></tbody></table></div></section><section><h2>What it is for and how to write it</h2><p>Write the pattern the source forbids as the body of <code>never</code>, name the thing a reader needs to find the culprit in <code>witness</code>, and say why in <code>message</code>. Declare the relation <code>violation</code> (two arguments, subject and object) in the knowledge so that a question can select the violations: the first argument is the integrity wire's id, the second the witness.</p></section><section><h2>What the engine does</h2><p>Each match of <code>never</code> derives <code>violation ID WITNESS</code>. A violation is an ordinary fact, so a question such as "which bookings violate the rules" is a normal query. It is deliberately never a hard assertion in any engine (a hard assertion would make a theory that contains the violation inconsistent, and from an inconsistent theory everything follows). Integrity over a whole memory cannot be checked on one retrieved slice (the second booking may be missing): the host checks it when a claim is ingested, through an index from predicate to integrity wires, or offline.</p></section><section><h2>Examples</h2><pre data-sop="knowledge"><code>@booked predicate
+  args subject:entity object:entity location:entity
+@violation predicate
+  args subject:entity object:entity
+
+@b1 fact
+  holds booked room1 slot9 ann
+@b2 fact
+  holds booked room1 slot9 bob
+@b3 fact
+  holds booked room2 slot9 cy
+
+@no_double_booking integrity
+  never all
+    booked ?r ?s ?a
+    booked ?r ?s ?b
+    compare ?a not_equal ?b
+  end
+  witness ?r
+  message "a room has two bookings in one slot"
+  severity error</code></pre><pre data-sop="knowledge-query" data-status="supported" data-rows="c=no_double_booking,w=room1"><code>@q query
+  where violation ?c ?w
+  select ?c ?w</code></pre><p>Room1 has two bookings in slot9, so the violation <code>no_double_booking room1</code> is reported; room2 is unaffected.</p><h3>Invalid: a variable under <code>compare</code> that nothing binds</h3><pre data-sop="knowledge-invalid" data-error="unsafe_variable"><code>@booked predicate
+  args subject:entity object:entity location:entity
+@bad integrity
+  never all
+    booked ?r ?s ?a
+    compare ?a not_equal ?c
+  end
+  witness ?r</code></pre></section><section><h2>Common mistakes</h2><ol><li>Using an integrity wire for something that may be done or not done (an action, a deadline): that is a <code>norm</code>.</li><li>Forgetting that two bookings with the same value count as one match: compare the bound variables with <code>compare ?a not_equal ?b</code>.</li><li>A <code>witness</code> variable that <code>never</code> does not bind.</li><li>Expecting the engine to stop on a violation: it reports and continues.</li></ol></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.integrity</code></li><li><code>sop/knowledge/desugar.mjs:desugar</code></li></ul><p>Related: <a href="norm.html"><code>norm</code></a>, <a href="rule.html"><code>rule</code></a>, <a href="default.html"><code>default</code></a>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>; the shared semantics are in <a href="knowledge-semantics.html">Knowledge semantics</a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

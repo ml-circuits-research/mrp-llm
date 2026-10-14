@@ -1,0 +1,21 @@
+@player_of predicate
+  args subject:entity object:entity
+  closed true
+@certified predicate
+  args subject:entity
+  closed true
+
+@p1 fact
+  holds player_of ann rapid
+@p2 fact
+  holds player_of bob rapid
+@p3 fact
+  holds player_of cy united
+@p4 fact
+  holds player_of di united
+@k1 fact
+  holds certified ann
+@k2 fact
+  holds certified bob
+@k3 fact
+  holds certified cy

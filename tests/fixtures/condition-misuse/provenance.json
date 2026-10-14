@@ -1,0 +1,60 @@
+{
+  "origin": {
+    "records": "eval/reports/current/symbolic-vs-llm/t8-qwen27b/records.jsonl",
+    "manifest": "eval/reports/current/symbolic-vs-llm/t7-data/manifest.jsonl",
+    "manifest_sha256": "1524dfaaf56a85c8f02e2ae7e988b11b40d9363e60b237ef008020d63f0f0f76"
+  },
+  "cases": [
+    {
+      "id": "f2-dev-096",
+      "arm": "B",
+      "saved_outcome": "wrong",
+      "saved_packet_status": "refuted",
+      "source_case_dir": "/home/salboaie/work/ChatSOP/eval/smoke-reasoning/bench/cases/f2/f2-dev-096",
+      "source_files": "eval/smoke-reasoning/bench/cases/f2/f2-dev-096",
+      "source_memory_sha256": "474b76c5f156edddd8878ddee3d433518cdd210a88baa905f36fdc2ce3e79e7c",
+      "files_sha256": {
+        "authored.sop": "82ce457dcf625cc9ac915a6f7c32dd8a00547f85cd3240b519ce54e031c6ead4",
+        "knowledge.sop": "1942d38916ecea1de54e99ecc9577b6f01dbbb39dabb2975ce208b46303f3a04",
+        "query.sop": "a210c4dd6b638735159e4e8c91a8f921533bbe7198ea98b4813ea7c839679876",
+        "expected.json": "40e5ec337b6d869880c6cff07dc855f4909d683d74b7e1abf13c78c64f6eda90",
+        "question.txt": "3a9cb59d914360ca6e7f02ae5f7ec934e33d0bf51d927d2885fc78037adc4eb5"
+      },
+      "question": "What is the total pay of department_vlad_dev_285 at firm_vlad_dev_285, not department_dragos_dev_286?"
+    },
+    {
+      "id": "f2-dev-048",
+      "arm": "B",
+      "saved_outcome": "wrong",
+      "saved_packet_status": "refuted",
+      "source_case_dir": "/home/salboaie/work/ChatSOP/eval/smoke-reasoning/bench/cases/f2/f2-dev-048",
+      "source_files": "eval/smoke-reasoning/bench/cases/f2/f2-dev-048",
+      "source_memory_sha256": "d2f8fb05c916766a04556fcb86b93d7a34569e4935588f3942dc55f28d896c8e",
+      "files_sha256": {
+        "authored.sop": "717aa44a1ad4457d3bd9315682c5fad03f632ff7b4d7281e2739c11355bb8d19",
+        "knowledge.sop": "1d81e3ae14889cee8edcb057e56392297566265949511851d3515018b2d29d8f",
+        "query.sop": "4be387d0e7541bdefa9bd641bf12161be6dbfe7633bc04d70f0b34b86b8a2b71",
+        "expected.json": "877132ad4fc772c1165cba2b9f03af3c78e3b5e89a05974a4d8ec33988a1c11d",
+        "question.txt": "84bc1222452cc715478bcdb7e77a21e45c7e6f40d00131c09625fcd5f83bf618"
+      },
+      "question": "What is the total pay of department_diana_dev_141 at firm_diana_dev_141, not department_corina_dev_142?"
+    },
+    {
+      "id": "f2-dev-090",
+      "arm": "B",
+      "saved_outcome": "wrong",
+      "saved_packet_status": "refuted",
+      "source_case_dir": "/home/salboaie/work/ChatSOP/eval/smoke-reasoning/bench/cases/f2/f2-dev-090",
+      "source_files": "eval/smoke-reasoning/bench/cases/f2/f2-dev-090",
+      "source_memory_sha256": "b7c7c71395d833c2881a00eaae32ce87af3c2b122cafb1b973d1cee4816580e8",
+      "files_sha256": {
+        "authored.sop": "634ceb79f26ec1595768f141a907d58a42e1dcfcfe6ab9e55cff6c6daa6173d8",
+        "knowledge.sop": "bd442ee04e0685c9ba0fe35b0b1b5e132f4541765266e34fbd8dde9cf5fbc4bd",
+        "query.sop": "48c18f095d73e5611f3c410d2130054be3bbd0ee13f4b6e07bcbd52601ee3c64",
+        "expected.json": "42436d2589cab7c62ed324f2f08c62e260f258dc26c74998d962ece761b5323a",
+        "question.txt": "a7be7533d717dbd1dc5259182d604381e906640b51429ebf34929f1f1fc6bd17"
+      },
+      "question": "What is the total pay of department_sanziana_dev_267 at firm_sanziana_dev_267, not department_ruxandra_dev_268?"
+    }
+  ]
+}

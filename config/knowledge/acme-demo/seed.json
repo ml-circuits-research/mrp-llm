@@ -1,0 +1,7 @@
+{
+  "name": "Acme demo",
+  "description": "A small company used by the acme-demo Symbolic Model: people, where they work, their projects, the offices and a family (core-en derives grandparents). Built on core-en, so it combines with every memory built on core-en.",
+  "imports": [
+    "core-en"
+  ]
+}

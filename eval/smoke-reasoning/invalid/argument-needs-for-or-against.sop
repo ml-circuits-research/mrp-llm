@@ -1,0 +1,6 @@
+# expect: argument_needs_for_or_against
+@r1 rule
+  when a ?x
+  then b ?x
+@g argument
+  claim "because"

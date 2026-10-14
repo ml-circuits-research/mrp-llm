@@ -1,0 +1,2 @@
+@works predicate
+  args subject:entity object:entity

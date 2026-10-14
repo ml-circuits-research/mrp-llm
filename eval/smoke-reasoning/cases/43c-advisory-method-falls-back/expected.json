@@ -1,0 +1,20 @@
+{
+  "feature": "binding advisory: the method guides the search and, with no legal run, the engine may fall back to primitives (and says so)",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 30,
+    "steps": 1,
+    "names": [
+      "copy_tape"
+    ]
+  },
+  "notes_include": [
+    "method_fallback_to_primitives"
+  ],
+  "requires": [
+    "plan",
+    "method",
+    "binding_advisory"
+  ]
+}

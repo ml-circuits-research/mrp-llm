@@ -1,0 +1,8 @@
+{
+  "feature": "Constraints and arithmetic: inconsistency is reported, never explodes",
+  "status": "inconsistent",
+  "complete": true,
+  "requires": [
+    "constraint"
+  ]
+}

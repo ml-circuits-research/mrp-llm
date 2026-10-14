@@ -1,0 +1,74 @@
+# Hand-written SOP of documents/kiln-lab-note.md.
+
+@kl_ref fact
+  holds as_of_year 2025
+  quote "Reference year: 2025."
+  source "kiln-lab-note.md, line 3"
+@kl_start fact
+  holds starts_on experiment_14 20250502
+  quote "The experiment started on 2025-05-02."
+  source "kiln-lab-note.md, line 5"
+@kl_mass fact
+  holds amount sample_mass 2.5
+  quote "The sample mass is 2.5 kg"
+  source "kiln-lab-note.md, line 6"
+@kl_mass_unit fact
+  holds unit_of sample_mass kg
+  quote "The sample mass is 2.5 kg"
+  source "kiln-lab-note.md, line 6"
+@kl_split fact
+  holds breakdown_complete sample_mass
+  quote "it consists of the glaze core (1800 g) and the clay shell (0.7 kg)"
+  source "kiln-lab-note.md, line 6"
+@kl_core_part fact
+  holds component_of core_mass sample_mass
+  quote "the glaze core (1800 g)"
+  source "kiln-lab-note.md, line 6"
+@kl_core fact
+  holds amount core_mass 1800
+  quote "the glaze core (1800 g)"
+  source "kiln-lab-note.md, line 6"
+@kl_core_unit fact
+  holds unit_of core_mass g
+  quote "the glaze core (1800 g)"
+  source "kiln-lab-note.md, line 6"
+@kl_shell_part fact
+  holds component_of shell_mass sample_mass
+  quote "the clay shell (0.7 kg)"
+  source "kiln-lab-note.md, line 6"
+@kl_shell fact
+  holds amount shell_mass 0.7
+  quote "the clay shell (0.7 kg)"
+  source "kiln-lab-note.md, line 6"
+@kl_shell_unit fact
+  holds unit_of shell_mass kg
+  quote "the clay shell (0.7 kg)"
+  source "kiln-lab-note.md, line 6"
+@kl_peak fact
+  holds amount peak_temperature 1240
+  quote "The kiln reached a peak temperature of 1240 °C."
+  source "kiln-lab-note.md, line 7"
+@kl_peak_unit fact
+  holds unit_of peak_temperature celsius
+  quote "The kiln reached a peak temperature of 1240 °C."
+  source "kiln-lab-note.md, line 7"
+@kl_peak_kind fact
+  holds measure_of peak_temperature temperature_celsius
+  quote "The kiln reached a peak temperature of 1240 °C."
+  source "kiln-lab-note.md, line 7"
+@kl_min fact
+  holds amount wall_minimum_temperature -300
+  quote "the probe recorded a minimum temperature of -300 °C at the chamber wall"
+  source "kiln-lab-note.md, line 8"
+@kl_min_unit fact
+  holds unit_of wall_minimum_temperature celsius
+  quote "the probe recorded a minimum temperature of -300 °C at the chamber wall"
+  source "kiln-lab-note.md, line 8"
+@kl_min_kind fact
+  holds measure_of wall_minimum_temperature temperature_celsius
+  quote "the probe recorded a minimum temperature of -300 °C at the chamber wall"
+  source "kiln-lab-note.md, line 8"
+@kl_start_again fact
+  holds starts_on experiment_14 20250503
+  quote "the experiment started on 2025-05-03, after the calibration run"
+  source "kiln-lab-note.md, line 10"

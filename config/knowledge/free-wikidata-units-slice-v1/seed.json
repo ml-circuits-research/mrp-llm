@@ -1,0 +1,11 @@
+{
+  "name": "Wikidata units slice (candidate)",
+  "description": "Candidate units layer, not loaded by any chat base memory: common units of length, mass, duration, area and volume missing from core-en and commonsense-v1, with their dimension, their integer amount in the fine base units of commonsense-v1 and their exact decimal factor to SI (new predicate si_factor), from Wikidata (CC0). Provenance on every wire; sources and licences in docs/specs/DS011-source-rights.md.",
+  "imports": [
+    "core-min",
+    "core-en",
+    "commonsense-v1"
+  ],
+  "chat": false,
+  "licence": "CC0 1.0"
+}

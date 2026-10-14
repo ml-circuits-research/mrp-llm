@@ -1,0 +1,12 @@
+{
+  "_note": "Defaults of the llm-agent baseline strategy (reasoning/strategies/llm-agent/). It asks a model through Ploinky Workers (lib/pworker.mjs): `model` is a Ploinky Workers tier (small, good, ...), `<provider>/<model>`, or a model of the openference plan (default `Qwen3.8 27b`); `upstream` names the provider explicitly. The model is asked with its fallback off; there is no omp and no fallback model by default. Environment overrides: CHATSOP_LLM_AGENT_MODEL, CHATSOP_LLM_AGENT_PRESENTATION.",
+  "model": "Qwen3.8 27b",
+  "backend": "completion",
+  "fallbackModels": [],
+  "presentation": "sop",
+  "reasoning": "cot",
+  "verify": false,
+  "timeoutMs": 180000,
+  "maxChars": 90000,
+  "cacheDir": "state/llm-agent/cache"
+}

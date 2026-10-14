@@ -1,0 +1,435 @@
+# conversation-v1: the sentences of the answer renderer (sop/answer-text.mjs, DS014 "Answer rendering"), part line. The renderer chooses
+# the line from the structure of the result packet and fills its {{slot}} placeholders; one wire per line (no variants: the answer
+# lines stay exact; the answer-formulation step varies the final wording).
+
+@cv_line_answer_one reply
+  situation line_answer_one
+  part line
+  language en
+  text "Answer: {{items}}."
+
+@cv_line_answer_many reply
+  situation line_answer_many
+  part line
+  language en
+  text "Answers: {{items}}."
+
+@cv_line_answer_many_more reply
+  situation line_answer_many_more
+  part line
+  language en
+  text "Answers: {{items}} and {{more}} more."
+
+@cv_line_described reply
+  situation line_described
+  part line
+  language en
+  text "Described as: {{text}}"
+
+@cv_line_yes reply
+  situation line_yes
+  part line
+  language en
+  text "Yes."
+
+@cv_line_no reply
+  situation line_no
+  part line
+  language en
+  text "No."
+
+@cv_line_both reply
+  situation line_both
+  part line
+  language en
+  text "Both: the claim and its explicit negation each have supporting evidence."
+
+@cv_line_mixed_temporal reply
+  situation line_mixed_temporal
+  part line
+  language en
+  text "It depends on the time: the claim and its negation hold in different intervals."
+
+@cv_line_undecided reply
+  situation line_undecided
+  part line
+  language en
+  text "The available information does not decide the question, so I don't know."
+
+@cv_line_stopped reply
+  situation line_stopped
+  part line
+  language en
+  text "I don't know: the search stopped before it found an answer, so this is not a \"no\"."
+
+@cv_line_no_answers reply
+  situation line_no_answers
+  part line
+  language en
+  text "No matching answers were established."
+
+@cv_line_conflicting reply
+  situation line_conflicting
+  part line
+  language en
+  text "Some answers have conflicting evidence."
+
+@cv_line_contradicted reply
+  situation line_contradicted
+  part line
+  language en
+  text "These are explicitly contradicted by the evidence."
+
+@cv_line_more_may_exist reply
+  situation line_more_may_exist
+  part line
+  language en
+  text "The search was not exhaustive, so more answers may exist."
+
+@cv_line_not_exhaustive reply
+  situation line_not_exhaustive
+  part line
+  language en
+  text "The search was not exhaustive."
+
+@cv_line_hypothetical reply
+  situation line_hypothetical
+  part line
+  language en
+  text "This result depends on the stated assumptions."
+
+@cv_line_count reply
+  situation line_count
+  part line
+  language en
+  text "{{count}}."
+
+@cv_line_count_at_least_incomplete reply
+  situation line_count_at_least_incomplete
+  part line
+  language en
+  text "At least {{count}}; the exact number cannot be given because the search was not exhaustive."
+
+@cv_line_count_at_least_open reply
+  situation line_count_at_least_open
+  part line
+  language en
+  text "At least {{count}}; the exact number cannot be given because the predicate is not closed."
+
+@cv_line_count_unknown_incomplete reply
+  situation line_count_unknown_incomplete
+  part line
+  language en
+  text "I don't know the number: the search was not exhaustive."
+
+@cv_line_count_undecided reply
+  situation line_count_undecided
+  part line
+  language en
+  text "The available information does not decide the count, so I don't know."
+
+@cv_line_relation_holds reply
+  situation line_relation_holds
+  part line
+  language en
+  text "The \"{{relation}}\" relation holds for {{subject}}"
+
+@cv_line_relation_not_holds reply
+  situation line_relation_not_holds
+  part line
+  language en
+  text "The \"{{relation}}\" relation does not hold for {{subject}}"
+
+@cv_line_fact_sourced reply
+  situation line_fact_sourced
+  part line
+  language en
+  text "{{fact}} ({{origin}}){{valid}}"
+
+@cv_line_fact_sourced_source reply
+  situation line_fact_sourced_source
+  part line
+  language en
+  text "{{fact}} ({{origin}}: {{source}}){{valid}}"
+
+@cv_line_valid_period reply
+  situation line_valid_period
+  part line
+  language en
+  text " [valid {{from}} to {{until}}]"
+
+@cv_line_valid_now reply
+  situation line_valid_now
+  part line
+  language en
+  text "now"
+
+@cv_line_fact_line reply
+  situation line_fact_line
+  part line
+  language en
+  text "{{fact}}."
+
+@cv_line_derived_because reply
+  situation line_derived_because
+  part line
+  language en
+  text "{{fact}}, because {{premises}}{{rule}}."
+
+@cv_line_derived_by_rule reply
+  situation line_derived_by_rule
+  part line
+  language en
+  text ", by the rule \"{{rule}}\""
+
+@cv_line_derived_support reply
+  situation line_derived_support
+  part line
+  language en
+  text "the supporting facts hold"
+
+@cv_line_more_facts reply
+  situation line_more_facts
+  part line
+  language en
+  text "({{count}} more supporting facts not shown.)"
+
+@cv_line_sources_used reply
+  situation line_sources_used
+  part line
+  language en
+  text "Sources used: {{items}}."
+
+@cv_line_source_item reply
+  situation line_source_item
+  part line
+  language en
+  text "{{origin}} ({{id}})"
+
+@cv_line_list_and reply
+  situation line_list_and
+  part line
+  language en
+  text "{{first}} and {{last}}"
+
+@cv_line_list_separator reply
+  situation line_list_separator
+  part line
+  language en
+  text ", "
+
+@cv_line_reading_item reply
+  situation line_reading_item
+  part line
+  language en
+  text "({{n}}) {{reading}}"
+
+@cv_line_origin_stated reply
+  situation line_origin_stated
+  part line
+  language en
+  text "stated in this conversation"
+
+@cv_line_origin_supposed reply
+  situation line_origin_supposed
+  part line
+  language en
+  text "supposed in this conversation"
+
+@cv_line_origin_agent_definition reply
+  situation line_origin_agent_definition
+  part line
+  language en
+  text "definition by coding agent"
+
+@cv_line_origin_agent_assumption reply
+  situation line_origin_agent_assumption
+  part line
+  language en
+  text "assumption by coding agent"
+
+@cv_line_origin_memory reply
+  situation line_origin_memory
+  part line
+  language en
+  text "memory"
+
+@cv_line_origin_assumed reply
+  situation line_origin_assumed
+  part line
+  language en
+  text "assumed"
+
+@cv_line_origin_definition reply
+  situation line_origin_definition
+  part line
+  language en
+  text "definition"
+
+@cv_line_sample_note reply
+  situation line_sample_note
+  part line
+  language en
+  text "(A random sample of {{count}} of the {{of}} answers in my memory.)"
+
+@cv_line_relation_label reply
+  situation line_relation_label
+  part line
+  language en
+  text "\"{{label}}\""
+
+@cv_line_proposition_holds reply
+  situation line_proposition_holds
+  part line
+  language en
+  text "\"{{relation}}\" holds"
+
+@cv_line_proposition_not_holds reply
+  situation line_proposition_not_holds
+  part line
+  language en
+  text "\"{{relation}}\" does not hold"
+
+@cv_line_rule_used reply
+  situation line_rule_used
+  part line
+  language en
+  text "Rule used, \"{{rule}}\": if {{conditions}}, then {{conclusion}}."
+
+@cv_line_default_used reply
+  situation line_default_used
+  part line
+  language en
+  text "Default used, \"{{rule}}\": if {{conditions}}, then {{conclusion}}, unless {{exceptions}}."
+
+@cv_line_list_or reply
+  situation line_list_or
+  part line
+  language en
+  text "{{first}} or {{last}}"
+
+@cv_line_why_not_holds reply
+  situation line_why_not_holds
+  part line
+  language en
+  text "It already follows from what is known, so nothing is missing."
+
+@cv_line_why_not_missing reply
+  situation line_why_not_missing
+  part line
+  language en
+  text "It would follow if {{facts}}."
+
+@cv_line_why_not_nothing reply
+  situation line_why_not_nothing
+  part line
+  language en
+  text "No set of missing facts over the known rules and names would make it follow."
+
+@cv_line_why_not_blocked reply
+  situation line_why_not_blocked
+  part line
+  language en
+  text "It is blocked because {{fact}}."
+
+@cv_line_abduce_explanation reply
+  situation line_abduce_explanation
+  part line
+  language en
+  text "A possible explanation: {{facts}}."
+
+@cv_line_abduce_already reply
+  situation line_abduce_already
+  part line
+  language en
+  text "It already follows from what is known without any of the candidate explanations."
+
+@cv_line_abduce_inconsistent reply
+  situation line_abduce_inconsistent
+  part line
+  language en
+  text "Rejected: {{facts}}, because it would contradict what is known ({{contradicts}})."
+
+@cv_line_abduce_none reply
+  situation line_abduce_none
+  part line
+  language en
+  text "None of the candidate explanations makes it follow."
+
+@cv_line_abduce_none_consistent reply
+  situation line_abduce_none_consistent
+  part line
+  language en
+  text "No candidate explanation fits: each one that would make it follow contradicts what is known."
+
+@cv_line_effect_baseline_supported reply
+  situation line_effect_baseline_supported
+  part line
+  language en
+  text "Without any of the options, it follows from what is known."
+
+@cv_line_effect_baseline_refuted reply
+  situation line_effect_baseline_refuted
+  part line
+  language en
+  text "Without any of the options, what is known says it is false."
+
+@cv_line_effect_baseline_both reply
+  situation line_effect_baseline_both
+  part line
+  language en
+  text "Without any of the options, what is known says both that it holds and that it does not."
+
+@cv_line_effect_baseline_unknown reply
+  situation line_effect_baseline_unknown
+  part line
+  language en
+  text "Without any of the options, it does not follow from what is known."
+
+@cv_line_effect_establishes reply
+  situation line_effect_establishes
+  part line
+  language en
+  text "With {{candidate}}, it would follow."
+
+@cv_line_effect_blocks reply
+  situation line_effect_blocks
+  part line
+  language en
+  text "With {{candidate}}, it would no longer follow."
+
+@cv_line_effect_contradicts reply
+  situation line_effect_contradicts
+  part line
+  language en
+  text "With {{candidate}}, it would be contradicted."
+
+@cv_line_effect_no_effect reply
+  situation line_effect_no_effect
+  part line
+  language en
+  text "{{candidate}} changes nothing about it."
+
+@cv_line_effect_inconsistent reply
+  situation line_effect_inconsistent
+  part line
+  language en
+  text "{{candidate}} cannot be assumed: it would contradict what is known ({{contradicts}})."
+
+@cv_line_effect_unfinished reply
+  situation line_effect_unfinished
+  part line
+  language en
+  text "The effect of {{candidate}} could not be decided within the limits."
+
+@cv_line_candidate_rule reply
+  situation line_candidate_rule
+  part line
+  language en
+  text "the rule \"{{rule}}\" (if {{conditions}}, then {{conclusion}})"
+
+@cv_line_abduce_necessary reply
+  situation line_abduce_necessary
+  part line
+  language en
+  text "Every explanation needs {{candidates}}."

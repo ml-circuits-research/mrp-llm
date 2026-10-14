@@ -1,0 +1,13 @@
+{
+  "feature": "Time for derived atoms: snapshot semantics (a derived atom holds at t iff its body holds at t)",
+  "status": "supported",
+  "complete": true,
+  "requires": [
+    "temporal",
+    "interval",
+    "throughout",
+    "snapshot_derived",
+    "rules",
+    "compare_in_rules"
+  ]
+}

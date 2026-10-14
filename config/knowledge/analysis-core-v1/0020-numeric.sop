@@ -1,0 +1,303 @@
+# analysis-core-v1: numeric consistency. Totals against their parts, percentage shares that must sum to 100, units of parts against
+# their whole, values outside the document's own limits or outside the plausible range of their kind of measurement. Tolerances are
+# parameters (member facts of analysis_parameter; a run may override them by name).
+
+@parts_total predicate
+  args subject:entity object:value
+  label en "parts total"
+  description "The sum of the amounts of the components of a quantity."
+@parts_count predicate
+  args subject:entity object:integer
+  label en "parts count"
+  description "The number of components of a quantity that have an amount."
+@shares_total predicate
+  args subject:entity object:value
+  label en "shares total"
+  description "The sum of the percentage shares stated for the parts of a whole."
+@has_unit predicate
+  args subject:entity
+  closed true
+  label en "has unit"
+  description "The document states a unit for the quantity."
+@has_share predicate
+  args subject:entity object:entity
+  closed true
+  label en "has share"
+  description "The document states the percentage share of the part in the whole."
+@share_missing predicate
+  args subject:entity
+  closed true
+  label en "share missing"
+  description "A component of the whole has no stated share, so the stated shares need not sum to 100."
+@mixed_units predicate
+  args subject:entity
+  closed true
+  label en "mixed units"
+  description "A component of the whole is stated in another unit than the whole."
+@has_total_mismatch predicate
+  args none
+  closed true
+  label en "has total mismatch"
+  description "Some total of the document does not agree with its parts or shares."
+
+@an_parts_total aggregate
+  over all
+    component_of ?p ?w
+    amount ?p ?v
+  end
+  group ?w
+  sum ?v as ?t
+  yields parts_total ?w ?t
+
+@an_parts_count aggregate
+  over all
+    component_of ?p ?w
+    amount ?p ?v
+  end
+  group ?w
+  count ?p as ?n
+  yields parts_count ?w ?n
+
+@an_shares_total aggregate
+  over share_of ?p ?w ?s
+  group ?w
+  sum ?s as ?t
+  yields shares_total ?w ?t
+
+@an_r_has_share rule
+  when share_of ?p ?w ?s
+  then has_share ?p ?w
+
+@an_r_share_missing rule
+  when component_of ?p ?w
+  when absent has_share ?p ?w
+  then share_missing ?w
+
+@an_r_mixed_units rule
+  when component_of ?p ?w
+  when unit_of ?p ?u1
+  when unit_of ?w ?u2
+  when compare ?u1 not_equal ?u2
+  then mixed_units ?w
+
+@an_r_has_unit rule
+  when unit_of ?q ?u
+  then has_unit ?q
+
+@an_parts_exceed_total integrity
+  never all
+    parts_total ?w ?t
+    amount ?w ?v
+    analysis_parameter total_tolerance ?tol
+    compute ?d ?t minus ?v
+    compare ?d above ?tol
+  end
+  witness ?w
+  message "the parts of a total add up to more than the total"
+  severity error
+  source "analysis-core-v1: numeric consistency (components never exceed their whole)"
+
+@an_breakdown_mismatch integrity
+  never all
+    breakdown_complete ?w
+    parts_total ?w ?t
+    amount ?w ?v
+    analysis_parameter total_tolerance ?tol
+    compute ?d ?v minus ?t
+    compare ?d above ?tol
+  end
+  witness ?w
+  message "a total broken down into its parts is larger than the sum of the parts"
+  severity error
+  source "analysis-core-v1: numeric consistency (a complete breakdown adds up to its total)"
+
+@an_shares_exceed_100 integrity
+  never all
+    shares_total ?w ?t
+    analysis_parameter share_tolerance ?tol
+    compute ?limit 100 plus ?tol
+    compare ?t above ?limit
+  end
+  witness ?w
+  message "the percentage shares of a whole add up to more than 100"
+  severity error
+  source "analysis-core-v1: numeric consistency (shares of one whole never exceed 100 percent)"
+
+@an_shares_below_100 integrity
+  never all
+    breakdown_complete ?w
+    absent share_missing ?w
+    shares_total ?w ?t
+    analysis_parameter share_tolerance ?tol
+    compute ?limit 100 minus ?tol
+    compare ?t below ?limit
+  end
+  witness ?w
+  message "the percentage shares of a complete breakdown add up to less than 100"
+  severity error
+  source "analysis-core-v1: numeric consistency (the shares of a complete breakdown sum to 100 percent)"
+
+@an_share_amount_mismatch integrity
+  never all
+    share_of ?p ?w ?s
+    amount ?p ?a
+    amount ?w ?t
+    compare ?t not_equal 0
+    compute ?r ?a divided_by ?t
+    compute ?pc ?r times 100
+    compute ?d1 ?pc minus ?s
+    compute ?d2 ?s minus ?pc
+    compute ?d ?d1 maximum_with ?d2
+    analysis_parameter share_tolerance ?tol
+    compare ?d above ?tol
+  end
+  witness ?p
+  message "a stated percentage does not match the amounts it is a percentage of"
+  severity error
+  source "analysis-core-v1: numeric consistency (a share agrees with part / whole x 100, within the tolerance)"
+
+@an_unit_mismatch integrity
+  never all
+    component_of ?p ?w
+    unit_of ?p ?u1
+    unit_of ?w ?u2
+    compare ?u1 not_equal ?u2
+  end
+  witness ?p
+  message "a part is stated in a different unit from its whole"
+  severity warning
+  source "analysis-core-v1: numeric consistency (parts and whole in one unit)"
+
+@an_below_lower_limit integrity
+  never all
+    amount ?q ?v
+    lower_limit ?q ?min
+    compare ?v below ?min
+  end
+  witness ?q
+  message "a value is below the minimum the document itself sets"
+  severity error
+  source "analysis-core-v1: numeric consistency (stated range)"
+
+@an_above_upper_limit integrity
+  never all
+    amount ?q ?v
+    upper_limit ?q ?max
+    compare ?v above ?max
+  end
+  witness ?q
+  message "a value is above the maximum the document itself sets"
+  severity error
+  source "analysis-core-v1: numeric consistency (stated range)"
+
+@an_implausible_low integrity
+  never all
+    amount ?q ?v
+    measure_of ?q ?m
+    plausible_min ?m ?min
+    compare ?v below ?min
+  end
+  witness ?q
+  message "a value is below what is possible for its kind of measurement"
+  severity error
+  source "analysis-core-v1: numeric consistency (plausible range of a kind of measurement)"
+
+@an_implausible_high integrity
+  never all
+    amount ?q ?v
+    measure_of ?q ?m
+    plausible_max ?m ?max
+    compare ?v above ?max
+  end
+  witness ?q
+  message "a value is above what is possible for its kind of measurement"
+  severity error
+  source "analysis-core-v1: numeric consistency (plausible range of a kind of measurement)"
+
+@an_r_mismatch_exceed rule
+  when parts_total ?w ?t
+  when amount ?w ?v
+  when analysis_parameter total_tolerance ?tol
+  when compute ?d ?t minus ?v
+  when compare ?d above ?tol
+  then has_total_mismatch
+  source "analysis-core-v1: the rubric's view of an_parts_exceed_total"
+
+@an_r_mismatch_breakdown rule
+  when breakdown_complete ?w
+  when parts_total ?w ?t
+  when amount ?w ?v
+  when analysis_parameter total_tolerance ?tol
+  when compute ?d ?v minus ?t
+  when compare ?d above ?tol
+  then has_total_mismatch
+  source "analysis-core-v1: the rubric's view of an_breakdown_mismatch"
+
+@an_r_mismatch_shares rule
+  when shares_total ?w ?t
+  when analysis_parameter share_tolerance ?tol
+  when compute ?limit 100 plus ?tol
+  when compare ?t above ?limit
+  then has_total_mismatch
+  source "analysis-core-v1: the rubric's view of an_shares_exceed_100"
+
+@an_r_mismatch_shares_below rule
+  when breakdown_complete ?w
+  when absent share_missing ?w
+  when shares_total ?w ?t
+  when analysis_parameter share_tolerance ?tol
+  when compute ?limit 100 minus ?tol
+  when compare ?t below ?limit
+  then has_total_mismatch
+  source "analysis-core-v1: the rubric's view of an_shares_below_100"
+
+@an_r_mismatch_share_amount rule
+  when share_of ?p ?w ?s
+  when amount ?p ?a
+  when amount ?w ?t
+  when compare ?t not_equal 0
+  when compute ?r ?a divided_by ?t
+  when compute ?pc ?r times 100
+  when compute ?d1 ?pc minus ?s
+  when compute ?d2 ?s minus ?pc
+  when compute ?d ?d1 maximum_with ?d2
+  when analysis_parameter share_tolerance ?tol
+  when compare ?d above ?tol
+  then has_total_mismatch
+  source "analysis-core-v1: the rubric's view of an_share_amount_mismatch"
+
+@an_p_total_tolerance fact
+  holds analysis_parameter total_tolerance 0
+  source "analysis-core-v1: parameter of analysis_numeric_consistency (absolute difference allowed between a total and its parts)"
+@an_p_share_tolerance fact
+  holds analysis_parameter share_tolerance 0.5
+  source "analysis-core-v1: parameter of analysis_numeric_consistency (percentage points allowed for rounded shares)"
+
+@an_m_percentage_min fact
+  holds plausible_min percentage 0
+@an_m_percentage_max fact
+  holds plausible_max percentage 100
+@an_m_age_min fact
+  holds plausible_min age 0
+@an_m_age_max fact
+  holds plausible_max age 130
+@an_m_duration_min fact
+  holds plausible_min duration 0
+@an_m_count_min fact
+  holds plausible_min count 0
+@an_m_price_min fact
+  holds plausible_min price 0
+@an_m_celsius_min fact
+  holds plausible_min temperature_celsius -273.15
+@an_m_kelvin_min fact
+  holds plausible_min temperature_kelvin 0
+@an_m_probability_min fact
+  holds plausible_min probability 0
+@an_m_probability_max fact
+  holds plausible_max probability 1
+
+@analysis_numeric_consistency procedure
+  members $an_parts_total $an_shares_total $an_parts_exceed_total $an_breakdown_mismatch $an_shares_exceed_100 $an_shares_below_100 $an_r_has_share $an_r_share_missing $an_share_amount_mismatch $an_unit_mismatch $an_below_lower_limit $an_above_upper_limit $an_implausible_low $an_implausible_high $an_p_total_tolerance $an_p_share_tolerance $an_m_percentage_min $an_m_percentage_max $an_m_age_min $an_m_age_max $an_m_duration_min $an_m_count_min $an_m_price_min $an_m_celsius_min $an_m_kelvin_min $an_m_probability_min $an_m_probability_max
+  description "Analysis: numeric consistency of a document - parts that add up to more than their total, a complete breakdown that does not add up, percentage shares that exceed or (for a complete breakdown) fall short of 100 or do not match the amounts they are shares of, parts in another unit than their whole, values outside the document's own limits or outside the plausible range of their kind of measurement."
+  scope "analysis, findings"
+  source "analysis-core-v1"

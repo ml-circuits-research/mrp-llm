@@ -1,0 +1,14 @@
+{
+  "name": "label-entities",
+  "description": "Find and label mentions in attached text with a fixed set of labels given by the user (for example person, organisation, date, price). Every label points to an exact span of the text.",
+  "kind": "prompt",
+  "targets": ["none", "session"],
+  "taskKind": "label-entities",
+  "params": {
+    "labels": {"type": "string[]", "min": 1, "max": 20, "description": "the labels to use, as the user named them (lowercase words)"},
+    "chunk_chars": {"type": "integer", "min": 500, "max": 12000, "default": 4000, "description": "characters per chunk"}
+  },
+  "ladder": ["tiny", "small", "medium"],
+  "ladderAllowed": ["tiny", "small", "medium", "good"],
+  "budget": {"usd": 0.2, "credits": 30}
+}

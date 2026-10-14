@@ -1,0 +1,112 @@
+@service predicate
+  args subject:entity
+@built predicate
+  args subject:entity
+@tested predicate
+  args subject:entity
+@live predicate
+  args subject:entity
+@notified predicate
+  args subject:entity
+@announced predicate
+  args subject:entity
+@change_freeze predicate
+  args none
+@high_risk predicate
+  args subject:entity
+
+@f_service fact
+  holds service s1
+@f_freeze fact
+  holds change_freeze
+@f_risk fact
+  holds high_risk s1
+
+@build action
+  params ?s
+  requires service ?s
+  adds built ?s
+  cost 2
+@test_fast action
+  params ?s
+  requires built ?s
+  adds tested ?s
+  cost 2
+@test_full action
+  params ?s
+  requires built ?s
+  adds tested ?s
+  cost 6
+@deploy_direct action
+  params ?s
+  requires tested ?s
+  adds live ?s
+  cost 1
+@deploy_blue_green action
+  params ?s
+  requires tested ?s
+  adds live ?s
+  cost 5
+@notify_security action
+  params ?s
+  requires service ?s
+  adds notified ?s
+  cost 6
+@announce action
+  params ?s
+  requires live ?s
+  adds announced ?s
+  cost 1
+
+@no_direct_in_freeze norm
+  forbid ~deploy_direct ?s
+  when change_freeze
+  severity hard
+  binding strict
+  version 1
+  approval approved
+  approved_by "release manager"
+  approved_at 2026-01-15
+  source "Release policy 3.1: no direct deploys during a change freeze"
+
+@no_fast_when_risky norm
+  forbid ~test_fast ?s
+  when high_risk ?s
+  severity hard
+  binding strict
+  version 1
+  approval approved
+  approved_by "release manager"
+  approved_at 2026-01-15
+  source "Release policy 3.4: high-risk changes need the full test suite"
+
+@notify_security_promptly norm
+  oblige ~notify_security ?s
+  when service ?s
+  within 3
+  severity soft
+  cost 4
+  version 1
+  approval approved
+  approved_by "release manager"
+  approved_at 2026-01-15
+  source "Release policy 5.2: notify security within three steps"
+
+@announce_release norm
+  oblige ~announce ?s
+  when service ?s
+  within 6
+  severity soft
+  cost 3
+  version 1
+  approval approved
+  approved_by "release manager"
+  approved_at 2026-01-15
+  source "Release policy 5.3: announce a release within six steps"
+
+@release_procedure procedure
+  members $no_direct_in_freeze $no_fast_when_risky $notify_security_promptly $announce_release
+  description "Release mode of work"
+  scope "release"
+@p policy
+  procedures $release_procedure

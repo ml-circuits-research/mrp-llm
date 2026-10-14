@@ -1,0 +1,17 @@
+{
+  "feature": "Mode of work: a compliant trace",
+  "status": "compliant",
+  "complete": true,
+  "compliance": {
+    "hard": "ok",
+    "soft_violations": [],
+    "total_cost": 5
+  },
+  "requires": [
+    "check_plan",
+    "norms_hard",
+    "norms_soft",
+    "method",
+    "zero_arity"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "benchmark": "qald10",
+  "title": "QALD-10 test (Wikidata)",
+  "url": "https://github.com/KGQA/QALD-10",
+  "license": "MIT",
+  "citation": "Usbeck et al. QALD-10 — The 10th Challenge on Question Answering over Linked Data. Semantic Web Journal 2023.",
+  "files": {
+    "qald_10.json": "https://raw.githubusercontent.com/KGQA/QALD-10/main/data/qald_10/qald_10.json",
+    "LICENSE": "https://raw.githubusercontent.com/KGQA/QALD-10/main/LICENSE"
+  },
+  "seed": "kbqa-v1",
+  "population": 393,
+  "sampled": 393,
+  "dropped_no_gold": 0,
+  "dropped_error": 0,
+  "built_at": "2026-10-01T15:21:31.382Z",
+  "gold_source": "answers shipped with the benchmark",
+  "types": {
+    "comparative": 4,
+    "count": 96,
+    "intersection": 26,
+    "multihop": 10,
+    "simple": 174,
+    "string_filter": 6,
+    "superlative": 16,
+    "yesno": 61
+  }
+}

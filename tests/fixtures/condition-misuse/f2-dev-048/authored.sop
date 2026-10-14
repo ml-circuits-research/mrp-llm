@@ -1,0 +1,22 @@
+@q query
+  select ?total
+  where all
+    match
+      relation "department_total"
+      role subject "department_diana_dev_141"
+      role object ?total
+      polarity affirmed
+    end
+    match
+      relation "department_pay"
+      role subject "department_diana_dev_141"
+      role object "firm_diana_dev_141"
+      polarity affirmed
+    end
+    match
+      relation "department_pay"
+      role subject "department_corina_dev_142"
+      role object "firm_diana_dev_141"
+      polarity affirmed
+    end
+  end

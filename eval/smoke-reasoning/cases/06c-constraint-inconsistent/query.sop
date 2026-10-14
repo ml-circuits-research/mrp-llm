@@ -1,0 +1,5 @@
+@c constraint
+  var ?x int 0 5
+  require ?x above 7
+  claim ?x equal 1
+  task prove

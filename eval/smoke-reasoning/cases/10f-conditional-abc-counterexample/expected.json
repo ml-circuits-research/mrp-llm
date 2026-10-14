@@ -1,0 +1,33 @@
+{
+  "feature": "Conditional answers are verified: leave-one-out is not exact (the row needs c and (a or b)), so the verification run fails and the list is all assumptions with conditional_unknown",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "z"
+    }
+  ],
+  "conditional": [
+    "s_a",
+    "s_b",
+    "s_c"
+  ],
+  "conditional_unknown": true,
+  "row_conditional": [
+    {
+      "row": {
+        "x": "z"
+      },
+      "conditional": [
+        "s_a",
+        "s_b",
+        "s_c"
+      ],
+      "conditional_unknown": true
+    }
+  ],
+  "requires": [
+    "whatif",
+    "rules"
+  ]
+}

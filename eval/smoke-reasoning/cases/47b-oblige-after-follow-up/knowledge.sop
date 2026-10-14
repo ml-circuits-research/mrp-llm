@@ -1,0 +1,34 @@
+@service predicate
+  args subject:entity
+@tested predicate
+  args subject:entity
+@deployed predicate
+  args subject:entity
+@announced predicate
+  args subject:entity
+
+@f1 fact
+  holds service s1
+
+@test action
+  params ?s
+  requires service ?s
+  adds tested ?s
+  cost 2
+@deploy action
+  params ?s
+  requires service ?s
+  adds deployed ?s
+  cost 1
+@announce action
+  params ?s
+  requires service ?s
+  adds announced ?s
+  cost 1
+
+@announce_after norm
+  oblige ~announce ?s
+  when service ?s
+  after ~deploy
+  severity hard
+  binding strict

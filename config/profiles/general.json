@@ -1,0 +1,44 @@
+{
+  "name": "General",
+  "description": "A general assistant over the default base memory (minimal shared vocabulary). Every message is translated to English, formalized step by step and answered in the user's language.",
+  "createOnFirstStart": true,
+  "base": "default",
+  "language": {
+    "output": "auto"
+  },
+  "slots": {
+    "normalize": {
+      "strategy": "translate-llm",
+      "params": {
+        "tier": "fast"
+      }
+    },
+    "reflex": {
+      "strategy": "faq-fixed"
+    },
+    "formalize": {
+      "strategy": "LocalLLMStepByStep",
+      "params": {
+        "tier": "fast"
+      }
+    },
+    "roundtrip": {
+      "strategy": "on-doubt",
+      "params": {
+        "tier": "fast"
+      }
+    },
+    "voice": {
+      "strategy": "natural-rephrase",
+      "params": {
+        "tier": "fast"
+      }
+    },
+    "commit": {
+      "strategy": "manual"
+    }
+  },
+  "faq": [],
+  "allowOverrides": true,
+  "tiersNote": "Uses the Ploinky tier fast (configure it on /models > Model gateway, for example DeepSeek flash with thinking disabled); without it these slots report the tier as unavailable."
+}

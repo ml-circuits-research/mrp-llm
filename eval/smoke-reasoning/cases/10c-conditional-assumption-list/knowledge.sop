@@ -1,0 +1,5 @@
+@works predicate
+  args subject:entity object:entity
+
+@f1 fact
+  holds works bob alpha

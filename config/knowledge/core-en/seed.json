@@ -1,0 +1,5 @@
+{
+  "name": "Core (English)",
+  "description": "The English core vocabulary: about 40 classes, 257 predicates with their English and Romanian lexemes, occupation, property and unit nouns and a few rules. Authored by coding agents as drafts; imports core-min.",
+  "imports": ["core-min"]
+}

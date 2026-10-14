@@ -1,0 +1,106 @@
+@edge predicate
+  args source:entity destination:entity
+  closed true
+
+@path predicate
+  args source:entity destination:entity
+  closed true
+
+@f1 fact
+  holds edge n0 n1
+
+@f2 fact
+  holds edge n1 n2
+
+@f3 fact
+  holds edge n2 n3
+
+@f4 fact
+  holds edge n3 n4
+
+@f5 fact
+  holds edge n4 n5
+
+@f6 fact
+  holds edge n5 n6
+
+@f7 fact
+  holds edge n6 n7
+
+@f8 fact
+  holds edge n7 n8
+
+@f9 fact
+  holds edge n8 n9
+
+@f10 fact
+  holds edge n9 n10
+
+@f11 fact
+  holds edge n10 n11
+
+@f12 fact
+  holds edge n11 n12
+
+@f13 fact
+  holds edge n12 n13
+
+@f14 fact
+  holds edge n13 n14
+
+@f15 fact
+  holds edge n14 n15
+
+@f16 fact
+  holds edge n15 n16
+
+@f17 fact
+  holds edge n16 n17
+
+@f18 fact
+  holds edge n17 n18
+
+@f19 fact
+  holds edge n18 n19
+
+@f20 fact
+  holds edge n19 n20
+
+@f21 fact
+  holds edge n20 n21
+
+@f22 fact
+  holds edge n21 n22
+
+@f23 fact
+  holds edge n22 n23
+
+@f24 fact
+  holds edge n23 n24
+
+@f25 fact
+  holds edge n24 n25
+
+@f26 fact
+  holds edge n25 n26
+
+@f27 fact
+  holds edge n26 n27
+
+@f28 fact
+  holds edge n27 n28
+
+@f29 fact
+  holds edge n28 n29
+
+@f30 fact
+  holds edge n29 n30
+
+@r_base rule
+  when edge ?x ?y
+  then path ?x ?y
+
+@r_join rule
+  when path ?x ?y
+  when path ?y ?z
+  then path ?x ?z

@@ -1,0 +1,30 @@
+@router predicate
+  args subject:entity
+@router_reset predicate
+  args subject:entity
+
+@s1 fact
+  holds router r1
+
+@press_button action
+  params ?r
+  requires router ?r
+  adds button_held ?r
+
+@wait_ten action
+  params ?r
+  requires button_held ?r
+  adds waited ?r
+
+@release_button action
+  params ?r
+  requires waited ?r
+  adds router_reset ?r
+  removes button_held ?r
+
+@reset_router method
+  achieves router_reset ?r
+  when router ?r
+  step ~press_button ?r
+  step ~wait_ten ?r
+  step ~release_button ?r

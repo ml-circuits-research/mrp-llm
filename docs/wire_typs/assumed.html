@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#assumed" target="_top">Wire index</a> · <a href="stated.html">stated</a> · <a href="unclear.html">unclear</a> · <a href="query.html">query</a> · <a href="unparsed.html">unparsed</a> · <a href="small-model.html">model/host roles</a></p><h1><code>assumed</code></h1>
+<p>An <code>assumed</code> wire states <strong>one proposition that the model adds</strong> during intent detection: something it takes for granted about the user's intent or the situation that the message does not say. It belongs to the model language; there is one wire type with no subtypes. Like <a href="stated.html">stated</a> it is written context-free, as strings: a relation phrase, roles from the closed inventory with quoted values, polarity and optional temporal expressions. The model uses it whenever a message is vague or has several readings and it picks one (<code>basis disambiguation</code>), when the wording presupposes something (<code>implicature</code>), when it treats a list as complete (<code>closure</code>), or when it applies a typical case (<code>default</code>) or general knowledge (<code>world</code>). An assumption may even restate the queried proposition; that is allowed, but not over-generated. It is never a fact, never stored, never carried to a later turn (the model restates it if needed) and never rendered with fact wording. The normative contract is <a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a>.</p>
+<p>By default (host policy <code>modelAssumptions: 'report'</code>) the reasoner ignores model assumptions: the primary answer is computed without them and each one is listed in <code>packet.model_assumptions</code> with <code>treatment: "reported"</code>; the host links it only for the report and an unlinkable assumption never blocks the turn. Only under <code>modelAssumptions: 'branch'</code> does the host link and resolve the assumptions like statements (an ambiguous entity then becomes a host question, so an assumption never chooses an identity) and add a second, hypothetical <code>solve</code> that supplies them as <code>fact … source assumption</code> through <code>solve.assume</code>; that branch is reported separately in <code>packet.assumption_branch</code> and never replaces the primary answer.</p>
+<h2>Every accepted keyword</h2><table><thead><tr><th>Keyword</th><th>Cardinality / default</th><th>Accepted value and concrete effect</th></tr></thead><tbody><tr><td id="field-relation"><code>relation</code></td><td>Exactly once; required</td><td>One JSON-quoted relation phrase as meant, normalized to its English lemma (<code>"work at"</code>); linked by the host, with English synonyms where needed, as on <a href="stated.html#field-relation">stated</a>.</td></tr><tr><td id="field-role"><code>role</code></td><td>Repeatable, 1 to 4 lines; required; a name at most once</td><td><code>role NAME VALUE</code> with NAME from the closed inventory (<code>subject</code>, <code>object</code>, <code>recipient</code>, <code>location</code>, <code>source</code>, <code>destination</code>, <code>instrument</code>, <code>time</code>, <code>topic</code>) and VALUE a JSON-quoted string (a proper name as written; another content word in the message's language, normalized, or in English) or an integer. The values need <strong>not</strong> appear in the message: the model may add them. As on <a href="stated.html#field-role">stated</a>, VALUE may also be <code>$id</code> naming another <code>stated</code> or <code>assumed</code> wire (a proposition used as an argument, reported only; at most one per wire, <code>reference_multiple</code>), or a placeholder <code>?variable</code> paired with an <a href="unparsed.html"><code>unparsed</code></a> span by <code>near $id</code> and <code>hint</code> (unpaired: <code>proposition_not_ground</code>).</td></tr><tr><td id="field-polarity"><code>polarity</code></td><td>Exactly once; required</td><td><code>affirmed</code> or <code>negated</code> (explicit negation).</td></tr><tr><td id="field-valid"><code>valid</code></td><td>Repeatable, at most one line per form; optional; absent means timeless</td><td><code>valid on|from|until "TEXT"</code>, normalized by the host as on <a href="stated.html#field-valid">stated</a>.</td></tr><tr><td id="field-basis"><code>basis</code></td><td>At most once; optional; absent means <code>unspecified</code></td><td><code>closure</code> (a list is treated as complete), <code>default</code> (a typical case applied to this instance), <code>disambiguation</code> (a reading of an ambiguous relation or sense, never an entity identity), <code>implicature</code> (a presupposition of the wording, such as "still"), <code>world</code> (general world knowledge). <strong>Descriptive only:</strong> the host never uses <code>basis</code> for trust, admission or reasoning; it is shown in the packet and measured separately (DS014 records the preregistered keep/drop criterion).</td></tr>
+<tr><td id="field-because"><code>because</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>because $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>cause</code>. The main clause holds because of the named clause: "Maria works at Alpha Lab because she is on the Delta Project" puts <code>because $s2</code> on the "works at" wire. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-because">clause links</a>.</td></tr>
+<tr><td id="field-so"><code>so</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>so $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>cause</code>. A result: "X, so Y" puts <code>so $x</code> on the <em>effect</em> wire Y, pointing at its cause X. The only keyword written on the result side; "so that" is <code>so_that</code>. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-so">clause links</a>.</td></tr>
+<tr><td id="field-if"><code>if</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>if $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>condition</code>. A condition: "if X, …" puts <code>if $x</code> on the main clause; X is a <code>stated</code> wire with <code>certainty supposed</code> (<code>link_condition_not_supposed</code> otherwise). Target: a <code>stated</code> wire with <code>certainty supposed</code>. On a statement: the statement is <strong>conditional</strong>; it is reported only, never used as evidence, and the link is <code>not_checked</code>. See <a href="syntax.html#link-if">clause links</a>.</td></tr>
+<tr><td id="field-unless"><code>unless</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>unless $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>negative_condition</code>. A negative condition: "unless X" puts <code>unless $x</code> on the main clause; X is written as the message words it, affirmed, with <code>certainty supposed</code>, and the host negates it. One clause is never the target of both <code>if</code> and <code>unless</code> (<code>link_conflict</code>). Target: a <code>stated</code> wire with <code>certainty supposed</code>. On a statement: the statement is <strong>conditional</strong>; it is reported only, never used as evidence, and the link is <code>not_checked</code>. See <a href="syntax.html#link-unless">clause links</a>.</td></tr>
+<tr><td id="field-although"><code>although</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>although $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>concession</code>. A concession: "although X, Y" puts <code>although $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-although">clause links</a>.</td></tr>
+<tr><td id="field-so_that"><code>so_that</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>so_that $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>purpose</code>. A purpose: "Y so that X" (also "in order to") puts <code>so_that $x</code> on Y; the purpose X is not asserted to happen, so it is a <code>stated</code> wire with <code>certainty supposed</code>. Target: a <code>stated</code> wire with <code>certainty supposed</code>. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-so_that">clause links</a>.</td></tr>
+<tr><td id="field-before"><code>before</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>before $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>before</code>. Temporal: "Y before X" puts <code>before $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-before">clause links</a>.</td></tr>
+<tr><td id="field-after"><code>after</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>after $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>after</code>. Temporal: "Y after X" puts <code>after $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-after">clause links</a>.</td></tr>
+<tr><td id="field-when"><code>when</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>when $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>during</code>. Temporal: "Y when X" puts <code>when $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-when">clause links</a>.</td></tr>
+<tr><td id="field-while"><code>while</code></td><td>Repeatable; optional; at most 3 link lines per wire (<code>link_too_many</code>), no line twice (<code>link_duplicate</code>); a wire-level line, never inside a <code>match</code> block</td><td><code>while $id</code>, exactly one <code>$id</code> naming a wire of this output (<code>link_form</code>); semantic type <code>during</code>. Temporal: "Y while X" puts <code>while $x</code> on Y. Target: a <code>stated</code> or <code>assumed</code> wire. On a statement: recorded in <code>clause_links</code> with <code>status: "not_checked"</code> (<code>reason: "statement_link"</code>); both propositions still execute. See <a href="syntax.html#link-while">clause links</a>.</td></tr>
+</tbody></table>
+<h2>Validation and reports</h2><p>An <code>assumed</code> equal to a <code>stated</code> of the same turn (same folded relation phrase, role values, polarity and validity text) is redundant and rejected (<code>assumed_duplicates_stated</code>). One contrary to a statement is accepted; under <code>branch</code> it is defeated by the user's evidence and reported with <code>defeated: true</code>. At most <code>policy.maxModelAssumptions</code> (default 8) are accepted; more reject the turn (<code>too_many_assumptions</code>) instead of truncating it. Each entry of <code>model_assumptions</code> carries the authored strings, the linked predicate (or <code>null</code>), the atom, validity, <code>basis</code> (or <code>unspecified</code>), treatment, <code>used_in_proof</code> and <code>defeated</code> (both <code>null</code> when reported only) and a host-rendered sentence <code>The model assumed: …</code>.</p>
+<h2>A closure assumption next to a user statement</h2><pre data-sop="current"><code>@s1 stated
+  relation "be a member of"
+  role subject "Ana"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted
+
+@s2 stated
+  relation "be a member of"
+  role subject "Ana"
+  role object "Gamma Lab"
+  polarity affirmed
+  certainty asserted
+
+@a1 assumed
+  relation "be a member of"
+  role subject "Ana"
+  role object "Beta Lab"
+  polarity negated
+  basis closure
+
+@q query
+  where match
+    relation "be a member of"
+    role subject "Ana"
+    role object "Beta Lab"
+    polarity affirmed
+  end</code></pre><p>"Ana is a member of Alpha Lab and of Gamma Lab. Is she a member of Beta Lab?" Treating the two memberships as the complete list is the model's addition. Under <code>report</code> the answer is <code>unknown</code> (open world) and <code>a1</code> is listed. Under <code>branch</code> the separate branch is <code>refuted</code> and hypothetical, while the primary answer stays <code>unknown</code>.</p>
+<h2>An implicature with an open start</h2><pre data-sop="current"><code>@a1 assumed
+  relation "works at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  basis implicature
+
+@q query
+  where match
+    relation "works at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>"Is Maria still working at Alpha Lab?" presupposes an earlier employment that the user did not assert. The assumption has no <code>valid</code> line, because the message names no time, and it restates the queried proposition, which is allowed.</p>
+<h2>A chosen reading</h2><p class="example-message"><span class="lang">EN</span> “Ana manages Irina. Does she live in Cluj?”</p><pre data-sop="current"><code>@s1 stated
+  relation "manage"
+  role subject "Ana"
+  role object "Irina"
+  polarity affirmed
+  certainty asserted
+
+@a1 assumed
+  relation "refer to"
+  role subject "she"
+  role object "Ana"
+  polarity affirmed
+  basis disambiguation
+
+@q query
+  where match
+    relation "live in"
+    role subject "Ana"
+    role location "Cluj"
+    polarity affirmed
+  end</code></pre><p><code>relation "refer to"</code> (and <code>"mean"</code> for a word sense) is the fixed phrase of the disambiguation convention. The pronoun is read as the subject of the preceding sentence (the convention); the choice is visible as an assumption and the query names Ana. With two parallel clauses and no preferable reading the model writes <a href="unclear.html"><code>unclear kind ambiguous</code></a> instead. More cases: <a href="model-guide.html#readings">How the model writes</a>.</p>
+<h2>An assumed clause with a link</h2><p class="example-message"><span class="lang">EN</span> “Is Maria still at Alpha Lab, now that the Delta Project is over?”</p><pre data-sop="current"><code>@s1 stated
+  relation "be over"
+  role subject "the Delta Project"
+  polarity affirmed
+  certainty asserted
+
+@a1 assumed
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  basis implicature
+  before $s1
+
+@q query
+  where match
+    relation "work at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>"still" presupposes that Maria worked there before the project ended: the presupposition is the model's addition, so it is <code>assumed</code>, and the order of the two clauses is its <code>before $s1</code> line. A link on an assumption is recorded in <code>clause_links</code> as <code>not_checked</code>, like any link on a statement.</p>
+<h2>Basis omitted</h2><pre data-sop="current"><code>@a1 assumed
+  relation "door open"
+  role source "room A"
+  role destination "room B"
+  polarity affirmed</code></pre><p>Allowed; the packet shows <code>"basis": "unspecified"</code>.</p>
+<h2>Invalid model output</h2><pre data-sop="invalid" data-check="parse" data-error="Unsupported field certainty on assumed"><code>@bad assumed
+  relation "door open"
+  role source "room A"
+  role destination "room B"
+  polarity affirmed
+  certainty hedged</code></pre><p>An assumption is uncertain by definition; <code>certainty</code> belongs to <a href="stated.html">stated</a>.</p>
+<pre data-sop="invalid" data-check="parse" data-error="basis must be one of"><code>@bad assumed
+  relation "door open"
+  role source "room A"
+  role destination "room B"
+  polarity affirmed
+  basis guess</code></pre><p><code>guess</code> is not a basis value.</p>
+<pre data-sop="invalid" data-check="graph" data-error="Unknown reference company"><code>@bad assumed
+  relation "works at"
+  role subject "Maria"
+  role object $company
+  polarity affirmed</code></pre><p>A <code>$id</code> value names a wire of the same output; there is no wire <code>company</code>. A company the model does not know is written as a string, or asked about in a query.</p>
+<pre data-sop="invalid" data-check="compile" data-error="proposition_not_ground"><code>@bad assumed
+  relation "works at"
+  role subject "Maria"
+  role object ?company
+  polarity affirmed</code></pre><p>A placeholder needs exactly one <a href="unparsed.html"><code>unparsed</code></a> span near this wire; an assumption states something, it does not ask.</p>
+<pre data-sop="invalid" data-check="compile" data-error="link_condition_not_supposed"><code>@a1 assumed
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  basis default
+
+@a2 assumed
+  relation "be paid"
+  role subject "Maria"
+  polarity affirmed
+  if $a1</code></pre><p>The target of <code>if</code>, <code>unless</code> and <code>so_that</code> is a clause the user supposes: a <code>stated</code> wire with <code>certainty supposed</code>.</p>
+<pre data-sop="invalid" data-check="compile" data-error="assumed_duplicates_stated"><code>@s1 stated
+  relation "works at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty asserted
+
+@a1 assumed
+  relation "Works at"
+  role subject "maria"
+  role object "Alpha Lab"
+  polarity affirmed
+
+@q query
+  where match
+    relation "works at"
+    role subject "Maria"
+    role object "Alpha Lab"
+    polarity affirmed
+  end</code></pre><p>The user already said it (case does not matter), so the assumption is redundant.</p>
+<h2>Sources</h2><p><code>sop/parser.mjs</code> (<code>SPEC.assumed</code>), <code>sop/clauses.mjs</code> (links, references, placeholders), <code>sop/linking.mjs</code>, <code>sop/propositions.mjs</code>, <code>sop/declarative.mjs</code> (report and branch), <code>probably_obsolete/tinyLLMExperiments/eval/propositions.mjs</code> (separation and basis metrics), <a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a>.</p></main><script type="module" src="help-page.mjs"></script></body></html>

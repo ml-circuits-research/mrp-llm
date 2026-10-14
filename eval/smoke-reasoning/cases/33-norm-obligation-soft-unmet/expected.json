@@ -1,0 +1,28 @@
+{
+  "feature": "Norm with a deadline: a soft obligation that cannot be met is reported as a violation with its cost, the plan is still returned",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 4,
+    "steps": 2,
+    "names": [
+      "investigate",
+      "patch"
+    ]
+  },
+  "compliance": {
+    "hard": "ok",
+    "soft_violations": [
+      {
+        "id": "log_promptly",
+        "cost": 10
+      }
+    ],
+    "total_cost": 14
+  },
+  "requires": [
+    "plan",
+    "norms_soft",
+    "temporal_norms"
+  ]
+}

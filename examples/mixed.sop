@@ -1,0 +1,30 @@
+@q query
+  mode select
+  select ?minutes
+  where duration route_demo ?minutes
+  at 2026-09-26
+
+@m recall
+  query $q
+
+@known reason
+  query $q
+  memory $m
+
+@duration jsEval
+  expr only($known.answers).binding["?minutes"]
+
+@c constraint
+  var ?arrival int 770 900
+  require ?arrival >= 770 + $duration
+  claim ?arrival <= 840
+  task possible
+  unit minute
+
+@r reason
+  constraint $c
+  backend auto
+
+@answer cnl
+  result $r
+  language en

@@ -1,0 +1,13 @@
+@s1 fact
+  holds works ann alpha
+  status supposed
+
+@s2 fact
+  holds works ann alpha
+  status hedged
+
+@q query
+  where works ?x alpha
+  select ?x
+  if $s1
+  if $s2

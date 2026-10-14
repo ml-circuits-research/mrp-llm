@@ -1,0 +1,20 @@
+@broken predicate
+  args subject:entity
+@fixed predicate
+  args subject:entity
+
+@f1 fact
+  holds broken m1
+
+@force_fix action
+  params ?m
+  requires broken ?m
+  adds fixed ?m
+  cost 2
+
+@no_force norm
+  forbid ~force_fix ?m
+  when broken ?m
+  severity hard
+  binding advisory
+  message "forced repairs are discouraged"

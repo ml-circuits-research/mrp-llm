@@ -1,0 +1,42 @@
+{
+  "feature": "Exact decimal arithmetic in rules and aggregates: line totals (price times quantity), their sum, a count and a minimum, with no binary floating-point noise",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "k": "all",
+      "v": 0.1
+    },
+    {
+      "k": "all",
+      "v": 4
+    },
+    {
+      "k": "all",
+      "v": 71.27
+    },
+    {
+      "k": "bread",
+      "v": 59.97
+    },
+    {
+      "k": "milk",
+      "v": 0.6
+    },
+    {
+      "k": "pen",
+      "v": 10
+    },
+    {
+      "k": "tea",
+      "v": 0.7
+    }
+  ],
+  "requires": [
+    "rules",
+    "aggregate",
+    "compute_in_rules",
+    "compare_in_rules",
+    "exact_arithmetic"
+  ]
+}

@@ -1,0 +1,16 @@
+# The caller declares the unknown output, not an @bunica value.
+@q query
+  select ?bunica
+  where grandmother ?bunica carina
+  at 2026-09-26
+
+@r solve
+  query $q
+  output ?bunica one
+
+@label jsEval
+  expr "Rezultatul recuperat este " + $bunica
+
+@answer cnl
+  result $r
+  language en

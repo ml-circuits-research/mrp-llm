@@ -1,0 +1,11 @@
+# expect: else_outside_if
+@a action
+  requires p
+  adds q
+@m method
+  achieves done
+  step choose
+    ~a
+    else
+    ~a
+  end

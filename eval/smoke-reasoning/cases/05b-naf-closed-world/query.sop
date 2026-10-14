@@ -1,0 +1,3 @@
+@q query
+  where open_node ?x
+  select ?x

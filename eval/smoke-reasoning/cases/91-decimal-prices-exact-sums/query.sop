@@ -1,0 +1,9 @@
+@q query
+  mode select
+  select ?k ?v
+  where any
+    line_total ?k ?v
+    basket_total ?k ?v
+    basket_items ?k ?v
+    cheapest ?k ?v
+  end

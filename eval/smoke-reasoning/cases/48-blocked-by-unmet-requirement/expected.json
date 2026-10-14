@@ -1,0 +1,16 @@
+{
+  "feature": "Blocked information: a strict method that cannot run names the deepest step it reached and the requirement that failed",
+  "status": "blocked",
+  "complete": true,
+  "blocked_by": [],
+  "blocked": {
+    "step": "~upload_s3 s1",
+    "requirement": "network_up s1"
+  },
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "blocked_info"
+  ]
+}

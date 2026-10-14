@@ -1,0 +1,21 @@
+{
+  "suite": "linking-v1",
+  "part": 1,
+  "labels": "mechanical (verification world of the source row)",
+  "sealed": true,
+  "built_at": "2026-10-01T16:15:10.588Z",
+  "sources": [
+    "eval/suites/symbolic_english/test.jsonl",
+    "eval/suites/neuro_english/test.jsonl"
+  ],
+  "rows": 2335,
+  "labelled": {
+    "relation_mentions": 6401,
+    "entity_mentions": 13770
+  },
+  "unlabelled_relation_mentions": 1489,
+  "not_measured": [
+    "class linking (no mechanical label)",
+    "justified versus unjustified clarification (needs judge labels, part 2)"
+  ]
+}

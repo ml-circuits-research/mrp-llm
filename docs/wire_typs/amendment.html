@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#amendment" target="_top">← Wire type index</a></p><h1><code>amendment</code></h1><p>A proposed change to a procedure or to a wire: new wires that supersede versions in force, removals, the reason and the review state. "Allow hard resets when a ticket is open" becomes a proposed norm version plus an amendment that carries it.</p><p><strong>Status and author:</strong> Host wire. The host composes it from the user's words (the user says the sentence; the host writes the proposed norm version, the amendment and the argument); it is not authored by the formalizer, which never emits it. Acceptance is a host write recorded in the project journal.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="field-of"><code>of</code></th><td>At most once; required</td><td>The <code>$procedure_or_wire</code> the amendment changes.</td></tr>
+<tr><th scope="row" id="field-proposed_by"><code>proposed_by</code></th><td>At most once; required</td><td><code>user</code> or <code>agent</code>.</td></tr>
+<tr><th scope="row" id="field-members"><code>members</code></th><td>Repeatable; optional</td><td>The proposed wires (<code>$id</code> list): new versions that supersede, or additions, each with <code>approval proposed</code> or <code>contested</code> (<code>amendment_member_not_proposed</code>).</td></tr>
+<tr><th scope="row" id="field-removes"><code>removes</code></th><td>Repeatable; optional</td><td>Wires the amendment would retire (<code>$id</code> list). An amendment proposes members or removes something (<code>amendment_empty</code>).</td></tr>
+<tr><th scope="row" id="field-reason"><code>reason</code></th><td>At most once; optional</td><td>The user's reason, quoted.</td></tr>
+<tr><th scope="row" id="field-approval"><code>approval</code></th><td>At most once; optional</td><td><code>proposed</code>, <code>approved</code> or <code>rejected</code> (the same words as the wires' approval).</td></tr>
+<tr><th scope="row" id="field-evaluated"><code>evaluated</code></th><td>At most once; optional</td><td>A link or note pointing to the what-if comparison the host ran.</td></tr></tbody></table></div></section><section><h2>What it is for and how to write it</h2><p>An author normally does not write an amendment. The host writes it in the negotiation loop: a user objects ("why can't I hard-reset r7?", answered <code>blocked_by $no_hard_reset_in_hours</code>); the host asks, through <code>mode abduce</code> with <code>waive</code> hypotheses, which norms would have to be relaxed; the user's words become a proposed norm version, an amendment and an <a href="argument.html"><code>argument</code></a>; the engine evaluates it as a what-if (<code>if $amendment</code>); the host shows the delta (plan cost, violations, blocked steps) and the user accepts or rejects.</p></section><section><h2>What the engine does</h2><p>A <code>proposed</code> or <code>rejected</code> wire binds only when a query supposes it with <code>if $id</code>; the answer is then <code>conditional</code> on it, and a proposed successor displaces the version it supersedes for that query. <code>if $amendment</code> supposes all its members at once. Accepting makes the proposed wires <code>approved</code> with <code>approved_by</code> and <code>approved_at</code> and the superseded versions <code>superseded</code>; rejecting records the amendment and its arguments so that the proposal is not re-litigated blindly. Before approval the host may replay the procedure's own smoke cases under the amendment and show which previously passing cases change.</p></section><section><h2>Examples</h2><pre data-sop="knowledge"><code>@router predicate
+  args subject:entity
+@business_hours predicate
+  args none
+@ticket_open predicate
+  args subject:entity
+  closed true
+@act action
+  params ?r
+  requires router ?r
+  adds router ?r
+
+@no_hard_reset_in_hours norm
+  forbid ~act ?r
+  when business_hours
+  version 1
+  approval approved
+  approved_by "ops lead"
+  approved_at 2026-01-15
+@relax_hours norm
+  forbid ~act ?r
+  when business_hours
+  when absent ticket_open ?r
+  version 2
+  supersedes $no_hard_reset_in_hours
+  approval proposed
+@a1 argument
+  for $relax_hours
+  claim "an open ticket already implies on-call awareness"
+  source "incident review 2026-09"
+@am1 amendment
+  of $no_hard_reset_in_hours
+  proposed_by user
+  members $relax_hours
+  reason "allow a hard reset when a ticket is open"
+  approval proposed</code></pre><p>The proposed version 2 supersedes version 1 and is used only by a question that supposes it: <code>if $am1</code> or <code>if $relax_hours</code>.</p><h3>Invalid: a member that is not proposed</h3><pre data-sop="knowledge-invalid" data-error="amendment_member_not_proposed"><code>@router predicate
+  args subject:entity
+@business_hours predicate
+  args none
+@ticket_open predicate
+  args subject:entity
+  closed true
+@act action
+  params ?r
+  requires router ?r
+  adds router ?r
+
+@no_hard_reset_in_hours norm
+  forbid ~act ?r
+  when business_hours
+  version 1
+  approval approved
+  approved_by "ops lead"
+  approved_at 2026-01-15
+@relax_hours norm
+  forbid ~act ?r
+  when business_hours
+  when absent ticket_open ?r
+  version 2
+  supersedes $no_hard_reset_in_hours
+  approval approved
+  approved_by "ops lead"
+  approved_at 2026-02-01
+@a1 argument
+  for $relax_hours
+  claim "an open ticket already implies on-call awareness"
+  source "incident review 2026-09"
+@am1 amendment
+  of $no_hard_reset_in_hours
+  proposed_by user
+  members $relax_hours
+  reason "allow a hard reset when a ticket is open"
+  approval proposed</code></pre></section><section><h2>Common mistakes</h2><ol><li>Listing as <code>members</code> a wire that is already <code>approved</code>.</li><li>An amendment with neither <code>members</code> nor <code>removes</code>.</li><li>Writing <code>approval accepted</code>: the vocabulary is <code>proposed</code>, <code>approved</code>, <code>rejected</code>.</li><li>Treating an <code>argument</code> as evidence of a fact: it is evidence for a negotiation only.</li></ol></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.amendment</code></li><li><code>sop/knowledge/cross-checks.mjs (governance checks)</code></li><li><code>sop/knowledge/governance.mjs:selectInForce, supposedWireIds</code></li></ul><p>Related: <a href="argument.html"><code>argument</code></a>, <a href="norm.html"><code>norm</code></a>, <a href="method.html"><code>method</code></a>, <a href="procedure.html"><code>procedure</code></a>, <a href="governance.html"><code>governance</code></a>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>; the shared semantics are in <a href="knowledge-semantics.html">Knowledge semantics</a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

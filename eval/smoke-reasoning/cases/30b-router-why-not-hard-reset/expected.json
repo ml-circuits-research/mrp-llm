@@ -1,0 +1,15 @@
+{
+  "feature": "Mode of work: why a step is not allowed (blocked by a named norm, not a bare no_plan)",
+  "status": "blocked",
+  "complete": true,
+  "blocked_by": [
+    "no_hard_reset_in_hours"
+  ],
+  "requires": [
+    "why_not",
+    "plan",
+    "method",
+    "norms_hard",
+    "blocked_info"
+  ]
+}

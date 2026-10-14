@@ -1,0 +1,17 @@
+@q query
+  mode select
+  select ?who
+  where grandmother ?who carina
+  at 2026-09-26
+
+@m recall
+  query $q
+
+@r reason
+  query $q
+  memory $m
+  backend auto
+
+@answer cnl
+  result $r
+  language en

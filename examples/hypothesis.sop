@@ -1,0 +1,20 @@
+@h fact
+  holds parent carina person_delta
+  valid timeless
+
+@q query
+  mode select
+  select ?who
+  where ancestor ?who person_delta
+
+@m recall
+  query $q
+
+@r reason
+  query $q
+  memory $m
+  assume $h
+
+@answer cnl
+  result $r
+  language en

@@ -1,0 +1,4 @@
+@q query
+  mode count
+  where can ?u ?s
+  select ?u ?s

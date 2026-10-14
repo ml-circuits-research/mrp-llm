@@ -1,0 +1,11 @@
+{
+  "name": "Quasimodo slice (candidate)",
+  "description": "Candidate common-sense layer, not loaded by any chat base memory: typical abilities, properties, colours, uses, body parts, materials and places of common things from Quasimodo v1.2 (Romero et al., CIKM 2019, Max Planck Institute for Informatics), CC BY 2.0, attribution required; modified (predicates mapped onto MRP-LLM predicates, filtered and selected). Provenance on every wire; sources and licences in docs/specs/DS011-source-rights.md.",
+  "imports": [
+    "core-min",
+    "core-en",
+    "commonsense-v1"
+  ],
+  "chat": false,
+  "licence": "CC BY 2.0"
+}

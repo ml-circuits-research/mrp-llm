@@ -1,0 +1,10 @@
+{
+  "feature": "Classical versus failure negation: `not` needs evidence, `absent` does not",
+  "status": "unknown",
+  "complete": true,
+  "requires": [
+    "facts",
+    "classical_negation",
+    "open_world"
+  ]
+}

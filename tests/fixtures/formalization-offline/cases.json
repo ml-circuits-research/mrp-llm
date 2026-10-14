@@ -1,0 +1,219 @@
+[
+ {
+  "id": "fixture/pens",
+  "message": "Pens cost 1.5 each. Mara buys 12 pens. What does she pay?",
+  "gold": "18",
+  "gold_kind": "number",
+  "gold_value": 18,
+  "steps": [
+   {
+    "name": "problem_kind",
+    "answer": "1"
+   },
+   {
+    "name": "problem_values",
+    "answer": "price_per_pen = 1.5\npen_count = 12"
+   },
+   {
+    "name": "problem_formulas",
+    "answer": "total = price_per_pen * pen_count"
+   }
+  ]
+ },
+ {
+  "id": "fixture/plans",
+  "message": "Plan A costs 400 per year. Plan B costs 30 per month. Which plan is cheaper for one year?",
+  "gold": "Plan B",
+  "gold_kind": "entity",
+  "gold_value": "Plan B",
+  "steps": [
+   {
+    "name": "problem_kind",
+    "answer": "2"
+   },
+   {
+    "name": "problem_values",
+    "answer": "cost_plan_a = 400\nmonthly_cost_plan_b = 30"
+   },
+   {
+    "name": "problem_formulas",
+    "answer": "year_a = cost_plan_a\nyear_b = monthly_cost_plan_b * 12"
+   },
+   {
+    "name": "problem_options",
+    "answer": "Plan A = year_a\nPlan B = year_b"
+   },
+   {
+    "name": "problem_direction",
+    "answer": "1"
+   }
+  ]
+ },
+ {
+  "id": "fixture/glorp",
+  "message": "Every glorp is blue. Zed is a glorp. Is Zed blue?",
+  "gold": "Yes",
+  "gold_kind": "yes_no",
+  "gold_value": true,
+  "steps": [
+   {
+    "name": "problem_kind",
+    "answer": "3"
+   },
+   {
+    "name": "problem_facts",
+    "answer": "Zed | is_glorp"
+   },
+   {
+    "name": "problem_rules",
+    "answer": "if is_glorp then is_blue"
+   },
+   {
+    "name": "problem_question",
+    "answer": "Zed | is_blue"
+   }
+  ]
+ },
+ {
+  "id": "fixture/unreadable",
+  "message": "A box holds 6 eggs. How many eggs are in 4 boxes?",
+  "gold": "24",
+  "gold_kind": "number",
+  "gold_value": 24,
+  "steps": [
+   {
+    "name": "problem_kind",
+    "answer": "1"
+   },
+   {
+    "name": "problem_values",
+    "answer": "none"
+   },
+   {
+    "name": "problem_values_again",
+    "answer": "six eggs"
+   }
+  ]
+ },
+ {
+  "id": "fixture/wrong-formula",
+  "message": "A box holds 6 eggs. How many eggs are in 4 boxes?",
+  "gold": "24",
+  "gold_kind": "number",
+  "gold_value": 24,
+  "steps": [
+   {
+    "name": "problem_kind",
+    "answer": "1"
+   },
+   {
+    "name": "problem_values",
+    "answer": "eggs_per_box = 6\nbox_count = 4"
+   },
+   {
+    "name": "problem_formulas",
+    "answer": "eggs = eggs_per_box + box_count"
+   }
+  ]
+ },
+ {
+  "id": "fixture/works",
+  "message": "Mara works at Delta. Ivo works at Orion. Lena works at Delta. Who works at Delta?",
+  "gold": "Mara and Lena",
+  "gold_kind": "list",
+  "gold_value": null,
+  "steps": [
+   {
+    "name": "problem_kind",
+    "answer": "3"
+   },
+   {
+    "name": "problem_facts",
+    "answer": "Mara | works_at | Delta\nIvo | works_at | Orion\nLena | works_at | Delta"
+   },
+   {
+    "name": "problem_rules",
+    "answer": "none"
+   },
+   {
+    "name": "problem_question",
+    "answer": "?x | works_at | Delta"
+   }
+  ]
+ },
+ {
+  "id": "fixture/count",
+  "message": "Ana plays chess. Bob plays chess. Cora plays tennis. How many people play chess?",
+  "gold": "2",
+  "gold_kind": "number",
+  "gold_value": 2,
+  "steps": [
+   {
+    "name": "problem_kind",
+    "answer": "3"
+   },
+   {
+    "name": "problem_facts",
+    "answer": "Ana | plays | chess\nBob | plays | chess\nCora | plays | tennis"
+   },
+   {
+    "name": "problem_rules",
+    "answer": "none"
+   },
+   {
+    "name": "problem_question",
+    "answer": "count ?x | plays | chess"
+   }
+  ]
+ },
+ {
+  "id": "fixture/grandparent",
+  "message": "A parent of a parent is a grandparent. Ana is the parent of Bob. Bob is the parent of Cora. Who is the grandparent of Cora?",
+  "gold": "Ana",
+  "gold_kind": "entity",
+  "gold_value": "Ana",
+  "steps": [
+   {
+    "name": "problem_kind",
+    "answer": "3"
+   },
+   {
+    "name": "problem_facts",
+    "answer": "Ana | parent_of | Bob\nBob | parent_of | Cora"
+   },
+   {
+    "name": "problem_rules",
+    "answer": "if ?x parent_of ?y and ?y parent_of ?z then ?x grandparent_of ?z"
+   },
+   {
+    "name": "problem_question",
+    "answer": "?x | grandparent_of | Cora"
+   }
+  ]
+ },
+ {
+  "id": "fixture/forced",
+  "message": "The gate opens only for staff. Sam is a visitor. Is it shown that the gate opens for Sam?",
+  "gold": "No",
+  "gold_kind": "yes_no",
+  "gold_value": false,
+  "steps": [
+   {
+    "name": "problem_kind",
+    "answer": "3"
+   },
+   {
+    "name": "problem_facts",
+    "answer": "Sam | is_visitor"
+   },
+   {
+    "name": "problem_rules",
+    "answer": "if is_staff then gate_opens_for"
+   },
+   {
+    "name": "problem_question",
+    "answer": "Sam | gate_opens_for"
+   }
+  ]
+ }
+]

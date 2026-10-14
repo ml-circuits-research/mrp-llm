@@ -1,0 +1,7 @@
+# expect: norm_one_modality
+@a action
+  requires p
+  adds q
+@n norm
+  forbid ~a
+  oblige ~a

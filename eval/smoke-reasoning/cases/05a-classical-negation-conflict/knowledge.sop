@@ -1,0 +1,12 @@
+@flies predicate
+  args subject:entity
+
+@f1 fact
+  holds bird tweety
+@f2 fact
+  holds not flies tweety
+  source "field report 12"
+
+@r_birds_fly rule
+  when bird ?x
+  then flies ?x

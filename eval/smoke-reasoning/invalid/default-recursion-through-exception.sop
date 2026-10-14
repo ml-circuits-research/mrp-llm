@@ -1,0 +1,7 @@
+# expect: not_stratifiable
+@pen predicate
+  args entity
+@d default
+  when bird ?x
+  then penguin ?x
+  except penguin ?x

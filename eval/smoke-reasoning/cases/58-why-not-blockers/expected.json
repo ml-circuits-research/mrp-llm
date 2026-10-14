@@ -1,0 +1,21 @@
+{
+  "feature": "why_not with blockers: the missing base atoms of the live route, plus the atoms that kill the other route or contradict a repair",
+  "status": "unknown",
+  "complete": true,
+  "missing": [
+    [
+      "escort_authorized cy vault"
+    ]
+  ],
+  "blockers": [
+    "suspended ann",
+    "not escort_authorized cy vault"
+  ],
+  "requires": [
+    "rules",
+    "why_not",
+    "naf",
+    "closed_world",
+    "classical_negation"
+  ]
+}

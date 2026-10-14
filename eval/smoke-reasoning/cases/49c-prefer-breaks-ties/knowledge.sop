@@ -1,0 +1,28 @@
+@payee predicate
+  args subject:entity
+@paid predicate
+  args subject:entity
+
+@f1 fact
+  holds payee p1
+
+@wire_transfer action
+  params ?p
+  requires payee ?p
+  adds paid ?p
+  cost 2
+@cheque action
+  params ?p
+  requires payee ?p
+  adds paid ?p
+  cost 2
+
+@pay method
+  achieves paid ?p
+  when payee ?p
+  binding strict
+  prefer ~wire_transfer over ~cheque
+  step choose
+    ~cheque ?p
+    ~wire_transfer ?p
+  end

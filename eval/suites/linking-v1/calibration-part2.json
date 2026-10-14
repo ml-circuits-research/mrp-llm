@@ -1,0 +1,410 @@
+{
+ "note": "40 rows (every 8th of part 2) checked by linker-m3-agent against the question and the vocabulary; hand_accepts lists the predicates the reviewer accepts. Equivalent pairs (area_of/area_km2_of style) exist in the merged vocabulary.",
+ "agreement_with_equivalents": 0.95,
+ "agreement_exact_primary": 0.875,
+ "rows": [
+  {
+   "id": "linking-v1::part2::013",
+   "question": "Which state shares a frontier with Saudi Arabia toward the gulf?",
+   "judge_gold": "borders",
+   "hand_accepts": [
+    "borders"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::021",
+   "question": "In what neighborhood was Liv Tyler born?",
+   "judge_gold": "born_in",
+   "hand_accepts": [
+    "born_in"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::029",
+   "question": "Unde s-a născut Axel Oxenstierna?",
+   "judge_gold": "born_in",
+   "hand_accepts": [
+    "born_in"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::037",
+   "question": "Which year marks the birth of Yul Brynner?",
+   "judge_gold": "birth_year",
+   "hand_accepts": [
+    "born_on",
+    "birth_year"
+   ],
+   "agree": true,
+   "equivalent_predicates": true
+  },
+  {
+   "id": "linking-v1::part2::045",
+   "question": "Dhaka serves as the capital city of what country?",
+   "judge_gold": "capital_of",
+   "hand_accepts": [
+    "capital_of"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::054",
+   "question": "Din ce țară era cetățean Mika Waltari?",
+   "judge_gold": "citizen_of",
+   "hand_accepts": [
+    "citizen_of"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::062",
+   "question": "What kind of country is the United States?",
+   "judge_gold": "is_a",
+   "hand_accepts": [
+    "is_a"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::071",
+   "question": "In which city did Alberto Sordi pass away?",
+   "judge_gold": "died_in",
+   "hand_accepts": [
+    "died_in"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::079",
+   "question": "Unde și-a găsit sfârșitul Henri Fayol?",
+   "judge_gold": "died_in",
+   "hand_accepts": [
+    "died_in"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::087",
+   "question": "Which year did kenneth macalpin die?",
+   "judge_gold": "death_year",
+   "hand_accepts": [
+    "died_on",
+    "death_year"
+   ],
+   "agree": true,
+   "equivalent_predicates": true
+  },
+  {
+   "id": "linking-v1::part2::095",
+   "question": "lethal weapon 3 was directed by who?",
+   "judge_gold": "directed",
+   "hand_accepts": [
+    "directed"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::103",
+   "question": "Is Joseph Black the person who discovered magnesium?",
+   "judge_gold": "discovered",
+   "hand_accepts": [
+    "discovered"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::111",
+   "question": "When was niobium first identified?",
+   "judge_gold": "discovery_year",
+   "hand_accepts": [
+    "discovery_year"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::119",
+   "question": "Când a fost descoperit radonul?",
+   "judge_gold": "discovery_year",
+   "hand_accepts": [
+    "discovery_year"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::127",
+   "question": "Serge Haroche completed his studies at what school?",
+   "judge_gold": "graduated_from",
+   "hand_accepts": [
+    "educated_at",
+    "graduated_from"
+   ],
+   "agree": true,
+   "equivalent_predicates": true
+  },
+  {
+   "id": "linking-v1::part2::135",
+   "question": "American Bantam is known for creating what brand?",
+   "judge_gold": "founded",
+   "hand_accepts": [
+    "founded"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::143",
+   "question": "What year marks the founding of ArcelorMittal?",
+   "judge_gold": "founded_year",
+   "hand_accepts": [
+    "founded_year"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::151",
+   "question": "Is Roger Taylor also a composer?",
+   "judge_gold": "has_occupation",
+   "hand_accepts": [
+    "has_occupation"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::159",
+   "question": "Franco Zeffirelli a fost designer de teatru?",
+   "judge_gold": "has_occupation",
+   "hand_accepts": [
+    "has_occupation"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::167",
+   "question": "Which country does Luís Montenegro govern?",
+   "judge_gold": "head_of_government_of",
+   "hand_accepts": [
+    "head_of_government_of"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::175",
+   "question": "Who is the current king of Spain?",
+   "judge_gold": "head_of_state_of",
+   "hand_accepts": [
+    "head_of_state_of"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::183",
+   "question": "Is Pixar based in Emeryville?",
+   "judge_gold": "located_in",
+   "hand_accepts": [
+    "headquartered_in"
+   ],
+   "agree": false,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::191",
+   "question": "PepsiCo works in which industry?",
+   "judge_gold": "industry",
+   "hand_accepts": [
+    "industry"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::199",
+   "question": "Care este industria în care activează Yum! Brands?",
+   "judge_gold": "industry",
+   "hand_accepts": [
+    "industry"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::207",
+   "question": "Malay is grouped under which language family?",
+   "judge_gold": "language_family",
+   "hand_accepts": [
+    "language_family"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::215",
+   "question": "Does The Pianist have any dialogue in German?",
+   "judge_gold": "language_of_work",
+   "hand_accepts": [
+    "language_of_work"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::223",
+   "question": "Where is Abakan located?",
+   "judge_gold": "located_in",
+   "hand_accepts": [
+    "located_in"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::231",
+   "question": "Which regional body is Saudi Arabia part of?",
+   "judge_gold": "member_of",
+   "hand_accepts": [
+    "member_of"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::240",
+   "question": "Is Arabic an official language in Bahrain?",
+   "judge_gold": "official_language_of",
+   "hand_accepts": [
+    "official_language_of"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::249",
+   "question": "Ce limbă e oficială în Emiratele Arabe Unite?",
+   "judge_gold": "official_language_of",
+   "hand_accepts": [
+    "official_language_of"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::257",
+   "question": "Jupiter is in orbit around which star?",
+   "judge_gold": "orbits",
+   "hand_accepts": [
+    "orbits"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::266",
+   "question": "Gangster Squad is a production of which country?",
+   "judge_gold": "origin_country",
+   "hand_accepts": [
+    "origin_country"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::275",
+   "question": "What's that sunset landscape van Gogh did at Montmajour called?",
+   "judge_gold": "named (ask)",
+   "hand_accepts": [
+    "painted"
+   ],
+   "agree": false,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::284",
+   "question": "Din ce grup face parte Porsche?",
+   "judge_gold": "parent_organization",
+   "hand_accepts": [
+    "parent_organization"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::293",
+   "question": "Does Hrodna have 364902 inhabitants?",
+   "judge_gold": "population_of",
+   "hand_accepts": [
+    "population_of"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::302",
+   "question": "Cat on a Hot Tin Roof first appeared in which year?",
+   "judge_gold": "publication_year",
+   "hand_accepts": [
+    "publication_year"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::310",
+   "question": "What currency does Iraq use?",
+   "judge_gold": "uses_currency",
+   "hand_accepts": [
+    "uses_currency"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::318",
+   "question": "Angola's money is called what?",
+   "judge_gold": "uses_currency",
+   "hand_accepts": [
+    "uses_currency"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::326",
+   "question": "Leopold Ružička got which Nobel?",
+   "judge_gold": "won",
+   "hand_accepts": [
+    "won"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  },
+  {
+   "id": "linking-v1::part2::334",
+   "question": "Ce roman a scris Paulo Coelho despre Veronika?",
+   "judge_gold": "wrote",
+   "hand_accepts": [
+    "wrote"
+   ],
+   "agree": true,
+   "equivalent_predicates": false
+  }
+ ]
+}

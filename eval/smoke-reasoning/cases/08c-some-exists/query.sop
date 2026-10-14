@@ -1,0 +1,6 @@
+@q query
+  mode exists
+  where all
+    member ?m delta
+    works ?m alpha
+  end

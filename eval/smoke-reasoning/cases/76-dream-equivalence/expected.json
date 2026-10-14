@@ -1,0 +1,23 @@
+{
+  "feature": "Dream equivalence: a frozen deployment plan (a certified join order) gives the same answer as the plain run",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "z": "o0"
+    },
+    {
+      "z": "o10"
+    },
+    {
+      "z": "o20"
+    },
+    {
+      "z": "o30"
+    }
+  ],
+  "requires": [
+    "rules",
+    "conjunction"
+  ]
+}

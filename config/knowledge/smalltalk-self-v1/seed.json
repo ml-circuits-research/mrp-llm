@@ -1,0 +1,140 @@
+{
+  "name": "Small talk: the assistant itself (English)",
+  "description": "Honest replies about the assistant (who it is, what it can do and knows, no feelings, not human, no internet, no memory beyond the conversation and its base memory, how it works), opinion and advice requests framed honestly, off-topic tasks, manipulation attempts, paradoxes, impossible premises, nonsense hypotheticals, offensive messages and possible irony.",
+  "imports": [
+    "conversation-v1"
+  ],
+  "role": "conversation",
+  "licence": "MIT (repository LICENSE); original MRP-LLM text written by model runs of jobs/smalltalk-replies and reviewed automatically",
+  "provenance": {
+    "generator": "jobs/smalltalk-replies (worker tier, bulk audit by the auditor tier, decider tier for fixes)",
+    "builder": "tools/smalltalk/build.mjs",
+    "taxonomy": "tools/smalltalk/taxonomy.json",
+    "runs": [
+      "state/llm-jobs/smalltalk-replies/20261002T155845-d6eeea",
+      "state/llm-jobs/smalltalk-replies-escalated/20261002T171332-ff6ba4"
+    ],
+    "inspired_by": [
+      {
+        "source": "DailyDialog",
+        "use": "topic categories and dialogue-act types (inform, question, directive, commissive) as ideas",
+        "text_copied": false
+      },
+      {
+        "source": "EmpatheticDialogues",
+        "use": "the set of 32 emotion labels, grouped into the empathy situations",
+        "text_copied": false
+      },
+      {
+        "source": "MultiWOZ",
+        "use": "general dialogue acts (greet, bye, thank, welcome, reqmore) as ideas",
+        "text_copied": false
+      },
+      {
+        "source": "Wizard of Wikipedia",
+        "use": "chit-chat about a topic that leads to knowledge, as an idea",
+        "text_copied": false
+      },
+      {
+        "source": "Cornell Movie-Dialogs Corpus",
+        "use": "turn patterns of casual conversation, as an idea",
+        "text_copied": false
+      }
+    ]
+  },
+  "counts": {
+    "situations": 23,
+    "replies": 112,
+    "by_register": {
+      "neutral": 61,
+      "warm": 51
+    },
+    "rules": 2,
+    "data_facts": 101,
+    "mean_distinct_1": 0.523,
+    "mean_distinct_2": 0.763,
+    "near_duplicates_dropped": 2
+  },
+  "acts": [
+    {
+      "kind": "ask_identity",
+      "group": "about_assistant",
+      "situation": "self_identity"
+    },
+    {
+      "kind": "ask_abilities",
+      "group": "about_assistant",
+      "situation": "self_abilities"
+    },
+    {
+      "kind": "ask_knowledge",
+      "group": "about_assistant",
+      "situation": "self_knowledge"
+    },
+    {
+      "kind": "ask_feelings",
+      "group": "about_assistant",
+      "situation": "self_feelings"
+    },
+    {
+      "kind": "ask_human",
+      "group": "about_assistant",
+      "situation": "self_human"
+    },
+    {
+      "kind": "ask_memory",
+      "group": "about_assistant",
+      "situation": "self_memory"
+    },
+    {
+      "kind": "ask_internet",
+      "group": "about_assistant",
+      "situation": "self_internet"
+    },
+    {
+      "kind": "ask_creator",
+      "group": "about_assistant",
+      "situation": "self_creator"
+    },
+    {
+      "kind": "ask_opinion",
+      "group": "about_assistant",
+      "situation": "self_opinion"
+    },
+    {
+      "kind": "ask_advice",
+      "group": "about_assistant",
+      "situation": "self_advice"
+    },
+    {
+      "kind": "ask_professional_advice",
+      "group": "about_assistant",
+      "situation": "self_professional_advice"
+    },
+    {
+      "kind": "out_of_scope_task",
+      "group": "off_limits",
+      "situation": "offtopic_task"
+    },
+    {
+      "kind": "manipulation",
+      "group": "off_limits",
+      "situation": "adversarial_manipulation"
+    },
+    {
+      "kind": "paradox",
+      "group": "off_limits",
+      "situation": "adversarial_paradox"
+    },
+    {
+      "kind": "false_premise",
+      "group": "off_limits",
+      "situation": "adversarial_false_premise"
+    },
+    {
+      "kind": "nonsense_hypothetical",
+      "group": "off_limits",
+      "situation": "nonsense_hypothetical"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "feature": "Abduction: all inclusion-minimal explanations, two of equal cost and a larger one, and a distractor hypothesis that explains nothing",
+  "status": "hypotheses",
+  "complete": true,
+  "hypotheses": [
+    ["smoke_seen lab"],
+    ["drill_running lab"],
+    ["heat_high lab", "motion_seen lab"]
+  ],
+  "requires": [
+    "rules",
+    "abduce"
+  ]
+}

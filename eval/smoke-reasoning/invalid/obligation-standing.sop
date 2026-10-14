@@ -1,0 +1,16 @@
+# expect: obligation_unscoped
+@incident predicate
+  args subject:entity
+@logged predicate
+  args subject:entity
+@log_incident action
+  params ?i
+  requires incident ?i
+  adds logged ?i
+@log_all norm
+  oblige ~log_incident ?i
+  when incident ?i
+  standing
+  within 5
+  severity soft
+  cost 3

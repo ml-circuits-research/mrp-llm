@@ -1,0 +1,14 @@
+@a fact
+  holds parent ana bogdan
+  valid timeless
+  source demonstration
+
+@b fact
+  holds parent bogdan carina
+  valid timeless
+  source demonstration
+
+@g rule
+  when parent ?x ?y
+  when parent ?y ?z
+  then grandparent ?x ?z

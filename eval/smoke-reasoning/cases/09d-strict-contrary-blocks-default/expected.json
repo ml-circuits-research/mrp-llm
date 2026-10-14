@@ -1,0 +1,9 @@
+{
+  "feature": "Defaults: a strict contrary (an explicit negative fact) blocks the default automatically, no both",
+  "status": "refuted",
+  "complete": true,
+  "requires": [
+    "default",
+    "strict_contrary"
+  ]
+}

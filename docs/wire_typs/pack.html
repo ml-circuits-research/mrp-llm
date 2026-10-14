@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#pack" target="_top">Wire index</a> · <a href="fact.html">fact</a> · <a href="solve.html">solve</a> · <a href="remember.html">remember</a></p><h1><code>pack</code></h1><p><code>pack</code> groups already constructed values or approved declaration handles into an array. A trusted <a href="../wiki.html#definition-sop" target="_top">SOP</a> circuit uses it when an operation needs several facts, assumption facts or events, for example <a href="solve.html">solve</a> data or <a href="remember.html">remember</a> inputs. Grouping does not establish truth, install a rule, or publish a claim. This is system/tool collection plumbing, not a model-authored declaration.</p><h2>Complete field grammar</h2><table><thead><tr><th>Field / multiplicity</th><th>Accepted values and semantics</th></tr></thead><tbody><tr><td id="field-items"><code>items</code> — one or more lines, required</td><td>Each line is split into whitespace-separated tokens by <code>words()</code> (quoted substrings count as one token but are <em>not</em> accepted as inputs). Each token must be <code>$id</code> referring to a produced value or <code>~id</code> referring to a declared definition. <code>$id</code> follows value dependencies, so a future port can be consumed when materialized; <code>~id</code> is a handle, not a value dependency. Only <code>~rule</code>, supported research declarations and template/procedure handles can be read by the current <code>readObject</code>; despite the declarative appearance of <code>fact</code>, <code>~fact</code> is not handled here: use <code>$fact</code>. <code>~solve</code> and arbitrary literals also fail at runtime. Multiple <code>items</code> lines retain source order; nested arrays from <code>pack</code> values are recursively flattened. No count, type, or homogeneity check occurs in <code>pack</code> itself; its consumer checks acceptable item kinds.</td></tr></tbody></table><h2>Consumer contracts</h2><p>Runtime returns a flat array. <code>solve.data</code> on the relational path requires only fact/rule items in its linker; numeric <code>solve.constraint</code> does not accept data. <code>remember.input</code> accepts facts, events, or approved library definitions with host permission. <code>solve.assume</code> accepts fact items (typically <code>source assumption</code>) and marks them conditional. A pack that combines kinds can be valid at construction and rejected by a later consumer; do not treat <code>pack</code> as a typed proof or a mutable <code>~</code> accumulator. Even when the same data also feeds a solve, session recording requires a separate authorized remember operation.</p><h2>Current syntax examples</h2><p>Two facts of the same relation can feed one local query. The expected binding collection contains <code>shelf_a</code> and <code>shelf_b</code>, subject to normal completeness checks:</p><pre data-sop="current"><code>@book_one fact
+  holds located book_a shelf_a
+  valid timeless
+
+@book_two fact
+  holds located book_b shelf_b
+  valid timeless
+
+@catalog pack
+  items $book_one $book_two
+
+@question query
+  where located ?book ?shelf
+  select ?shelf
+  mode select
+
+@answer solve
+  query $question
+  data $catalog
+  output ?shelf many</code></pre><p>A second application groups facts for an authorized session write, rather than using them as local solve data. The remember operation requires a session and write permission:</p><pre data-sop="current"><code>@north fact
+  holds accessible entrance_north
+  valid timeless
+
+@south fact
+  holds accessible entrance_south
+  valid timeless
+
+@entries pack
+  items $north
+  items $south
+
+@store remember
+  input $entries
+  scope session</code></pre><p>The following parses because <code>items</code> is initially an untyped string. It fails at runtime with <code>Expected approved declarative definition ~need_detail</code>: <code>~need_detail</code> names a <code>clarify</code> operation, not a supported declaration handle.</p><pre data-sop="invalid" data-check="runtime" data-error="Expected approved declarative definition ~need_detail"><code>@need_detail clarify
+  text "Which item?"
+
+@bad pack
+  items ~need_detail</code></pre><p><strong>Implementation sources:</strong> <code>sop/parser.mjs</code> (<code>SPEC.pack</code>, <code>words</code>, <code>dependencies</code>), <code>sop/runtime.mjs</code> (<code>dataInputs</code>, <code>readObject</code>, <code>case 'pack'</code>, <code>case 'remember'</code>).</p></main><script type="module" src="help-page.mjs"></script></body></html>

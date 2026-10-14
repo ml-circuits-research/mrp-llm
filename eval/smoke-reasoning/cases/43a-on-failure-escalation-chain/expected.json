@@ -1,0 +1,25 @@
+{
+  "feature": "on_failure escalation: a strict method with no legal run hands over to its declared fallback, which may hand over again",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 30,
+    "steps": 1,
+    "names": [
+      "copy_tape"
+    ]
+  },
+  "used": [
+    {
+      "id": "tape_backup",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "on_failure",
+    "used"
+  ]
+}

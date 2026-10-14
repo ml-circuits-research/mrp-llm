@@ -1,0 +1,5 @@
+@q query
+  mode every
+  where player_of ?p ?t
+  select ?t
+  scope certified ?p

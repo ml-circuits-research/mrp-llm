@@ -1,0 +1,10 @@
+{
+  "feature": "Versioned rules: asof reproduces the answer under the version in force at that date",
+  "status": "unknown",
+  "complete": true,
+  "requires": [
+    "rules",
+    "compare_in_rules",
+    "versions"
+  ]
+}

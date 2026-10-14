@@ -1,0 +1,111 @@
+{
+  "feature": "LLM stress: a 30-step reachability chain with a cut, bypasses, blocked nodes (closed), a cycle and 60 distractor edges",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "t": "d0"
+    },
+    {
+      "t": "d1"
+    },
+    {
+      "t": "d2"
+    },
+    {
+      "t": "d3"
+    },
+    {
+      "t": "d4"
+    },
+    {
+      "t": "d5"
+    },
+    {
+      "t": "d6"
+    },
+    {
+      "t": "d7"
+    },
+    {
+      "t": "d8"
+    },
+    {
+      "t": "d9"
+    },
+    {
+      "t": "n1"
+    },
+    {
+      "t": "n10"
+    },
+    {
+      "t": "n11"
+    },
+    {
+      "t": "n12"
+    },
+    {
+      "t": "n13"
+    },
+    {
+      "t": "n14"
+    },
+    {
+      "t": "n16"
+    },
+    {
+      "t": "n17"
+    },
+    {
+      "t": "n18"
+    },
+    {
+      "t": "n19"
+    },
+    {
+      "t": "n2"
+    },
+    {
+      "t": "n20"
+    },
+    {
+      "t": "n21"
+    },
+    {
+      "t": "n22"
+    },
+    {
+      "t": "n23"
+    },
+    {
+      "t": "n3"
+    },
+    {
+      "t": "n4"
+    },
+    {
+      "t": "n5"
+    },
+    {
+      "t": "n6"
+    },
+    {
+      "t": "n8"
+    },
+    {
+      "t": "n9"
+    },
+    {
+      "t": "z0"
+    }
+  ],
+  "requires": [
+    "facts",
+    "rules",
+    "recursion",
+    "naf",
+    "closed_world",
+    "select"
+  ]
+}

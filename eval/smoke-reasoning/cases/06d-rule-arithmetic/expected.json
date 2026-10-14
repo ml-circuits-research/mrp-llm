@@ -1,0 +1,18 @@
+{
+  "feature": "Arithmetic inside rules (compute and compare over bound values)",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "o": "o1"
+    },
+    {
+      "o": "o3"
+    }
+  ],
+  "requires": [
+    "rules",
+    "compute_in_rules",
+    "compare_in_rules"
+  ]
+}

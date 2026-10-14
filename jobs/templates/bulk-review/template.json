@@ -1,0 +1,15 @@
+{
+  "name": "bulk-review",
+  "description": "Review many work items (knowledge wires, query circuits, commonsense wires) against their material with a cheap model, repair confirmed problems automatically, and escalate only what stays unresolved. The attachment is JSONL: {id, material, work, context_id?, context?} per line.",
+  "kind": "adapter",
+  "adapter": "adapter.mjs",
+  "targets": ["none"],
+  "taskKind": "bulk-review",
+  "params": {
+    "review_kind": {"type": "string", "enum": ["knowledge-wires", "query-circuits", "commonsense-wires"], "description": "which review instructions apply (config/review/<kind>/)"},
+    "repair": {"type": "boolean", "default": true, "description": "repair confirmed problems automatically"},
+    "limit": {"type": "integer", "min": 1, "max": 5000, "required": false, "description": "review only the first N items"}
+  },
+  "budget": {"usd": 0.3},
+  "_note": "Wraps lib/llm-review (reviewLoop) with the auditor role's tier; escalations are written to the task folder."
+}

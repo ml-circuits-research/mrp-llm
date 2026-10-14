@@ -1,0 +1,11 @@
+@smoke_detected predicate
+  args none
+@alarm_on predicate
+  args none
+
+@f1 fact
+  holds smoke_detected
+
+@r1 rule
+  when smoke_detected
+  then alarm_on

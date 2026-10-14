@@ -1,0 +1,90 @@
+{
+  "feature": "Budget exhaustion: a partial result says it is partial",
+  "status": "supported",
+  "complete": false,
+  "rows_subset_of": [
+    {
+      "t": "n1"
+    },
+    {
+      "t": "n2"
+    },
+    {
+      "t": "n3"
+    },
+    {
+      "t": "n4"
+    },
+    {
+      "t": "n5"
+    },
+    {
+      "t": "n6"
+    },
+    {
+      "t": "n7"
+    },
+    {
+      "t": "n8"
+    },
+    {
+      "t": "n9"
+    },
+    {
+      "t": "n10"
+    },
+    {
+      "t": "n11"
+    },
+    {
+      "t": "n12"
+    }
+  ],
+  "min_rows": 1,
+  "budget": {
+    "must_exhaust": true,
+    "full_rows": [
+      {
+        "t": "n1"
+      },
+      {
+        "t": "n2"
+      },
+      {
+        "t": "n3"
+      },
+      {
+        "t": "n4"
+      },
+      {
+        "t": "n5"
+      },
+      {
+        "t": "n6"
+      },
+      {
+        "t": "n7"
+      },
+      {
+        "t": "n8"
+      },
+      {
+        "t": "n9"
+      },
+      {
+        "t": "n10"
+      },
+      {
+        "t": "n11"
+      },
+      {
+        "t": "n12"
+      }
+    ]
+  },
+  "requires": [
+    "rules",
+    "recursion",
+    "budget"
+  ]
+}

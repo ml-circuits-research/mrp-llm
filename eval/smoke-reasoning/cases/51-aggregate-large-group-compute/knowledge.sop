@@ -1,0 +1,12048 @@
+@salary predicate
+  args subject:entity topic:entity object:integer
+  closed true
+
+@dept_payroll predicate
+  args subject:entity object:integer
+
+@dept_size predicate
+  args subject:entity object:integer
+
+@top_salary predicate
+  args subject:entity object:integer
+
+@avg_salary predicate
+  args subject:entity object:integer
+
+@gap predicate
+  args subject:entity object:integer
+
+@f1 fact
+  holds salary p0 d0 30000
+
+@f2 fact
+  holds salary p1 d0 30111
+
+@f3 fact
+  holds salary p2 d0 30222
+
+@f4 fact
+  holds salary p3 d0 30333
+
+@f5 fact
+  holds salary p4 d0 30444
+
+@f6 fact
+  holds salary p5 d0 30555
+
+@f7 fact
+  holds salary p6 d0 30666
+
+@f8 fact
+  holds salary p7 d0 30777
+
+@f9 fact
+  holds salary p8 d0 30888
+
+@f10 fact
+  holds salary p9 d0 30999
+
+@f11 fact
+  holds salary p10 d0 31110
+
+@f12 fact
+  holds salary p11 d0 31221
+
+@f13 fact
+  holds salary p12 d0 31332
+
+@f14 fact
+  holds salary p13 d0 31443
+
+@f15 fact
+  holds salary p14 d0 31554
+
+@f16 fact
+  holds salary p15 d0 31665
+
+@f17 fact
+  holds salary p16 d0 31776
+
+@f18 fact
+  holds salary p17 d0 31887
+
+@f19 fact
+  holds salary p18 d0 31998
+
+@f20 fact
+  holds salary p19 d0 32109
+
+@f21 fact
+  holds salary p20 d0 32220
+
+@f22 fact
+  holds salary p21 d0 32331
+
+@f23 fact
+  holds salary p22 d0 32442
+
+@f24 fact
+  holds salary p23 d0 32553
+
+@f25 fact
+  holds salary p24 d0 32664
+
+@f26 fact
+  holds salary p25 d0 32775
+
+@f27 fact
+  holds salary p26 d0 32886
+
+@f28 fact
+  holds salary p27 d0 32997
+
+@f29 fact
+  holds salary p28 d0 33108
+
+@f30 fact
+  holds salary p29 d0 33219
+
+@f31 fact
+  holds salary p30 d0 33330
+
+@f32 fact
+  holds salary p31 d0 33441
+
+@f33 fact
+  holds salary p32 d0 33552
+
+@f34 fact
+  holds salary p33 d0 33663
+
+@f35 fact
+  holds salary p34 d0 33774
+
+@f36 fact
+  holds salary p35 d0 33885
+
+@f37 fact
+  holds salary p36 d0 33996
+
+@f38 fact
+  holds salary p37 d0 34107
+
+@f39 fact
+  holds salary p38 d0 34218
+
+@f40 fact
+  holds salary p39 d0 34329
+
+@f41 fact
+  holds salary p40 d0 34440
+
+@f42 fact
+  holds salary p41 d0 34551
+
+@f43 fact
+  holds salary p42 d0 34662
+
+@f44 fact
+  holds salary p43 d0 34773
+
+@f45 fact
+  holds salary p44 d0 34884
+
+@f46 fact
+  holds salary p45 d0 34995
+
+@f47 fact
+  holds salary p46 d0 35106
+
+@f48 fact
+  holds salary p47 d0 35217
+
+@f49 fact
+  holds salary p48 d0 35328
+
+@f50 fact
+  holds salary p49 d0 35439
+
+@f51 fact
+  holds salary p50 d0 35550
+
+@f52 fact
+  holds salary p51 d0 35661
+
+@f53 fact
+  holds salary p52 d0 35772
+
+@f54 fact
+  holds salary p53 d0 35883
+
+@f55 fact
+  holds salary p54 d0 35994
+
+@f56 fact
+  holds salary p55 d0 36105
+
+@f57 fact
+  holds salary p56 d0 36216
+
+@f58 fact
+  holds salary p57 d0 36327
+
+@f59 fact
+  holds salary p58 d0 36438
+
+@f60 fact
+  holds salary p59 d0 36549
+
+@f61 fact
+  holds salary p60 d0 36660
+
+@f62 fact
+  holds salary p61 d0 36771
+
+@f63 fact
+  holds salary p62 d0 36882
+
+@f64 fact
+  holds salary p63 d0 36993
+
+@f65 fact
+  holds salary p64 d0 37104
+
+@f66 fact
+  holds salary p65 d0 37215
+
+@f67 fact
+  holds salary p66 d0 37326
+
+@f68 fact
+  holds salary p67 d0 37437
+
+@f69 fact
+  holds salary p68 d0 37548
+
+@f70 fact
+  holds salary p69 d0 37659
+
+@f71 fact
+  holds salary p70 d0 37770
+
+@f72 fact
+  holds salary p71 d0 37881
+
+@f73 fact
+  holds salary p72 d0 37992
+
+@f74 fact
+  holds salary p73 d0 38103
+
+@f75 fact
+  holds salary p74 d0 38214
+
+@f76 fact
+  holds salary p75 d0 38325
+
+@f77 fact
+  holds salary p76 d0 38436
+
+@f78 fact
+  holds salary p77 d0 38547
+
+@f79 fact
+  holds salary p78 d0 38658
+
+@f80 fact
+  holds salary p79 d0 38769
+
+@f81 fact
+  holds salary p80 d0 38880
+
+@f82 fact
+  holds salary p81 d0 38991
+
+@f83 fact
+  holds salary p82 d0 39102
+
+@f84 fact
+  holds salary p83 d0 39213
+
+@f85 fact
+  holds salary p84 d0 39324
+
+@f86 fact
+  holds salary p85 d0 39435
+
+@f87 fact
+  holds salary p86 d0 39546
+
+@f88 fact
+  holds salary p87 d0 39657
+
+@f89 fact
+  holds salary p88 d0 39768
+
+@f90 fact
+  holds salary p89 d0 39879
+
+@f91 fact
+  holds salary p90 d0 39990
+
+@f92 fact
+  holds salary p91 d0 40101
+
+@f93 fact
+  holds salary p92 d0 40212
+
+@f94 fact
+  holds salary p93 d0 40323
+
+@f95 fact
+  holds salary p94 d0 40434
+
+@f96 fact
+  holds salary p95 d0 40545
+
+@f97 fact
+  holds salary p96 d0 40656
+
+@f98 fact
+  holds salary p97 d0 40767
+
+@f99 fact
+  holds salary p98 d0 40878
+
+@f100 fact
+  holds salary p99 d0 40989
+
+@f101 fact
+  holds salary p100 d0 41100
+
+@f102 fact
+  holds salary p101 d0 41211
+
+@f103 fact
+  holds salary p102 d0 41322
+
+@f104 fact
+  holds salary p103 d0 41433
+
+@f105 fact
+  holds salary p104 d0 41544
+
+@f106 fact
+  holds salary p105 d0 41655
+
+@f107 fact
+  holds salary p106 d0 41766
+
+@f108 fact
+  holds salary p107 d0 41877
+
+@f109 fact
+  holds salary p108 d0 41988
+
+@f110 fact
+  holds salary p109 d0 42099
+
+@f111 fact
+  holds salary p110 d0 42210
+
+@f112 fact
+  holds salary p111 d0 42321
+
+@f113 fact
+  holds salary p112 d0 42432
+
+@f114 fact
+  holds salary p113 d0 42543
+
+@f115 fact
+  holds salary p114 d0 42654
+
+@f116 fact
+  holds salary p115 d0 42765
+
+@f117 fact
+  holds salary p116 d0 42876
+
+@f118 fact
+  holds salary p117 d0 42987
+
+@f119 fact
+  holds salary p118 d0 43098
+
+@f120 fact
+  holds salary p119 d0 43209
+
+@f121 fact
+  holds salary p120 d0 43320
+
+@f122 fact
+  holds salary p121 d0 43431
+
+@f123 fact
+  holds salary p122 d0 43542
+
+@f124 fact
+  holds salary p123 d0 43653
+
+@f125 fact
+  holds salary p124 d0 43764
+
+@f126 fact
+  holds salary p125 d0 43875
+
+@f127 fact
+  holds salary p126 d0 43986
+
+@f128 fact
+  holds salary p127 d0 44097
+
+@f129 fact
+  holds salary p128 d0 44208
+
+@f130 fact
+  holds salary p129 d0 44319
+
+@f131 fact
+  holds salary p130 d0 44430
+
+@f132 fact
+  holds salary p131 d0 44541
+
+@f133 fact
+  holds salary p132 d0 44652
+
+@f134 fact
+  holds salary p133 d0 44763
+
+@f135 fact
+  holds salary p134 d0 44874
+
+@f136 fact
+  holds salary p135 d0 44985
+
+@f137 fact
+  holds salary p136 d0 30096
+
+@f138 fact
+  holds salary p137 d0 30207
+
+@f139 fact
+  holds salary p138 d0 30318
+
+@f140 fact
+  holds salary p139 d0 30429
+
+@f141 fact
+  holds salary p140 d0 30540
+
+@f142 fact
+  holds salary p141 d0 30651
+
+@f143 fact
+  holds salary p142 d0 30762
+
+@f144 fact
+  holds salary p143 d0 30873
+
+@f145 fact
+  holds salary p144 d0 30984
+
+@f146 fact
+  holds salary p145 d0 31095
+
+@f147 fact
+  holds salary p146 d0 31206
+
+@f148 fact
+  holds salary p147 d0 31317
+
+@f149 fact
+  holds salary p148 d0 31428
+
+@f150 fact
+  holds salary p149 d0 31539
+
+@f151 fact
+  holds salary p150 d0 31650
+
+@f152 fact
+  holds salary p151 d0 31761
+
+@f153 fact
+  holds salary p152 d0 31872
+
+@f154 fact
+  holds salary p153 d0 31983
+
+@f155 fact
+  holds salary p154 d0 32094
+
+@f156 fact
+  holds salary p155 d0 32205
+
+@f157 fact
+  holds salary p156 d0 32316
+
+@f158 fact
+  holds salary p157 d0 32427
+
+@f159 fact
+  holds salary p158 d0 32538
+
+@f160 fact
+  holds salary p159 d0 32649
+
+@f161 fact
+  holds salary p160 d0 32760
+
+@f162 fact
+  holds salary p161 d0 32871
+
+@f163 fact
+  holds salary p162 d0 32982
+
+@f164 fact
+  holds salary p163 d0 33093
+
+@f165 fact
+  holds salary p164 d0 33204
+
+@f166 fact
+  holds salary p165 d0 33315
+
+@f167 fact
+  holds salary p166 d0 33426
+
+@f168 fact
+  holds salary p167 d0 33537
+
+@f169 fact
+  holds salary p168 d0 33648
+
+@f170 fact
+  holds salary p169 d0 33759
+
+@f171 fact
+  holds salary p170 d0 33870
+
+@f172 fact
+  holds salary p171 d0 33981
+
+@f173 fact
+  holds salary p172 d0 34092
+
+@f174 fact
+  holds salary p173 d0 34203
+
+@f175 fact
+  holds salary p174 d0 34314
+
+@f176 fact
+  holds salary p175 d0 34425
+
+@f177 fact
+  holds salary p176 d0 34536
+
+@f178 fact
+  holds salary p177 d0 34647
+
+@f179 fact
+  holds salary p178 d0 34758
+
+@f180 fact
+  holds salary p179 d0 34869
+
+@f181 fact
+  holds salary p180 d0 34980
+
+@f182 fact
+  holds salary p181 d0 35091
+
+@f183 fact
+  holds salary p182 d0 35202
+
+@f184 fact
+  holds salary p183 d0 35313
+
+@f185 fact
+  holds salary p184 d0 35424
+
+@f186 fact
+  holds salary p185 d0 35535
+
+@f187 fact
+  holds salary p186 d0 35646
+
+@f188 fact
+  holds salary p187 d0 35757
+
+@f189 fact
+  holds salary p188 d0 35868
+
+@f190 fact
+  holds salary p189 d0 35979
+
+@f191 fact
+  holds salary p190 d0 36090
+
+@f192 fact
+  holds salary p191 d0 36201
+
+@f193 fact
+  holds salary p192 d0 36312
+
+@f194 fact
+  holds salary p193 d0 36423
+
+@f195 fact
+  holds salary p194 d0 36534
+
+@f196 fact
+  holds salary p195 d0 36645
+
+@f197 fact
+  holds salary p196 d0 36756
+
+@f198 fact
+  holds salary p197 d0 36867
+
+@f199 fact
+  holds salary p198 d0 36978
+
+@f200 fact
+  holds salary p199 d0 37089
+
+@f201 fact
+  holds salary p200 d0 37200
+
+@f202 fact
+  holds salary p201 d0 37311
+
+@f203 fact
+  holds salary p202 d0 37422
+
+@f204 fact
+  holds salary p203 d0 37533
+
+@f205 fact
+  holds salary p204 d0 37644
+
+@f206 fact
+  holds salary p205 d0 37755
+
+@f207 fact
+  holds salary p206 d0 37866
+
+@f208 fact
+  holds salary p207 d0 37977
+
+@f209 fact
+  holds salary p208 d0 38088
+
+@f210 fact
+  holds salary p209 d0 38199
+
+@f211 fact
+  holds salary p210 d0 38310
+
+@f212 fact
+  holds salary p211 d0 38421
+
+@f213 fact
+  holds salary p212 d0 38532
+
+@f214 fact
+  holds salary p213 d0 38643
+
+@f215 fact
+  holds salary p214 d0 38754
+
+@f216 fact
+  holds salary p215 d0 38865
+
+@f217 fact
+  holds salary p216 d0 38976
+
+@f218 fact
+  holds salary p217 d0 39087
+
+@f219 fact
+  holds salary p218 d0 39198
+
+@f220 fact
+  holds salary p219 d0 39309
+
+@f221 fact
+  holds salary p220 d0 39420
+
+@f222 fact
+  holds salary p221 d0 39531
+
+@f223 fact
+  holds salary p222 d0 39642
+
+@f224 fact
+  holds salary p223 d0 39753
+
+@f225 fact
+  holds salary p224 d0 39864
+
+@f226 fact
+  holds salary p225 d0 39975
+
+@f227 fact
+  holds salary p226 d0 40086
+
+@f228 fact
+  holds salary p227 d0 40197
+
+@f229 fact
+  holds salary p228 d0 40308
+
+@f230 fact
+  holds salary p229 d0 40419
+
+@f231 fact
+  holds salary p230 d0 40530
+
+@f232 fact
+  holds salary p231 d0 40641
+
+@f233 fact
+  holds salary p232 d0 40752
+
+@f234 fact
+  holds salary p233 d0 40863
+
+@f235 fact
+  holds salary p234 d0 40974
+
+@f236 fact
+  holds salary p235 d0 41085
+
+@f237 fact
+  holds salary p236 d0 41196
+
+@f238 fact
+  holds salary p237 d0 41307
+
+@f239 fact
+  holds salary p238 d0 41418
+
+@f240 fact
+  holds salary p239 d0 41529
+
+@f241 fact
+  holds salary p240 d0 41640
+
+@f242 fact
+  holds salary p241 d0 41751
+
+@f243 fact
+  holds salary p242 d0 41862
+
+@f244 fact
+  holds salary p243 d0 41973
+
+@f245 fact
+  holds salary p244 d0 42084
+
+@f246 fact
+  holds salary p245 d0 42195
+
+@f247 fact
+  holds salary p246 d0 42306
+
+@f248 fact
+  holds salary p247 d0 42417
+
+@f249 fact
+  holds salary p248 d0 42528
+
+@f250 fact
+  holds salary p249 d0 42639
+
+@f251 fact
+  holds salary p250 d0 42750
+
+@f252 fact
+  holds salary p251 d0 42861
+
+@f253 fact
+  holds salary p252 d0 42972
+
+@f254 fact
+  holds salary p253 d0 43083
+
+@f255 fact
+  holds salary p254 d0 43194
+
+@f256 fact
+  holds salary p255 d0 43305
+
+@f257 fact
+  holds salary p256 d0 43416
+
+@f258 fact
+  holds salary p257 d0 43527
+
+@f259 fact
+  holds salary p258 d0 43638
+
+@f260 fact
+  holds salary p259 d0 43749
+
+@f261 fact
+  holds salary p260 d0 43860
+
+@f262 fact
+  holds salary p261 d0 43971
+
+@f263 fact
+  holds salary p262 d0 44082
+
+@f264 fact
+  holds salary p263 d0 44193
+
+@f265 fact
+  holds salary p264 d0 44304
+
+@f266 fact
+  holds salary p265 d0 44415
+
+@f267 fact
+  holds salary p266 d0 44526
+
+@f268 fact
+  holds salary p267 d0 44637
+
+@f269 fact
+  holds salary p268 d0 44748
+
+@f270 fact
+  holds salary p269 d0 44859
+
+@f271 fact
+  holds salary p270 d0 44970
+
+@f272 fact
+  holds salary p271 d0 30081
+
+@f273 fact
+  holds salary p272 d0 30192
+
+@f274 fact
+  holds salary p273 d0 30303
+
+@f275 fact
+  holds salary p274 d0 30414
+
+@f276 fact
+  holds salary p275 d0 30525
+
+@f277 fact
+  holds salary p276 d0 30636
+
+@f278 fact
+  holds salary p277 d0 30747
+
+@f279 fact
+  holds salary p278 d0 30858
+
+@f280 fact
+  holds salary p279 d0 30969
+
+@f281 fact
+  holds salary p280 d0 31080
+
+@f282 fact
+  holds salary p281 d0 31191
+
+@f283 fact
+  holds salary p282 d0 31302
+
+@f284 fact
+  holds salary p283 d0 31413
+
+@f285 fact
+  holds salary p284 d0 31524
+
+@f286 fact
+  holds salary p285 d0 31635
+
+@f287 fact
+  holds salary p286 d0 31746
+
+@f288 fact
+  holds salary p287 d0 31857
+
+@f289 fact
+  holds salary p288 d0 31968
+
+@f290 fact
+  holds salary p289 d0 32079
+
+@f291 fact
+  holds salary p290 d0 32190
+
+@f292 fact
+  holds salary p291 d0 32301
+
+@f293 fact
+  holds salary p292 d0 32412
+
+@f294 fact
+  holds salary p293 d0 32523
+
+@f295 fact
+  holds salary p294 d0 32634
+
+@f296 fact
+  holds salary p295 d0 32745
+
+@f297 fact
+  holds salary p296 d0 32856
+
+@f298 fact
+  holds salary p297 d0 32967
+
+@f299 fact
+  holds salary p298 d0 33078
+
+@f300 fact
+  holds salary p299 d0 33189
+
+@f301 fact
+  holds salary p300 d0 33300
+
+@f302 fact
+  holds salary p301 d0 33411
+
+@f303 fact
+  holds salary p302 d0 33522
+
+@f304 fact
+  holds salary p303 d0 33633
+
+@f305 fact
+  holds salary p304 d0 33744
+
+@f306 fact
+  holds salary p305 d0 33855
+
+@f307 fact
+  holds salary p306 d0 33966
+
+@f308 fact
+  holds salary p307 d0 34077
+
+@f309 fact
+  holds salary p308 d0 34188
+
+@f310 fact
+  holds salary p309 d0 34299
+
+@f311 fact
+  holds salary p310 d0 34410
+
+@f312 fact
+  holds salary p311 d0 34521
+
+@f313 fact
+  holds salary p312 d0 34632
+
+@f314 fact
+  holds salary p313 d0 34743
+
+@f315 fact
+  holds salary p314 d0 34854
+
+@f316 fact
+  holds salary p315 d0 34965
+
+@f317 fact
+  holds salary p316 d0 35076
+
+@f318 fact
+  holds salary p317 d0 35187
+
+@f319 fact
+  holds salary p318 d0 35298
+
+@f320 fact
+  holds salary p319 d0 35409
+
+@f321 fact
+  holds salary p320 d0 35520
+
+@f322 fact
+  holds salary p321 d0 35631
+
+@f323 fact
+  holds salary p322 d0 35742
+
+@f324 fact
+  holds salary p323 d0 35853
+
+@f325 fact
+  holds salary p324 d0 35964
+
+@f326 fact
+  holds salary p325 d0 36075
+
+@f327 fact
+  holds salary p326 d0 36186
+
+@f328 fact
+  holds salary p327 d0 36297
+
+@f329 fact
+  holds salary p328 d0 36408
+
+@f330 fact
+  holds salary p329 d0 36519
+
+@f331 fact
+  holds salary p330 d0 36630
+
+@f332 fact
+  holds salary p331 d0 36741
+
+@f333 fact
+  holds salary p332 d0 36852
+
+@f334 fact
+  holds salary p333 d0 36963
+
+@f335 fact
+  holds salary p334 d0 37074
+
+@f336 fact
+  holds salary p335 d0 37185
+
+@f337 fact
+  holds salary p336 d0 37296
+
+@f338 fact
+  holds salary p337 d0 37407
+
+@f339 fact
+  holds salary p338 d0 37518
+
+@f340 fact
+  holds salary p339 d0 37629
+
+@f341 fact
+  holds salary p340 d0 37740
+
+@f342 fact
+  holds salary p341 d0 37851
+
+@f343 fact
+  holds salary p342 d0 37962
+
+@f344 fact
+  holds salary p343 d0 38073
+
+@f345 fact
+  holds salary p344 d0 38184
+
+@f346 fact
+  holds salary p345 d0 38295
+
+@f347 fact
+  holds salary p346 d0 38406
+
+@f348 fact
+  holds salary p347 d0 38517
+
+@f349 fact
+  holds salary p348 d0 38628
+
+@f350 fact
+  holds salary p349 d0 38739
+
+@f351 fact
+  holds salary p350 d0 38850
+
+@f352 fact
+  holds salary p351 d0 38961
+
+@f353 fact
+  holds salary p352 d0 39072
+
+@f354 fact
+  holds salary p353 d0 39183
+
+@f355 fact
+  holds salary p354 d0 39294
+
+@f356 fact
+  holds salary p355 d0 39405
+
+@f357 fact
+  holds salary p356 d0 39516
+
+@f358 fact
+  holds salary p357 d0 39627
+
+@f359 fact
+  holds salary p358 d0 39738
+
+@f360 fact
+  holds salary p359 d0 39849
+
+@f361 fact
+  holds salary p360 d0 39960
+
+@f362 fact
+  holds salary p361 d0 40071
+
+@f363 fact
+  holds salary p362 d0 40182
+
+@f364 fact
+  holds salary p363 d0 40293
+
+@f365 fact
+  holds salary p364 d0 40404
+
+@f366 fact
+  holds salary p365 d0 40515
+
+@f367 fact
+  holds salary p366 d0 40626
+
+@f368 fact
+  holds salary p367 d0 40737
+
+@f369 fact
+  holds salary p368 d0 40848
+
+@f370 fact
+  holds salary p369 d0 40959
+
+@f371 fact
+  holds salary p370 d0 41070
+
+@f372 fact
+  holds salary p371 d0 41181
+
+@f373 fact
+  holds salary p372 d0 41292
+
+@f374 fact
+  holds salary p373 d0 41403
+
+@f375 fact
+  holds salary p374 d0 41514
+
+@f376 fact
+  holds salary p375 d0 41625
+
+@f377 fact
+  holds salary p376 d0 41736
+
+@f378 fact
+  holds salary p377 d0 41847
+
+@f379 fact
+  holds salary p378 d0 41958
+
+@f380 fact
+  holds salary p379 d0 42069
+
+@f381 fact
+  holds salary p380 d0 42180
+
+@f382 fact
+  holds salary p381 d0 42291
+
+@f383 fact
+  holds salary p382 d0 42402
+
+@f384 fact
+  holds salary p383 d0 42513
+
+@f385 fact
+  holds salary p384 d0 42624
+
+@f386 fact
+  holds salary p385 d0 42735
+
+@f387 fact
+  holds salary p386 d0 42846
+
+@f388 fact
+  holds salary p387 d0 42957
+
+@f389 fact
+  holds salary p388 d0 43068
+
+@f390 fact
+  holds salary p389 d0 43179
+
+@f391 fact
+  holds salary p390 d0 43290
+
+@f392 fact
+  holds salary p391 d0 43401
+
+@f393 fact
+  holds salary p392 d0 43512
+
+@f394 fact
+  holds salary p393 d0 43623
+
+@f395 fact
+  holds salary p394 d0 43734
+
+@f396 fact
+  holds salary p395 d0 43845
+
+@f397 fact
+  holds salary p396 d0 43956
+
+@f398 fact
+  holds salary p397 d0 44067
+
+@f399 fact
+  holds salary p398 d0 44178
+
+@f400 fact
+  holds salary p399 d0 44289
+
+@f401 fact
+  holds salary p400 d0 44400
+
+@f402 fact
+  holds salary p401 d0 44511
+
+@f403 fact
+  holds salary p402 d0 44622
+
+@f404 fact
+  holds salary p403 d0 44733
+
+@f405 fact
+  holds salary p404 d0 44844
+
+@f406 fact
+  holds salary p405 d0 44955
+
+@f407 fact
+  holds salary p406 d0 30066
+
+@f408 fact
+  holds salary p407 d0 30177
+
+@f409 fact
+  holds salary p408 d0 30288
+
+@f410 fact
+  holds salary p409 d0 30399
+
+@f411 fact
+  holds salary p410 d0 30510
+
+@f412 fact
+  holds salary p411 d0 30621
+
+@f413 fact
+  holds salary p412 d0 30732
+
+@f414 fact
+  holds salary p413 d0 30843
+
+@f415 fact
+  holds salary p414 d0 30954
+
+@f416 fact
+  holds salary p415 d0 31065
+
+@f417 fact
+  holds salary p416 d0 31176
+
+@f418 fact
+  holds salary p417 d0 31287
+
+@f419 fact
+  holds salary p418 d0 31398
+
+@f420 fact
+  holds salary p419 d0 31509
+
+@f421 fact
+  holds salary p420 d0 31620
+
+@f422 fact
+  holds salary p421 d0 31731
+
+@f423 fact
+  holds salary p422 d0 31842
+
+@f424 fact
+  holds salary p423 d0 31953
+
+@f425 fact
+  holds salary p424 d0 32064
+
+@f426 fact
+  holds salary p425 d0 32175
+
+@f427 fact
+  holds salary p426 d0 32286
+
+@f428 fact
+  holds salary p427 d0 32397
+
+@f429 fact
+  holds salary p428 d0 32508
+
+@f430 fact
+  holds salary p429 d0 32619
+
+@f431 fact
+  holds salary p430 d0 32730
+
+@f432 fact
+  holds salary p431 d0 32841
+
+@f433 fact
+  holds salary p432 d0 32952
+
+@f434 fact
+  holds salary p433 d0 33063
+
+@f435 fact
+  holds salary p434 d0 33174
+
+@f436 fact
+  holds salary p435 d0 33285
+
+@f437 fact
+  holds salary p436 d0 33396
+
+@f438 fact
+  holds salary p437 d0 33507
+
+@f439 fact
+  holds salary p438 d0 33618
+
+@f440 fact
+  holds salary p439 d0 33729
+
+@f441 fact
+  holds salary p440 d0 33840
+
+@f442 fact
+  holds salary p441 d0 33951
+
+@f443 fact
+  holds salary p442 d0 34062
+
+@f444 fact
+  holds salary p443 d0 34173
+
+@f445 fact
+  holds salary p444 d0 34284
+
+@f446 fact
+  holds salary p445 d0 34395
+
+@f447 fact
+  holds salary p446 d0 34506
+
+@f448 fact
+  holds salary p447 d0 34617
+
+@f449 fact
+  holds salary p448 d0 34728
+
+@f450 fact
+  holds salary p449 d0 34839
+
+@f451 fact
+  holds salary p450 d0 34950
+
+@f452 fact
+  holds salary p451 d0 35061
+
+@f453 fact
+  holds salary p452 d0 35172
+
+@f454 fact
+  holds salary p453 d0 35283
+
+@f455 fact
+  holds salary p454 d0 35394
+
+@f456 fact
+  holds salary p455 d0 35505
+
+@f457 fact
+  holds salary p456 d0 35616
+
+@f458 fact
+  holds salary p457 d0 35727
+
+@f459 fact
+  holds salary p458 d0 35838
+
+@f460 fact
+  holds salary p459 d0 35949
+
+@f461 fact
+  holds salary p460 d0 36060
+
+@f462 fact
+  holds salary p461 d0 36171
+
+@f463 fact
+  holds salary p462 d0 36282
+
+@f464 fact
+  holds salary p463 d0 36393
+
+@f465 fact
+  holds salary p464 d0 36504
+
+@f466 fact
+  holds salary p465 d0 36615
+
+@f467 fact
+  holds salary p466 d0 36726
+
+@f468 fact
+  holds salary p467 d0 36837
+
+@f469 fact
+  holds salary p468 d0 36948
+
+@f470 fact
+  holds salary p469 d0 37059
+
+@f471 fact
+  holds salary p470 d0 37170
+
+@f472 fact
+  holds salary p471 d0 37281
+
+@f473 fact
+  holds salary p472 d0 37392
+
+@f474 fact
+  holds salary p473 d0 37503
+
+@f475 fact
+  holds salary p474 d0 37614
+
+@f476 fact
+  holds salary p475 d0 37725
+
+@f477 fact
+  holds salary p476 d0 37836
+
+@f478 fact
+  holds salary p477 d0 37947
+
+@f479 fact
+  holds salary p478 d0 38058
+
+@f480 fact
+  holds salary p479 d0 38169
+
+@f481 fact
+  holds salary p480 d0 38280
+
+@f482 fact
+  holds salary p481 d0 38391
+
+@f483 fact
+  holds salary p482 d0 38502
+
+@f484 fact
+  holds salary p483 d0 38613
+
+@f485 fact
+  holds salary p484 d0 38724
+
+@f486 fact
+  holds salary p485 d0 38835
+
+@f487 fact
+  holds salary p486 d0 38946
+
+@f488 fact
+  holds salary p487 d0 39057
+
+@f489 fact
+  holds salary p488 d0 39168
+
+@f490 fact
+  holds salary p489 d0 39279
+
+@f491 fact
+  holds salary p490 d0 39390
+
+@f492 fact
+  holds salary p491 d0 39501
+
+@f493 fact
+  holds salary p492 d0 39612
+
+@f494 fact
+  holds salary p493 d0 39723
+
+@f495 fact
+  holds salary p494 d0 39834
+
+@f496 fact
+  holds salary p495 d0 39945
+
+@f497 fact
+  holds salary p496 d0 40056
+
+@f498 fact
+  holds salary p497 d0 40167
+
+@f499 fact
+  holds salary p498 d0 40278
+
+@f500 fact
+  holds salary p499 d0 40389
+
+@f501 fact
+  holds salary p500 d0 40500
+
+@f502 fact
+  holds salary p501 d0 40611
+
+@f503 fact
+  holds salary p502 d0 40722
+
+@f504 fact
+  holds salary p503 d0 40833
+
+@f505 fact
+  holds salary p504 d0 40944
+
+@f506 fact
+  holds salary p505 d0 41055
+
+@f507 fact
+  holds salary p506 d0 41166
+
+@f508 fact
+  holds salary p507 d0 41277
+
+@f509 fact
+  holds salary p508 d0 41388
+
+@f510 fact
+  holds salary p509 d0 41499
+
+@f511 fact
+  holds salary p510 d0 41610
+
+@f512 fact
+  holds salary p511 d0 41721
+
+@f513 fact
+  holds salary p512 d0 41832
+
+@f514 fact
+  holds salary p513 d0 41943
+
+@f515 fact
+  holds salary p514 d0 42054
+
+@f516 fact
+  holds salary p515 d0 42165
+
+@f517 fact
+  holds salary p516 d0 42276
+
+@f518 fact
+  holds salary p517 d0 42387
+
+@f519 fact
+  holds salary p518 d0 42498
+
+@f520 fact
+  holds salary p519 d0 42609
+
+@f521 fact
+  holds salary p520 d0 42720
+
+@f522 fact
+  holds salary p521 d0 42831
+
+@f523 fact
+  holds salary p522 d0 42942
+
+@f524 fact
+  holds salary p523 d0 43053
+
+@f525 fact
+  holds salary p524 d0 43164
+
+@f526 fact
+  holds salary p525 d0 43275
+
+@f527 fact
+  holds salary p526 d0 43386
+
+@f528 fact
+  holds salary p527 d0 43497
+
+@f529 fact
+  holds salary p528 d0 43608
+
+@f530 fact
+  holds salary p529 d0 43719
+
+@f531 fact
+  holds salary p530 d0 43830
+
+@f532 fact
+  holds salary p531 d0 43941
+
+@f533 fact
+  holds salary p532 d0 44052
+
+@f534 fact
+  holds salary p533 d0 44163
+
+@f535 fact
+  holds salary p534 d0 44274
+
+@f536 fact
+  holds salary p535 d0 44385
+
+@f537 fact
+  holds salary p536 d0 44496
+
+@f538 fact
+  holds salary p537 d0 44607
+
+@f539 fact
+  holds salary p538 d0 44718
+
+@f540 fact
+  holds salary p539 d0 44829
+
+@f541 fact
+  holds salary p540 d0 44940
+
+@f542 fact
+  holds salary p541 d0 30051
+
+@f543 fact
+  holds salary p542 d0 30162
+
+@f544 fact
+  holds salary p543 d0 30273
+
+@f545 fact
+  holds salary p544 d0 30384
+
+@f546 fact
+  holds salary p545 d0 30495
+
+@f547 fact
+  holds salary p546 d0 30606
+
+@f548 fact
+  holds salary p547 d0 30717
+
+@f549 fact
+  holds salary p548 d0 30828
+
+@f550 fact
+  holds salary p549 d0 30939
+
+@f551 fact
+  holds salary p550 d0 31050
+
+@f552 fact
+  holds salary p551 d0 31161
+
+@f553 fact
+  holds salary p552 d0 31272
+
+@f554 fact
+  holds salary p553 d0 31383
+
+@f555 fact
+  holds salary p554 d0 31494
+
+@f556 fact
+  holds salary p555 d0 31605
+
+@f557 fact
+  holds salary p556 d0 31716
+
+@f558 fact
+  holds salary p557 d0 31827
+
+@f559 fact
+  holds salary p558 d0 31938
+
+@f560 fact
+  holds salary p559 d0 32049
+
+@f561 fact
+  holds salary p560 d0 32160
+
+@f562 fact
+  holds salary p561 d0 32271
+
+@f563 fact
+  holds salary p562 d0 32382
+
+@f564 fact
+  holds salary p563 d0 32493
+
+@f565 fact
+  holds salary p564 d0 32604
+
+@f566 fact
+  holds salary p565 d0 32715
+
+@f567 fact
+  holds salary p566 d0 32826
+
+@f568 fact
+  holds salary p567 d0 32937
+
+@f569 fact
+  holds salary p568 d0 33048
+
+@f570 fact
+  holds salary p569 d0 33159
+
+@f571 fact
+  holds salary p570 d0 33270
+
+@f572 fact
+  holds salary p571 d0 33381
+
+@f573 fact
+  holds salary p572 d0 33492
+
+@f574 fact
+  holds salary p573 d0 33603
+
+@f575 fact
+  holds salary p574 d0 33714
+
+@f576 fact
+  holds salary p575 d0 33825
+
+@f577 fact
+  holds salary p576 d0 33936
+
+@f578 fact
+  holds salary p577 d0 34047
+
+@f579 fact
+  holds salary p578 d0 34158
+
+@f580 fact
+  holds salary p579 d0 34269
+
+@f581 fact
+  holds salary p580 d0 34380
+
+@f582 fact
+  holds salary p581 d0 34491
+
+@f583 fact
+  holds salary p582 d0 34602
+
+@f584 fact
+  holds salary p583 d0 34713
+
+@f585 fact
+  holds salary p584 d0 34824
+
+@f586 fact
+  holds salary p585 d0 34935
+
+@f587 fact
+  holds salary p586 d0 35046
+
+@f588 fact
+  holds salary p587 d0 35157
+
+@f589 fact
+  holds salary p588 d0 35268
+
+@f590 fact
+  holds salary p589 d0 35379
+
+@f591 fact
+  holds salary p590 d0 35490
+
+@f592 fact
+  holds salary p591 d0 35601
+
+@f593 fact
+  holds salary p592 d0 35712
+
+@f594 fact
+  holds salary p593 d0 35823
+
+@f595 fact
+  holds salary p594 d0 35934
+
+@f596 fact
+  holds salary p595 d0 36045
+
+@f597 fact
+  holds salary p596 d0 36156
+
+@f598 fact
+  holds salary p597 d0 36267
+
+@f599 fact
+  holds salary p598 d0 36378
+
+@f600 fact
+  holds salary p599 d0 36489
+
+@f601 fact
+  holds salary p600 d0 36600
+
+@f602 fact
+  holds salary p601 d0 36711
+
+@f603 fact
+  holds salary p602 d0 36822
+
+@f604 fact
+  holds salary p603 d0 36933
+
+@f605 fact
+  holds salary p604 d0 37044
+
+@f606 fact
+  holds salary p605 d0 37155
+
+@f607 fact
+  holds salary p606 d0 37266
+
+@f608 fact
+  holds salary p607 d0 37377
+
+@f609 fact
+  holds salary p608 d0 37488
+
+@f610 fact
+  holds salary p609 d0 37599
+
+@f611 fact
+  holds salary p610 d0 37710
+
+@f612 fact
+  holds salary p611 d0 37821
+
+@f613 fact
+  holds salary p612 d0 37932
+
+@f614 fact
+  holds salary p613 d0 38043
+
+@f615 fact
+  holds salary p614 d0 38154
+
+@f616 fact
+  holds salary p615 d0 38265
+
+@f617 fact
+  holds salary p616 d0 38376
+
+@f618 fact
+  holds salary p617 d0 38487
+
+@f619 fact
+  holds salary p618 d0 38598
+
+@f620 fact
+  holds salary p619 d0 38709
+
+@f621 fact
+  holds salary p620 d0 38820
+
+@f622 fact
+  holds salary p621 d0 38931
+
+@f623 fact
+  holds salary p622 d0 39042
+
+@f624 fact
+  holds salary p623 d0 39153
+
+@f625 fact
+  holds salary p624 d0 39264
+
+@f626 fact
+  holds salary p625 d0 39375
+
+@f627 fact
+  holds salary p626 d0 39486
+
+@f628 fact
+  holds salary p627 d0 39597
+
+@f629 fact
+  holds salary p628 d0 39708
+
+@f630 fact
+  holds salary p629 d0 39819
+
+@f631 fact
+  holds salary p630 d0 39930
+
+@f632 fact
+  holds salary p631 d0 40041
+
+@f633 fact
+  holds salary p632 d0 40152
+
+@f634 fact
+  holds salary p633 d0 40263
+
+@f635 fact
+  holds salary p634 d0 40374
+
+@f636 fact
+  holds salary p635 d0 40485
+
+@f637 fact
+  holds salary p636 d0 40596
+
+@f638 fact
+  holds salary p637 d0 40707
+
+@f639 fact
+  holds salary p638 d0 40818
+
+@f640 fact
+  holds salary p639 d0 40929
+
+@f641 fact
+  holds salary p640 d0 41040
+
+@f642 fact
+  holds salary p641 d0 41151
+
+@f643 fact
+  holds salary p642 d0 41262
+
+@f644 fact
+  holds salary p643 d0 41373
+
+@f645 fact
+  holds salary p644 d0 41484
+
+@f646 fact
+  holds salary p645 d0 41595
+
+@f647 fact
+  holds salary p646 d0 41706
+
+@f648 fact
+  holds salary p647 d0 41817
+
+@f649 fact
+  holds salary p648 d0 41928
+
+@f650 fact
+  holds salary p649 d0 42039
+
+@f651 fact
+  holds salary p650 d0 42150
+
+@f652 fact
+  holds salary p651 d0 42261
+
+@f653 fact
+  holds salary p652 d0 42372
+
+@f654 fact
+  holds salary p653 d0 42483
+
+@f655 fact
+  holds salary p654 d0 42594
+
+@f656 fact
+  holds salary p655 d0 42705
+
+@f657 fact
+  holds salary p656 d0 42816
+
+@f658 fact
+  holds salary p657 d0 42927
+
+@f659 fact
+  holds salary p658 d0 43038
+
+@f660 fact
+  holds salary p659 d0 43149
+
+@f661 fact
+  holds salary p660 d0 43260
+
+@f662 fact
+  holds salary p661 d0 43371
+
+@f663 fact
+  holds salary p662 d0 43482
+
+@f664 fact
+  holds salary p663 d0 43593
+
+@f665 fact
+  holds salary p664 d0 43704
+
+@f666 fact
+  holds salary p665 d0 43815
+
+@f667 fact
+  holds salary p666 d0 43926
+
+@f668 fact
+  holds salary p667 d0 44037
+
+@f669 fact
+  holds salary p668 d0 44148
+
+@f670 fact
+  holds salary p669 d0 44259
+
+@f671 fact
+  holds salary p670 d0 44370
+
+@f672 fact
+  holds salary p671 d0 44481
+
+@f673 fact
+  holds salary p672 d0 44592
+
+@f674 fact
+  holds salary p673 d0 44703
+
+@f675 fact
+  holds salary p674 d0 44814
+
+@f676 fact
+  holds salary p675 d0 44925
+
+@f677 fact
+  holds salary p676 d0 30036
+
+@f678 fact
+  holds salary p677 d0 30147
+
+@f679 fact
+  holds salary p678 d0 30258
+
+@f680 fact
+  holds salary p679 d0 30369
+
+@f681 fact
+  holds salary p680 d0 30480
+
+@f682 fact
+  holds salary p681 d0 30591
+
+@f683 fact
+  holds salary p682 d0 30702
+
+@f684 fact
+  holds salary p683 d0 30813
+
+@f685 fact
+  holds salary p684 d0 30924
+
+@f686 fact
+  holds salary p685 d0 31035
+
+@f687 fact
+  holds salary p686 d0 31146
+
+@f688 fact
+  holds salary p687 d0 31257
+
+@f689 fact
+  holds salary p688 d0 31368
+
+@f690 fact
+  holds salary p689 d0 31479
+
+@f691 fact
+  holds salary p690 d0 31590
+
+@f692 fact
+  holds salary p691 d0 31701
+
+@f693 fact
+  holds salary p692 d0 31812
+
+@f694 fact
+  holds salary p693 d0 31923
+
+@f695 fact
+  holds salary p694 d0 32034
+
+@f696 fact
+  holds salary p695 d0 32145
+
+@f697 fact
+  holds salary p696 d0 32256
+
+@f698 fact
+  holds salary p697 d0 32367
+
+@f699 fact
+  holds salary p698 d0 32478
+
+@f700 fact
+  holds salary p699 d0 32589
+
+@f701 fact
+  holds salary p700 d0 32700
+
+@f702 fact
+  holds salary p701 d0 32811
+
+@f703 fact
+  holds salary p702 d0 32922
+
+@f704 fact
+  holds salary p703 d0 33033
+
+@f705 fact
+  holds salary p704 d0 33144
+
+@f706 fact
+  holds salary p705 d0 33255
+
+@f707 fact
+  holds salary p706 d0 33366
+
+@f708 fact
+  holds salary p707 d0 33477
+
+@f709 fact
+  holds salary p708 d0 33588
+
+@f710 fact
+  holds salary p709 d0 33699
+
+@f711 fact
+  holds salary p710 d0 33810
+
+@f712 fact
+  holds salary p711 d0 33921
+
+@f713 fact
+  holds salary p712 d0 34032
+
+@f714 fact
+  holds salary p713 d0 34143
+
+@f715 fact
+  holds salary p714 d0 34254
+
+@f716 fact
+  holds salary p715 d0 34365
+
+@f717 fact
+  holds salary p716 d0 34476
+
+@f718 fact
+  holds salary p717 d0 34587
+
+@f719 fact
+  holds salary p718 d0 34698
+
+@f720 fact
+  holds salary p719 d0 34809
+
+@f721 fact
+  holds salary p720 d0 34920
+
+@f722 fact
+  holds salary p721 d0 35031
+
+@f723 fact
+  holds salary p722 d0 35142
+
+@f724 fact
+  holds salary p723 d0 35253
+
+@f725 fact
+  holds salary p724 d0 35364
+
+@f726 fact
+  holds salary p725 d0 35475
+
+@f727 fact
+  holds salary p726 d0 35586
+
+@f728 fact
+  holds salary p727 d0 35697
+
+@f729 fact
+  holds salary p728 d0 35808
+
+@f730 fact
+  holds salary p729 d0 35919
+
+@f731 fact
+  holds salary p730 d0 36030
+
+@f732 fact
+  holds salary p731 d0 36141
+
+@f733 fact
+  holds salary p732 d0 36252
+
+@f734 fact
+  holds salary p733 d0 36363
+
+@f735 fact
+  holds salary p734 d0 36474
+
+@f736 fact
+  holds salary p735 d0 36585
+
+@f737 fact
+  holds salary p736 d0 36696
+
+@f738 fact
+  holds salary p737 d0 36807
+
+@f739 fact
+  holds salary p738 d0 36918
+
+@f740 fact
+  holds salary p739 d0 37029
+
+@f741 fact
+  holds salary p740 d0 37140
+
+@f742 fact
+  holds salary p741 d0 37251
+
+@f743 fact
+  holds salary p742 d0 37362
+
+@f744 fact
+  holds salary p743 d0 37473
+
+@f745 fact
+  holds salary p744 d0 37584
+
+@f746 fact
+  holds salary p745 d0 37695
+
+@f747 fact
+  holds salary p746 d0 37806
+
+@f748 fact
+  holds salary p747 d0 37917
+
+@f749 fact
+  holds salary p748 d0 38028
+
+@f750 fact
+  holds salary p749 d0 38139
+
+@f751 fact
+  holds salary p750 d0 38250
+
+@f752 fact
+  holds salary p751 d0 38361
+
+@f753 fact
+  holds salary p752 d0 38472
+
+@f754 fact
+  holds salary p753 d0 38583
+
+@f755 fact
+  holds salary p754 d0 38694
+
+@f756 fact
+  holds salary p755 d0 38805
+
+@f757 fact
+  holds salary p756 d0 38916
+
+@f758 fact
+  holds salary p757 d0 39027
+
+@f759 fact
+  holds salary p758 d0 39138
+
+@f760 fact
+  holds salary p759 d0 39249
+
+@f761 fact
+  holds salary p760 d0 39360
+
+@f762 fact
+  holds salary p761 d0 39471
+
+@f763 fact
+  holds salary p762 d0 39582
+
+@f764 fact
+  holds salary p763 d0 39693
+
+@f765 fact
+  holds salary p764 d0 39804
+
+@f766 fact
+  holds salary p765 d0 39915
+
+@f767 fact
+  holds salary p766 d0 40026
+
+@f768 fact
+  holds salary p767 d0 40137
+
+@f769 fact
+  holds salary p768 d0 40248
+
+@f770 fact
+  holds salary p769 d0 40359
+
+@f771 fact
+  holds salary p770 d0 40470
+
+@f772 fact
+  holds salary p771 d0 40581
+
+@f773 fact
+  holds salary p772 d0 40692
+
+@f774 fact
+  holds salary p773 d0 40803
+
+@f775 fact
+  holds salary p774 d0 40914
+
+@f776 fact
+  holds salary p775 d0 41025
+
+@f777 fact
+  holds salary p776 d0 41136
+
+@f778 fact
+  holds salary p777 d0 41247
+
+@f779 fact
+  holds salary p778 d0 41358
+
+@f780 fact
+  holds salary p779 d0 41469
+
+@f781 fact
+  holds salary p780 d0 41580
+
+@f782 fact
+  holds salary p781 d0 41691
+
+@f783 fact
+  holds salary p782 d0 41802
+
+@f784 fact
+  holds salary p783 d0 41913
+
+@f785 fact
+  holds salary p784 d0 42024
+
+@f786 fact
+  holds salary p785 d0 42135
+
+@f787 fact
+  holds salary p786 d0 42246
+
+@f788 fact
+  holds salary p787 d0 42357
+
+@f789 fact
+  holds salary p788 d0 42468
+
+@f790 fact
+  holds salary p789 d0 42579
+
+@f791 fact
+  holds salary p790 d0 42690
+
+@f792 fact
+  holds salary p791 d0 42801
+
+@f793 fact
+  holds salary p792 d0 42912
+
+@f794 fact
+  holds salary p793 d0 43023
+
+@f795 fact
+  holds salary p794 d0 43134
+
+@f796 fact
+  holds salary p795 d0 43245
+
+@f797 fact
+  holds salary p796 d0 43356
+
+@f798 fact
+  holds salary p797 d0 43467
+
+@f799 fact
+  holds salary p798 d0 43578
+
+@f800 fact
+  holds salary p799 d0 43689
+
+@f801 fact
+  holds salary p800 d0 43800
+
+@f802 fact
+  holds salary p801 d0 43911
+
+@f803 fact
+  holds salary p802 d0 44022
+
+@f804 fact
+  holds salary p803 d0 44133
+
+@f805 fact
+  holds salary p804 d0 44244
+
+@f806 fact
+  holds salary p805 d0 44355
+
+@f807 fact
+  holds salary p806 d0 44466
+
+@f808 fact
+  holds salary p807 d0 44577
+
+@f809 fact
+  holds salary p808 d0 44688
+
+@f810 fact
+  holds salary p809 d0 44799
+
+@f811 fact
+  holds salary p810 d0 44910
+
+@f812 fact
+  holds salary p811 d0 30021
+
+@f813 fact
+  holds salary p812 d0 30132
+
+@f814 fact
+  holds salary p813 d0 30243
+
+@f815 fact
+  holds salary p814 d0 30354
+
+@f816 fact
+  holds salary p815 d0 30465
+
+@f817 fact
+  holds salary p816 d0 30576
+
+@f818 fact
+  holds salary p817 d0 30687
+
+@f819 fact
+  holds salary p818 d0 30798
+
+@f820 fact
+  holds salary p819 d0 30909
+
+@f821 fact
+  holds salary p820 d0 31020
+
+@f822 fact
+  holds salary p821 d0 31131
+
+@f823 fact
+  holds salary p822 d0 31242
+
+@f824 fact
+  holds salary p823 d0 31353
+
+@f825 fact
+  holds salary p824 d0 31464
+
+@f826 fact
+  holds salary p825 d0 31575
+
+@f827 fact
+  holds salary p826 d0 31686
+
+@f828 fact
+  holds salary p827 d0 31797
+
+@f829 fact
+  holds salary p828 d0 31908
+
+@f830 fact
+  holds salary p829 d0 32019
+
+@f831 fact
+  holds salary p830 d0 32130
+
+@f832 fact
+  holds salary p831 d0 32241
+
+@f833 fact
+  holds salary p832 d0 32352
+
+@f834 fact
+  holds salary p833 d0 32463
+
+@f835 fact
+  holds salary p834 d0 32574
+
+@f836 fact
+  holds salary p835 d0 32685
+
+@f837 fact
+  holds salary p836 d0 32796
+
+@f838 fact
+  holds salary p837 d0 32907
+
+@f839 fact
+  holds salary p838 d0 33018
+
+@f840 fact
+  holds salary p839 d0 33129
+
+@f841 fact
+  holds salary p840 d0 33240
+
+@f842 fact
+  holds salary p841 d0 33351
+
+@f843 fact
+  holds salary p842 d0 33462
+
+@f844 fact
+  holds salary p843 d0 33573
+
+@f845 fact
+  holds salary p844 d0 33684
+
+@f846 fact
+  holds salary p845 d0 33795
+
+@f847 fact
+  holds salary p846 d0 33906
+
+@f848 fact
+  holds salary p847 d0 34017
+
+@f849 fact
+  holds salary p848 d0 34128
+
+@f850 fact
+  holds salary p849 d0 34239
+
+@f851 fact
+  holds salary p850 d0 34350
+
+@f852 fact
+  holds salary p851 d0 34461
+
+@f853 fact
+  holds salary p852 d0 34572
+
+@f854 fact
+  holds salary p853 d0 34683
+
+@f855 fact
+  holds salary p854 d0 34794
+
+@f856 fact
+  holds salary p855 d0 34905
+
+@f857 fact
+  holds salary p856 d0 35016
+
+@f858 fact
+  holds salary p857 d0 35127
+
+@f859 fact
+  holds salary p858 d0 35238
+
+@f860 fact
+  holds salary p859 d0 35349
+
+@f861 fact
+  holds salary p860 d0 35460
+
+@f862 fact
+  holds salary p861 d0 35571
+
+@f863 fact
+  holds salary p862 d0 35682
+
+@f864 fact
+  holds salary p863 d0 35793
+
+@f865 fact
+  holds salary p864 d0 35904
+
+@f866 fact
+  holds salary p865 d0 36015
+
+@f867 fact
+  holds salary p866 d0 36126
+
+@f868 fact
+  holds salary p867 d0 36237
+
+@f869 fact
+  holds salary p868 d0 36348
+
+@f870 fact
+  holds salary p869 d0 36459
+
+@f871 fact
+  holds salary p870 d0 36570
+
+@f872 fact
+  holds salary p871 d0 36681
+
+@f873 fact
+  holds salary p872 d0 36792
+
+@f874 fact
+  holds salary p873 d0 36903
+
+@f875 fact
+  holds salary p874 d0 37014
+
+@f876 fact
+  holds salary p875 d0 37125
+
+@f877 fact
+  holds salary p876 d0 37236
+
+@f878 fact
+  holds salary p877 d0 37347
+
+@f879 fact
+  holds salary p878 d0 37458
+
+@f880 fact
+  holds salary p879 d0 37569
+
+@f881 fact
+  holds salary p880 d0 37680
+
+@f882 fact
+  holds salary p881 d0 37791
+
+@f883 fact
+  holds salary p882 d0 37902
+
+@f884 fact
+  holds salary p883 d0 38013
+
+@f885 fact
+  holds salary p884 d0 38124
+
+@f886 fact
+  holds salary p885 d0 38235
+
+@f887 fact
+  holds salary p886 d0 38346
+
+@f888 fact
+  holds salary p887 d0 38457
+
+@f889 fact
+  holds salary p888 d0 38568
+
+@f890 fact
+  holds salary p889 d0 38679
+
+@f891 fact
+  holds salary p890 d0 38790
+
+@f892 fact
+  holds salary p891 d0 38901
+
+@f893 fact
+  holds salary p892 d0 39012
+
+@f894 fact
+  holds salary p893 d0 39123
+
+@f895 fact
+  holds salary p894 d0 39234
+
+@f896 fact
+  holds salary p895 d0 39345
+
+@f897 fact
+  holds salary p896 d0 39456
+
+@f898 fact
+  holds salary p897 d0 39567
+
+@f899 fact
+  holds salary p898 d0 39678
+
+@f900 fact
+  holds salary p899 d0 39789
+
+@f901 fact
+  holds salary p900 d0 39900
+
+@f902 fact
+  holds salary p901 d0 40011
+
+@f903 fact
+  holds salary p902 d0 40122
+
+@f904 fact
+  holds salary p903 d0 40233
+
+@f905 fact
+  holds salary p904 d0 40344
+
+@f906 fact
+  holds salary p905 d0 40455
+
+@f907 fact
+  holds salary p906 d0 40566
+
+@f908 fact
+  holds salary p907 d0 40677
+
+@f909 fact
+  holds salary p908 d0 40788
+
+@f910 fact
+  holds salary p909 d0 40899
+
+@f911 fact
+  holds salary p910 d0 41010
+
+@f912 fact
+  holds salary p911 d0 41121
+
+@f913 fact
+  holds salary p912 d0 41232
+
+@f914 fact
+  holds salary p913 d0 41343
+
+@f915 fact
+  holds salary p914 d0 41454
+
+@f916 fact
+  holds salary p915 d0 41565
+
+@f917 fact
+  holds salary p916 d0 41676
+
+@f918 fact
+  holds salary p917 d0 41787
+
+@f919 fact
+  holds salary p918 d0 41898
+
+@f920 fact
+  holds salary p919 d0 42009
+
+@f921 fact
+  holds salary p920 d0 42120
+
+@f922 fact
+  holds salary p921 d0 42231
+
+@f923 fact
+  holds salary p922 d0 42342
+
+@f924 fact
+  holds salary p923 d0 42453
+
+@f925 fact
+  holds salary p924 d0 42564
+
+@f926 fact
+  holds salary p925 d0 42675
+
+@f927 fact
+  holds salary p926 d0 42786
+
+@f928 fact
+  holds salary p927 d0 42897
+
+@f929 fact
+  holds salary p928 d0 43008
+
+@f930 fact
+  holds salary p929 d0 43119
+
+@f931 fact
+  holds salary p930 d0 43230
+
+@f932 fact
+  holds salary p931 d0 43341
+
+@f933 fact
+  holds salary p932 d0 43452
+
+@f934 fact
+  holds salary p933 d0 43563
+
+@f935 fact
+  holds salary p934 d0 43674
+
+@f936 fact
+  holds salary p935 d0 43785
+
+@f937 fact
+  holds salary p936 d0 43896
+
+@f938 fact
+  holds salary p937 d0 44007
+
+@f939 fact
+  holds salary p938 d0 44118
+
+@f940 fact
+  holds salary p939 d0 44229
+
+@f941 fact
+  holds salary p940 d0 44340
+
+@f942 fact
+  holds salary p941 d0 44451
+
+@f943 fact
+  holds salary p942 d0 44562
+
+@f944 fact
+  holds salary p943 d0 44673
+
+@f945 fact
+  holds salary p944 d0 44784
+
+@f946 fact
+  holds salary p945 d0 44895
+
+@f947 fact
+  holds salary p946 d0 30006
+
+@f948 fact
+  holds salary p947 d0 30117
+
+@f949 fact
+  holds salary p948 d0 30228
+
+@f950 fact
+  holds salary p949 d0 30339
+
+@f951 fact
+  holds salary p950 d0 30450
+
+@f952 fact
+  holds salary p951 d0 30561
+
+@f953 fact
+  holds salary p952 d0 30672
+
+@f954 fact
+  holds salary p953 d0 30783
+
+@f955 fact
+  holds salary p954 d0 30894
+
+@f956 fact
+  holds salary p955 d0 31005
+
+@f957 fact
+  holds salary p956 d0 31116
+
+@f958 fact
+  holds salary p957 d0 31227
+
+@f959 fact
+  holds salary p958 d0 31338
+
+@f960 fact
+  holds salary p959 d0 31449
+
+@f961 fact
+  holds salary p960 d0 31560
+
+@f962 fact
+  holds salary p961 d0 31671
+
+@f963 fact
+  holds salary p962 d0 31782
+
+@f964 fact
+  holds salary p963 d0 31893
+
+@f965 fact
+  holds salary p964 d0 32004
+
+@f966 fact
+  holds salary p965 d0 32115
+
+@f967 fact
+  holds salary p966 d0 32226
+
+@f968 fact
+  holds salary p967 d0 32337
+
+@f969 fact
+  holds salary p968 d0 32448
+
+@f970 fact
+  holds salary p969 d0 32559
+
+@f971 fact
+  holds salary p970 d0 32670
+
+@f972 fact
+  holds salary p971 d0 32781
+
+@f973 fact
+  holds salary p972 d0 32892
+
+@f974 fact
+  holds salary p973 d0 33003
+
+@f975 fact
+  holds salary p974 d0 33114
+
+@f976 fact
+  holds salary p975 d0 33225
+
+@f977 fact
+  holds salary p976 d0 33336
+
+@f978 fact
+  holds salary p977 d0 33447
+
+@f979 fact
+  holds salary p978 d0 33558
+
+@f980 fact
+  holds salary p979 d0 33669
+
+@f981 fact
+  holds salary p980 d0 33780
+
+@f982 fact
+  holds salary p981 d0 33891
+
+@f983 fact
+  holds salary p982 d0 34002
+
+@f984 fact
+  holds salary p983 d0 34113
+
+@f985 fact
+  holds salary p984 d0 34224
+
+@f986 fact
+  holds salary p985 d0 34335
+
+@f987 fact
+  holds salary p986 d0 34446
+
+@f988 fact
+  holds salary p987 d0 34557
+
+@f989 fact
+  holds salary p988 d0 34668
+
+@f990 fact
+  holds salary p989 d0 34779
+
+@f991 fact
+  holds salary p990 d0 34890
+
+@f992 fact
+  holds salary p991 d0 35001
+
+@f993 fact
+  holds salary p992 d0 35112
+
+@f994 fact
+  holds salary p993 d0 35223
+
+@f995 fact
+  holds salary p994 d0 35334
+
+@f996 fact
+  holds salary p995 d0 35445
+
+@f997 fact
+  holds salary p996 d0 35556
+
+@f998 fact
+  holds salary p997 d0 35667
+
+@f999 fact
+  holds salary p998 d0 35778
+
+@f1000 fact
+  holds salary p999 d0 35889
+
+@f1001 fact
+  holds salary p1000 d0 36000
+
+@f1002 fact
+  holds salary p1001 d0 36111
+
+@f1003 fact
+  holds salary p1002 d0 36222
+
+@f1004 fact
+  holds salary p1003 d0 36333
+
+@f1005 fact
+  holds salary p1004 d0 36444
+
+@f1006 fact
+  holds salary p1005 d0 36555
+
+@f1007 fact
+  holds salary p1006 d0 36666
+
+@f1008 fact
+  holds salary p1007 d0 36777
+
+@f1009 fact
+  holds salary p1008 d0 36888
+
+@f1010 fact
+  holds salary p1009 d0 36999
+
+@f1011 fact
+  holds salary p1010 d0 37110
+
+@f1012 fact
+  holds salary p1011 d0 37221
+
+@f1013 fact
+  holds salary p1012 d0 37332
+
+@f1014 fact
+  holds salary p1013 d0 37443
+
+@f1015 fact
+  holds salary p1014 d0 37554
+
+@f1016 fact
+  holds salary p1015 d0 37665
+
+@f1017 fact
+  holds salary p1016 d0 37776
+
+@f1018 fact
+  holds salary p1017 d0 37887
+
+@f1019 fact
+  holds salary p1018 d0 37998
+
+@f1020 fact
+  holds salary p1019 d0 38109
+
+@f1021 fact
+  holds salary p1020 d0 38220
+
+@f1022 fact
+  holds salary p1021 d0 38331
+
+@f1023 fact
+  holds salary p1022 d0 38442
+
+@f1024 fact
+  holds salary p1023 d0 38553
+
+@f1025 fact
+  holds salary p1024 d0 38664
+
+@f1026 fact
+  holds salary p1025 d0 38775
+
+@f1027 fact
+  holds salary p1026 d0 38886
+
+@f1028 fact
+  holds salary p1027 d0 38997
+
+@f1029 fact
+  holds salary p1028 d0 39108
+
+@f1030 fact
+  holds salary p1029 d0 39219
+
+@f1031 fact
+  holds salary p1030 d0 39330
+
+@f1032 fact
+  holds salary p1031 d0 39441
+
+@f1033 fact
+  holds salary p1032 d0 39552
+
+@f1034 fact
+  holds salary p1033 d0 39663
+
+@f1035 fact
+  holds salary p1034 d0 39774
+
+@f1036 fact
+  holds salary p1035 d0 39885
+
+@f1037 fact
+  holds salary p1036 d0 39996
+
+@f1038 fact
+  holds salary p1037 d0 40107
+
+@f1039 fact
+  holds salary p1038 d0 40218
+
+@f1040 fact
+  holds salary p1039 d0 40329
+
+@f1041 fact
+  holds salary p1040 d0 40440
+
+@f1042 fact
+  holds salary p1041 d0 40551
+
+@f1043 fact
+  holds salary p1042 d0 40662
+
+@f1044 fact
+  holds salary p1043 d0 40773
+
+@f1045 fact
+  holds salary p1044 d0 40884
+
+@f1046 fact
+  holds salary p1045 d0 40995
+
+@f1047 fact
+  holds salary p1046 d0 41106
+
+@f1048 fact
+  holds salary p1047 d0 41217
+
+@f1049 fact
+  holds salary p1048 d0 41328
+
+@f1050 fact
+  holds salary p1049 d0 41439
+
+@f1051 fact
+  holds salary p1050 d0 41550
+
+@f1052 fact
+  holds salary p1051 d0 41661
+
+@f1053 fact
+  holds salary p1052 d0 41772
+
+@f1054 fact
+  holds salary p1053 d0 41883
+
+@f1055 fact
+  holds salary p1054 d0 41994
+
+@f1056 fact
+  holds salary p1055 d0 42105
+
+@f1057 fact
+  holds salary p1056 d0 42216
+
+@f1058 fact
+  holds salary p1057 d0 42327
+
+@f1059 fact
+  holds salary p1058 d0 42438
+
+@f1060 fact
+  holds salary p1059 d0 42549
+
+@f1061 fact
+  holds salary p1060 d0 42660
+
+@f1062 fact
+  holds salary p1061 d0 42771
+
+@f1063 fact
+  holds salary p1062 d0 42882
+
+@f1064 fact
+  holds salary p1063 d0 42993
+
+@f1065 fact
+  holds salary p1064 d0 43104
+
+@f1066 fact
+  holds salary p1065 d0 43215
+
+@f1067 fact
+  holds salary p1066 d0 43326
+
+@f1068 fact
+  holds salary p1067 d0 43437
+
+@f1069 fact
+  holds salary p1068 d0 43548
+
+@f1070 fact
+  holds salary p1069 d0 43659
+
+@f1071 fact
+  holds salary p1070 d0 43770
+
+@f1072 fact
+  holds salary p1071 d0 43881
+
+@f1073 fact
+  holds salary p1072 d0 43992
+
+@f1074 fact
+  holds salary p1073 d0 44103
+
+@f1075 fact
+  holds salary p1074 d0 44214
+
+@f1076 fact
+  holds salary p1075 d0 44325
+
+@f1077 fact
+  holds salary p1076 d0 44436
+
+@f1078 fact
+  holds salary p1077 d0 44547
+
+@f1079 fact
+  holds salary p1078 d0 44658
+
+@f1080 fact
+  holds salary p1079 d0 44769
+
+@f1081 fact
+  holds salary p1080 d0 44880
+
+@f1082 fact
+  holds salary p1081 d0 44991
+
+@f1083 fact
+  holds salary p1082 d0 30102
+
+@f1084 fact
+  holds salary p1083 d0 30213
+
+@f1085 fact
+  holds salary p1084 d0 30324
+
+@f1086 fact
+  holds salary p1085 d0 30435
+
+@f1087 fact
+  holds salary p1086 d0 30546
+
+@f1088 fact
+  holds salary p1087 d0 30657
+
+@f1089 fact
+  holds salary p1088 d0 30768
+
+@f1090 fact
+  holds salary p1089 d0 30879
+
+@f1091 fact
+  holds salary p1090 d0 30990
+
+@f1092 fact
+  holds salary p1091 d0 31101
+
+@f1093 fact
+  holds salary p1092 d0 31212
+
+@f1094 fact
+  holds salary p1093 d0 31323
+
+@f1095 fact
+  holds salary p1094 d0 31434
+
+@f1096 fact
+  holds salary p1095 d0 31545
+
+@f1097 fact
+  holds salary p1096 d0 31656
+
+@f1098 fact
+  holds salary p1097 d0 31767
+
+@f1099 fact
+  holds salary p1098 d0 31878
+
+@f1100 fact
+  holds salary p1099 d0 31989
+
+@f1101 fact
+  holds salary p1100 d0 32100
+
+@f1102 fact
+  holds salary p1101 d0 32211
+
+@f1103 fact
+  holds salary p1102 d0 32322
+
+@f1104 fact
+  holds salary p1103 d0 32433
+
+@f1105 fact
+  holds salary p1104 d0 32544
+
+@f1106 fact
+  holds salary p1105 d0 32655
+
+@f1107 fact
+  holds salary p1106 d0 32766
+
+@f1108 fact
+  holds salary p1107 d0 32877
+
+@f1109 fact
+  holds salary p1108 d0 32988
+
+@f1110 fact
+  holds salary p1109 d0 33099
+
+@f1111 fact
+  holds salary p1110 d0 33210
+
+@f1112 fact
+  holds salary p1111 d0 33321
+
+@f1113 fact
+  holds salary p1112 d0 33432
+
+@f1114 fact
+  holds salary p1113 d0 33543
+
+@f1115 fact
+  holds salary p1114 d0 33654
+
+@f1116 fact
+  holds salary p1115 d0 33765
+
+@f1117 fact
+  holds salary p1116 d0 33876
+
+@f1118 fact
+  holds salary p1117 d0 33987
+
+@f1119 fact
+  holds salary p1118 d0 34098
+
+@f1120 fact
+  holds salary p1119 d0 34209
+
+@f1121 fact
+  holds salary p1120 d0 34320
+
+@f1122 fact
+  holds salary p1121 d0 34431
+
+@f1123 fact
+  holds salary p1122 d0 34542
+
+@f1124 fact
+  holds salary p1123 d0 34653
+
+@f1125 fact
+  holds salary p1124 d0 34764
+
+@f1126 fact
+  holds salary p1125 d0 34875
+
+@f1127 fact
+  holds salary p1126 d0 34986
+
+@f1128 fact
+  holds salary p1127 d0 35097
+
+@f1129 fact
+  holds salary p1128 d0 35208
+
+@f1130 fact
+  holds salary p1129 d0 35319
+
+@f1131 fact
+  holds salary p1130 d0 35430
+
+@f1132 fact
+  holds salary p1131 d0 35541
+
+@f1133 fact
+  holds salary p1132 d0 35652
+
+@f1134 fact
+  holds salary p1133 d0 35763
+
+@f1135 fact
+  holds salary p1134 d0 35874
+
+@f1136 fact
+  holds salary p1135 d0 35985
+
+@f1137 fact
+  holds salary p1136 d0 36096
+
+@f1138 fact
+  holds salary p1137 d0 36207
+
+@f1139 fact
+  holds salary p1138 d0 36318
+
+@f1140 fact
+  holds salary p1139 d0 36429
+
+@f1141 fact
+  holds salary p1140 d0 36540
+
+@f1142 fact
+  holds salary p1141 d0 36651
+
+@f1143 fact
+  holds salary p1142 d0 36762
+
+@f1144 fact
+  holds salary p1143 d0 36873
+
+@f1145 fact
+  holds salary p1144 d0 36984
+
+@f1146 fact
+  holds salary p1145 d0 37095
+
+@f1147 fact
+  holds salary p1146 d0 37206
+
+@f1148 fact
+  holds salary p1147 d0 37317
+
+@f1149 fact
+  holds salary p1148 d0 37428
+
+@f1150 fact
+  holds salary p1149 d0 37539
+
+@f1151 fact
+  holds salary p1150 d0 37650
+
+@f1152 fact
+  holds salary p1151 d0 37761
+
+@f1153 fact
+  holds salary p1152 d0 37872
+
+@f1154 fact
+  holds salary p1153 d0 37983
+
+@f1155 fact
+  holds salary p1154 d0 38094
+
+@f1156 fact
+  holds salary p1155 d0 38205
+
+@f1157 fact
+  holds salary p1156 d0 38316
+
+@f1158 fact
+  holds salary p1157 d0 38427
+
+@f1159 fact
+  holds salary p1158 d0 38538
+
+@f1160 fact
+  holds salary p1159 d0 38649
+
+@f1161 fact
+  holds salary p1160 d0 38760
+
+@f1162 fact
+  holds salary p1161 d0 38871
+
+@f1163 fact
+  holds salary p1162 d0 38982
+
+@f1164 fact
+  holds salary p1163 d0 39093
+
+@f1165 fact
+  holds salary p1164 d0 39204
+
+@f1166 fact
+  holds salary p1165 d0 39315
+
+@f1167 fact
+  holds salary p1166 d0 39426
+
+@f1168 fact
+  holds salary p1167 d0 39537
+
+@f1169 fact
+  holds salary p1168 d0 39648
+
+@f1170 fact
+  holds salary p1169 d0 39759
+
+@f1171 fact
+  holds salary p1170 d0 39870
+
+@f1172 fact
+  holds salary p1171 d0 39981
+
+@f1173 fact
+  holds salary p1172 d0 40092
+
+@f1174 fact
+  holds salary p1173 d0 40203
+
+@f1175 fact
+  holds salary p1174 d0 40314
+
+@f1176 fact
+  holds salary p1175 d0 40425
+
+@f1177 fact
+  holds salary p1176 d0 40536
+
+@f1178 fact
+  holds salary p1177 d0 40647
+
+@f1179 fact
+  holds salary p1178 d0 40758
+
+@f1180 fact
+  holds salary p1179 d0 40869
+
+@f1181 fact
+  holds salary p1180 d0 40980
+
+@f1182 fact
+  holds salary p1181 d0 41091
+
+@f1183 fact
+  holds salary p1182 d0 41202
+
+@f1184 fact
+  holds salary p1183 d0 41313
+
+@f1185 fact
+  holds salary p1184 d0 41424
+
+@f1186 fact
+  holds salary p1185 d0 41535
+
+@f1187 fact
+  holds salary p1186 d0 41646
+
+@f1188 fact
+  holds salary p1187 d0 41757
+
+@f1189 fact
+  holds salary p1188 d0 41868
+
+@f1190 fact
+  holds salary p1189 d0 41979
+
+@f1191 fact
+  holds salary p1190 d0 42090
+
+@f1192 fact
+  holds salary p1191 d0 42201
+
+@f1193 fact
+  holds salary p1192 d0 42312
+
+@f1194 fact
+  holds salary p1193 d0 42423
+
+@f1195 fact
+  holds salary p1194 d0 42534
+
+@f1196 fact
+  holds salary p1195 d0 42645
+
+@f1197 fact
+  holds salary p1196 d0 42756
+
+@f1198 fact
+  holds salary p1197 d0 42867
+
+@f1199 fact
+  holds salary p1198 d0 42978
+
+@f1200 fact
+  holds salary p1199 d0 43089
+
+@f1201 fact
+  holds salary p1200 d0 43200
+
+@f1202 fact
+  holds salary p1201 d0 43311
+
+@f1203 fact
+  holds salary p1202 d0 43422
+
+@f1204 fact
+  holds salary p1203 d0 43533
+
+@f1205 fact
+  holds salary p1204 d0 43644
+
+@f1206 fact
+  holds salary p1205 d0 43755
+
+@f1207 fact
+  holds salary p1206 d0 43866
+
+@f1208 fact
+  holds salary p1207 d0 43977
+
+@f1209 fact
+  holds salary p1208 d0 44088
+
+@f1210 fact
+  holds salary p1209 d0 44199
+
+@f1211 fact
+  holds salary p1210 d0 44310
+
+@f1212 fact
+  holds salary p1211 d0 44421
+
+@f1213 fact
+  holds salary p1212 d0 44532
+
+@f1214 fact
+  holds salary p1213 d0 44643
+
+@f1215 fact
+  holds salary p1214 d0 44754
+
+@f1216 fact
+  holds salary p1215 d0 44865
+
+@f1217 fact
+  holds salary p1216 d0 44976
+
+@f1218 fact
+  holds salary p1217 d0 30087
+
+@f1219 fact
+  holds salary p1218 d0 30198
+
+@f1220 fact
+  holds salary p1219 d0 30309
+
+@f1221 fact
+  holds salary p1220 d0 30420
+
+@f1222 fact
+  holds salary p1221 d0 30531
+
+@f1223 fact
+  holds salary p1222 d0 30642
+
+@f1224 fact
+  holds salary p1223 d0 30753
+
+@f1225 fact
+  holds salary p1224 d0 30864
+
+@f1226 fact
+  holds salary p1225 d0 30975
+
+@f1227 fact
+  holds salary p1226 d0 31086
+
+@f1228 fact
+  holds salary p1227 d0 31197
+
+@f1229 fact
+  holds salary p1228 d0 31308
+
+@f1230 fact
+  holds salary p1229 d0 31419
+
+@f1231 fact
+  holds salary p1230 d0 31530
+
+@f1232 fact
+  holds salary p1231 d0 31641
+
+@f1233 fact
+  holds salary p1232 d0 31752
+
+@f1234 fact
+  holds salary p1233 d0 31863
+
+@f1235 fact
+  holds salary p1234 d0 31974
+
+@f1236 fact
+  holds salary p1235 d0 32085
+
+@f1237 fact
+  holds salary p1236 d0 32196
+
+@f1238 fact
+  holds salary p1237 d0 32307
+
+@f1239 fact
+  holds salary p1238 d0 32418
+
+@f1240 fact
+  holds salary p1239 d0 32529
+
+@f1241 fact
+  holds salary p1240 d0 32640
+
+@f1242 fact
+  holds salary p1241 d0 32751
+
+@f1243 fact
+  holds salary p1242 d0 32862
+
+@f1244 fact
+  holds salary p1243 d0 32973
+
+@f1245 fact
+  holds salary p1244 d0 33084
+
+@f1246 fact
+  holds salary p1245 d0 33195
+
+@f1247 fact
+  holds salary p1246 d0 33306
+
+@f1248 fact
+  holds salary p1247 d0 33417
+
+@f1249 fact
+  holds salary p1248 d0 33528
+
+@f1250 fact
+  holds salary p1249 d0 33639
+
+@f1251 fact
+  holds salary p1250 d0 33750
+
+@f1252 fact
+  holds salary p1251 d0 33861
+
+@f1253 fact
+  holds salary p1252 d0 33972
+
+@f1254 fact
+  holds salary p1253 d0 34083
+
+@f1255 fact
+  holds salary p1254 d0 34194
+
+@f1256 fact
+  holds salary p1255 d0 34305
+
+@f1257 fact
+  holds salary p1256 d0 34416
+
+@f1258 fact
+  holds salary p1257 d0 34527
+
+@f1259 fact
+  holds salary p1258 d0 34638
+
+@f1260 fact
+  holds salary p1259 d0 34749
+
+@f1261 fact
+  holds salary p1260 d0 34860
+
+@f1262 fact
+  holds salary p1261 d0 34971
+
+@f1263 fact
+  holds salary p1262 d0 35082
+
+@f1264 fact
+  holds salary p1263 d0 35193
+
+@f1265 fact
+  holds salary p1264 d0 35304
+
+@f1266 fact
+  holds salary p1265 d0 35415
+
+@f1267 fact
+  holds salary p1266 d0 35526
+
+@f1268 fact
+  holds salary p1267 d0 35637
+
+@f1269 fact
+  holds salary p1268 d0 35748
+
+@f1270 fact
+  holds salary p1269 d0 35859
+
+@f1271 fact
+  holds salary p1270 d0 35970
+
+@f1272 fact
+  holds salary p1271 d0 36081
+
+@f1273 fact
+  holds salary p1272 d0 36192
+
+@f1274 fact
+  holds salary p1273 d0 36303
+
+@f1275 fact
+  holds salary p1274 d0 36414
+
+@f1276 fact
+  holds salary p1275 d0 36525
+
+@f1277 fact
+  holds salary p1276 d0 36636
+
+@f1278 fact
+  holds salary p1277 d0 36747
+
+@f1279 fact
+  holds salary p1278 d0 36858
+
+@f1280 fact
+  holds salary p1279 d0 36969
+
+@f1281 fact
+  holds salary p1280 d0 37080
+
+@f1282 fact
+  holds salary p1281 d0 37191
+
+@f1283 fact
+  holds salary p1282 d0 37302
+
+@f1284 fact
+  holds salary p1283 d0 37413
+
+@f1285 fact
+  holds salary p1284 d0 37524
+
+@f1286 fact
+  holds salary p1285 d0 37635
+
+@f1287 fact
+  holds salary p1286 d0 37746
+
+@f1288 fact
+  holds salary p1287 d0 37857
+
+@f1289 fact
+  holds salary p1288 d0 37968
+
+@f1290 fact
+  holds salary p1289 d0 38079
+
+@f1291 fact
+  holds salary p1290 d0 38190
+
+@f1292 fact
+  holds salary p1291 d0 38301
+
+@f1293 fact
+  holds salary p1292 d0 38412
+
+@f1294 fact
+  holds salary p1293 d0 38523
+
+@f1295 fact
+  holds salary p1294 d0 38634
+
+@f1296 fact
+  holds salary p1295 d0 38745
+
+@f1297 fact
+  holds salary p1296 d0 38856
+
+@f1298 fact
+  holds salary p1297 d0 38967
+
+@f1299 fact
+  holds salary p1298 d0 39078
+
+@f1300 fact
+  holds salary p1299 d0 39189
+
+@f1301 fact
+  holds salary p1300 d0 39300
+
+@f1302 fact
+  holds salary p1301 d0 39411
+
+@f1303 fact
+  holds salary p1302 d0 39522
+
+@f1304 fact
+  holds salary p1303 d0 39633
+
+@f1305 fact
+  holds salary p1304 d0 39744
+
+@f1306 fact
+  holds salary p1305 d0 39855
+
+@f1307 fact
+  holds salary p1306 d0 39966
+
+@f1308 fact
+  holds salary p1307 d0 40077
+
+@f1309 fact
+  holds salary p1308 d0 40188
+
+@f1310 fact
+  holds salary p1309 d0 40299
+
+@f1311 fact
+  holds salary p1310 d0 40410
+
+@f1312 fact
+  holds salary p1311 d0 40521
+
+@f1313 fact
+  holds salary p1312 d0 40632
+
+@f1314 fact
+  holds salary p1313 d0 40743
+
+@f1315 fact
+  holds salary p1314 d0 40854
+
+@f1316 fact
+  holds salary p1315 d0 40965
+
+@f1317 fact
+  holds salary p1316 d0 41076
+
+@f1318 fact
+  holds salary p1317 d0 41187
+
+@f1319 fact
+  holds salary p1318 d0 41298
+
+@f1320 fact
+  holds salary p1319 d0 41409
+
+@f1321 fact
+  holds salary p1320 d0 41520
+
+@f1322 fact
+  holds salary p1321 d0 41631
+
+@f1323 fact
+  holds salary p1322 d0 41742
+
+@f1324 fact
+  holds salary p1323 d0 41853
+
+@f1325 fact
+  holds salary p1324 d0 41964
+
+@f1326 fact
+  holds salary p1325 d0 42075
+
+@f1327 fact
+  holds salary p1326 d0 42186
+
+@f1328 fact
+  holds salary p1327 d0 42297
+
+@f1329 fact
+  holds salary p1328 d0 42408
+
+@f1330 fact
+  holds salary p1329 d0 42519
+
+@f1331 fact
+  holds salary p1330 d0 42630
+
+@f1332 fact
+  holds salary p1331 d0 42741
+
+@f1333 fact
+  holds salary p1332 d0 42852
+
+@f1334 fact
+  holds salary p1333 d0 42963
+
+@f1335 fact
+  holds salary p1334 d0 43074
+
+@f1336 fact
+  holds salary p1335 d0 43185
+
+@f1337 fact
+  holds salary p1336 d0 43296
+
+@f1338 fact
+  holds salary p1337 d0 43407
+
+@f1339 fact
+  holds salary p1338 d0 43518
+
+@f1340 fact
+  holds salary p1339 d0 43629
+
+@f1341 fact
+  holds salary p1340 d0 43740
+
+@f1342 fact
+  holds salary p1341 d0 43851
+
+@f1343 fact
+  holds salary p1342 d0 43962
+
+@f1344 fact
+  holds salary p1343 d0 44073
+
+@f1345 fact
+  holds salary p1344 d0 44184
+
+@f1346 fact
+  holds salary p1345 d0 44295
+
+@f1347 fact
+  holds salary p1346 d0 44406
+
+@f1348 fact
+  holds salary p1347 d0 44517
+
+@f1349 fact
+  holds salary p1348 d0 44628
+
+@f1350 fact
+  holds salary p1349 d0 44739
+
+@f1351 fact
+  holds salary p1350 d0 44850
+
+@f1352 fact
+  holds salary p1351 d0 44961
+
+@f1353 fact
+  holds salary p1352 d0 30072
+
+@f1354 fact
+  holds salary p1353 d0 30183
+
+@f1355 fact
+  holds salary p1354 d0 30294
+
+@f1356 fact
+  holds salary p1355 d0 30405
+
+@f1357 fact
+  holds salary p1356 d0 30516
+
+@f1358 fact
+  holds salary p1357 d0 30627
+
+@f1359 fact
+  holds salary p1358 d0 30738
+
+@f1360 fact
+  holds salary p1359 d0 30849
+
+@f1361 fact
+  holds salary p1360 d0 30960
+
+@f1362 fact
+  holds salary p1361 d0 31071
+
+@f1363 fact
+  holds salary p1362 d0 31182
+
+@f1364 fact
+  holds salary p1363 d0 31293
+
+@f1365 fact
+  holds salary p1364 d0 31404
+
+@f1366 fact
+  holds salary p1365 d0 31515
+
+@f1367 fact
+  holds salary p1366 d0 31626
+
+@f1368 fact
+  holds salary p1367 d0 31737
+
+@f1369 fact
+  holds salary p1368 d0 31848
+
+@f1370 fact
+  holds salary p1369 d0 31959
+
+@f1371 fact
+  holds salary p1370 d0 32070
+
+@f1372 fact
+  holds salary p1371 d0 32181
+
+@f1373 fact
+  holds salary p1372 d0 32292
+
+@f1374 fact
+  holds salary p1373 d0 32403
+
+@f1375 fact
+  holds salary p1374 d0 32514
+
+@f1376 fact
+  holds salary p1375 d0 32625
+
+@f1377 fact
+  holds salary p1376 d0 32736
+
+@f1378 fact
+  holds salary p1377 d0 32847
+
+@f1379 fact
+  holds salary p1378 d0 32958
+
+@f1380 fact
+  holds salary p1379 d0 33069
+
+@f1381 fact
+  holds salary p1380 d0 33180
+
+@f1382 fact
+  holds salary p1381 d0 33291
+
+@f1383 fact
+  holds salary p1382 d0 33402
+
+@f1384 fact
+  holds salary p1383 d0 33513
+
+@f1385 fact
+  holds salary p1384 d0 33624
+
+@f1386 fact
+  holds salary p1385 d0 33735
+
+@f1387 fact
+  holds salary p1386 d0 33846
+
+@f1388 fact
+  holds salary p1387 d0 33957
+
+@f1389 fact
+  holds salary p1388 d0 34068
+
+@f1390 fact
+  holds salary p1389 d0 34179
+
+@f1391 fact
+  holds salary p1390 d0 34290
+
+@f1392 fact
+  holds salary p1391 d0 34401
+
+@f1393 fact
+  holds salary p1392 d0 34512
+
+@f1394 fact
+  holds salary p1393 d0 34623
+
+@f1395 fact
+  holds salary p1394 d0 34734
+
+@f1396 fact
+  holds salary p1395 d0 34845
+
+@f1397 fact
+  holds salary p1396 d0 34956
+
+@f1398 fact
+  holds salary p1397 d0 35067
+
+@f1399 fact
+  holds salary p1398 d0 35178
+
+@f1400 fact
+  holds salary p1399 d0 35289
+
+@f1401 fact
+  holds salary p1400 d0 35400
+
+@f1402 fact
+  holds salary p1401 d0 35511
+
+@f1403 fact
+  holds salary p1402 d0 35622
+
+@f1404 fact
+  holds salary p1403 d0 35733
+
+@f1405 fact
+  holds salary p1404 d0 35844
+
+@f1406 fact
+  holds salary p1405 d0 35955
+
+@f1407 fact
+  holds salary p1406 d0 36066
+
+@f1408 fact
+  holds salary p1407 d0 36177
+
+@f1409 fact
+  holds salary p1408 d0 36288
+
+@f1410 fact
+  holds salary p1409 d0 36399
+
+@f1411 fact
+  holds salary p1410 d0 36510
+
+@f1412 fact
+  holds salary p1411 d0 36621
+
+@f1413 fact
+  holds salary p1412 d0 36732
+
+@f1414 fact
+  holds salary p1413 d0 36843
+
+@f1415 fact
+  holds salary p1414 d0 36954
+
+@f1416 fact
+  holds salary p1415 d0 37065
+
+@f1417 fact
+  holds salary p1416 d0 37176
+
+@f1418 fact
+  holds salary p1417 d0 37287
+
+@f1419 fact
+  holds salary p1418 d0 37398
+
+@f1420 fact
+  holds salary p1419 d0 37509
+
+@f1421 fact
+  holds salary p1420 d0 37620
+
+@f1422 fact
+  holds salary p1421 d0 37731
+
+@f1423 fact
+  holds salary p1422 d0 37842
+
+@f1424 fact
+  holds salary p1423 d0 37953
+
+@f1425 fact
+  holds salary p1424 d0 38064
+
+@f1426 fact
+  holds salary p1425 d0 38175
+
+@f1427 fact
+  holds salary p1426 d0 38286
+
+@f1428 fact
+  holds salary p1427 d0 38397
+
+@f1429 fact
+  holds salary p1428 d0 38508
+
+@f1430 fact
+  holds salary p1429 d0 38619
+
+@f1431 fact
+  holds salary p1430 d0 38730
+
+@f1432 fact
+  holds salary p1431 d0 38841
+
+@f1433 fact
+  holds salary p1432 d0 38952
+
+@f1434 fact
+  holds salary p1433 d0 39063
+
+@f1435 fact
+  holds salary p1434 d0 39174
+
+@f1436 fact
+  holds salary p1435 d0 39285
+
+@f1437 fact
+  holds salary p1436 d0 39396
+
+@f1438 fact
+  holds salary p1437 d0 39507
+
+@f1439 fact
+  holds salary p1438 d0 39618
+
+@f1440 fact
+  holds salary p1439 d0 39729
+
+@f1441 fact
+  holds salary p1440 d0 39840
+
+@f1442 fact
+  holds salary p1441 d0 39951
+
+@f1443 fact
+  holds salary p1442 d0 40062
+
+@f1444 fact
+  holds salary p1443 d0 40173
+
+@f1445 fact
+  holds salary p1444 d0 40284
+
+@f1446 fact
+  holds salary p1445 d0 40395
+
+@f1447 fact
+  holds salary p1446 d0 40506
+
+@f1448 fact
+  holds salary p1447 d0 40617
+
+@f1449 fact
+  holds salary p1448 d0 40728
+
+@f1450 fact
+  holds salary p1449 d0 40839
+
+@f1451 fact
+  holds salary p1450 d0 40950
+
+@f1452 fact
+  holds salary p1451 d0 41061
+
+@f1453 fact
+  holds salary p1452 d0 41172
+
+@f1454 fact
+  holds salary p1453 d0 41283
+
+@f1455 fact
+  holds salary p1454 d0 41394
+
+@f1456 fact
+  holds salary p1455 d0 41505
+
+@f1457 fact
+  holds salary p1456 d0 41616
+
+@f1458 fact
+  holds salary p1457 d0 41727
+
+@f1459 fact
+  holds salary p1458 d0 41838
+
+@f1460 fact
+  holds salary p1459 d0 41949
+
+@f1461 fact
+  holds salary p1460 d0 42060
+
+@f1462 fact
+  holds salary p1461 d0 42171
+
+@f1463 fact
+  holds salary p1462 d0 42282
+
+@f1464 fact
+  holds salary p1463 d0 42393
+
+@f1465 fact
+  holds salary p1464 d0 42504
+
+@f1466 fact
+  holds salary p1465 d0 42615
+
+@f1467 fact
+  holds salary p1466 d0 42726
+
+@f1468 fact
+  holds salary p1467 d0 42837
+
+@f1469 fact
+  holds salary p1468 d0 42948
+
+@f1470 fact
+  holds salary p1469 d0 43059
+
+@f1471 fact
+  holds salary p1470 d0 43170
+
+@f1472 fact
+  holds salary p1471 d0 43281
+
+@f1473 fact
+  holds salary p1472 d0 43392
+
+@f1474 fact
+  holds salary p1473 d0 43503
+
+@f1475 fact
+  holds salary p1474 d0 43614
+
+@f1476 fact
+  holds salary p1475 d0 43725
+
+@f1477 fact
+  holds salary p1476 d0 43836
+
+@f1478 fact
+  holds salary p1477 d0 43947
+
+@f1479 fact
+  holds salary p1478 d0 44058
+
+@f1480 fact
+  holds salary p1479 d0 44169
+
+@f1481 fact
+  holds salary p1480 d0 44280
+
+@f1482 fact
+  holds salary p1481 d0 44391
+
+@f1483 fact
+  holds salary p1482 d0 44502
+
+@f1484 fact
+  holds salary p1483 d0 44613
+
+@f1485 fact
+  holds salary p1484 d0 44724
+
+@f1486 fact
+  holds salary p1485 d0 44835
+
+@f1487 fact
+  holds salary p1486 d0 44946
+
+@f1488 fact
+  holds salary p1487 d0 30057
+
+@f1489 fact
+  holds salary p1488 d0 30168
+
+@f1490 fact
+  holds salary p1489 d0 30279
+
+@f1491 fact
+  holds salary p1490 d0 30390
+
+@f1492 fact
+  holds salary p1491 d0 30501
+
+@f1493 fact
+  holds salary p1492 d0 30612
+
+@f1494 fact
+  holds salary p1493 d0 30723
+
+@f1495 fact
+  holds salary p1494 d0 30834
+
+@f1496 fact
+  holds salary p1495 d0 30945
+
+@f1497 fact
+  holds salary p1496 d0 31056
+
+@f1498 fact
+  holds salary p1497 d0 31167
+
+@f1499 fact
+  holds salary p1498 d0 31278
+
+@f1500 fact
+  holds salary p1499 d0 31389
+
+@f1501 fact
+  holds salary p1500 d0 31500
+
+@f1502 fact
+  holds salary p1501 d0 31611
+
+@f1503 fact
+  holds salary p1502 d0 31722
+
+@f1504 fact
+  holds salary p1503 d0 31833
+
+@f1505 fact
+  holds salary p1504 d0 31944
+
+@f1506 fact
+  holds salary p1505 d0 32055
+
+@f1507 fact
+  holds salary p1506 d0 32166
+
+@f1508 fact
+  holds salary p1507 d0 32277
+
+@f1509 fact
+  holds salary p1508 d0 32388
+
+@f1510 fact
+  holds salary p1509 d0 32499
+
+@f1511 fact
+  holds salary p1510 d0 32610
+
+@f1512 fact
+  holds salary p1511 d0 32721
+
+@f1513 fact
+  holds salary p1512 d0 32832
+
+@f1514 fact
+  holds salary p1513 d0 32943
+
+@f1515 fact
+  holds salary p1514 d0 33054
+
+@f1516 fact
+  holds salary p1515 d0 33165
+
+@f1517 fact
+  holds salary p1516 d0 33276
+
+@f1518 fact
+  holds salary p1517 d0 33387
+
+@f1519 fact
+  holds salary p1518 d0 33498
+
+@f1520 fact
+  holds salary p1519 d0 33609
+
+@f1521 fact
+  holds salary p1520 d0 33720
+
+@f1522 fact
+  holds salary p1521 d0 33831
+
+@f1523 fact
+  holds salary p1522 d0 33942
+
+@f1524 fact
+  holds salary p1523 d0 34053
+
+@f1525 fact
+  holds salary p1524 d0 34164
+
+@f1526 fact
+  holds salary p1525 d0 34275
+
+@f1527 fact
+  holds salary p1526 d0 34386
+
+@f1528 fact
+  holds salary p1527 d0 34497
+
+@f1529 fact
+  holds salary p1528 d0 34608
+
+@f1530 fact
+  holds salary p1529 d0 34719
+
+@f1531 fact
+  holds salary p1530 d0 34830
+
+@f1532 fact
+  holds salary p1531 d0 34941
+
+@f1533 fact
+  holds salary p1532 d0 35052
+
+@f1534 fact
+  holds salary p1533 d0 35163
+
+@f1535 fact
+  holds salary p1534 d0 35274
+
+@f1536 fact
+  holds salary p1535 d0 35385
+
+@f1537 fact
+  holds salary p1536 d0 35496
+
+@f1538 fact
+  holds salary p1537 d0 35607
+
+@f1539 fact
+  holds salary p1538 d0 35718
+
+@f1540 fact
+  holds salary p1539 d0 35829
+
+@f1541 fact
+  holds salary p1540 d0 35940
+
+@f1542 fact
+  holds salary p1541 d0 36051
+
+@f1543 fact
+  holds salary p1542 d0 36162
+
+@f1544 fact
+  holds salary p1543 d0 36273
+
+@f1545 fact
+  holds salary p1544 d0 36384
+
+@f1546 fact
+  holds salary p1545 d0 36495
+
+@f1547 fact
+  holds salary p1546 d0 36606
+
+@f1548 fact
+  holds salary p1547 d0 36717
+
+@f1549 fact
+  holds salary p1548 d0 36828
+
+@f1550 fact
+  holds salary p1549 d0 36939
+
+@f1551 fact
+  holds salary p1550 d0 37050
+
+@f1552 fact
+  holds salary p1551 d0 37161
+
+@f1553 fact
+  holds salary p1552 d0 37272
+
+@f1554 fact
+  holds salary p1553 d0 37383
+
+@f1555 fact
+  holds salary p1554 d0 37494
+
+@f1556 fact
+  holds salary p1555 d0 37605
+
+@f1557 fact
+  holds salary p1556 d0 37716
+
+@f1558 fact
+  holds salary p1557 d0 37827
+
+@f1559 fact
+  holds salary p1558 d0 37938
+
+@f1560 fact
+  holds salary p1559 d0 38049
+
+@f1561 fact
+  holds salary p1560 d0 38160
+
+@f1562 fact
+  holds salary p1561 d0 38271
+
+@f1563 fact
+  holds salary p1562 d0 38382
+
+@f1564 fact
+  holds salary p1563 d0 38493
+
+@f1565 fact
+  holds salary p1564 d0 38604
+
+@f1566 fact
+  holds salary p1565 d0 38715
+
+@f1567 fact
+  holds salary p1566 d0 38826
+
+@f1568 fact
+  holds salary p1567 d0 38937
+
+@f1569 fact
+  holds salary p1568 d0 39048
+
+@f1570 fact
+  holds salary p1569 d0 39159
+
+@f1571 fact
+  holds salary p1570 d0 39270
+
+@f1572 fact
+  holds salary p1571 d0 39381
+
+@f1573 fact
+  holds salary p1572 d0 39492
+
+@f1574 fact
+  holds salary p1573 d0 39603
+
+@f1575 fact
+  holds salary p1574 d0 39714
+
+@f1576 fact
+  holds salary p1575 d0 39825
+
+@f1577 fact
+  holds salary p1576 d0 39936
+
+@f1578 fact
+  holds salary p1577 d0 40047
+
+@f1579 fact
+  holds salary p1578 d0 40158
+
+@f1580 fact
+  holds salary p1579 d0 40269
+
+@f1581 fact
+  holds salary p1580 d0 40380
+
+@f1582 fact
+  holds salary p1581 d0 40491
+
+@f1583 fact
+  holds salary p1582 d0 40602
+
+@f1584 fact
+  holds salary p1583 d0 40713
+
+@f1585 fact
+  holds salary p1584 d0 40824
+
+@f1586 fact
+  holds salary p1585 d0 40935
+
+@f1587 fact
+  holds salary p1586 d0 41046
+
+@f1588 fact
+  holds salary p1587 d0 41157
+
+@f1589 fact
+  holds salary p1588 d0 41268
+
+@f1590 fact
+  holds salary p1589 d0 41379
+
+@f1591 fact
+  holds salary p1590 d0 41490
+
+@f1592 fact
+  holds salary p1591 d0 41601
+
+@f1593 fact
+  holds salary p1592 d0 41712
+
+@f1594 fact
+  holds salary p1593 d0 41823
+
+@f1595 fact
+  holds salary p1594 d0 41934
+
+@f1596 fact
+  holds salary p1595 d0 42045
+
+@f1597 fact
+  holds salary p1596 d0 42156
+
+@f1598 fact
+  holds salary p1597 d0 42267
+
+@f1599 fact
+  holds salary p1598 d0 42378
+
+@f1600 fact
+  holds salary p1599 d0 42489
+
+@f1601 fact
+  holds salary p1600 d0 42600
+
+@f1602 fact
+  holds salary p1601 d0 42711
+
+@f1603 fact
+  holds salary p1602 d0 42822
+
+@f1604 fact
+  holds salary p1603 d0 42933
+
+@f1605 fact
+  holds salary p1604 d0 43044
+
+@f1606 fact
+  holds salary p1605 d0 43155
+
+@f1607 fact
+  holds salary p1606 d0 43266
+
+@f1608 fact
+  holds salary p1607 d0 43377
+
+@f1609 fact
+  holds salary p1608 d0 43488
+
+@f1610 fact
+  holds salary p1609 d0 43599
+
+@f1611 fact
+  holds salary p1610 d0 43710
+
+@f1612 fact
+  holds salary p1611 d0 43821
+
+@f1613 fact
+  holds salary p1612 d0 43932
+
+@f1614 fact
+  holds salary p1613 d0 44043
+
+@f1615 fact
+  holds salary p1614 d0 44154
+
+@f1616 fact
+  holds salary p1615 d0 44265
+
+@f1617 fact
+  holds salary p1616 d0 44376
+
+@f1618 fact
+  holds salary p1617 d0 44487
+
+@f1619 fact
+  holds salary p1618 d0 44598
+
+@f1620 fact
+  holds salary p1619 d0 44709
+
+@f1621 fact
+  holds salary p1620 d0 44820
+
+@f1622 fact
+  holds salary p1621 d0 44931
+
+@f1623 fact
+  holds salary p1622 d0 30042
+
+@f1624 fact
+  holds salary p1623 d0 30153
+
+@f1625 fact
+  holds salary p1624 d0 30264
+
+@f1626 fact
+  holds salary p1625 d0 30375
+
+@f1627 fact
+  holds salary p1626 d0 30486
+
+@f1628 fact
+  holds salary p1627 d0 30597
+
+@f1629 fact
+  holds salary p1628 d0 30708
+
+@f1630 fact
+  holds salary p1629 d0 30819
+
+@f1631 fact
+  holds salary p1630 d0 30930
+
+@f1632 fact
+  holds salary p1631 d0 31041
+
+@f1633 fact
+  holds salary p1632 d0 31152
+
+@f1634 fact
+  holds salary p1633 d0 31263
+
+@f1635 fact
+  holds salary p1634 d0 31374
+
+@f1636 fact
+  holds salary p1635 d0 31485
+
+@f1637 fact
+  holds salary p1636 d0 31596
+
+@f1638 fact
+  holds salary p1637 d0 31707
+
+@f1639 fact
+  holds salary p1638 d0 31818
+
+@f1640 fact
+  holds salary p1639 d0 31929
+
+@f1641 fact
+  holds salary p1640 d0 32040
+
+@f1642 fact
+  holds salary p1641 d0 32151
+
+@f1643 fact
+  holds salary p1642 d0 32262
+
+@f1644 fact
+  holds salary p1643 d0 32373
+
+@f1645 fact
+  holds salary p1644 d0 32484
+
+@f1646 fact
+  holds salary p1645 d0 32595
+
+@f1647 fact
+  holds salary p1646 d0 32706
+
+@f1648 fact
+  holds salary p1647 d0 32817
+
+@f1649 fact
+  holds salary p1648 d0 32928
+
+@f1650 fact
+  holds salary p1649 d0 33039
+
+@f1651 fact
+  holds salary p1650 d0 33150
+
+@f1652 fact
+  holds salary p1651 d0 33261
+
+@f1653 fact
+  holds salary p1652 d0 33372
+
+@f1654 fact
+  holds salary p1653 d0 33483
+
+@f1655 fact
+  holds salary p1654 d0 33594
+
+@f1656 fact
+  holds salary p1655 d0 33705
+
+@f1657 fact
+  holds salary p1656 d0 33816
+
+@f1658 fact
+  holds salary p1657 d0 33927
+
+@f1659 fact
+  holds salary p1658 d0 34038
+
+@f1660 fact
+  holds salary p1659 d0 34149
+
+@f1661 fact
+  holds salary p1660 d0 34260
+
+@f1662 fact
+  holds salary p1661 d0 34371
+
+@f1663 fact
+  holds salary p1662 d0 34482
+
+@f1664 fact
+  holds salary p1663 d0 34593
+
+@f1665 fact
+  holds salary p1664 d0 34704
+
+@f1666 fact
+  holds salary p1665 d0 34815
+
+@f1667 fact
+  holds salary p1666 d0 34926
+
+@f1668 fact
+  holds salary p1667 d0 35037
+
+@f1669 fact
+  holds salary p1668 d0 35148
+
+@f1670 fact
+  holds salary p1669 d0 35259
+
+@f1671 fact
+  holds salary p1670 d0 35370
+
+@f1672 fact
+  holds salary p1671 d0 35481
+
+@f1673 fact
+  holds salary p1672 d0 35592
+
+@f1674 fact
+  holds salary p1673 d0 35703
+
+@f1675 fact
+  holds salary p1674 d0 35814
+
+@f1676 fact
+  holds salary p1675 d0 35925
+
+@f1677 fact
+  holds salary p1676 d0 36036
+
+@f1678 fact
+  holds salary p1677 d0 36147
+
+@f1679 fact
+  holds salary p1678 d0 36258
+
+@f1680 fact
+  holds salary p1679 d0 36369
+
+@f1681 fact
+  holds salary p1680 d0 36480
+
+@f1682 fact
+  holds salary p1681 d0 36591
+
+@f1683 fact
+  holds salary p1682 d0 36702
+
+@f1684 fact
+  holds salary p1683 d0 36813
+
+@f1685 fact
+  holds salary p1684 d0 36924
+
+@f1686 fact
+  holds salary p1685 d0 37035
+
+@f1687 fact
+  holds salary p1686 d0 37146
+
+@f1688 fact
+  holds salary p1687 d0 37257
+
+@f1689 fact
+  holds salary p1688 d0 37368
+
+@f1690 fact
+  holds salary p1689 d0 37479
+
+@f1691 fact
+  holds salary p1690 d0 37590
+
+@f1692 fact
+  holds salary p1691 d0 37701
+
+@f1693 fact
+  holds salary p1692 d0 37812
+
+@f1694 fact
+  holds salary p1693 d0 37923
+
+@f1695 fact
+  holds salary p1694 d0 38034
+
+@f1696 fact
+  holds salary p1695 d0 38145
+
+@f1697 fact
+  holds salary p1696 d0 38256
+
+@f1698 fact
+  holds salary p1697 d0 38367
+
+@f1699 fact
+  holds salary p1698 d0 38478
+
+@f1700 fact
+  holds salary p1699 d0 38589
+
+@f1701 fact
+  holds salary p1700 d0 38700
+
+@f1702 fact
+  holds salary p1701 d0 38811
+
+@f1703 fact
+  holds salary p1702 d0 38922
+
+@f1704 fact
+  holds salary p1703 d0 39033
+
+@f1705 fact
+  holds salary p1704 d0 39144
+
+@f1706 fact
+  holds salary p1705 d0 39255
+
+@f1707 fact
+  holds salary p1706 d0 39366
+
+@f1708 fact
+  holds salary p1707 d0 39477
+
+@f1709 fact
+  holds salary p1708 d0 39588
+
+@f1710 fact
+  holds salary p1709 d0 39699
+
+@f1711 fact
+  holds salary p1710 d0 39810
+
+@f1712 fact
+  holds salary p1711 d0 39921
+
+@f1713 fact
+  holds salary p1712 d0 40032
+
+@f1714 fact
+  holds salary p1713 d0 40143
+
+@f1715 fact
+  holds salary p1714 d0 40254
+
+@f1716 fact
+  holds salary p1715 d0 40365
+
+@f1717 fact
+  holds salary p1716 d0 40476
+
+@f1718 fact
+  holds salary p1717 d0 40587
+
+@f1719 fact
+  holds salary p1718 d0 40698
+
+@f1720 fact
+  holds salary p1719 d0 40809
+
+@f1721 fact
+  holds salary p1720 d0 40920
+
+@f1722 fact
+  holds salary p1721 d0 41031
+
+@f1723 fact
+  holds salary p1722 d0 41142
+
+@f1724 fact
+  holds salary p1723 d0 41253
+
+@f1725 fact
+  holds salary p1724 d0 41364
+
+@f1726 fact
+  holds salary p1725 d0 41475
+
+@f1727 fact
+  holds salary p1726 d0 41586
+
+@f1728 fact
+  holds salary p1727 d0 41697
+
+@f1729 fact
+  holds salary p1728 d0 41808
+
+@f1730 fact
+  holds salary p1729 d0 41919
+
+@f1731 fact
+  holds salary p1730 d0 42030
+
+@f1732 fact
+  holds salary p1731 d0 42141
+
+@f1733 fact
+  holds salary p1732 d0 42252
+
+@f1734 fact
+  holds salary p1733 d0 42363
+
+@f1735 fact
+  holds salary p1734 d0 42474
+
+@f1736 fact
+  holds salary p1735 d0 42585
+
+@f1737 fact
+  holds salary p1736 d0 42696
+
+@f1738 fact
+  holds salary p1737 d0 42807
+
+@f1739 fact
+  holds salary p1738 d0 42918
+
+@f1740 fact
+  holds salary p1739 d0 43029
+
+@f1741 fact
+  holds salary p1740 d0 43140
+
+@f1742 fact
+  holds salary p1741 d0 43251
+
+@f1743 fact
+  holds salary p1742 d0 43362
+
+@f1744 fact
+  holds salary p1743 d0 43473
+
+@f1745 fact
+  holds salary p1744 d0 43584
+
+@f1746 fact
+  holds salary p1745 d0 43695
+
+@f1747 fact
+  holds salary p1746 d0 43806
+
+@f1748 fact
+  holds salary p1747 d0 43917
+
+@f1749 fact
+  holds salary p1748 d0 44028
+
+@f1750 fact
+  holds salary p1749 d0 44139
+
+@f1751 fact
+  holds salary p1750 d0 44250
+
+@f1752 fact
+  holds salary p1751 d0 44361
+
+@f1753 fact
+  holds salary p1752 d0 44472
+
+@f1754 fact
+  holds salary p1753 d0 44583
+
+@f1755 fact
+  holds salary p1754 d0 44694
+
+@f1756 fact
+  holds salary p1755 d0 44805
+
+@f1757 fact
+  holds salary p1756 d0 44916
+
+@f1758 fact
+  holds salary p1757 d0 30027
+
+@f1759 fact
+  holds salary p1758 d0 30138
+
+@f1760 fact
+  holds salary p1759 d0 30249
+
+@f1761 fact
+  holds salary p1760 d0 30360
+
+@f1762 fact
+  holds salary p1761 d0 30471
+
+@f1763 fact
+  holds salary p1762 d0 30582
+
+@f1764 fact
+  holds salary p1763 d0 30693
+
+@f1765 fact
+  holds salary p1764 d0 30804
+
+@f1766 fact
+  holds salary p1765 d0 30915
+
+@f1767 fact
+  holds salary p1766 d0 31026
+
+@f1768 fact
+  holds salary p1767 d0 31137
+
+@f1769 fact
+  holds salary p1768 d0 31248
+
+@f1770 fact
+  holds salary p1769 d0 31359
+
+@f1771 fact
+  holds salary p1770 d0 31470
+
+@f1772 fact
+  holds salary p1771 d0 31581
+
+@f1773 fact
+  holds salary p1772 d0 31692
+
+@f1774 fact
+  holds salary p1773 d0 31803
+
+@f1775 fact
+  holds salary p1774 d0 31914
+
+@f1776 fact
+  holds salary p1775 d0 32025
+
+@f1777 fact
+  holds salary p1776 d0 32136
+
+@f1778 fact
+  holds salary p1777 d0 32247
+
+@f1779 fact
+  holds salary p1778 d0 32358
+
+@f1780 fact
+  holds salary p1779 d0 32469
+
+@f1781 fact
+  holds salary p1780 d0 32580
+
+@f1782 fact
+  holds salary p1781 d0 32691
+
+@f1783 fact
+  holds salary p1782 d0 32802
+
+@f1784 fact
+  holds salary p1783 d0 32913
+
+@f1785 fact
+  holds salary p1784 d0 33024
+
+@f1786 fact
+  holds salary p1785 d0 33135
+
+@f1787 fact
+  holds salary p1786 d0 33246
+
+@f1788 fact
+  holds salary p1787 d0 33357
+
+@f1789 fact
+  holds salary p1788 d0 33468
+
+@f1790 fact
+  holds salary p1789 d0 33579
+
+@f1791 fact
+  holds salary p1790 d0 33690
+
+@f1792 fact
+  holds salary p1791 d0 33801
+
+@f1793 fact
+  holds salary p1792 d0 33912
+
+@f1794 fact
+  holds salary p1793 d0 34023
+
+@f1795 fact
+  holds salary p1794 d0 34134
+
+@f1796 fact
+  holds salary p1795 d0 34245
+
+@f1797 fact
+  holds salary p1796 d0 34356
+
+@f1798 fact
+  holds salary p1797 d0 34467
+
+@f1799 fact
+  holds salary p1798 d0 34578
+
+@f1800 fact
+  holds salary p1799 d0 34689
+
+@f1801 fact
+  holds salary p1800 d0 34800
+
+@f1802 fact
+  holds salary p1801 d0 34911
+
+@f1803 fact
+  holds salary p1802 d0 35022
+
+@f1804 fact
+  holds salary p1803 d0 35133
+
+@f1805 fact
+  holds salary p1804 d0 35244
+
+@f1806 fact
+  holds salary p1805 d0 35355
+
+@f1807 fact
+  holds salary p1806 d0 35466
+
+@f1808 fact
+  holds salary p1807 d0 35577
+
+@f1809 fact
+  holds salary p1808 d0 35688
+
+@f1810 fact
+  holds salary p1809 d0 35799
+
+@f1811 fact
+  holds salary p1810 d0 35910
+
+@f1812 fact
+  holds salary p1811 d0 36021
+
+@f1813 fact
+  holds salary p1812 d0 36132
+
+@f1814 fact
+  holds salary p1813 d0 36243
+
+@f1815 fact
+  holds salary p1814 d0 36354
+
+@f1816 fact
+  holds salary p1815 d0 36465
+
+@f1817 fact
+  holds salary p1816 d0 36576
+
+@f1818 fact
+  holds salary p1817 d0 36687
+
+@f1819 fact
+  holds salary p1818 d0 36798
+
+@f1820 fact
+  holds salary p1819 d0 36909
+
+@f1821 fact
+  holds salary p1820 d0 37020
+
+@f1822 fact
+  holds salary p1821 d0 37131
+
+@f1823 fact
+  holds salary p1822 d0 37242
+
+@f1824 fact
+  holds salary p1823 d0 37353
+
+@f1825 fact
+  holds salary p1824 d0 37464
+
+@f1826 fact
+  holds salary p1825 d0 37575
+
+@f1827 fact
+  holds salary p1826 d0 37686
+
+@f1828 fact
+  holds salary p1827 d0 37797
+
+@f1829 fact
+  holds salary p1828 d0 37908
+
+@f1830 fact
+  holds salary p1829 d0 38019
+
+@f1831 fact
+  holds salary p1830 d0 38130
+
+@f1832 fact
+  holds salary p1831 d0 38241
+
+@f1833 fact
+  holds salary p1832 d0 38352
+
+@f1834 fact
+  holds salary p1833 d0 38463
+
+@f1835 fact
+  holds salary p1834 d0 38574
+
+@f1836 fact
+  holds salary p1835 d0 38685
+
+@f1837 fact
+  holds salary p1836 d0 38796
+
+@f1838 fact
+  holds salary p1837 d0 38907
+
+@f1839 fact
+  holds salary p1838 d0 39018
+
+@f1840 fact
+  holds salary p1839 d0 39129
+
+@f1841 fact
+  holds salary p1840 d0 39240
+
+@f1842 fact
+  holds salary p1841 d0 39351
+
+@f1843 fact
+  holds salary p1842 d0 39462
+
+@f1844 fact
+  holds salary p1843 d0 39573
+
+@f1845 fact
+  holds salary p1844 d0 39684
+
+@f1846 fact
+  holds salary p1845 d0 39795
+
+@f1847 fact
+  holds salary p1846 d0 39906
+
+@f1848 fact
+  holds salary p1847 d0 40017
+
+@f1849 fact
+  holds salary p1848 d0 40128
+
+@f1850 fact
+  holds salary p1849 d0 40239
+
+@f1851 fact
+  holds salary p1850 d0 40350
+
+@f1852 fact
+  holds salary p1851 d0 40461
+
+@f1853 fact
+  holds salary p1852 d0 40572
+
+@f1854 fact
+  holds salary p1853 d0 40683
+
+@f1855 fact
+  holds salary p1854 d0 40794
+
+@f1856 fact
+  holds salary p1855 d0 40905
+
+@f1857 fact
+  holds salary p1856 d0 41016
+
+@f1858 fact
+  holds salary p1857 d0 41127
+
+@f1859 fact
+  holds salary p1858 d0 41238
+
+@f1860 fact
+  holds salary p1859 d0 41349
+
+@f1861 fact
+  holds salary p1860 d0 41460
+
+@f1862 fact
+  holds salary p1861 d0 41571
+
+@f1863 fact
+  holds salary p1862 d0 41682
+
+@f1864 fact
+  holds salary p1863 d0 41793
+
+@f1865 fact
+  holds salary p1864 d0 41904
+
+@f1866 fact
+  holds salary p1865 d0 42015
+
+@f1867 fact
+  holds salary p1866 d0 42126
+
+@f1868 fact
+  holds salary p1867 d0 42237
+
+@f1869 fact
+  holds salary p1868 d0 42348
+
+@f1870 fact
+  holds salary p1869 d0 42459
+
+@f1871 fact
+  holds salary p1870 d0 42570
+
+@f1872 fact
+  holds salary p1871 d0 42681
+
+@f1873 fact
+  holds salary p1872 d0 42792
+
+@f1874 fact
+  holds salary p1873 d0 42903
+
+@f1875 fact
+  holds salary p1874 d0 43014
+
+@f1876 fact
+  holds salary p1875 d0 43125
+
+@f1877 fact
+  holds salary p1876 d0 43236
+
+@f1878 fact
+  holds salary p1877 d0 43347
+
+@f1879 fact
+  holds salary p1878 d0 43458
+
+@f1880 fact
+  holds salary p1879 d0 43569
+
+@f1881 fact
+  holds salary p1880 d0 43680
+
+@f1882 fact
+  holds salary p1881 d0 43791
+
+@f1883 fact
+  holds salary p1882 d0 43902
+
+@f1884 fact
+  holds salary p1883 d0 44013
+
+@f1885 fact
+  holds salary p1884 d0 44124
+
+@f1886 fact
+  holds salary p1885 d0 44235
+
+@f1887 fact
+  holds salary p1886 d0 44346
+
+@f1888 fact
+  holds salary p1887 d0 44457
+
+@f1889 fact
+  holds salary p1888 d0 44568
+
+@f1890 fact
+  holds salary p1889 d0 44679
+
+@f1891 fact
+  holds salary p1890 d0 44790
+
+@f1892 fact
+  holds salary p1891 d0 44901
+
+@f1893 fact
+  holds salary p1892 d0 30012
+
+@f1894 fact
+  holds salary p1893 d0 30123
+
+@f1895 fact
+  holds salary p1894 d0 30234
+
+@f1896 fact
+  holds salary p1895 d0 30345
+
+@f1897 fact
+  holds salary p1896 d0 30456
+
+@f1898 fact
+  holds salary p1897 d0 30567
+
+@f1899 fact
+  holds salary p1898 d0 30678
+
+@f1900 fact
+  holds salary p1899 d0 30789
+
+@f1901 fact
+  holds salary p1900 d0 30900
+
+@f1902 fact
+  holds salary p1901 d0 31011
+
+@f1903 fact
+  holds salary p1902 d0 31122
+
+@f1904 fact
+  holds salary p1903 d0 31233
+
+@f1905 fact
+  holds salary p1904 d0 31344
+
+@f1906 fact
+  holds salary p1905 d0 31455
+
+@f1907 fact
+  holds salary p1906 d0 31566
+
+@f1908 fact
+  holds salary p1907 d0 31677
+
+@f1909 fact
+  holds salary p1908 d0 31788
+
+@f1910 fact
+  holds salary p1909 d0 31899
+
+@f1911 fact
+  holds salary p1910 d0 32010
+
+@f1912 fact
+  holds salary p1911 d0 32121
+
+@f1913 fact
+  holds salary p1912 d0 32232
+
+@f1914 fact
+  holds salary p1913 d0 32343
+
+@f1915 fact
+  holds salary p1914 d0 32454
+
+@f1916 fact
+  holds salary p1915 d0 32565
+
+@f1917 fact
+  holds salary p1916 d0 32676
+
+@f1918 fact
+  holds salary p1917 d0 32787
+
+@f1919 fact
+  holds salary p1918 d0 32898
+
+@f1920 fact
+  holds salary p1919 d0 33009
+
+@f1921 fact
+  holds salary p1920 d0 33120
+
+@f1922 fact
+  holds salary p1921 d0 33231
+
+@f1923 fact
+  holds salary p1922 d0 33342
+
+@f1924 fact
+  holds salary p1923 d0 33453
+
+@f1925 fact
+  holds salary p1924 d0 33564
+
+@f1926 fact
+  holds salary p1925 d0 33675
+
+@f1927 fact
+  holds salary p1926 d0 33786
+
+@f1928 fact
+  holds salary p1927 d0 33897
+
+@f1929 fact
+  holds salary p1928 d0 34008
+
+@f1930 fact
+  holds salary p1929 d0 34119
+
+@f1931 fact
+  holds salary p1930 d0 34230
+
+@f1932 fact
+  holds salary p1931 d0 34341
+
+@f1933 fact
+  holds salary p1932 d0 34452
+
+@f1934 fact
+  holds salary p1933 d0 34563
+
+@f1935 fact
+  holds salary p1934 d0 34674
+
+@f1936 fact
+  holds salary p1935 d0 34785
+
+@f1937 fact
+  holds salary p1936 d0 34896
+
+@f1938 fact
+  holds salary p1937 d0 35007
+
+@f1939 fact
+  holds salary p1938 d0 35118
+
+@f1940 fact
+  holds salary p1939 d0 35229
+
+@f1941 fact
+  holds salary p1940 d0 35340
+
+@f1942 fact
+  holds salary p1941 d0 35451
+
+@f1943 fact
+  holds salary p1942 d0 35562
+
+@f1944 fact
+  holds salary p1943 d0 35673
+
+@f1945 fact
+  holds salary p1944 d0 35784
+
+@f1946 fact
+  holds salary p1945 d0 35895
+
+@f1947 fact
+  holds salary p1946 d0 36006
+
+@f1948 fact
+  holds salary p1947 d0 36117
+
+@f1949 fact
+  holds salary p1948 d0 36228
+
+@f1950 fact
+  holds salary p1949 d0 36339
+
+@f1951 fact
+  holds salary p1950 d0 36450
+
+@f1952 fact
+  holds salary p1951 d0 36561
+
+@f1953 fact
+  holds salary p1952 d0 36672
+
+@f1954 fact
+  holds salary p1953 d0 36783
+
+@f1955 fact
+  holds salary p1954 d0 36894
+
+@f1956 fact
+  holds salary p1955 d0 37005
+
+@f1957 fact
+  holds salary p1956 d0 37116
+
+@f1958 fact
+  holds salary p1957 d0 37227
+
+@f1959 fact
+  holds salary p1958 d0 37338
+
+@f1960 fact
+  holds salary p1959 d0 37449
+
+@f1961 fact
+  holds salary p1960 d0 37560
+
+@f1962 fact
+  holds salary p1961 d0 37671
+
+@f1963 fact
+  holds salary p1962 d0 37782
+
+@f1964 fact
+  holds salary p1963 d0 37893
+
+@f1965 fact
+  holds salary p1964 d0 38004
+
+@f1966 fact
+  holds salary p1965 d0 38115
+
+@f1967 fact
+  holds salary p1966 d0 38226
+
+@f1968 fact
+  holds salary p1967 d0 38337
+
+@f1969 fact
+  holds salary p1968 d0 38448
+
+@f1970 fact
+  holds salary p1969 d0 38559
+
+@f1971 fact
+  holds salary p1970 d0 38670
+
+@f1972 fact
+  holds salary p1971 d0 38781
+
+@f1973 fact
+  holds salary p1972 d0 38892
+
+@f1974 fact
+  holds salary p1973 d0 39003
+
+@f1975 fact
+  holds salary p1974 d0 39114
+
+@f1976 fact
+  holds salary p1975 d0 39225
+
+@f1977 fact
+  holds salary p1976 d0 39336
+
+@f1978 fact
+  holds salary p1977 d0 39447
+
+@f1979 fact
+  holds salary p1978 d0 39558
+
+@f1980 fact
+  holds salary p1979 d0 39669
+
+@f1981 fact
+  holds salary p1980 d0 39780
+
+@f1982 fact
+  holds salary p1981 d0 39891
+
+@f1983 fact
+  holds salary p1982 d0 40002
+
+@f1984 fact
+  holds salary p1983 d0 40113
+
+@f1985 fact
+  holds salary p1984 d0 40224
+
+@f1986 fact
+  holds salary p1985 d0 40335
+
+@f1987 fact
+  holds salary p1986 d0 40446
+
+@f1988 fact
+  holds salary p1987 d0 40557
+
+@f1989 fact
+  holds salary p1988 d0 40668
+
+@f1990 fact
+  holds salary p1989 d0 40779
+
+@f1991 fact
+  holds salary p1990 d0 40890
+
+@f1992 fact
+  holds salary p1991 d0 41001
+
+@f1993 fact
+  holds salary p1992 d0 41112
+
+@f1994 fact
+  holds salary p1993 d0 41223
+
+@f1995 fact
+  holds salary p1994 d0 41334
+
+@f1996 fact
+  holds salary p1995 d0 41445
+
+@f1997 fact
+  holds salary p1996 d0 41556
+
+@f1998 fact
+  holds salary p1997 d0 41667
+
+@f1999 fact
+  holds salary p1998 d0 41778
+
+@f2000 fact
+  holds salary p1999 d0 41889
+
+@f2001 fact
+  holds salary p2000 d0 42000
+
+@f2002 fact
+  holds salary p2001 d0 42111
+
+@f2003 fact
+  holds salary p2002 d0 42222
+
+@f2004 fact
+  holds salary p2003 d0 42333
+
+@f2005 fact
+  holds salary p2004 d0 42444
+
+@f2006 fact
+  holds salary p2005 d0 42555
+
+@f2007 fact
+  holds salary p2006 d0 42666
+
+@f2008 fact
+  holds salary p2007 d0 42777
+
+@f2009 fact
+  holds salary p2008 d0 42888
+
+@f2010 fact
+  holds salary p2009 d0 42999
+
+@f2011 fact
+  holds salary p2010 d0 43110
+
+@f2012 fact
+  holds salary p2011 d0 43221
+
+@f2013 fact
+  holds salary p2012 d0 43332
+
+@f2014 fact
+  holds salary p2013 d0 43443
+
+@f2015 fact
+  holds salary p2014 d0 43554
+
+@f2016 fact
+  holds salary p2015 d0 43665
+
+@f2017 fact
+  holds salary p2016 d0 43776
+
+@f2018 fact
+  holds salary p2017 d0 43887
+
+@f2019 fact
+  holds salary p2018 d0 43998
+
+@f2020 fact
+  holds salary p2019 d0 44109
+
+@f2021 fact
+  holds salary p2020 d0 44220
+
+@f2022 fact
+  holds salary p2021 d0 44331
+
+@f2023 fact
+  holds salary p2022 d0 44442
+
+@f2024 fact
+  holds salary p2023 d0 44553
+
+@f2025 fact
+  holds salary p2024 d0 44664
+
+@f2026 fact
+  holds salary p2025 d0 44775
+
+@f2027 fact
+  holds salary p2026 d0 44886
+
+@f2028 fact
+  holds salary p2027 d0 44997
+
+@f2029 fact
+  holds salary p2028 d0 30108
+
+@f2030 fact
+  holds salary p2029 d0 30219
+
+@f2031 fact
+  holds salary p2030 d0 30330
+
+@f2032 fact
+  holds salary p2031 d0 30441
+
+@f2033 fact
+  holds salary p2032 d0 30552
+
+@f2034 fact
+  holds salary p2033 d0 30663
+
+@f2035 fact
+  holds salary p2034 d0 30774
+
+@f2036 fact
+  holds salary p2035 d0 30885
+
+@f2037 fact
+  holds salary p2036 d0 30996
+
+@f2038 fact
+  holds salary p2037 d0 31107
+
+@f2039 fact
+  holds salary p2038 d0 31218
+
+@f2040 fact
+  holds salary p2039 d0 31329
+
+@f2041 fact
+  holds salary p2040 d0 31440
+
+@f2042 fact
+  holds salary p2041 d0 31551
+
+@f2043 fact
+  holds salary p2042 d0 31662
+
+@f2044 fact
+  holds salary p2043 d0 31773
+
+@f2045 fact
+  holds salary p2044 d0 31884
+
+@f2046 fact
+  holds salary p2045 d0 31995
+
+@f2047 fact
+  holds salary p2046 d0 32106
+
+@f2048 fact
+  holds salary p2047 d0 32217
+
+@f2049 fact
+  holds salary p2048 d0 32328
+
+@f2050 fact
+  holds salary p2049 d0 32439
+
+@f2051 fact
+  holds salary p2050 d0 32550
+
+@f2052 fact
+  holds salary p2051 d0 32661
+
+@f2053 fact
+  holds salary p2052 d0 32772
+
+@f2054 fact
+  holds salary p2053 d0 32883
+
+@f2055 fact
+  holds salary p2054 d0 32994
+
+@f2056 fact
+  holds salary p2055 d0 33105
+
+@f2057 fact
+  holds salary p2056 d0 33216
+
+@f2058 fact
+  holds salary p2057 d0 33327
+
+@f2059 fact
+  holds salary p2058 d0 33438
+
+@f2060 fact
+  holds salary p2059 d0 33549
+
+@f2061 fact
+  holds salary p2060 d0 33660
+
+@f2062 fact
+  holds salary p2061 d0 33771
+
+@f2063 fact
+  holds salary p2062 d0 33882
+
+@f2064 fact
+  holds salary p2063 d0 33993
+
+@f2065 fact
+  holds salary p2064 d0 34104
+
+@f2066 fact
+  holds salary p2065 d0 34215
+
+@f2067 fact
+  holds salary p2066 d0 34326
+
+@f2068 fact
+  holds salary p2067 d0 34437
+
+@f2069 fact
+  holds salary p2068 d0 34548
+
+@f2070 fact
+  holds salary p2069 d0 34659
+
+@f2071 fact
+  holds salary p2070 d0 34770
+
+@f2072 fact
+  holds salary p2071 d0 34881
+
+@f2073 fact
+  holds salary p2072 d0 34992
+
+@f2074 fact
+  holds salary p2073 d0 35103
+
+@f2075 fact
+  holds salary p2074 d0 35214
+
+@f2076 fact
+  holds salary p2075 d0 35325
+
+@f2077 fact
+  holds salary p2076 d0 35436
+
+@f2078 fact
+  holds salary p2077 d0 35547
+
+@f2079 fact
+  holds salary p2078 d0 35658
+
+@f2080 fact
+  holds salary p2079 d0 35769
+
+@f2081 fact
+  holds salary p2080 d0 35880
+
+@f2082 fact
+  holds salary p2081 d0 35991
+
+@f2083 fact
+  holds salary p2082 d0 36102
+
+@f2084 fact
+  holds salary p2083 d0 36213
+
+@f2085 fact
+  holds salary p2084 d0 36324
+
+@f2086 fact
+  holds salary p2085 d0 36435
+
+@f2087 fact
+  holds salary p2086 d0 36546
+
+@f2088 fact
+  holds salary p2087 d0 36657
+
+@f2089 fact
+  holds salary p2088 d0 36768
+
+@f2090 fact
+  holds salary p2089 d0 36879
+
+@f2091 fact
+  holds salary p2090 d0 36990
+
+@f2092 fact
+  holds salary p2091 d0 37101
+
+@f2093 fact
+  holds salary p2092 d0 37212
+
+@f2094 fact
+  holds salary p2093 d0 37323
+
+@f2095 fact
+  holds salary p2094 d0 37434
+
+@f2096 fact
+  holds salary p2095 d0 37545
+
+@f2097 fact
+  holds salary p2096 d0 37656
+
+@f2098 fact
+  holds salary p2097 d0 37767
+
+@f2099 fact
+  holds salary p2098 d0 37878
+
+@f2100 fact
+  holds salary p2099 d0 37989
+
+@f2101 fact
+  holds salary p2100 d0 38100
+
+@f2102 fact
+  holds salary p2101 d0 38211
+
+@f2103 fact
+  holds salary p2102 d0 38322
+
+@f2104 fact
+  holds salary p2103 d0 38433
+
+@f2105 fact
+  holds salary p2104 d0 38544
+
+@f2106 fact
+  holds salary p2105 d0 38655
+
+@f2107 fact
+  holds salary p2106 d0 38766
+
+@f2108 fact
+  holds salary p2107 d0 38877
+
+@f2109 fact
+  holds salary p2108 d0 38988
+
+@f2110 fact
+  holds salary p2109 d0 39099
+
+@f2111 fact
+  holds salary p2110 d0 39210
+
+@f2112 fact
+  holds salary p2111 d0 39321
+
+@f2113 fact
+  holds salary p2112 d0 39432
+
+@f2114 fact
+  holds salary p2113 d0 39543
+
+@f2115 fact
+  holds salary p2114 d0 39654
+
+@f2116 fact
+  holds salary p2115 d0 39765
+
+@f2117 fact
+  holds salary p2116 d0 39876
+
+@f2118 fact
+  holds salary p2117 d0 39987
+
+@f2119 fact
+  holds salary p2118 d0 40098
+
+@f2120 fact
+  holds salary p2119 d0 40209
+
+@f2121 fact
+  holds salary p2120 d0 40320
+
+@f2122 fact
+  holds salary p2121 d0 40431
+
+@f2123 fact
+  holds salary p2122 d0 40542
+
+@f2124 fact
+  holds salary p2123 d0 40653
+
+@f2125 fact
+  holds salary p2124 d0 40764
+
+@f2126 fact
+  holds salary p2125 d0 40875
+
+@f2127 fact
+  holds salary p2126 d0 40986
+
+@f2128 fact
+  holds salary p2127 d0 41097
+
+@f2129 fact
+  holds salary p2128 d0 41208
+
+@f2130 fact
+  holds salary p2129 d0 41319
+
+@f2131 fact
+  holds salary p2130 d0 41430
+
+@f2132 fact
+  holds salary p2131 d0 41541
+
+@f2133 fact
+  holds salary p2132 d0 41652
+
+@f2134 fact
+  holds salary p2133 d0 41763
+
+@f2135 fact
+  holds salary p2134 d0 41874
+
+@f2136 fact
+  holds salary p2135 d0 41985
+
+@f2137 fact
+  holds salary p2136 d0 42096
+
+@f2138 fact
+  holds salary p2137 d0 42207
+
+@f2139 fact
+  holds salary p2138 d0 42318
+
+@f2140 fact
+  holds salary p2139 d0 42429
+
+@f2141 fact
+  holds salary p2140 d0 42540
+
+@f2142 fact
+  holds salary p2141 d0 42651
+
+@f2143 fact
+  holds salary p2142 d0 42762
+
+@f2144 fact
+  holds salary p2143 d0 42873
+
+@f2145 fact
+  holds salary p2144 d0 42984
+
+@f2146 fact
+  holds salary p2145 d0 43095
+
+@f2147 fact
+  holds salary p2146 d0 43206
+
+@f2148 fact
+  holds salary p2147 d0 43317
+
+@f2149 fact
+  holds salary p2148 d0 43428
+
+@f2150 fact
+  holds salary p2149 d0 43539
+
+@f2151 fact
+  holds salary p2150 d0 43650
+
+@f2152 fact
+  holds salary p2151 d0 43761
+
+@f2153 fact
+  holds salary p2152 d0 43872
+
+@f2154 fact
+  holds salary p2153 d0 43983
+
+@f2155 fact
+  holds salary p2154 d0 44094
+
+@f2156 fact
+  holds salary p2155 d0 44205
+
+@f2157 fact
+  holds salary p2156 d0 44316
+
+@f2158 fact
+  holds salary p2157 d0 44427
+
+@f2159 fact
+  holds salary p2158 d0 44538
+
+@f2160 fact
+  holds salary p2159 d0 44649
+
+@f2161 fact
+  holds salary p2160 d0 44760
+
+@f2162 fact
+  holds salary p2161 d0 44871
+
+@f2163 fact
+  holds salary p2162 d0 44982
+
+@f2164 fact
+  holds salary p2163 d0 30093
+
+@f2165 fact
+  holds salary p2164 d0 30204
+
+@f2166 fact
+  holds salary p2165 d0 30315
+
+@f2167 fact
+  holds salary p2166 d0 30426
+
+@f2168 fact
+  holds salary p2167 d0 30537
+
+@f2169 fact
+  holds salary p2168 d0 30648
+
+@f2170 fact
+  holds salary p2169 d0 30759
+
+@f2171 fact
+  holds salary p2170 d0 30870
+
+@f2172 fact
+  holds salary p2171 d0 30981
+
+@f2173 fact
+  holds salary p2172 d0 31092
+
+@f2174 fact
+  holds salary p2173 d0 31203
+
+@f2175 fact
+  holds salary p2174 d0 31314
+
+@f2176 fact
+  holds salary p2175 d0 31425
+
+@f2177 fact
+  holds salary p2176 d0 31536
+
+@f2178 fact
+  holds salary p2177 d0 31647
+
+@f2179 fact
+  holds salary p2178 d0 31758
+
+@f2180 fact
+  holds salary p2179 d0 31869
+
+@f2181 fact
+  holds salary p2180 d0 31980
+
+@f2182 fact
+  holds salary p2181 d0 32091
+
+@f2183 fact
+  holds salary p2182 d0 32202
+
+@f2184 fact
+  holds salary p2183 d0 32313
+
+@f2185 fact
+  holds salary p2184 d0 32424
+
+@f2186 fact
+  holds salary p2185 d0 32535
+
+@f2187 fact
+  holds salary p2186 d0 32646
+
+@f2188 fact
+  holds salary p2187 d0 32757
+
+@f2189 fact
+  holds salary p2188 d0 32868
+
+@f2190 fact
+  holds salary p2189 d0 32979
+
+@f2191 fact
+  holds salary p2190 d0 33090
+
+@f2192 fact
+  holds salary p2191 d0 33201
+
+@f2193 fact
+  holds salary p2192 d0 33312
+
+@f2194 fact
+  holds salary p2193 d0 33423
+
+@f2195 fact
+  holds salary p2194 d0 33534
+
+@f2196 fact
+  holds salary p2195 d0 33645
+
+@f2197 fact
+  holds salary p2196 d0 33756
+
+@f2198 fact
+  holds salary p2197 d0 33867
+
+@f2199 fact
+  holds salary p2198 d0 33978
+
+@f2200 fact
+  holds salary p2199 d0 34089
+
+@f2201 fact
+  holds salary p2200 d0 34200
+
+@f2202 fact
+  holds salary p2201 d0 34311
+
+@f2203 fact
+  holds salary p2202 d0 34422
+
+@f2204 fact
+  holds salary p2203 d0 34533
+
+@f2205 fact
+  holds salary p2204 d0 34644
+
+@f2206 fact
+  holds salary p2205 d0 34755
+
+@f2207 fact
+  holds salary p2206 d0 34866
+
+@f2208 fact
+  holds salary p2207 d0 34977
+
+@f2209 fact
+  holds salary p2208 d0 35088
+
+@f2210 fact
+  holds salary p2209 d0 35199
+
+@f2211 fact
+  holds salary p2210 d0 35310
+
+@f2212 fact
+  holds salary p2211 d0 35421
+
+@f2213 fact
+  holds salary p2212 d0 35532
+
+@f2214 fact
+  holds salary p2213 d0 35643
+
+@f2215 fact
+  holds salary p2214 d0 35754
+
+@f2216 fact
+  holds salary p2215 d0 35865
+
+@f2217 fact
+  holds salary p2216 d0 35976
+
+@f2218 fact
+  holds salary p2217 d0 36087
+
+@f2219 fact
+  holds salary p2218 d0 36198
+
+@f2220 fact
+  holds salary p2219 d0 36309
+
+@f2221 fact
+  holds salary p2220 d0 36420
+
+@f2222 fact
+  holds salary p2221 d0 36531
+
+@f2223 fact
+  holds salary p2222 d0 36642
+
+@f2224 fact
+  holds salary p2223 d0 36753
+
+@f2225 fact
+  holds salary p2224 d0 36864
+
+@f2226 fact
+  holds salary p2225 d0 36975
+
+@f2227 fact
+  holds salary p2226 d0 37086
+
+@f2228 fact
+  holds salary p2227 d0 37197
+
+@f2229 fact
+  holds salary p2228 d0 37308
+
+@f2230 fact
+  holds salary p2229 d0 37419
+
+@f2231 fact
+  holds salary p2230 d0 37530
+
+@f2232 fact
+  holds salary p2231 d0 37641
+
+@f2233 fact
+  holds salary p2232 d0 37752
+
+@f2234 fact
+  holds salary p2233 d0 37863
+
+@f2235 fact
+  holds salary p2234 d0 37974
+
+@f2236 fact
+  holds salary p2235 d0 38085
+
+@f2237 fact
+  holds salary p2236 d0 38196
+
+@f2238 fact
+  holds salary p2237 d0 38307
+
+@f2239 fact
+  holds salary p2238 d0 38418
+
+@f2240 fact
+  holds salary p2239 d0 38529
+
+@f2241 fact
+  holds salary p2240 d0 38640
+
+@f2242 fact
+  holds salary p2241 d0 38751
+
+@f2243 fact
+  holds salary p2242 d0 38862
+
+@f2244 fact
+  holds salary p2243 d0 38973
+
+@f2245 fact
+  holds salary p2244 d0 39084
+
+@f2246 fact
+  holds salary p2245 d0 39195
+
+@f2247 fact
+  holds salary p2246 d0 39306
+
+@f2248 fact
+  holds salary p2247 d0 39417
+
+@f2249 fact
+  holds salary p2248 d0 39528
+
+@f2250 fact
+  holds salary p2249 d0 39639
+
+@f2251 fact
+  holds salary p2250 d0 39750
+
+@f2252 fact
+  holds salary p2251 d0 39861
+
+@f2253 fact
+  holds salary p2252 d0 39972
+
+@f2254 fact
+  holds salary p2253 d0 40083
+
+@f2255 fact
+  holds salary p2254 d0 40194
+
+@f2256 fact
+  holds salary p2255 d0 40305
+
+@f2257 fact
+  holds salary p2256 d0 40416
+
+@f2258 fact
+  holds salary p2257 d0 40527
+
+@f2259 fact
+  holds salary p2258 d0 40638
+
+@f2260 fact
+  holds salary p2259 d0 40749
+
+@f2261 fact
+  holds salary p2260 d0 40860
+
+@f2262 fact
+  holds salary p2261 d0 40971
+
+@f2263 fact
+  holds salary p2262 d0 41082
+
+@f2264 fact
+  holds salary p2263 d0 41193
+
+@f2265 fact
+  holds salary p2264 d0 41304
+
+@f2266 fact
+  holds salary p2265 d0 41415
+
+@f2267 fact
+  holds salary p2266 d0 41526
+
+@f2268 fact
+  holds salary p2267 d0 41637
+
+@f2269 fact
+  holds salary p2268 d0 41748
+
+@f2270 fact
+  holds salary p2269 d0 41859
+
+@f2271 fact
+  holds salary p2270 d0 41970
+
+@f2272 fact
+  holds salary p2271 d0 42081
+
+@f2273 fact
+  holds salary p2272 d0 42192
+
+@f2274 fact
+  holds salary p2273 d0 42303
+
+@f2275 fact
+  holds salary p2274 d0 42414
+
+@f2276 fact
+  holds salary p2275 d0 42525
+
+@f2277 fact
+  holds salary p2276 d0 42636
+
+@f2278 fact
+  holds salary p2277 d0 42747
+
+@f2279 fact
+  holds salary p2278 d0 42858
+
+@f2280 fact
+  holds salary p2279 d0 42969
+
+@f2281 fact
+  holds salary p2280 d0 43080
+
+@f2282 fact
+  holds salary p2281 d0 43191
+
+@f2283 fact
+  holds salary p2282 d0 43302
+
+@f2284 fact
+  holds salary p2283 d0 43413
+
+@f2285 fact
+  holds salary p2284 d0 43524
+
+@f2286 fact
+  holds salary p2285 d0 43635
+
+@f2287 fact
+  holds salary p2286 d0 43746
+
+@f2288 fact
+  holds salary p2287 d0 43857
+
+@f2289 fact
+  holds salary p2288 d0 43968
+
+@f2290 fact
+  holds salary p2289 d0 44079
+
+@f2291 fact
+  holds salary p2290 d0 44190
+
+@f2292 fact
+  holds salary p2291 d0 44301
+
+@f2293 fact
+  holds salary p2292 d0 44412
+
+@f2294 fact
+  holds salary p2293 d0 44523
+
+@f2295 fact
+  holds salary p2294 d0 44634
+
+@f2296 fact
+  holds salary p2295 d0 44745
+
+@f2297 fact
+  holds salary p2296 d0 44856
+
+@f2298 fact
+  holds salary p2297 d0 44967
+
+@f2299 fact
+  holds salary p2298 d0 30078
+
+@f2300 fact
+  holds salary p2299 d0 30189
+
+@f2301 fact
+  holds salary p2300 d0 30300
+
+@f2302 fact
+  holds salary p2301 d0 30411
+
+@f2303 fact
+  holds salary p2302 d0 30522
+
+@f2304 fact
+  holds salary p2303 d0 30633
+
+@f2305 fact
+  holds salary p2304 d0 30744
+
+@f2306 fact
+  holds salary p2305 d0 30855
+
+@f2307 fact
+  holds salary p2306 d0 30966
+
+@f2308 fact
+  holds salary p2307 d0 31077
+
+@f2309 fact
+  holds salary p2308 d0 31188
+
+@f2310 fact
+  holds salary p2309 d0 31299
+
+@f2311 fact
+  holds salary p2310 d0 31410
+
+@f2312 fact
+  holds salary p2311 d0 31521
+
+@f2313 fact
+  holds salary p2312 d0 31632
+
+@f2314 fact
+  holds salary p2313 d0 31743
+
+@f2315 fact
+  holds salary p2314 d0 31854
+
+@f2316 fact
+  holds salary p2315 d0 31965
+
+@f2317 fact
+  holds salary p2316 d0 32076
+
+@f2318 fact
+  holds salary p2317 d0 32187
+
+@f2319 fact
+  holds salary p2318 d0 32298
+
+@f2320 fact
+  holds salary p2319 d0 32409
+
+@f2321 fact
+  holds salary p2320 d0 32520
+
+@f2322 fact
+  holds salary p2321 d0 32631
+
+@f2323 fact
+  holds salary p2322 d0 32742
+
+@f2324 fact
+  holds salary p2323 d0 32853
+
+@f2325 fact
+  holds salary p2324 d0 32964
+
+@f2326 fact
+  holds salary p2325 d0 33075
+
+@f2327 fact
+  holds salary p2326 d0 33186
+
+@f2328 fact
+  holds salary p2327 d0 33297
+
+@f2329 fact
+  holds salary p2328 d0 33408
+
+@f2330 fact
+  holds salary p2329 d0 33519
+
+@f2331 fact
+  holds salary p2330 d0 33630
+
+@f2332 fact
+  holds salary p2331 d0 33741
+
+@f2333 fact
+  holds salary p2332 d0 33852
+
+@f2334 fact
+  holds salary p2333 d0 33963
+
+@f2335 fact
+  holds salary p2334 d0 34074
+
+@f2336 fact
+  holds salary p2335 d0 34185
+
+@f2337 fact
+  holds salary p2336 d0 34296
+
+@f2338 fact
+  holds salary p2337 d0 34407
+
+@f2339 fact
+  holds salary p2338 d0 34518
+
+@f2340 fact
+  holds salary p2339 d0 34629
+
+@f2341 fact
+  holds salary p2340 d0 34740
+
+@f2342 fact
+  holds salary p2341 d0 34851
+
+@f2343 fact
+  holds salary p2342 d0 34962
+
+@f2344 fact
+  holds salary p2343 d0 35073
+
+@f2345 fact
+  holds salary p2344 d0 35184
+
+@f2346 fact
+  holds salary p2345 d0 35295
+
+@f2347 fact
+  holds salary p2346 d0 35406
+
+@f2348 fact
+  holds salary p2347 d0 35517
+
+@f2349 fact
+  holds salary p2348 d0 35628
+
+@f2350 fact
+  holds salary p2349 d0 35739
+
+@f2351 fact
+  holds salary p2350 d0 35850
+
+@f2352 fact
+  holds salary p2351 d0 35961
+
+@f2353 fact
+  holds salary p2352 d0 36072
+
+@f2354 fact
+  holds salary p2353 d0 36183
+
+@f2355 fact
+  holds salary p2354 d0 36294
+
+@f2356 fact
+  holds salary p2355 d0 36405
+
+@f2357 fact
+  holds salary p2356 d0 36516
+
+@f2358 fact
+  holds salary p2357 d0 36627
+
+@f2359 fact
+  holds salary p2358 d0 36738
+
+@f2360 fact
+  holds salary p2359 d0 36849
+
+@f2361 fact
+  holds salary p2360 d0 36960
+
+@f2362 fact
+  holds salary p2361 d0 37071
+
+@f2363 fact
+  holds salary p2362 d0 37182
+
+@f2364 fact
+  holds salary p2363 d0 37293
+
+@f2365 fact
+  holds salary p2364 d0 37404
+
+@f2366 fact
+  holds salary p2365 d0 37515
+
+@f2367 fact
+  holds salary p2366 d0 37626
+
+@f2368 fact
+  holds salary p2367 d0 37737
+
+@f2369 fact
+  holds salary p2368 d0 37848
+
+@f2370 fact
+  holds salary p2369 d0 37959
+
+@f2371 fact
+  holds salary p2370 d0 38070
+
+@f2372 fact
+  holds salary p2371 d0 38181
+
+@f2373 fact
+  holds salary p2372 d0 38292
+
+@f2374 fact
+  holds salary p2373 d0 38403
+
+@f2375 fact
+  holds salary p2374 d0 38514
+
+@f2376 fact
+  holds salary p2375 d0 38625
+
+@f2377 fact
+  holds salary p2376 d0 38736
+
+@f2378 fact
+  holds salary p2377 d0 38847
+
+@f2379 fact
+  holds salary p2378 d0 38958
+
+@f2380 fact
+  holds salary p2379 d0 39069
+
+@f2381 fact
+  holds salary p2380 d0 39180
+
+@f2382 fact
+  holds salary p2381 d0 39291
+
+@f2383 fact
+  holds salary p2382 d0 39402
+
+@f2384 fact
+  holds salary p2383 d0 39513
+
+@f2385 fact
+  holds salary p2384 d0 39624
+
+@f2386 fact
+  holds salary p2385 d0 39735
+
+@f2387 fact
+  holds salary p2386 d0 39846
+
+@f2388 fact
+  holds salary p2387 d0 39957
+
+@f2389 fact
+  holds salary p2388 d0 40068
+
+@f2390 fact
+  holds salary p2389 d0 40179
+
+@f2391 fact
+  holds salary p2390 d0 40290
+
+@f2392 fact
+  holds salary p2391 d0 40401
+
+@f2393 fact
+  holds salary p2392 d0 40512
+
+@f2394 fact
+  holds salary p2393 d0 40623
+
+@f2395 fact
+  holds salary p2394 d0 40734
+
+@f2396 fact
+  holds salary p2395 d0 40845
+
+@f2397 fact
+  holds salary p2396 d0 40956
+
+@f2398 fact
+  holds salary p2397 d0 41067
+
+@f2399 fact
+  holds salary p2398 d0 41178
+
+@f2400 fact
+  holds salary p2399 d0 41289
+
+@f2401 fact
+  holds salary p2400 d0 41400
+
+@f2402 fact
+  holds salary p2401 d0 41511
+
+@f2403 fact
+  holds salary p2402 d0 41622
+
+@f2404 fact
+  holds salary p2403 d0 41733
+
+@f2405 fact
+  holds salary p2404 d0 41844
+
+@f2406 fact
+  holds salary p2405 d0 41955
+
+@f2407 fact
+  holds salary p2406 d0 42066
+
+@f2408 fact
+  holds salary p2407 d0 42177
+
+@f2409 fact
+  holds salary p2408 d0 42288
+
+@f2410 fact
+  holds salary p2409 d0 42399
+
+@f2411 fact
+  holds salary p2410 d0 42510
+
+@f2412 fact
+  holds salary p2411 d0 42621
+
+@f2413 fact
+  holds salary p2412 d0 42732
+
+@f2414 fact
+  holds salary p2413 d0 42843
+
+@f2415 fact
+  holds salary p2414 d0 42954
+
+@f2416 fact
+  holds salary p2415 d0 43065
+
+@f2417 fact
+  holds salary p2416 d0 43176
+
+@f2418 fact
+  holds salary p2417 d0 43287
+
+@f2419 fact
+  holds salary p2418 d0 43398
+
+@f2420 fact
+  holds salary p2419 d0 43509
+
+@f2421 fact
+  holds salary p2420 d0 43620
+
+@f2422 fact
+  holds salary p2421 d0 43731
+
+@f2423 fact
+  holds salary p2422 d0 43842
+
+@f2424 fact
+  holds salary p2423 d0 43953
+
+@f2425 fact
+  holds salary p2424 d0 44064
+
+@f2426 fact
+  holds salary p2425 d0 44175
+
+@f2427 fact
+  holds salary p2426 d0 44286
+
+@f2428 fact
+  holds salary p2427 d0 44397
+
+@f2429 fact
+  holds salary p2428 d0 44508
+
+@f2430 fact
+  holds salary p2429 d0 44619
+
+@f2431 fact
+  holds salary p2430 d0 44730
+
+@f2432 fact
+  holds salary p2431 d0 44841
+
+@f2433 fact
+  holds salary p2432 d0 44952
+
+@f2434 fact
+  holds salary p2433 d0 30063
+
+@f2435 fact
+  holds salary p2434 d0 30174
+
+@f2436 fact
+  holds salary p2435 d0 30285
+
+@f2437 fact
+  holds salary p2436 d0 30396
+
+@f2438 fact
+  holds salary p2437 d0 30507
+
+@f2439 fact
+  holds salary p2438 d0 30618
+
+@f2440 fact
+  holds salary p2439 d0 30729
+
+@f2441 fact
+  holds salary p2440 d0 30840
+
+@f2442 fact
+  holds salary p2441 d0 30951
+
+@f2443 fact
+  holds salary p2442 d0 31062
+
+@f2444 fact
+  holds salary p2443 d0 31173
+
+@f2445 fact
+  holds salary p2444 d0 31284
+
+@f2446 fact
+  holds salary p2445 d0 31395
+
+@f2447 fact
+  holds salary p2446 d0 31506
+
+@f2448 fact
+  holds salary p2447 d0 31617
+
+@f2449 fact
+  holds salary p2448 d0 31728
+
+@f2450 fact
+  holds salary p2449 d0 31839
+
+@f2451 fact
+  holds salary p2450 d0 31950
+
+@f2452 fact
+  holds salary p2451 d0 32061
+
+@f2453 fact
+  holds salary p2452 d0 32172
+
+@f2454 fact
+  holds salary p2453 d0 32283
+
+@f2455 fact
+  holds salary p2454 d0 32394
+
+@f2456 fact
+  holds salary p2455 d0 32505
+
+@f2457 fact
+  holds salary p2456 d0 32616
+
+@f2458 fact
+  holds salary p2457 d0 32727
+
+@f2459 fact
+  holds salary p2458 d0 32838
+
+@f2460 fact
+  holds salary p2459 d0 32949
+
+@f2461 fact
+  holds salary p2460 d0 33060
+
+@f2462 fact
+  holds salary p2461 d0 33171
+
+@f2463 fact
+  holds salary p2462 d0 33282
+
+@f2464 fact
+  holds salary p2463 d0 33393
+
+@f2465 fact
+  holds salary p2464 d0 33504
+
+@f2466 fact
+  holds salary p2465 d0 33615
+
+@f2467 fact
+  holds salary p2466 d0 33726
+
+@f2468 fact
+  holds salary p2467 d0 33837
+
+@f2469 fact
+  holds salary p2468 d0 33948
+
+@f2470 fact
+  holds salary p2469 d0 34059
+
+@f2471 fact
+  holds salary p2470 d0 34170
+
+@f2472 fact
+  holds salary p2471 d0 34281
+
+@f2473 fact
+  holds salary p2472 d0 34392
+
+@f2474 fact
+  holds salary p2473 d0 34503
+
+@f2475 fact
+  holds salary p2474 d0 34614
+
+@f2476 fact
+  holds salary p2475 d0 34725
+
+@f2477 fact
+  holds salary p2476 d0 34836
+
+@f2478 fact
+  holds salary p2477 d0 34947
+
+@f2479 fact
+  holds salary p2478 d0 35058
+
+@f2480 fact
+  holds salary p2479 d0 35169
+
+@f2481 fact
+  holds salary p2480 d0 35280
+
+@f2482 fact
+  holds salary p2481 d0 35391
+
+@f2483 fact
+  holds salary p2482 d0 35502
+
+@f2484 fact
+  holds salary p2483 d0 35613
+
+@f2485 fact
+  holds salary p2484 d0 35724
+
+@f2486 fact
+  holds salary p2485 d0 35835
+
+@f2487 fact
+  holds salary p2486 d0 35946
+
+@f2488 fact
+  holds salary p2487 d0 36057
+
+@f2489 fact
+  holds salary p2488 d0 36168
+
+@f2490 fact
+  holds salary p2489 d0 36279
+
+@f2491 fact
+  holds salary p2490 d0 36390
+
+@f2492 fact
+  holds salary p2491 d0 36501
+
+@f2493 fact
+  holds salary p2492 d0 36612
+
+@f2494 fact
+  holds salary p2493 d0 36723
+
+@f2495 fact
+  holds salary p2494 d0 36834
+
+@f2496 fact
+  holds salary p2495 d0 36945
+
+@f2497 fact
+  holds salary p2496 d0 37056
+
+@f2498 fact
+  holds salary p2497 d0 37167
+
+@f2499 fact
+  holds salary p2498 d0 37278
+
+@f2500 fact
+  holds salary p2499 d0 37389
+
+@f2501 fact
+  holds salary p2500 d1 38500
+
+@f2502 fact
+  holds salary p2501 d2 39611
+
+@f2503 fact
+  holds salary p2502 d3 40722
+
+@f2504 fact
+  holds salary p2503 d4 41833
+
+@f2505 fact
+  holds salary p2504 d5 42944
+
+@f2506 fact
+  holds salary p2505 d6 44055
+
+@f2507 fact
+  holds salary p2506 d7 45166
+
+@f2508 fact
+  holds salary p2507 d1 39277
+
+@f2509 fact
+  holds salary p2508 d2 40388
+
+@f2510 fact
+  holds salary p2509 d3 41499
+
+@f2511 fact
+  holds salary p2510 d4 42610
+
+@f2512 fact
+  holds salary p2511 d5 43721
+
+@f2513 fact
+  holds salary p2512 d6 44832
+
+@f2514 fact
+  holds salary p2513 d7 45943
+
+@f2515 fact
+  holds salary p2514 d1 40054
+
+@f2516 fact
+  holds salary p2515 d2 41165
+
+@f2517 fact
+  holds salary p2516 d3 42276
+
+@f2518 fact
+  holds salary p2517 d4 43387
+
+@f2519 fact
+  holds salary p2518 d5 44498
+
+@f2520 fact
+  holds salary p2519 d6 45609
+
+@f2521 fact
+  holds salary p2520 d7 46720
+
+@f2522 fact
+  holds salary p2521 d1 40831
+
+@f2523 fact
+  holds salary p2522 d2 41942
+
+@f2524 fact
+  holds salary p2523 d3 43053
+
+@f2525 fact
+  holds salary p2524 d4 44164
+
+@f2526 fact
+  holds salary p2525 d5 45275
+
+@f2527 fact
+  holds salary p2526 d6 46386
+
+@f2528 fact
+  holds salary p2527 d7 47497
+
+@f2529 fact
+  holds salary p2528 d1 41608
+
+@f2530 fact
+  holds salary p2529 d2 42719
+
+@f2531 fact
+  holds salary p2530 d3 43830
+
+@f2532 fact
+  holds salary p2531 d4 44941
+
+@f2533 fact
+  holds salary p2532 d5 46052
+
+@f2534 fact
+  holds salary p2533 d6 47163
+
+@f2535 fact
+  holds salary p2534 d7 48274
+
+@f2536 fact
+  holds salary p2535 d1 42385
+
+@f2537 fact
+  holds salary p2536 d2 43496
+
+@f2538 fact
+  holds salary p2537 d3 44607
+
+@f2539 fact
+  holds salary p2538 d4 45718
+
+@f2540 fact
+  holds salary p2539 d5 46829
+
+@f2541 fact
+  holds salary p2540 d6 47940
+
+@f2542 fact
+  holds salary p2541 d7 49051
+
+@f2543 fact
+  holds salary p2542 d1 43162
+
+@f2544 fact
+  holds salary p2543 d2 44273
+
+@f2545 fact
+  holds salary p2544 d3 45384
+
+@f2546 fact
+  holds salary p2545 d4 46495
+
+@f2547 fact
+  holds salary p2546 d5 47606
+
+@f2548 fact
+  holds salary p2547 d6 48717
+
+@f2549 fact
+  holds salary p2548 d7 49828
+
+@f2550 fact
+  holds salary p2549 d1 43939
+
+@f2551 fact
+  holds salary p2550 d2 45050
+
+@f2552 fact
+  holds salary p2551 d3 46161
+
+@f2553 fact
+  holds salary p2552 d4 47272
+
+@f2554 fact
+  holds salary p2553 d5 48383
+
+@f2555 fact
+  holds salary p2554 d6 49494
+
+@f2556 fact
+  holds salary p2555 d7 50605
+
+@f2557 fact
+  holds salary p2556 d1 44716
+
+@f2558 fact
+  holds salary p2557 d2 45827
+
+@f2559 fact
+  holds salary p2558 d3 46938
+
+@f2560 fact
+  holds salary p2559 d4 48049
+
+@f2561 fact
+  holds salary p2560 d5 49160
+
+@f2562 fact
+  holds salary p2561 d6 50271
+
+@f2563 fact
+  holds salary p2562 d7 51382
+
+@f2564 fact
+  holds salary p2563 d1 45493
+
+@f2565 fact
+  holds salary p2564 d2 46604
+
+@f2566 fact
+  holds salary p2565 d3 47715
+
+@f2567 fact
+  holds salary p2566 d4 48826
+
+@f2568 fact
+  holds salary p2567 d5 49937
+
+@f2569 fact
+  holds salary p2568 d6 36048
+
+@f2570 fact
+  holds salary p2569 d7 37159
+
+@f2571 fact
+  holds salary p2570 d1 31270
+
+@f2572 fact
+  holds salary p2571 d2 32381
+
+@f2573 fact
+  holds salary p2572 d3 33492
+
+@f2574 fact
+  holds salary p2573 d4 34603
+
+@f2575 fact
+  holds salary p2574 d5 35714
+
+@f2576 fact
+  holds salary p2575 d6 36825
+
+@f2577 fact
+  holds salary p2576 d7 37936
+
+@f2578 fact
+  holds salary p2577 d1 32047
+
+@f2579 fact
+  holds salary p2578 d2 33158
+
+@f2580 fact
+  holds salary p2579 d3 34269
+
+@f2581 fact
+  holds salary p2580 d4 35380
+
+@f2582 fact
+  holds salary p2581 d5 36491
+
+@f2583 fact
+  holds salary p2582 d6 37602
+
+@f2584 fact
+  holds salary p2583 d7 38713
+
+@f2585 fact
+  holds salary p2584 d1 32824
+
+@f2586 fact
+  holds salary p2585 d2 33935
+
+@f2587 fact
+  holds salary p2586 d3 35046
+
+@f2588 fact
+  holds salary p2587 d4 36157
+
+@f2589 fact
+  holds salary p2588 d5 37268
+
+@f2590 fact
+  holds salary p2589 d6 38379
+
+@f2591 fact
+  holds salary p2590 d7 39490
+
+@f2592 fact
+  holds salary p2591 d1 33601
+
+@f2593 fact
+  holds salary p2592 d2 34712
+
+@f2594 fact
+  holds salary p2593 d3 35823
+
+@f2595 fact
+  holds salary p2594 d4 36934
+
+@f2596 fact
+  holds salary p2595 d5 38045
+
+@f2597 fact
+  holds salary p2596 d6 39156
+
+@f2598 fact
+  holds salary p2597 d7 40267
+
+@f2599 fact
+  holds salary p2598 d1 34378
+
+@f2600 fact
+  holds salary p2599 d2 35489
+
+@f2601 fact
+  holds salary p2600 d3 36600
+
+@f2602 fact
+  holds salary p2601 d4 37711
+
+@f2603 fact
+  holds salary p2602 d5 38822
+
+@f2604 fact
+  holds salary p2603 d6 39933
+
+@f2605 fact
+  holds salary p2604 d7 41044
+
+@f2606 fact
+  holds salary p2605 d1 35155
+
+@f2607 fact
+  holds salary p2606 d2 36266
+
+@f2608 fact
+  holds salary p2607 d3 37377
+
+@f2609 fact
+  holds salary p2608 d4 38488
+
+@f2610 fact
+  holds salary p2609 d5 39599
+
+@f2611 fact
+  holds salary p2610 d6 40710
+
+@f2612 fact
+  holds salary p2611 d7 41821
+
+@f2613 fact
+  holds salary p2612 d1 35932
+
+@f2614 fact
+  holds salary p2613 d2 37043
+
+@f2615 fact
+  holds salary p2614 d3 38154
+
+@f2616 fact
+  holds salary p2615 d4 39265
+
+@f2617 fact
+  holds salary p2616 d5 40376
+
+@f2618 fact
+  holds salary p2617 d6 41487
+
+@f2619 fact
+  holds salary p2618 d7 42598
+
+@f2620 fact
+  holds salary p2619 d1 36709
+
+@f2621 fact
+  holds salary p2620 d2 37820
+
+@f2622 fact
+  holds salary p2621 d3 38931
+
+@f2623 fact
+  holds salary p2622 d4 40042
+
+@f2624 fact
+  holds salary p2623 d5 41153
+
+@f2625 fact
+  holds salary p2624 d6 42264
+
+@f2626 fact
+  holds salary p2625 d7 43375
+
+@f2627 fact
+  holds salary p2626 d1 37486
+
+@f2628 fact
+  holds salary p2627 d2 38597
+
+@f2629 fact
+  holds salary p2628 d3 39708
+
+@f2630 fact
+  holds salary p2629 d4 40819
+
+@f2631 fact
+  holds salary p2630 d5 41930
+
+@f2632 fact
+  holds salary p2631 d6 43041
+
+@f2633 fact
+  holds salary p2632 d7 44152
+
+@f2634 fact
+  holds salary p2633 d1 38263
+
+@f2635 fact
+  holds salary p2634 d2 39374
+
+@f2636 fact
+  holds salary p2635 d3 40485
+
+@f2637 fact
+  holds salary p2636 d4 41596
+
+@f2638 fact
+  holds salary p2637 d5 42707
+
+@f2639 fact
+  holds salary p2638 d6 43818
+
+@f2640 fact
+  holds salary p2639 d7 44929
+
+@f2641 fact
+  holds salary p2640 d1 39040
+
+@f2642 fact
+  holds salary p2641 d2 40151
+
+@f2643 fact
+  holds salary p2642 d3 41262
+
+@f2644 fact
+  holds salary p2643 d4 42373
+
+@f2645 fact
+  holds salary p2644 d5 43484
+
+@f2646 fact
+  holds salary p2645 d6 44595
+
+@f2647 fact
+  holds salary p2646 d7 45706
+
+@f2648 fact
+  holds salary p2647 d1 39817
+
+@f2649 fact
+  holds salary p2648 d2 40928
+
+@f2650 fact
+  holds salary p2649 d3 42039
+
+@f2651 fact
+  holds salary p2650 d4 43150
+
+@f2652 fact
+  holds salary p2651 d5 44261
+
+@f2653 fact
+  holds salary p2652 d6 45372
+
+@f2654 fact
+  holds salary p2653 d7 46483
+
+@f2655 fact
+  holds salary p2654 d1 40594
+
+@f2656 fact
+  holds salary p2655 d2 41705
+
+@f2657 fact
+  holds salary p2656 d3 42816
+
+@f2658 fact
+  holds salary p2657 d4 43927
+
+@f2659 fact
+  holds salary p2658 d5 45038
+
+@f2660 fact
+  holds salary p2659 d6 46149
+
+@f2661 fact
+  holds salary p2660 d7 47260
+
+@f2662 fact
+  holds salary p2661 d1 41371
+
+@f2663 fact
+  holds salary p2662 d2 42482
+
+@f2664 fact
+  holds salary p2663 d3 43593
+
+@f2665 fact
+  holds salary p2664 d4 44704
+
+@f2666 fact
+  holds salary p2665 d5 45815
+
+@f2667 fact
+  holds salary p2666 d6 46926
+
+@f2668 fact
+  holds salary p2667 d7 48037
+
+@f2669 fact
+  holds salary p2668 d1 42148
+
+@f2670 fact
+  holds salary p2669 d2 43259
+
+@f2671 fact
+  holds salary p2670 d3 44370
+
+@f2672 fact
+  holds salary p2671 d4 45481
+
+@f2673 fact
+  holds salary p2672 d5 46592
+
+@f2674 fact
+  holds salary p2673 d6 47703
+
+@f2675 fact
+  holds salary p2674 d7 48814
+
+@f2676 fact
+  holds salary p2675 d1 42925
+
+@f2677 fact
+  holds salary p2676 d2 44036
+
+@f2678 fact
+  holds salary p2677 d3 45147
+
+@f2679 fact
+  holds salary p2678 d4 46258
+
+@f2680 fact
+  holds salary p2679 d5 47369
+
+@f2681 fact
+  holds salary p2680 d6 48480
+
+@f2682 fact
+  holds salary p2681 d7 49591
+
+@f2683 fact
+  holds salary p2682 d1 43702
+
+@f2684 fact
+  holds salary p2683 d2 44813
+
+@f2685 fact
+  holds salary p2684 d3 45924
+
+@f2686 fact
+  holds salary p2685 d4 47035
+
+@f2687 fact
+  holds salary p2686 d5 48146
+
+@f2688 fact
+  holds salary p2687 d6 49257
+
+@f2689 fact
+  holds salary p2688 d7 50368
+
+@f2690 fact
+  holds salary p2689 d1 44479
+
+@f2691 fact
+  holds salary p2690 d2 45590
+
+@f2692 fact
+  holds salary p2691 d3 46701
+
+@f2693 fact
+  holds salary p2692 d4 47812
+
+@f2694 fact
+  holds salary p2693 d5 48923
+
+@f2695 fact
+  holds salary p2694 d6 50034
+
+@f2696 fact
+  holds salary p2695 d7 51145
+
+@f2697 fact
+  holds salary p2696 d1 45256
+
+@f2698 fact
+  holds salary p2697 d2 46367
+
+@f2699 fact
+  holds salary p2698 d3 47478
+
+@f2700 fact
+  holds salary p2699 d4 48589
+
+@f2701 fact
+  holds salary p2700 d5 49700
+
+@f2702 fact
+  holds salary p2701 d6 50811
+
+@f2703 fact
+  holds salary p2702 d7 51922
+
+@f2704 fact
+  holds salary p2703 d1 31033
+
+@f2705 fact
+  holds salary p2704 d2 32144
+
+@f2706 fact
+  holds salary p2705 d3 33255
+
+@f2707 fact
+  holds salary p2706 d4 34366
+
+@f2708 fact
+  holds salary p2707 d5 35477
+
+@f2709 fact
+  holds salary p2708 d6 36588
+
+@f2710 fact
+  holds salary p2709 d7 37699
+
+@f2711 fact
+  holds salary p2710 d1 31810
+
+@f2712 fact
+  holds salary p2711 d2 32921
+
+@f2713 fact
+  holds salary p2712 d3 34032
+
+@f2714 fact
+  holds salary p2713 d4 35143
+
+@f2715 fact
+  holds salary p2714 d5 36254
+
+@f2716 fact
+  holds salary p2715 d6 37365
+
+@f2717 fact
+  holds salary p2716 d7 38476
+
+@f2718 fact
+  holds salary p2717 d1 32587
+
+@f2719 fact
+  holds salary p2718 d2 33698
+
+@f2720 fact
+  holds salary p2719 d3 34809
+
+@f2721 fact
+  holds salary p2720 d4 35920
+
+@f2722 fact
+  holds salary p2721 d5 37031
+
+@f2723 fact
+  holds salary p2722 d6 38142
+
+@f2724 fact
+  holds salary p2723 d7 39253
+
+@f2725 fact
+  holds salary p2724 d1 33364
+
+@f2726 fact
+  holds salary p2725 d2 34475
+
+@f2727 fact
+  holds salary p2726 d3 35586
+
+@f2728 fact
+  holds salary p2727 d4 36697
+
+@f2729 fact
+  holds salary p2728 d5 37808
+
+@f2730 fact
+  holds salary p2729 d6 38919
+
+@f2731 fact
+  holds salary p2730 d7 40030
+
+@f2732 fact
+  holds salary p2731 d1 34141
+
+@f2733 fact
+  holds salary p2732 d2 35252
+
+@f2734 fact
+  holds salary p2733 d3 36363
+
+@f2735 fact
+  holds salary p2734 d4 37474
+
+@f2736 fact
+  holds salary p2735 d5 38585
+
+@f2737 fact
+  holds salary p2736 d6 39696
+
+@f2738 fact
+  holds salary p2737 d7 40807
+
+@f2739 fact
+  holds salary p2738 d1 34918
+
+@f2740 fact
+  holds salary p2739 d2 36029
+
+@f2741 fact
+  holds salary p2740 d3 37140
+
+@f2742 fact
+  holds salary p2741 d4 38251
+
+@f2743 fact
+  holds salary p2742 d5 39362
+
+@f2744 fact
+  holds salary p2743 d6 40473
+
+@f2745 fact
+  holds salary p2744 d7 41584
+
+@f2746 fact
+  holds salary p2745 d1 35695
+
+@f2747 fact
+  holds salary p2746 d2 36806
+
+@f2748 fact
+  holds salary p2747 d3 37917
+
+@f2749 fact
+  holds salary p2748 d4 39028
+
+@f2750 fact
+  holds salary p2749 d5 40139
+
+@f2751 fact
+  holds salary p2750 d6 41250
+
+@f2752 fact
+  holds salary p2751 d7 42361
+
+@f2753 fact
+  holds salary p2752 d1 36472
+
+@f2754 fact
+  holds salary p2753 d2 37583
+
+@f2755 fact
+  holds salary p2754 d3 38694
+
+@f2756 fact
+  holds salary p2755 d4 39805
+
+@f2757 fact
+  holds salary p2756 d5 40916
+
+@f2758 fact
+  holds salary p2757 d6 42027
+
+@f2759 fact
+  holds salary p2758 d7 43138
+
+@f2760 fact
+  holds salary p2759 d1 37249
+
+@f2761 fact
+  holds salary p2760 d2 38360
+
+@f2762 fact
+  holds salary p2761 d3 39471
+
+@f2763 fact
+  holds salary p2762 d4 40582
+
+@f2764 fact
+  holds salary p2763 d5 41693
+
+@f2765 fact
+  holds salary p2764 d6 42804
+
+@f2766 fact
+  holds salary p2765 d7 43915
+
+@f2767 fact
+  holds salary p2766 d1 38026
+
+@f2768 fact
+  holds salary p2767 d2 39137
+
+@f2769 fact
+  holds salary p2768 d3 40248
+
+@f2770 fact
+  holds salary p2769 d4 41359
+
+@f2771 fact
+  holds salary p2770 d5 42470
+
+@f2772 fact
+  holds salary p2771 d6 43581
+
+@f2773 fact
+  holds salary p2772 d7 44692
+
+@f2774 fact
+  holds salary p2773 d1 38803
+
+@f2775 fact
+  holds salary p2774 d2 39914
+
+@f2776 fact
+  holds salary p2775 d3 41025
+
+@f2777 fact
+  holds salary p2776 d4 42136
+
+@f2778 fact
+  holds salary p2777 d5 43247
+
+@f2779 fact
+  holds salary p2778 d6 44358
+
+@f2780 fact
+  holds salary p2779 d7 45469
+
+@f2781 fact
+  holds salary p2780 d1 39580
+
+@f2782 fact
+  holds salary p2781 d2 40691
+
+@f2783 fact
+  holds salary p2782 d3 41802
+
+@f2784 fact
+  holds salary p2783 d4 42913
+
+@f2785 fact
+  holds salary p2784 d5 44024
+
+@f2786 fact
+  holds salary p2785 d6 45135
+
+@f2787 fact
+  holds salary p2786 d7 46246
+
+@f2788 fact
+  holds salary p2787 d1 40357
+
+@f2789 fact
+  holds salary p2788 d2 41468
+
+@f2790 fact
+  holds salary p2789 d3 42579
+
+@f2791 fact
+  holds salary p2790 d4 43690
+
+@f2792 fact
+  holds salary p2791 d5 44801
+
+@f2793 fact
+  holds salary p2792 d6 45912
+
+@f2794 fact
+  holds salary p2793 d7 47023
+
+@f2795 fact
+  holds salary p2794 d1 41134
+
+@f2796 fact
+  holds salary p2795 d2 42245
+
+@f2797 fact
+  holds salary p2796 d3 43356
+
+@f2798 fact
+  holds salary p2797 d4 44467
+
+@f2799 fact
+  holds salary p2798 d5 45578
+
+@f2800 fact
+  holds salary p2799 d6 46689
+
+@f2801 fact
+  holds salary p2800 d7 47800
+
+@f2802 fact
+  holds salary p2801 d1 41911
+
+@f2803 fact
+  holds salary p2802 d2 43022
+
+@f2804 fact
+  holds salary p2803 d3 44133
+
+@f2805 fact
+  holds salary p2804 d4 45244
+
+@f2806 fact
+  holds salary p2805 d5 46355
+
+@f2807 fact
+  holds salary p2806 d6 47466
+
+@f2808 fact
+  holds salary p2807 d7 48577
+
+@f2809 fact
+  holds salary p2808 d1 42688
+
+@f2810 fact
+  holds salary p2809 d2 43799
+
+@f2811 fact
+  holds salary p2810 d3 44910
+
+@f2812 fact
+  holds salary p2811 d4 46021
+
+@f2813 fact
+  holds salary p2812 d5 47132
+
+@f2814 fact
+  holds salary p2813 d6 48243
+
+@f2815 fact
+  holds salary p2814 d7 49354
+
+@f2816 fact
+  holds salary p2815 d1 43465
+
+@f2817 fact
+  holds salary p2816 d2 44576
+
+@f2818 fact
+  holds salary p2817 d3 45687
+
+@f2819 fact
+  holds salary p2818 d4 46798
+
+@f2820 fact
+  holds salary p2819 d5 47909
+
+@f2821 fact
+  holds salary p2820 d6 49020
+
+@f2822 fact
+  holds salary p2821 d7 50131
+
+@f2823 fact
+  holds salary p2822 d1 44242
+
+@f2824 fact
+  holds salary p2823 d2 45353
+
+@f2825 fact
+  holds salary p2824 d3 46464
+
+@f2826 fact
+  holds salary p2825 d4 47575
+
+@f2827 fact
+  holds salary p2826 d5 48686
+
+@f2828 fact
+  holds salary p2827 d6 49797
+
+@f2829 fact
+  holds salary p2828 d7 50908
+
+@f2830 fact
+  holds salary p2829 d1 45019
+
+@f2831 fact
+  holds salary p2830 d2 46130
+
+@f2832 fact
+  holds salary p2831 d3 47241
+
+@f2833 fact
+  holds salary p2832 d4 48352
+
+@f2834 fact
+  holds salary p2833 d5 49463
+
+@f2835 fact
+  holds salary p2834 d6 50574
+
+@f2836 fact
+  holds salary p2835 d7 51685
+
+@f2837 fact
+  holds salary p2836 d1 45796
+
+@f2838 fact
+  holds salary p2837 d2 46907
+
+@f2839 fact
+  holds salary p2838 d3 33018
+
+@f2840 fact
+  holds salary p2839 d4 34129
+
+@f2841 fact
+  holds salary p2840 d5 35240
+
+@f2842 fact
+  holds salary p2841 d6 36351
+
+@f2843 fact
+  holds salary p2842 d7 37462
+
+@f2844 fact
+  holds salary p2843 d1 31573
+
+@f2845 fact
+  holds salary p2844 d2 32684
+
+@f2846 fact
+  holds salary p2845 d3 33795
+
+@f2847 fact
+  holds salary p2846 d4 34906
+
+@f2848 fact
+  holds salary p2847 d5 36017
+
+@f2849 fact
+  holds salary p2848 d6 37128
+
+@f2850 fact
+  holds salary p2849 d7 38239
+
+@f2851 fact
+  holds salary p2850 d1 32350
+
+@f2852 fact
+  holds salary p2851 d2 33461
+
+@f2853 fact
+  holds salary p2852 d3 34572
+
+@f2854 fact
+  holds salary p2853 d4 35683
+
+@f2855 fact
+  holds salary p2854 d5 36794
+
+@f2856 fact
+  holds salary p2855 d6 37905
+
+@f2857 fact
+  holds salary p2856 d7 39016
+
+@f2858 fact
+  holds salary p2857 d1 33127
+
+@f2859 fact
+  holds salary p2858 d2 34238
+
+@f2860 fact
+  holds salary p2859 d3 35349
+
+@f2861 fact
+  holds salary p2860 d4 36460
+
+@f2862 fact
+  holds salary p2861 d5 37571
+
+@f2863 fact
+  holds salary p2862 d6 38682
+
+@f2864 fact
+  holds salary p2863 d7 39793
+
+@f2865 fact
+  holds salary p2864 d1 33904
+
+@f2866 fact
+  holds salary p2865 d2 35015
+
+@f2867 fact
+  holds salary p2866 d3 36126
+
+@f2868 fact
+  holds salary p2867 d4 37237
+
+@f2869 fact
+  holds salary p2868 d5 38348
+
+@f2870 fact
+  holds salary p2869 d6 39459
+
+@f2871 fact
+  holds salary p2870 d7 40570
+
+@f2872 fact
+  holds salary p2871 d1 34681
+
+@f2873 fact
+  holds salary p2872 d2 35792
+
+@f2874 fact
+  holds salary p2873 d3 36903
+
+@f2875 fact
+  holds salary p2874 d4 38014
+
+@f2876 fact
+  holds salary p2875 d5 39125
+
+@f2877 fact
+  holds salary p2876 d6 40236
+
+@f2878 fact
+  holds salary p2877 d7 41347
+
+@f2879 fact
+  holds salary p2878 d1 35458
+
+@f2880 fact
+  holds salary p2879 d2 36569
+
+@f2881 fact
+  holds salary p2880 d3 37680
+
+@f2882 fact
+  holds salary p2881 d4 38791
+
+@f2883 fact
+  holds salary p2882 d5 39902
+
+@f2884 fact
+  holds salary p2883 d6 41013
+
+@f2885 fact
+  holds salary p2884 d7 42124
+
+@f2886 fact
+  holds salary p2885 d1 36235
+
+@f2887 fact
+  holds salary p2886 d2 37346
+
+@f2888 fact
+  holds salary p2887 d3 38457
+
+@f2889 fact
+  holds salary p2888 d4 39568
+
+@f2890 fact
+  holds salary p2889 d5 40679
+
+@f2891 fact
+  holds salary p2890 d6 41790
+
+@f2892 fact
+  holds salary p2891 d7 42901
+
+@f2893 fact
+  holds salary p2892 d1 37012
+
+@f2894 fact
+  holds salary p2893 d2 38123
+
+@f2895 fact
+  holds salary p2894 d3 39234
+
+@f2896 fact
+  holds salary p2895 d4 40345
+
+@f2897 fact
+  holds salary p2896 d5 41456
+
+@f2898 fact
+  holds salary p2897 d6 42567
+
+@f2899 fact
+  holds salary p2898 d7 43678
+
+@f2900 fact
+  holds salary p2899 d1 37789
+
+@f2901 fact
+  holds salary p2900 d2 38900
+
+@f2902 fact
+  holds salary p2901 d3 40011
+
+@f2903 fact
+  holds salary p2902 d4 41122
+
+@f2904 fact
+  holds salary p2903 d5 42233
+
+@f2905 fact
+  holds salary p2904 d6 43344
+
+@f2906 fact
+  holds salary p2905 d7 44455
+
+@f2907 fact
+  holds salary p2906 d1 38566
+
+@f2908 fact
+  holds salary p2907 d2 39677
+
+@f2909 fact
+  holds salary p2908 d3 40788
+
+@f2910 fact
+  holds salary p2909 d4 41899
+
+@f2911 fact
+  holds salary p2910 d5 43010
+
+@f2912 fact
+  holds salary p2911 d6 44121
+
+@f2913 fact
+  holds salary p2912 d7 45232
+
+@f2914 fact
+  holds salary p2913 d1 39343
+
+@f2915 fact
+  holds salary p2914 d2 40454
+
+@f2916 fact
+  holds salary p2915 d3 41565
+
+@f2917 fact
+  holds salary p2916 d4 42676
+
+@f2918 fact
+  holds salary p2917 d5 43787
+
+@f2919 fact
+  holds salary p2918 d6 44898
+
+@f2920 fact
+  holds salary p2919 d7 46009
+
+@f2921 fact
+  holds salary p2920 d1 40120
+
+@f2922 fact
+  holds salary p2921 d2 41231
+
+@f2923 fact
+  holds salary p2922 d3 42342
+
+@f2924 fact
+  holds salary p2923 d4 43453
+
+@f2925 fact
+  holds salary p2924 d5 44564
+
+@f2926 fact
+  holds salary p2925 d6 45675
+
+@f2927 fact
+  holds salary p2926 d7 46786
+
+@f2928 fact
+  holds salary p2927 d1 40897
+
+@f2929 fact
+  holds salary p2928 d2 42008
+
+@f2930 fact
+  holds salary p2929 d3 43119
+
+@f2931 fact
+  holds salary p2930 d4 44230
+
+@f2932 fact
+  holds salary p2931 d5 45341
+
+@f2933 fact
+  holds salary p2932 d6 46452
+
+@f2934 fact
+  holds salary p2933 d7 47563
+
+@f2935 fact
+  holds salary p2934 d1 41674
+
+@f2936 fact
+  holds salary p2935 d2 42785
+
+@f2937 fact
+  holds salary p2936 d3 43896
+
+@f2938 fact
+  holds salary p2937 d4 45007
+
+@f2939 fact
+  holds salary p2938 d5 46118
+
+@f2940 fact
+  holds salary p2939 d6 47229
+
+@f2941 fact
+  holds salary p2940 d7 48340
+
+@f2942 fact
+  holds salary p2941 d1 42451
+
+@f2943 fact
+  holds salary p2942 d2 43562
+
+@f2944 fact
+  holds salary p2943 d3 44673
+
+@f2945 fact
+  holds salary p2944 d4 45784
+
+@f2946 fact
+  holds salary p2945 d5 46895
+
+@f2947 fact
+  holds salary p2946 d6 48006
+
+@f2948 fact
+  holds salary p2947 d7 49117
+
+@f2949 fact
+  holds salary p2948 d1 43228
+
+@f2950 fact
+  holds salary p2949 d2 44339
+
+@f2951 fact
+  holds salary p2950 d3 45450
+
+@f2952 fact
+  holds salary p2951 d4 46561
+
+@f2953 fact
+  holds salary p2952 d5 47672
+
+@f2954 fact
+  holds salary p2953 d6 48783
+
+@f2955 fact
+  holds salary p2954 d7 49894
+
+@f2956 fact
+  holds salary p2955 d1 44005
+
+@f2957 fact
+  holds salary p2956 d2 45116
+
+@f2958 fact
+  holds salary p2957 d3 46227
+
+@f2959 fact
+  holds salary p2958 d4 47338
+
+@f2960 fact
+  holds salary p2959 d5 48449
+
+@f2961 fact
+  holds salary p2960 d6 49560
+
+@f2962 fact
+  holds salary p2961 d7 50671
+
+@f2963 fact
+  holds salary p2962 d1 44782
+
+@f2964 fact
+  holds salary p2963 d2 45893
+
+@f2965 fact
+  holds salary p2964 d3 47004
+
+@f2966 fact
+  holds salary p2965 d4 48115
+
+@f2967 fact
+  holds salary p2966 d5 49226
+
+@f2968 fact
+  holds salary p2967 d6 50337
+
+@f2969 fact
+  holds salary p2968 d7 51448
+
+@f2970 fact
+  holds salary p2969 d1 45559
+
+@f2971 fact
+  holds salary p2970 d2 46670
+
+@f2972 fact
+  holds salary p2971 d3 47781
+
+@f2973 fact
+  holds salary p2972 d4 48892
+
+@f2974 fact
+  holds salary p2973 d5 35003
+
+@f2975 fact
+  holds salary p2974 d6 36114
+
+@f2976 fact
+  holds salary p2975 d7 37225
+
+@f2977 fact
+  holds salary p2976 d1 31336
+
+@f2978 fact
+  holds salary p2977 d2 32447
+
+@f2979 fact
+  holds salary p2978 d3 33558
+
+@f2980 fact
+  holds salary p2979 d4 34669
+
+@f2981 fact
+  holds salary p2980 d5 35780
+
+@f2982 fact
+  holds salary p2981 d6 36891
+
+@f2983 fact
+  holds salary p2982 d7 38002
+
+@f2984 fact
+  holds salary p2983 d1 32113
+
+@f2985 fact
+  holds salary p2984 d2 33224
+
+@f2986 fact
+  holds salary p2985 d3 34335
+
+@f2987 fact
+  holds salary p2986 d4 35446
+
+@f2988 fact
+  holds salary p2987 d5 36557
+
+@f2989 fact
+  holds salary p2988 d6 37668
+
+@f2990 fact
+  holds salary p2989 d7 38779
+
+@f2991 fact
+  holds salary p2990 d1 32890
+
+@f2992 fact
+  holds salary p2991 d2 34001
+
+@f2993 fact
+  holds salary p2992 d3 35112
+
+@f2994 fact
+  holds salary p2993 d4 36223
+
+@f2995 fact
+  holds salary p2994 d5 37334
+
+@f2996 fact
+  holds salary p2995 d6 38445
+
+@f2997 fact
+  holds salary p2996 d7 39556
+
+@f2998 fact
+  holds salary p2997 d1 33667
+
+@f2999 fact
+  holds salary p2998 d2 34778
+
+@f3000 fact
+  holds salary p2999 d3 35889
+
+@f3001 fact
+  holds salary p3000 d4 37000
+
+@f3002 fact
+  holds salary p3001 d5 38111
+
+@f3003 fact
+  holds salary p3002 d6 39222
+
+@f3004 fact
+  holds salary p3003 d7 40333
+
+@f3005 fact
+  holds salary p3004 d1 34444
+
+@f3006 fact
+  holds salary p3005 d2 35555
+
+@f3007 fact
+  holds salary p3006 d3 36666
+
+@f3008 fact
+  holds salary p3007 d4 37777
+
+@f3009 fact
+  holds salary p3008 d5 38888
+
+@f3010 fact
+  holds salary p3009 d6 39999
+
+@f3011 fact
+  holds salary p3010 d7 41110
+
+@f3012 fact
+  holds salary p3011 d1 35221
+
+@f3013 fact
+  holds salary p3012 d2 36332
+
+@f3014 fact
+  holds salary p3013 d3 37443
+
+@f3015 fact
+  holds salary p3014 d4 38554
+
+@f3016 fact
+  holds salary p3015 d5 39665
+
+@f3017 fact
+  holds salary p3016 d6 40776
+
+@f3018 fact
+  holds salary p3017 d7 41887
+
+@f3019 fact
+  holds salary p3018 d1 35998
+
+@f3020 fact
+  holds salary p3019 d2 37109
+
+@f3021 fact
+  holds salary p3020 d3 38220
+
+@f3022 fact
+  holds salary p3021 d4 39331
+
+@f3023 fact
+  holds salary p3022 d5 40442
+
+@f3024 fact
+  holds salary p3023 d6 41553
+
+@f3025 fact
+  holds salary p3024 d7 42664
+
+@f3026 fact
+  holds salary p3025 d1 36775
+
+@f3027 fact
+  holds salary p3026 d2 37886
+
+@f3028 fact
+  holds salary p3027 d3 38997
+
+@f3029 fact
+  holds salary p3028 d4 40108
+
+@f3030 fact
+  holds salary p3029 d5 41219
+
+@f3031 fact
+  holds salary p3030 d6 42330
+
+@f3032 fact
+  holds salary p3031 d7 43441
+
+@f3033 fact
+  holds salary p3032 d1 37552
+
+@f3034 fact
+  holds salary p3033 d2 38663
+
+@f3035 fact
+  holds salary p3034 d3 39774
+
+@f3036 fact
+  holds salary p3035 d4 40885
+
+@f3037 fact
+  holds salary p3036 d5 41996
+
+@f3038 fact
+  holds salary p3037 d6 43107
+
+@f3039 fact
+  holds salary p3038 d7 44218
+
+@f3040 fact
+  holds salary p3039 d1 38329
+
+@f3041 fact
+  holds salary p3040 d2 39440
+
+@f3042 fact
+  holds salary p3041 d3 40551
+
+@f3043 fact
+  holds salary p3042 d4 41662
+
+@f3044 fact
+  holds salary p3043 d5 42773
+
+@f3045 fact
+  holds salary p3044 d6 43884
+
+@f3046 fact
+  holds salary p3045 d7 44995
+
+@f3047 fact
+  holds salary p3046 d1 39106
+
+@f3048 fact
+  holds salary p3047 d2 40217
+
+@f3049 fact
+  holds salary p3048 d3 41328
+
+@f3050 fact
+  holds salary p3049 d4 42439
+
+@f3051 fact
+  holds salary p3050 d5 43550
+
+@f3052 fact
+  holds salary p3051 d6 44661
+
+@f3053 fact
+  holds salary p3052 d7 45772
+
+@f3054 fact
+  holds salary p3053 d1 39883
+
+@f3055 fact
+  holds salary p3054 d2 40994
+
+@f3056 fact
+  holds salary p3055 d3 42105
+
+@f3057 fact
+  holds salary p3056 d4 43216
+
+@f3058 fact
+  holds salary p3057 d5 44327
+
+@f3059 fact
+  holds salary p3058 d6 45438
+
+@f3060 fact
+  holds salary p3059 d7 46549
+
+@f3061 fact
+  holds salary p3060 d1 40660
+
+@f3062 fact
+  holds salary p3061 d2 41771
+
+@f3063 fact
+  holds salary p3062 d3 42882
+
+@f3064 fact
+  holds salary p3063 d4 43993
+
+@f3065 fact
+  holds salary p3064 d5 45104
+
+@f3066 fact
+  holds salary p3065 d6 46215
+
+@f3067 fact
+  holds salary p3066 d7 47326
+
+@f3068 fact
+  holds salary p3067 d1 41437
+
+@f3069 fact
+  holds salary p3068 d2 42548
+
+@f3070 fact
+  holds salary p3069 d3 43659
+
+@f3071 fact
+  holds salary p3070 d4 44770
+
+@f3072 fact
+  holds salary p3071 d5 45881
+
+@f3073 fact
+  holds salary p3072 d6 46992
+
+@f3074 fact
+  holds salary p3073 d7 48103
+
+@f3075 fact
+  holds salary p3074 d1 42214
+
+@f3076 fact
+  holds salary p3075 d2 43325
+
+@f3077 fact
+  holds salary p3076 d3 44436
+
+@f3078 fact
+  holds salary p3077 d4 45547
+
+@f3079 fact
+  holds salary p3078 d5 46658
+
+@f3080 fact
+  holds salary p3079 d6 47769
+
+@f3081 fact
+  holds salary p3080 d7 48880
+
+@f3082 fact
+  holds salary p3081 d1 42991
+
+@f3083 fact
+  holds salary p3082 d2 44102
+
+@f3084 fact
+  holds salary p3083 d3 45213
+
+@f3085 fact
+  holds salary p3084 d4 46324
+
+@f3086 fact
+  holds salary p3085 d5 47435
+
+@f3087 fact
+  holds salary p3086 d6 48546
+
+@f3088 fact
+  holds salary p3087 d7 49657
+
+@f3089 fact
+  holds salary p3088 d1 43768
+
+@f3090 fact
+  holds salary p3089 d2 44879
+
+@f3091 fact
+  holds salary p3090 d3 45990
+
+@f3092 fact
+  holds salary p3091 d4 47101
+
+@f3093 fact
+  holds salary p3092 d5 48212
+
+@f3094 fact
+  holds salary p3093 d6 49323
+
+@f3095 fact
+  holds salary p3094 d7 50434
+
+@f3096 fact
+  holds salary p3095 d1 44545
+
+@f3097 fact
+  holds salary p3096 d2 45656
+
+@f3098 fact
+  holds salary p3097 d3 46767
+
+@f3099 fact
+  holds salary p3098 d4 47878
+
+@f3100 fact
+  holds salary p3099 d5 48989
+
+@f3101 fact
+  holds salary p3100 d6 50100
+
+@f3102 fact
+  holds salary p3101 d7 51211
+
+@f3103 fact
+  holds salary p3102 d1 45322
+
+@f3104 fact
+  holds salary p3103 d2 46433
+
+@f3105 fact
+  holds salary p3104 d3 47544
+
+@f3106 fact
+  holds salary p3105 d4 48655
+
+@f3107 fact
+  holds salary p3106 d5 49766
+
+@f3108 fact
+  holds salary p3107 d6 50877
+
+@f3109 fact
+  holds salary p3108 d7 51988
+
+@f3110 fact
+  holds salary p3109 d1 31099
+
+@f3111 fact
+  holds salary p3110 d2 32210
+
+@f3112 fact
+  holds salary p3111 d3 33321
+
+@f3113 fact
+  holds salary p3112 d4 34432
+
+@f3114 fact
+  holds salary p3113 d5 35543
+
+@f3115 fact
+  holds salary p3114 d6 36654
+
+@f3116 fact
+  holds salary p3115 d7 37765
+
+@f3117 fact
+  holds salary p3116 d1 31876
+
+@f3118 fact
+  holds salary p3117 d2 32987
+
+@f3119 fact
+  holds salary p3118 d3 34098
+
+@f3120 fact
+  holds salary p3119 d4 35209
+
+@f3121 fact
+  holds salary p3120 d5 36320
+
+@f3122 fact
+  holds salary p3121 d6 37431
+
+@f3123 fact
+  holds salary p3122 d7 38542
+
+@f3124 fact
+  holds salary p3123 d1 32653
+
+@f3125 fact
+  holds salary p3124 d2 33764
+
+@f3126 fact
+  holds salary p3125 d3 34875
+
+@f3127 fact
+  holds salary p3126 d4 35986
+
+@f3128 fact
+  holds salary p3127 d5 37097
+
+@f3129 fact
+  holds salary p3128 d6 38208
+
+@f3130 fact
+  holds salary p3129 d7 39319
+
+@f3131 fact
+  holds salary p3130 d1 33430
+
+@f3132 fact
+  holds salary p3131 d2 34541
+
+@f3133 fact
+  holds salary p3132 d3 35652
+
+@f3134 fact
+  holds salary p3133 d4 36763
+
+@f3135 fact
+  holds salary p3134 d5 37874
+
+@f3136 fact
+  holds salary p3135 d6 38985
+
+@f3137 fact
+  holds salary p3136 d7 40096
+
+@f3138 fact
+  holds salary p3137 d1 34207
+
+@f3139 fact
+  holds salary p3138 d2 35318
+
+@f3140 fact
+  holds salary p3139 d3 36429
+
+@f3141 fact
+  holds salary p3140 d4 37540
+
+@f3142 fact
+  holds salary p3141 d5 38651
+
+@f3143 fact
+  holds salary p3142 d6 39762
+
+@f3144 fact
+  holds salary p3143 d7 40873
+
+@f3145 fact
+  holds salary p3144 d1 34984
+
+@f3146 fact
+  holds salary p3145 d2 36095
+
+@f3147 fact
+  holds salary p3146 d3 37206
+
+@f3148 fact
+  holds salary p3147 d4 38317
+
+@f3149 fact
+  holds salary p3148 d5 39428
+
+@f3150 fact
+  holds salary p3149 d6 40539
+
+@f3151 fact
+  holds salary p3150 d7 41650
+
+@f3152 fact
+  holds salary p3151 d1 35761
+
+@f3153 fact
+  holds salary p3152 d2 36872
+
+@f3154 fact
+  holds salary p3153 d3 37983
+
+@f3155 fact
+  holds salary p3154 d4 39094
+
+@f3156 fact
+  holds salary p3155 d5 40205
+
+@f3157 fact
+  holds salary p3156 d6 41316
+
+@f3158 fact
+  holds salary p3157 d7 42427
+
+@f3159 fact
+  holds salary p3158 d1 36538
+
+@f3160 fact
+  holds salary p3159 d2 37649
+
+@f3161 fact
+  holds salary p3160 d3 38760
+
+@f3162 fact
+  holds salary p3161 d4 39871
+
+@f3163 fact
+  holds salary p3162 d5 40982
+
+@f3164 fact
+  holds salary p3163 d6 42093
+
+@f3165 fact
+  holds salary p3164 d7 43204
+
+@f3166 fact
+  holds salary p3165 d1 37315
+
+@f3167 fact
+  holds salary p3166 d2 38426
+
+@f3168 fact
+  holds salary p3167 d3 39537
+
+@f3169 fact
+  holds salary p3168 d4 40648
+
+@f3170 fact
+  holds salary p3169 d5 41759
+
+@f3171 fact
+  holds salary p3170 d6 42870
+
+@f3172 fact
+  holds salary p3171 d7 43981
+
+@f3173 fact
+  holds salary p3172 d1 38092
+
+@f3174 fact
+  holds salary p3173 d2 39203
+
+@f3175 fact
+  holds salary p3174 d3 40314
+
+@f3176 fact
+  holds salary p3175 d4 41425
+
+@f3177 fact
+  holds salary p3176 d5 42536
+
+@f3178 fact
+  holds salary p3177 d6 43647
+
+@f3179 fact
+  holds salary p3178 d7 44758
+
+@f3180 fact
+  holds salary p3179 d1 38869
+
+@f3181 fact
+  holds salary p3180 d2 39980
+
+@f3182 fact
+  holds salary p3181 d3 41091
+
+@f3183 fact
+  holds salary p3182 d4 42202
+
+@f3184 fact
+  holds salary p3183 d5 43313
+
+@f3185 fact
+  holds salary p3184 d6 44424
+
+@f3186 fact
+  holds salary p3185 d7 45535
+
+@f3187 fact
+  holds salary p3186 d1 39646
+
+@f3188 fact
+  holds salary p3187 d2 40757
+
+@f3189 fact
+  holds salary p3188 d3 41868
+
+@f3190 fact
+  holds salary p3189 d4 42979
+
+@f3191 fact
+  holds salary p3190 d5 44090
+
+@f3192 fact
+  holds salary p3191 d6 45201
+
+@f3193 fact
+  holds salary p3192 d7 46312
+
+@f3194 fact
+  holds salary p3193 d1 40423
+
+@f3195 fact
+  holds salary p3194 d2 41534
+
+@f3196 fact
+  holds salary p3195 d3 42645
+
+@f3197 fact
+  holds salary p3196 d4 43756
+
+@f3198 fact
+  holds salary p3197 d5 44867
+
+@f3199 fact
+  holds salary p3198 d6 45978
+
+@f3200 fact
+  holds salary p3199 d7 47089
+
+@f3201 fact
+  holds salary p3200 d1 41200
+
+@f3202 fact
+  holds salary p3201 d2 42311
+
+@f3203 fact
+  holds salary p3202 d3 43422
+
+@f3204 fact
+  holds salary p3203 d4 44533
+
+@f3205 fact
+  holds salary p3204 d5 45644
+
+@f3206 fact
+  holds salary p3205 d6 46755
+
+@f3207 fact
+  holds salary p3206 d7 47866
+
+@f3208 fact
+  holds salary p3207 d1 41977
+
+@f3209 fact
+  holds salary p3208 d2 43088
+
+@f3210 fact
+  holds salary p3209 d3 44199
+
+@f3211 fact
+  holds salary p3210 d4 45310
+
+@f3212 fact
+  holds salary p3211 d5 46421
+
+@f3213 fact
+  holds salary p3212 d6 47532
+
+@f3214 fact
+  holds salary p3213 d7 48643
+
+@f3215 fact
+  holds salary p3214 d1 42754
+
+@f3216 fact
+  holds salary p3215 d2 43865
+
+@f3217 fact
+  holds salary p3216 d3 44976
+
+@f3218 fact
+  holds salary p3217 d4 46087
+
+@f3219 fact
+  holds salary p3218 d5 47198
+
+@f3220 fact
+  holds salary p3219 d6 48309
+
+@f3221 fact
+  holds salary p3220 d7 49420
+
+@f3222 fact
+  holds salary p3221 d1 43531
+
+@f3223 fact
+  holds salary p3222 d2 44642
+
+@f3224 fact
+  holds salary p3223 d3 45753
+
+@f3225 fact
+  holds salary p3224 d4 46864
+
+@f3226 fact
+  holds salary p3225 d5 47975
+
+@f3227 fact
+  holds salary p3226 d6 49086
+
+@f3228 fact
+  holds salary p3227 d7 50197
+
+@f3229 fact
+  holds salary p3228 d1 44308
+
+@f3230 fact
+  holds salary p3229 d2 45419
+
+@f3231 fact
+  holds salary p3230 d3 46530
+
+@f3232 fact
+  holds salary p3231 d4 47641
+
+@f3233 fact
+  holds salary p3232 d5 48752
+
+@f3234 fact
+  holds salary p3233 d6 49863
+
+@f3235 fact
+  holds salary p3234 d7 50974
+
+@f3236 fact
+  holds salary p3235 d1 45085
+
+@f3237 fact
+  holds salary p3236 d2 46196
+
+@f3238 fact
+  holds salary p3237 d3 47307
+
+@f3239 fact
+  holds salary p3238 d4 48418
+
+@f3240 fact
+  holds salary p3239 d5 49529
+
+@f3241 fact
+  holds salary p3240 d6 50640
+
+@f3242 fact
+  holds salary p3241 d7 51751
+
+@f3243 fact
+  holds salary p3242 d1 45862
+
+@f3244 fact
+  holds salary p3243 d2 46973
+
+@f3245 fact
+  holds salary p3244 d3 33084
+
+@f3246 fact
+  holds salary p3245 d4 34195
+
+@f3247 fact
+  holds salary p3246 d5 35306
+
+@f3248 fact
+  holds salary p3247 d6 36417
+
+@f3249 fact
+  holds salary p3248 d7 37528
+
+@f3250 fact
+  holds salary p3249 d1 31639
+
+@f3251 fact
+  holds salary p3250 d2 32750
+
+@f3252 fact
+  holds salary p3251 d3 33861
+
+@f3253 fact
+  holds salary p3252 d4 34972
+
+@f3254 fact
+  holds salary p3253 d5 36083
+
+@f3255 fact
+  holds salary p3254 d6 37194
+
+@f3256 fact
+  holds salary p3255 d7 38305
+
+@f3257 fact
+  holds salary p3256 d1 32416
+
+@f3258 fact
+  holds salary p3257 d2 33527
+
+@f3259 fact
+  holds salary p3258 d3 34638
+
+@f3260 fact
+  holds salary p3259 d4 35749
+
+@f3261 fact
+  holds salary p3260 d5 36860
+
+@f3262 fact
+  holds salary p3261 d6 37971
+
+@f3263 fact
+  holds salary p3262 d7 39082
+
+@f3264 fact
+  holds salary p3263 d1 33193
+
+@f3265 fact
+  holds salary p3264 d2 34304
+
+@f3266 fact
+  holds salary p3265 d3 35415
+
+@f3267 fact
+  holds salary p3266 d4 36526
+
+@f3268 fact
+  holds salary p3267 d5 37637
+
+@f3269 fact
+  holds salary p3268 d6 38748
+
+@f3270 fact
+  holds salary p3269 d7 39859
+
+@f3271 fact
+  holds salary p3270 d1 33970
+
+@f3272 fact
+  holds salary p3271 d2 35081
+
+@f3273 fact
+  holds salary p3272 d3 36192
+
+@f3274 fact
+  holds salary p3273 d4 37303
+
+@f3275 fact
+  holds salary p3274 d5 38414
+
+@f3276 fact
+  holds salary p3275 d6 39525
+
+@f3277 fact
+  holds salary p3276 d7 40636
+
+@f3278 fact
+  holds salary p3277 d1 34747
+
+@f3279 fact
+  holds salary p3278 d2 35858
+
+@f3280 fact
+  holds salary p3279 d3 36969
+
+@f3281 fact
+  holds salary p3280 d4 38080
+
+@f3282 fact
+  holds salary p3281 d5 39191
+
+@f3283 fact
+  holds salary p3282 d6 40302
+
+@f3284 fact
+  holds salary p3283 d7 41413
+
+@f3285 fact
+  holds salary p3284 d1 35524
+
+@f3286 fact
+  holds salary p3285 d2 36635
+
+@f3287 fact
+  holds salary p3286 d3 37746
+
+@f3288 fact
+  holds salary p3287 d4 38857
+
+@f3289 fact
+  holds salary p3288 d5 39968
+
+@f3290 fact
+  holds salary p3289 d6 41079
+
+@f3291 fact
+  holds salary p3290 d7 42190
+
+@f3292 fact
+  holds salary p3291 d1 36301
+
+@f3293 fact
+  holds salary p3292 d2 37412
+
+@f3294 fact
+  holds salary p3293 d3 38523
+
+@f3295 fact
+  holds salary p3294 d4 39634
+
+@f3296 fact
+  holds salary p3295 d5 40745
+
+@f3297 fact
+  holds salary p3296 d6 41856
+
+@f3298 fact
+  holds salary p3297 d7 42967
+
+@f3299 fact
+  holds salary p3298 d1 37078
+
+@f3300 fact
+  holds salary p3299 d2 38189
+
+@f3301 fact
+  holds salary p3300 d3 39300
+
+@f3302 fact
+  holds salary p3301 d4 40411
+
+@f3303 fact
+  holds salary p3302 d5 41522
+
+@f3304 fact
+  holds salary p3303 d6 42633
+
+@f3305 fact
+  holds salary p3304 d7 43744
+
+@f3306 fact
+  holds salary p3305 d1 37855
+
+@f3307 fact
+  holds salary p3306 d2 38966
+
+@f3308 fact
+  holds salary p3307 d3 40077
+
+@f3309 fact
+  holds salary p3308 d4 41188
+
+@f3310 fact
+  holds salary p3309 d5 42299
+
+@f3311 fact
+  holds salary p3310 d6 43410
+
+@f3312 fact
+  holds salary p3311 d7 44521
+
+@f3313 fact
+  holds salary p3312 d1 38632
+
+@f3314 fact
+  holds salary p3313 d2 39743
+
+@f3315 fact
+  holds salary p3314 d3 40854
+
+@f3316 fact
+  holds salary p3315 d4 41965
+
+@f3317 fact
+  holds salary p3316 d5 43076
+
+@f3318 fact
+  holds salary p3317 d6 44187
+
+@f3319 fact
+  holds salary p3318 d7 45298
+
+@f3320 fact
+  holds salary p3319 d1 39409
+
+@f3321 fact
+  holds salary p3320 d2 40520
+
+@f3322 fact
+  holds salary p3321 d3 41631
+
+@f3323 fact
+  holds salary p3322 d4 42742
+
+@f3324 fact
+  holds salary p3323 d5 43853
+
+@f3325 fact
+  holds salary p3324 d6 44964
+
+@f3326 fact
+  holds salary p3325 d7 46075
+
+@f3327 fact
+  holds salary p3326 d1 40186
+
+@f3328 fact
+  holds salary p3327 d2 41297
+
+@f3329 fact
+  holds salary p3328 d3 42408
+
+@f3330 fact
+  holds salary p3329 d4 43519
+
+@f3331 fact
+  holds salary p3330 d5 44630
+
+@f3332 fact
+  holds salary p3331 d6 45741
+
+@f3333 fact
+  holds salary p3332 d7 46852
+
+@f3334 fact
+  holds salary p3333 d1 40963
+
+@f3335 fact
+  holds salary p3334 d2 42074
+
+@f3336 fact
+  holds salary p3335 d3 43185
+
+@f3337 fact
+  holds salary p3336 d4 44296
+
+@f3338 fact
+  holds salary p3337 d5 45407
+
+@f3339 fact
+  holds salary p3338 d6 46518
+
+@f3340 fact
+  holds salary p3339 d7 47629
+
+@f3341 fact
+  holds salary p3340 d1 41740
+
+@f3342 fact
+  holds salary p3341 d2 42851
+
+@f3343 fact
+  holds salary p3342 d3 43962
+
+@f3344 fact
+  holds salary p3343 d4 45073
+
+@f3345 fact
+  holds salary p3344 d5 46184
+
+@f3346 fact
+  holds salary p3345 d6 47295
+
+@f3347 fact
+  holds salary p3346 d7 48406
+
+@f3348 fact
+  holds salary p3347 d1 42517
+
+@f3349 fact
+  holds salary p3348 d2 43628
+
+@f3350 fact
+  holds salary p3349 d3 44739
+
+@f3351 fact
+  holds salary p3350 d4 45850
+
+@f3352 fact
+  holds salary p3351 d5 46961
+
+@f3353 fact
+  holds salary p3352 d6 48072
+
+@f3354 fact
+  holds salary p3353 d7 49183
+
+@f3355 fact
+  holds salary p3354 d1 43294
+
+@f3356 fact
+  holds salary p3355 d2 44405
+
+@f3357 fact
+  holds salary p3356 d3 45516
+
+@f3358 fact
+  holds salary p3357 d4 46627
+
+@f3359 fact
+  holds salary p3358 d5 47738
+
+@f3360 fact
+  holds salary p3359 d6 48849
+
+@f3361 fact
+  holds salary p3360 d7 49960
+
+@f3362 fact
+  holds salary p3361 d1 44071
+
+@f3363 fact
+  holds salary p3362 d2 45182
+
+@f3364 fact
+  holds salary p3363 d3 46293
+
+@f3365 fact
+  holds salary p3364 d4 47404
+
+@f3366 fact
+  holds salary p3365 d5 48515
+
+@f3367 fact
+  holds salary p3366 d6 49626
+
+@f3368 fact
+  holds salary p3367 d7 50737
+
+@f3369 fact
+  holds salary p3368 d1 44848
+
+@f3370 fact
+  holds salary p3369 d2 45959
+
+@f3371 fact
+  holds salary p3370 d3 47070
+
+@f3372 fact
+  holds salary p3371 d4 48181
+
+@f3373 fact
+  holds salary p3372 d5 49292
+
+@f3374 fact
+  holds salary p3373 d6 50403
+
+@f3375 fact
+  holds salary p3374 d7 51514
+
+@f3376 fact
+  holds salary p3375 d1 45625
+
+@f3377 fact
+  holds salary p3376 d2 46736
+
+@f3378 fact
+  holds salary p3377 d3 47847
+
+@f3379 fact
+  holds salary p3378 d4 48958
+
+@f3380 fact
+  holds salary p3379 d5 35069
+
+@f3381 fact
+  holds salary p3380 d6 36180
+
+@f3382 fact
+  holds salary p3381 d7 37291
+
+@f3383 fact
+  holds salary p3382 d1 31402
+
+@f3384 fact
+  holds salary p3383 d2 32513
+
+@f3385 fact
+  holds salary p3384 d3 33624
+
+@f3386 fact
+  holds salary p3385 d4 34735
+
+@f3387 fact
+  holds salary p3386 d5 35846
+
+@f3388 fact
+  holds salary p3387 d6 36957
+
+@f3389 fact
+  holds salary p3388 d7 38068
+
+@f3390 fact
+  holds salary p3389 d1 32179
+
+@f3391 fact
+  holds salary p3390 d2 33290
+
+@f3392 fact
+  holds salary p3391 d3 34401
+
+@f3393 fact
+  holds salary p3392 d4 35512
+
+@f3394 fact
+  holds salary p3393 d5 36623
+
+@f3395 fact
+  holds salary p3394 d6 37734
+
+@f3396 fact
+  holds salary p3395 d7 38845
+
+@f3397 fact
+  holds salary p3396 d1 32956
+
+@f3398 fact
+  holds salary p3397 d2 34067
+
+@f3399 fact
+  holds salary p3398 d3 35178
+
+@f3400 fact
+  holds salary p3399 d4 36289
+
+@f3401 fact
+  holds salary p3400 d5 37400
+
+@f3402 fact
+  holds salary p3401 d6 38511
+
+@f3403 fact
+  holds salary p3402 d7 39622
+
+@f3404 fact
+  holds salary p3403 d1 33733
+
+@f3405 fact
+  holds salary p3404 d2 34844
+
+@f3406 fact
+  holds salary p3405 d3 35955
+
+@f3407 fact
+  holds salary p3406 d4 37066
+
+@f3408 fact
+  holds salary p3407 d5 38177
+
+@f3409 fact
+  holds salary p3408 d6 39288
+
+@f3410 fact
+  holds salary p3409 d7 40399
+
+@f3411 fact
+  holds salary p3410 d1 34510
+
+@f3412 fact
+  holds salary p3411 d2 35621
+
+@f3413 fact
+  holds salary p3412 d3 36732
+
+@f3414 fact
+  holds salary p3413 d4 37843
+
+@f3415 fact
+  holds salary p3414 d5 38954
+
+@f3416 fact
+  holds salary p3415 d6 40065
+
+@f3417 fact
+  holds salary p3416 d7 41176
+
+@f3418 fact
+  holds salary p3417 d1 35287
+
+@f3419 fact
+  holds salary p3418 d2 36398
+
+@f3420 fact
+  holds salary p3419 d3 37509
+
+@f3421 fact
+  holds salary p3420 d4 38620
+
+@f3422 fact
+  holds salary p3421 d5 39731
+
+@f3423 fact
+  holds salary p3422 d6 40842
+
+@f3424 fact
+  holds salary p3423 d7 41953
+
+@f3425 fact
+  holds salary p3424 d1 36064
+
+@f3426 fact
+  holds salary p3425 d2 37175
+
+@f3427 fact
+  holds salary p3426 d3 38286
+
+@f3428 fact
+  holds salary p3427 d4 39397
+
+@f3429 fact
+  holds salary p3428 d5 40508
+
+@f3430 fact
+  holds salary p3429 d6 41619
+
+@f3431 fact
+  holds salary p3430 d7 42730
+
+@f3432 fact
+  holds salary p3431 d1 36841
+
+@f3433 fact
+  holds salary p3432 d2 37952
+
+@f3434 fact
+  holds salary p3433 d3 39063
+
+@f3435 fact
+  holds salary p3434 d4 40174
+
+@f3436 fact
+  holds salary p3435 d5 41285
+
+@f3437 fact
+  holds salary p3436 d6 42396
+
+@f3438 fact
+  holds salary p3437 d7 43507
+
+@f3439 fact
+  holds salary p3438 d1 37618
+
+@f3440 fact
+  holds salary p3439 d2 38729
+
+@f3441 fact
+  holds salary p3440 d3 39840
+
+@f3442 fact
+  holds salary p3441 d4 40951
+
+@f3443 fact
+  holds salary p3442 d5 42062
+
+@f3444 fact
+  holds salary p3443 d6 43173
+
+@f3445 fact
+  holds salary p3444 d7 44284
+
+@f3446 fact
+  holds salary p3445 d1 38395
+
+@f3447 fact
+  holds salary p3446 d2 39506
+
+@f3448 fact
+  holds salary p3447 d3 40617
+
+@f3449 fact
+  holds salary p3448 d4 41728
+
+@f3450 fact
+  holds salary p3449 d5 42839
+
+@f3451 fact
+  holds salary p3450 d6 43950
+
+@f3452 fact
+  holds salary p3451 d7 45061
+
+@f3453 fact
+  holds salary p3452 d1 39172
+
+@f3454 fact
+  holds salary p3453 d2 40283
+
+@f3455 fact
+  holds salary p3454 d3 41394
+
+@f3456 fact
+  holds salary p3455 d4 42505
+
+@f3457 fact
+  holds salary p3456 d5 43616
+
+@f3458 fact
+  holds salary p3457 d6 44727
+
+@f3459 fact
+  holds salary p3458 d7 45838
+
+@f3460 fact
+  holds salary p3459 d1 39949
+
+@f3461 fact
+  holds salary p3460 d2 41060
+
+@f3462 fact
+  holds salary p3461 d3 42171
+
+@f3463 fact
+  holds salary p3462 d4 43282
+
+@f3464 fact
+  holds salary p3463 d5 44393
+
+@f3465 fact
+  holds salary p3464 d6 45504
+
+@f3466 fact
+  holds salary p3465 d7 46615
+
+@f3467 fact
+  holds salary p3466 d1 40726
+
+@f3468 fact
+  holds salary p3467 d2 41837
+
+@f3469 fact
+  holds salary p3468 d3 42948
+
+@f3470 fact
+  holds salary p3469 d4 44059
+
+@f3471 fact
+  holds salary p3470 d5 45170
+
+@f3472 fact
+  holds salary p3471 d6 46281
+
+@f3473 fact
+  holds salary p3472 d7 47392
+
+@f3474 fact
+  holds salary p3473 d1 41503
+
+@f3475 fact
+  holds salary p3474 d2 42614
+
+@f3476 fact
+  holds salary p3475 d3 43725
+
+@f3477 fact
+  holds salary p3476 d4 44836
+
+@f3478 fact
+  holds salary p3477 d5 45947
+
+@f3479 fact
+  holds salary p3478 d6 47058
+
+@f3480 fact
+  holds salary p3479 d7 48169
+
+@f3481 fact
+  holds salary p3480 d1 42280
+
+@f3482 fact
+  holds salary p3481 d2 43391
+
+@f3483 fact
+  holds salary p3482 d3 44502
+
+@f3484 fact
+  holds salary p3483 d4 45613
+
+@f3485 fact
+  holds salary p3484 d5 46724
+
+@f3486 fact
+  holds salary p3485 d6 47835
+
+@f3487 fact
+  holds salary p3486 d7 48946
+
+@f3488 fact
+  holds salary p3487 d1 43057
+
+@f3489 fact
+  holds salary p3488 d2 44168
+
+@f3490 fact
+  holds salary p3489 d3 45279
+
+@f3491 fact
+  holds salary p3490 d4 46390
+
+@f3492 fact
+  holds salary p3491 d5 47501
+
+@f3493 fact
+  holds salary p3492 d6 48612
+
+@f3494 fact
+  holds salary p3493 d7 49723
+
+@f3495 fact
+  holds salary p3494 d1 43834
+
+@f3496 fact
+  holds salary p3495 d2 44945
+
+@f3497 fact
+  holds salary p3496 d3 46056
+
+@f3498 fact
+  holds salary p3497 d4 47167
+
+@f3499 fact
+  holds salary p3498 d5 48278
+
+@f3500 fact
+  holds salary p3499 d6 49389
+
+@f3501 fact
+  holds salary p3500 d7 50500
+
+@f3502 fact
+  holds salary p3501 d1 44611
+
+@f3503 fact
+  holds salary p3502 d2 45722
+
+@f3504 fact
+  holds salary p3503 d3 46833
+
+@f3505 fact
+  holds salary p3504 d4 47944
+
+@f3506 fact
+  holds salary p3505 d5 49055
+
+@f3507 fact
+  holds salary p3506 d6 50166
+
+@f3508 fact
+  holds salary p3507 d7 51277
+
+@f3509 fact
+  holds salary p3508 d1 45388
+
+@f3510 fact
+  holds salary p3509 d2 46499
+
+@f3511 fact
+  holds salary p3510 d3 47610
+
+@f3512 fact
+  holds salary p3511 d4 48721
+
+@f3513 fact
+  holds salary p3512 d5 49832
+
+@f3514 fact
+  holds salary p3513 d6 50943
+
+@f3515 fact
+  holds salary p3514 d7 37054
+
+@f3516 fact
+  holds salary p3515 d1 31165
+
+@f3517 fact
+  holds salary p3516 d2 32276
+
+@f3518 fact
+  holds salary p3517 d3 33387
+
+@f3519 fact
+  holds salary p3518 d4 34498
+
+@f3520 fact
+  holds salary p3519 d5 35609
+
+@f3521 fact
+  holds salary p3520 d6 36720
+
+@f3522 fact
+  holds salary p3521 d7 37831
+
+@f3523 fact
+  holds salary p3522 d1 31942
+
+@f3524 fact
+  holds salary p3523 d2 33053
+
+@f3525 fact
+  holds salary p3524 d3 34164
+
+@f3526 fact
+  holds salary p3525 d4 35275
+
+@f3527 fact
+  holds salary p3526 d5 36386
+
+@f3528 fact
+  holds salary p3527 d6 37497
+
+@f3529 fact
+  holds salary p3528 d7 38608
+
+@f3530 fact
+  holds salary p3529 d1 32719
+
+@f3531 fact
+  holds salary p3530 d2 33830
+
+@f3532 fact
+  holds salary p3531 d3 34941
+
+@f3533 fact
+  holds salary p3532 d4 36052
+
+@f3534 fact
+  holds salary p3533 d5 37163
+
+@f3535 fact
+  holds salary p3534 d6 38274
+
+@f3536 fact
+  holds salary p3535 d7 39385
+
+@f3537 fact
+  holds salary p3536 d1 33496
+
+@f3538 fact
+  holds salary p3537 d2 34607
+
+@f3539 fact
+  holds salary p3538 d3 35718
+
+@f3540 fact
+  holds salary p3539 d4 36829
+
+@f3541 fact
+  holds salary p3540 d5 37940
+
+@f3542 fact
+  holds salary p3541 d6 39051
+
+@f3543 fact
+  holds salary p3542 d7 40162
+
+@f3544 fact
+  holds salary p3543 d1 34273
+
+@f3545 fact
+  holds salary p3544 d2 35384
+
+@f3546 fact
+  holds salary p3545 d3 36495
+
+@f3547 fact
+  holds salary p3546 d4 37606
+
+@f3548 fact
+  holds salary p3547 d5 38717
+
+@f3549 fact
+  holds salary p3548 d6 39828
+
+@f3550 fact
+  holds salary p3549 d7 40939
+
+@f3551 fact
+  holds salary p3550 d1 35050
+
+@f3552 fact
+  holds salary p3551 d2 36161
+
+@f3553 fact
+  holds salary p3552 d3 37272
+
+@f3554 fact
+  holds salary p3553 d4 38383
+
+@f3555 fact
+  holds salary p3554 d5 39494
+
+@f3556 fact
+  holds salary p3555 d6 40605
+
+@f3557 fact
+  holds salary p3556 d7 41716
+
+@f3558 fact
+  holds salary p3557 d1 35827
+
+@f3559 fact
+  holds salary p3558 d2 36938
+
+@f3560 fact
+  holds salary p3559 d3 38049
+
+@f3561 fact
+  holds salary p3560 d4 39160
+
+@f3562 fact
+  holds salary p3561 d5 40271
+
+@f3563 fact
+  holds salary p3562 d6 41382
+
+@f3564 fact
+  holds salary p3563 d7 42493
+
+@f3565 fact
+  holds salary p3564 d1 36604
+
+@f3566 fact
+  holds salary p3565 d2 37715
+
+@f3567 fact
+  holds salary p3566 d3 38826
+
+@f3568 fact
+  holds salary p3567 d4 39937
+
+@f3569 fact
+  holds salary p3568 d5 41048
+
+@f3570 fact
+  holds salary p3569 d6 42159
+
+@f3571 fact
+  holds salary p3570 d7 43270
+
+@f3572 fact
+  holds salary p3571 d1 37381
+
+@f3573 fact
+  holds salary p3572 d2 38492
+
+@f3574 fact
+  holds salary p3573 d3 39603
+
+@f3575 fact
+  holds salary p3574 d4 40714
+
+@f3576 fact
+  holds salary p3575 d5 41825
+
+@f3577 fact
+  holds salary p3576 d6 42936
+
+@f3578 fact
+  holds salary p3577 d7 44047
+
+@f3579 fact
+  holds salary p3578 d1 38158
+
+@f3580 fact
+  holds salary p3579 d2 39269
+
+@f3581 fact
+  holds salary p3580 d3 40380
+
+@f3582 fact
+  holds salary p3581 d4 41491
+
+@f3583 fact
+  holds salary p3582 d5 42602
+
+@f3584 fact
+  holds salary p3583 d6 43713
+
+@f3585 fact
+  holds salary p3584 d7 44824
+
+@f3586 fact
+  holds salary p3585 d1 38935
+
+@f3587 fact
+  holds salary p3586 d2 40046
+
+@f3588 fact
+  holds salary p3587 d3 41157
+
+@f3589 fact
+  holds salary p3588 d4 42268
+
+@f3590 fact
+  holds salary p3589 d5 43379
+
+@f3591 fact
+  holds salary p3590 d6 44490
+
+@f3592 fact
+  holds salary p3591 d7 45601
+
+@f3593 fact
+  holds salary p3592 d1 39712
+
+@f3594 fact
+  holds salary p3593 d2 40823
+
+@f3595 fact
+  holds salary p3594 d3 41934
+
+@f3596 fact
+  holds salary p3595 d4 43045
+
+@f3597 fact
+  holds salary p3596 d5 44156
+
+@f3598 fact
+  holds salary p3597 d6 45267
+
+@f3599 fact
+  holds salary p3598 d7 46378
+
+@f3600 fact
+  holds salary p3599 d1 40489
+
+@f3601 fact
+  holds salary p3600 d2 41600
+
+@f3602 fact
+  holds salary p3601 d3 42711
+
+@f3603 fact
+  holds salary p3602 d4 43822
+
+@f3604 fact
+  holds salary p3603 d5 44933
+
+@f3605 fact
+  holds salary p3604 d6 46044
+
+@f3606 fact
+  holds salary p3605 d7 47155
+
+@f3607 fact
+  holds salary p3606 d1 41266
+
+@f3608 fact
+  holds salary p3607 d2 42377
+
+@f3609 fact
+  holds salary p3608 d3 43488
+
+@f3610 fact
+  holds salary p3609 d4 44599
+
+@f3611 fact
+  holds salary p3610 d5 45710
+
+@f3612 fact
+  holds salary p3611 d6 46821
+
+@f3613 fact
+  holds salary p3612 d7 47932
+
+@f3614 fact
+  holds salary p3613 d1 42043
+
+@f3615 fact
+  holds salary p3614 d2 43154
+
+@f3616 fact
+  holds salary p3615 d3 44265
+
+@f3617 fact
+  holds salary p3616 d4 45376
+
+@f3618 fact
+  holds salary p3617 d5 46487
+
+@f3619 fact
+  holds salary p3618 d6 47598
+
+@f3620 fact
+  holds salary p3619 d7 48709
+
+@f3621 fact
+  holds salary p3620 d1 42820
+
+@f3622 fact
+  holds salary p3621 d2 43931
+
+@f3623 fact
+  holds salary p3622 d3 45042
+
+@f3624 fact
+  holds salary p3623 d4 46153
+
+@f3625 fact
+  holds salary p3624 d5 47264
+
+@f3626 fact
+  holds salary p3625 d6 48375
+
+@f3627 fact
+  holds salary p3626 d7 49486
+
+@f3628 fact
+  holds salary p3627 d1 43597
+
+@f3629 fact
+  holds salary p3628 d2 44708
+
+@f3630 fact
+  holds salary p3629 d3 45819
+
+@f3631 fact
+  holds salary p3630 d4 46930
+
+@f3632 fact
+  holds salary p3631 d5 48041
+
+@f3633 fact
+  holds salary p3632 d6 49152
+
+@f3634 fact
+  holds salary p3633 d7 50263
+
+@f3635 fact
+  holds salary p3634 d1 44374
+
+@f3636 fact
+  holds salary p3635 d2 45485
+
+@f3637 fact
+  holds salary p3636 d3 46596
+
+@f3638 fact
+  holds salary p3637 d4 47707
+
+@f3639 fact
+  holds salary p3638 d5 48818
+
+@f3640 fact
+  holds salary p3639 d6 49929
+
+@f3641 fact
+  holds salary p3640 d7 51040
+
+@f3642 fact
+  holds salary p3641 d1 45151
+
+@f3643 fact
+  holds salary p3642 d2 46262
+
+@f3644 fact
+  holds salary p3643 d3 47373
+
+@f3645 fact
+  holds salary p3644 d4 48484
+
+@f3646 fact
+  holds salary p3645 d5 49595
+
+@f3647 fact
+  holds salary p3646 d6 50706
+
+@f3648 fact
+  holds salary p3647 d7 51817
+
+@f3649 fact
+  holds salary p3648 d1 45928
+
+@f3650 fact
+  holds salary p3649 d2 32039
+
+@f3651 fact
+  holds salary p3650 d3 33150
+
+@f3652 fact
+  holds salary p3651 d4 34261
+
+@f3653 fact
+  holds salary p3652 d5 35372
+
+@f3654 fact
+  holds salary p3653 d6 36483
+
+@f3655 fact
+  holds salary p3654 d7 37594
+
+@f3656 fact
+  holds salary p3655 d1 31705
+
+@f3657 fact
+  holds salary p3656 d2 32816
+
+@f3658 fact
+  holds salary p3657 d3 33927
+
+@f3659 fact
+  holds salary p3658 d4 35038
+
+@f3660 fact
+  holds salary p3659 d5 36149
+
+@f3661 fact
+  holds salary p3660 d6 37260
+
+@f3662 fact
+  holds salary p3661 d7 38371
+
+@f3663 fact
+  holds salary p3662 d1 32482
+
+@f3664 fact
+  holds salary p3663 d2 33593
+
+@f3665 fact
+  holds salary p3664 d3 34704
+
+@f3666 fact
+  holds salary p3665 d4 35815
+
+@f3667 fact
+  holds salary p3666 d5 36926
+
+@f3668 fact
+  holds salary p3667 d6 38037
+
+@f3669 fact
+  holds salary p3668 d7 39148
+
+@f3670 fact
+  holds salary p3669 d1 33259
+
+@f3671 fact
+  holds salary p3670 d2 34370
+
+@f3672 fact
+  holds salary p3671 d3 35481
+
+@f3673 fact
+  holds salary p3672 d4 36592
+
+@f3674 fact
+  holds salary p3673 d5 37703
+
+@f3675 fact
+  holds salary p3674 d6 38814
+
+@f3676 fact
+  holds salary p3675 d7 39925
+
+@f3677 fact
+  holds salary p3676 d1 34036
+
+@f3678 fact
+  holds salary p3677 d2 35147
+
+@f3679 fact
+  holds salary p3678 d3 36258
+
+@f3680 fact
+  holds salary p3679 d4 37369
+
+@f3681 fact
+  holds salary p3680 d5 38480
+
+@f3682 fact
+  holds salary p3681 d6 39591
+
+@f3683 fact
+  holds salary p3682 d7 40702
+
+@f3684 fact
+  holds salary p3683 d1 34813
+
+@f3685 fact
+  holds salary p3684 d2 35924
+
+@f3686 fact
+  holds salary p3685 d3 37035
+
+@f3687 fact
+  holds salary p3686 d4 38146
+
+@f3688 fact
+  holds salary p3687 d5 39257
+
+@f3689 fact
+  holds salary p3688 d6 40368
+
+@f3690 fact
+  holds salary p3689 d7 41479
+
+@f3691 fact
+  holds salary p3690 d1 35590
+
+@f3692 fact
+  holds salary p3691 d2 36701
+
+@f3693 fact
+  holds salary p3692 d3 37812
+
+@f3694 fact
+  holds salary p3693 d4 38923
+
+@f3695 fact
+  holds salary p3694 d5 40034
+
+@f3696 fact
+  holds salary p3695 d6 41145
+
+@f3697 fact
+  holds salary p3696 d7 42256
+
+@f3698 fact
+  holds salary p3697 d1 36367
+
+@f3699 fact
+  holds salary p3698 d2 37478
+
+@f3700 fact
+  holds salary p3699 d3 38589
+
+@f3701 fact
+  holds salary p3700 d4 39700
+
+@f3702 fact
+  holds salary p3701 d5 40811
+
+@f3703 fact
+  holds salary p3702 d6 41922
+
+@f3704 fact
+  holds salary p3703 d7 43033
+
+@f3705 fact
+  holds salary p3704 d1 37144
+
+@f3706 fact
+  holds salary p3705 d2 38255
+
+@f3707 fact
+  holds salary p3706 d3 39366
+
+@f3708 fact
+  holds salary p3707 d4 40477
+
+@f3709 fact
+  holds salary p3708 d5 41588
+
+@f3710 fact
+  holds salary p3709 d6 42699
+
+@f3711 fact
+  holds salary p3710 d7 43810
+
+@f3712 fact
+  holds salary p3711 d1 37921
+
+@f3713 fact
+  holds salary p3712 d2 39032
+
+@f3714 fact
+  holds salary p3713 d3 40143
+
+@f3715 fact
+  holds salary p3714 d4 41254
+
+@f3716 fact
+  holds salary p3715 d5 42365
+
+@f3717 fact
+  holds salary p3716 d6 43476
+
+@f3718 fact
+  holds salary p3717 d7 44587
+
+@f3719 fact
+  holds salary p3718 d1 38698
+
+@f3720 fact
+  holds salary p3719 d2 39809
+
+@f3721 fact
+  holds salary p3720 d3 40920
+
+@f3722 fact
+  holds salary p3721 d4 42031
+
+@f3723 fact
+  holds salary p3722 d5 43142
+
+@f3724 fact
+  holds salary p3723 d6 44253
+
+@f3725 fact
+  holds salary p3724 d7 45364
+
+@f3726 fact
+  holds salary p3725 d1 39475
+
+@f3727 fact
+  holds salary p3726 d2 40586
+
+@f3728 fact
+  holds salary p3727 d3 41697
+
+@f3729 fact
+  holds salary p3728 d4 42808
+
+@f3730 fact
+  holds salary p3729 d5 43919
+
+@f3731 fact
+  holds salary p3730 d6 45030
+
+@f3732 fact
+  holds salary p3731 d7 46141
+
+@f3733 fact
+  holds salary p3732 d1 40252
+
+@f3734 fact
+  holds salary p3733 d2 41363
+
+@f3735 fact
+  holds salary p3734 d3 42474
+
+@f3736 fact
+  holds salary p3735 d4 43585
+
+@f3737 fact
+  holds salary p3736 d5 44696
+
+@f3738 fact
+  holds salary p3737 d6 45807
+
+@f3739 fact
+  holds salary p3738 d7 46918
+
+@f3740 fact
+  holds salary p3739 d1 41029
+
+@f3741 fact
+  holds salary p3740 d2 42140
+
+@f3742 fact
+  holds salary p3741 d3 43251
+
+@f3743 fact
+  holds salary p3742 d4 44362
+
+@f3744 fact
+  holds salary p3743 d5 45473
+
+@f3745 fact
+  holds salary p3744 d6 46584
+
+@f3746 fact
+  holds salary p3745 d7 47695
+
+@f3747 fact
+  holds salary p3746 d1 41806
+
+@f3748 fact
+  holds salary p3747 d2 42917
+
+@f3749 fact
+  holds salary p3748 d3 44028
+
+@f3750 fact
+  holds salary p3749 d4 45139
+
+@f3751 fact
+  holds salary p3750 d5 46250
+
+@f3752 fact
+  holds salary p3751 d6 47361
+
+@f3753 fact
+  holds salary p3752 d7 48472
+
+@f3754 fact
+  holds salary p3753 d1 42583
+
+@f3755 fact
+  holds salary p3754 d2 43694
+
+@f3756 fact
+  holds salary p3755 d3 44805
+
+@f3757 fact
+  holds salary p3756 d4 45916
+
+@f3758 fact
+  holds salary p3757 d5 47027
+
+@f3759 fact
+  holds salary p3758 d6 48138
+
+@f3760 fact
+  holds salary p3759 d7 49249
+
+@f3761 fact
+  holds salary p3760 d1 43360
+
+@f3762 fact
+  holds salary p3761 d2 44471
+
+@f3763 fact
+  holds salary p3762 d3 45582
+
+@f3764 fact
+  holds salary p3763 d4 46693
+
+@f3765 fact
+  holds salary p3764 d5 47804
+
+@f3766 fact
+  holds salary p3765 d6 48915
+
+@f3767 fact
+  holds salary p3766 d7 50026
+
+@f3768 fact
+  holds salary p3767 d1 44137
+
+@f3769 fact
+  holds salary p3768 d2 45248
+
+@f3770 fact
+  holds salary p3769 d3 46359
+
+@f3771 fact
+  holds salary p3770 d4 47470
+
+@f3772 fact
+  holds salary p3771 d5 48581
+
+@f3773 fact
+  holds salary p3772 d6 49692
+
+@f3774 fact
+  holds salary p3773 d7 50803
+
+@f3775 fact
+  holds salary p3774 d1 44914
+
+@f3776 fact
+  holds salary p3775 d2 46025
+
+@f3777 fact
+  holds salary p3776 d3 47136
+
+@f3778 fact
+  holds salary p3777 d4 48247
+
+@f3779 fact
+  holds salary p3778 d5 49358
+
+@f3780 fact
+  holds salary p3779 d6 50469
+
+@f3781 fact
+  holds salary p3780 d7 51580
+
+@f3782 fact
+  holds salary p3781 d1 45691
+
+@f3783 fact
+  holds salary p3782 d2 46802
+
+@f3784 fact
+  holds salary p3783 d3 47913
+
+@f3785 fact
+  holds salary p3784 d4 34024
+
+@f3786 fact
+  holds salary p3785 d5 35135
+
+@f3787 fact
+  holds salary p3786 d6 36246
+
+@f3788 fact
+  holds salary p3787 d7 37357
+
+@f3789 fact
+  holds salary p3788 d1 31468
+
+@f3790 fact
+  holds salary p3789 d2 32579
+
+@f3791 fact
+  holds salary p3790 d3 33690
+
+@f3792 fact
+  holds salary p3791 d4 34801
+
+@f3793 fact
+  holds salary p3792 d5 35912
+
+@f3794 fact
+  holds salary p3793 d6 37023
+
+@f3795 fact
+  holds salary p3794 d7 38134
+
+@f3796 fact
+  holds salary p3795 d1 32245
+
+@f3797 fact
+  holds salary p3796 d2 33356
+
+@f3798 fact
+  holds salary p3797 d3 34467
+
+@f3799 fact
+  holds salary p3798 d4 35578
+
+@f3800 fact
+  holds salary p3799 d5 36689
+
+@f3801 fact
+  holds salary p3800 d6 37800
+
+@f3802 fact
+  holds salary p3801 d7 38911
+
+@f3803 fact
+  holds salary p3802 d1 33022
+
+@f3804 fact
+  holds salary p3803 d2 34133
+
+@f3805 fact
+  holds salary p3804 d3 35244
+
+@f3806 fact
+  holds salary p3805 d4 36355
+
+@f3807 fact
+  holds salary p3806 d5 37466
+
+@f3808 fact
+  holds salary p3807 d6 38577
+
+@f3809 fact
+  holds salary p3808 d7 39688
+
+@f3810 fact
+  holds salary p3809 d1 33799
+
+@f3811 fact
+  holds salary p3810 d2 34910
+
+@f3812 fact
+  holds salary p3811 d3 36021
+
+@f3813 fact
+  holds salary p3812 d4 37132
+
+@f3814 fact
+  holds salary p3813 d5 38243
+
+@f3815 fact
+  holds salary p3814 d6 39354
+
+@f3816 fact
+  holds salary p3815 d7 40465
+
+@f3817 fact
+  holds salary p3816 d1 34576
+
+@f3818 fact
+  holds salary p3817 d2 35687
+
+@f3819 fact
+  holds salary p3818 d3 36798
+
+@f3820 fact
+  holds salary p3819 d4 37909
+
+@f3821 fact
+  holds salary p3820 d5 39020
+
+@f3822 fact
+  holds salary p3821 d6 40131
+
+@f3823 fact
+  holds salary p3822 d7 41242
+
+@f3824 fact
+  holds salary p3823 d1 35353
+
+@f3825 fact
+  holds salary p3824 d2 36464
+
+@f3826 fact
+  holds salary p3825 d3 37575
+
+@f3827 fact
+  holds salary p3826 d4 38686
+
+@f3828 fact
+  holds salary p3827 d5 39797
+
+@f3829 fact
+  holds salary p3828 d6 40908
+
+@f3830 fact
+  holds salary p3829 d7 42019
+
+@f3831 fact
+  holds salary p3830 d1 36130
+
+@f3832 fact
+  holds salary p3831 d2 37241
+
+@f3833 fact
+  holds salary p3832 d3 38352
+
+@f3834 fact
+  holds salary p3833 d4 39463
+
+@f3835 fact
+  holds salary p3834 d5 40574
+
+@f3836 fact
+  holds salary p3835 d6 41685
+
+@f3837 fact
+  holds salary p3836 d7 42796
+
+@f3838 fact
+  holds salary p3837 d1 36907
+
+@f3839 fact
+  holds salary p3838 d2 38018
+
+@f3840 fact
+  holds salary p3839 d3 39129
+
+@f3841 fact
+  holds salary p3840 d4 40240
+
+@f3842 fact
+  holds salary p3841 d5 41351
+
+@f3843 fact
+  holds salary p3842 d6 42462
+
+@f3844 fact
+  holds salary p3843 d7 43573
+
+@f3845 fact
+  holds salary p3844 d1 37684
+
+@f3846 fact
+  holds salary p3845 d2 38795
+
+@f3847 fact
+  holds salary p3846 d3 39906
+
+@f3848 fact
+  holds salary p3847 d4 41017
+
+@f3849 fact
+  holds salary p3848 d5 42128
+
+@f3850 fact
+  holds salary p3849 d6 43239
+
+@f3851 fact
+  holds salary p3850 d7 44350
+
+@f3852 fact
+  holds salary p3851 d1 38461
+
+@f3853 fact
+  holds salary p3852 d2 39572
+
+@f3854 fact
+  holds salary p3853 d3 40683
+
+@f3855 fact
+  holds salary p3854 d4 41794
+
+@f3856 fact
+  holds salary p3855 d5 42905
+
+@f3857 fact
+  holds salary p3856 d6 44016
+
+@f3858 fact
+  holds salary p3857 d7 45127
+
+@f3859 fact
+  holds salary p3858 d1 39238
+
+@f3860 fact
+  holds salary p3859 d2 40349
+
+@f3861 fact
+  holds salary p3860 d3 41460
+
+@f3862 fact
+  holds salary p3861 d4 42571
+
+@f3863 fact
+  holds salary p3862 d5 43682
+
+@f3864 fact
+  holds salary p3863 d6 44793
+
+@f3865 fact
+  holds salary p3864 d7 45904
+
+@f3866 fact
+  holds salary p3865 d1 40015
+
+@f3867 fact
+  holds salary p3866 d2 41126
+
+@f3868 fact
+  holds salary p3867 d3 42237
+
+@f3869 fact
+  holds salary p3868 d4 43348
+
+@f3870 fact
+  holds salary p3869 d5 44459
+
+@f3871 fact
+  holds salary p3870 d6 45570
+
+@f3872 fact
+  holds salary p3871 d7 46681
+
+@f3873 fact
+  holds salary p3872 d1 40792
+
+@f3874 fact
+  holds salary p3873 d2 41903
+
+@f3875 fact
+  holds salary p3874 d3 43014
+
+@f3876 fact
+  holds salary p3875 d4 44125
+
+@f3877 fact
+  holds salary p3876 d5 45236
+
+@f3878 fact
+  holds salary p3877 d6 46347
+
+@f3879 fact
+  holds salary p3878 d7 47458
+
+@f3880 fact
+  holds salary p3879 d1 41569
+
+@f3881 fact
+  holds salary p3880 d2 42680
+
+@f3882 fact
+  holds salary p3881 d3 43791
+
+@f3883 fact
+  holds salary p3882 d4 44902
+
+@f3884 fact
+  holds salary p3883 d5 46013
+
+@f3885 fact
+  holds salary p3884 d6 47124
+
+@f3886 fact
+  holds salary p3885 d7 48235
+
+@f3887 fact
+  holds salary p3886 d1 42346
+
+@f3888 fact
+  holds salary p3887 d2 43457
+
+@f3889 fact
+  holds salary p3888 d3 44568
+
+@f3890 fact
+  holds salary p3889 d4 45679
+
+@f3891 fact
+  holds salary p3890 d5 46790
+
+@f3892 fact
+  holds salary p3891 d6 47901
+
+@f3893 fact
+  holds salary p3892 d7 49012
+
+@f3894 fact
+  holds salary p3893 d1 43123
+
+@f3895 fact
+  holds salary p3894 d2 44234
+
+@f3896 fact
+  holds salary p3895 d3 45345
+
+@f3897 fact
+  holds salary p3896 d4 46456
+
+@f3898 fact
+  holds salary p3897 d5 47567
+
+@f3899 fact
+  holds salary p3898 d6 48678
+
+@f3900 fact
+  holds salary p3899 d7 49789
+
+@f3901 fact
+  holds salary p3900 d1 43900
+
+@f3902 fact
+  holds salary p3901 d2 45011
+
+@f3903 fact
+  holds salary p3902 d3 46122
+
+@f3904 fact
+  holds salary p3903 d4 47233
+
+@f3905 fact
+  holds salary p3904 d5 48344
+
+@f3906 fact
+  holds salary p3905 d6 49455
+
+@f3907 fact
+  holds salary p3906 d7 50566
+
+@f3908 fact
+  holds salary p3907 d1 44677
+
+@f3909 fact
+  holds salary p3908 d2 45788
+
+@f3910 fact
+  holds salary p3909 d3 46899
+
+@f3911 fact
+  holds salary p3910 d4 48010
+
+@f3912 fact
+  holds salary p3911 d5 49121
+
+@f3913 fact
+  holds salary p3912 d6 50232
+
+@f3914 fact
+  holds salary p3913 d7 51343
+
+@f3915 fact
+  holds salary p3914 d1 45454
+
+@f3916 fact
+  holds salary p3915 d2 46565
+
+@f3917 fact
+  holds salary p3916 d3 47676
+
+@f3918 fact
+  holds salary p3917 d4 48787
+
+@f3919 fact
+  holds salary p3918 d5 49898
+
+@f3920 fact
+  holds salary p3919 d6 36009
+
+@f3921 fact
+  holds salary p3920 d7 37120
+
+@f3922 fact
+  holds salary p3921 d1 31231
+
+@f3923 fact
+  holds salary p3922 d2 32342
+
+@f3924 fact
+  holds salary p3923 d3 33453
+
+@f3925 fact
+  holds salary p3924 d4 34564
+
+@f3926 fact
+  holds salary p3925 d5 35675
+
+@f3927 fact
+  holds salary p3926 d6 36786
+
+@f3928 fact
+  holds salary p3927 d7 37897
+
+@f3929 fact
+  holds salary p3928 d1 32008
+
+@f3930 fact
+  holds salary p3929 d2 33119
+
+@f3931 fact
+  holds salary p3930 d3 34230
+
+@f3932 fact
+  holds salary p3931 d4 35341
+
+@f3933 fact
+  holds salary p3932 d5 36452
+
+@f3934 fact
+  holds salary p3933 d6 37563
+
+@f3935 fact
+  holds salary p3934 d7 38674
+
+@f3936 fact
+  holds salary p3935 d1 32785
+
+@f3937 fact
+  holds salary p3936 d2 33896
+
+@f3938 fact
+  holds salary p3937 d3 35007
+
+@f3939 fact
+  holds salary p3938 d4 36118
+
+@f3940 fact
+  holds salary p3939 d5 37229
+
+@f3941 fact
+  holds salary p3940 d6 38340
+
+@f3942 fact
+  holds salary p3941 d7 39451
+
+@f3943 fact
+  holds salary p3942 d1 33562
+
+@f3944 fact
+  holds salary p3943 d2 34673
+
+@f3945 fact
+  holds salary p3944 d3 35784
+
+@f3946 fact
+  holds salary p3945 d4 36895
+
+@f3947 fact
+  holds salary p3946 d5 38006
+
+@f3948 fact
+  holds salary p3947 d6 39117
+
+@f3949 fact
+  holds salary p3948 d7 40228
+
+@f3950 fact
+  holds salary p3949 d1 34339
+
+@f3951 fact
+  holds salary p3950 d2 35450
+
+@f3952 fact
+  holds salary p3951 d3 36561
+
+@f3953 fact
+  holds salary p3952 d4 37672
+
+@f3954 fact
+  holds salary p3953 d5 38783
+
+@f3955 fact
+  holds salary p3954 d6 39894
+
+@f3956 fact
+  holds salary p3955 d7 41005
+
+@f3957 fact
+  holds salary p3956 d1 35116
+
+@f3958 fact
+  holds salary p3957 d2 36227
+
+@f3959 fact
+  holds salary p3958 d3 37338
+
+@f3960 fact
+  holds salary p3959 d4 38449
+
+@f3961 fact
+  holds salary p3960 d5 39560
+
+@f3962 fact
+  holds salary p3961 d6 40671
+
+@f3963 fact
+  holds salary p3962 d7 41782
+
+@f3964 fact
+  holds salary p3963 d1 35893
+
+@f3965 fact
+  holds salary p3964 d2 37004
+
+@f3966 fact
+  holds salary p3965 d3 38115
+
+@f3967 fact
+  holds salary p3966 d4 39226
+
+@f3968 fact
+  holds salary p3967 d5 40337
+
+@f3969 fact
+  holds salary p3968 d6 41448
+
+@f3970 fact
+  holds salary p3969 d7 42559
+
+@f3971 fact
+  holds salary p3970 d1 36670
+
+@f3972 fact
+  holds salary p3971 d2 37781
+
+@f3973 fact
+  holds salary p3972 d3 38892
+
+@f3974 fact
+  holds salary p3973 d4 40003
+
+@f3975 fact
+  holds salary p3974 d5 41114
+
+@f3976 fact
+  holds salary p3975 d6 42225
+
+@f3977 fact
+  holds salary p3976 d7 43336
+
+@f3978 fact
+  holds salary p3977 d1 37447
+
+@f3979 fact
+  holds salary p3978 d2 38558
+
+@f3980 fact
+  holds salary p3979 d3 39669
+
+@f3981 fact
+  holds salary p3980 d4 40780
+
+@f3982 fact
+  holds salary p3981 d5 41891
+
+@f3983 fact
+  holds salary p3982 d6 43002
+
+@f3984 fact
+  holds salary p3983 d7 44113
+
+@f3985 fact
+  holds salary p3984 d1 38224
+
+@f3986 fact
+  holds salary p3985 d2 39335
+
+@f3987 fact
+  holds salary p3986 d3 40446
+
+@f3988 fact
+  holds salary p3987 d4 41557
+
+@f3989 fact
+  holds salary p3988 d5 42668
+
+@f3990 fact
+  holds salary p3989 d6 43779
+
+@f3991 fact
+  holds salary p3990 d7 44890
+
+@f3992 fact
+  holds salary p3991 d1 39001
+
+@f3993 fact
+  holds salary p3992 d2 40112
+
+@f3994 fact
+  holds salary p3993 d3 41223
+
+@f3995 fact
+  holds salary p3994 d4 42334
+
+@f3996 fact
+  holds salary p3995 d5 43445
+
+@f3997 fact
+  holds salary p3996 d6 44556
+
+@f3998 fact
+  holds salary p3997 d7 45667
+
+@f3999 fact
+  holds salary p3998 d1 39778
+
+@f4000 fact
+  holds salary p3999 d2 40889
+
+@payroll aggregate
+  over salary ?p ?d ?s
+  group ?d
+  sum ?s as ?t
+  yields dept_payroll ?d ?t
+
+@headcount aggregate
+  over salary ?p ?d ?s
+  group ?d
+  count as ?n
+  yields dept_size ?d ?n
+
+@best aggregate
+  over salary ?p ?d ?s
+  group ?d
+  max ?s as ?m
+  yields top_salary ?d ?m
+
+@r_avg rule
+  when dept_payroll ?d ?t
+  when dept_size ?d ?n
+  when compute ?a ?t whole_divided_by ?n
+  then avg_salary ?d ?a
+
+@r_gap rule
+  when top_salary ?d ?m
+  when avg_salary ?d ?a
+  when compute ?g ?m minus ?a
+  then gap ?d ?g

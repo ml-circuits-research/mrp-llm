@@ -1,0 +1,18 @@
+{
+  "feature": "Conditional answers with redundant assumptions: the list is all of them and flagged conditional_unknown",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "ann"
+    }
+  ],
+  "conditional": [
+    "s1",
+    "s2"
+  ],
+  "conditional_unknown": true,
+  "requires": [
+    "whatif"
+  ]
+}

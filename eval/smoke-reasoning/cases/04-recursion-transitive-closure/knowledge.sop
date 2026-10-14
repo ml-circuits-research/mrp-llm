@@ -1,0 +1,22 @@
+@edge predicate
+  args source:entity destination:entity
+@reaches predicate
+  args source:entity destination:entity
+
+@e1 fact
+  holds edge a b
+@e2 fact
+  holds edge b c
+@e3 fact
+  holds edge c a
+@e4 fact
+  holds edge c d
+
+@r_base rule
+  when edge ?x ?y
+  then reaches ?x ?y
+
+@r_step rule
+  when edge ?x ?m
+  when reaches ?m ?y
+  then reaches ?x ?y

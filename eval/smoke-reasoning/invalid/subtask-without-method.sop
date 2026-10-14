@@ -1,0 +1,8 @@
+# expect: subtask_without_method
+@a action
+  requires p
+  adds q
+@m method
+  achieves q
+  step ~a
+  step missing_task

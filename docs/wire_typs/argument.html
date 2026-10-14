@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#argument" target="_top">← Wire type index</a></p><h1><code>argument</code></h1><p>A reason for or against a wire or an amendment, with its source and an optional cost difference. Evidence for the negotiation of a change, never evidence of a fact.</p><p><strong>Status and author:</strong> Knowledge wire, written by an author or composed by the host from the user's words. Not governed. It is never used to derive an answer; it is shown with the amendment it concerns.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="field-for"><code>for</code></th><td>At most once; optional</td><td>The <code>$wire_or_amendment</code> this argument supports. Exactly one of <code>for</code> and <code>against</code> (<code>argument_needs_for_or_against</code>).</td></tr>
+<tr><th scope="row" id="field-against"><code>against</code></th><td>At most once; optional</td><td>The <code>$wire_or_amendment</code> this argument opposes.</td></tr>
+<tr><th scope="row" id="field-claim"><code>claim</code></th><td>At most once; required</td><td>The reason, JSON-quoted.</td></tr>
+<tr><th scope="row" id="field-source"><code>source</code></th><td>At most once; optional</td><td>Quoted citation of where the reason comes from.</td></tr>
+<tr><th scope="row" id="field-cost_delta"><code>cost_delta</code></th><td>At most once; optional</td><td>An integer: the change in plan cost the argument claims for the proposal.</td></tr></tbody></table></div></section><section><h2>What it is for and how to write it</h2><p>Write one argument per reason, pointing at the wire or amendment it concerns and quoting its source. An argument has exactly one of <code>for</code> and <code>against</code>.</p></section><section><h2>What the engine does</h2><p>Nothing in an answer: arguments are stored with the amendment they concern, listed when the host presents the delta of a what-if, and kept (with a rejected amendment) so that the same proposal is not re-litigated blindly. Dung-style argumentation between amendments and norms is not part of the language.</p></section><section><h2>Examples</h2><pre data-sop="knowledge"><code>@a predicate
+  args subject:entity
+@act action
+  params ?x
+  requires a ?x
+  adds a ?x
+@n1 norm
+  forbid ~act ?x
+  version 1
+@n2 norm
+  forbid ~act ?x
+  when a ?x
+  version 2
+  supersedes $n1
+  approval proposed
+@arg1 argument
+  for $n2
+  claim "the narrower prohibition still covers the risk"
+  source "incident review 2026-09"
+  cost_delta -2</code></pre><p>While the successor is only proposed the predecessor stays approved; an approved successor would require the predecessor to be marked <code>approval superseded</code> (<code>superseded_not_marked</code>).</p><h3>Invalid: both <code>for</code> and <code>against</code></h3><pre data-sop="knowledge-invalid" data-error="argument_needs_for_or_against"><code>@a predicate
+  args subject:entity
+@act action
+  params ?x
+  requires a ?x
+  adds a ?x
+@n1 norm
+  forbid ~act ?x
+@arg1 argument
+  for $n1
+  against $n1
+  claim "x"</code></pre></section><section><h2>Common mistakes</h2><ol><li>Writing both <code>for</code> and <code>against</code>, or neither.</li><li>Using an argument to assert a fact: write a <code>fact</code> with its source.</li><li>Quoting a paraphrase as the source.</li></ol></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.argument</code></li><li><code>sop/knowledge/validate.mjs (argument check)</code></li></ul><p>Related: <a href="amendment.html"><code>amendment</code></a>, <a href="norm.html"><code>norm</code></a>, <a href="method.html"><code>method</code></a>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>; the shared semantics are in <a href="knowledge-semantics.html">Knowledge semantics</a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

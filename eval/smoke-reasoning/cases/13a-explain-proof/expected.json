@@ -1,0 +1,16 @@
+{
+  "feature": "Explanation and proof: the derivation of an answer",
+  "status": "supported",
+  "complete": true,
+  "explain": {
+    "depth": 1,
+    "uses": [
+      "parent ann bob",
+      "parent bob cy"
+    ]
+  },
+  "requires": [
+    "rules",
+    "explain"
+  ]
+}

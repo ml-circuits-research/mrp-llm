@@ -1,0 +1,17 @@
+{
+  "feature": "Mode of work: the minimal norms to waive so that a blocked step becomes possible (abduction with a restricted hypothesis space)",
+  "status": "hypotheses",
+  "complete": true,
+  "hypotheses": [
+    [
+      "waive no_hard_reset_in_hours"
+    ]
+  ],
+  "requires": [
+    "abduce",
+    "abduce_waive",
+    "plan",
+    "method",
+    "norms_hard"
+  ]
+}

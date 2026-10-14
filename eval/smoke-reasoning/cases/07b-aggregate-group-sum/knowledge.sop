@@ -1,0 +1,22 @@
+@salary predicate
+  args subject:entity topic:entity object:integer
+  closed true
+@dept_payroll predicate
+  args subject:entity object:integer
+
+@s1 fact
+  holds salary ann dev 100
+@s2 fact
+  holds salary bob dev 120
+@s3 fact
+  holds salary cy dev 90
+@s4 fact
+  holds salary di ops 80
+@s5 fact
+  holds salary ed ops 95
+
+@payroll aggregate
+  over salary ?p ?d ?s
+  group ?d
+  sum ?s as ?total
+  yields dept_payroll ?d ?total

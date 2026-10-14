@@ -1,0 +1,26 @@
+{
+  "feature": "Left recursion over a graph with two cycles terminates and is complete",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "t": "a"
+    },
+    {
+      "t": "b"
+    },
+    {
+      "t": "c"
+    },
+    {
+      "t": "d"
+    },
+    {
+      "t": "e"
+    }
+  ],
+  "requires": [
+    "rules",
+    "recursion"
+  ]
+}

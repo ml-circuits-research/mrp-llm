@@ -1,0 +1,46 @@
+@next predicate
+  args source:entity destination:entity
+@start predicate
+  args subject:entity
+@blocked predicate
+  args subject:entity
+  closed true
+@even predicate
+  args subject:entity
+@odd predicate
+  args subject:entity
+@free_even predicate
+  args subject:entity
+
+@n1 fact
+  holds next n0 n1
+@n2 fact
+  holds next n1 n2
+@n3 fact
+  holds next n2 n3
+@n4 fact
+  holds next n3 n4
+@n5 fact
+  holds next n4 n5
+@n6 fact
+  holds next n5 n0
+@s0 fact
+  holds start n0
+@b1 fact
+  holds blocked n2
+
+@r_even0 rule
+  when start ?x
+  then even ?x
+@r_odd rule
+  when even ?x
+  when next ?x ?y
+  then odd ?y
+@r_even rule
+  when odd ?x
+  when next ?x ?y
+  then even ?y
+@r_free rule
+  when even ?x
+  when absent blocked ?x
+  then free_even ?x

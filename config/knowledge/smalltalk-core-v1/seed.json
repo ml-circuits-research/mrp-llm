@@ -1,0 +1,115 @@
+{
+  "name": "Small talk: core (English)",
+  "description": "Greetings and farewells, thanks, apologies, how-are-you, weather, weekend, hobbies and sport chat, compliments, acknowledgements, clarification and repair, and small talk that leads back to useful help; neutral and warm registers. More variants for the situations of conversation-v1 and new situations triggered by pragmatic kinds.",
+  "imports": [
+    "conversation-v1"
+  ],
+  "role": "conversation",
+  "licence": "MIT (repository LICENSE); original MRP-LLM text written by model runs of jobs/smalltalk-replies and reviewed automatically",
+  "provenance": {
+    "generator": "jobs/smalltalk-replies (worker tier, bulk audit by the auditor tier, decider tier for fixes)",
+    "builder": "tools/smalltalk/build.mjs",
+    "taxonomy": "tools/smalltalk/taxonomy.json",
+    "runs": [
+      "state/llm-jobs/smalltalk-replies/20261002T155845-d6eeea",
+      "state/llm-jobs/smalltalk-replies-escalated/20261002T171332-ff6ba4"
+    ],
+    "inspired_by": [
+      {
+        "source": "DailyDialog",
+        "use": "topic categories and dialogue-act types (inform, question, directive, commissive) as ideas",
+        "text_copied": false
+      },
+      {
+        "source": "EmpatheticDialogues",
+        "use": "the set of 32 emotion labels, grouped into the empathy situations",
+        "text_copied": false
+      },
+      {
+        "source": "MultiWOZ",
+        "use": "general dialogue acts (greet, bye, thank, welcome, reqmore) as ideas",
+        "text_copied": false
+      },
+      {
+        "source": "Wizard of Wikipedia",
+        "use": "chit-chat about a topic that leads to knowledge, as an idea",
+        "text_copied": false
+      },
+      {
+        "source": "Cornell Movie-Dialogs Corpus",
+        "use": "turn patterns of casual conversation, as an idea",
+        "text_copied": false
+      }
+    ]
+  },
+  "counts": {
+    "situations": 49,
+    "replies": 239,
+    "by_register": {
+      "neutral": 122,
+      "warm": 117
+    },
+    "rules": 0,
+    "data_facts": 56,
+    "mean_distinct_1": 0.579,
+    "mean_distinct_2": 0.784,
+    "near_duplicates_dropped": 46
+  },
+  "acts": [
+    {
+      "kind": "how_are_you",
+      "group": "courtesy",
+      "situation": "smalltalk_how_are_you"
+    },
+    {
+      "kind": "presence_check",
+      "group": "courtesy",
+      "situation": "smalltalk_presence_check"
+    },
+    {
+      "kind": "compliment",
+      "group": "courtesy",
+      "situation": "smalltalk_compliment"
+    },
+    {
+      "kind": "acknowledgement",
+      "group": "courtesy",
+      "situation": "smalltalk_acknowledgement"
+    },
+    {
+      "kind": "small_talk_weather",
+      "group": "small_talk",
+      "situation": "smalltalk_weather"
+    },
+    {
+      "kind": "small_talk_plans",
+      "group": "small_talk",
+      "situation": "smalltalk_weekend"
+    },
+    {
+      "kind": "small_talk_hobbies",
+      "group": "small_talk",
+      "situation": "smalltalk_hobbies"
+    },
+    {
+      "kind": "small_talk_sport",
+      "group": "small_talk",
+      "situation": "smalltalk_sport"
+    },
+    {
+      "kind": "small_talk",
+      "group": "small_talk",
+      "situation": "smalltalk_chitchat"
+    },
+    {
+      "kind": "correction",
+      "group": "conversation",
+      "situation": "repair_user_correction"
+    },
+    {
+      "kind": "repeat_request",
+      "group": "conversation",
+      "situation": "repair_repeat_request"
+    }
+  ]
+}

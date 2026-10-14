@@ -1,0 +1,20 @@
+{
+  "feature": "Memory at scale: a default conclusion is completeness-sensitive (a retrieved strict contrary retracts it), with retrieval completeness for the keys",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "tweety"
+    }
+  ],
+  "retrieval": {
+    "max_wires": 40,
+    "needed_recall": 1,
+    "min_steps": 2
+  },
+  "requires": [
+    "default",
+    "strict_contrary",
+    "retrieval"
+  ]
+}

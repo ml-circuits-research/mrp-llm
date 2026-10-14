@@ -1,0 +1,294 @@
+@link predicate
+  args subject:entity object:entity
+@blocked predicate
+  args subject:entity
+  closed true
+@reached predicate
+  args subject:entity
+
+@l1 fact
+  holds link n0 n1
+@l2 fact
+  holds link n1 n2
+@l3 fact
+  holds link n2 n3
+@l4 fact
+  holds link n3 n4
+@l5 fact
+  holds link n4 n5
+@l6 fact
+  holds link n5 n6
+@l7 fact
+  holds link n6 n7
+@l8 fact
+  holds link n7 n8
+@l9 fact
+  holds link n8 n9
+@l10 fact
+  holds link n9 n10
+@l11 fact
+  holds link n10 n11
+@l12 fact
+  holds link n11 n12
+@l13 fact
+  holds link n12 n13
+@l14 fact
+  holds link n13 n14
+@l15 fact
+  holds link n14 n15
+@l16 fact
+  holds link n15 n16
+@l17 fact
+  holds link n16 n17
+@l18 fact
+  holds link n17 n18
+@l19 fact
+  holds link n18 n19
+@l20 fact
+  holds link n19 n20
+@l21 fact
+  holds link n20 n21
+@l22 fact
+  holds link n21 n22
+@l23 fact
+  holds link n22 n23
+@l24 fact
+  holds link n24 n25
+@l25 fact
+  holds link n25 n26
+@l26 fact
+  holds link n26 n27
+@l27 fact
+  holds link n27 n28
+@l28 fact
+  holds link n28 n29
+@l29 fact
+  holds link n29 n30
+@l30 fact
+  holds link n30 n31
+@l31 fact
+  holds link n31 n32
+@l32 fact
+  holds link n32 n33
+@l33 fact
+  holds link n33 n34
+@l34 fact
+  holds link n34 n35
+@l35 fact
+  holds link n35 n36
+@l36 fact
+  holds link n36 n37
+@l37 fact
+  holds link n37 n38
+@l38 fact
+  holds link n38 n39
+@l39 fact
+  holds link n6 n8
+@l40 fact
+  holds link n14 n16
+@l41 fact
+  holds link n10 d0
+@l42 fact
+  holds link d0 d1
+@l43 fact
+  holds link d1 d2
+@l44 fact
+  holds link d2 d3
+@l45 fact
+  holds link d3 d4
+@l46 fact
+  holds link d4 d5
+@l47 fact
+  holds link d5 d6
+@l48 fact
+  holds link d6 d7
+@l49 fact
+  holds link d7 d8
+@l50 fact
+  holds link d8 d9
+@l51 fact
+  holds link d9 d0
+@l52 fact
+  holds link n30 e0
+@l53 fact
+  holds link e0 e1
+@l54 fact
+  holds link e1 e2
+@l55 fact
+  holds link e2 e3
+@l56 fact
+  holds link e3 e4
+@l57 fact
+  holds link e4 e5
+@l58 fact
+  holds link e5 e6
+@l59 fact
+  holds link e6 e7
+@l60 fact
+  holds link e7 e8
+@l61 fact
+  holds link e8 e9
+@l62 fact
+  holds link e9 e10
+@l63 fact
+  holds link e10 e11
+@l64 fact
+  holds link e11 e12
+@l65 fact
+  holds link e12 e13
+@l66 fact
+  holds link e13 e14
+@l67 fact
+  holds link e14 e15
+@l68 fact
+  holds link e15 e16
+@l69 fact
+  holds link e16 e17
+@l70 fact
+  holds link e17 e18
+@l71 fact
+  holds link e18 e19
+@l72 fact
+  holds link e19 e20
+@l73 fact
+  holds link x0 x3
+@l74 fact
+  holds link x1 x10
+@l75 fact
+  holds link x2 x17
+@l76 fact
+  holds link x3 x24
+@l77 fact
+  holds link x4 x31
+@l78 fact
+  holds link x5 x38
+@l79 fact
+  holds link x6 x45
+@l80 fact
+  holds link x7 x52
+@l81 fact
+  holds link x8 x59
+@l82 fact
+  holds link x9 x6
+@l83 fact
+  holds link x10 x13
+@l84 fact
+  holds link x11 x20
+@l85 fact
+  holds link x12 x27
+@l86 fact
+  holds link x13 x34
+@l87 fact
+  holds link x14 x41
+@l88 fact
+  holds link x15 x48
+@l89 fact
+  holds link x16 x55
+@l90 fact
+  holds link x17 x2
+@l91 fact
+  holds link x18 x9
+@l92 fact
+  holds link x19 x16
+@l93 fact
+  holds link x20 x23
+@l94 fact
+  holds link x21 x30
+@l95 fact
+  holds link x22 x37
+@l96 fact
+  holds link x23 x44
+@l97 fact
+  holds link x24 x51
+@l98 fact
+  holds link x25 x58
+@l99 fact
+  holds link x26 x5
+@l100 fact
+  holds link x27 x12
+@l101 fact
+  holds link x28 x19
+@l102 fact
+  holds link x29 x26
+@l103 fact
+  holds link x30 x33
+@l104 fact
+  holds link x31 x40
+@l105 fact
+  holds link x32 x47
+@l106 fact
+  holds link x33 x54
+@l107 fact
+  holds link x34 x1
+@l108 fact
+  holds link x35 x8
+@l109 fact
+  holds link x36 x15
+@l110 fact
+  holds link x37 x22
+@l111 fact
+  holds link x38 x29
+@l112 fact
+  holds link x39 x36
+@l113 fact
+  holds link x40 x43
+@l114 fact
+  holds link x41 x50
+@l115 fact
+  holds link x42 x57
+@l116 fact
+  holds link x43 x4
+@l117 fact
+  holds link x44 x11
+@l118 fact
+  holds link x45 x18
+@l119 fact
+  holds link x46 x25
+@l120 fact
+  holds link x47 x32
+@l121 fact
+  holds link x48 x39
+@l122 fact
+  holds link x49 x46
+@l123 fact
+  holds link x50 x53
+@l124 fact
+  holds link x51 x0
+@l125 fact
+  holds link x52 x7
+@l126 fact
+  holds link x53 x14
+@l127 fact
+  holds link x54 x21
+@l128 fact
+  holds link x55 x28
+@l129 fact
+  holds link x56 x35
+@l130 fact
+  holds link x57 x42
+@l131 fact
+  holds link x58 x49
+@l132 fact
+  holds link x59 x56
+@l133 fact
+  holds link n22 z0
+@l134 fact
+  holds link z0 z1
+@l135 fact
+  holds link z1 n24
+@b1 fact
+  holds blocked n7
+@b2 fact
+  holds blocked n15
+@b3 fact
+  holds blocked z1
+
+@r_base rule
+  when link n0 ?y
+  when absent blocked ?y
+  then reached ?y
+@r_step rule
+  when reached ?y
+  when link ?y ?z
+  when absent blocked ?z
+  then reached ?z

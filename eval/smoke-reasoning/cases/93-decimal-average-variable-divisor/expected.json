@@ -1,0 +1,25 @@
+{
+  "feature": "A decimal average: a sum divided by a count that is a variable, exact when the quotient terminates",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "t": "green",
+      "avg": 4
+    },
+    {
+      "t": "red",
+      "avg": 7.75
+    },
+    {
+      "t": "blue",
+      "avg": 7
+    }
+  ],
+  "requires": [
+    "rules",
+    "aggregate",
+    "compute_in_rules",
+    "exact_arithmetic"
+  ]
+}

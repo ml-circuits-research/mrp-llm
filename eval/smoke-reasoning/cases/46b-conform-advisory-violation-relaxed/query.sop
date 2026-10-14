@@ -1,0 +1,7 @@
+@t1 trace
+  step ~force_stop s1
+  step ~start s1
+
+@q query
+  mode conform
+  trace $t1

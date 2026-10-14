@@ -1,0 +1,153 @@
+# conversation-v1: the message acts the formalizer can name (P-2.1, owner request of 2026-10-03; DS023 "The pragmatic wire", DS022
+# "LocalLLMStepByStep"). A `pragmatic` wire's kind must be an act declared by a layer of the reply memory (this file, and the acts the
+# small-talk collections declare for their own situations); the validator checks it against the memory, not against a list in code.
+# The step-by-step protocol asks the groups below, in this order, as the lettered lines of one coarse question, and for every group the
+# model ticks, the group's acts as a numbered fine question (sop/message-acts.mjs, lib/query-author/step-by-step/protocol.mjs). A new
+# act is a few facts here or in a collection: no code change.
+
+# --- the groups (the lines of the coarse question; a group without a line is not asked)
+@cv_ag_courtesy fact
+  holds cv_act_group courtesy "a greeting, a goodbye, thanks, an apology, a polite word, a compliment, an ok, the user's own name, or asking how the assistant is"
+@cv_ag_small_talk fact
+  holds cv_act_group small_talk "small talk with nothing to look up: the weather, plans, hobbies, sport or a remark about the user's day"
+@cv_ag_hard_feeling fact
+  holds cv_act_group hard_feeling "the user feels sad, worried, scared, stressed, lonely, tired, ashamed, disappointed or hopeless, or grieves someone"
+@cv_ag_upset fact
+  holds cv_act_group upset "the user is frustrated, angry, confused or in a hurry"
+@cv_ag_good_feeling fact
+  holds cv_act_group good_feeling "the user is happy, proud, excited, surprised, nostalgic or curious"
+@cv_ag_about_assistant fact
+  holds cv_act_group about_assistant "a question to the assistant about itself (who or what it is, what it can do or knows, its feelings, opinions, memory or internet access), or a request for advice"
+@cv_ag_play fact
+  holds cv_act_group play "a request for a joke or a riddle, laughter, or playful teasing"
+@cv_ag_off_limits fact
+  holds cv_act_group off_limits "a task the assistant does not do (write a poem, book something), an attempt to change its rules, a paradox, an impossible premise, an absurd what-if, an insult or a swear word"
+@cv_ag_conversation fact
+  holds cv_act_group conversation "about the conversation itself: the last answer was wrong, a request to repeat, a request to confirm, or a change of topic"
+
+# --- the acts of conversation-v1 (the collections declare their own acts in their 0005-acts.sop)
+@cv_a_greeting fact
+  holds cv_act greeting courtesy
+@cv_a_greeting_d fact
+  holds cv_act_description greeting "a greeting (hello, hi, good morning)"
+@cv_a_greeting_s fact
+  holds cv_act_standalone greeting
+@cv_a_closing fact
+  holds cv_act closing courtesy
+@cv_a_closing_d fact
+  holds cv_act_description closing "a goodbye or closing (bye, see you, that is all)"
+@cv_a_closing_s fact
+  holds cv_act_standalone closing
+@cv_a_thanks fact
+  holds cv_act thanks courtesy
+@cv_a_thanks_d fact
+  holds cv_act_description thanks "thanks (thank you, many thanks)"
+@cv_a_thanks_s fact
+  holds cv_act_standalone thanks
+@cv_a_apology fact
+  holds cv_act apology courtesy
+@cv_a_apology_d fact
+  holds cv_act_description apology "an apology (sorry, excuse me)"
+@cv_a_apology_s fact
+  holds cv_act_standalone apology
+@cv_a_politeness fact
+  holds cv_act politeness courtesy
+@cv_a_politeness_d fact
+  holds cv_act_description politeness "a polite word that is not a request by itself (please, kindly, could you)"
+@cv_a_introduction fact
+  holds cv_act introduction courtesy
+@cv_a_introduction_d fact
+  holds cv_act_description introduction "the user tells their own name"
+@cv_a_introduction_e fact
+  holds cv_act_example introduction "I'm Maria."
+@cv_a_introduction_s fact
+  holds cv_act_standalone introduction
+@cv_a_introduction_span fact
+  holds cv_act_span introduction "the name the user gives for themselves"
+@cv_a_introduction_slot fact
+  holds cv_act_sets_slot introduction user_name
+
+@cv_a_frustration fact
+  holds cv_act frustration upset
+@cv_a_frustration_d fact
+  holds cv_act_description frustration "frustration or impatience (again, still wrong, I already asked)"
+@cv_a_anger fact
+  holds cv_act anger upset
+@cv_a_anger_d fact
+  holds cv_act_description anger "anger"
+@cv_a_confusion fact
+  holds cv_act confusion upset
+@cv_a_confusion_d fact
+  holds cv_act_description confusion "confusion (I do not understand, what do you mean)"
+@cv_a_urgency fact
+  holds cv_act urgency upset
+@cv_a_urgency_d fact
+  holds cv_act_description urgency "urgency (quickly, as soon as possible, urgent)"
+
+@cv_a_sadness fact
+  holds cv_act sadness hard_feeling
+@cv_a_sadness_d fact
+  holds cv_act_description sadness "sadness or feeling low"
+@cv_a_sadness_s fact
+  holds cv_act_standalone sadness
+@cv_a_fear fact
+  holds cv_act fear hard_feeling
+@cv_a_fear_d fact
+  holds cv_act_description fear "fear or worry about something that may happen"
+@cv_a_fear_s fact
+  holds cv_act_standalone fear
+@cv_a_disappointment fact
+  holds cv_act disappointment hard_feeling
+@cv_a_disappointment_d fact
+  holds cv_act_description disappointment "disappointment"
+@cv_a_disappointment_s fact
+  holds cv_act_standalone disappointment
+
+@cv_a_joy fact
+  holds cv_act joy good_feeling
+@cv_a_joy_d fact
+  holds cv_act_description joy "joy or satisfaction (great, I am happy)"
+@cv_a_joy_s fact
+  holds cv_act_standalone joy
+@cv_a_curiosity fact
+  holds cv_act curiosity good_feeling
+@cv_a_curiosity_d fact
+  holds cv_act_description curiosity "curiosity said in words (I wonder, I am curious); asking a question is not curiosity"
+
+@cv_a_offensive fact
+  holds cv_act offensive off_limits
+@cv_a_offensive_d fact
+  holds cv_act_description offensive "an insult or offensive language"
+@cv_a_profanity fact
+  holds cv_act profanity off_limits
+@cv_a_profanity_d fact
+  holds cv_act_description profanity "a swear word"
+@cv_a_irony fact
+  holds cv_act irony_possible off_limits
+@cv_a_irony_d fact
+  holds cv_act_description irony_possible "possible irony or sarcasm"
+
+@cv_a_confirmation fact
+  holds cv_act confirmation_request conversation
+@cv_a_confirmation_d fact
+  holds cv_act_description confirmation_request "a request to confirm what was said (correct?, is that so?)"
+@cv_a_confirmation_s fact
+  holds cv_act_standalone confirmation_request
+@cv_a_topic_shift fact
+  holds cv_act topic_shift conversation
+@cv_a_topic_shift_d fact
+  holds cv_act_description topic_shift "a change of topic (by the way, another question)"
+
+# --- acts that are valid but not asked (their group has no line): signals the archived detectors wrote
+@cv_a_hedge fact
+  holds cv_act hedge signal
+@cv_a_hedge_d fact
+  holds cv_act_description hedge "a hedge (maybe, I think, probably) over what the user says"
+@cv_a_emphasis fact
+  holds cv_act emphasis signal
+@cv_a_emphasis_d fact
+  holds cv_act_description emphasis "emphasis (capitals, repeated marks, really)"
+@cv_a_unclassified fact
+  holds cv_act unclassified signal
+@cv_a_unclassified_d fact
+  holds cv_act_description unclassified "another pragmatic or emotional signal"

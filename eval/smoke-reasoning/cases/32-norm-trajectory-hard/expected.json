@@ -1,0 +1,35 @@
+{
+  "feature": "Trajectory constraint as a hard norm: a state that must never hold along the plan (always forbid)",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 5,
+    "steps": 5,
+    "names": [
+      "open_a",
+      "rinse_a",
+      "close_a",
+      "open_b",
+      "rinse_b"
+    ]
+  },
+  "used": [
+    {
+      "id": "no_cross_flow",
+      "version": 1
+    }
+  ],
+  "compliance": {
+    "hard": "ok",
+    "soft_violations": [],
+    "total_cost": 5
+  },
+  "requires": [
+    "plan",
+    "rules",
+    "norms_hard",
+    "temporal_norms",
+    "zero_arity",
+    "used"
+  ]
+}

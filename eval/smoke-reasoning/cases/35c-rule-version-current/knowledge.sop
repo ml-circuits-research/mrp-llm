@@ -1,0 +1,26 @@
+@income predicate
+  args subject:entity object:integer
+@taxable predicate
+  args subject:entity
+
+@f1 fact
+  holds income ann 90
+
+@tax_v1 rule
+  when income ?p ?i
+  when compare ?i above 100
+  then taxable ?p
+  version 1
+  approval superseded
+  approved_by "board"
+  approved_at 2025-01-01
+
+@tax_v2 rule
+  when income ?p ?i
+  when compare ?i above 80
+  then taxable ?p
+  version 2
+  supersedes $tax_v1
+  approval approved
+  approved_by "board"
+  approved_at 2026-06-01

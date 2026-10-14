@@ -1,0 +1,19 @@
+{
+  "distractors": {
+    "seed": 5,
+    "facts": 3000,
+    "rules": 400,
+    "predicates": 30,
+    "hard": {
+      "id_checked": {
+        "n": 500,
+        "arity": 1
+      }
+    }
+  },
+  "start": {
+    "radius": 1,
+    "hops": 1,
+    "cap": 1000
+  }
+}

@@ -1,0 +1,367 @@
+# conversation-v1: the behaviour layer (DS023 "Behaviour layer", experiments/proposal/behaviour-layer.md): the user's standing
+# instructions, the drives (preoccupations that surface when their occasion comes and their cooldown has passed, triggered by the
+# user's feelings and by the time since the last reaction of that kind) and the decision rules over the time facts of the turn.
+# The runtime writes cv_turn_number, cv_turns_since, cv_seconds_since and the instruction outcomes; a user instruction itself
+# joins as data of the conversation (a reply wire and a rule, origin user; lib/conversation/behaviour.mjs overlayOf).
+
+@cv_turn_number predicate
+  args subject:integer
+  closed true
+  description "the number of this turn in the conversation (1 for the first message)"
+@cv_turns_since predicate
+  args subject:entity object:integer
+  closed true
+  description "turns since the reaction (a situation, a reaction kind or a drive; subject) was last used, or since the start of the conversation for a drive never used"
+@cv_seconds_since predicate
+  args subject:entity object:integer
+  closed true
+  description "seconds since the reaction (subject) was last used"
+@cv_turn_instruction_set predicate
+  args subject:entity
+  closed true
+  description "the message set an instruction of this kind (prefix, suffix, short, detailed, formal, playful)"
+@cv_turn_instruction_cancelled predicate
+  args subject:entity
+  closed true
+  description "the message withdrew the active instruction of this kind"
+@cv_turn_instructions_cancelled predicate
+  args none
+  closed true
+  description "the message withdrew several active instructions"
+@cv_turn_instruction_missing predicate
+  args none
+  closed true
+  description "the message asked to withdraw an instruction that is not active"
+@cv_turn_instructions_listed predicate
+  args none
+  closed true
+  description "the message asked for the active instructions and there are some (slot instructions)"
+@cv_turn_instructions_none predicate
+  args none
+  closed true
+  description "the message asked for the active instructions and there are none"
+@cv_instruction_active predicate
+  args subject:entity
+  closed true
+  description "an instruction of this kind is active in the conversation"
+@cv_turn_aside_available predicate
+  args none
+  closed true
+  description "the memory holds another fact about something in the answer (slot aside_fact)"
+@cv_drive predicate
+  args subject:entity
+  closed true
+  description "a preoccupation of the assistant: a situation that is used when its occasion comes and its cooldown has passed"
+@cv_drive_cooldown predicate
+  args subject:entity object:integer
+  closed true
+  description "a drive (subject) waits at least this many turns (object) after it was last used"
+@cv_drive_ready predicate
+  args subject:entity
+  closed true
+  description "the cooldown of the drive has passed"
+@cv_drive_occasion predicate
+  args subject:entity
+  closed true
+  description "the turn is an occasion for the drive"
+@cv_reaction_kind predicate
+  args subject:entity object:entity
+  closed true
+  description "a situation (subject) is a reaction of this kind (object); the time since a kind is tracked like a situation"
+@cv_check_kind predicate
+  args subject:entity
+  closed true
+  description "a feeling of the user (pragmatic kind) after which the assistant checks that the answer helped"
+@cv_style_detailed predicate
+  args none
+  closed true
+  description "the user asked for detailed answers: the short style is not applied"
+
+
+# --- the user's instructions: the outcome of this turn's instruction wires is the body of an instruction-only message
+@cv_r_instruction_set rule
+  when cv_turn_instruction_set ?k
+  then cv_applies instruction_set
+
+@cv_r_instruction_cancelled rule
+  when cv_turn_instruction_cancelled ?k
+  then cv_applies instruction_cancelled
+
+@cv_r_instructions_cancelled rule
+  when cv_turn_instructions_cancelled
+  then cv_applies instructions_cancelled
+
+@cv_r_instruction_missing rule
+  when cv_turn_instruction_missing
+  then cv_applies instruction_missing
+
+@cv_r_instructions_listed rule
+  when cv_turn_instructions_listed
+  then cv_applies instructions_listed
+
+@cv_r_instructions_none rule
+  when cv_turn_instructions_none
+  then cv_applies instructions_none
+
+# A user who asked for detailed answers does not get the short style of urgency.
+@cv_r_style_detailed rule
+  when cv_instruction_active detailed
+  then cv_style_detailed
+
+# --- greeting again: a greeting soon after the last one is answered as a returning greeting; the first turn introduces the assistant
+@cv_r_greeting_again rule
+  when cv_courtesy_only
+  when cv_turn_signal greeting
+  when cv_seconds_since greeting ?s
+  when compare ?s below 3600
+  then cv_applies courtesy_greeting_again
+
+@cv_r_open_greeting_again rule
+  when cv_turn_signal greeting
+  when absent cv_courtesy_only
+  when cv_seconds_since greeting ?s
+  when compare ?s below 3600
+  then cv_applies open_greeting_again
+
+@cv_r_greeting_first rule
+  when cv_courtesy_only
+  when cv_turn_signal greeting
+  when cv_turn_number 1
+  when cv_turn_topics
+  then cv_applies courtesy_greeting_first
+
+# --- drives: a drive fires when its cooldown has passed and the turn is its occasion
+@cv_r_drive_ready rule
+  when cv_drive ?d
+  when cv_drive_cooldown ?d ?c
+  when cv_turns_since ?d ?n
+  when compare ?n at_least ?c
+  then cv_drive_ready ?d
+
+@cv_r_drive_fires rule
+  when cv_drive_ready ?d
+  when cv_drive_occasion ?d
+  then cv_applies ?d
+
+# Offer an interesting fact about what the answer is about, when the user is not upset or in a hurry.
+@cv_r_occasion_aside_fact rule
+  when cv_turn_answered
+  when cv_turn_aside_available
+  when absent cv_turn_signal frustration
+  when absent cv_turn_signal anger
+  when absent cv_turn_signal urgency
+  when absent cv_style short
+  then cv_drive_occasion aside_fact
+
+# After a frustrated or confused message with an answer, check that the answer helped.
+@cv_r_occasion_check_helped rule
+  when cv_turn_computed
+  when cv_turn_signal ?k
+  when cv_check_kind ?k
+  then cv_drive_occasion check_helped
+
+# After several answers with no word about the conversation itself, offer what else the assistant can do.
+@cv_r_occasion_offer_more rule
+  when cv_turn_answered
+  when cv_turn_topics
+  when absent cv_turn_signal urgency
+  then cv_drive_occasion offer_more
+
+@cv_b1 fact
+  holds cv_situation_priority instruction_set 96
+@cv_b2 fact
+  holds cv_situation_priority instruction_cancelled 96
+@cv_b3 fact
+  holds cv_situation_priority instructions_cancelled 96
+@cv_b4 fact
+  holds cv_situation_priority instruction_missing 96
+@cv_b5 fact
+  holds cv_situation_priority instructions_listed 96
+@cv_b6 fact
+  holds cv_situation_priority instructions_none 96
+@cv_b7 fact
+  holds cv_situation_priority courtesy_greeting_again 67
+@cv_b8 fact
+  holds cv_situation_priority courtesy_greeting_first 68
+@cv_b9 fact
+  holds cv_situation_priority open_greeting_again 31
+@cv_b10 fact
+  holds cv_situation_priority aside_fact 50
+@cv_b11 fact
+  holds cv_situation_priority check_helped 50
+@cv_b12 fact
+  holds cv_situation_priority offer_more 20
+@cv_b13 fact
+  holds cv_drive aside_fact
+@cv_b14 fact
+  holds cv_drive_cooldown aside_fact 3
+@cv_b15 fact
+  holds cv_drive check_helped
+@cv_b16 fact
+  holds cv_drive_cooldown check_helped 2
+@cv_b17 fact
+  holds cv_drive offer_more
+@cv_b18 fact
+  holds cv_drive_cooldown offer_more 5
+@cv_b19 fact
+  holds cv_reaction_kind courtesy_greeting greeting
+@cv_b20 fact
+  holds cv_reaction_kind courtesy_greeting_again greeting
+@cv_b21 fact
+  holds cv_reaction_kind courtesy_greeting_first greeting
+@cv_b22 fact
+  holds cv_reaction_kind open_greeting greeting
+@cv_b23 fact
+  holds cv_reaction_kind open_greeting_again greeting
+@cv_b24 fact
+  holds cv_check_kind frustration
+@cv_b25 fact
+  holds cv_check_kind confusion
+@cv_b26 fact
+  holds cv_check_kind disappointment
+@cv_b27 fact
+  holds cv_check_kind anger
+
+@cv_instruction_set_1 reply
+  situation instruction_set
+  part body
+  language en
+  text "Understood. From now on I will {{instruction}}."
+
+@cv_instruction_set_2 reply
+  situation instruction_set
+  part body
+  language en
+  text "Done: from now on I will {{instruction}}."
+
+@cv_instruction_cancelled_1 reply
+  situation instruction_cancelled
+  part body
+  language en
+  text "Done. I will no longer {{instruction}}."
+
+@cv_instruction_cancelled_2 reply
+  situation instruction_cancelled
+  part body
+  language en
+  text "All right, I will stop: I will no longer {{instruction}}."
+
+@cv_instructions_cancelled_1 reply
+  situation instructions_cancelled
+  part body
+  language en
+  text "Done. I have dropped your instructions."
+
+@cv_instruction_missing_1 reply
+  situation instruction_missing
+  part body
+  language en
+  text "There is no such instruction active, so there is nothing to stop."
+
+@cv_instructions_listed_1 reply
+  situation instructions_listed
+  part body
+  language en
+  text "Your instructions: I should {{instructions}}."
+
+@cv_instructions_listed_2 reply
+  situation instructions_listed
+  part body
+  language en
+  text "You asked me to {{instructions}}."
+
+@cv_instructions_none_1 reply
+  situation instructions_none
+  part body
+  language en
+  text "You have not given me any instructions yet. You can tell me, for example, to keep my answers short."
+
+@cv_courtesy_greeting_again_1 reply
+  situation courtesy_greeting_again
+  part body
+  language en
+  text "Hello again! What else would you like to know?"
+
+@cv_courtesy_greeting_again_2 reply
+  situation courtesy_greeting_again
+  part body
+  language en
+  text "Hi again! What's next?"
+
+@cv_courtesy_greeting_first_1 reply
+  situation courtesy_greeting_first
+  part body
+  language en
+  text "Hello! I'm MRP-LLM. I answer from a memory of facts and rules; I know most about {{topics}}. What would you like to know?"
+
+@cv_courtesy_greeting_first_2 reply
+  situation courtesy_greeting_first
+  part body
+  language en
+  text "Hi! I'm MRP-LLM. Ask me about {{topics}}, ask for a random fact, or ask what my memory holds."
+
+@cv_open_greeting_again_1 reply
+  situation open_greeting_again
+  part opening
+  language en
+  text "Hello again!"
+
+@cv_aside_fact_1 reply
+  situation aside_fact
+  part aside
+  language en
+  text "By the way: {{aside_fact}}"
+
+@cv_aside_fact_2 reply
+  situation aside_fact
+  part aside
+  language en
+  text "Something else I know: {{aside_fact}}"
+
+@cv_check_helped_1 reply
+  situation check_helped
+  part follow_up
+  language en
+  text "Did that help? If not, tell me what is missing and I will try another way."
+
+@cv_check_helped_2 reply
+  situation check_helped
+  part follow_up
+  language en
+  text "Is this what you needed? Tell me if something is still off."
+
+@cv_offer_more_1 reply
+  situation offer_more
+  part follow_up
+  language en
+  text "I can also give you a random fact or tell you what my memory holds."
+
+@cv_offer_more_2 reply
+  situation offer_more
+  part follow_up
+  language en
+  text "If you are curious, ask me for a random fact about {{topics}}."
+
+@cv_line_instruction_prefix reply
+  situation line_instruction_prefix
+  part line
+  language en
+  text "start my answers with \"{{text}}\""
+
+@cv_line_instruction_suffix reply
+  situation line_instruction_suffix
+  part line
+  language en
+  text "end my answers with \"{{text}}\""
+
+@cv_line_instruction_short reply
+  situation line_instruction_short
+  part line
+  language en
+  text "keep my answers short"
+
+@cv_line_instruction_detailed reply
+  situation line_instruction_detailed
+  part line
+  language en
+  text "give detailed answers"

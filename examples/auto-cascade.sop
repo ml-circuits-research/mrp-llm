@@ -1,0 +1,21 @@
+@family query
+  select ?bunica
+  where grandmother ?bunica carina
+  at 2026-09-26
+
+@who solve
+  query $family
+  output ?bunica one
+
+@children query
+  select ?copii
+  where parent $bunica ?copii
+  at 2026-09-26
+
+@next solve
+  query $children
+  output ?copii many
+
+@answer cnl
+  result $next
+  language en

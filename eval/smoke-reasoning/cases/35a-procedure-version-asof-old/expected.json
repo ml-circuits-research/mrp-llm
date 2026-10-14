@@ -1,0 +1,25 @@
+{
+  "feature": "Versioned procedure: asof selects the approved version known at that date; proposed versions never bind",
+  "status": "procedure_found",
+  "complete": true,
+  "procedure": {
+    "id": "reset_router_v1",
+    "version": 1,
+    "steps": [
+      "~hard_reset ?r",
+      "~verify_link ?r"
+    ]
+  },
+  "used": [
+    {
+      "id": "reset_router_v1",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "method",
+    "versions",
+    "procedure_render",
+    "used"
+  ]
+}

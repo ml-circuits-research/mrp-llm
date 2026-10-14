@@ -1,0 +1,279 @@
+[
+ {
+  "id": "q01",
+  "kind": "where",
+  "q": "What is the capital of France?",
+  "expect": [
+   "paris"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q02",
+  "kind": "who",
+  "q": "Which country is Berlin the capital of?",
+  "expect": [
+   "germany"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q03",
+  "kind": "where",
+  "q": "Where is Paris located?",
+  "expect": [
+   "france"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q04",
+  "kind": "who",
+  "q": "Who wrote Hamlet?",
+  "expect": [
+   "william_shakespeare"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q05",
+  "kind": "when",
+  "q": "Când s-a născut Albert Einstein?",
+  "expect": [
+   "1879"
+  ],
+  "lang": "ro"
+ },
+ {
+  "id": "q06",
+  "kind": "where",
+  "q": "Where was Marie Curie born?",
+  "expect": [
+   "warsaw"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q07",
+  "kind": "where",
+  "q": "Where did Isaac Newton die?",
+  "expect": [
+   "kensington",
+   "london"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q08",
+  "kind": "who",
+  "q": "Who was born in Ulm?",
+  "expect": [
+   "albert_einstein"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q09",
+  "kind": "where",
+  "q": "Care este limba oficială a Braziliei?",
+  "expect": [
+   "portuguese"
+  ],
+  "lang": "ro"
+ },
+ {
+  "id": "q10",
+  "kind": "where",
+  "q": "What currency does Japan use?",
+  "expect": [
+   "yen"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q11",
+  "kind": "count",
+  "q": "How many people live in Canada?",
+  "expect": [
+   "population"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q12",
+  "kind": "where",
+  "q": "În ce continent se află Egiptul?",
+  "expect": [
+   "africa"
+  ],
+  "lang": "ro"
+ },
+ {
+  "id": "q13",
+  "kind": "who",
+  "q": "Which countries border Germany?",
+  "expect": [
+   "france",
+   "poland",
+   "austria"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q14",
+  "kind": "who",
+  "q": "Who is the head of state of France?",
+  "expect": [
+   "emmanuel_macron"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q15",
+  "kind": "what",
+  "q": "Care este numărul atomic al aurului?",
+  "expect": [
+   "79"
+  ],
+  "lang": "ro"
+ },
+ {
+  "id": "q16",
+  "kind": "what",
+  "q": "What is the chemical symbol of sodium?",
+  "expect": [
+   "na"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q17",
+  "kind": "who",
+  "q": "Who discovered oxygen?",
+  "expect": [
+   "carl_wilhelm_scheele",
+   "joseph_priestley"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q18",
+  "kind": "who",
+  "q": "Which planets orbit the Sun?",
+  "expect": [
+   "earth",
+   "mars",
+   "venus"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q19",
+  "kind": "who",
+  "q": "Cine a fondat Microsoft?",
+  "expect": [
+   "bill_gates",
+   "paul_allen"
+  ],
+  "lang": "ro"
+ },
+ {
+  "id": "q20",
+  "kind": "when",
+  "q": "When was Apple founded?",
+  "expect": [
+   "1976"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q21",
+  "kind": "where",
+  "q": "Where is Google headquartered?",
+  "expect": [
+   "mountain_view"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q22",
+  "kind": "who",
+  "q": "Cine a regizat Inception?",
+  "expect": [
+   "christopher_nolan"
+  ],
+  "lang": "ro"
+ },
+ {
+  "id": "q23",
+  "kind": "who",
+  "q": "Who painted the Mona Lisa?",
+  "expect": [
+   "leonardo_da_vinci"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q24",
+  "kind": "what",
+  "q": "Was Leonardo da Vinci a painter?",
+  "expect": [
+   "true"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q25",
+  "kind": "exists",
+  "q": "Is Paris in France?",
+  "expect": [
+   "true"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q26",
+  "kind": "compare",
+  "q": "Was Einstein born before Newton?",
+  "expect": [
+   "false"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q27",
+  "kind": "compare",
+  "q": "Who was older, Einstein or Newton?",
+  "expect": [
+   "isaac_newton"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q28",
+  "kind": "count",
+  "q": "How many countries are in Europe?",
+  "expect": [
+   "lower_bound"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q29",
+  "kind": "join",
+  "q": "Which physicists born in Germany won the Nobel Prize in Physics?",
+  "expect": [
+   "albert_einstein"
+  ],
+  "lang": "en"
+ },
+ {
+  "id": "q30",
+  "kind": "compute",
+  "q": "How old was Einstein when he died?",
+  "expect": [
+   "76"
+  ],
+  "lang": "en"
+ }
+]

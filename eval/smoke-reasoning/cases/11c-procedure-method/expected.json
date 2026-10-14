@@ -1,0 +1,18 @@
+{
+  "feature": "Procedures from a manual: an ordered method with steps",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 3,
+    "steps": 3,
+    "names": [
+      "press_button",
+      "wait_ten",
+      "release_button"
+    ]
+  },
+  "requires": [
+    "plan",
+    "method"
+  ]
+}

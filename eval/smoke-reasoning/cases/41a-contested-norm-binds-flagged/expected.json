@@ -1,0 +1,17 @@
+{
+  "feature": "A contested norm keeps binding and is flagged until the host rules on the contest (a user cannot switch a prohibition off by objecting)",
+  "status": "blocked",
+  "complete": true,
+  "blocked_by": [
+    "no_shutdown_in_prod"
+  ],
+  "contested": [
+    "no_shutdown_in_prod"
+  ],
+  "requires": [
+    "plan",
+    "norms_hard",
+    "blocked_info",
+    "versions"
+  ]
+}

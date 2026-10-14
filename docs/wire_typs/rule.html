@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#rule" target="_top">← Wire type index</a></p><h1><code>rule</code></h1><p>Declares a reviewed implication from one or more atom conditions to one atom conclusion. The rule becomes useful only when a trusted program or approved library supplies it to the linker/reasoner; it is not a fact by itself.</p><p><strong>Status and author:</strong> Host-approved declaration; a model-origin program cannot install this definition. Installation in a session additionally needs reviewed ingestion and <code>allowRules</code>.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once at parse time. Other field names are rejected.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and current behavior</th></tr></thead><tbody><tr><th scope="row" id="field-when"><code>when</code></th><td>Repeatable; required (1–16 at lowering)</td><td>Atom <code>[not ]predicate term1 ...</code>; each repeated line is a required condition, 1–16 at lowering; shared variables join conditions.</td></tr>
+<tr><th scope="row" id="field-then"><code>then</code></th><td>At most once; required</td><td>Atom <code>[not ]predicate term1 ...</code>; conclusion; each head variable must occur in conditions.</td></tr>
+<tr><th scope="row" id="field-valid"><code>valid</code></th><td>At most once; optional; default timeless</td><td><code>timeless</code> (default) or ISO/UTC <code>START END</code> interval; bounds rule applicability.</td></tr>
+<tr><th scope="row" id="field-mode"><code>mode</code></th><td>At most once; optional; default logical</td><td><code>logical</code> (default) or <code>causal</code>; causal marking affects counterfactual simulation.</td></tr>
+<tr><th scope="row" id="field-source"><code>source</code></th><td>At most once; optional; default approved-library</td><td>Plain or JSON-quoted provenance text, default <code>approved-library</code>; labels approved rule origin, not proof.</td></tr></tbody></table></div></section><section><h2>Execution and result</h2><p>The parser checks atom shapes and mode; <code>lowerRule</code> checks the 1–16 body count, head safety and schema/type consistency. The <a href="../wiki.html#definition-linker" target="_top">linker</a> selects rules whose heads match the query and its possible refutation, expands body subgoals and retrieves matching facts; finite Horn reasoning then evaluates relative to admitted evidence. A rule is not automatically stored simply by appearing in SOP. A trusted local program can pass its value through <code>pack.items ~rule</code> then <code>link.data $pack</code>; approved library rules are loaded for memory queries. A model cannot author a new executable implication under <code>origin=model</code>.</p></section><section><h2>Current SOP examples</h2><h3>Trusted local rule and local facts</h3><pre data-sop="current"><code>@parent_rule rule
+  when parent ?x ?y
+  then ancestor ?x ?y
+  mode logical
+
+@fact0 fact
+  holds parent ana bogdan
+  valid timeless
+
+@inputs pack
+  items ~parent_rule $fact0
+
+@ask query
+  where ancestor ana bogdan
+  mode exists
+
+@linked link
+  query $ask
+  data $inputs
+
+@result reason
+  query $ask
+  memory $linked</code></pre><p>The trusted host-provided rule supports the ancestor query from the local parent fact. No session write occurs.</p>
+<h3>Two-condition join</h3><pre data-sop="current"><code>@grandparent_rule rule
+  when parent ?grand ?middle
+  when parent ?middle ?child
+  then grandparent ?grand ?child
+  valid timeless</code></pre><p>This host-side definition requires both parent edges with the same <code>?middle</code>; until supplied to a linker with facts it has no answer of its own.</p><h3>Invalid or unsafe example</h3><pre data-sop="invalid" data-check="lower" data-error="Unsafe head variable"><code>@unsafe rule
+  when parent ?x bogdan
+  then grandparent ?x ?unknown</code></pre><p>The parser accepts atom shapes, but lowering rejects an unbound head variable <code>?unknown</code>. A model-origin declaration is independently forbidden.</p></section><section id="knowledge-language"><h2>Knowledge language: <code>rule</code></h2><p class="note">In the knowledge language a <code>rule</code> is a law of the source (no exceptions); its body may use <code>not</code>, <code>absent</code>, <code>compare</code>, <code>compute</code>, <code>order</code>, <code>start_of</code> and <code>end_of</code>, atoms have zero to six terms, and a rule is governed. The tables and examples of this section are about the <b>knowledge</b> form, written from a source and checked by <code>sop/knowledge/</code>; the sections above describe the host-circuit form. Anchors of this section's fields start with <code>kfield-</code>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>.</p><p>Other field names are rejected (<code>unknown_field</code>). The table is generated from <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table data-knowledge="fields"><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="kfield-when"><code>when</code></th><td>Repeatable; required</td><td>The body: repeated lines are a conjunction, or one <code>all</code>/<code>any</code> group closed by <code>end</code>. Leaves: an atom, <code>not ATOM</code> (explicit evidence), <code>absent ATOM</code> (closed predicates only, <code>absent_needs_closed</code>), <code>compare A WORD B</code> (<code>above below at_least at_most equal not_equal</code>), <code>compute ?v A WORD B</code> (<code>plus minus times divided_by</code> exact, <code>whole_divided_by modulo power rounded_to rounded_up_to rounded_down_to</code>; integers and decimals, DS004 "Exact arithmetic"), <code>start_of ?t ATOM</code>, <code>end_of ?t ATOM</code>, <code>order ?t1 before|after|same_time ?t2</code>.</td></tr>
+<tr><th scope="row" id="kfield-then"><code>then</code></th><td>At most once; required</td><td>One atom, possibly negative (<code>then not flies ?x</code>) and possibly with no terms. Every head variable must occur in a positive body atom (<code>unsafe_head</code>).</td></tr>
+<tr><th scope="row" id="kfield-mode"><code>mode</code></th><td>At most once; optional</td><td><code>logical</code> (default) or <code>causal</code>; causal rules may be used by counterfactual simulation.</td></tr>
+<tr><th scope="row" id="kfield-valid"><code>valid</code></th><td>At most once; optional</td><td><code>timeless</code> (default) or <code>START END</code>: the period the law applies.</td></tr>
+<tr><th scope="row" id="kfield-source"><code>source</code></th><td>At most once; optional</td><td>Quoted citation of the sentence the rule comes from.</td></tr>
+<tr><th scope="row" id="kfield-version"><code>version</code></th><td>At most once; optional</td><td>A positive integer. A revision is a new wire with <code>version N+1</code> and <code>supersedes $old</code>; the old wire is never edited.</td></tr>
+<tr><th scope="row" id="kfield-supersedes"><code>supersedes</code></th><td>At most once; optional</td><td>A <code>$id</code> of a wire of the same type with a lower version (<code>supersedes_type_mismatch</code>, <code>version_not_increasing</code>). An approved successor makes its predecessor <code>approval superseded</code>.</td></tr>
+<tr><th scope="row" id="kfield-approval"><code>approval</code></th><td>At most once; optional</td><td><code>proposed</code>, <code>approved</code>, <code>contested</code>, <code>rejected</code>, <code>superseded</code> or <code>retired</code>. Written by the host when it accepts the wire; an author never writes it (authoring mode ignores it with <code>governance_ignored</code>). Only approved wires bind, and so do contested ones, flagged.</td></tr>
+<tr><th scope="row" id="kfield-approved_by"><code>approved_by</code></th><td>At most once; optional</td><td>Text. Written by the host at approval; required with <code>approval approved</code> in memory (<code>approval_incomplete</code>).</td></tr>
+<tr><th scope="row" id="kfield-approved_at"><code>approved_at</code></th><td>At most once; optional</td><td>ISO date or timestamp. Written by the host; <code>asof</code> selects the version in force from this date. Required for every norm and every strict method.</td></tr>
+<tr><th scope="row" id="kfield-retired_at"><code>retired_at</code></th><td>At most once; optional</td><td>ISO date or timestamp after which the wire no longer binds.</td></tr>
+<tr><th scope="row" id="kfield-scope"><code>scope</code></th><td>At most once; optional</td><td>A quoted list of tags (<code>scope "ops, business_hours"</code>). A scoped wire binds when its tags intersect the query context; an unscoped wire always binds.</td></tr>
+<tr><th scope="row" id="kfield-quote"><code>quote</code></th><td>At most once; optional</td><td>The exact words of the source, copied byte for byte.</td></tr></tbody></table></div><h3>What it is for</h3><p>Write a rule for "always", "never" and definitions; write a <a href="default.html"><code>default</code></a> for "usually". The engine derives positive and negative evidence independently, so two rules with contrary heads give <code>both</code> and nothing unrelated follows. Negation as failure (<code>absent</code>) is allowed only over a closed predicate and may not occur in a cycle (<code>not_stratifiable</code>); <code>compute</code> may not occur in a recursive cycle.</p><h3>Examples</h3><pre data-sop="knowledge"><code>@parent predicate
+  args subject:entity object:entity
+@grandparent predicate
+  args subject:entity object:entity
+
+@f1 fact
+  holds parent ann bob
+@f2 fact
+  holds parent bob cy
+
+@r_grand rule
+  when parent ?x ?y
+  when parent ?y ?z
+  then grandparent ?x ?z</code></pre><pre data-sop="knowledge-query" data-status="supported" data-rows="z=cy"><code>@q query
+  where grandparent ann ?z
+  select ?z</code></pre><h3>Exact arithmetic over a problem's own numbers</h3><p>A loan of 4000 at a yearly rate of 0.11 for 8 months: the interest in cents, and the number of 1000-sized instalments rounded up. <code>divided_by</code> is exact; <code>rounded_to 0.01</code> and <code>rounded_up_to 1</code> round to a multiple.</p><pre data-sop="knowledge"><code>@loan predicate
+  args subject:entity object:value
+@rate predicate
+  args subject:entity object:value
+@interest predicate
+  args subject:entity object:value topic:value
+@f1 fact
+  holds loan kara 4000
+@f2 fact
+  holds rate kara 0.11
+@interest_rule rule
+  when loan ?p ?c
+  when rate ?p ?r
+  when compute ?y ?c times ?r
+  when compute ?m ?y times 8
+  when compute ?e ?m divided_by 12
+  when compute ?i ?e rounded_to 0.01
+  when compute ?q ?c divided_by 1000
+  when compute ?n ?q rounded_up_to 1
+  then interest ?p ?i ?n</code></pre><pre data-sop="knowledge-query" data-status="supported" data-rows="i=293.33,n=4"><code>@q query
+  where interest kara ?i ?n
+  select ?i ?n</code></pre><h3>The smaller or the larger of two values</h3><p>Three stages in series pass 170, 140 and 100 units an hour: the line passes the smallest, chained with <code>minimum_with</code>. The spare capacity of stage c over stage b cannot be negative: <code>maximum_with 0</code> is a floor at zero.</p><pre data-sop="knowledge"><code>@capacity predicate
+  args subject:entity object:value
+@line predicate
+  args subject:entity object:value topic:value
+@f1 fact
+  holds capacity a 170
+@f2 fact
+  holds capacity b 140
+@f3 fact
+  holds capacity c 100
+@line_rule rule
+  when capacity a ?a
+  when capacity b ?b
+  when capacity c ?c
+  when compute ?m ?a minimum_with ?b
+  when compute ?t ?m minimum_with ?c
+  when compute ?g ?c minus ?b
+  when compute ?s ?g maximum_with 0
+  then line c ?t ?s</code></pre><pre data-sop="knowledge-query" data-status="supported" data-rows="s=0,t=100"><code>@q query
+  where line c ?t ?s
+  select ?t ?s</code></pre><h3>Invalid: a head variable the body does not bind</h3><pre data-sop="knowledge-invalid" data-error="unsafe_head"><code>@parent predicate
+  args subject:entity object:entity
+@grandparent predicate
+  args subject:entity object:entity
+@r rule
+  when parent ?x bogdan
+  then grandparent ?x ?unknown</code></pre><h3>Common mistakes</h3><ol><li><code>not</code> where <code>absent</code> is meant (the rule never fires); declare the predicate <code>closed true</code> and use <code>absent</code>, only if the source says the list is exhaustive.</li><li>A rule written for "usually": a conflict becomes <code>both</code>.</li><li>Expecting <code>divided_by</code> to truncate: it is exact; the integer quotient is <code>whole_divided_by</code>.</li><li>Negation through recursion (<code>not_stratifiable</code>).</li></ol></section><!--/knowledge-language--><section><h2>Implementation sources</h2><ul><li><code>sop/parser.mjs:SPEC, validateShape, validateGraph</code></li><li><code>sop/runtime.mjs:Runtime.run</code></li><li><code>sop/lower.mjs:lowerRule</code></li><li><code>lib/types.mjs:rule</code></li><li><code>reasoning/linker.mjs:planGoals</code></li></ul><p>Related: <a href="link.html"><code>link</code></a>, <a href="reason.html"><code>reason</code></a>, <a href="theory.html"><code>theory</code></a>. See the <a href="../wiki.html#definition-sop" target="_top">SOP terminology</a> for wire/reference conventions.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

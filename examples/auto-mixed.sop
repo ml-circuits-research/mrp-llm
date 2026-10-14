@@ -1,0 +1,27 @@
+# Relational recall -> generated numeric wire -> constraint -> another output.
+@q query
+  select ?duration
+  where duration route_demo ?duration
+  at 2026-09-26
+
+@trip solve
+  query $q
+  output ?duration one
+
+@timing constraint
+  var ?arrival int 0 1440
+  require ?arrival == 770 + $duration
+  claim ?arrival <= 840
+  task possible
+  unit minute
+
+@feasibility solve
+  constraint $timing
+  output ?arrival one
+
+@margin jsEval
+  expr 840 - $arrival
+
+@answer cnl
+  result $feasibility
+  language en

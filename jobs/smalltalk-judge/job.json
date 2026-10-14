@@ -1,0 +1,15 @@
+{
+  "name": "smalltalk-judge",
+  "description": "Judges chat replies of eval/smalltalk-v1 (tools/eval/conversation/smalltalk/run.mjs) with a 1-5 rubric: relevance, tone and empathy, naturalness, honesty about the system, brevity. Blind: the ids are hashes and the arms are not shown. No reference answers.",
+  "inputs": {"path": "../../state/llm-jobs/smalltalk-judge-input.jsonl", "idField": "id", "promptFields": ["message", "reply"]},
+  "packing": {"itemsPerCall": 6},
+  "models": "tier:medium",
+  "fallbackOnFailure": false,
+  "output": {"format": "jsonl", "idField": "id", "minRecords": 1, "fields": {"relevance": "number", "tone": "number", "naturalness": "number", "honesty": "number", "brevity": "number", "note": {"type": "string", "required": false}}},
+  "checks": "checks.mjs",
+  "repairRounds": 1,
+  "concurrency": 3,
+  "budget": {"usd": 0.5, "calls": 120},
+  "stages": [{"name": "all", "items": null, "stop": {"maxEmptyRate": 0.2, "maxRejectRate": 0.2}}],
+  "decider": null
+}

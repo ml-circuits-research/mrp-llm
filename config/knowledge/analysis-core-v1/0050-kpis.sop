@@ -1,0 +1,74 @@
+# analysis-core-v1: a sample KPI set over the document's quantities. Shares of a part in its whole, growth of a quantity from one period
+# to the next, the average of the parts of a whole, and ratios defined as data (ratio_definition NAME NUMERATOR DENOMINATOR). Percentages
+# and averages are rounded to 0.01, ratios to 0.0001; a zero denominator gives no value (never a division by zero), and a whole whose parts are
+# stated in another unit than the whole gets no share and no average (the arithmetic would mix units).
+
+@kpi_share predicate
+  args subject:entity object:entity topic:value
+  label en "share KPI"
+  description "KPI: the percentage of a whole that one of its components makes up."
+@kpi_growth predicate
+  args subject:entity time:entity object:value
+  label en "growth KPI"
+  description "KPI: the percentage change of a quantity in a period against the period it follows."
+@kpi_average predicate
+  args subject:entity object:value
+  label en "average KPI"
+  description "KPI: the average amount of the components of a whole."
+@kpi_ratio predicate
+  args subject:entity object:value
+  label en "ratio KPI"
+  description "KPI: a ratio defined as data (numerator over denominator)."
+
+@an_k_share rule
+  when component_of ?p ?w
+  when amount ?p ?a
+  when amount ?w ?t
+  when absent mixed_units ?w
+  when compare ?t not_equal 0
+  when compute ?r ?a divided_by ?t
+  when compute ?pc ?r times 100
+  when compute ?v ?pc rounded_to 0.01
+  then kpi_share ?p ?w ?v
+  source "analysis-core-v1: KPI share = part / whole x 100"
+
+@an_k_growth rule
+  when period_amount ?q ?cur ?a
+  when period_follows ?cur ?prev
+  when period_amount ?q ?prev ?b
+  when compare ?b not_equal 0
+  when compute ?d ?a minus ?b
+  when compute ?r ?d divided_by ?b
+  when compute ?pc ?r times 100
+  when compute ?v ?pc rounded_to 0.01
+  then kpi_growth ?q ?cur ?v
+  source "analysis-core-v1: KPI growth = (current - previous) / previous x 100"
+
+@an_k_average rule
+  when parts_total ?w ?t
+  when parts_count ?w ?n
+  when absent mixed_units ?w
+  when compute ?avg ?t divided_by ?n
+  when compute ?v ?avg rounded_to 0.01
+  then kpi_average ?w ?v
+  source "analysis-core-v1: KPI average = sum of the parts / number of parts"
+
+@an_k_ratio rule
+  when ratio_definition ?k ?num ?den
+  when amount ?num ?a
+  when amount ?den ?b
+  when compare ?b not_equal 0
+  when compute ?r ?a divided_by ?b
+  when compute ?v ?r rounded_to 0.0001
+  then kpi_ratio ?k ?v
+  source "analysis-core-v1: KPI ratio = numerator / denominator, as defined by ratio_definition"
+
+@analysis_kpis procedure
+  members $an_k_share $an_k_growth $an_k_average $an_k_ratio $an_parts_total $an_parts_count $an_r_mixed_units
+  description "Analysis: a sample set of key performance indicators over a document's quantities - the share of each component in its whole, the growth of a quantity from one period to the next, the average of the components of a whole, and ratios defined as data."
+  scope "analysis, kpis"
+  source "analysis-core-v1"
+  report kpi_share ?part ?whole ?percent
+  report kpi_growth ?quantity ?period ?percent
+  report kpi_average ?whole ?average
+  report kpi_ratio ?name ?ratio

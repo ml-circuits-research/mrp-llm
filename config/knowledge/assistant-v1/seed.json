@@ -1,0 +1,5 @@
+{
+  "name": "The assistant itself (English)",
+  "description": "The self layer of the chat's default base: who the assistant is, what it can do and what its memory holds. Static facts here; the statistics of a memory (entities per class, facts per relation, totals, layers) are generated from the memory's own lexicon by tools/assistant/memory-statistics.mjs when the memory is built (data, regenerated with the memory, never hand-written). Imports core-min and core-en.",
+  "imports": ["core-min", "core-en"]
+}

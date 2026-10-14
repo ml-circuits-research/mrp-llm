@@ -1,0 +1,7 @@
+# expect: unknown_field
+@r1 rule
+  when a ?x
+  then b ?x
+@p procedure
+  members $r1
+  version 2

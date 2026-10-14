@@ -1,0 +1,18 @@
+{
+  "feature": "Aggregation: a derived relation defined by group-by and sum",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "d": "dev",
+      "t": 310
+    },
+    {
+      "d": "ops",
+      "t": 175
+    }
+  ],
+  "requires": [
+    "aggregate"
+  ]
+}

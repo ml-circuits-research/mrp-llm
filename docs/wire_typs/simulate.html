@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body>
+<div data-include="../partials/header.html" data-link-base="../"></div>
+<main class="wire-help"><p><a href="../wire_types.html#simulate" target="_top">All wire types</a></p><h1><code>simulate</code></h1><p>Simulation compares a checked query against a factual snapshot and a transient state after ground interventions. The what-if route replaces facts; counterfactual mode requires explicitly causal rules. It never writes back to memory. Trusted system/tool circuits can use this operation; model-authored declarative input cannot invoke it directly.</p><p><a href="../wiki.html#definition-sop">SOP</a> syntax: <code>@id type</code>, exactly two leading spaces on each field line, <code>$id</code> for a computed value, <code>~id</code> for a declaration handle, and <code>?x</code> for a local logic variable or an output name. Atoms use <code>[not ]predicate term1 [term2 [term3 [term4]]]</code> with one to four whitespace-separated terms; lowercase predicate names, canonical symbols, JSON-quoted strings or safe integers. Parenthesized <code>predicate(arg, …)</code> and comma-separated arguments are not executable syntax.</p><section><h2>Fields and inputs</h2><table><thead><tr><th scope="col">Keyword</th><th scope="col">Cardinality</th><th scope="col">Accepted value, default and effect</th></tr></thead><tbody><tr><th scope="row" id="field-query"><code>query</code></th><td>At most once; required</td><td>One <code>$query</code> query value. Required; its selected variables, filters and time determine both factual and intervened evaluations.</td></tr><tr><th scope="row" id="field-data"><code>data</code></th><td>At most once; optional</td><td>One <code>$value</code>, <code>~declaration</code> or packed $array of admitted facts and approved rules, optionally hypotheses; hypothesis objects in data are not themselves interventions. A numeric constraint cannot be silently discarded.</td></tr><tr><th scope="row" id="field-memory"><code>memory</code></th><td>At most once; optional</td><td>One <code>$link</code> reference to a retrieval result, normally from <code>link</code>. A query declaration handle is not a retrieval; omitted memory triggers host-backed linking only when a repository/session and a retrieval query are available. Without either, local data is used.</td></tr><tr><th scope="row" id="field-intervention"><code>intervention</code></th><td>At most once; required</td><td>One <code>$fact</code>, <code>$hypothesis</code>, <code>~hypothesis</code> or packed $array. Facts contribute their atoms, hypotheses contribute all assumptions; all must be ground. A <code>~fact</code> handle is not accepted by the runtime. Required but an empty pack supplies no changed atoms.</td></tr><tr><th scope="row" id="field-mode"><code>mode</code></th><td>At most once; optional</td><td>Exact <code>whatif</code> (default) or <code>counterfactual</code>; any other value throws during operation. Counterfactual requires every relevant rule to have <code>mode causal</code>.</td></tr><tr><th scope="row" id="field-reasoning"><code>reasoning</code></th><td>At most once; optional</td><td>A strategy name (plain token), default host <code>policy.reasoningStrategy</code> (<code>reference</code> by default). Built-ins: <code>reference</code> (the <code>js-reference</code> oracle; <code>js-reference</code> and <code>js-oracle</code> are the same route) and the deprecated <code>advanced</code> (the oracle plus optional external backends for deduction and numeric constraints). The host may restrict allowed strategies.</td></tr><tr><th scope="row" id="field-policy"><code>policy</code></th><td>At most once; optional</td><td>One <code>$policy</code> value or <code>~policy</code> declaration handle. It must lower to a policy object; each specified positive integer budget caps the corresponding host budget by <code>min(host, wire)</code>. No policy reference means host limits alone.</td></tr><tr><th scope="row" id="field-output"><code>output</code></th><td>Repeatable; optional</td><td>Repeatable <code>?name [one|many|rows|count|status]</code> declaration, default <code>one</code>. Each output becomes a deferred <code>$name</code> value if bound; names must be unique and cannot collide with explicit wires. <code>status</code> binds result status even for incomplete results. Other modes require completeness; unusable/unselected modes become blocked, not arbitrary first answers.</td></tr><tr><th scope="row" id="field-after"><code>after</code></th><td>Repeatable; optional</td><td>Repeatable <code>$wire</code> value-dependency reference. Orders execution after that producer; it does not alter inputs, proofs or output. A <code>~definition</code> handle is graph-checked but is not a value-ordering dependency.</td></tr></tbody></table><p>If no explicit memory and a repository/session exist, the runtime links a retrieval view for the query. What-if overlays interventions, removes their explicit opposites and rederives rules. Counterfactual additionally removes observed heads of causal rules and blocks rules from overwriting intervened heads; this is a deterministic causal Horn fragment, not a stochastic causal model.</p></section><section><h2>Result and limits</h2><p>The result is the relational answer of the query over the intervened world (answers and proof, as for a deduction) with the native fields <code>guarantee</code>, <code>budget</code>, <code>used</code>, <code>hypothetical: true</code> and <code>whatif</code> (<code>{mode, intervention: [atom texts], factual_status, source_memory_modified: false}</code>). Output status binds status; relational one/many/rows/count follow <code>selectOutput</code> and the query selection/count rules, not a plans/explanations projection.</p><p>All operations use bounded search (host defaults include maxNodes 5000, maxDepth 8, maxCandidates 512, timeoutMs 3000); a <code>~policy</code> can only tighten configured limits. The result records completeness and epistemic status relative to supplied finite inputs and the visible memory view, never calibrated truth probability. No operation here writes to the repository; <code>after</code> is only scheduling. An intervention containing both polarities returns inconsistent. Missing facts are unknown, not negative facts. Incomplete retrieval or closure can make outputs unavailable; counterfactual mode with noncausal rules returns <code>not_expressible</code> (<code>reason causal_model_required</code>).</p></section><section><h2>Executable examples</h2><h3>What-if outage</h3><pre data-sop="current"><code>@healthy fact
+  holds online server
+  valid timeless
+@down hypothesis
+  holds not online server
+@q query
+  where not online server
+  mode exists
+@scenario simulate
+  query $q
+  data $healthy
+  intervention ~down
+  mode whatif</code></pre><p>The factual query lacks direct support; the hypothetical state replaces online server with its negative counterpart without altering the original fact.</p><h3>Causal intervention</h3><pre data-sop="current"><code>@base fact
+  holds power_on server
+  valid timeless
+@causal rule
+  when power_on ?x
+  then running ?x
+  mode causal
+@off hypothesis
+  holds not power_on server
+@q query
+  where running server
+  mode exists
+@inputs pack
+  items $base $causal
+@scenario simulate
+  query $q
+  data $inputs
+  intervention ~off
+  mode counterfactual</code></pre><p>This trusted/reviewed rule makes the factual running state derivable; intervening on power removes its support in the counterfactual branch.</p><h3>Invalid or unsafe use</h3><pre data-sop="invalid" data-check="runtime" data-status="bad=not_expressible"><code>@r rule
+  when power_on ?x
+  then running ?x
+  mode logical
+@q query
+  where running server
+  mode exists
+@off hypothesis
+  holds not power_on server
+@bad simulate
+  query $q
+  data ~r
+  intervention ~off
+  mode counterfactual</code></pre><p>This parses and runs, but the rule is in <code>logical</code> mode (also the default when <code>mode</code> is omitted); counterfactual simulation returns status <code>not_expressible</code> (<code>reason causal_model_required</code>) because an all-causal rule model is required.</p></section><section><h2>Implementation references</h2><p><code>sop/parser.mjs</code> (<code>SPEC.simulate</code>), <code>sop/runtime.mjs</code> (operation dispatch), <code>reasoning/worlds.mjs</code> (<code>simulate</code>), <code>sop/outputs.mjs</code> (<code>selectOutput</code>).</p><p>Related wires: <a href="hypothesis.html"><code>hypothesis</code></a> · <a href="plan.html"><code>plan</code></a> · <a href="temporal.html"><code>temporal</code></a>.</p></section></main>
+<script type="module" src="help-page.mjs"></script></body></html>

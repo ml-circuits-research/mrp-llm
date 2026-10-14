@@ -1,0 +1,29 @@
+{
+  "feature": "Obligation scoping: an instance is triggered only for bindings bound by the goal's arguments or by an executed action, not for every incident in memory",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 5,
+    "steps": 3
+  },
+  "obligations_triggered": [
+    "log_promptly i1"
+  ],
+  "compliance": {
+    "hard": "ok",
+    "soft_violations": [],
+    "total_cost": 5
+  },
+  "used": [
+    {
+      "id": "log_promptly",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "plan",
+    "norms_soft",
+    "temporal_norms",
+    "used"
+  ]
+}

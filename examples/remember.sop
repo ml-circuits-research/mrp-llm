@@ -1,0 +1,27 @@
+@f fact
+  holds project_member maria project_delta
+  valid 2026-09-26 open
+  source user
+  retention pinned
+
+@save remember
+  input $f
+  scope session
+
+@q query
+  mode select
+  select ?project
+  where project_member maria ?project
+  at 2026-09-26
+
+@m recall
+  query $q
+  after $save
+
+@r reason
+  query $q
+  memory $m
+
+@answer cnl
+  result $r
+  language en

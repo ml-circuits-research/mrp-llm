@@ -1,0 +1,15 @@
+{
+  "feature": "Aggregation consumed by a rule (stratified composition)",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "d": "dev"
+    }
+  ],
+  "requires": [
+    "aggregate",
+    "rules",
+    "compare_in_rules"
+  ]
+}

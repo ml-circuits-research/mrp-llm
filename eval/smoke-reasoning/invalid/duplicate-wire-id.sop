@@ -1,0 +1,5 @@
+# expect: duplicate_id
+@f1 fact
+  holds p a
+@f1 fact
+  holds p b

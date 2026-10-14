@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#template" target="_top">← Wire type index</a></p><h1><code>template</code></h1><p>Defines a reusable, reviewed SOP subcircuit. <code>template</code> and <a href="procedure.html"><code>procedure</code></a> use the same parameterized circuit expansion mechanism; their names label intended library use, not distinct execution languages or extra permissions. A host may approve a definition so an <code>expand</code> wire can apply it to supplied arguments; declaring it alone produces only a definition handle.</p><p><strong>Status and author:</strong> Host-approved declaration; a model-origin program cannot install this definition.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once at parse time. Other field names are rejected.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and current behavior</th></tr></thead><tbody><tr><th scope="row" id="field-params"><code>params</code></th><td>At most once; optional; default empty</td><td>Whitespace-separated distinct parameter names, default empty; names become expansion inputs.</td></tr>
+<tr><th scope="row" id="field-yield"><code>yield</code></th><td>Exactly once; required</td><td>Wire ID or declared output name produced by the body; determines the value exposed by expansion.</td></tr>
+<tr><th scope="row" id="field-body"><code>body</code></th><td>Exactly once; required</td><td><code>|</code> with four-space-indented SOP source; reviewed definition body expanded by an explicit invocation, not executed upon declaration.</td></tr>
+<tr><th scope="row" id="field-description"><code>description</code></th><td>At most once; optional; default empty</td><td>Plain or JSON-quoted descriptive text, default empty; documentation metadata only.</td></tr>
+<tr><th scope="row" id="field-cue"><code>cue</code></th><td>Repeatable; optional; default none</td><td>Plain or JSON-quoted cue per line; optional metadata for locating a reviewed definition, not an execution trigger.</td></tr></tbody></table></div></section><section><h2>Execution and result</h2><p>Each <code>with name value</code> binds one declared parameter, once. A value beginning with <code>$</code> resolves an existing wire value; other text is unquoted (a JSON-quoted string is decoded). Missing or duplicate parameters, unknown names, a bad body, ID collisions, or a yield outside body/output are errors. At expansion, the runtime creates namespaced parameter <code>value</code> wires and body wires, substitutes references, renames body output ports, then aliases the expansion result to its yield. Definition metadata does not turn this into arbitrary code execution.</p><p><code>~id</code> is a definition handle, not a mutable accumulator. An approved library entry is loaded only with a repository/session, exact ID, permitted library type and matching checksum; a trusted host can also supply a definition in its source. A trusted system/tool circuit may refer to an approved definition. Model-authored declarative input cannot invoke or define one. Body effects follow normal runtime authorizations if it contains effectful wires; a template itself does not write to memory.</p></section><section><h2>Current SOP examples</h2><h3>Local trusted definition and invocation</h3><pre data-sop="current"><code>@calc template
+  description &quot;Add a reviewed offset to an input&quot;
+  cue &quot;adjust score&quot;
+  params base offset
+  yield total
+  body |
+    @total value
+      data $base + $offset
+
+@input value
+  data 7
+
+@offset value
+  data 3
+
+@use expand
+  using ~calc
+  with base $input
+  with offset $offset</code></pre><p>In a trusted host program the body adds 7 and 3; the expansion value is 10. Model-authored declarative input cannot declare or invoke <code>@calc template</code>.</p>
+<h3>Yielding an output port</h3><pre data-sop="current"><code>@approved template
+  params route
+  yield who
+  body |
+    @q query
+      select ?who
+      where serves $route ?who
+    @s solve
+      query $q
+      output ?who one
+
+@route value
+  data &quot;route_a&quot;
+
+@call expand
+  using ~approved
+  with route $route</code></pre><p>A host-approved template can yield a solve output port. The query needs an admitted <code>serves</code> fact and one complete answer; no answer/multiple answers blocks the yielded value.</p><h3>Invalid or unsafe example</h3><pre data-sop="invalid" data-check="runtime" data-error="Template yield is not a local wire/output"><code>@bad template
+  params number
+  yield missing
+  body |
+    @present value
+      data $number + 1
+
+@one value
+  data 1
+
+@use expand
+  using ~bad
+  with number $one</code></pre><p>The outer source parses, but expansion rejects <code>yield missing</code> because there is no such body wire or output port.</p></section><section><h2>Implementation sources</h2><ul><li><code>sop/parser.mjs:SPEC, validateShape, validateGraph</code></li><li><code>sop/runtime.mjs:Runtime.run</code></li><li><code>sop/runtime.mjs:Runtime.run expand case, replaceReferences, renameLogicOutputs</code></li><li><code>sop/outputs.mjs:outputRegistry</code></li></ul><p>Related: <a href="expand.html"><code>expand</code></a>, <a href="procedure.html"><code>procedure</code></a>, <a href="binding.html"><code>binding</code></a>. See the <a href="../wiki.html#definition-sop" target="_top">SOP terminology</a> for wire/reference conventions.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

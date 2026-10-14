@@ -1,0 +1,12 @@
+# expect: version_not_increasing
+@r1 rule
+  when a ?x
+  then b ?x
+  version 2
+  approval superseded
+@r2 rule
+  when a ?x
+  then c ?x
+  version 2
+  supersedes $r1
+  approval proposed

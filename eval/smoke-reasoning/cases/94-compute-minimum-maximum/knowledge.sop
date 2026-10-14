@@ -1,0 +1,51 @@
+@capacity predicate
+  args subject:entity object:rational
+  closed true
+@branch predicate
+  args subject:entity object:rational
+  closed true
+@result predicate
+  args subject:entity object:rational
+@c1 fact
+  holds capacity a 170
+@c2 fact
+  holds capacity b 140
+@c3 fact
+  holds capacity c 100
+@c4 fact
+  holds capacity d 130.5
+@b1 fact
+  holds branch left 12.5
+@b2 fact
+  holds branch right 17
+@r_bottleneck rule
+  when capacity a ?a
+  when capacity b ?b
+  when capacity c ?c
+  when capacity d ?d
+  when compute ?m1 ?a minimum_with ?b
+  when compute ?m2 ?m1 minimum_with ?c
+  when compute ?m3 ?m2 minimum_with ?d
+  then result bottleneck ?m3
+@r_improved rule
+  when capacity a ?a
+  when capacity b ?b
+  when capacity c ?c
+  when capacity d ?d
+  when compute ?c2 ?c times 1.3
+  when compute ?m1 ?a minimum_with ?b
+  when compute ?m2 ?m1 minimum_with ?c2
+  when compute ?m3 ?m2 minimum_with ?d
+  then result improved ?m3
+@r_join rule
+  when branch left ?l
+  when branch right ?r
+  when compute ?j ?l maximum_with ?r
+  when compute ?t ?j plus 5
+  then result join_finish ?t
+@r_floor rule
+  when capacity c ?c
+  when capacity b ?b
+  when compute ?gap ?c minus ?b
+  when compute ?need ?gap maximum_with 0
+  then result extra_needed ?need

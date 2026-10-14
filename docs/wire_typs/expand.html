@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#expand" target="_top">← Wire type index</a></p><h1><code>expand</code></h1><p>Instantiates a named host-approved template or procedure with specific argument values and exposes its declared yield as this wire’s value.</p><p><strong>Status and author:</strong> Only trusted host/tool circuits may author this operation. Small-model declarative input cannot emit it; host-approved orchestration supplies the required execution steps.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once at parse time. Other field names are rejected.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and current behavior</th></tr></thead><tbody><tr><th scope="row" id="field-using"><code>using</code></th><td>At most once; required</td><td>Approved <code>~template</code> or <code>~procedure</code> handle; selects the definition to expand, not a <code>$value</code>.</td></tr>
+<tr><th scope="row" id="field-with"><code>with</code></th><td>Repeatable; optional; exactly one per declared parameter at expansion</td><td><code>name value</code>; one per declared parameter. <code>$id</code> reads a value, otherwise text is decoded if JSON-quoted; binds an expansion parameter.</td></tr>
+<tr><th scope="row" id="field-after"><code>after</code></th><td>Repeatable; optional; default none</td><td><code>$wire</code> dependency per line; orders expansion after an earlier value/effect without adding an argument.</td></tr></tbody></table></div></section><section><h2>Execution and result</h2><p>Each <code>with name value</code> binds one declared parameter, once. A value beginning with <code>$</code> resolves an existing wire value; other text is unquoted (a JSON-quoted string is decoded). Missing or duplicate parameters, unknown names, a bad body, ID collisions, or a yield outside body/output are errors. At expansion, the runtime creates namespaced parameter <code>value</code> wires and body wires, substitutes references, renames body output ports, then aliases the expansion result to its yield. Definition metadata does not turn this into arbitrary code execution.</p><p>Definitions loaded from the repository are matched by ID and verified checksum. A trusted invocation can contain an <code>expand</code> call; the host must supply the approved definition. If the yielded port is unbound, dependent wires remain blocked. Expansion is subject to maxWires/maxEpochs and graph-cycle checks. It never changes the rules for writing facts: any body <code>remember</code> still requires repository/session and host permission.</p></section><section><h2>Current SOP examples</h2><h3>Approved template defined in trusted source</h3><pre data-sop="current"><code>@calc template
+  description &quot;Add a reviewed offset to an input&quot;
+  cue &quot;adjust score&quot;
+  params base offset
+  yield total
+  body |
+    @total value
+      data $base + $offset
+
+@input value
+  data 7
+
+@offset value
+  data 3
+
+@use expand
+  using ~calc
+  with base $input
+  with offset $offset</code></pre><p>The <code>with</code> lines supply both arguments; <code>@use</code> receives the body’s 10 result.</p>
+<h3>Invoking a procedure with constant arguments</h3><pre data-sop="current"><code>@check_rule procedure
+  params measured threshold
+  yield verdict
+  body |
+    @verdict value
+      data $measured &gt;= $threshold
+
+@result expand
+  using ~check_rule
+  with measured 9
+  with threshold 8</code></pre><p>A trusted declaration is included for a self-contained example; expansion yields true. In a trusted invocation omit that declaration and rely on the exact approved library entry.</p><h3>Invalid or unsafe example</h3><pre data-sop="invalid" data-check="runtime" data-error="Expected ~wire definition handle"><code>@check_rule procedure
+  params measured
+  yield verdict
+  body |
+    @verdict value
+      data $measured &gt; 0
+
+@bad expand
+  using $check_rule
+  with measured 9</code></pre><p>The parser can recognize the reference, but runtime requires a definition handle <code>~check_rule</code>; a value reference is not an approved template handle.</p></section><section><h2>Implementation sources</h2><ul><li><code>sop/parser.mjs:SPEC, validateShape, validateGraph</code></li><li><code>sop/runtime.mjs:Runtime.run</code></li><li><code>sop/runtime.mjs:Runtime.run expand case, renameLogicOutputs</code></li><li><code>sop/outputs.mjs:outputRegistry</code></li></ul><p>Related: <a href="template.html"><code>template</code></a>, <a href="procedure.html"><code>procedure</code></a>, <a href="binding.html"><code>binding</code></a>. See the <a href="../wiki.html#definition-sop" target="_top">SOP terminology</a> for wire/reference conventions.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

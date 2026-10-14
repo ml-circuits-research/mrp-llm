@@ -1,0 +1,4 @@
+Release of service s1. A change freeze is in force and s1 is high-risk. Actions (cost): build (2; makes it built), test fast (2; needs built; makes it tested), test full (6; needs built; makes it tested), deploy direct (1; needs tested; makes it live), deploy blue-green (5; needs tested; makes it live), notify security (6), announce (1; needs the service live).
+Rules (release policy). Hard: no direct deploys during a change freeze; high-risk changes may not use the fast test. Soft: security should be notified within three steps (penalty 4 if not); a release should be announced within six steps (penalty 3 if not).
+
+Question: what is the cheapest plan to make s1 live, counting action costs plus the penalties of violated soft rules? Give the action ids in order, the plan cost (actions only), the total cost with penalties, and the soft rules violated.

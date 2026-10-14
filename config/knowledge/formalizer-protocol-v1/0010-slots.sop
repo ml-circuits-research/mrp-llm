@@ -1,0 +1,1005 @@
+# formalizer-protocol-v1: the slots of a formalization (DS022 "InternalReasoningStepByStep").
+# A slot is needed (by the kind of answer, the aspects and the statements chosen so far), settled (by an answer, a default or an
+# observation) or open. The goal `formalized` holds when the kind is known, nothing needed is open, no integrity constraint of
+# 0050-integrity.sop is violated, the circuit was assembled and the reading confirmed. The symbol `none` is the argument of the
+# global slots; `q` is the main query, `c1`, `c2` the copied clauses.
+
+@fp_main_query_q fact
+  holds fp_main_query q
+
+# --------------------------------------------------------------------------------------------- generic slot logic
+@fp_settled_by_answer rule
+  when fp_answered ?q ?a
+  when fp_establishes ?q ?s
+  then fp_settled ?s ?a
+
+@fp_open_slot_rule rule
+  when fp_needed ?s ?a
+  when absent fp_settled ?s ?a
+  then fp_open_slot ?s ?a
+
+@fp_any_open_rule rule
+  when fp_open_slot ?s ?a
+  then fp_any_open
+
+@fp_any_violation_rule rule
+  when violation ?v ?w
+  then fp_any_violation
+
+@fp_circuit_complete_rule rule
+  when fp_settled kind none
+  when absent fp_any_open
+  when absent fp_any_violation
+  then fp_circuit_complete
+
+@fp_formalized_rule rule
+  when fp_circuit_complete
+  when fp_assembled
+  when fp_confirmed
+  then fp_formalized
+
+@fp_prelude_open_rule rule
+  when fp_open_slot ?s ?a
+  when fp_prelude_slot ?s
+  then fp_prelude_open
+
+# --------------------------------------------------------------------------------------------- the kind of answer
+@fp_need_kind rule
+  when fp_start
+  then fp_needed kind none
+
+@fp_kind_settled rule
+  when fp_kind ?k
+  then fp_settled kind none
+
+@fp_route_by_statements rule
+  when fp_candidate_statement ?s
+  then fp_route_possible
+
+@fp_route_by_numbers rule
+  when fp_number ?n
+  then fp_route_possible
+
+@fp_has_candidates_rule rule
+  when fp_candidate_statement ?s
+  then fp_has_candidates
+
+@fp_base_kind_main rule
+  when fp_kind ?k
+  then fp_base_kind q ?k
+
+@fp_query_kind_as_answered rule
+  when fp_base_kind ?qq ?k
+  when absent fp_kind_changed ?qq
+  then fp_query_kind ?qq ?k
+
+@fp_query_kind_changed rule
+  when fp_kind_changed ?qq
+  then fp_query_kind ?qq yesno
+
+@fp_statement_built_as_yesno rule
+  when fp_kind statement
+  then fp_kind_changed q
+
+@fp_reach_built_as_yesno rule
+  when fp_kind reach
+  when fp_reach_impossible
+  then fp_kind_changed q
+
+@fp_switched_built_as_yesno rule
+  when fp_switched_yesno ?qq
+  then fp_kind_changed ?qq
+
+@fp_relational_rule rule
+  when fp_query_kind q ?k
+  when fp_relational_kind ?k
+  then fp_relational
+
+@fp_need_acts rule
+  when fp_kind ?k
+  then fp_needed acts none
+
+@fp_only_kind_is_act rule
+  when fp_kind ?k
+  when fp_only_kind_act ?k ?a
+  then fp_act ?a
+
+@fp_need_emotion rule
+  when fp_act emotion
+  then fp_needed emotion none
+
+@fp_emotion_settled rule
+  when fp_emotion ?e
+  then fp_settled emotion none
+
+# --------------------------------------------------------------------------------------------- names
+@fp_some_mention_rule rule
+  when fp_mention ?m
+  then fp_some_mention
+
+@fp_need_names rule
+  when fp_query_kind q ?k
+  when fp_aspect_kind ?k
+  when absent fp_some_mention
+  then fp_needed names none
+
+@fp_need_link rule
+  when fp_query_kind q ?k
+  when fp_aspect_kind ?k
+  when fp_mention ?m
+  when absent fp_single_candidate ?m
+  then fp_needed link ?m
+
+@fp_linking_open_link rule
+  when fp_open_slot link ?m
+  then fp_linking_open
+
+@fp_linking_open_names rule
+  when fp_open_slot names none
+  then fp_linking_open
+
+@fp_link_settled rule
+  when fp_linked ?m ?n
+  then fp_settled link ?m
+
+@fp_name_in_request_rule rule
+  when fp_linked ?m ?n
+  then fp_name_in_request ?n
+
+@fp_one_name_rule rule
+  when fp_name_in_request ?a
+  then fp_one_name
+
+@fp_two_names_rule rule
+  when fp_name_in_request ?a
+  when fp_name_in_request ?b
+  when compare ?a not_equal ?b
+  then fp_two_names
+
+@fp_three_names_rule rule
+  when fp_name_in_request ?a
+  when fp_name_in_request ?b
+  when fp_name_in_request ?c
+  when compare ?a not_equal ?b
+  when compare ?a not_equal ?c
+  when compare ?b not_equal ?c
+  then fp_three_names
+
+@fp_exactly_two_names_rule rule
+  when fp_two_names
+  when absent fp_three_names
+  then fp_exactly_two_names
+
+@fp_place_name_main rule
+  when fp_main_query ?qq
+  when fp_name_in_request ?n
+  when absent fp_reserved ?n
+  then fp_place_name ?qq ?n
+
+@fp_place_name_clause rule
+  when fp_clause_name ?c ?n
+  then fp_place_name ?c ?n
+
+@fp_has_place_name_rule rule
+  when fp_place_name ?qq ?n
+  then fp_has_place_name ?qq
+
+@fp_two_place_names_rule rule
+  when fp_place_name ?qq ?a
+  when fp_place_name ?qq ?b
+  when compare ?a not_equal ?b
+  then fp_two_place_names ?qq
+
+# --------------------------------------------------------------------------------------------- aspects and their details
+@fp_need_aspects rule
+  when fp_query_kind q ?k
+  when fp_aspect_kind ?k
+  then fp_needed aspects none
+
+@fp_aspect_possible_always rule
+  when fp_aspect_always ?a
+  then fp_aspect_possible ?a
+
+@fp_aspect_possible_limit rule
+  when fp_number ?n
+  then fp_aspect_possible limit
+
+@fp_aspect_possible_options rule
+  when fp_two_names
+  then fp_aspect_possible options
+
+@fp_aspect_possible_two_sided rule
+  when fp_two_names
+  then fp_aspect_possible two_sided
+
+@fp_aspect_possible_fewest rule
+  when fp_two_names
+  then fp_aspect_possible fewest
+
+@fp_aspect_possible_exclusion rule
+  when fp_one_name
+  then fp_aspect_possible exclusion
+
+@fp_aspect_possible_chain rule
+  when fp_one_name
+  then fp_aspect_possible chain
+
+@fp_has_aspect_rule rule
+  when fp_ticked ?a
+  when fp_aspect_possible ?a
+  then fp_has_aspect ?a
+
+@fp_some_excluded_rule rule
+  when fp_excluded_name ?n
+  then fp_some_excluded
+
+# Something to leave out without a name to leave out: what is left out is a statement (a negation).
+@fp_exclusion_without_name_is_negation rule
+  when fp_ticked exclusion
+  when fp_answered ask_excluded_names none
+  when absent fp_some_excluded
+  then fp_has_aspect negation
+
+@fp_need_option_names rule
+  when fp_has_aspect options
+  then fp_needed option_names none
+
+@fp_option_names_settled rule
+  when fp_option_name ?n
+  then fp_settled option_names none
+
+@fp_reserved_option rule
+  when fp_option_name ?n
+  then fp_reserved ?n
+
+@fp_need_excluded_names rule
+  when fp_has_aspect exclusion
+  then fp_needed excluded_names none
+
+@fp_excluded_names_settled rule
+  when fp_excluded_name ?n
+  then fp_settled excluded_names none
+
+@fp_reserved_excluded rule
+  when fp_excluded_name ?n
+  then fp_reserved ?n
+
+@fp_need_limit_kind rule
+  when fp_has_aspect limit
+  when fp_limit_candidate ?n
+  then fp_needed limit_kind ?n
+
+@fp_limit_kind_settled rule
+  when fp_limit_kind ?n ?c
+  then fp_settled limit_kind ?n
+
+@fp_need_supposition rule
+  when fp_has_aspect supposition
+  then fp_needed supposition none
+
+@fp_supposition_settled rule
+  when fp_clause_role ?c supposition
+  then fp_settled supposition none
+
+@fp_need_second rule
+  when fp_has_aspect second
+  then fp_needed second none
+
+@fp_second_settled rule
+  when fp_clause_role ?c second
+  then fp_settled second none
+
+@fp_need_clause_link rule
+  when fp_clause_role ?c supposition
+  then fp_needed clause_link ?c
+
+@fp_clause_link_settled rule
+  when fp_clause_link ?c ?k
+  then fp_settled clause_link ?c
+
+# --------------------------------------------------------------------------------------------- clauses
+@fp_statement_clause_rule rule
+  when fp_clause_role ?c supposition
+  then fp_statement_clause ?c
+
+@fp_statement_clause_is_yesno rule
+  when fp_statement_clause ?c
+  then fp_base_kind ?c yesno
+
+@fp_clause_kind_query_rule rule
+  when fp_clause_role ?c second
+  then fp_clause_kind_query ?c
+
+@fp_need_clause_statement rule
+  when fp_statement_clause ?c
+  then fp_needed clause_statement ?c
+
+@fp_clause_uses rule
+  when fp_clause_pick ?c ?s
+  when fp_clause_instance ?c ?i
+  then fp_uses ?c ?i
+
+@fp_clause_instance_of rule
+  when fp_clause_pick ?c ?s
+  when fp_clause_instance ?c ?i
+  then fp_instance_of ?i ?s
+
+@fp_clause_statement_settled rule
+  when fp_clause_pick ?c ?s
+  then fp_settled clause_statement ?c
+
+@fp_clause_has_own_rule rule
+  when fp_clause_own_name ?c ?n
+  then fp_clause_has_own ?c
+
+@fp_clause_name_own rule
+  when fp_clause_own_name ?c ?n
+  when fp_name_in_request ?n
+  then fp_clause_name ?c ?n
+
+@fp_clause_named_rule rule
+  when fp_clause_name ?c ?n
+  then fp_clause_named ?c
+
+@fp_need_clause_name_statement rule
+  when fp_statement_clause ?c
+  when fp_clause_pick ?c ?s
+  when absent fp_clause_named ?c
+  then fp_needed clause_name ?c
+
+@fp_need_clause_name_question rule
+  when fp_clause_kind_query ?c
+  when fp_base_kind ?c ?k
+  when absent fp_clause_named ?c
+  then fp_needed clause_name ?c
+
+@fp_clause_name_settled rule
+  when fp_clause_named ?c
+  then fp_settled clause_name ?c
+
+@fp_need_clause_kind rule
+  when fp_clause_kind_query ?c
+  then fp_needed clause_kind ?c
+
+@fp_clause_kind_settled rule
+  when fp_base_kind ?c ?k
+  when fp_clause_kind_query ?c
+  then fp_settled clause_kind ?c
+
+# --------------------------------------------------------------------------------------------- the statements of a query
+@fp_fewest_route_aspect rule
+  when fp_main_query ?qq
+  when fp_has_aspect fewest
+  when fp_query_kind ?qq ?k
+  when fp_fewest_kind ?k
+  then fp_fewest_route ?qq
+
+@fp_fewest_route_definition rule
+  when fp_definition ?qq fewest
+  then fp_fewest_route ?qq
+
+@fp_need_statements rule
+  when fp_query_kind ?qq ?k
+  when fp_relational_kind ?k
+  when absent fp_statement_clause ?qq
+  when absent fp_fewest_route ?qq
+  then fp_needed statements ?qq
+
+@fp_statements_settled_by_use rule
+  when fp_uses ?qq ?i
+  then fp_settled statements ?qq
+
+@fp_statements_settled_none rule
+  when fp_statements_none ?qq
+  then fp_settled statements ?qq
+
+@fp_has_instances_rule rule
+  when fp_uses ?qq ?i
+  then fp_has_instances ?qq
+
+@fp_need_statement_check rule
+  when fp_statements_none ?qq
+  when fp_main_query ?qq
+  when fp_single_hit ?s
+  when fp_budget_ample
+  then fp_needed statement_check ?qq
+
+@fp_need_definition rule
+  when fp_statements_none ?qq
+  when fp_main_query ?qq
+  when fp_has_candidates
+  when absent fp_has_instances ?qq
+  when absent fp_kind statement
+  when fp_budget_ample
+  then fp_needed definition ?qq
+
+@fp_definition_settled rule
+  when fp_definition ?qq ?d
+  then fp_settled definition ?qq
+
+@fp_need_restatement_chain rule
+  when fp_definition ?qq chain
+  when absent fp_has_instances ?qq
+  then fp_needed restatement ?qq
+
+@fp_need_restatement_count rule
+  when fp_definition ?qq group_count
+  when absent fp_has_instances ?qq
+  then fp_needed restatement ?qq
+
+@fp_restatement_settled rule
+  when fp_has_instances ?qq
+  when fp_definition ?qq ?d
+  then fp_settled restatement ?qq
+
+@fp_instance_pair_rule rule
+  when fp_uses ?qq ?a
+  when fp_uses ?qq ?b
+  when compare ?a not_equal ?b
+  then fp_instance_pair ?qq
+
+@fp_instance_triple_rule rule
+  when fp_uses ?qq ?a
+  when fp_uses ?qq ?b
+  when fp_uses ?qq ?c
+  when compare ?a not_equal ?b
+  when compare ?a not_equal ?c
+  when compare ?b not_equal ?c
+  then fp_instance_triple ?qq
+
+# --------------------------------------------------------------------------------------------- the places of the statements
+@fp_offer_member rule
+  when fp_query_kind ?qq every
+  then fp_offered ?qq unknown_m
+
+@fp_offer_asked rule
+  when fp_query_kind ?qq ?k
+  when fp_asking_kind ?k
+  then fp_offered ?qq unknown_x
+
+@fp_offer_value_rank rule
+  when fp_query_kind ?qq ?k
+  when fp_rank_kind ?k
+  then fp_offered ?qq unknown_v
+
+@fp_offer_value_two_sided rule
+  when fp_main_query ?qq
+  when fp_has_aspect two_sided
+  then fp_offered ?qq unknown_v
+
+@fp_offer_limited rule
+  when fp_main_query ?qq
+  when fp_has_aspect limit
+  then fp_offered ?qq unknown_w
+
+@fp_offer_other rule
+  when fp_instance_pair ?qq
+  then fp_offered ?qq unknown_p
+
+@fp_offer_second_other rule
+  when fp_instance_triple ?qq
+  then fp_offered ?qq unknown_q
+
+@fp_placed_rule rule
+  when fp_place ?i ?r ?v
+  then fp_placed ?i ?r
+
+@fp_open_role_rule rule
+  when fp_uses ?qq ?i
+  when fp_instance_of ?i ?s
+  when fp_statement_role ?s ?r ?t
+  when absent fp_placed ?i ?r
+  then fp_open_role ?i ?r
+
+@fp_need_places rule
+  when fp_open_role ?i ?r
+  then fp_needed places ?i
+
+@fp_places_pending_rule rule
+  when fp_uses ?qq ?i
+  when fp_open_role ?i ?r
+  then fp_places_pending ?qq
+
+@fp_places_done_rule rule
+  when fp_has_instances ?qq
+  when absent fp_places_pending ?qq
+  then fp_places_done ?qq
+
+@fp_waits_rule rule
+  when fp_instance_after ?i ?j
+  when fp_open_slot places ?j
+  then fp_waits ?i
+
+@fp_observed_twice_rule rule
+  when fp_observed_place ?n ?s ?a
+  when fp_observed_place ?n ?s ?b
+  when compare ?a not_equal ?b
+  then fp_observed_twice ?n ?s
+
+@fp_claim_rule rule
+  when fp_uses ?qq ?i
+  when fp_instance_of ?i ?s
+  when fp_place_name ?qq ?n
+  when fp_observed_place ?n ?s ?r
+  when absent fp_observed_twice ?n ?s
+  then fp_claim ?i ?r ?n
+
+@fp_contested_rule rule
+  when fp_claim ?i ?r ?a
+  when fp_claim ?i ?r ?b
+  when compare ?a not_equal ?b
+  then fp_contested ?i ?r
+
+@fp_more_names_than_one_place rule
+  when fp_statement_arity ?s 1
+  when fp_two_names
+  then fp_more_names_than_roles ?s
+
+@fp_more_names_than_two_places rule
+  when fp_statement_arity ?s 2
+  when fp_three_names
+  then fp_more_names_than_roles ?s
+
+@fp_crowded_yesno_rule rule
+  when fp_uses ?qq ?i
+  when fp_query_kind ?qq yesno
+  when fp_instance_of ?i ?s
+  when fp_more_names_than_roles ?s
+  then fp_crowded_yesno ?i
+
+@fp_asked_placed_x rule
+  when fp_uses ?qq ?i
+  when fp_place ?i ?r unknown_x
+  then fp_asked_placed ?qq
+
+@fp_asked_placed_m rule
+  when fp_uses ?qq ?i
+  when fp_place ?i ?r unknown_m
+  then fp_asked_placed ?qq
+
+@fp_v_placed_rule rule
+  when fp_uses ?qq ?i
+  when fp_place ?i ?r unknown_v
+  then fp_v_placed ?qq
+
+@fp_unknown_place_rule rule
+  when fp_uses ?qq ?i
+  when fp_place ?i ?r ?u
+  when fp_unknown ?u
+  then fp_unknown_place ?qq
+
+@fp_named_instance_rule rule
+  when fp_place ?i ?r ?n
+  when fp_name ?n
+  then fp_named_instance ?i
+
+@fp_number_instance_rule rule
+  when fp_uses ?qq ?i
+  when fp_instance_of ?i ?s
+  when fp_statement_role ?s ?r number
+  then fp_number_instance ?qq ?i
+
+@fp_v_fixable_rule rule
+  when fp_number_instance ?qq ?i
+  when absent fp_reasked ?i
+  then fp_v_fixable ?qq
+
+@fp_chainable_rule rule
+  when fp_uses ?qq ?i
+  when fp_instance_of ?i ?s
+  when fp_statement_shape ?s binary_entity
+  when fp_place ?i ?a ?n
+  when fp_name ?n
+  when fp_place ?i ?b ?u
+  when fp_unknown ?u
+  then fp_chainable ?qq ?i
+
+@fp_scope_split_rule rule
+  when fp_uses ?qq ?a
+  when fp_named_instance ?a
+  when fp_uses ?qq ?b
+  when absent fp_named_instance ?b
+  then fp_scope_split ?qq
+
+# --------------------------------------------------------------------------------------------- the two-sided comparison
+@fp_need_sided rule
+  when fp_main_query ?qq
+  when fp_has_aspect two_sided
+  when fp_two_place_names ?qq
+  when fp_has_instances ?qq
+  then fp_needed sided ?qq
+
+@fp_sided_settled rule
+  when fp_sided ?qq ?k
+  then fp_settled sided ?qq
+
+@fp_need_sided_role rule
+  when fp_sided_pending ?qq
+  then fp_needed sided_role ?qq
+
+@fp_sided_role_settled rule
+  when fp_sided_role ?qq ?r
+  then fp_settled sided_role ?qq
+
+# --------------------------------------------------------------------------------------------- after the places
+@fp_need_yes_no_switch rule
+  when fp_query_kind ?qq ?k
+  when fp_asking_kind ?k
+  when fp_places_done ?qq
+  when absent fp_unknown_place ?qq
+  then fp_needed yes_no_switch ?qq
+
+@fp_need_rank_value rule
+  when fp_query_kind ?qq ?k
+  when fp_rank_kind ?k
+  when fp_places_done ?qq
+  when absent fp_v_placed ?qq
+  when absent fp_v_fixable ?qq
+  then fp_needed rank_value ?qq
+
+@fp_rank_value_settled_by_instance rule
+  when fp_rank_instance ?qq ?i
+  then fp_settled rank_value ?qq
+
+@fp_rank_value_settled_dropped rule
+  when fp_rank_dropped ?qq
+  then fp_settled rank_value ?qq
+
+@fp_need_connect rule
+  when fp_disconnected ?qq
+  when fp_places_done ?qq
+  then fp_needed connect ?qq
+
+@fp_connect_settled rule
+  when fp_connected ?qq
+  then fp_settled connect ?qq
+
+@fp_yes_like_truth rule
+  when fp_query_kind ?qq ?k
+  when fp_yes_like_kind ?k
+  when fp_places_done ?qq
+  then fp_needed truth ?qq
+
+@fp_truth_settled rule
+  when fp_polarity ?qq ?p
+  then fp_settled truth ?qq
+
+@fp_doubt_by_negation rule
+  when fp_query_kind ?qq ?k
+  when fp_has_aspect negation
+  then fp_truth_doubtful ?qq
+
+@fp_doubt_by_closed_statement rule
+  when fp_uses ?qq ?i
+  when fp_instance_of ?i ?s
+  when fp_closed_statement ?s
+  when absent fp_instance_pair ?qq
+  when absent fp_statement_clause ?qq
+  then fp_truth_doubtful ?qq
+
+@fp_need_negated rule
+  when fp_query_kind ?qq ?k
+  when fp_asking_kind ?k
+  when fp_has_aspect negation
+  when fp_instance_pair ?qq
+  when fp_places_done ?qq
+  then fp_needed negated ?qq
+
+@fp_need_negated_statement rule
+  when fp_main_query ?qq
+  when fp_query_kind ?qq ?k
+  when fp_counting_kind ?k
+  when fp_has_aspect negation
+  when fp_has_instances ?qq
+  when absent fp_instance_pair ?qq
+  when fp_places_done ?qq
+  when fp_budget_ample
+  then fp_needed negated_statement ?qq
+
+@fp_need_chain_aspect rule
+  when fp_chainable ?qq ?i
+  when fp_query_kind ?qq ?k
+  when fp_counting_kind ?k
+  when fp_has_aspect chain
+  when fp_places_done ?qq
+  then fp_needed chain ?qq
+
+@fp_need_chain_definition rule
+  when fp_chainable ?qq ?i
+  when fp_definition ?qq chain
+  when fp_places_done ?qq
+  then fp_needed chain ?qq
+
+@fp_need_scope rule
+  when fp_query_kind ?qq every
+  when fp_places_done ?qq
+  when fp_instance_pair ?qq
+  when absent fp_scope_split ?qq
+  then fp_needed scope ?qq
+
+@fp_scope_settled rule
+  when fp_uses ?qq ?i
+  when fp_scope_instance ?i
+  then fp_settled scope ?qq
+
+@fp_need_quantifier rule
+  when fp_query_kind ?qq every
+  when fp_places_done ?qq
+  then fp_needed quantifier ?qq
+
+@fp_quantifier_settled rule
+  when fp_quantifier ?qq ?x
+  then fp_settled quantifier ?qq
+
+@fp_quantifier_at_least_rule rule
+  when fp_quantifier ?qq at_least
+  then fp_quantifier_at_least ?qq
+
+@fp_need_limit_target rule
+  when fp_limit_kind ?n ?c
+  when fp_places_done q
+  when absent fp_quantifier_at_least q
+  then fp_needed limit_target ?n
+
+@fp_limit_target_settled rule
+  when fp_limit_target ?n ?t
+  then fp_settled limit_target ?n
+
+@fp_limit_open_rule rule
+  when fp_open_slot limit_target ?n
+  then fp_limit_open
+
+@fp_need_options_target rule
+  when fp_main_query ?qq
+  when fp_has_aspect options
+  when fp_places_done ?qq
+  when fp_option_name ?n
+  then fp_needed options_target ?qq
+
+@fp_options_target_settled rule
+  when fp_options_target ?qq ?u
+  then fp_settled options_target ?qq
+
+@fp_need_exclusion_target rule
+  when fp_excluded_name ?n
+  when fp_places_done q
+  then fp_needed exclusion_target ?n
+
+@fp_exclusion_target_settled rule
+  when fp_exclusion_target ?n ?u
+  then fp_settled exclusion_target ?n
+
+# --------------------------------------------------------------------------------------------- time
+@fp_need_measure rule
+  when fp_query_kind ?qq when
+  when fp_places_done ?qq
+  then fp_needed measure ?qq
+
+@fp_measure_settled rule
+  when fp_measure ?qq ?m
+  then fp_settled measure ?qq
+
+@fp_date_many_rule rule
+  when fp_date_count ?k
+  when compare ?k at_least 2
+  then fp_date_many
+
+@fp_date_one_rule rule
+  when fp_date_count 1
+  then fp_date_one
+
+# Readable dates are structure: the period question needs no aspect from the model.
+@fp_need_period rule
+  when fp_main_query ?qq
+  when fp_date_many
+  when fp_places_done ?qq
+  then fp_needed period ?qq
+
+@fp_period_settled rule
+  when fp_period ?qq ?p
+  then fp_settled period ?qq
+
+@fp_need_dates rule
+  when fp_main_query ?qq
+  when fp_has_aspect date
+  when fp_year_only
+  when fp_places_done ?qq
+  then fp_needed dates ?qq
+
+# --------------------------------------------------------------------------------------------- chains of links (reach) and the fewest links
+@fp_binary_candidate_rule rule
+  when fp_candidate_statement ?s
+  when fp_statement_shape ?s binary_entity
+  then fp_binary_candidate ?s
+
+@fp_unary_candidate_rule rule
+  when fp_candidate_statement ?s
+  when fp_statement_shape ?s unary_entity
+  then fp_unary_candidate ?s
+
+@fp_numeric_candidate_rule rule
+  when fp_candidate_statement ?s
+  when fp_statement_shape ?s entity_number
+  then fp_numeric_candidate ?s
+
+@fp_derived_binary_candidate_rule rule
+  when fp_binary_candidate ?s
+  when fp_derived_statement ?s
+  then fp_derived_binary_candidate ?s
+
+@fp_binary_any_rule rule
+  when fp_binary_candidate ?s
+  then fp_binary_any
+
+@fp_nonderived_binary_any_rule rule
+  when fp_binary_candidate ?s
+  when absent fp_derived_statement ?s
+  then fp_nonderived_binary_any
+
+@fp_unary_any_rule rule
+  when fp_unary_candidate ?s
+  then fp_unary_any
+
+@fp_reach_impossible_no_link rule
+  when fp_kind reach
+  when absent fp_binary_any
+  then fp_reach_impossible
+
+@fp_reach_impossible_few_names rule
+  when fp_kind reach
+  when fp_answered ask_aspects none
+  when absent fp_two_place_names q
+  then fp_reach_impossible
+
+@fp_reach_impossible_no_step rule
+  when fp_kind reach
+  when fp_answered ask_reach_relation q
+  when absent fp_has_reach_relation
+  when absent fp_nonderived_binary_any
+  then fp_reach_impossible
+
+@fp_has_reach_relation_rule rule
+  when fp_reach_relation q ?s
+  then fp_has_reach_relation
+
+@fp_need_reach_relation rule
+  when fp_query_kind q reach
+  when fp_derived_binary_candidate ?s
+  then fp_needed reach_relation q
+
+@fp_reach_relation_settled rule
+  when fp_reach_relation q ?s
+  then fp_settled reach_relation q
+
+@fp_need_reach_step rule
+  when fp_query_kind q reach
+  when absent fp_has_reach_relation
+  when fp_nonderived_binary_any
+  then fp_needed reach_step q
+
+@fp_reach_step_settled rule
+  when fp_reach_step q ?s
+  then fp_settled reach_step q
+
+@fp_need_reach_avoid rule
+  when fp_query_kind q reach
+  when absent fp_has_reach_relation
+  when fp_unary_any
+  then fp_needed reach_avoid q
+
+@fp_reach_avoid_settled rule
+  when fp_reach_avoid q ?s
+  then fp_settled reach_avoid q
+
+@fp_need_ends_reach rule
+  when fp_query_kind q reach
+  then fp_needed ends q
+
+@fp_need_ends_fewest rule
+  when fp_fewest_route q
+  then fp_needed ends q
+
+@fp_ends_settled rule
+  when fp_reach_goal q ?n
+  then fp_settled ends q
+
+@fp_need_fewest_step rule
+  when fp_fewest_route q
+  then fp_needed fewest_step q
+
+@fp_fewest_step_settled rule
+  when fp_fewest_step q ?s
+  then fp_settled fewest_step q
+
+# --------------------------------------------------------------------------------------------- the numeric puzzle
+@fp_need_puzzle_unknowns rule
+  when fp_kind puzzle
+  then fp_needed puzzle_unknowns none
+
+@fp_need_puzzle_conditions rule
+  when fp_kind puzzle
+  then fp_needed puzzle_conditions none
+
+@fp_need_puzzle_aim rule
+  when fp_kind puzzle
+  then fp_needed puzzle_aim none
+
+@fp_puzzle_aim_settled rule
+  when fp_puzzle_goal ?g
+  then fp_settled puzzle_aim none
+
+@fp_need_puzzle_objective_min rule
+  when fp_puzzle_goal min
+  then fp_needed puzzle_objective none
+
+@fp_need_puzzle_objective_max rule
+  when fp_puzzle_goal max
+  then fp_needed puzzle_objective none
+
+@fp_need_puzzle_claim rule
+  when fp_puzzle_goal prove
+  then fp_needed puzzle_claim none
+
+# --------------------------------------------------------------------------------------------- the validator and the confirmation
+@fp_need_unused_name rule
+  when fp_validator_problem mention_not_used ?n
+  when fp_repairs_left
+  then fp_needed unused_name ?n
+
+@fp_unused_name_settled rule
+  when fp_unused_statement ?n ?i
+  then fp_settled unused_name ?n
+
+@fp_contrast_wanted_rule rule
+  when fp_contrast_available
+  when fp_budget_left
+  when absent fp_answered ask_contrast none
+  then fp_contrast_wanted
+
+@fp_confirmed_by_reading rule
+  when fp_contrast_pick reading
+  then fp_confirmed
+
+@fp_confirmed_by_flipped rule
+  when fp_contrast_pick flipped
+  then fp_confirmed
+
+@fp_wrong_part_wanted_rule rule
+  when fp_contrast_pick neither
+  when fp_budget_ample
+  when absent fp_answered ask_wrong_part none
+  then fp_wrong_part_wanted
+
+# The wrong part names the slot that is asked again: the kind (excluding the one answered), the statements, the places.
+@fp_need_kind_again_doubt rule
+  when fp_doubt kind
+  then fp_needed kind_again none
+
+@fp_need_kind_again_violation rule
+  when violation fp_every_unsplit q
+  then fp_needed kind_again none
+
+# The kind says nothing to look up while the acts question says the message asks something: the kind is asked again.
+@fp_need_kind_again_request rule
+  when fp_kind none
+  when fp_act request
+  then fp_needed kind_again none
+
+@fp_need_restatements rule
+  when fp_doubt statements
+  then fp_needed restatements q
+
+# --------------------------------------------------------------------------------------------- coverage
+# A content word of the request that the chosen statements do not cover names exactly one other statement: asked once.
+@fp_places_open_rule rule
+  when fp_open_slot places ?i
+  then fp_places_open
+
+@fp_need_coverage rule
+  when fp_uncovered q ?s
+  when fp_budget_ample
+  then fp_needed coverage ?s
+
+@fp_coverage_settled rule
+  when fp_covered ?s
+  then fp_settled coverage ?s

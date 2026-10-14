@@ -1,0 +1,726 @@
+# formalizer-protocol-v1: the questions as actions (DS022 "InternalReasoningStepByStep"). A question may be asked when its `askable`
+# rule holds; asking it adds `answered QUESTION ARGUMENT`, which settles the slot the question establishes (0010-slots.sop). The cost is
+# the number of model calls; `assemble` is the system's own step (cost 0). Re-asks cost 2 and are enabled only by a violation of
+# 0050-integrity.sop or by a validator problem. The planner of every decision looks for the cheapest sequence of actions that reaches
+# the goal `formalized`; its first action is the next question.
+
+@fp_askable_ask_kind rule
+  when fp_open_slot kind none
+  when fp_route_possible
+  when fp_budget_left
+  then fp_askable ask_kind none
+
+@fp_ask_kind action
+  params ?a
+  requires fp_askable ask_kind ?a
+  adds fp_answered ask_kind ?a
+  cost 1
+
+@fp_askable_ask_acts rule
+  when fp_open_slot acts none
+  when fp_budget_left
+  then fp_askable ask_acts none
+
+@fp_ask_acts action
+  params ?a
+  requires fp_askable ask_acts ?a
+  adds fp_answered ask_acts ?a
+  cost 1
+
+@fp_askable_ask_emotion rule
+  when fp_open_slot emotion none
+  when fp_budget_left
+  then fp_askable ask_emotion none
+
+@fp_ask_emotion action
+  params ?a
+  requires fp_askable ask_emotion ?a
+  adds fp_answered ask_emotion ?a
+  cost 1
+
+@fp_askable_ask_entity rule
+  when fp_open_slot link ?m
+  when fp_budget_left
+  then fp_askable ask_entity ?m
+
+@fp_ask_entity action
+  params ?a
+  requires fp_askable ask_entity ?a
+  adds fp_answered ask_entity ?a
+  cost 1
+
+@fp_askable_ask_names rule
+  when fp_open_slot names none
+  when absent fp_open_slot own_data none
+  when fp_budget_left
+  then fp_askable ask_names none
+
+@fp_ask_names action
+  params ?a
+  requires fp_askable ask_names ?a
+  adds fp_answered ask_names ?a
+  cost 1
+
+@fp_askable_ask_aspects rule
+  when fp_open_slot aspects none
+  when absent fp_open_slot own_data none
+  when absent fp_linking_open
+  when fp_budget_left
+  then fp_askable ask_aspects none
+
+@fp_ask_aspects action
+  params ?a
+  requires fp_askable ask_aspects ?a
+  adds fp_answered ask_aspects ?a
+  cost 1
+
+@fp_askable_ask_option_names rule
+  when fp_open_slot option_names none
+  when fp_settled aspects none
+  when fp_budget_left
+  then fp_askable ask_option_names none
+
+@fp_ask_option_names action
+  params ?a
+  requires fp_askable ask_option_names ?a
+  adds fp_answered ask_option_names ?a
+  cost 1
+
+@fp_askable_ask_excluded_names rule
+  when fp_open_slot excluded_names none
+  when absent fp_open_slot option_names none
+  when fp_budget_left
+  then fp_askable ask_excluded_names none
+
+@fp_ask_excluded_names action
+  params ?a
+  requires fp_askable ask_excluded_names ?a
+  adds fp_answered ask_excluded_names ?a
+  cost 1
+
+@fp_askable_ask_limit_kind rule
+  when fp_open_slot limit_kind ?n
+  when fp_settled aspects none
+  when fp_budget_left
+  then fp_askable ask_limit_kind ?n
+
+@fp_ask_limit_kind action
+  params ?a
+  requires fp_askable ask_limit_kind ?a
+  adds fp_answered ask_limit_kind ?a
+  cost 1
+
+@fp_askable_ask_supposition_part rule
+  when fp_open_slot supposition none
+  when fp_settled aspects none
+  when fp_budget_left
+  then fp_askable ask_supposition_part none
+
+@fp_ask_supposition_part action
+  params ?a
+  requires fp_askable ask_supposition_part ?a
+  adds fp_answered ask_supposition_part ?a
+  cost 1
+
+@fp_askable_ask_second_part rule
+  when fp_open_slot second none
+  when fp_settled aspects none
+  when fp_budget_left
+  then fp_askable ask_second_part none
+
+@fp_ask_second_part action
+  params ?a
+  requires fp_askable ask_second_part ?a
+  adds fp_answered ask_second_part ?a
+  cost 1
+
+@fp_askable_ask_supposition_link rule
+  when fp_open_slot clause_link ?c
+  when fp_budget_left
+  then fp_askable ask_supposition_link ?c
+
+@fp_ask_supposition_link action
+  params ?a
+  requires fp_askable ask_supposition_link ?a
+  adds fp_answered ask_supposition_link ?a
+  cost 1
+
+@fp_askable_ask_statements rule
+  when fp_open_slot statements ?qq
+  when absent fp_prelude_open
+  when absent fp_open_slot clause_kind ?qq
+  when absent fp_open_slot clause_name ?qq
+  when fp_budget_left
+  then fp_askable ask_statements ?qq
+
+@fp_ask_statements action
+  params ?a
+  requires fp_askable ask_statements ?a
+  adds fp_answered ask_statements ?a
+  cost 1
+
+@fp_askable_ask_statement_check rule
+  when fp_open_slot statement_check ?qq
+  when fp_budget_ample
+  then fp_askable ask_statement_check ?qq
+
+@fp_ask_statement_check action
+  params ?a
+  requires fp_askable ask_statement_check ?a
+  adds fp_answered ask_statement_check ?a
+  cost 1
+
+@fp_askable_ask_definition rule
+  when fp_open_slot definition ?qq
+  when absent fp_open_slot statement_check ?qq
+  when fp_budget_ample
+  then fp_askable ask_definition ?qq
+
+@fp_ask_definition action
+  params ?a
+  requires fp_askable ask_definition ?a
+  adds fp_answered ask_definition ?a
+  cost 1
+
+@fp_askable_ask_restatement rule
+  when fp_open_slot restatement ?qq
+  when fp_budget_left
+  then fp_askable ask_restatement ?qq
+
+@fp_ask_restatement action
+  params ?a
+  requires fp_askable ask_restatement ?a
+  adds fp_answered ask_restatement ?a
+  cost 1
+
+@fp_askable_ask_two_sided rule
+  when fp_open_slot sided ?qq
+  when fp_budget_left
+  then fp_askable ask_two_sided ?qq
+
+@fp_ask_two_sided action
+  params ?a
+  requires fp_askable ask_two_sided ?a
+  adds fp_answered ask_two_sided ?a
+  cost 1
+
+@fp_askable_ask_sided_role rule
+  when fp_open_slot sided_role ?qq
+  when fp_budget_left
+  then fp_askable ask_sided_role ?qq
+
+@fp_ask_sided_role action
+  params ?a
+  requires fp_askable ask_sided_role ?a
+  adds fp_answered ask_sided_role ?a
+  cost 1
+
+@fp_askable_ask_places rule
+  when fp_open_slot places ?i
+  when fp_uses ?qq ?i
+  when absent fp_open_slot sided ?qq
+  when absent fp_open_slot sided_role ?qq
+  when absent fp_waits ?i
+  when absent fp_prelude_open
+  when fp_budget_left
+  then fp_askable ask_places ?i
+
+@fp_ask_places action
+  params ?a
+  requires fp_askable ask_places ?a
+  adds fp_answered ask_places ?a
+  cost 1
+
+@fp_askable_ask_coverage rule
+  when fp_open_slot coverage ?s
+  when absent fp_places_open
+  when fp_budget_ample
+  then fp_askable ask_coverage ?s
+
+@fp_ask_coverage action
+  params ?a
+  requires fp_askable ask_coverage ?a
+  adds fp_answered ask_coverage ?a
+  cost 1
+
+@fp_askable_ask_yes_no_switch rule
+  when fp_open_slot yes_no_switch ?qq
+  when absent fp_any_violation
+  when fp_budget_left
+  then fp_askable ask_yes_no_switch ?qq
+
+@fp_ask_yes_no_switch action
+  params ?a
+  requires fp_askable ask_yes_no_switch ?a
+  adds fp_answered ask_yes_no_switch ?a
+  cost 1
+
+@fp_askable_ask_rank_value rule
+  when fp_open_slot rank_value ?qq
+  when fp_budget_left
+  then fp_askable ask_rank_value ?qq
+
+@fp_ask_rank_value action
+  params ?a
+  requires fp_askable ask_rank_value ?a
+  adds fp_answered ask_rank_value ?a
+  cost 1
+
+@fp_askable_ask_connect rule
+  when fp_open_slot connect ?qq
+  when fp_budget_left
+  then fp_askable ask_connect ?qq
+
+@fp_ask_connect action
+  params ?a
+  requires fp_askable ask_connect ?a
+  adds fp_answered ask_connect ?a
+  cost 1
+
+@fp_askable_ask_truth rule
+  when fp_open_slot truth ?qq
+  when absent fp_statement_clause ?qq
+  when absent fp_open_slot connect ?qq
+  when fp_budget_left
+  then fp_askable ask_truth ?qq
+
+@fp_ask_truth action
+  params ?a
+  requires fp_askable ask_truth ?a
+  adds fp_answered ask_truth ?a
+  cost 1
+
+@fp_askable_ask_clause_truth rule
+  when fp_open_slot truth ?c
+  when fp_statement_clause ?c
+  when fp_budget_left
+  then fp_askable ask_clause_truth ?c
+
+@fp_ask_clause_truth action
+  params ?a
+  requires fp_askable ask_clause_truth ?a
+  adds fp_answered ask_clause_truth ?a
+  cost 1
+
+@fp_askable_ask_negated rule
+  when fp_open_slot negated ?qq
+  when fp_budget_left
+  then fp_askable ask_negated ?qq
+
+@fp_ask_negated action
+  params ?a
+  requires fp_askable ask_negated ?a
+  adds fp_answered ask_negated ?a
+  cost 1
+
+@fp_askable_ask_negated_statement rule
+  when fp_open_slot negated_statement ?qq
+  when fp_budget_ample
+  then fp_askable ask_negated_statement ?qq
+
+@fp_ask_negated_statement action
+  params ?a
+  requires fp_askable ask_negated_statement ?a
+  adds fp_answered ask_negated_statement ?a
+  cost 1
+
+@fp_askable_ask_chain rule
+  when fp_open_slot chain ?qq
+  when fp_budget_left
+  then fp_askable ask_chain ?qq
+
+@fp_ask_chain action
+  params ?a
+  requires fp_askable ask_chain ?a
+  adds fp_answered ask_chain ?a
+  cost 1
+
+@fp_askable_ask_scope rule
+  when fp_open_slot scope ?qq
+  when fp_budget_left
+  then fp_askable ask_scope ?qq
+
+@fp_ask_scope action
+  params ?a
+  requires fp_askable ask_scope ?a
+  adds fp_answered ask_scope ?a
+  cost 1
+
+@fp_askable_ask_quantifier rule
+  when fp_open_slot quantifier ?qq
+  when absent fp_open_slot scope ?qq
+  when fp_budget_left
+  then fp_askable ask_quantifier ?qq
+
+@fp_ask_quantifier action
+  params ?a
+  requires fp_askable ask_quantifier ?a
+  adds fp_answered ask_quantifier ?a
+  cost 1
+
+@fp_askable_ask_limit_target rule
+  when fp_open_slot limit_target ?n
+  when absent fp_open_slot negated_statement q
+  when absent fp_open_slot chain q
+  when fp_budget_left
+  then fp_askable ask_limit_target ?n
+
+@fp_ask_limit_target action
+  params ?a
+  requires fp_askable ask_limit_target ?a
+  adds fp_answered ask_limit_target ?a
+  cost 1
+
+@fp_askable_ask_options_target rule
+  when fp_open_slot options_target ?qq
+  when absent fp_limit_open
+  when fp_budget_left
+  then fp_askable ask_options_target ?qq
+
+@fp_ask_options_target action
+  params ?a
+  requires fp_askable ask_options_target ?a
+  adds fp_answered ask_options_target ?a
+  cost 1
+
+@fp_askable_ask_exclusion_target rule
+  when fp_open_slot exclusion_target ?n
+  when absent fp_limit_open
+  when fp_budget_left
+  then fp_askable ask_exclusion_target ?n
+
+@fp_ask_exclusion_target action
+  params ?a
+  requires fp_askable ask_exclusion_target ?a
+  adds fp_answered ask_exclusion_target ?a
+  cost 1
+
+@fp_askable_ask_measure rule
+  when fp_open_slot measure ?qq
+  when fp_budget_left
+  then fp_askable ask_measure ?qq
+
+@fp_ask_measure action
+  params ?a
+  requires fp_askable ask_measure ?a
+  adds fp_answered ask_measure ?a
+  cost 1
+
+@fp_askable_ask_period rule
+  when fp_open_slot period ?qq
+  when fp_budget_left
+  then fp_askable ask_period ?qq
+
+@fp_ask_period action
+  params ?a
+  requires fp_askable ask_period ?a
+  adds fp_answered ask_period ?a
+  cost 1
+
+@fp_askable_ask_dates rule
+  when fp_open_slot dates ?qq
+  when fp_budget_left
+  then fp_askable ask_dates ?qq
+
+@fp_ask_dates action
+  params ?a
+  requires fp_askable ask_dates ?a
+  adds fp_answered ask_dates ?a
+  cost 1
+
+@fp_askable_ask_reach_relation rule
+  when fp_open_slot reach_relation ?qq
+  when absent fp_prelude_open
+  when fp_budget_left
+  then fp_askable ask_reach_relation ?qq
+
+@fp_ask_reach_relation action
+  params ?a
+  requires fp_askable ask_reach_relation ?a
+  adds fp_answered ask_reach_relation ?a
+  cost 1
+
+@fp_askable_ask_reach_step rule
+  when fp_open_slot reach_step ?qq
+  when absent fp_open_slot reach_relation ?qq
+  when absent fp_prelude_open
+  when fp_budget_left
+  then fp_askable ask_reach_step ?qq
+
+@fp_ask_reach_step action
+  params ?a
+  requires fp_askable ask_reach_step ?a
+  adds fp_answered ask_reach_step ?a
+  cost 1
+
+@fp_askable_ask_reach_avoid rule
+  when fp_open_slot reach_avoid ?qq
+  when absent fp_open_slot reach_relation ?qq
+  when absent fp_prelude_open
+  when fp_budget_left
+  then fp_askable ask_reach_avoid ?qq
+
+@fp_ask_reach_avoid action
+  params ?a
+  requires fp_askable ask_reach_avoid ?a
+  adds fp_answered ask_reach_avoid ?a
+  cost 1
+
+@fp_askable_ask_ends rule
+  when fp_open_slot ends ?qq
+  when absent fp_open_slot reach_relation ?qq
+  when absent fp_open_slot reach_step ?qq
+  when absent fp_open_slot reach_avoid ?qq
+  when absent fp_open_slot fewest_step ?qq
+  when absent fp_prelude_open
+  when fp_budget_left
+  then fp_askable ask_ends ?qq
+
+@fp_ask_ends action
+  params ?a
+  requires fp_askable ask_ends ?a
+  adds fp_answered ask_ends ?a
+  cost 1
+
+@fp_askable_ask_fewest_step rule
+  when fp_open_slot fewest_step ?qq
+  when absent fp_prelude_open
+  when fp_budget_left
+  then fp_askable ask_fewest_step ?qq
+
+@fp_ask_fewest_step action
+  params ?a
+  requires fp_askable ask_fewest_step ?a
+  adds fp_answered ask_fewest_step ?a
+  cost 1
+
+@fp_askable_ask_puzzle_unknowns rule
+  when fp_open_slot puzzle_unknowns none
+  when fp_budget_left
+  then fp_askable ask_puzzle_unknowns none
+
+@fp_ask_puzzle_unknowns action
+  params ?a
+  requires fp_askable ask_puzzle_unknowns ?a
+  adds fp_answered ask_puzzle_unknowns ?a
+  cost 1
+
+@fp_askable_ask_puzzle_conditions rule
+  when fp_open_slot puzzle_conditions none
+  when fp_settled puzzle_unknowns none
+  when fp_budget_left
+  then fp_askable ask_puzzle_conditions none
+
+@fp_ask_puzzle_conditions action
+  params ?a
+  requires fp_askable ask_puzzle_conditions ?a
+  adds fp_answered ask_puzzle_conditions ?a
+  cost 1
+
+@fp_askable_ask_puzzle_aim rule
+  when fp_open_slot puzzle_aim none
+  when fp_settled puzzle_conditions none
+  when fp_budget_left
+  then fp_askable ask_puzzle_aim none
+
+@fp_ask_puzzle_aim action
+  params ?a
+  requires fp_askable ask_puzzle_aim ?a
+  adds fp_answered ask_puzzle_aim ?a
+  cost 1
+
+@fp_askable_ask_puzzle_objective rule
+  when fp_open_slot puzzle_objective none
+  when fp_budget_left
+  then fp_askable ask_puzzle_objective none
+
+@fp_ask_puzzle_objective action
+  params ?a
+  requires fp_askable ask_puzzle_objective ?a
+  adds fp_answered ask_puzzle_objective ?a
+  cost 1
+
+@fp_askable_ask_puzzle_claim rule
+  when fp_open_slot puzzle_claim none
+  when fp_budget_left
+  then fp_askable ask_puzzle_claim none
+
+@fp_ask_puzzle_claim action
+  params ?a
+  requires fp_askable ask_puzzle_claim ?a
+  adds fp_answered ask_puzzle_claim ?a
+  cost 1
+
+@fp_askable_ask_clause_statement rule
+  when fp_open_slot clause_statement ?c
+  when absent fp_prelude_open
+  when absent fp_open_slot statements q
+  when fp_budget_left
+  then fp_askable ask_clause_statement ?c
+
+@fp_ask_clause_statement action
+  params ?a
+  requires fp_askable ask_clause_statement ?a
+  adds fp_answered ask_clause_statement ?a
+  cost 1
+
+@fp_askable_ask_clause_name rule
+  when fp_open_slot clause_name ?c
+  when fp_budget_left
+  then fp_askable ask_clause_name ?c
+
+@fp_ask_clause_name action
+  params ?a
+  requires fp_askable ask_clause_name ?a
+  adds fp_answered ask_clause_name ?a
+  cost 1
+
+@fp_askable_ask_clause_kind rule
+  when fp_open_slot clause_kind ?c
+  when absent fp_prelude_open
+  when absent fp_open_slot statements q
+  when fp_budget_left
+  then fp_askable ask_clause_kind ?c
+
+@fp_ask_clause_kind action
+  params ?a
+  requires fp_askable ask_clause_kind ?a
+  adds fp_answered ask_clause_kind ?a
+  cost 1
+
+@fp_askable_ask_unused_name rule
+  when fp_open_slot unused_name ?n
+  when fp_budget_left
+  then fp_askable ask_unused_name ?n
+
+@fp_ask_unused_name action
+  params ?a
+  requires fp_askable ask_unused_name ?a
+  adds fp_answered ask_unused_name ?a
+  removes fp_assembly_failed
+  cost 2
+
+@fp_askable_ask_contrast rule
+  when fp_assembled
+  when fp_contrast_wanted
+  when absent fp_answered ask_contrast none
+  then fp_askable ask_contrast none
+
+@fp_ask_contrast action
+  params ?a
+  requires fp_askable ask_contrast ?a
+  adds fp_answered ask_contrast ?a
+  cost 1
+
+@fp_askable_ask_wrong_part rule
+  when fp_wrong_part_wanted
+  then fp_askable ask_wrong_part none
+
+@fp_ask_wrong_part action
+  params ?a
+  requires fp_askable ask_wrong_part ?a
+  adds fp_answered ask_wrong_part ?a
+  removes fp_assembled
+  removes fp_contrast_available
+  cost 1
+
+@fp_askable_ask_kind_again rule
+  when fp_open_slot kind_again none
+  when fp_budget_left
+  then fp_askable ask_kind_again none
+
+@fp_ask_kind_again action
+  params ?a
+  requires fp_askable ask_kind_again ?a
+  adds fp_answered ask_kind_again ?a
+  removes fp_assembled
+  removes fp_contrast_available
+  cost 2
+
+@fp_askable_ask_statements_again rule
+  when fp_open_slot restatements ?qq
+  when fp_budget_left
+  then fp_askable ask_statements_again ?qq
+
+@fp_ask_statements_again action
+  params ?a
+  requires fp_askable ask_statements_again ?a
+  adds fp_answered ask_statements_again ?a
+  removes fp_assembled
+  removes fp_contrast_available
+  cost 2
+
+@fp_askable_assemble rule
+  when fp_circuit_complete
+  when absent fp_assembled
+  when absent fp_assembly_failed
+  then fp_askable assemble none
+
+@fp_assemble action
+  params ?a
+  requires fp_askable assemble ?a
+  adds fp_answered assemble ?a
+  adds fp_assembled
+  cost 0
+
+@fp_askable_ask_places_again_asked_not_placed rule
+  when violation fp_asked_not_placed ?qq
+  when fp_main_instance ?qq ?i
+  when absent fp_reasked ?i
+  when fp_budget_left
+  then fp_askable ask_places_again ?i
+
+@fp_askable_ask_places_again_name_in_number_place rule
+  when violation fp_name_in_number_place ?i
+  when absent fp_reasked ?i
+  when fp_budget_left
+  then fp_askable ask_places_again ?i
+
+@fp_askable_ask_places_again_number_in_name_place rule
+  when violation fp_number_in_name_place ?i
+  when absent fp_reasked ?i
+  when fp_budget_left
+  then fp_askable ask_places_again ?i
+
+@fp_askable_ask_places_again_value_in_name_place rule
+  when violation fp_value_in_name_place ?i
+  when absent fp_reasked ?i
+  when fp_budget_left
+  then fp_askable ask_places_again ?i
+
+@fp_askable_ask_places_again_v_not_placed rule
+  when violation fp_v_not_placed ?qq
+  when fp_number_instance ?qq ?i
+  when absent fp_reasked ?i
+  when fp_budget_left
+  then fp_askable ask_places_again ?i
+
+@fp_askable_ask_places_again_validator rule
+  when fp_repair_target ?qq ?i
+  when fp_assembly_failed
+  when fp_repairs_left
+  when absent fp_reasked ?i
+  when fp_budget_left
+  then fp_askable ask_places_again ?i
+
+@fp_askable_ask_places_again_doubt rule
+  when fp_doubt places
+  when fp_uses q ?i
+  when fp_budget_ample
+  when absent fp_reasked ?i
+  when fp_budget_left
+  then fp_askable ask_places_again ?i
+
+@fp_ask_places_again action
+  params ?a
+  requires fp_askable ask_places_again ?a
+  adds fp_answered ask_places_again ?a
+  adds fp_reasked ?a
+  removes fp_assembly_failed
+  removes fp_assembled
+  removes fp_contrast_available
+  cost 2
+
+# The goal of every decision.
+@fp_formalized_goal goal
+  where fp_formalized

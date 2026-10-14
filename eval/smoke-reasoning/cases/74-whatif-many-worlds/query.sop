@@ -1,0 +1,53 @@
+@s1 fact
+  holds overloaded m1
+  status supposed
+
+@s2 fact
+  holds overloaded m2
+  status supposed
+
+@s3 fact
+  holds overloaded m3
+  status supposed
+
+@s4 fact
+  holds overloaded m4
+  status supposed
+
+@s5 fact
+  holds overloaded m5
+  status supposed
+
+@s6 fact
+  holds overloaded m6
+  status supposed
+
+@s7 fact
+  holds overloaded m7
+  status supposed
+
+@s8 fact
+  holds overloaded m8
+  status supposed
+
+@s9 fact
+  holds overloaded m9
+  status supposed
+
+@s10 fact
+  holds overloaded m10
+  status supposed
+
+@q query
+  where escalated ?z
+  select ?z
+  if $s1
+  if $s2
+  if $s3
+  if $s4
+  if $s5
+  if $s6
+  if $s7
+  if $s8
+  if $s9
+  if $s10

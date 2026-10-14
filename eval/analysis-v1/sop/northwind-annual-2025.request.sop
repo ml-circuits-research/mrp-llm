@@ -1,0 +1,13 @@
+# The analysis request for northwind-annual-2025 (a session circuit, not part of the document layer): a domain procedure written as
+# data, which defines the ratio KPI the analyst asks for and reuses the library's ratio rule.
+
+@nw_def_net_margin fact
+  holds ratio_definition net_margin_fy2025 net_profit_fy2025 revenue_fy2025
+  source "analysis request: net margin = net profit / revenue"
+
+@northwind_ratios procedure
+  members $an_k_ratio $nw_def_net_margin
+  description "Analysis: the financial ratios the analyst asks for in the Northwind report (net margin)."
+  scope "analysis, kpis"
+  source "eval/analysis-v1 analysis request"
+  report kpi_ratio ?name ?ratio

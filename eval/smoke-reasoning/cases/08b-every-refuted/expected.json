@@ -1,0 +1,10 @@
+{
+  "feature": "Quantifiers: every with an explicit counterexample",
+  "status": "refuted",
+  "complete": true,
+  "requires": [
+    "facts",
+    "every",
+    "classical_negation"
+  ]
+}

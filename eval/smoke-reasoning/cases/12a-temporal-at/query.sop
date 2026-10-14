@@ -1,0 +1,4 @@
+@q query
+  where works_at ann ?c
+  select ?c
+  at 2021-06-01

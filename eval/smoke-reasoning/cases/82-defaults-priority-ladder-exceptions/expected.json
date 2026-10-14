@@ -1,0 +1,27 @@
+{
+  "feature": "LLM stress: defaults on a priority ladder with an exception that disables a default, a strict contrary and equal-strength sources",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "a"
+    },
+    {
+      "x": "c"
+    },
+    {
+      "x": "f"
+    },
+    {
+      "x": "h"
+    },
+    {
+      "x": "i"
+    }
+  ],
+  "requires": [
+    "default",
+    "overrides",
+    "strict_contrary"
+  ]
+}

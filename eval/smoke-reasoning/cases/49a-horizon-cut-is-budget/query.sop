@@ -1,0 +1,7 @@
+@p policy
+  maxDepth 3
+
+@q query
+  mode plan
+  where at robot e
+  policy $p

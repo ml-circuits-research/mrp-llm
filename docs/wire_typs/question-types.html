@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p class="breadcrumb"><a href="../wire_types.html" target="_top">Wire help</a> / Question types</p><h1>Question types</h1>
+<p>The corpora (<a href="../specsLoader.html?spec=DS015-diversity-generator.md" target="_top">DS015</a>) label every message with one of eighteen question types, and every question word has exactly one formalization (<a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a>, "Question forms"). The model writes the question it reads and never rewrites it into another form: "all" stays universal, "how long" stays a duration, "why" stays an explanation. This page maps each type to its formalization, the host's answer and one executed example. The message is English (the input edge translates other languages first): content words are English relation lemmas (<code>"work at"</code>, <code>"live in"</code>) and common nouns, time expressions stay as written ("last year"), names stay as written ("Cătălin"), and the keywords are English. The examples are complete model outputs: they contain only what the message says, as strings, one keyword per line. How to write them is explained in <a href="model-guide.html">How the model writes</a>; each keyword is documented on <a href="query.html">query</a>, <a href="stated.html">stated</a>, <a href="constraint.html">constraint</a> and <a href="unclear.html">unclear</a>.</p>
+<h2>Overview</h2><div class="table-wrap"><table><thead><tr><th>Type</th><th>Typical wording</th><th>Formalization</th><th>Host answer</th></tr></thead><tbody class="question-types"><tr><td id="row-yes_no"><a href="#type-yes_no"><code>yes_no</code></a></td><td>&quot;Does …?&quot;, &quot;Is …?&quot;</td><td><code>where</code> match blocks, no <code>select</code></td><td><code>supported</code>, <code>refuted</code>, <code>both</code> or <code>unknown</code></td></tr><tr><td id="row-wh"><a href="#type-wh"><code>wh</code></a></td><td>&quot;Who …?&quot;, &quot;What …?&quot;, &quot;Which …?&quot;, &quot;Cine …?&quot;, &quot;Ce …?&quot;</td><td>the asked role as a <code>?variable</code>, <code>select</code> it</td><td>the bindings (entities)</td></tr><tr><td id="row-count"><a href="#type-count"><code>count</code></a></td><td>&quot;How many …?&quot;</td><td><code>mode count</code>, <code>select ?x</code></td><td>the number of distinct bindings</td></tr><tr><td id="row-universal"><a href="#type-universal"><code>universal</code></a></td><td>&quot;Is everyone …?&quot;, &quot;Does every …?&quot;, &quot;Is nobody …?&quot;</td><td><code>mode every</code>: <code>where</code> is the restriction (who is counted), <code>scope</code> what must hold for each member</td><td><code>refuted</code> with <code>counterexamples</code> when a known member fails; <code>supported</code> when every known member satisfies the scope; otherwise <code>unknown</code></td></tr><tr><td id="row-when"><a href="#type-when"><code>when</code></a></td><td>&quot;When …?&quot;</td><td><code>role time ?t</code> in the match block, <code>select ?t</code></td><td>the validity interval of the matched fact</td></tr><tr><td id="row-since_when"><a href="#type-since_when"><code>since_when</code></a></td><td>&quot;Since when …?&quot;</td><td>as <em>when</em>, plus <code>measure start</code></td><td>the interval's start (ISO)</td></tr><tr><td id="row-until_when"><a href="#type-until_when"><code>until_when</code></a></td><td>&quot;Until when …?&quot;</td><td>as <em>when</em>, plus <code>measure end</code></td><td>the interval's end, <code>open</code> when ongoing</td></tr><tr><td id="row-how_long"><a href="#type-how_long"><code>how_long</code></a></td><td>&quot;How long …?&quot;, &quot;For how long …?&quot;</td><td>as <em>when</em>, plus <code>measure duration</code></td><td>whole days up to the runtime clock (<code>unbounded</code> without a start)</td></tr><tr><td id="row-how_many_times"><a href="#type-how_many_times"><code>how_many_times</code></a></td><td>&quot;How many times …?&quot;, &quot;How often …?&quot;</td><td><code>mode count</code>, <code>select ?t</code>, <code>role time ?t</code></td><td>the number of distinct validity intervals</td></tr><tr><td id="row-where"><a href="#type-where"><code>where</code></a></td><td>&quot;Where …?&quot;, &quot;Where to/from …?&quot;, &quot;Unde …?&quot;, &quot;De unde …?&quot;</td><td><code>role location ?place</code> (<code>destination</code> for "where to", <code>source</code> for "where from")</td><td>the bindings</td></tr><tr><td id="row-why"><a href="#type-why"><code>why</code></a></td><td>&quot;Why …?&quot;, &quot;How come …?&quot;, &quot;De ce …?&quot;</td><td><code>mode explain</code> over the proposition (<code>negated</code> for "why not"), no <code>select</code></td><td>the status plus <code>explanation</code>: <code>derivation</code>, <code>recorded</code> or <code>none</code></td></tr><tr><td id="row-how"><a href="#type-how"><code>how</code></a></td><td>&quot;How does … travel/pay?&quot;, &quot;Cum …?&quot;</td><td><code>role instrument ?how</code></td><td>the bindings</td></tr><tr><td id="row-claim_check"><a href="#type-claim_check"><code>claim_check</code></a></td><td>&quot;True or false: …&quot;, &quot;Check this: …&quot;</td><td>a yes/no <code>query</code> about the quoted claim; the claim is <strong>not</strong> <code>stated</code></td><td>as a yes/no question</td></tr><tr><td id="row-multi"><a href="#type-multi"><code>multi</code></a></td><td>two or more questions in one message</td><td>one <code>query</code> per question (<code>@q</code>, <code>@q2</code>, …)</td><td>one answer per query</td></tr><tr><td id="row-numeric"><a href="#type-numeric"><code>numeric</code></a></td><td>&quot;Could …?&quot;, &quot;Can we fit …?&quot;, &quot;Încap …?&quot; over stated numbers</td><td><code>constraint</code> with <code>var</code>, <code>require</code>/<code>claim</code> and a required <code>task</code></td><td>proved, possible or optimal values</td></tr><tr><td id="row-none"><a href="#type-none"><code>none</code></a></td><td>a message that only asserts</td><td>one <code>stated</code> per proposition, no <code>query</code></td><td><code>status: context_updated</code>; asserted statements are carried in the conversation</td></tr><tr><td id="row-unclear"><a href="#type-unclear"><code>unclear</code></a></td><td>&quot;asdf qwer&quot;, &quot;ok&quot;, &quot;thanks&quot;, &quot;write a poem&quot;</td><td><code>unclear kind gibberish</code> or <code>kind no_request</code>, alone</td><td>a fixed reply asking to rephrase or to ask something</td></tr><tr><td id="row-ambiguous"><a href="#type-ambiguous"><code>ambiguous</code></a></td><td>a message that the text itself makes ambiguous</td><td><code>unclear kind ambiguous</code> with 2–4 <code>reading</code> lines, alone</td><td>the readings, numbered, and <code>next: choose_reading</code></td></tr></tbody></table></div>
+<p>Types combine with statements: any message may also carry <code>stated</code> propositions (assertions, suppositions, reported speech) and <code>assumed</code> ones (a chosen reading, a presupposition, a closure); see <a href="model-guide.html#boundary">stated or assumed?</a>. A proportional quantifier ("most", "half") has no form yet.</p>
+<section id="type-yes_no"><h2><code>yes_no</code>: Yes/no question</h2><p><strong>Formalization:</strong> <code>where</code> match blocks, no <code>select</code>. <strong>Host answer:</strong> <code>supported</code>, <code>refuted</code>, <code>both</code> or <code>unknown</code>.</p><p class="example-message"><span class="lang">EN</span> “Does Maria work at Acme?”</p><pre data-sop="current"><code>@q query
+  where match
+    relation &quot;work at&quot;
+    role subject &quot;Maria&quot;
+    role object &quot;Acme&quot;
+    polarity affirmed
+  end</code></pre><p>An explicitly negative question ("Does Maria not work at Acme?") asks about the negated proposition and is written with <code>polarity negated</code>; "… or not?" adds nothing and stays <code>affirmed</code>.</p></section>
+
+<section id="type-wh"><h2><code>wh</code>: Who / what / which</h2><p><strong>Formalization:</strong> the asked role as a <code>?variable</code>, <code>select</code> it. <strong>Host answer:</strong> the bindings (entities).</p><p class="example-message"><span class="lang">EN</span> “Who works at Acme?”</p><pre data-sop="current"><code>@q query
+  where match
+    relation &quot;work at&quot;
+    role subject ?who
+    role object &quot;Acme&quot;
+    polarity affirmed
+  end
+  select ?who</code></pre><p>The variable name is free (<code>?who</code>, <code>?x</code>); only its position matters.</p></section>
+
+<section id="type-count"><h2><code>count</code>: How many (things)</h2><p><strong>Formalization:</strong> <code>mode count</code>, <code>select ?x</code>. <strong>Host answer:</strong> the number of distinct bindings.</p><p class="example-message"><span class="lang">EN</span> “How many people work at Acme?”</p><pre data-sop="current"><code>@q query
+  mode count
+  select ?x
+  where match
+    relation &quot;work at&quot;
+    role subject ?x
+    role object &quot;Acme&quot;
+    polarity affirmed
+  end</code></pre><p>Counting occurrences in time ("how many times") is a different type: see <a href="#type-how_many_times">how_many_times</a>.</p></section>
+
+<section id="type-universal"><h2><code>universal</code>: All / every / each / no</h2><p><strong>Formalization:</strong> <code>mode every</code>: <code>where</code> is the restriction (who is counted), <code>scope</code> what must hold for each member. <strong>Host answer:</strong> <code>refuted</code> with <code>counterexamples</code> when a known member fails; <code>supported</code> when every known member satisfies the scope; otherwise <code>unknown</code>.</p><p class="example-message"><span class="lang">EN</span> “Is everyone who works at Acme certified?”</p><pre data-sop="current"><code>@q query
+  mode every
+  where match
+    relation &quot;work at&quot;
+    role subject ?m
+    role object &quot;Acme&quot;
+    polarity affirmed
+  end
+  scope match
+    relation &quot;be certified&quot;
+    role subject ?m
+    polarity affirmed
+  end</code></pre><p class="example-message"><span class="lang">EN</span> “Is nobody who works at Acme certified?”</p><pre data-sop="current"><code>@q query
+  mode every
+  where match
+    relation &quot;work at&quot;
+    role subject ?m
+    role object &quot;Acme&quot;
+    polarity affirmed
+  end
+  scope match
+    relation &quot;be certified&quot;
+    role subject ?m
+    polarity negated
+  end</code></pre><p>"No"/"nobody"/"niciun" is the only form with a <code>negated</code> scope; "all" is never rewritten as "nobody … not". The check covers the members known to the host.</p></section>
+
+<section id="type-when"><h2><code>when</code>: When</h2><p><strong>Formalization:</strong> <code>role time ?t</code> in the match block, <code>select ?t</code>. <strong>Host answer:</strong> the validity interval of the matched fact.</p><p class="example-message"><span class="lang">EN</span> “When did Ana work at Acme?”</p><pre data-sop="current"><code>@q query
+  select ?t
+  where match
+    relation &quot;work at&quot;
+    role subject &quot;Ana&quot;
+    role object &quot;Acme&quot;
+    role time ?t
+    polarity affirmed
+  end</code></pre><p>The model never writes a date it was not given; the host binds <code>?t</code> (host-only <code>span</code>) when the relation has no time argument of its own.</p></section>
+
+<section id="type-since_when"><h2><code>since_when</code>: Since when</h2><p><strong>Formalization:</strong> as <em>when</em>, plus <code>measure start</code>. <strong>Host answer:</strong> the interval's start (ISO).</p><p class="example-message"><span class="lang">EN</span> “Since when has Ana lived in Cluj?”</p><pre data-sop="current"><code>@q query
+  select ?t
+  measure start
+  where match
+    relation &quot;live in&quot;
+    role subject &quot;Ana&quot;
+    role location &quot;Cluj&quot;
+    role time ?t
+    polarity affirmed
+  end</code></pre></section>
+
+<section id="type-until_when"><h2><code>until_when</code>: Until when</h2><p><strong>Formalization:</strong> as <em>when</em>, plus <code>measure end</code>. <strong>Host answer:</strong> the interval's end, <code>open</code> when ongoing.</p><p class="example-message"><span class="lang">EN</span> “Until when did Ana live in Cluj?”</p><pre data-sop="current"><code>@q query
+  select ?t
+  measure end
+  where match
+    relation &quot;live in&quot;
+    role subject &quot;Ana&quot;
+    role location &quot;Cluj&quot;
+    role time ?t
+    polarity affirmed
+  end</code></pre></section>
+
+<section id="type-how_long"><h2><code>how_long</code>: How long</h2><p><strong>Formalization:</strong> as <em>when</em>, plus <code>measure duration</code>. <strong>Host answer:</strong> whole days up to the runtime clock (<code>unbounded</code> without a start).</p><p class="example-message"><span class="lang">EN</span> “How long did Ana work at Acme?”</p><pre data-sop="current"><code>@q query
+  select ?t
+  measure duration
+  where match
+    relation &quot;work at&quot;
+    role subject &quot;Ana&quot;
+    role object &quot;Acme&quot;
+    role time ?t
+    polarity affirmed
+  end</code></pre></section>
+
+<section id="type-how_many_times"><h2><code>how_many_times</code>: How many times</h2><p><strong>Formalization:</strong> <code>mode count</code>, <code>select ?t</code>, <code>role time ?t</code>. <strong>Host answer:</strong> the number of distinct validity intervals.</p><p class="example-message"><span class="lang">EN</span> “How many times did Ana visit Cluj?”</p><pre data-sop="current"><code>@q query
+  mode count
+  select ?t
+  where match
+    relation &quot;visit&quot;
+    role subject &quot;Ana&quot;
+    role destination &quot;Cluj&quot;
+    role time ?t
+    polarity affirmed
+  end</code></pre></section>
+
+<section id="type-where"><h2><code>where</code>: Where (to, from)</h2><p><strong>Formalization:</strong> <code>role location ?place</code> (<code>destination</code> for "where to", <code>source</code> for "where from"). <strong>Host answer:</strong> the bindings.</p><p class="example-message"><span class="lang">EN</span> “Where does Ana live?”</p><pre data-sop="current"><code>@q query
+  select ?place
+  where match
+    relation &quot;live in&quot;
+    role subject &quot;Ana&quot;
+    role location ?place
+    polarity affirmed
+  end</code></pre></section>
+
+<section id="type-why"><h2><code>why</code>: Why / how come</h2><p><strong>Formalization:</strong> <code>mode explain</code> over the proposition (<code>negated</code> for "why not"), no <code>select</code>. <strong>Host answer:</strong> the status plus <code>explanation</code>: <code>derivation</code>, <code>recorded</code> or <code>none</code>.</p><p class="example-message"><span class="lang">EN</span> “Why is Ana ill?”</p><pre data-sop="current"><code>@q query
+  mode explain
+  where match
+    relation &quot;be ill&quot;
+    role subject &quot;Ana&quot;
+    polarity affirmed
+  end</code></pre><p>The question states what is to be explained; the model does not guess the reason. A proposed reason in the message ("Is that because …?") is its own proposition: see the "because" convention in <a href="model-guide.html#because">How the model writes</a>.</p></section>
+
+<section id="type-how"><h2><code>how</code>: How (means or manner)</h2><p><strong>Formalization:</strong> <code>role instrument ?how</code>. <strong>Host answer:</strong> the bindings.</p><p class="example-message"><span class="lang">EN</span> “How does Ana pay?”</p><pre data-sop="current"><code>@q query
+  select ?how
+  where match
+    relation &quot;pay&quot;
+    role subject &quot;Ana&quot;
+    role instrument ?how
+    polarity affirmed
+  end</code></pre><p>"How many" and "how long" are not this type; they have their own forms above.</p></section>
+
+<section id="type-claim_check"><h2><code>claim_check</code>: Claim check</h2><p><strong>Formalization:</strong> a yes/no <code>query</code> about the quoted claim; the claim is <strong>not</strong> <code>stated</code>. <strong>Host answer:</strong> as a yes/no question.</p><p class="example-message"><span class="lang">EN</span> “True or false: Ana works at Acme.”</p><pre data-sop="current"><code>@q query
+  where match
+    relation &quot;work at&quot;
+    role subject &quot;Ana&quot;
+    role object &quot;Acme&quot;
+    polarity affirmed
+  end</code></pre><p>The user asks whether the claim holds; the user does not assert it, so it is not evidence.</p></section>
+
+<section id="type-multi"><h2><code>multi</code>: Several questions</h2><p><strong>Formalization:</strong> one <code>query</code> per question (<code>@q</code>, <code>@q2</code>, …). <strong>Host answer:</strong> one answer per query.</p><p class="example-message"><span class="lang">EN</span> “Does Ana work at Acme? And does she live in Cluj?”</p><pre data-sop="current"><code>@q query
+  where match
+    relation &quot;work at&quot;
+    role subject &quot;Ana&quot;
+    role object &quot;Acme&quot;
+    polarity affirmed
+  end
+
+@q2 query
+  where match
+    relation &quot;live in&quot;
+    role subject &quot;Ana&quot;
+    role location &quot;Cluj&quot;
+    polarity affirmed
+  end</code></pre><p>"she" has a single possible antecedent, so it is resolved to "Ana" without an assumption. With two candidates the model writes an <code>assumed</code> <code>relation "refer to"</code> or, when neither is preferable, <code>unclear kind ambiguous</code>.</p></section>
+
+<section id="type-numeric"><h2><code>numeric</code>: Numeric problem</h2><p><strong>Formalization:</strong> <code>constraint</code> with <code>var</code>, <code>require</code>/<code>claim</code> and a required <code>task</code>. <strong>Host answer:</strong> proved, possible or optimal values.</p><p class="example-message"><span class="lang">EN</span> “Each table seats 4 to 7 guests. Could one table seat 8?”</p><pre data-sop="current"><code>@c constraint
+  var ?x int 4 7
+  claim ?x equal 8
+  task possible</code></pre><p>Numbers come from the message; constraints need no linking. <code>task</code> is always written, because <code>prove</code> and <code>possible</code> give opposite readings.</p></section>
+
+<section id="type-none"><h2><code>none</code>: No question (statements only)</h2><p><strong>Formalization:</strong> one <code>stated</code> per proposition, no <code>query</code>. <strong>Host answer:</strong> <code>status: context_updated</code>; asserted statements are carried in the conversation.</p><p class="example-message"><span class="lang">EN</span> “Ana works at Acme.”</p><pre data-sop="current"><code>@s1 stated
+  relation &quot;work at&quot;
+  role subject &quot;Ana&quot;
+  role object &quot;Acme&quot;
+  polarity affirmed
+  certainty asserted</code></pre><p>The statement is never written to the knowledge repository.</p></section>
+
+<section id="type-unclear"><h2><code>unclear</code>: Unintelligible or no request</h2><p><strong>Formalization:</strong> <code>unclear kind gibberish</code> or <code>kind no_request</code>, alone. <strong>Host answer:</strong> a fixed reply asking to rephrase or to ask something.</p><p class="example-message"><span class="lang">EN</span> “asdf qwer zxcv”</p><pre data-sop="current"><code>@u unclear
+  kind gibberish</code></pre><p>A readable but odd message ("The square circle is red. Is it red?") is not unclear; it is formalized as written.</p></section>
+
+<section id="type-ambiguous"><h2><code>ambiguous</code>: Ambiguous with no preferable reading</h2><p><strong>Formalization:</strong> <code>unclear kind ambiguous</code> with 2–4 <code>reading</code> lines, alone. <strong>Host answer:</strong> the readings, numbered, and <code>next: choose_reading</code>.</p><p class="example-message"><span class="lang">EN</span> “Did Ana see the man with the telescope?”</p><pre data-sop="current"><code>@u unclear
+  kind ambiguous
+  reading &quot;Ana saw the man who had the telescope&quot;
+  reading &quot;Ana used the telescope to see the man&quot;</code></pre><p>When one reading is preferable, the model does not use <code>unclear</code>: it formalizes that reading and records the choice with <code>assumed</code> <code>basis disambiguation</code> (<a href="model-guide.html#readings">examples</a>).</p></section>
+<section id="type-words"><h2>Values, comparisons, superlatives, quantifiers, order and follow-ups</h2><p>These questions keep their corpus types (a value question is <code>wh</code>, a quantified one <code>universal</code>, a before/after one <code>yes_no</code>); the table lists their word forms (<a href="query.html#field-compare">compare</a>, <a href="query.html#field-rank">rank</a>, <a href="query.html#field-except">except</a>, <a href="query.html#field-quantifier">quantifier</a>, <a href="query.html#field-order">order</a>, <a href="query.html#field-fragment">fragment</a>).</p><p class="example-message"><span class="lang">EN</span> “How old is Ana?”</p><pre data-sop="current"><code>@q query
+  select ?age
+  where match
+    relation &quot;be old&quot;
+    role subject &quot;Ana&quot;
+    role object ?age
+    polarity affirmed
+  end</code></pre><p class="example-message"><span class="lang">EN</span> “Is Ana older than Maria?”</p><pre data-sop="current"><code>@q query
+  compare ?a above ?b
+  where all
+    match
+      relation &quot;be aged&quot;
+      role subject &quot;Ana&quot;
+      role object ?a
+      polarity affirmed
+    end
+    match
+      relation &quot;be aged&quot;
+      role subject &quot;Maria&quot;
+      role object ?b
+      polarity affirmed
+    end
+  end</code></pre><p class="example-message"><span class="lang">EN</span> “What is the cheapest project?”</p><pre data-sop="current"><code>@q query
+  select ?p
+  rank lowest ?price
+  where match
+    relation &quot;cost&quot;
+    role subject ?p
+    role object ?price
+    polarity affirmed
+  end</code></pre><p class="example-message"><span class="lang">EN</span> “Did at least two Delta Project members work at Alpha Lab?”</p><pre data-sop="current"><code>@q query
+  mode every
+  quantifier at_least 2
+  where match
+    relation &quot;member of project&quot;
+    role subject ?m
+    role object &quot;Delta Project&quot;
+    polarity affirmed
+  end
+  scope match
+    relation &quot;works at&quot;
+    role subject ?m
+    role object &quot;Alpha Lab&quot;
+    polarity affirmed
+  end</code></pre><p class="example-message"><span class="lang">EN</span> “Did Ana join the Delta Project after she started at Alpha Lab?”</p><pre data-sop="current"><code>@q query
+  order ?t1 after ?t2
+  where all
+    match
+      relation &quot;member of project&quot;
+      role subject &quot;Ana&quot;
+      role object &quot;Delta Project&quot;
+      role time ?t1
+      polarity affirmed
+    end
+    match
+      relation &quot;works at&quot;
+      role subject &quot;Ana&quot;
+      role object &quot;Alpha Lab&quot;
+      role time ?t2
+      polarity affirmed
+    end
+  end</code></pre><p>Without a previous question in the conversation the host answers a fragment with a clarification; with one, it completes the previous question with the roles the fragment gives.</p></section>
+<section id="type-clauses"><h2>Conditions, chains, temporal clauses and partial understanding</h2><p>These forms combine with any question type above. A condition or a temporal clause is its own <code>stated</code> wire that the query names with a <a href="syntax.html#clause-links">link line</a>; a question about the answers of another is chained with <code>$q</code>; a part of the message the model cannot write is an <a href="unparsed.html"><code>unparsed</code></a> span.</p>
+<h3 id="form-conditional">Conditional question: <code>if $s</code></h3><p class="example-message"><span class="lang">EN</span> “If Maria works at Alpha Lab, who works at Alpha Lab?”</p><pre data-sop="current"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  certainty supposed
+
+@q query
+  select ?who
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+  if $s1</code></pre><p><strong>Host answer:</strong> the question is answered with the supposition, and only this question uses it (<code>clause_links</code> <code>applied</code>, <code>condition_scoped</code>); the answer is hypothetical and names the condition. "Unless" is <code>unless $s1</code> with the clause written affirmed.</p>
+<h3 id="form-chained">A question on another question: <code>$q</code></h3><p><strong>Host answer:</strong> both questions; the second is joined with the first (the host inlines q's conditions with a fresh variable). The first query selects exactly one variable.</p>
+<h3 id="form-temporal-clause">A temporal clause: <code>before</code>, <code>after</code>, <code>when</code>, <code>while</code></h3><p class="example-message"><span class="lang">EN</span> “Who worked at Alpha Lab before Maria started there on 1 March 2026?”</p><pre data-sop="current"><code>@s1 stated
+  relation "work at"
+  role subject "Maria"
+  role object "Alpha Lab"
+  polarity affirmed
+  valid from "1 March 2026"
+  certainty asserted
+
+@q query
+  select ?who
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+  before $s1</code></pre><p><strong>Host answer:</strong> the clause has a readable time, so <code>before $s1</code> becomes the query period <strong>until</strong> 1 March 2026 (<code>effect: "until"</code>); <code>after</code> gives <em>from</em>, <code>when</code>/<code>while</code> give <em>during</em>. "Before the audit on 1 March 2026" has the same form: the audit clause is a <code>stated</code> wire with <code>role time "1 March 2026"</code>, and the host needs to know its relation. An undated clause leaves the link <code>not_checked</code>, and the question is answered without it. A question that asks <em>about</em> the order of two events uses <a href="#type-words"><code>order</code></a> instead.</p>
+<h3 id="form-partial">A partially understood question: <code>unparsed</code></h3><p class="example-message"><span class="lang">EN</span> “Who worked at Alpha Lab on the day of the big outage?”</p><pre data-sop="current"><code>@q query
+  select ?who
+  where match
+    relation "work at"
+    role subject ?who
+    role object "Alpha Lab"
+    role time ?t
+    polarity affirmed
+  end
+
+@u1 unparsed
+  span "the day of the big outage"
+  near $q
+  hint time</code></pre><p><strong>Host answer:</strong> the host tries to repair each span (a date, a number, a conversation reference, a name, an English synonym); a repaired span fills its variable, and an unresolved one becomes one targeted question ("Which date or period do you mean by "the day of the big outage"?"), reported in <code>unresolved_spans</code>.</p></section>
+<section id="invalid"><h2>Common mistakes the parser rejects</h2><pre data-sop="invalid" data-check="parse" data-error="explain_no_select"><code>@q query
+  mode explain
+  select ?who
+  where match
+    relation &quot;work at&quot;
+    role subject ?who
+    role object &quot;Acme&quot;
+    polarity affirmed
+  end</code></pre><p>"Why" asks about one proposition; "Who works at Acme, and why?" is two queries.</p><pre data-sop="invalid" data-check="compile" data-error="measure_needs_time_variable"><code>@q query
+  select ?who
+  measure duration
+  where match
+    relation &quot;work at&quot;
+    role subject ?who
+    role object &quot;Acme&quot;
+    polarity affirmed
+  end</code></pre><p>"How long" measures a time variable written as <code>role time ?t</code>, not an entity.</p><pre data-sop="invalid" data-check="parse" data-error="every_needs_scope"><code>@q query
+  mode every
+  where match
+    relation &quot;work at&quot;
+    role subject ?m
+    role object &quot;Acme&quot;
+    polarity affirmed
+  end</code></pre><p>A universal question states what must hold for each member.</p></section>
+<h2>Sources</h2><p>Question types: <code>probably_obsolete/tinyLLMExperiments/tests/data/formalizer-corpus.test.mjs</code> (<code>QUESTION_TYPES</code>) and the generator under <code>tools/datasets/diversity/</code>; forms and validation: <code>sop/parser.mjs</code> (<code>SPEC.query</code>); semantics: <code>reasoning/bridge/reason.mjs</code> (<code>evaluate</code>) and <code>reasoning/strategies/js-reference/forms.mjs</code> (<code>quantifiedStatus</code>, <code>numericValue</code>); host linking and time: <code>sop/linking.mjs</code>.</p><section id="reasoning-question-forms"><h2>Reasoning question forms (not corpus types)</h2><p>Five further question forms are modes of a <code>query</code>: <code>why_not</code> ("why can't I ...?"), <code>plan</code> ("how do I ...?"), <code>abduce</code> ("what could explain ...?"), <code>conform</code> ("was the procedure followed?") and <code>procedure</code> ("what is the procedure for ...?"). The model writes the question as the <code>mode</code> word with a <code>match</code> block in strings; it never writes <code>via</code>, <code>trace</code> or an identifier, because the host supplies them. A form that no strategy computes is answered <code>not_computable</code> with the formalization shown. They are not among the eighteen corpus labels above. See <a href="query-modes.html">Query modes</a>.</p><h3 id="rules-v27">The circuits for these forms</h3><p>Every example below is the circuit written for the message; the wire-help test executes it.</p><p class="example-message"><span class="lang">EN</span> “Why can't I hard-reset the router?”</p><pre data-sop="current"><code>@q query
+  mode why_not
+  where match
+    relation "hard-reset"
+    role subject "the user"
+    role object "the router"
+    polarity affirmed
+  end</code></pre><p>A modal negative "why" asks what blocks the claim; the claim is written affirmed and the modal is the mode. <code>hard-reset</code> stays one word.</p><p class="example-message"><span class="lang">EN</span> “What is stopping Ana from joining the project?”</p><pre data-sop="current"><code>@q query
+  mode why_not
+  where match
+    relation "join"
+    role subject "Ana"
+    role object "the project"
+    polarity affirmed
+  end</code></pre><p>The blocked clause is the claim.</p><p class="example-message"><span class="lang">EN</span> “How do I reset the router?”</p><pre data-sop="current"><code>@q query
+  mode plan
+  where match
+    relation "reset"
+    role subject "the user"
+    role object "the router"
+    polarity affirmed
+  end</code></pre><p>The asker is first person (<code>"the user"</code>); the goal is the claim.</p><p class="example-message"><span class="lang">EN</span> “What are the steps to reset the router?”</p><pre data-sop="current"><code>@q query
+  mode plan
+  where match
+    relation "reset"
+    role object "the router"
+    polarity affirmed
+  end</code></pre><p>A step or way noun with a to-clause is a plan question; there is no asker.</p><p class="example-message"><span class="lang">EN</span> “What could explain the outage?”</p><pre data-sop="current"><code>@q query
+  mode abduce
+  where match
+    relation "occur"
+    role subject "the outage"
+    polarity affirmed
+  end</code></pre><p>A modal "could" or "might" with explain, cause or account for asks for hypotheses; the observation is the claim, and a noun observation is the subject of <code>occur</code>.</p><p class="example-message"><span class="lang">EN</span> “What is the procedure for resetting the router?”</p><pre data-sop="current"><code>@q query
+  mode procedure
+  where match
+    relation "reset"
+    role object "the router"
+    polarity affirmed
+  end</code></pre><p>The task is the claim.</p><p class="example-message"><span class="lang">EN</span> “Did we follow the reset procedure?”</p><pre data-sop="current"><code>@q query
+  mode conform
+  where match
+    relation "follow"
+    role subject "we"
+    role object "the reset procedure"
+    polarity affirmed
+  end</code></pre><p>Following, observing or violating a procedure, or being compliant; the match stays literal and the performed trace is the host's.</p><p class="example-message"><span class="lang">EN</span> “Which teams have only certified players?”</p><pre data-sop="current"><code>@q query
+  mode every
+  select ?g
+  where match
+    relation "be a player of"
+    role subject ?m
+    role object ?g
+    polarity affirmed
+  end
+  scope match
+    relation "be certified"
+    role subject ?m
+    polarity affirmed
+  end</code></pre><p>A grouped universal: the groups are selected, the members are the restriction, the property is the scope.</p><p class="example-message"><span class="lang">EN</span> “Both at once: does Liam grow lavender, and is he the chef at the Bistrița Arena?”</p><pre data-sop="current"><code>@q query
+  where all
+    match
+      relation "grow"
+      role subject "Liam"
+      role object "lavender"
+      polarity affirmed
+    end
+    match
+      relation "be the chef at"
+      role object "the Bistrița Arena"
+      role subject "Liam"
+      polarity affirmed
+    end
+  end</code></pre><p>"Both at once" or "both … and" makes the yes/no clauses of the sentence one conjunction.</p><p class="example-message"><span class="lang">EN</span> “Does the cottage cost more than 30000 lei?”</p><pre data-sop="current"><code>@q query
+  mode exists
+  where match
+    relation "cost"
+    role subject "the cottage"
+    role object ?price
+    polarity affirmed
+  end
+  compare ?price above 30000</code></pre><p>A measured amount (cost, price, weigh) is a value variable; the unit is consumed.</p><p class="example-message"><span class="lang">EN</span> “Did Ana work at Alpha Lab at any point in 2025?”</p><pre data-sop="current"><code>@q query
+  where match
+    relation "work at"
+    role subject "Ana"
+    role object "Alpha Lab"
+    polarity affirmed
+  end
+  overlaps "2025"</code></pre><p>"At any point in" asks about some instant of the period (<code>overlaps</code>).</p><p class="example-message"><span class="lang">EN</span> “What is the reason that Rafael does not qualify for the bonus?”</p><pre data-sop="current"><code>@q query
+  mode explain
+  where match
+    relation "qualify for"
+    role subject "Rafael"
+    role object "the bonus"
+    polarity negated
+  end</code></pre><p>The reason clause is explained; a negated clause stays negated.</p><p class="example-message"><span class="lang">EN</span> “Who is a parent of a parent of Ana?”</p><pre data-sop="current"><code>@q query
+  select ?x
+  where all
+    match
+      relation "be a parent of"
+      role object ?m
+      role subject ?x
+      polarity affirmed
+    end
+    match
+      relation "be a parent of"
+      role subject ?m
+      role object "Ana"
+      polarity affirmed
+    end
+  end</code></pre><p>A repeated relational noun chains through a variable.</p><p class="example-message"><span class="lang">EN</span> “Is Javier García still playing for Olimpia Sighișoara?”</p><pre data-sop="current"><code>@a1 assumed
+  relation "play for"
+  role subject "Javier García"
+  role object "Olimpia Sighișoara"
+  polarity affirmed
+  basis implicature
+
+@q query
+  where match
+    relation "play for"
+    role subject "Javier García"
+    role object "Olimpia Sighișoara"
+    polarity affirmed
+  end</code></pre><p>"Still" and "again" presuppose the proposition: an <code>assumed</code> wire with <code>basis implicature</code>.</p><p class="example-message"><span class="lang">EN</span> “Who is Ada Lovelace?”</p><pre data-sop="current"><code>@q query
+  select ?x
+  where match
+    relation "be"
+    role object ?x
+    role subject "Ada Lovelace"
+    polarity affirmed
+  end</code></pre><p>The copula, identity: the bare relation "be" with the asked object; the host binds it to the description predicate of the lexicon (DS014 "The copula").</p><p class="example-message"><span class="lang">EN</span> “Is Paris a city?”</p><pre data-sop="current"><code>@q query
+  where match
+    relation "be a"
+    role object "city"
+    role subject "Paris"
+    polarity affirmed
+  end</code></pre><p>The copula, class membership: "be a" with the class noun as the object; the host reports the lexicon's class and occupation predicates as readings.</p><p class="example-message"><span class="lang">EN</span> “Where is Ana?”</p><pre data-sop="current"><code>@q query
+  select ?place
+  where match
+    relation "be"
+    role subject "Ana"
+    role location ?place
+    polarity affirmed
+  end</code></pre><p>The copula, location: "be" with a location variable.</p><p class="example-message"><span class="lang">EN</span> “Who is the CEO of Acme?”</p><pre data-sop="current"><code>@q query
+  select ?x
+  where match
+    relation "be the CEO of"
+    role object "Acme"
+    role subject ?x
+    polarity affirmed
+  end</code></pre><p>The copula, a role relation: an ordinary relation phrase.</p><p class="example-message"><span class="lang">EN</span> “Does any employee of Alpha Lab speak German?”</p><pre data-sop="current"><code>@q query
+  mode exists
+  where all
+    match
+      relation "be an employee of"
+      role subject ?x
+      role object "Alpha Lab"
+      polarity affirmed
+    end
+    match
+      relation "speak"
+      role subject ?x
+      role object "German"
+      polarity affirmed
+    end
+  end</code></pre><p>"Any" on a subject noun is an existential variable restricted to the noun's class.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

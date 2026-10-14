@@ -1,0 +1,10 @@
+{
+  "feature": "Bulk three-way join over 3,000 generated facts, exact count over closed relations",
+  "status": "supported",
+  "complete": true,
+  "count": 740,
+  "requires": [
+    "rules",
+    "count"
+  ]
+}

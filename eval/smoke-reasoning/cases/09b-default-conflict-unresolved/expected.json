@@ -1,0 +1,9 @@
+{
+  "feature": "Defaults: two equal-priority defaults disagree (Nixon diamond)",
+  "status": "both",
+  "complete": true,
+  "requires": [
+    "default",
+    "conflict"
+  ]
+}

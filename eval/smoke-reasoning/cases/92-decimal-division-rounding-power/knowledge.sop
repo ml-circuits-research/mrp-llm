@@ -1,0 +1,41 @@
+@amount predicate
+  args subject:entity object:rational
+  closed true
+@result predicate
+  args subject:entity object:rational
+@a1 fact
+  holds amount a 19.99
+@a2 fact
+  holds amount b -2.75
+@a3 fact
+  holds amount c 7
+@a4 fact
+  holds amount d 0.1
+@r_quarter rule
+  when amount ?i ?x
+  when compute ?z ?x divided_by 4
+  then result quarter ?z
+@r_half_step rule
+  when amount ?i ?x
+  when compute ?z ?x rounded_to 0.5
+  then result nearest_half ?z
+@r_up rule
+  when amount ?i ?x
+  when compute ?z ?x rounded_up_to 1
+  then result up_whole ?z
+@r_down rule
+  when amount ?i ?x
+  when compute ?z ?x rounded_down_to 0.25
+  then result down_quarter ?z
+@r_sq rule
+  when amount d ?x
+  when compute ?z ?x power 2
+  then result square_of_tenth ?z
+@r_whole rule
+  when amount c ?x
+  when compute ?z ?x whole_divided_by 2
+  then result whole_half ?z
+@r_mod rule
+  when amount c ?x
+  when compute ?z ?x modulo 4
+  then result remainder ?z

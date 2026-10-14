@@ -1,0 +1,8 @@
+# expect: bad_enum
+@r1 rule
+  when a ?x
+  then b ?x
+@am amendment
+  of $r1
+  proposed_by user
+  approval accepted

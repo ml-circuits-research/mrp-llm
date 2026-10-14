@@ -1,0 +1,47 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#solve" target="_top">Wire index</a> · <a href="fact.html">fact</a> · <a href="query.html">query</a> · <a href="cnl.html">cnl</a></p><h1><code>solve</code></h1><p><code>solve</code> evaluates a <code>query</code> against selected evidence or a <code>constraint</code> against numeric requirements. The model's question is not its answer: the reasoning strategy produces a checked result, and optional output ports project values only when justified. A host-approved metaprogram generates this operation from a model-authored declarative request; the small model cannot author <code>solve</code> directly. Trusted general-runtime circuits may still use it explicitly.</p>
+<h2>Every accepted keyword</h2><table><thead><tr><th>Keyword</th><th>Cardinality / default</th><th>Accepted value and concrete effect</th></tr></thead><tbody>
+<tr><td id="field-query"><code>query</code></td><td>At most once; exactly one of query/constraint required</td><td><code>$query</code> value; relational route creates internal linking/reasoning against local data and/or selected session repository view.</td></tr>
+<tr><td id="field-constraint"><code>constraint</code></td><td>At most once; exclusive with query</td><td><code>$constraint</code> value; finite numeric route, no generated relational linker. <code>data</code> and <code>assume</code> forbidden on this route.</td></tr>
+<tr><td id="field-data"><code>data</code></td><td>At most once; default none; query route only</td><td><code>$fact</code>, <code>$rule</code> or packed array of admitted facts/approved rules; temporary evidence for this evaluation, not session recording.</td></tr>
+<tr><td id="field-backend"><code>backend</code></td><td>At most once; default <code>auto</code></td><td>Relational <code>auto</code>/<code>js</code>/<code>prolog</code> or numeric <code>auto</code>/<code>js</code>/<code>z3</code>. An explicit non-JS backend (<code>prolog</code> or <code>z3</code>) without a <code>reasoning</code> field implicitly selects the <code>advanced</code> strategy; write <code>reasoning advanced</code> explicitly so the route is visible. The reference strategy returns <code>unsupported</code> (<code>reference_backend_mismatch</code>) for an explicit external backend, and an unavailable requested backend is reported as <code>unsupported</code> with that backend named, never substituted.</td></tr>
+<tr><td id="field-strategy"><code>strategy</code></td><td>At most once; default host retrieval strategy</td><td>Registered retrieval strategy name; selects relational linker memory search, subject to host allowlist; not a reasoning strategy.</td></tr>
+<tr><td id="field-assume"><code>assume</code></td><td>At most once; query route only</td><td><code>$fact</code> (typically <code>source assumption</code>) or a flat pack of such conditional facts; tags temporary assumptions and checks query time/opposing evidence. An assumed fact stays conditional, never a sourced fact or session write.</td></tr>
+<tr><td id="field-reasoning"><code>reasoning</code></td><td>At most once; default host reasoning strategy, or <code>advanced</code> when an explicit non-JS <code>backend</code> is present</td><td>Registered <code>reference</code>/<code>advanced</code> reasoning strategy subject to host policy; evaluates relational or numeric route.</td></tr>
+<tr><td id="field-output"><code>output</code></td><td>Repeatable; default none; mode default <code>one</code></td><td><code>?name [one|many|rows|count|status]</code>. An omitted mode means <code>one</code>, which turns several answers into <code>ambiguous</code>; write the mode explicitly. Creates checked deferred <code>$name</code>; <code>one</code> requires unique answer, <code>many</code> returns selected values, <code>rows</code> correlated assignments, <code>count</code> a count-query number, <code>status</code> result status.</td></tr>
+<tr><td id="field-after"><code>after</code></td><td>Repeatable; default none</td><td><code>$wire</code> dependency per line; orders execution after that wire, especially a <code>remember</code> receipt, but does not itself supply evidence.</td></tr></tbody></table>
+<h2>Solve using a local claim, without recording it</h2><p><code>@catalog</code> constructs an unverified supplied claim; <code>@question</code> requires <code>on_shelf ?book shelf_north</code>; <code>data $catalog</code> admits that claim only for this one evaluation. If it is the sole complete matching fact, <code>$book</code> is <code>book_a</code>. No session write occurs.</p><pre data-sop="current"><code>@catalog fact
+  holds on_shelf book_a shelf_north
+  valid timeless
+  source "catalog card 17"
+
+@question query
+  where on_shelf ?book shelf_north
+  select ?book
+  mode select
+
+@answer solve
+  query $question
+  data $catalog
+  output ?book one</code></pre>
+<h2>Explicit negative evidence and status</h2><pre data-sop="current"><code>@negative fact
+  holds not open door_a
+  valid timeless
+
+@question query
+  where not open door_a
+  mode exists
+
+@check solve
+  query $question
+  data $negative
+  output ?state status</code></pre><p>This asks for explicit negative support, not absence of positive evidence. <code>?state</code> is a status port, not a query-selected variable. Incomplete/conflicting answers remain statuses rather than invented values.</p>
+<h2>Invalid input kind</h2><pre data-sop="invalid" data-check="runtime" data-error="link data must contain fact/rule wires"><code>@question query
+  where open door_a
+  mode exists
+
+@message clarify
+  text "Please identify the door."
+
+@bad solve
+  query $question
+  data $message</code></pre><p>The parser accepts the fields, but the linker rejects a clarification message as fact/rule evidence. See <a href="binding.html">binding</a> for output semantics.</p><p><strong>Implementation sources:</strong> <code>sop/parser.mjs</code> (<code>SPEC.solve</code>), <code>sop/runtime.mjs</code> (<code>solve</code> route), <code>sop/outputs.mjs</code> (<code>selectOutput</code>), <code>reasoning/bridge/reason.mjs</code> (<code>evaluate</code>).</p></main><script type="module" src="help-page.mjs"></script></body></html>

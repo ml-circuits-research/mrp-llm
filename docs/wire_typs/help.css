@@ -1,0 +1,29 @@
+.wire-help { width: 100%; padding: 1rem 1rem 3rem; background: white; overflow-wrap: anywhere; }
+.wire-help h1 { font-size: 2rem; }
+.wire-help h2 { margin-top: 2rem; padding-top: .7rem; border-top: 1px solid #dce6eb; }
+.wire-help pre { white-space: pre; overflow: auto; max-width: 100%; }
+.wire-help pre code { overflow-wrap: normal; }
+.wire-help table { border-collapse: collapse; margin: 1rem 0; }
+.wire-help th, .wire-help td { border: 1px solid #dce6eb; padding: .65rem; text-align: left; line-height: 1.5; }
+.wire-help th { background: #eaf0f4; }
+.wire-help table code { white-space: normal; }
+.wire-help th:first-child, .wire-help td:first-child { min-width: 7rem; overflow-wrap: normal; }
+.wire-help td:first-child code { white-space: nowrap; }
+.wire-help th:nth-child(2), .wire-help td:nth-child(2) { min-width: 9rem; overflow-wrap: normal; }
+.wire-help .note, .wire-help .warning, .wire-help .status, .wire-help .review-note, .wire-help aside { padding: .8rem 1rem; border-left: 4px solid #bf671e; background: #fff7e8; margin: 1rem 0; }
+.wire-help .proposal { padding: .8rem 1rem; border-left: 4px solid #145c80; background: #edf7fb; }
+.wire-help dt { font-weight: 700; margin-top: .65rem; }
+.wire-help dd { margin: .25rem 0 .8rem 1rem; }
+.wire-help :target { scroll-margin-top: 1rem; }
+.wire-help pre[data-sop]::before { display: block; margin-bottom: .5rem; font: 600 .78rem/1.3 system-ui, sans-serif; white-space: normal; }
+.wire-help pre[data-sop="current"]::before { content: "Valid example"; color: #1d6b3a; }
+.wire-help pre[data-sop="ontology"]::before { content: "Valid host ontology declaration"; color: #1d6b3a; }
+.wire-help pre[data-sop="invalid"]::before { content: "Invalid: rejected at the " attr(data-check) " stage"; color: #9c2f1f; }
+.wire-help pre[data-sop="invalid"][data-error]::before { content: "Invalid: rejected at the " attr(data-check) " stage with \201C" attr(data-error) "\201D"; }
+.wire-help pre[data-sop="invalid"][data-status]::before { content: "Invalid: the " attr(data-check) " reports " attr(data-status); }
+@media (max-width: 700px) {
+  .wire-help { padding: .8rem .8rem 3rem; }
+  .wire-help h1 { font-size: 1.65rem; }
+  .wire-help table { display: block; overflow-x: auto; }
+  .wire-help th, .wire-help td { min-width: 8rem; }
+}

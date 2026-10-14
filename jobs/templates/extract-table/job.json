@@ -1,0 +1,19 @@
+{
+  "name": "extract-table",
+  "description": "Extract records with fixed columns from text chunks; every record carries the exact quote it comes from.",
+  "kind": "extract-table",
+  "inputs": {"attachments": {"chunkChars": "{{params.chunk_chars}}"}, "promptFields": ["text"]},
+  "packing": {"itemsPerCall": 1},
+  "ladder": ["small", "medium", "good"],
+  "quality": {"minPassRate": 0.9, "maxAuditPer100": 10},
+  "output": {"format": "jsonl", "fields": {"record": "object", "quote": "string"}, "minRecords": 0},
+  "checks": "checks.mjs",
+  "repairRounds": 1,
+  "concurrency": 3,
+  "budget": {"usd": 0.3, "credits": 40},
+  "stages": [
+    {"name": "pilot", "items": 5, "stop": {"maxEmptyRate": 0.3, "maxRejectRate": 0.4, "minItems": 5}},
+    {"name": "all", "items": null, "stop": {"maxRejectRate": 0.2}}
+  ],
+  "audit": {"rate": 0.1, "role": "auditor", "instructions": "audit.md", "severity": "high"}
+}

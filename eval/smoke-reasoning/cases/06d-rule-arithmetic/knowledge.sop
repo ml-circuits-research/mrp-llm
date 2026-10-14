@@ -1,0 +1,23 @@
+@order_line predicate
+  args subject:entity object:integer location:integer
+@line_total predicate
+  args subject:entity object:integer
+@big_order predicate
+  args subject:entity
+
+@l1 fact
+  holds order_line o1 3 40
+@l2 fact
+  holds order_line o2 5 10
+@l3 fact
+  holds order_line o3 2 60
+
+@r_total rule
+  when order_line ?o ?q ?p
+  when compute ?t ?q times ?p
+  then line_total ?o ?t
+
+@r_big rule
+  when line_total ?o ?t
+  when compare ?t above 100
+  then big_order ?o

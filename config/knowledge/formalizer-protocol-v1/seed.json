@@ -1,0 +1,6 @@
+{
+  "name": "Formalizer protocol (InternalReasoningStepByStep)",
+  "description": "The questioning protocol of the InternalReasoningStepByStep formalization strategy as wires: the questions (actions with their texts, choices and the slots they settle), the slot rules, early exits (defaults), consistency (integrity) and the goal `formalized`. The JS oracle plans the next question over these wires; code asserts observations from structure and memory data and assembles the circuit. Loaded by the strategy, never imported by a chat base memory. Imports core-min.",
+  "imports": ["core-min"],
+  "chat": false
+}

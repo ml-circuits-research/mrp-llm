@@ -1,0 +1,110 @@
+# analysis-core-v1: temporal consistency. An end before its start, a stated order of events against their dates, an age that does not
+# match the birth year at the document's reference year, an age outside the plausible range, a person taking part before being born.
+
+@has_date_error predicate
+  args none
+  closed true
+  label en "has date error"
+  description "Some date, order or age of the document is inconsistent."
+
+@an_end_before_start integrity
+  never all
+    starts_on ?e ?s
+    ends_on ?e ?f
+    compare ?f below ?s
+  end
+  witness ?e
+  message "something ends before it starts"
+  severity error
+  source "analysis-core-v1: temporal consistency (an end is not before its start)"
+
+@an_order_against_dates integrity
+  never all
+    precedes ?a ?b
+    starts_on ?a ?sa
+    starts_on ?b ?sb
+    compare ?sb below ?sa
+  end
+  witness ?a
+  message "an event said to come first starts after the event it is said to precede"
+  severity error
+  source "analysis-core-v1: temporal consistency (stated order against the dates)"
+
+@an_age_mismatch integrity
+  never all
+    born_in_year ?p ?y
+    age_years ?p ?n
+    as_of_year ?r
+    compute ?expected ?r minus ?y
+    compute ?d1 ?expected minus ?n
+    compute ?d2 ?n minus ?expected
+    compute ?d ?d1 maximum_with ?d2
+    analysis_parameter age_tolerance ?tol
+    compare ?d above ?tol
+  end
+  witness ?p
+  message "an age does not match the birth year at the document's reference year"
+  severity error
+  source "analysis-core-v1: temporal consistency (age = reference year - birth year, within the tolerance)"
+
+@an_impossible_age integrity
+  never any
+    all
+      age_years ?p ?n
+      plausible_max age ?max
+      compare ?n above ?max
+    end
+    all
+      age_years ?p ?n
+      plausible_min age ?min
+      compare ?n below ?min
+    end
+  end
+  witness ?p
+  message "an age is impossible for a person"
+  severity error
+  source "analysis-core-v1: temporal consistency (plausible ages)"
+
+@an_born_after_reference integrity
+  never all
+    born_in_year ?p ?y
+    as_of_year ?r
+    compare ?y above ?r
+  end
+  witness ?p
+  message "a person is born after the document's reference year"
+  severity error
+  source "analysis-core-v1: temporal consistency (a birth before the reference year)"
+
+@an_r_date_end rule
+  when starts_on ?e ?s
+  when ends_on ?e ?f
+  when compare ?f below ?s
+  then has_date_error
+@an_r_date_order rule
+  when precedes ?a ?b
+  when starts_on ?a ?sa
+  when starts_on ?b ?sb
+  when compare ?sb below ?sa
+  then has_date_error
+@an_r_date_age rule
+  when born_in_year ?p ?y
+  when age_years ?p ?n
+  when as_of_year ?r
+  when compute ?expected ?r minus ?y
+  when compute ?d1 ?expected minus ?n
+  when compute ?d2 ?n minus ?expected
+  when compute ?d ?d1 maximum_with ?d2
+  when analysis_parameter age_tolerance ?tol
+  when compare ?d above ?tol
+  then has_date_error
+
+@an_p_age_tolerance fact
+  holds analysis_parameter age_tolerance 1
+  source "analysis-core-v1: parameter of analysis_temporal_consistency (years allowed between a stated age and the age from the birth year; 1 covers a birthday later in the year)"
+
+@analysis_temporal_consistency procedure
+  members $an_end_before_start $an_order_against_dates $an_age_mismatch $an_impossible_age $an_born_after_reference $an_p_age_tolerance $an_m_age_min $an_m_age_max
+  description "Analysis: temporal consistency of a document - something that ends before it starts, events whose stated order contradicts their dates, ages that do not match the birth year or are impossible, a birth after the document's reference year."
+  scope "analysis, findings"
+  source "analysis-core-v1"

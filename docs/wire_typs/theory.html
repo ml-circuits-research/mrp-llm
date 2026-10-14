@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#theory" target="_top">← Wire type index</a></p><h1><code>theory</code></h1><p>Records host-approved theory text and a dialect label for a prospective extension compiler. The current built-in reasoning strategies do not compile or execute arbitrary theory bodies.</p><p><strong>Status and author:</strong> Host-approved declaration; a model-origin program cannot install this definition. Accepting the declaration syntax does not mean the named dialect has a backend.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once at parse time. Other field names are rejected.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and current behavior</th></tr></thead><tbody><tr><th scope="row" id="field-dialect"><code>dialect</code></th><td>At most once; required</td><td>Opaque dialect label or JSON-quoted name; records the declared foreign-language source. No built-in theory compiler is registered, so supplying this required theory to reasoning reports <code>unsupported_theory</code>.</td></tr>
+<tr><th scope="row" id="field-body"><code>body</code></th><td>At most once; required</td><td><code>|</code> followed by four-space-indented backend-language source; retained as reviewed code, not SOP atom syntax.</td></tr></tbody></table></div></section><section><h2>Execution and result</h2><p>The lowered object has <code>kind: theory</code>, <code>dialect</code>, <code>body</code> and <code>required: true</code>. A trusted source can declare or package it; model-origin sources cannot declare it. If a theory is included as a required <code>data</code> input to the built-in reasoning registry, the result is <code>unsupported_theory</code> with no silently discarded theory. This differs from <code>rule</code>, whose finite Horn form is implemented. No registered extension compiler for arbitrary dialects is present in the standard route; do not infer executable Prolog/Z3 code from this field. A <code>theory</code> wire by itself produces metadata, not a proof or write.</p></section><section><h2>Current SOP examples</h2><h3>Host-side metadata only</h3><pre data-sop="current"><code>@calculus theory
+  dialect &quot;research-prototype&quot;
+  body |
+    P(a) -&gt; Q(a)</code></pre><p>This trusted declaration produces a theory object. The body is retained as text, not executed; no claim about <code>Q(a)</code> follows.</p>
+<h3>Required theory reports unsupported</h3><pre data-sop="current"><code>@calculus theory
+  dialect &quot;research-prototype&quot;
+  body |
+    P(a) -&gt; Q(a)
+
+@requirements pack
+  items ~calculus
+
+@question query
+  where q a
+  mode exists
+
+@attempt reason
+  query $question
+  data $requirements</code></pre><p>The pack makes the theory a required reasoning input; the built-in strategy reports <code>unsupported_theory</code>. No executable answer is inferred from the opaque text.</p><h3>Invalid or unsafe example</h3><pre data-sop="invalid" data-check="compile" data-error="theory belongs to symbolic execution"><code>@invented theory
+  dialect &quot;javascript&quot;
+  body |
+    return process.env.SECRET</code></pre><p>A model may not author a theory: the model-origin compiler rejects the declaration with <code>Model authors stated, assumed, unclear, query or constraint; theory belongs to symbolic execution</code>. In a trusted source the parser accepts this opaque text, but the runtime neither executes JavaScript nor grants environment access; a solve that requires it returns <code>unsupported_theory</code>.</p></section><section><h2>Implementation sources</h2><ul><li><code>sop/parser.mjs:SPEC, validateShape, validateGraph</code></li><li><code>sop/runtime.mjs:Runtime.run</code></li><li><code>reasoning/lower.mjs:lowerDeclaration theory</code></li><li><code>reasoning/registry.mjs:ReasoningRegistry.builtin unsupported_theory</code></li></ul><p>Related: <a href="rule.html"><code>rule</code></a>, <a href="policy.html"><code>policy</code></a>, <a href="reason.html"><code>reason</code></a>. See the <a href="../wiki.html#definition-sop" target="_top">SOP terminology</a> for wire/reference conventions.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

@@ -1,0 +1,10 @@
+@q query
+  mode count
+  where all
+    works_on ?e ?p
+    budget_of ?p ?b
+    compare ?b above 100
+    absent on_leave ?e
+    certified ?e
+  end
+  select ?e

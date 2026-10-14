@@ -1,0 +1,10 @@
+# expect: overrides_cycle
+@a action
+  requires p
+  adds q
+@n1 norm
+  forbid ~a
+  overrides $n2
+@n2 norm
+  permit ~a
+  overrides $n1

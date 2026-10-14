@@ -1,0 +1,33 @@
+@f fact
+  holds works_at ana lab_alpha
+  valid 2024-01-01 open
+  source user
+
+@saved remember
+  input $f
+
+@end event
+  action end
+  target $saved
+  effective 2025-06-01
+  source user
+
+@applied remember
+  input $end
+
+@q query
+  mode exists
+  where works_at ana lab_alpha
+  at 2025-07-01
+
+@m recall
+  query $q
+  after $applied
+
+@r reason
+  query $q
+  memory $m
+
+@answer cnl
+  result $r
+  language en

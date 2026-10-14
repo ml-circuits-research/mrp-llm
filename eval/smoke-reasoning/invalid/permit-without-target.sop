@@ -1,0 +1,6 @@
+# expect: permit_without_target
+@a action
+  requires p
+  adds q
+@n norm
+  permit ~a

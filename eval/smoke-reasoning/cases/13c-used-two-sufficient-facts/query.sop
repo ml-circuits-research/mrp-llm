@@ -1,0 +1,3 @@
+@q query
+  mode exists
+  where ok z

@@ -1,0 +1,5 @@
+# expect: division_by_zero
+@r rule
+  when n ?x
+  when compute ?v ?x divided_by 0
+  then q ?v

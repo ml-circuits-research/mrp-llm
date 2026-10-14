@@ -1,0 +1,10 @@
+# expect: time_leaf_on_derived
+@w predicate
+  args subject:entity object:entity
+@r1 rule
+  when w ?x ?y
+  then v ?x ?y
+@r2 rule
+  when start_of ?t v ?x ?y
+  when order ?t before ?t
+  then u ?x

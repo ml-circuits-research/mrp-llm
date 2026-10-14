@@ -1,0 +1,8 @@
+@s1 fact
+  holds blocked b
+  status supposed
+
+@q query
+  where open_node ?x
+  select ?x
+  if $s1

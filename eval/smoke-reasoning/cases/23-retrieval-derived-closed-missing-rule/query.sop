@@ -1,0 +1,3 @@
+@q query
+  where unreached ?y
+  select ?y

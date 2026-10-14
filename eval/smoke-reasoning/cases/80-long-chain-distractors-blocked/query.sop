@@ -1,0 +1,3 @@
+@q query
+  where reached ?t
+  select ?t

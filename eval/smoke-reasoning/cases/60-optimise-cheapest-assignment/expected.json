@@ -1,0 +1,15 @@
+{
+  "feature": "Optimisation: the cheapest assignment of a finite problem, proved optimal with a unique optimum",
+  "status": "optimal",
+  "complete": true,
+  "objective": 13,
+  "witness": {
+    "a": 2,
+    "b": 3,
+    "c": 0
+  },
+  "requires": [
+    "constraint",
+    "optimize"
+  ]
+}

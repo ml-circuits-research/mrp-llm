@@ -1,0 +1,34 @@
+{
+  "feature": "conform takes asof for the steps that carry no at: the same trace that is non_compliant today is compliant as of January",
+  "status": "compliant",
+  "complete": true,
+  "compliance": {
+    "hard": "ok",
+    "violated": [],
+    "soft_violations": [],
+    "total_cost": 2
+  },
+  "used": [
+    {
+      "id": "reset_router_v1",
+      "version": 1
+    },
+    {
+      "id": "hard_reset",
+      "version": 1
+    },
+    {
+      "id": "verify_link",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "check_plan",
+    "norms_hard",
+    "method",
+    "conform_asof",
+    "versions",
+    "zero_arity",
+    "used"
+  ]
+}

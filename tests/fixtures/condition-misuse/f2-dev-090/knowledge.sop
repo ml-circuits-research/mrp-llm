@@ -1,0 +1,316 @@
+@department_ruxandra_dev_268 entity
+  kind entity
+  label en "department ruxandra dev 268"
+  alias en "department_ruxandra_dev_268"
+@department_sanziana_dev_267 entity
+  kind entity
+  label en "department sanziana dev 267"
+  alias en "department_sanziana_dev_267"
+@firm_sanziana_dev_267 entity
+  kind entity
+  label en "firm sanziana dev 267"
+  alias en "firm_sanziana_dev_267"
+@assigned_to predicate
+  args subject:entity object:entity
+  closed true
+@compensation predicate
+  args subject:entity object:integer
+  closed true
+@f1 fact
+  holds assigned_to oana_dev_9400 firm_sanziana_dev_267
+@f2 fact
+  holds assigned_to oana_dev_9400 project_oana_dev_9400
+@f3 fact
+  holds compensation oana_dev_9400 123
+@f4 fact
+  holds assigned_to alina_dev_9401 firm_sanziana_dev_267
+@f5 fact
+  holds assigned_to alina_dev_9401 project_alina_dev_9401
+@f6 fact
+  holds compensation alina_dev_9401 140
+@f7 fact
+  holds assigned_to cristina_dev_9402 firm_sanziana_dev_267
+@f8 fact
+  holds assigned_to cristina_dev_9402 project_cristina_dev_9402
+@f9 fact
+  holds compensation cristina_dev_9402 157
+@f10 fact
+  holds assigned_to bianca_dev_9403 firm_sanziana_dev_267
+@f11 fact
+  holds assigned_to bianca_dev_9403 project_bianca_dev_9403
+@f12 fact
+  holds compensation bianca_dev_9403 64
+@f13 fact
+  holds assigned_to roxana_dev_9404 firm_sanziana_dev_267
+@f14 fact
+  holds assigned_to roxana_dev_9404 project_roxana_dev_9404
+@f15 fact
+  holds compensation roxana_dev_9404 81
+@f16 fact
+  holds assigned_to teodora_dev_9405 firm_sanziana_dev_267
+@f17 fact
+  holds assigned_to teodora_dev_9405 project_teodora_dev_9405
+@f18 fact
+  holds compensation teodora_dev_9405 98
+@f19 fact
+  holds assigned_to iulia_dev_9406 firm_sanziana_dev_267
+@f20 fact
+  holds assigned_to iulia_dev_9406 project_iulia_dev_9406
+@f21 fact
+  holds compensation iulia_dev_9406 115
+@f22 fact
+  holds assigned_to diana_dev_9407 firm_sanziana_dev_267
+@f23 fact
+  holds assigned_to diana_dev_9407 project_diana_dev_9407
+@f24 fact
+  holds compensation diana_dev_9407 132
+@f25 fact
+  holds assigned_to corina_dev_9408 firm_sanziana_dev_267
+@f26 fact
+  holds assigned_to corina_dev_9408 project_corina_dev_9408
+@f27 fact
+  holds compensation corina_dev_9408 149
+@f28 fact
+  holds assigned_to smaranda_dev_9409 firm_sanziana_dev_267
+@f29 fact
+  holds assigned_to smaranda_dev_9409 project_smaranda_dev_9409
+@f30 fact
+  holds compensation smaranda_dev_9409 56
+@f31 fact
+  holds assigned_to ilinca_dev_9410 firm_sanziana_dev_267
+@f32 fact
+  holds assigned_to ilinca_dev_9410 project_ilinca_dev_9410
+@f33 fact
+  holds compensation ilinca_dev_9410 73
+@f34 fact
+  holds assigned_to brandusa_dev_9411 firm_sanziana_dev_267
+@f35 fact
+  holds assigned_to brandusa_dev_9411 project_brandusa_dev_9411
+@f36 fact
+  holds compensation brandusa_dev_9411 123
+@f37 fact
+  holds assigned_to otilia_dev_9412 firm_sanziana_dev_267
+@f38 fact
+  holds assigned_to otilia_dev_9412 project_otilia_dev_9412
+@f39 fact
+  holds compensation otilia_dev_9412 140
+@f40 fact
+  holds assigned_to viorica_dev_9413 firm_sanziana_dev_267
+@f41 fact
+  holds assigned_to viorica_dev_9413 project_viorica_dev_9413
+@f42 fact
+  holds compensation viorica_dev_9413 157
+@f43 fact
+  holds assigned_to doina_dev_9414 firm_sanziana_dev_267
+@f44 fact
+  holds assigned_to doina_dev_9414 project_doina_dev_9414
+@f45 fact
+  holds compensation doina_dev_9414 64
+@f46 fact
+  holds assigned_to floarea_dev_9415 firm_sanziana_dev_267
+@f47 fact
+  holds assigned_to floarea_dev_9415 project_floarea_dev_9415
+@f48 fact
+  holds compensation floarea_dev_9415 81
+@f49 fact
+  holds assigned_to anca_dev_9416 firm_sanziana_dev_267
+@f50 fact
+  holds assigned_to anca_dev_9416 project_anca_dev_9416
+@f51 fact
+  holds compensation anca_dev_9416 98
+@f52 fact
+  holds assigned_to simona_dev_9417 firm_sanziana_dev_267
+@f53 fact
+  holds assigned_to simona_dev_9417 project_simona_dev_9417
+@f54 fact
+  holds compensation simona_dev_9417 115
+@f55 fact
+  holds assigned_to georgiana_dev_9418 firm_sanziana_dev_267
+@f56 fact
+  holds assigned_to georgiana_dev_9418 project_georgiana_dev_9418
+@f57 fact
+  holds compensation georgiana_dev_9418 132
+@f58 fact
+  holds assigned_to larisa_dev_9419 firm_sanziana_dev_267
+@f59 fact
+  holds assigned_to larisa_dev_9419 project_larisa_dev_9419
+@f60 fact
+  holds compensation larisa_dev_9419 149
+@f61 fact
+  holds assigned_to sanziana_dev_9420 firm_sanziana_dev_267
+@f62 fact
+  holds assigned_to sanziana_dev_9420 project_sanziana_dev_9420
+@f63 fact
+  holds compensation sanziana_dev_9420 56
+@f64 fact
+  holds assigned_to ruxandra_dev_9421 firm_sanziana_dev_267
+@f65 fact
+  holds assigned_to ruxandra_dev_9421 project_ruxandra_dev_9421
+@f66 fact
+  holds compensation ruxandra_dev_9421 73
+@f67 fact
+  holds assigned_to paula_dev_9422 firm_sanziana_dev_267
+@f68 fact
+  holds assigned_to paula_dev_9422 project_paula_dev_9422
+@f69 fact
+  holds compensation paula_dev_9422 123
+@f70 fact
+  holds assigned_to carmen_dev_9423 firm_sanziana_dev_267
+@f71 fact
+  holds assigned_to carmen_dev_9423 project_carmen_dev_9423
+@f72 fact
+  holds compensation carmen_dev_9423 140
+@f73 fact
+  holds assigned_to mirela_dev_9424 firm_sanziana_dev_267
+@f74 fact
+  holds assigned_to mirela_dev_9424 project_mirela_dev_9424
+@f75 fact
+  holds compensation mirela_dev_9424 157
+@f76 fact
+  holds assigned_to luminita_dev_9425 firm_sanziana_dev_267
+@f77 fact
+  holds assigned_to luminita_dev_9425 project_luminita_dev_9425
+@f78 fact
+  holds compensation luminita_dev_9425 64
+@f79 fact
+  holds assigned_to tatiana_dev_9426 firm_sanziana_dev_267
+@f80 fact
+  holds assigned_to tatiana_dev_9426 project_tatiana_dev_9426
+@f81 fact
+  holds compensation tatiana_dev_9426 81
+@f82 fact
+  holds assigned_to daria_dev_9427 firm_sanziana_dev_267
+@f83 fact
+  holds assigned_to daria_dev_9427 project_daria_dev_9427
+@f84 fact
+  holds compensation daria_dev_9427 98
+@f85 fact
+  holds assigned_to medeea_dev_9428 firm_sanziana_dev_267
+@f86 fact
+  holds assigned_to medeea_dev_9428 project_medeea_dev_9428
+@f87 fact
+  holds compensation medeea_dev_9428 115
+@f88 fact
+  holds assigned_to aurelia_dev_9429 firm_sanziana_dev_267
+@f89 fact
+  holds assigned_to aurelia_dev_9429 project_aurelia_dev_9429
+@f90 fact
+  holds compensation aurelia_dev_9429 132
+@f91 fact
+  holds assigned_to petronela_dev_9430 firm_sanziana_dev_267
+@f92 fact
+  holds assigned_to petronela_dev_9430 project_petronela_dev_9430
+@f93 fact
+  holds compensation petronela_dev_9430 149
+@f94 fact
+  holds assigned_to andrei_dev_9431 firm_sanziana_dev_267
+@f95 fact
+  holds assigned_to andrei_dev_9431 project_andrei_dev_9431
+@f96 fact
+  holds compensation andrei_dev_9431 56
+@f97 fact
+  holds assigned_to mihai_dev_9432 firm_sanziana_dev_267
+@f98 fact
+  holds assigned_to mihai_dev_9432 project_mihai_dev_9432
+@f99 fact
+  holds compensation mihai_dev_9432 73
+@f100 fact
+  holds assigned_to ion_dev_9433 firm_sanziana_dev_267
+@f101 fact
+  holds assigned_to ion_dev_9433 project_ion_dev_9433
+@f102 fact
+  holds compensation ion_dev_9433 123
+@f103 fact
+  holds assigned_to stefan_dev_9434 firm_sanziana_dev_267
+@f104 fact
+  holds assigned_to stefan_dev_9434 project_stefan_dev_9434
+@f105 fact
+  holds compensation stefan_dev_9434 140
+@f106 fact
+  holds assigned_to bogdan_dev_9435 firm_sanziana_dev_267
+@f107 fact
+  holds assigned_to bogdan_dev_9435 project_bogdan_dev_9435
+@f108 fact
+  holds compensation bogdan_dev_9435 157
+@department_pay predicate
+  args subject:entity object:entity topic:integer
+  closed true
+@department_total predicate
+  args subject:entity object:integer
+@f109 fact
+  holds department_pay oana_dev_9400 department_sanziana_dev_267 123
+@f110 fact
+  holds department_pay alina_dev_9401 department_ruxandra_dev_268 140
+@f111 fact
+  holds department_pay cristina_dev_9402 department_sanziana_dev_267 157
+@f112 fact
+  holds department_pay bianca_dev_9403 department_ruxandra_dev_268 64
+@f113 fact
+  holds department_pay roxana_dev_9404 department_sanziana_dev_267 81
+@f114 fact
+  holds department_pay teodora_dev_9405 department_ruxandra_dev_268 98
+@f115 fact
+  holds department_pay iulia_dev_9406 department_sanziana_dev_267 115
+@f116 fact
+  holds department_pay diana_dev_9407 department_ruxandra_dev_268 132
+@f117 fact
+  holds department_pay corina_dev_9408 department_sanziana_dev_267 149
+@f118 fact
+  holds department_pay smaranda_dev_9409 department_ruxandra_dev_268 56
+@f119 fact
+  holds department_pay ilinca_dev_9410 department_sanziana_dev_267 73
+@f120 fact
+  holds department_pay brandusa_dev_9411 department_ruxandra_dev_268 123
+@f121 fact
+  holds department_pay otilia_dev_9412 department_sanziana_dev_267 140
+@f122 fact
+  holds department_pay viorica_dev_9413 department_ruxandra_dev_268 157
+@f123 fact
+  holds department_pay doina_dev_9414 department_sanziana_dev_267 64
+@f124 fact
+  holds department_pay floarea_dev_9415 department_ruxandra_dev_268 81
+@f125 fact
+  holds department_pay anca_dev_9416 department_sanziana_dev_267 98
+@f126 fact
+  holds department_pay simona_dev_9417 department_ruxandra_dev_268 115
+@f127 fact
+  holds department_pay georgiana_dev_9418 department_sanziana_dev_267 132
+@f128 fact
+  holds department_pay larisa_dev_9419 department_ruxandra_dev_268 149
+@f129 fact
+  holds department_pay sanziana_dev_9420 department_sanziana_dev_267 56
+@f130 fact
+  holds department_pay ruxandra_dev_9421 department_ruxandra_dev_268 73
+@f131 fact
+  holds department_pay paula_dev_9422 department_sanziana_dev_267 123
+@f132 fact
+  holds department_pay carmen_dev_9423 department_ruxandra_dev_268 140
+@f133 fact
+  holds department_pay mirela_dev_9424 department_sanziana_dev_267 157
+@f134 fact
+  holds department_pay luminita_dev_9425 department_ruxandra_dev_268 64
+@f135 fact
+  holds department_pay tatiana_dev_9426 department_sanziana_dev_267 81
+@f136 fact
+  holds department_pay daria_dev_9427 department_ruxandra_dev_268 98
+@f137 fact
+  holds department_pay medeea_dev_9428 department_sanziana_dev_267 115
+@f138 fact
+  holds department_pay aurelia_dev_9429 department_ruxandra_dev_268 132
+@f139 fact
+  holds department_pay petronela_dev_9430 department_sanziana_dev_267 149
+@f140 fact
+  holds department_pay andrei_dev_9431 department_ruxandra_dev_268 56
+@f141 fact
+  holds department_pay mihai_dev_9432 department_sanziana_dev_267 73
+@f142 fact
+  holds department_pay ion_dev_9433 department_ruxandra_dev_268 123
+@f143 fact
+  holds department_pay stefan_dev_9434 department_sanziana_dev_267 140
+@f144 fact
+  holds department_pay bogdan_dev_9435 department_ruxandra_dev_268 157
+@by_department aggregate
+  over department_pay ?person ?dept ?amount
+  group ?dept
+  sum ?amount as ?total
+  yields department_total ?dept ?total

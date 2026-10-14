@@ -1,0 +1,88 @@
+# commonsense-v1: geography (rules, defaults, integrity and facts written by a Claude Haiku subagent of commonsense-agent from its skeleton, 2026-10-02; reviewed and corrected by commonsense-agent; mechanically validated by tools/commonsense/check.mjs).
+@cs_geo_on_continent rule
+  when located_in ?x ?c
+  when is_a ?c continent
+  then on_continent ?x ?c
+  source "authored (commonsense-v1, geography): things located in places on a continent are on that continent"
+
+@cs_geo_in_country rule
+  when located_in ?x ?k
+  when is_a ?k country
+  then in_country ?x ?k
+  source "authored (commonsense-v1, geography): things located in places in a country are in that country"
+
+@cs_geo_same_country_as rule
+  when in_country ?a ?k
+  when in_country ?b ?k
+  when compare ?a not_equal ?b
+  then same_country_as ?a ?b
+  source "authored (commonsense-v1, geography): two different things in the same country are in the same country as each other"
+
+@cs_geo_same_continent_as rule
+  when on_continent ?a ?c
+  when on_continent ?b ?c
+  when compare ?a not_equal ?b
+  then same_continent_as ?a ?b
+  source "authored (commonsense-v1, geography): two different things on the same continent are on the same continent as each other"
+
+@cs_geo_capital_is_city rule
+  when capital_of ?city ?country
+  then is_a ?city city
+  source "authored (commonsense-v1, geography): a capital city is a city"
+
+@cs_geo_borders_implies_near rule
+  when borders ?a ?b
+  then near ?a ?b
+  source "authored (commonsense-v1, geography): two countries that border each other are near each other"
+
+@cs_geo_lives_in_container rule
+  when lives_in ?p ?place
+  when located_in ?place ?country
+  then lives_in ?p ?country
+  source "authored (commonsense-v1, geography): a person living in a place located in a country lives in that country"
+
+@cs_geo_no_cycle_located_in integrity
+  never all
+    located_in ?a ?b
+    located_in ?b ?a
+    compare ?a not_equal ?b
+  end
+  witness ?a
+  message "a place cannot be located in another place that is located in it"
+  severity warning
+  source "authored (commonsense-v1, geography): located_in should not cycle between different places"
+
+@cs_geo_country_not_in_city integrity
+  never all
+    is_a ?x country
+    located_in ?x ?y
+    is_a ?y city
+  end
+  witness ?x
+  message "a country cannot be located in a city"
+  severity error
+  source "authored (commonsense-v1, geography): countries are larger administrative units than cities"
+
+@cs_geo_capital_of_unique integrity
+  never all
+    capital_of ?city1 ?country
+    capital_of ?city2 ?country
+    compare ?city1 not_equal ?city2
+  end
+  witness ?country
+  message "a country can have at most one capital city (exception: cities like Jerusalem or Rome may have multiple capitals)"
+  severity warning
+  source "authored (commonsense-v1, geography): typically a country has one capital; some historic or political cases may have multiple"
+
+@cs_geo_borders_not_self integrity
+  never all
+    borders ?a ?a
+  end
+  witness ?a
+  message "a country cannot border itself"
+  severity error
+  source "authored (commonsense-v1, geography): borders is a relation between two different entities"
+
+@cs_geo_disjoint_place_person fact
+  holds disjoint_with place person
+  source "authored (commonsense-v1, geography): nothing is both a place and a person"

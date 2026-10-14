@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#aggregate" target="_top">← Wire type index</a></p><h1><code>aggregate</code></h1><p>Defines a derived relation by grouping: the number, the sum, the minimum, the maximum or the list of the values of a group of conditions. "The payroll of each department", "how many employees each team has".</p><p><strong>Status and author:</strong> Knowledge wire, written by a model or the owner from a source. Core, not sugar: an aggregate sits in a lower stratum than the rules that consume its result. A model-origin program cannot author it.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="field-over"><code>over</code></th><td>Repeatable; required</td><td>The grouped conditions, a condition group. The rows are the distinct bindings of ALL variables that occur in it.</td></tr>
+<tr><th scope="row" id="field-group"><code>group</code></th><td>At most once; optional</td><td>The <code>?variables</code> the result is grouped by; they must be bound by <code>over</code>.</td></tr>
+<tr><th scope="row" id="field-count"><code>count</code></th><td>At most once; optional</td><td><code>?field as ?out</code>, or <code>as ?out</code> to count the rows. Exactly one of <code>count</code>, <code>sum</code>, <code>min</code>, <code>max</code>, <code>collect</code> (<code>aggregate_one_function</code>).</td></tr>
+<tr><th scope="row" id="field-sum"><code>sum</code></th><td>At most once; optional</td><td><code>?field as ?out</code> over integers; the field must be bound by <code>over</code> (<code>aggregate_field</code>, <code>unsafe_variable</code>).</td></tr>
+<tr><th scope="row" id="field-min"><code>min</code></th><td>At most once; optional</td><td><code>?field as ?out</code>.</td></tr>
+<tr><th scope="row" id="field-max"><code>max</code></th><td>At most once; optional</td><td><code>?field as ?out</code>.</td></tr>
+<tr><th scope="row" id="field-collect"><code>collect</code></th><td>At most once; optional</td><td><code>?field as ?out</code>: the set of the values.</td></tr>
+<tr><th scope="row" id="field-yields"><code>yields</code></th><td>At most once; required</td><td>The derived atom over the group variables and the output variable; no other variable may occur (<code>unsafe_head</code>).</td></tr></tbody></table></div></section><section><h2>What it is for and how to write it</h2><p>Declare the relation the aggregate yields (<code>dept_payroll</code>) with its roles and types, write the <code>over</code> group on the base relation, name the grouping variables and one function, and yield the result. The relation under <code>over</code> should be declared <code>closed true</code> only if the source says the list is exhaustive ("the table lists the salary of every employee"): over an open relation the result is a lower bound.</p></section><section><h2>What the engine does</h2><p>It computes the distinct bindings of every variable of <code>over</code> and groups them, so two employees with the same salary count twice, because the employee variable is in <code>over</code> although it is not in <code>group</code>. The yielded atoms are ordinary derived facts that rules and questions can use. An aggregate may not occur in a cycle of the dependency graph (<code>not_stratifiable</code>), so recursive aggregation is not expressible; shortest-path and path-counting questions on cyclic graphs are planning or closure questions. Over an open relation the validator warns <code>aggregate_needs_closed</code> and a count is reported as a lower bound (<code>bound at_least</code>).</p></section><section><h2>Examples</h2><pre data-sop="knowledge"><code>@salary predicate
+  args subject:entity topic:entity object:integer
+  closed true
+  description "HR handbook 2.1: 'the table lists the salary of every employee'"
+@dept_payroll predicate
+  args subject:entity object:integer
+
+@s1 fact
+  holds salary ann dev 100
+@s2 fact
+  holds salary bob dev 120
+@s3 fact
+  holds salary di ops 80
+
+@payroll aggregate
+  over salary ?p ?d ?s
+  group ?d
+  sum ?s as ?total
+  yields dept_payroll ?d ?total</code></pre><pre data-sop="knowledge-query" data-status="supported" data-rows="d=dev,t=220;d=ops,t=80"><code>@q query
+  where dept_payroll ?d ?t
+  select ?d ?t</code></pre><p>The development department pays 220 and operations 80.</p><h3>The same aggregate over an open relation</h3><pre data-sop="knowledge" data-warnings="aggregate_needs_closed"><code>@salary predicate
+  args subject:entity topic:entity object:integer
+  description "HR handbook 2.1: 'the table lists the salary of every employee'"
+@dept_payroll predicate
+  args subject:entity object:integer
+
+@s1 fact
+  holds salary ann dev 100
+@s2 fact
+  holds salary bob dev 120
+@s3 fact
+  holds salary di ops 80
+
+@payroll aggregate
+  over salary ?p ?d ?s
+  group ?d
+  sum ?s as ?total
+  yields dept_payroll ?d ?total</code></pre><p>The validator warns <code>aggregate_needs_closed</code>: the source did not say that the table is complete, so the totals are lower bounds.</p><h3>Invalid: two functions in one aggregate</h3><pre data-sop="knowledge-invalid" data-error="aggregate_one_function"><code>@salary predicate
+  args subject:entity topic:entity object:integer
+  closed true
+@total predicate
+  args subject:entity object:integer
+@bad aggregate
+  over salary ?p ?d ?s
+  group ?d
+  sum ?s as ?t
+  count as ?n
+  yields total ?d ?t</code></pre></section><section><h2>Common mistakes</h2><ol><li>Counting without declaring the relation <code>closed</code> when the source says the list is complete (or declaring it <code>closed</code> when it does not).</li><li>Expecting a set of people to collapse when they have equal values: the person variable is part of the row.</li><li>Yielding a variable that is neither grouped nor the output (<code>unsafe_head</code>).</li><li>Using an aggregate inside a recursive definition (<code>not_stratifiable</code>).</li></ol></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.aggregate</code></li><li><code>sop/knowledge/validate.mjs (aggregate checks)</code></li><li><code>reasoning/strategies/js-reference</code></li></ul><p>Related: <a href="rule.html"><code>rule</code></a>, <a href="predicate.html"><code>predicate</code></a>, <a href="query.html"><code>query</code></a>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>; the shared semantics are in <a href="knowledge-semantics.html">Knowledge semantics</a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

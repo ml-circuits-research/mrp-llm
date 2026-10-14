@@ -1,0 +1,129 @@
+@router predicate
+  args subject:entity
+@router_reset predicate
+  args subject:entity
+@notified predicate
+  args subject:entity
+@reset_done predicate
+  args subject:entity
+@link_up predicate
+  args subject:entity
+@checked predicate
+  args subject:entity
+@business_hours predicate
+  args none
+@emergency predicate
+  args subject:entity
+@ticket_open predicate
+  args subject:entity
+  closed true
+
+@f_router fact
+  holds router r7
+@f_hours fact
+  holds business_hours
+
+@notify_oncall action
+  params ?r
+  requires router ?r
+  adds notified ?r
+  cost 1
+@soft_reset action
+  params ?r
+  requires router ?r
+  requires notified ?r
+  adds reset_done ?r
+  cost 3
+@hard_reset action
+  params ?r
+  requires router ?r
+  adds reset_done ?r
+  cost 1
+@verify_link action
+  params ?r
+  requires reset_done ?r
+  adds link_up ?r
+  adds router_reset ?r
+  cost 1
+
+@extra_check action
+  params ?r
+  requires router ?r
+  adds checked ?r
+  cost 1
+
+@reset_router_v1 method
+  achieves router_reset ?r
+  when router ?r
+  version 1
+  approval superseded
+  approved_by "ops lead"
+  approved_at 2025-03-01
+  step ~hard_reset ?r
+  step ~verify_link ?r
+
+@reset_router method
+  achieves router_reset ?r
+  when router ?r
+  version 2
+  supersedes $reset_router_v1
+  approval approved
+  approved_by "ops lead"
+  approved_at 2026-09-30
+  source "Ops manual 4.2"
+  binding strict
+  step ~notify_oncall ?r
+  step choose
+    ~soft_reset ?r
+    ~hard_reset ?r
+  end
+  step ~verify_link ?r
+
+@no_hard_reset_in_hours norm
+  forbid ~hard_reset ?r
+  when business_hours
+  severity hard
+  binding strict
+  version 1
+  approval approved
+  approved_by "ops lead"
+  approved_at 2026-01-15
+  source "Ops manual 4.3"
+
+@notify_promptly norm
+  oblige ~notify_oncall ?r
+  when router ?r
+  within 10
+  severity soft
+  cost 50
+  approval approved
+  approved_by "ops lead"
+  approved_at 2026-01-15
+
+@emergency_hard_reset norm
+  permit ~hard_reset ?r
+  when emergency ?r
+  overrides $no_hard_reset_in_hours
+  approval approved
+  approved_by "ops lead"
+  approved_at 2026-01-15
+
+@relax_hours norm
+  forbid ~hard_reset ?r
+  when business_hours
+  when absent ticket_open ?r
+  severity hard
+  binding strict
+  version 2
+  supersedes $no_hard_reset_in_hours
+  approval proposed
+
+@a1 argument
+  for $relax_hours
+  claim "an open ticket already implies on-call awareness"
+  source "incident review 2026-09"
+
+@reset_procedure procedure
+  members $reset_router $no_hard_reset_in_hours $notify_promptly $emergency_hard_reset
+  description "Router reset mode of work"
+  scope "ops, business hours"

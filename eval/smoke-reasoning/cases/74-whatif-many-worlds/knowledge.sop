@@ -1,0 +1,306 @@
+@machine predicate
+  args subject:entity
+@in_zone predicate
+  args subject:entity location:entity
+@overloaded predicate
+  args subject:entity
+@alert predicate
+  args subject:entity
+@escalated predicate
+  args subject:entity
+
+@fm0 fact
+  holds machine m0
+@fz0 fact
+  holds in_zone m0 z0
+@fm1 fact
+  holds machine m1
+@fz1 fact
+  holds in_zone m1 z1
+@fm2 fact
+  holds machine m2
+@fz2 fact
+  holds in_zone m2 z2
+@fm3 fact
+  holds machine m3
+@fz3 fact
+  holds in_zone m3 z3
+@fm4 fact
+  holds machine m4
+@fz4 fact
+  holds in_zone m4 z4
+@fm5 fact
+  holds machine m5
+@fz5 fact
+  holds in_zone m5 z5
+@fm6 fact
+  holds machine m6
+@fz6 fact
+  holds in_zone m6 z6
+@fm7 fact
+  holds machine m7
+@fz7 fact
+  holds in_zone m7 z7
+@fm8 fact
+  holds machine m8
+@fz8 fact
+  holds in_zone m8 z8
+@fm9 fact
+  holds machine m9
+@fz9 fact
+  holds in_zone m9 z9
+@fm10 fact
+  holds machine m10
+@fz10 fact
+  holds in_zone m10 z10
+@fm11 fact
+  holds machine f0
+@fz11 fact
+  holds in_zone f0 g0
+@fm12 fact
+  holds machine f1
+@fz12 fact
+  holds in_zone f1 g1
+@fm13 fact
+  holds machine f2
+@fz13 fact
+  holds in_zone f2 g2
+@fm14 fact
+  holds machine f3
+@fz14 fact
+  holds in_zone f3 g3
+@fm15 fact
+  holds machine f4
+@fz15 fact
+  holds in_zone f4 g4
+@fm16 fact
+  holds machine f5
+@fz16 fact
+  holds in_zone f5 g5
+@fm17 fact
+  holds machine f6
+@fz17 fact
+  holds in_zone f6 g6
+@fm18 fact
+  holds machine f7
+@fz18 fact
+  holds in_zone f7 g7
+@fm19 fact
+  holds machine f8
+@fz19 fact
+  holds in_zone f8 g8
+@fm20 fact
+  holds machine f9
+@fz20 fact
+  holds in_zone f9 g9
+@fm21 fact
+  holds machine f10
+@fz21 fact
+  holds in_zone f10 g10
+@fm22 fact
+  holds machine f11
+@fz22 fact
+  holds in_zone f11 g11
+@fm23 fact
+  holds machine f12
+@fz23 fact
+  holds in_zone f12 g0
+@fm24 fact
+  holds machine f13
+@fz24 fact
+  holds in_zone f13 g1
+@fm25 fact
+  holds machine f14
+@fz25 fact
+  holds in_zone f14 g2
+@fm26 fact
+  holds machine f15
+@fz26 fact
+  holds in_zone f15 g3
+@fm27 fact
+  holds machine f16
+@fz27 fact
+  holds in_zone f16 g4
+@fm28 fact
+  holds machine f17
+@fz28 fact
+  holds in_zone f17 g5
+@fm29 fact
+  holds machine f18
+@fz29 fact
+  holds in_zone f18 g6
+@fm30 fact
+  holds machine f19
+@fz30 fact
+  holds in_zone f19 g7
+@fm31 fact
+  holds machine f20
+@fz31 fact
+  holds in_zone f20 g8
+@fm32 fact
+  holds machine f21
+@fz32 fact
+  holds in_zone f21 g9
+@fm33 fact
+  holds machine f22
+@fz33 fact
+  holds in_zone f22 g10
+@fm34 fact
+  holds machine f23
+@fz34 fact
+  holds in_zone f23 g11
+@fm35 fact
+  holds machine f24
+@fz35 fact
+  holds in_zone f24 g0
+@fm36 fact
+  holds machine f25
+@fz36 fact
+  holds in_zone f25 g1
+@fm37 fact
+  holds machine f26
+@fz37 fact
+  holds in_zone f26 g2
+@fm38 fact
+  holds machine f27
+@fz38 fact
+  holds in_zone f27 g3
+@fm39 fact
+  holds machine f28
+@fz39 fact
+  holds in_zone f28 g4
+@fm40 fact
+  holds machine f29
+@fz40 fact
+  holds in_zone f29 g5
+@fm41 fact
+  holds machine f30
+@fz41 fact
+  holds in_zone f30 g6
+@fm42 fact
+  holds machine f31
+@fz42 fact
+  holds in_zone f31 g7
+@fm43 fact
+  holds machine f32
+@fz43 fact
+  holds in_zone f32 g8
+@fm44 fact
+  holds machine f33
+@fz44 fact
+  holds in_zone f33 g9
+@fm45 fact
+  holds machine f34
+@fz45 fact
+  holds in_zone f34 g10
+@fm46 fact
+  holds machine f35
+@fz46 fact
+  holds in_zone f35 g11
+@fm47 fact
+  holds machine f36
+@fz47 fact
+  holds in_zone f36 g0
+@fm48 fact
+  holds machine f37
+@fz48 fact
+  holds in_zone f37 g1
+@fm49 fact
+  holds machine f38
+@fz49 fact
+  holds in_zone f38 g2
+@fm50 fact
+  holds machine f39
+@fz50 fact
+  holds in_zone f39 g3
+@fm51 fact
+  holds machine f40
+@fz51 fact
+  holds in_zone f40 g4
+@fm52 fact
+  holds machine f41
+@fz52 fact
+  holds in_zone f41 g5
+@fm53 fact
+  holds machine f42
+@fz53 fact
+  holds in_zone f42 g6
+@fm54 fact
+  holds machine f43
+@fz54 fact
+  holds in_zone f43 g7
+@fm55 fact
+  holds machine f44
+@fz55 fact
+  holds in_zone f44 g8
+@fm56 fact
+  holds machine f45
+@fz56 fact
+  holds in_zone f45 g9
+@fm57 fact
+  holds machine f46
+@fz57 fact
+  holds in_zone f46 g10
+@fm58 fact
+  holds machine f47
+@fz58 fact
+  holds in_zone f47 g11
+@fm59 fact
+  holds machine f48
+@fz59 fact
+  holds in_zone f48 g0
+@fm60 fact
+  holds machine f49
+@fz60 fact
+  holds in_zone f49 g1
+@fm61 fact
+  holds machine f50
+@fz61 fact
+  holds in_zone f50 g2
+@fm62 fact
+  holds machine f51
+@fz62 fact
+  holds in_zone f51 g3
+@fm63 fact
+  holds machine f52
+@fz63 fact
+  holds in_zone f52 g4
+@fm64 fact
+  holds machine f53
+@fz64 fact
+  holds in_zone f53 g5
+@fm65 fact
+  holds machine f54
+@fz65 fact
+  holds in_zone f54 g6
+@fm66 fact
+  holds machine f55
+@fz66 fact
+  holds in_zone f55 g7
+@fm67 fact
+  holds machine f56
+@fz67 fact
+  holds in_zone f56 g8
+@fm68 fact
+  holds machine f57
+@fz68 fact
+  holds in_zone f57 g9
+@fm69 fact
+  holds machine f58
+@fz69 fact
+  holds in_zone f58 g10
+@fm70 fact
+  holds machine f59
+@fz70 fact
+  holds in_zone f59 g11
+
+@fo0 fact
+  holds overloaded m0
+
+@r_alert rule
+  when overloaded ?m
+  then alert ?m
+@r_escalate rule
+  when alert ?m
+  when in_zone ?m ?z
+  then escalated ?z

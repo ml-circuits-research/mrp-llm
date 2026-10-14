@@ -1,0 +1,22 @@
+# analysis-core-v1: the DOCUMENT VIEW (DS022 "Analysis procedures"). The analyzer (lib/analysis/view.mjs) writes these facts for one
+# run, deterministically, from the closure of the document layer under the selected procedures' rules: one fact per literal that
+# depends on a document wire. They are structure, not understanding: the canonical text of an atom and of a functional value. The view
+# is complete by construction (every literal of the closure is written), so its predicates are closed.
+
+@asserted_atom predicate
+  args subject:text
+  closed true
+  label en "asserted atom"
+  description "Document view: the atom (canonical SOP text) has positive evidence in the closure of the document layer."
+
+@denied_atom predicate
+  args subject:text
+  closed true
+  label en "denied atom"
+  description "Document view: the atom (canonical SOP text) has negative evidence (an explicit not) in the closure of the document layer."
+
+@keyed_value predicate
+  args subject:text object:text
+  closed true
+  label en "keyed value"
+  description "Document view: for a positive atom of a predicate declared with key N (a functional predicate), the predicate and its key argument as text, and the remaining arguments as text. Two different values under one key are a conflict."

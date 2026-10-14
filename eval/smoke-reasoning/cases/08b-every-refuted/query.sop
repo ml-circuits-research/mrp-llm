@@ -1,0 +1,4 @@
+@q query
+  mode every
+  where member ?m delta
+  scope works ?m alpha

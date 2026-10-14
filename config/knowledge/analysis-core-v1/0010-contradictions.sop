@@ -1,0 +1,76 @@
+# analysis-core-v1: contradictions. An atom asserted and denied (by facts, or derived by the document's own rules), two values under
+# one key of a functional relation (declared with key N), and a thing placed in two disjoint classes.
+
+@has_contradiction predicate
+  args none
+  closed true
+  label en "has contradiction"
+  description "Some atom of the document is both asserted and denied, or a functional relation has two values, or a thing is in two disjoint classes."
+
+@an_contradicted_atom integrity
+  never all
+    asserted_atom ?a
+    denied_atom ?a
+  end
+  witness ?a
+  message "the document both asserts and denies the same statement"
+  severity error
+  source "analysis-core-v1: contradiction (an atom with positive and negative evidence)"
+
+@an_conflicting_values integrity
+  never all
+    keyed_value ?k ?v1
+    keyed_value ?k ?v2
+    compare ?v1 not_equal ?v2
+  end
+  witness ?k
+  message "the document gives two different values for the same thing"
+  severity error
+  source "analysis-core-v1: contradiction (a functional relation, declared key N, with two values for one key)"
+
+@an_disjoint_membership integrity
+  never all
+    is_a ?x ?a
+    is_a ?x ?b
+    disjoint_classes ?a ?b
+  end
+  witness ?x
+  message "the document places one thing in two classes that exclude each other"
+  severity error
+  source "analysis-core-v1: contradiction (mutually exclusive classes)"
+
+@an_r_contradiction_atom rule
+  when asserted_atom ?a
+  when denied_atom ?a
+  then has_contradiction
+  source "analysis-core-v1: the rubric's view of an_contradicted_atom"
+
+@an_r_contradiction_value rule
+  when keyed_value ?k ?v1
+  when keyed_value ?k ?v2
+  when compare ?v1 not_equal ?v2
+  then has_contradiction
+  source "analysis-core-v1: the rubric's view of an_conflicting_values"
+
+@an_r_contradiction_class rule
+  when is_a ?x ?a
+  when is_a ?x ?b
+  when disjoint_classes ?a ?b
+  then has_contradiction
+  source "analysis-core-v1: the rubric's view of an_disjoint_membership"
+
+@an_d_person_organization fact
+  holds disjoint_classes person organization
+  source "analysis-core-v1: a person is not an organization"
+@an_d_person_place fact
+  holds disjoint_classes person place
+  source "analysis-core-v1: a person is not a place"
+@an_d_organization_place fact
+  holds disjoint_classes organization place
+  source "analysis-core-v1: an organization is not a place"
+
+@analysis_contradictions procedure
+  members $an_contradicted_atom $an_conflicting_values $an_disjoint_membership $an_d_person_organization $an_d_person_place $an_d_organization_place
+  description "Analysis: contradictions in a document - a statement asserted and denied (directly or through the document's own rules), two different values for one thing of a functional relation, a thing placed in two classes that exclude each other."
+  scope "analysis, findings"
+  source "analysis-core-v1"

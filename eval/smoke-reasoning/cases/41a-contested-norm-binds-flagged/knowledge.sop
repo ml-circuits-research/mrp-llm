@@ -1,0 +1,23 @@
+@production predicate
+  args subject:entity
+@halted predicate
+  args subject:entity
+
+@f1 fact
+  holds production s1
+
+@shutdown action
+  params ?s
+  requires production ?s
+  adds halted ?s
+  cost 1
+
+@no_shutdown_in_prod norm
+  forbid ~shutdown ?s
+  when production ?s
+  severity hard
+  binding strict
+  version 1
+  approval contested
+  approved_by "ops lead"
+  approved_at 2026-01-15

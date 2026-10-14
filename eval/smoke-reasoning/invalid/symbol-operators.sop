@@ -1,0 +1,7 @@
+# expect: bad_expression
+@c constraint
+  var ?x int 0 10
+  var ?y int 0 10
+  require ?x + ?y >= 5
+  claim ?x equal 1
+  task prove

@@ -1,0 +1,7 @@
+@p policy
+  maxRounds 3
+
+@q query
+  mode exists
+  where reaches n0 n12
+  policy $p

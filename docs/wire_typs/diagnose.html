@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body>
+<div data-include="../partials/header.html" data-link-base="../"></div>
+<main class="wire-help"><p><a href="../wire_types.html#diagnose" target="_top">All wire types</a></p><h1><code>diagnose</code></h1><p>Diagnosis first proposes abductive explanations, then compares explicit candidate tests by how many explanations they separate. It recommends tests but never performs them or asserts a cause. Trusted system/tool circuits can use this operation; model-authored declarative input cannot invoke it directly.</p><p><a href="../wiki.html#definition-sop">SOP</a> syntax: <code>@id type</code>, exactly two leading spaces on each field line, <code>$id</code> for a computed value, <code>~id</code> for a declaration handle, and <code>?x</code> for a local logic variable or an output name. Atoms use <code>[not ]predicate term1 [term2 [term3 [term4]]]</code> with one to four whitespace-separated terms; lowercase predicate names, canonical symbols, JSON-quoted strings or safe integers. Parenthesized <code>predicate(arg, …)</code> and comma-separated arguments are not executable syntax.</p><section><h2>Fields and inputs</h2><table><thead><tr><th scope="col">Keyword</th><th scope="col">Cardinality</th><th scope="col">Accepted value, default and effect</th></tr></thead><tbody><tr><th scope="row" id="field-query"><code>query</code></th><td>At most once; optional</td><td>A single <code>$query</code> value; it must be a query declaration. For abduce/diagnose its atoms must be ground. For simulate/temporal it determines selection, filters and time; no query handle (<code>~query</code>) is accepted.</td></tr><tr><th scope="row" id="field-data"><code>data</code></th><td>At most once; optional</td><td>One <code>$value</code> or <code>~declaration</code>; facts and rules supply the model, hypotheses can supply fallback candidates, patterns do not act as rules. A numeric constraint is rejected as unsupported.</td></tr><tr><th scope="row" id="field-memory"><code>memory</code></th><td>At most once; optional</td><td>One <code>$link</code> reference to a retrieval result, normally from <code>link</code>. A query declaration handle is not a retrieval; omitted memory triggers host-backed linking only when a repository/session and a retrieval query are available. Without either, local data is used.</td></tr><tr><th scope="row" id="field-observation"><code>observation</code></th><td>At most once; optional</td><td>One <code>$fact</code> or <code>~fact</code>. When query is absent, generates the observed target query at runtime now; query takes precedence if supplied.</td></tr><tr><th scope="row" id="field-candidates"><code>candidates</code></th><td>At most once; optional</td><td>One <code>$hypothesis</code>, <code>~hypothesis</code> or packed array. Omission uses hypotheses in data or finite generated missing conditions.</td></tr><tr><th scope="row" id="field-tests"><code>tests</code></th><td>At most once; optional</td><td>One <code>$query</code> value or packed $array of queries. Every test must be a ground, single-atom query. Optional; with no tests, no next test is recommended. <code>~query</code> is not a valid declaration handle.</td></tr><tr><th scope="row" id="field-reasoning"><code>reasoning</code></th><td>At most once; optional</td><td>A strategy name (plain token), default host <code>policy.reasoningStrategy</code> (<code>reference</code> by default). Built-ins: <code>reference</code> (the <code>js-reference</code> oracle; <code>js-reference</code> and <code>js-oracle</code> are the same route) and the deprecated <code>advanced</code> (the oracle plus optional external backends for deduction and numeric constraints). The host may restrict allowed strategies.</td></tr><tr><th scope="row" id="field-policy"><code>policy</code></th><td>At most once; optional</td><td>One <code>$policy</code> value or <code>~policy</code> declaration handle. It must lower to a policy object; each specified positive integer budget caps the corresponding host budget by <code>min(host, wire)</code>. No policy reference means host limits alone.</td></tr><tr><th scope="row" id="field-output"><code>output</code></th><td>Repeatable; optional</td><td>Repeatable <code>?name [one|many|rows|count|status]</code> declaration, default <code>one</code>. Each output becomes a deferred <code>$name</code> value if bound; names must be unique and cannot collide with explicit wires. <code>status</code> binds result status even for incomplete results. Other modes require completeness; unusable/unselected modes become blocked, not arbitrary first answers.</td></tr><tr><th scope="row" id="field-after"><code>after</code></th><td>Repeatable; optional</td><td>Repeatable <code>$wire</code> value-dependency reference. Orders execution after that producer; it does not alter inputs, proofs or output. A <code>~definition</code> handle is graph-checked but is not a value-ordering dependency.</td></tr></tbody></table><p>At runtime either query or observation must produce a ground target. The query controls automatic memory linking if repository/session exist. A supplied memory must be a <code>$link</code> retrieval result. Tests are evaluated under each candidate explanation, not fetched or executed in the world.</p></section><section><h2>Result and limits</h2><p>The result is the packet of <code>abduce</code> plus <code>tests</code> (<code>{query, separated_pairs, predictions: [{explanation, status}]}</code>, most separating first), <code>next_test</code> if a test separates at least one pair, <code>executed_tests: false</code> and the completeness flag. The score counts separated explanation pairs, not expected information gain. Output one/many/rows projects explanations (not tests); count unsupported; status returns status.</p><p>All operations use bounded search (host defaults include maxNodes 5000, maxDepth 8, maxCandidates 512, timeoutMs 3000); a <code>~policy</code> can only tighten configured limits. The result records completeness and epistemic status relative to supplied finite inputs and the visible memory view, never calibrated truth probability. No operation here writes to the repository; <code>after</code> is only scheduling. Test predictions require bounded Horn closure and ground single-atom test queries. Missing predictions are unknown, not negative test results.</p></section><section><h2>Executable examples</h2><h3>Compare two possible causes</h3><pre data-sop="current"><code>@target query
+  where outage server
+  mode exists
+@network hypothesis
+  holds network_down server
+@disk hypothesis
+  holds disk_full server
+@causes pack
+  items $network $disk
+@nrule rule
+  when network_down ?x
+  then outage ?x
+@drule rule
+  when disk_full ?x
+  then outage ?x
+@rules pack
+  items $nrule $drule
+@check query
+  where network_down server
+  mode exists
+@diagnosis diagnose
+  query $target
+  data $rules
+  candidates $causes
+  tests $check</code></pre><p>Both approved rules make the two assumptions potential explanations. The network test can separate their predictions; it is recommended only and is not performed.</p><h3>Single-cause diagnosis</h3><pre data-sop="current"><code>@q query
+  where alarm device1
+  mode exists
+@r rule
+  when temperature_high ?x
+  then alarm ?x
+@h hypothesis
+  holds temperature_high device1
+@test query
+  where temperature_high device1
+  mode exists
+@result diagnose
+  query $q
+  data ~r
+  candidates ~h
+  tests $test</code></pre><p>This produces an explanation candidate; with only one explanation there may be no discriminating <code>next_test</code>.</p><h3>Invalid or unsafe use</h3><pre data-sop="invalid" data-check="runtime" data-error="Diagnostic tests must be ground queries"><code>@q query
+  where alarm device1
+  mode exists
+@badtest query
+  where temperature_high ?x
+  mode exists
+@result diagnose
+  query $q
+  tests $badtest</code></pre><p>The parser accepts it, but diagnosis rejects a diagnostic test containing an unground <code>?x</code>.</p></section><section><h2>Implementation references</h2><p><code>sop/parser.mjs</code> (<code>SPEC.diagnose</code>), <code>sop/runtime.mjs</code> (operation dispatch), <code>reasoning/abduction.mjs</code> (<code>diagnose</code>), <code>sop/outputs.mjs</code> (<code>selectOutput</code>).</p><p>Related wires: <a href="abduce.html"><code>abduce</code></a> · <a href="hypothesis.html"><code>hypothesis</code></a> · <a href="query.html"><code>query</code></a>.</p></section></main>
+<script type="module" src="help-page.mjs"></script></body></html>

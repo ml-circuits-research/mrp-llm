@@ -1,0 +1,17 @@
+@works_at predicate
+  args subject:entity object:entity
+@colleague predicate
+  args subject:entity object:entity
+
+@f1 fact
+  holds works_at ann alpha
+  valid 2020-01-01 2023-01-01
+@f2 fact
+  holds works_at bob alpha
+  valid 2022-01-01 2025-01-01
+
+@r_col rule
+  when works_at ?x ?c
+  when works_at ?y ?c
+  when compare ?x not_equal ?y
+  then colleague ?x ?y

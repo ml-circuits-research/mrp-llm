@@ -1,0 +1,11 @@
+{
+  "name": "ATOMIC 2020 slice (candidate)",
+  "description": "Candidate common-sense layer, not loaded by any chat base memory: typical uses, abilities, properties, places and parts of common things from ATOMIC 2020 (Hwang et al., AAAI 2021, Allen Institute for AI), CC BY 4.0, attribution required; modified (relations mapped onto MRP-LLM predicates, filtered and selected). Provenance on every wire; sources and licences in docs/specs/DS011-source-rights.md.",
+  "imports": [
+    "core-min",
+    "core-en",
+    "commonsense-v1"
+  ],
+  "chat": false,
+  "licence": "CC BY 4.0"
+}

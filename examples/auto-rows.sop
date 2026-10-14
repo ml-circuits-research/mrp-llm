@@ -1,0 +1,12 @@
+@q query
+  select ?parent ?child
+  where parent ?parent ?child
+  at 2026-09-26
+
+@r solve
+  query $q
+  output ?families rows
+
+@answer cnl
+  result $r
+  language en

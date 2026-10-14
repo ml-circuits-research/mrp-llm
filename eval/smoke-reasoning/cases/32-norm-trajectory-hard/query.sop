@@ -1,0 +1,6 @@
+@q query
+  mode plan
+  where all
+    rinsed_a
+    rinsed_b
+  end

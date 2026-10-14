@@ -1,0 +1,6 @@
+{
+  "name": "Formalizer learned rules (step-by-step strategies)",
+  "description": "The learned-rules layer of the step-by-step formalization protocol (AGENTS.md \"Formalization improvement\"): hints, worked examples (generic, never a regression or test case), replacement question texts, choice texts and early exits that the formalization improver admits after the regression gate on tier tiny (jobs/formalization-improve). Read after formalizer-protocol-v1 by both LocalLLMStepByStep and InternalReasoningStepByStep (lib/formalize/protocol-data.mjs); uses the protocol's fp_ vocabulary. Not a chat base memory.",
+  "imports": ["formalizer-protocol-v1"],
+  "chat": false
+}

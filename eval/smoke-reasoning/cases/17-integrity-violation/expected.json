@@ -1,0 +1,15 @@
+{
+  "feature": "Integrity constraints: a violation is reported as data, not as an explosion",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "c": "no_double_booking",
+      "w": "room1"
+    }
+  ],
+  "requires": [
+    "integrity",
+    "compare_in_rules"
+  ]
+}

@@ -1,0 +1,5 @@
+# expect: type_mismatch
+@salary predicate
+  args subject:entity object:integer
+@f1 fact
+  holds salary ann high

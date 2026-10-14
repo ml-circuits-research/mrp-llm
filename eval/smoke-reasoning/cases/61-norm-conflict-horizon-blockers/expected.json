@@ -1,0 +1,17 @@
+{
+  "feature": "Norm conflict over a horizon: a freeze forbids the only deploy step while an urgency obliges it within three steps; the blockers are named",
+  "status": "blocked",
+  "complete": true,
+  "blocked_by": [
+    "freeze_hold",
+    "urgent_release"
+  ],
+  "requires": [
+    "plan",
+    "rules",
+    "norms_hard",
+    "blocked_info",
+    "norm_conflict",
+    "temporal_norms"
+  ]
+}

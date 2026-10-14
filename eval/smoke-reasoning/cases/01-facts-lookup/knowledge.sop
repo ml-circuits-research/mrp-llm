@@ -1,0 +1,10 @@
+# Three ground claims about where cities are.
+@located_in predicate
+  args subject:entity location:entity
+
+@f1 fact
+  holds located_in paris france
+@f2 fact
+  holds located_in lyon france
+@f3 fact
+  holds located_in berlin germany

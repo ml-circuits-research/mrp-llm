@@ -1,0 +1,22 @@
+{
+  "feature": "Conditional answers under negation as failure are non-monotone: a supposition can remove a row, and the packet says so",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "a"
+    },
+    {
+      "x": "c"
+    }
+  ],
+  "conditional": [
+    "s1"
+  ],
+  "nonmonotone": true,
+  "requires": [
+    "naf",
+    "closed_world",
+    "whatif"
+  ]
+}

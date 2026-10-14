@@ -1,0 +1,92 @@
+@age predicate
+  args subject:entity object:integer
+  closed true
+@member_of predicate
+  args subject:entity object:entity
+  closed true
+@exempt predicate
+  args subject:entity
+  closed true
+@fare predicate
+  args subject:entity object:integer
+@family_size predicate
+  args subject:entity object:integer
+@pays predicate
+  args subject:entity object:integer
+
+@f1 fact
+  holds age ann 40
+@f2 fact
+  holds age bob 38
+@f3 fact
+  holds age cy 9
+@f4 fact
+  holds age di 70
+@f5 fact
+  holds age ed 66
+@f6 fact
+  holds age flo 30
+@f7 fact
+  holds age gus 11
+@m1 fact
+  holds member_of ann fam1
+@m2 fact
+  holds member_of bob fam1
+@m3 fact
+  holds member_of cy fam1
+@m4 fact
+  holds member_of di fam2
+@m5 fact
+  holds member_of ed fam2
+@m6 fact
+  holds member_of flo fam3
+@m7 fact
+  holds member_of gus fam3
+@x1 fact
+  holds exempt gus
+
+@r_child rule
+  when age ?p ?a
+  when compare ?a below 12
+  then fare ?p ?a
+
+@r_adult rule
+  when age ?p ?a
+  when compare ?a at_least 12
+  when compare ?a below 65
+  then fare ?p 20
+
+@r_senior rule
+  when age ?p ?a
+  when compare ?a at_least 65
+  when compute ?d ?a minus 60
+  when compute ?e ?d whole_divided_by 5
+  when compute ?f 20 minus ?e
+  then fare ?p ?f
+
+@sizes aggregate
+  over member_of ?p ?f
+  group ?f
+  count ?p as ?n
+  yields family_size ?f ?n
+
+@r_big_family rule
+  when fare ?p ?x
+  when absent exempt ?p
+  when member_of ?p ?fam
+  when family_size ?fam ?n
+  when compare ?n at_least 3
+  when compute ?y ?x minus 2
+  then pays ?p ?y
+
+@r_small_family rule
+  when fare ?p ?x
+  when absent exempt ?p
+  when member_of ?p ?fam
+  when family_size ?fam ?n
+  when compare ?n below 3
+  then pays ?p ?x
+
+@r_exempt rule
+  when exempt ?p
+  then pays ?p 0

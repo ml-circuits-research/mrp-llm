@@ -1,0 +1,15 @@
+{
+  "feature": "Time variables: start_of binds the start of a stored validity, order compares them in a rule body",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "p": "ann"
+    }
+  ],
+  "requires": [
+    "temporal",
+    "rules",
+    "time_vars"
+  ]
+}

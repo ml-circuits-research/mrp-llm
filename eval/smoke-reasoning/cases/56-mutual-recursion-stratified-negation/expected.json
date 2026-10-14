@@ -1,0 +1,19 @@
+{
+  "feature": "Mutual recursion over a cycle, with stratified negation as failure on top of the recursive stratum",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "n0"
+    },
+    {
+      "x": "n4"
+    }
+  ],
+  "requires": [
+    "rules",
+    "recursion",
+    "naf",
+    "closed_world"
+  ]
+}

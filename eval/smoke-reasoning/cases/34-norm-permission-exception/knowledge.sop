@@ -1,0 +1,27 @@
+@production predicate
+  args subject:entity
+@maintenance_window predicate
+  args subject:entity
+@halted predicate
+  args subject:entity
+
+@f1 fact
+  holds production s1
+@f2 fact
+  holds maintenance_window s1
+
+@shutdown action
+  params ?s
+  requires production ?s
+  adds halted ?s
+  cost 1
+
+@no_shutdown_in_prod norm
+  forbid ~shutdown ?s
+  when production ?s
+  severity hard
+
+@shutdown_in_window norm
+  permit ~shutdown ?s
+  when maintenance_window ?s
+  overrides $no_shutdown_in_prod

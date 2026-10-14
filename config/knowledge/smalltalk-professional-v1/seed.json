@@ -1,0 +1,58 @@
+{
+  "name": "Small talk: professional register (English)",
+  "description": "The formal register: a formal variant of every situation that has one, one priority above its base situation, so that with this collection loaded the formal phrasing wins. Load at most one register collection that overrides (this one).",
+  "imports": [
+    "conversation-v1"
+  ],
+  "role": "conversation",
+  "group": "register",
+  "licence": "MIT (repository LICENSE); original MRP-LLM text written by model runs of jobs/smalltalk-replies and reviewed automatically",
+  "provenance": {
+    "generator": "jobs/smalltalk-replies (worker tier, bulk audit by the auditor tier, decider tier for fixes)",
+    "builder": "tools/smalltalk/build.mjs",
+    "taxonomy": "tools/smalltalk/taxonomy.json",
+    "runs": [
+      "state/llm-jobs/smalltalk-replies/20261002T155845-d6eeea",
+      "state/llm-jobs/smalltalk-replies-escalated/20261002T171332-ff6ba4"
+    ],
+    "inspired_by": [
+      {
+        "source": "DailyDialog",
+        "use": "topic categories and dialogue-act types (inform, question, directive, commissive) as ideas",
+        "text_copied": false
+      },
+      {
+        "source": "EmpatheticDialogues",
+        "use": "the set of 32 emotion labels, grouped into the empathy situations",
+        "text_copied": false
+      },
+      {
+        "source": "MultiWOZ",
+        "use": "general dialogue acts (greet, bye, thank, welcome, reqmore) as ideas",
+        "text_copied": false
+      },
+      {
+        "source": "Wizard of Wikipedia",
+        "use": "chit-chat about a topic that leads to knowledge, as an idea",
+        "text_copied": false
+      },
+      {
+        "source": "Cornell Movie-Dialogs Corpus",
+        "use": "turn patterns of casual conversation, as an idea",
+        "text_copied": false
+      }
+    ]
+  },
+  "counts": {
+    "situations": 91,
+    "replies": 264,
+    "by_register": {
+      "formal": 264
+    },
+    "rules": 2,
+    "data_facts": 315,
+    "mean_distinct_1": 0.688,
+    "mean_distinct_2": 0.875,
+    "near_duplicates_dropped": 29
+  }
+}

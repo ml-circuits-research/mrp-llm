@@ -1,0 +1,16 @@
+{
+  "feature": "Facts and lookup (select over ground claims)",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "city": "paris"
+    },
+    {
+      "city": "lyon"
+    }
+  ],
+  "requires": [
+    "facts"
+  ]
+}

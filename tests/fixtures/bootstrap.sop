@@ -1,0 +1,99 @@
+# Fictitious demonstration data. Dates are fixtures, not claims about real people.
+@family1 fact
+  holds mother ana bogdan
+  valid timeless
+  source demo
+  retention pinned
+
+@family2 fact
+  holds parent bogdan carina
+  valid timeless
+  source demo
+  retention pinned
+
+@employment fact
+  holds works_at maria lab_alpha
+  valid 2024-01-01 open
+  source demo
+
+@trip fact
+  holds duration route_demo 70
+  valid timeless
+  source demo
+
+@mother_parent rule
+  when mother ?x ?y
+  then parent ?x ?y
+
+@father_parent rule
+  when father ?x ?y
+  then parent ?x ?y
+
+@grandparent_rule rule
+  when parent ?x ?y
+  when parent ?y ?z
+  then grandparent ?x ?z
+
+@grandmother_rule rule
+  when mother ?x ?y
+  when parent ?y ?z
+  then grandmother ?x ?z
+
+@ancestor_base rule
+  when parent ?x ?y
+  then ancestor ?x ?y
+
+@ancestor_recursive rule
+  when parent ?x ?y
+  when ancestor ?y ?z
+  then ancestor ?x ?z
+
+@employment_general rule
+  when employed_by ?x ?o
+  then works_at ?x ?o
+
+@find_ancestors template
+  description "Găsește strămoșii unei persoane prin regulile aprobate."
+  cue "ascendență"
+  cue "strămoși"
+  params person
+  yield answer
+  body |
+    @q query
+      mode select
+      select ?who
+      where ancestor ?who $person
+    @m recall
+      query $q
+    @r reason
+      query $q
+      memory $m
+    @answer cnl
+      result $r
+      language en
+
+@check_arrival template
+  description "Recuperează durata rutei și calculează sosirea într-o zi, în minute de la miezul nopții."
+  cue "sosire"
+  cue "ajung"
+  params route start deadline
+  yield answer
+  body |
+    @travel query
+      select ?duration
+      where duration $route ?duration
+    @retrieve_duration solve
+      query $travel
+      output ?duration one
+    @timing constraint
+      var ?arrival int 0 1440
+      require ?arrival == $start + $duration
+      claim ?arrival <= $deadline
+      task possible
+      unit minute
+    @feasibility solve
+      constraint $timing
+      output ?arrival one
+    @answer cnl
+      result $feasibility
+      language en

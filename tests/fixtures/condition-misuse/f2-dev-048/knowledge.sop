@@ -1,0 +1,284 @@
+@department_corina_dev_142 entity
+  kind entity
+  label en "department corina dev 142"
+  alias en "department_corina_dev_142"
+@department_diana_dev_141 entity
+  kind entity
+  label en "department diana dev 141"
+  alias en "department_diana_dev_141"
+@firm_diana_dev_141 entity
+  kind entity
+  label en "firm diana dev 141"
+  alias en "firm_diana_dev_141"
+@assigned_to predicate
+  args subject:entity object:entity
+  closed true
+@compensation predicate
+  args subject:entity object:integer
+  closed true
+@f1 fact
+  holds assigned_to camille_dev_5200 firm_diana_dev_141
+@f2 fact
+  holds assigned_to camille_dev_5200 project_camille_dev_5200
+@f3 fact
+  holds compensation camille_dev_5200 159
+@f4 fact
+  holds assigned_to chloe_dev_5201 firm_diana_dev_141
+@f5 fact
+  holds assigned_to chloe_dev_5201 project_chloe_dev_5201
+@f6 fact
+  holds compensation chloe_dev_5201 66
+@f7 fact
+  holds assigned_to lea_dev_5202 firm_diana_dev_141
+@f8 fact
+  holds assigned_to lea_dev_5202 project_lea_dev_5202
+@f9 fact
+  holds compensation lea_dev_5202 83
+@f10 fact
+  holds assigned_to manon_dev_5203 firm_diana_dev_141
+@f11 fact
+  holds assigned_to manon_dev_5203 project_manon_dev_5203
+@f12 fact
+  holds compensation manon_dev_5203 100
+@f13 fact
+  holds assigned_to elodie_dev_5204 firm_diana_dev_141
+@f14 fact
+  holds assigned_to elodie_dev_5204 project_elodie_dev_5204
+@f15 fact
+  holds compensation elodie_dev_5204 117
+@f16 fact
+  holds assigned_to hugo_dev_5205 firm_diana_dev_141
+@f17 fact
+  holds assigned_to hugo_dev_5205 project_hugo_dev_5205
+@f18 fact
+  holds compensation hugo_dev_5205 134
+@f19 fact
+  holds assigned_to theo_dev_5206 firm_diana_dev_141
+@f20 fact
+  holds assigned_to theo_dev_5206 project_theo_dev_5206
+@f21 fact
+  holds compensation theo_dev_5206 151
+@f22 fact
+  holds assigned_to julien_dev_5207 firm_diana_dev_141
+@f23 fact
+  holds assigned_to julien_dev_5207 project_julien_dev_5207
+@f24 fact
+  holds compensation julien_dev_5207 58
+@f25 fact
+  holds assigned_to mathieu_dev_5208 firm_diana_dev_141
+@f26 fact
+  holds assigned_to mathieu_dev_5208 project_mathieu_dev_5208
+@f27 fact
+  holds compensation mathieu_dev_5208 75
+@f28 fact
+  holds assigned_to remi_dev_5209 firm_diana_dev_141
+@f29 fact
+  holds assigned_to remi_dev_5209 project_remi_dev_5209
+@f30 fact
+  holds compensation remi_dev_5209 92
+@f31 fact
+  holds assigned_to ana_dev_5210 firm_diana_dev_141
+@f32 fact
+  holds assigned_to ana_dev_5210 project_ana_dev_5210
+@f33 fact
+  holds compensation ana_dev_5210 109
+@f34 fact
+  holds assigned_to maria_dev_5211 firm_diana_dev_141
+@f35 fact
+  holds assigned_to maria_dev_5211 project_maria_dev_5211
+@f36 fact
+  holds compensation maria_dev_5211 159
+@f37 fact
+  holds assigned_to ioana_dev_5212 firm_diana_dev_141
+@f38 fact
+  holds assigned_to ioana_dev_5212 project_ioana_dev_5212
+@f39 fact
+  holds compensation ioana_dev_5212 66
+@f40 fact
+  holds assigned_to elena_dev_5213 firm_diana_dev_141
+@f41 fact
+  holds assigned_to elena_dev_5213 project_elena_dev_5213
+@f42 fact
+  holds compensation elena_dev_5213 83
+@f43 fact
+  holds assigned_to andreea_dev_5214 firm_diana_dev_141
+@f44 fact
+  holds assigned_to andreea_dev_5214 project_andreea_dev_5214
+@f45 fact
+  holds compensation andreea_dev_5214 100
+@f46 fact
+  holds assigned_to madalina_dev_5215 firm_diana_dev_141
+@f47 fact
+  holds assigned_to madalina_dev_5215 project_madalina_dev_5215
+@f48 fact
+  holds compensation madalina_dev_5215 117
+@f49 fact
+  holds assigned_to stefania_dev_5216 firm_diana_dev_141
+@f50 fact
+  holds assigned_to stefania_dev_5216 project_stefania_dev_5216
+@f51 fact
+  holds compensation stefania_dev_5216 134
+@f52 fact
+  holds assigned_to irina_dev_5217 firm_diana_dev_141
+@f53 fact
+  holds assigned_to irina_dev_5217 project_irina_dev_5217
+@f54 fact
+  holds compensation irina_dev_5217 151
+@f55 fact
+  holds assigned_to raluca_dev_5218 firm_diana_dev_141
+@f56 fact
+  holds assigned_to raluca_dev_5218 project_raluca_dev_5218
+@f57 fact
+  holds compensation raluca_dev_5218 58
+@f58 fact
+  holds assigned_to oana_dev_5219 firm_diana_dev_141
+@f59 fact
+  holds assigned_to oana_dev_5219 project_oana_dev_5219
+@f60 fact
+  holds compensation oana_dev_5219 75
+@f61 fact
+  holds assigned_to alina_dev_5220 firm_diana_dev_141
+@f62 fact
+  holds assigned_to alina_dev_5220 project_alina_dev_5220
+@f63 fact
+  holds compensation alina_dev_5220 92
+@f64 fact
+  holds assigned_to cristina_dev_5221 firm_diana_dev_141
+@f65 fact
+  holds assigned_to cristina_dev_5221 project_cristina_dev_5221
+@f66 fact
+  holds compensation cristina_dev_5221 109
+@f67 fact
+  holds assigned_to bianca_dev_5222 firm_diana_dev_141
+@f68 fact
+  holds assigned_to bianca_dev_5222 project_bianca_dev_5222
+@f69 fact
+  holds compensation bianca_dev_5222 159
+@f70 fact
+  holds assigned_to roxana_dev_5223 firm_diana_dev_141
+@f71 fact
+  holds assigned_to roxana_dev_5223 project_roxana_dev_5223
+@f72 fact
+  holds compensation roxana_dev_5223 66
+@f73 fact
+  holds assigned_to teodora_dev_5224 firm_diana_dev_141
+@f74 fact
+  holds assigned_to teodora_dev_5224 project_teodora_dev_5224
+@f75 fact
+  holds compensation teodora_dev_5224 83
+@f76 fact
+  holds assigned_to iulia_dev_5225 firm_diana_dev_141
+@f77 fact
+  holds assigned_to iulia_dev_5225 project_iulia_dev_5225
+@f78 fact
+  holds compensation iulia_dev_5225 100
+@f79 fact
+  holds assigned_to diana_dev_5226 firm_diana_dev_141
+@f80 fact
+  holds assigned_to diana_dev_5226 project_diana_dev_5226
+@f81 fact
+  holds compensation diana_dev_5226 117
+@f82 fact
+  holds assigned_to corina_dev_5227 firm_diana_dev_141
+@f83 fact
+  holds assigned_to corina_dev_5227 project_corina_dev_5227
+@f84 fact
+  holds compensation corina_dev_5227 134
+@f85 fact
+  holds assigned_to smaranda_dev_5228 firm_diana_dev_141
+@f86 fact
+  holds assigned_to smaranda_dev_5228 project_smaranda_dev_5228
+@f87 fact
+  holds compensation smaranda_dev_5228 151
+@f88 fact
+  holds assigned_to ilinca_dev_5229 firm_diana_dev_141
+@f89 fact
+  holds assigned_to ilinca_dev_5229 project_ilinca_dev_5229
+@f90 fact
+  holds compensation ilinca_dev_5229 58
+@f91 fact
+  holds assigned_to brandusa_dev_5230 firm_diana_dev_141
+@f92 fact
+  holds assigned_to brandusa_dev_5230 project_brandusa_dev_5230
+@f93 fact
+  holds compensation brandusa_dev_5230 75
+@f94 fact
+  holds assigned_to otilia_dev_5231 firm_diana_dev_141
+@f95 fact
+  holds assigned_to otilia_dev_5231 project_otilia_dev_5231
+@f96 fact
+  holds compensation otilia_dev_5231 92
+@department_pay predicate
+  args subject:entity object:entity topic:integer
+  closed true
+@department_total predicate
+  args subject:entity object:integer
+@f97 fact
+  holds department_pay camille_dev_5200 department_diana_dev_141 159
+@f98 fact
+  holds department_pay chloe_dev_5201 department_corina_dev_142 66
+@f99 fact
+  holds department_pay lea_dev_5202 department_diana_dev_141 83
+@f100 fact
+  holds department_pay manon_dev_5203 department_corina_dev_142 100
+@f101 fact
+  holds department_pay elodie_dev_5204 department_diana_dev_141 117
+@f102 fact
+  holds department_pay hugo_dev_5205 department_corina_dev_142 134
+@f103 fact
+  holds department_pay theo_dev_5206 department_diana_dev_141 151
+@f104 fact
+  holds department_pay julien_dev_5207 department_corina_dev_142 58
+@f105 fact
+  holds department_pay mathieu_dev_5208 department_diana_dev_141 75
+@f106 fact
+  holds department_pay remi_dev_5209 department_corina_dev_142 92
+@f107 fact
+  holds department_pay ana_dev_5210 department_diana_dev_141 109
+@f108 fact
+  holds department_pay maria_dev_5211 department_corina_dev_142 159
+@f109 fact
+  holds department_pay ioana_dev_5212 department_diana_dev_141 66
+@f110 fact
+  holds department_pay elena_dev_5213 department_corina_dev_142 83
+@f111 fact
+  holds department_pay andreea_dev_5214 department_diana_dev_141 100
+@f112 fact
+  holds department_pay madalina_dev_5215 department_corina_dev_142 117
+@f113 fact
+  holds department_pay stefania_dev_5216 department_diana_dev_141 134
+@f114 fact
+  holds department_pay irina_dev_5217 department_corina_dev_142 151
+@f115 fact
+  holds department_pay raluca_dev_5218 department_diana_dev_141 58
+@f116 fact
+  holds department_pay oana_dev_5219 department_corina_dev_142 75
+@f117 fact
+  holds department_pay alina_dev_5220 department_diana_dev_141 92
+@f118 fact
+  holds department_pay cristina_dev_5221 department_corina_dev_142 109
+@f119 fact
+  holds department_pay bianca_dev_5222 department_diana_dev_141 159
+@f120 fact
+  holds department_pay roxana_dev_5223 department_corina_dev_142 66
+@f121 fact
+  holds department_pay teodora_dev_5224 department_diana_dev_141 83
+@f122 fact
+  holds department_pay iulia_dev_5225 department_corina_dev_142 100
+@f123 fact
+  holds department_pay diana_dev_5226 department_diana_dev_141 117
+@f124 fact
+  holds department_pay corina_dev_5227 department_corina_dev_142 134
+@f125 fact
+  holds department_pay smaranda_dev_5228 department_diana_dev_141 151
+@f126 fact
+  holds department_pay ilinca_dev_5229 department_corina_dev_142 58
+@f127 fact
+  holds department_pay brandusa_dev_5230 department_diana_dev_141 75
+@f128 fact
+  holds department_pay otilia_dev_5231 department_corina_dev_142 92
+@by_department aggregate
+  over department_pay ?person ?dept ?amount
+  group ?dept
+  sum ?amount as ?total
+  yields department_total ?dept ?total

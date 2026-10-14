@@ -1,0 +1,8 @@
+@door_open predicate
+  args subject:entity
+
+@f1 fact
+  holds door_open lab
+  status reported
+  speaker "bob"
+  source "chat 2026-09-30"

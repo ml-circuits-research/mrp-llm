@@ -1,0 +1,18 @@
+{
+  "feature": "Negation as failure over a declared closed predicate",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "x": "a"
+    },
+    {
+      "x": "c"
+    }
+  ],
+  "requires": [
+    "rules",
+    "naf",
+    "closed_world"
+  ]
+}

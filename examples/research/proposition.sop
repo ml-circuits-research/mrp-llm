@@ -1,0 +1,15 @@
+# Usage example 1 — question intent as a declarative proposition.
+# Design inspired by QA2D's question-to-proposition idea; authored here, no
+# external rows copied. Domain: employment and roles (not kinship).
+#
+# Message: "Who works at North Lab?" The model writes the question as strings;
+# the host links "works at" and "North Lab" to its lexicon and compiles
+# retrieval, reasoning and rendering into an inspectable circuit.
+@question query
+  select ?who
+  where match
+    relation "works at"
+    role subject ?who
+    role object "North Lab"
+    polarity affirmed
+  end

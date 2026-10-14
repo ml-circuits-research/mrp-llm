@@ -1,0 +1,3 @@
+@q query
+  mode explain
+  where ancestor p0 p8

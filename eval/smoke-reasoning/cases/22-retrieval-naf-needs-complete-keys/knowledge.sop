@@ -1,0 +1,29 @@
+@node predicate
+  args subject:entity
+@blocked predicate
+  args subject:entity
+  closed true
+@open_node predicate
+  args subject:entity
+
+@n1 fact
+  holds node n1
+@n2 fact
+  holds node n2
+@n3 fact
+  holds node n3
+@n4 fact
+  holds node n4
+@n5 fact
+  holds node n5
+@n6 fact
+  holds node n6
+@b1 fact
+  holds blocked n2
+@b2 fact
+  holds blocked n5
+
+@r_open rule
+  when node ?x
+  when absent blocked ?x
+  then open_node ?x

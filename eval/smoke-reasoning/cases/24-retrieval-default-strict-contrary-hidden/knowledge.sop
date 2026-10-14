@@ -1,0 +1,18 @@
+@bird predicate
+  args subject:entity
+@penguin predicate
+  args subject:entity
+@flies predicate
+  args subject:entity
+
+@f1 fact
+  holds bird tweety
+@f2 fact
+  holds bird pingu
+@f3 fact
+  holds not flies pingu
+
+@birds_fly default
+  when bird ?x
+  then flies ?x
+  except penguin ?x

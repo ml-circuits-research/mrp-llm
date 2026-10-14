@@ -1,0 +1,33 @@
+/** Portable, generated worlds. No expected answer is passed to the runtime. */
+const fact=(id,a,valid='timeless')=>`@${id} fact\n  holds ${a}\n  valid ${valid}\n  source synthetic\n`;
+const rule=(id,body,head,mode='logical')=>`@${id} rule\n${body.map(a=>'  when '+a+'\n').join('')}  then ${head}\n  mode ${mode}\n`;
+const hypothesis=(id,a,cost=1)=>`@${id} hypothesis\n  holds ${a}\n  cost ${cost}\n`;
+const trace=(id,atoms,closed=false,text='')=>`@${id} trace\n  text ${JSON.stringify(text)}\n${atoms.map(a=>'  feature '+a+'\n').join('')}  closed ${closed}\n  source synthetic\n`;
+const query=(a,select='')=>`@q query\n${select?'  select '+select+'\n':''}  where ${a}\n  at 2026-09-26\n`;
+const end=id=>`\n@answer cnl\n  result $${id}\n  language en\n`;
+export function scenarios(i=0){
+ const a='person_a_'+i,b='person_b_'+i,c='person_c_'+i,s='device_'+i,r='robot_'+i,l1='place_a_'+i,l2='place_b_'+i,l3='place_c_'+i;
+ const roots=fact('known_a',`parent ${a} ${b}`)+fact('known_b',`parent ${b} ${c}`)+rule('grandparent_rule',['parent ?x ?y','parent ?y ?z'],'grandparent ?x ?z');
+ const causal=fact('power',`supply ${s}`)+rule('power_switch',['supply ?x'],'switch_on ?x','causal')+rule('switch_light',['switch_on ?x'],'light_on ?x','causal');
+ const causeSetup=rule('network_causes_outage',['network_down ?x'],'outage ?x')+rule('disk_causes_outage',['disk_full ?x'],'outage ?x')+hypothesis('network',`network_down ${s}`,2)+hypothesis('disk',`disk_full ${s}`,1);
+ const twoTraces=trace('case_good',[`hot ${s}`,`dry ${s}`],true,'senzor fierbinte și uscat')+trace('case_bad',[`hot other_${i}`],true,'senzor fierbinte dar nu uscat');
+ const cases=[];const add=(name,nl,setup,target,status,check={})=>cases.push({name,input:nl,setup,target:target+end('result'),expectedStatus:status,check});
+ add('deduction',`Cine este bunicul sau bunica persoanei C${i}?`,roots,query(`grandparent ?who ${c}`,'?who')+'@result solve\n  query $q\n  output ?who one\n','supported',{output:'who',value:a});
+ add('classification',`Este dispozitivul ${i} în categoria celor care necesită atenție?`,fact('hot',`hot ${s}`)+rule('hot_class',['hot ?x'],'needs_attention ?x'),query(`needs_attention ${s}`)+'@result reason\n  query $q\n  memory $m\n@m recall\n  query $q\n  ', 'supported');
+ add('temporal',`Unde lucra persoana A${i} în iunie 2025, nu acum?`,fact('job',`works_at ${a} org_${i}`,'2024-01-01 2026-03-01'),`@q query\n  select ?where\n  where works_at ${a} ?where\n  at 2025-06-15\n@result temporal\n  query $q\n  output ?where one\n`,'supported',{output:'where',value:'org_'+i});
+ add('constraint',`O durată de ${30+i%7} minute permite sosirea înainte de minutul 900 dacă plec la 770?`,roots,`@c constraint\n  var ?arrival int 0 1440\n  require ?arrival == 770 + ${30+i%7}\n  claim ?arrival <= 900\n  task prove\n@result solve\n  constraint $c\n  output ?arrival one\n`,'entailed',{output:'arrival',value:800+i%7});
+ add('optimization',`Alege numere întregi x,y între 0 și 10 cu suma cel puțin ${3+i%4}. Minimizează 2x+y.`,roots,`@c constraint\n  var ?x int 0 10\n  var ?y int 0 10\n  require ?x + ?y >= ${3+i%4}\n  claim ?x >= 0\n  objective 2 * ?x + ?y\n  direction min\n  task optimize\n@result solve\n  constraint $c\n  output ?x one\n  output ?y one\n`,'optimal',{objective:3+i%4});
+ add('abduction',`Ce ipoteze aprobate ar explica indisponibilitatea dispozitivului ${i}? Nu le considera confirmate.`,causeSetup,query(`outage ${s}`)+'@possible pack\n  items $network $disk\n@result abduce\n  query $q\n  candidates $possible\n  output ?causes many\n','hypotheses',{explanations:2});
+ add('abduction_auto',`Ce condiții lipsă ar explica indisponibilitatea dispozitivului ${i}, folosind regulile aprobate?`,rule('disk_to_process',['disk_full ?x'],'process_crashed ?x')+rule('process_to_outage',['process_crashed ?x'],'outage ?x'),query(`outage ${s}`)+'@result abduce\n  query $q\n','hypotheses',{explanations:1});
+ add('diagnosis',`Ce verificare ar separa ipotezele pentru indisponibilitatea dispozitivului ${i}?`,causeSetup,query(`outage ${s}`)+`@test query\n  where network_down ${s}\n@possible pack\n  items $network $disk\n@result diagnose\n  query $q\n  candidates $possible\n  tests $test\n`,'hypotheses',{testRecommended:true});
+ add('association',`Ce caz cunoscut seamănă cu senzorul ${i} fierbinte și uscat?`,twoTraces,trace('cue',[`hot ${s}`,`dry ${s}`],false,'senzor fierbinte și uscat')+'@cases pack\n  items $case_good $case_bad\n@result associate\n  cue $cue\n  data $cases\n  mode recall-memory\n','approximate',{firstCandidate:'case_good'});
+ add('induction',`Verifică regula candidată «hot implică dry» pe cazurile dispozitivului ${i}. Separă contraexemplele de necunoscut.`,twoTraces+'@candidate pattern\n  when hot ?x\n  then dry ?x\n', '@cases pack\n  items $case_good $case_bad\n@result induce\n  data $cases\n  candidates ~candidate\n  output ?patterns many\n','approximate',{counterexamples:1});
+ add('analogy',`Transferă doar ca ipoteză proprietatea părții b${i} către structura analogă c${i}–d${i}.`,trace('source_case',[`connected a_${i} b_${i}`])+trace('target_case',[`connected c_${i} d_${i}`])+trace('extra_case',[`useful b_${i}`]),'@result analogize\n  source ~source_case\n  target ~target_case\n  transfer ~extra_case\n','approximate',{mappingScore:1});
+ const action='@move action\n  params ?r ?from ?to\n  requires located_in ?r ?from\n  requires connected ?from ?to\n  removes located_in ?r ?from\n  adds located_in ?r ?to\n  cost 1\n';
+ add('planning',`Găsește un plan pentru robotul ${i} din camera A în camera C. Nu executa acțiunile.`,fact('position',`located_in ${r} ${l1}`)+fact('road_ab',`connected ${l1} ${l2}`)+fact('road_bc',`connected ${l2} ${l3}`)+action,`@destination goal\n  where located_in ${r} ${l3}\n@result plan\n  goal $destination\n  actions ~move\n  output ?chosen_plan one\n`,'plan_found',{planCost:2});
+ add('whatif',`Presupune că persoana C${i} este părintele lui A${i}. Ar fi C${i} bunicul sau bunica lui B${i}? Nu salva presupunerea.`,roots,hypothesis('assumption',`parent ${c} ${a}`)+query(`grandparent ${c} ${b}`)+'@result simulate\n  query $q\n  intervention $assumption\n  mode whatif\n','supported',{hypothetical:true});
+ add('counterfactual',`În modelul cauzal aprobat, ce se întâmplă cu lumina dispozitivului ${i} dacă forțăm comutatorul oprit?`,causal,hypothesis('off',`not switch_on ${s}`)+query(`light_on ${s}`)+'@result simulate\n  query $q\n  intervention $off\n  mode counterfactual\n','unknown',{hypothetical:true,factualStatus:'supported'});
+ // Pack can hold values ($) and approved declarative definitions (~).
+ for(const c of cases)for(const name of ['network','disk','case_good','case_bad'])c.target=c.target.replaceAll('$'+name,'~'+name);
+ return cases;
+}

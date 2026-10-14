@@ -1,0 +1,17 @@
+@has_a predicate
+  args subject:entity
+@has_b predicate
+  args subject:entity
+@has_c predicate
+  args subject:entity
+@ok predicate
+  args subject:entity
+
+@r1 rule
+  when has_c ?x
+  when has_a ?x
+  then ok ?x
+@r2 rule
+  when has_c ?x
+  when has_b ?x
+  then ok ?x

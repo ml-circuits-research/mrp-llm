@@ -1,0 +1,3 @@
+# expect: args_mixed_roles
+@p predicate
+  args subject:entity entity

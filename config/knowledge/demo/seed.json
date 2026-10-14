@@ -1,0 +1,5 @@
+{
+  "name": "Demo vocabulary",
+  "description": "A small demonstration vocabulary (kinship, work, a few devices) with a handful of entities; the former global config/ontology.sop.",
+  "imports": ["core-min"]
+}

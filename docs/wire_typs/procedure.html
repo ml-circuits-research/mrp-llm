@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#procedure" target="_top">← Wire type index</a></p><h1><code>procedure</code></h1><p>Stores an approved reusable SOP circuit using the same parameterized runtime expansion contract as <a href="template.html"><code>template</code></a>. The name distinguishes library intent; it is not a separate procedure execution engine and neither type grants an imperative function body.</p><p><strong>Status and author:</strong> Host-approved declaration; a model-origin program cannot install this definition.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once at parse time. Other field names are rejected.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and current behavior</th></tr></thead><tbody><tr><th scope="row" id="field-params"><code>params</code></th><td>At most once; optional; default empty</td><td>Whitespace-separated distinct parameter names, default empty; names become expansion inputs.</td></tr>
+<tr><th scope="row" id="field-yield"><code>yield</code></th><td>Exactly once; required</td><td>Wire ID or declared output name produced by the body; determines the value exposed by expansion.</td></tr>
+<tr><th scope="row" id="field-body"><code>body</code></th><td>Exactly once; required</td><td><code>|</code> with four-space-indented SOP source; reviewed definition body expanded by an explicit invocation, not executed upon declaration.</td></tr>
+<tr><th scope="row" id="field-description"><code>description</code></th><td>At most once; optional; default empty</td><td>Plain or JSON-quoted descriptive text, default empty; documentation metadata only.</td></tr>
+<tr><th scope="row" id="field-cue"><code>cue</code></th><td>Repeatable; optional; default none</td><td>Plain or JSON-quoted cue per line; optional metadata for locating a reviewed definition, not an execution trigger.</td></tr></tbody></table></div></section><section><h2>Execution and result</h2><p>Each <code>with name value</code> binds one declared parameter, once. A value beginning with <code>$</code> resolves an existing wire value; other text is unquoted (a JSON-quoted string is decoded). Missing or duplicate parameters, unknown names, a bad body, ID collisions, or a yield outside body/output are errors. At expansion, the runtime creates namespaced parameter <code>value</code> wires and body wires, substitutes references, renames body output ports, then aliases the expansion result to its yield. Definition metadata does not turn this into arbitrary code execution.</p><p>Host-approved <code>~procedure</code> handles can come from a checksum-verified repository library or a trusted program. A trusted system/tool program can invoke the approved handle using <a href="expand.html">expand</a>, but cannot publish a procedure definition. Nested runtime operations still have their own authorization and cardinality rules. This does not execute arbitrary JavaScript or automatically commit a library.</p></section><section><h2>Current SOP examples</h2><h3>Arithmetic procedure in trusted source</h3><pre data-sop="current"><code>@approved procedure
+  description &quot;Compute a validated threshold comparison&quot;
+  cue &quot;check threshold&quot;
+  params number limit
+  yield result
+  body |
+    @result value
+      data $number &lt;= $limit
+
+@actual value
+  data 4
+
+@bound value
+  data 9
+
+@check expand
+  using ~approved
+  with number $actual
+  with limit $bound</code></pre><p>The approved body evaluates a bounded comparison and returns true from 4 ≤ 9; the host is the author of the definition.</p>
+<h3>Procedure with a status result</h3><pre data-sop="current"><code>@reviewed procedure
+  params item
+  yield status
+  body |
+    @q query
+      where selected $item
+    @s solve
+      query $q
+      output ?status status
+
+@thing value
+  data &quot;sample&quot;
+
+@application expand
+  using ~reviewed
+  with item $thing</code></pre><p>The result is the query status from a generated output port, not a guessed boolean. The query requires an appropriate admitted predicate/knowledge view.</p><h3>Invalid or unsafe example</h3><pre data-sop="invalid" data-check="runtime" data-error="Missing template argument"><code>@bad procedure
+  params x y
+  yield result
+  body |
+    @result value
+      data $x + $y
+
+@v value
+  data 1
+
+@use expand
+  using ~bad
+  with x $v</code></pre><p>All parameters must be supplied; the expansion rejects the missing <code>y</code> even though the outer fields parse.</p></section><section id="knowledge-language"><h2>Knowledge language: <code>procedure</code></h2><p class="note">In the knowledge language a <code>procedure</code> is a named bundle of wires, a mode of work; it has no approval and no version of its own. The tables and examples of this section are about the <b>knowledge</b> form, written from a source and checked by <code>sop/knowledge/</code>; the sections above describe the host-circuit form. Anchors of this section's fields start with <code>kfield-</code>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>.</p><p>Other field names are rejected (<code>unknown_field</code>). The table is generated from <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table data-knowledge="fields"><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="kfield-members"><code>members</code></th><td>Repeatable; required</td><td>One or more <code>$id</code> references: the methods, norms, rules and actions that make up the procedure. Required (<code>bad_ref</code>, <code>unknown_ref</code>).</td></tr>
+<tr><th scope="row" id="kfield-description"><code>description</code></th><td>At most once; optional</td><td>Text: what the procedure is for.</td></tr>
+<tr><th scope="row" id="kfield-scope"><code>scope</code></th><td>At most once; optional</td><td>Text: the tasks, agents or contexts it applies to.</td></tr>
+<tr><th scope="row" id="kfield-source"><code>source</code></th><td>At most once; optional</td><td>Quoted citation of the manual.</td></tr>
+<tr><th scope="row" id="kfield-report"><code>report</code></th><td>Repeatable; optional</td><td>An atom pattern over declared predicates (variables allowed, no <code>not</code>): the rows the procedure reports. Added 2026-10-03 for analysis procedures (proposal P-8); the arity is checked against the declaration (<code>bad_atom</code>, <code>arity_mismatch</code>).</td></tr></tbody></table></div><h3>What it is for</h3><p>A procedure makes ten wires addressable by one name. The members carry the approval and the versions, so the procedure is in force exactly when its members are, and "which version of the reset procedure applied on that date" is answered from their history (<code>asof</code>). An amendment addresses a procedure by name.</p><h3>Examples</h3><pre data-sop="knowledge"><code>@a predicate
+  args subject:entity
+@act action
+  params ?x
+  requires a ?x
+  adds a ?x
+@n1 norm
+  forbid ~act ?x
+@reset_procedure procedure
+  members $act $n1
+  description "Reset mode of work"
+  scope "ops"</code></pre><h3>Analysis procedures</h3><p>A procedure whose <code>scope</code> carries the tag <code>analysis</code> is an <b>analysis procedure</b> (DS022 "Analysis procedures", <a href="../analysis.html" target="_top">Analysis procedures</a>): the analyzer applies its members, and only its members, to the document layer of a session or a base memory. Its findings are the violations of its <code>integrity</code> members; its <code>report</code> lines are its measures (KPIs, scores). Parameters are member facts of <code>analysis_parameter</code>, which a run may override by name. The library <code>config/knowledge/analysis-core-v1/</code> holds the starter procedures.</p><pre data-sop="knowledge"><code>@amount predicate
+  args subject:entity object:value
+  key 1
+  closed true
+@upper_limit predicate
+  args subject:entity object:value
+  closed true
+@analysis_parameter predicate
+  args subject:entity object:value
+  key 1
+@kpi_headroom predicate
+  args subject:entity object:value
+@over_limit integrity
+  never all
+    amount ?q ?v
+    upper_limit ?q ?max
+    compare ?v above ?max
+  end
+  witness ?q
+  message "a value is above the maximum the document itself sets"
+  severity error
+@headroom rule
+  when amount ?q ?v
+  when upper_limit ?q ?max
+  when compute ?h ?max minus ?v
+  then kpi_headroom ?q ?h
+@p_margin fact
+  holds analysis_parameter safety_margin 0
+@limits_check procedure
+  members $over_limit $headroom $p_margin
+  description "Analysis: values against the limits the document sets, and the headroom left"
+  scope "analysis, findings, kpis"
+  report kpi_headroom ?quantity ?headroom</code></pre><h3>Invalid: a negated report line</h3><pre data-sop="knowledge-invalid" data-error="bad_atom"><code>@q predicate
+  args subject:entity
+@r1 rule
+  when q ?x
+  then q ?x
+@p procedure
+  members $r1
+  report not q ?x</code></pre><h3>Invalid: a member that does not exist</h3><pre data-sop="knowledge-invalid" data-error="unknown_ref"><code>@p procedure
+  members $missing</code></pre></section><!--/knowledge-language--><section><h2>Implementation sources</h2><ul><li><code>sop/parser.mjs:SPEC, validateShape, validateGraph</code></li><li><code>sop/runtime.mjs:Runtime.run</code></li><li><code>sop/runtime.mjs:Runtime.run library loading and expand case</code></li></ul><p>Related: <a href="template.html"><code>template</code></a>, <a href="expand.html"><code>expand</code></a>, <a href="policy.html"><code>policy</code></a>. See the <a href="../wiki.html#definition-sop" target="_top">SOP terminology</a> for wire/reference conventions.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

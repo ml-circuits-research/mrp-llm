@@ -1,0 +1,78 @@
+@release predicate
+  args subject:entity
+@big_release predicate
+  args subject:entity
+@backed_up predicate
+  args subject:entity
+@canaried predicate
+  args subject:entity
+@smoke_ok predicate
+  args subject:entity
+@live predicate
+  args subject:entity
+@announced predicate
+  args subject:entity
+@deployed predicate
+  args subject:entity
+
+@f_release fact
+  holds release s1
+@f_big fact
+  holds big_release s1
+
+@backup_db action
+  params ?s
+  requires release ?s
+  adds backed_up ?s
+  cost 1
+@canary action
+  params ?s
+  requires backed_up ?s
+  adds canaried ?s
+  cost 2
+@smoke_test action
+  params ?s
+  requires backed_up ?s
+  adds smoke_ok ?s
+  cost 1
+@rollout_blue action
+  params ?s
+  requires backed_up ?s
+  adds live ?s
+  cost 3
+@rollout_green action
+  params ?s
+  requires backed_up ?s
+  adds live ?s
+  cost 2
+@announce action
+  params ?s
+  requires live ?s
+  adds announced ?s
+  adds deployed ?s
+  cost 1
+
+@deploy method
+  achieves deployed ?s
+  when release ?s
+  version 1
+  binding strict
+  source "Release manual 2.1"
+  step ~backup_db ?s
+  step if big_release ?s
+    ~canary ?s
+  else
+    ~smoke_test ?s
+  end
+  step choose
+    ~rollout_blue ?s
+    ~rollout_green ?s
+  end
+  step ~announce ?s
+
+@announce_promptly norm
+  oblige ~announce ?s
+  when release ?s
+  within 5
+  severity soft
+  cost 7

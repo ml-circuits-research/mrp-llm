@@ -1,0 +1,41 @@
+@program_verified predicate
+  args subject:entity
+  description "the program of the task passed every test in the sandbox (bounded, never exact)"
+@run predicate
+  args subject:entity
+  closed true
+  description "sandbox trace: one run of the program; closed by construction"
+@in_elem predicate
+  args subject:entity object:integer
+  closed true
+  description "sandbox trace: an integer element of the input of run ?subject; closed by construction"
+@out_elem predicate
+  args subject:entity object:integer
+  closed true
+  description "sandbox trace: an integer element of the output of run ?subject; closed by construction"
+@test_result predicate
+  args subject:entity topic:entity object:entity
+  closed true
+  description "sandbox trace: run ?subject of test ?topic ended passed or failed; closed by construction"
+@c1 code
+  of t1
+  language javascript
+  entry sumList
+  body "export function sumList(xs) {\n  let s = 0;\n  for (const x of xs) s += x;\n  return s;\n}\n"
+  produced_by user
+  version 1
+@e1 test
+  of t1
+  call "sumList([1, 2, 3])"
+  expect "6"
+  kind example
+@e2 test
+  of t1
+  call "sumList([])"
+  expect "0"
+  kind example
+@e3 test
+  of t1
+  call "sumList([-4, 4, 10])"
+  expect "10"
+  kind example

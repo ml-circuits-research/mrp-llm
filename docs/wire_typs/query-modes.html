@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html" target="_top">← Wire type index</a></p><h1>Query modes</h1><p>The eleven question forms of the knowledge language. Five are older (<code>select exists count explain every</code>); six are reasoning modes (<code>why_not plan abduce conform procedure effect</code>), all declarative question forms, never operations. The small model may write them as the <code>mode</code> of a <code>query</code> (<a href="../specsLoader.html?spec=DS014-model-surface.md" target="_top">DS014</a>); the host supplies <code>via</code>, <code>trace</code> and <code>policy</code>.</p><section><h2>The modes</h2><div class="table-wrap"><table><thead><tr><th>Mode</th><th>Asks</th><th>Answer</th></tr></thead><tbody>
+<tr><td><code>mode select</code></td><td>which bindings of <code>select</code> satisfy <code>where</code></td><td><code>rows</code>, each with its own <code>conditional</code> list</td></tr>
+<tr><td><code>mode exists</code></td><td>does <code>where</code> hold</td><td><code>supported</code>, <code>refuted</code>, <code>both</code> or <code>unknown</code></td></tr>
+<tr><td><code>mode count</code></td><td>how many distinct bindings</td><td><code>count</code>; a lower bound (<code>bound at_least</code>) over an open relation</td></tr>
+<tr><td><code>mode every</code></td><td>does <code>scope</code> hold for every member of the <code>where</code> restriction</td><td><code>supported</code>, <code>refuted</code> with a counterexample, or <code>unknown</code> over an open domain</td></tr>
+<tr><td><code>mode explain</code></td><td>why does the claim hold</td><td>the status plus the derivation (the rules and facts used)</td></tr>
+<tr><td><code>mode why_not</code></td><td>what would make the claim derivable, or what blocks it</td><td>the minimal sets of base atoms to add plus the blocking atoms; on a planning goal, <code>blocked</code> with <code>blocked_by</code></td></tr>
+<tr><td><code>mode plan</code></td><td>how is the goal reached</td><td><code>plan_found</code> with the plan, its <code>used</code> versions, <code>compliance</code> and <code>choices</code>; or <code>blocked</code>, <code>no_plan</code>, <code>budget_exhausted</code></td></tr>
+<tr><td><code>mode abduce</code></td><td>what could explain the observation</td><td>all inclusion-minimal explanations (atoms, or <code>waive $norm</code>); <code>limit</code> bounds the list</td></tr>
+<tr><td><code>mode conform</code></td><td>does a performed <code>trace</code> comply with the procedures and norms in force</td><td><code>compliant</code> or <code>non_compliant</code> with violations, deviations and total cost</td></tr>
+<tr><td><code>mode procedure</code></td><td>what is the approved procedure for the task</td><td>the method as written, its version, the norms in force (no planning)</td></tr>
+<tr><td><code>mode effect</code></td><td>what does each candidate (<code>candidate $id</code>: a supposed fact or a rule not in force) do to a ground claim</td><td>the claim's status without the candidates plus <code>effects</code>: per candidate <code>establishes</code>, <code>blocks</code>, <code>contradicts</code>, <code>no_effect</code> or <code>inconsistent</code></td></tr>
+</tbody></table></div></section><section><h2>Rules of the fields</h2><p>The validator checks the mode against the fields: <code>mode every</code> needs <code>scope</code> and no other mode takes one; <code>mode conform</code> needs <code>trace</code> (and needs no <code>where</code>) and no other mode takes <code>trace</code>; <code>via</code> is only for <code>plan</code>, <code>why_not</code> and <code>abduce</code>; at most one of <code>at</code>, <code>during</code>, <code>overlaps</code>; every selected variable occurs in <code>where</code>; <code>order random</code> (a random sample with <code>limit</code>, see <a href="query.html#random-sample">query</a>) is only for <code>select</code> (<code>order_random_mode</code>); <code>candidate</code> lines (1 to 8, <code>candidate_limit</code>) only for <code>effect</code> and <code>abduce</code> (<code>candidate_needs_mode</code>), each naming a <code>fact</code> with <code>status supposed</code> or a <code>rule</code>/<code>default</code> (<code>candidate_target</code>) that is not also supposed with <code>if</code> (<code>candidate_also_if</code>); <code>mode effect</code> needs a ground claim and a candidate (<code>effect_needs_ground_claim</code>). A <code>query</code> belongs in a query circuit, never in a knowledge circuit.</p></section><section><h2>why_not, plan, abduce, conform, procedure in detail</h2><ul><li><b><code>why_not</code></b> is abduction over a restricted hypothesis space, not an unsat core: if the claim does not hold, its theory plus the negated claim is satisfiable and an unsat core explains only entailed claims. It returns the base atoms, in the vocabulary of the slice and respecting the <code>predicate</code> types, whose addition would make the claim derivable. With <code>via ~hard_reset r7</code> on a goal it answers <code>blocked</code> when a plan would exist if the named norms or unmet requirements were waived, and <code>no_plan</code> when none exists even then.</li><li><b><code>plan</code></b> returns the cheapest legal execution that satisfies the norms in force; with <code>via</code> the plan must contain the given steps. The packet carries <code>plan</code>, <code>used: [{id, version}]</code>, <code>compliance: {hard, soft_violations, total_cost}</code> and <code>choices</code> for what the engine optimised.</li><li><b><code>abduce</code></b> over atom hypotheses returns every inclusion-minimal <em>consistent</em> set of <code>hypothesis</code> wires that makes the observation hold: a set whose consequences contradict an admitted fact (it would derive <code>tool_marks yard</code> against the fact <code>not tool_marks yard</code>) is no explanation and is listed under <code>inconsistent</code> with the literals it contradicts; when every explaining set is inconsistent the answer is <code>unknown</code> with reason <code>no_consistent_explanation</code>. An observation that already holds is explained by the empty set. With <code>waive</code> hypotheses it returns the minimal sets of norms whose relaxation unblocks a plan.</li><li><b><code>conform</code></b> judges a trace against the versions in force at the time of each step (<code>at</code> on a step, <code>asof</code> for the others); leaving a strict method is non-compliance and is listed in <code>deviations</code>, under <code>binding advisory</code> it is only reported.</li><li><b><code>procedure</code></b> renders the approved method as of <code>asof</code>.</li></ul><p>These modes need strategies that declare <code>plan</code>, <code>method</code>, <code>norms_hard</code>, <code>abduce_waive</code>, <code>check_plan</code> and the like; the oracle <code>js-reference</code> expresses <code>abduce</code> over atoms, <code>why_not</code> over base atoms and <code>plan</code> over actions, and declares the norm and method features <code>not_expressible</code>. A question no strategy declares is understood and answered <code>not_computable</code>, never answered as a plain <code>select</code>.</p><p><b>In the chat</b> (<a href="../specsLoader.html?spec=DS006-reasoning.md" target="_top">DS006</a> "Routing rules", R1): a model <code>query</code> in mode <code>explain</code>, <code>why_not</code> or <code>abduce</code> is answered by the oracle. <code>explain</code> names the rules it used with their text (the packet field <code>rules_used</code>), <code>why_not</code> names the missing facts ("It would follow if …") and the blockers, and <code>abduce</code> names the consistent explanations among the memory's <code>hypothesis</code> wires, or among the question's own candidates, and the rejected ones (the model writes no hypotheses; the stated observation itself is not a premise); <code>effect</code> says what the claim is without the options and what each option does to it (<a href="#candidates">candidates</a>). <code>plan</code>, <code>conform</code> and <code>procedure</code> need actions, traces or procedures the model does not write and are answered <code>not_computable</code>. An explicitly requested engine that does not express a mode answers <code>not_expressible</code>.</p></section><section><h2>Examples</h2><pre data-sop="knowledge"><code>@router predicate
+  args subject:entity
+@reset_done predicate
+  args subject:entity
+@hard_reset action
+  params ?r
+  requires router ?r
+  adds reset_done ?r
+@no_hard_reset norm
+  forbid ~hard_reset ?r
+  when router ?r
+@f1 fact
+  holds router r7</code></pre><pre data-sop="knowledge-query" data-run="validate"><code>@q query
+  mode why_not
+  where reset_done r7
+  via ~hard_reset r7</code></pre><p>The answer is <code>blocked</code> with <code>blocked_by [no_hard_reset]</code>.</p><pre data-sop="knowledge-query" data-run="validate"><code>@q query
+  mode plan
+  where reset_done r7</code></pre><h3>Consistent abduction: a closed incident note</h3><p>The gate was found open, the padlock lies closed, and there are no tool marks. Forced entry would open the gate and leave tool marks; a key would open it without marks.</p><pre data-sop="knowledge"><code>@gate_open predicate
+  args subject:entity
+@padlock_closed predicate
+  args subject:entity
+@tool_marks predicate
+  args subject:entity
+@forced_entry predicate
+  args subject:entity
+@key_entry predicate
+  args subject:entity
+@f1 fact
+  holds padlock_closed yard
+@f2 fact
+  holds not tool_marks yard
+@r_forced_open rule
+  when forced_entry ?s
+  then gate_open ?s
+@r_forced_marks rule
+  when forced_entry ?s
+  then tool_marks ?s
+@r_key_open rule
+  when key_entry ?s
+  then gate_open ?s
+@h_forced hypothesis
+  holds forced_entry yard
+@h_key hypothesis
+  holds key_entry yard</code></pre><pre data-sop="knowledge-query" data-status="hypotheses"><code>@q query
+  mode abduce
+  where gate_open yard</code></pre><p>The answer is <code>hypotheses</code> with the one explanation <code>[h_key]</code>; <code>h_forced</code> is listed under <code>inconsistent</code> with <code>contradicts [not tool_marks yard]</code>. The chat renders it as "A possible explanation: … key entry …" and "Rejected: … forced entry …, because it would contradict what is known (…)".</p><pre data-sop="knowledge-query" data-status="unknown"><code>@q query
+  mode why_not
+  where gate_open yard</code></pre><p>The gate's opening is not derivable from the facts alone: the answer is <code>unknown</code> with <code>missing</code> naming the base facts whose addition would derive it (<code>forced_entry yard</code> or <code>key_entry yard</code>).</p><h3 id="candidates">Candidates: <code>mode effect</code> and <code>abduce</code> over candidates (Q-LANG-10)</h3><p>A <code>candidate $id</code> line names a supposed fact of the query circuit or a rule or default of the knowledge (any approval; the chat hands a session rule named by <code>candidate</code> or <code>if</code> to the engines as <code>approval proposed</code>). It is in force only in the runs of this query. <code>mode effect</code> answers the claim without the candidates and then with each one; <code>mode abduce</code> with candidates looks for the minimal consistent sets of candidates that make the claim derivable and reports <code>necessary</code>, the candidates every set needs. Every run is hypothetical and never stored; strict knowledge beats defaults; a candidate contradicted by what is known is <code>inconsistent</code>. Only the oracle runs candidates: every other engine answers <code>not_expressible</code>. The examples below are invented SOP programs for three items of the logic book (proposal P-1), never its text.</p><p><b>Affirming the consequent (logic book item 171).</b> The card says: if it rained at the market, the pavement there is wet. The pavement is wet. Sam concludes that it rained. The converse of the card's rule is a candidate the card does not contain.</p><pre data-sop="knowledge"><code>@rained predicate
+  args subject:entity
+@pavement_wet predicate
+  args subject:entity
+@f1 fact
+  holds pavement_wet market
+@r_card rule
+  when rained ?m
+  then pavement_wet ?m
+@r_converse rule
+  when pavement_wet ?m
+  then rained ?m
+  approval proposed</code></pre><pre data-sop="knowledge-query" data-status="unknown" data-effects="r_converse:establishes"><code>@q_sam query
+  mode effect
+  where rained market
+  candidate $r_converse</code></pre><p>The claim does not follow from the card (<code>unknown</code>: it is not forced); with the converse it would (<code>establishes</code>). The chat says "Without any of the options, it does not follow from what is known." and "With the rule "r_converse" (if …, then …), it would follow.": Sam is right only with a rule the card does not state. The same rule supposed for one question only:</p><pre data-sop="knowledge-query" data-status="supported" data-conditional="r_converse"><code>@q_if query
+  mode exists
+  where rained market
+  if $r_converse</code></pre><p><b>A rule that does not apply (logic book item 91).</b> Rule One: an apprentice at the grinder wears the face shield. Sam is an apprentice at the grinder. Tess claims Sam may skip the shield because the depot is dark.</p><pre data-sop="knowledge"><code>@apprentice predicate
+  args subject:entity
+@at_grinder predicate
+  args subject:entity
+@dark predicate
+  args subject:entity
+@wears_shield predicate
+  args subject:entity
+@f1 fact
+  holds apprentice sam
+@f2 fact
+  holds at_grinder sam
+@r_one rule
+  when apprentice ?x
+  when at_grinder ?x
+  then wears_shield ?x</code></pre><pre data-sop="knowledge-query" data-status="supported" data-effects="s_dark:no_effect"><code>@s_dark fact
+  holds dark depot
+  status supposed
+
+@q_tess query
+  mode effect
+  where wears_shield sam
+  candidate $s_dark</code></pre><p>The darkness of the depot has no effect on Rule One: Sam still wears the shield.</p><p><b>The story that fits the signs (logic book item 541).</b> The yard gate was found open, the padlock lies closed, and there are no tool marks. Forced entry would open the gate and leave tool marks; a key would open it without marks. The two stories are candidates of the question.</p><pre data-sop="knowledge"><code>@gate_open predicate
+  args subject:entity
+@padlock_closed predicate
+  args subject:entity
+@tool_marks predicate
+  args subject:entity
+@forced_entry predicate
+  args subject:entity
+@key_entry predicate
+  args subject:entity
+@f1 fact
+  holds padlock_closed yard
+@f2 fact
+  holds not tool_marks yard
+@r_forced_open rule
+  when forced_entry ?s
+  then gate_open ?s
+@r_forced_marks rule
+  when forced_entry ?s
+  then tool_marks ?s
+@r_key_open rule
+  when key_entry ?s
+  then gate_open ?s</code></pre><pre data-sop="knowledge-query" data-status="hypotheses" data-explanations="s_key" data-necessary="s_key"><code>@s_forced fact
+  holds forced_entry yard
+  status supposed
+
+@s_key fact
+  holds key_entry yard
+  status supposed
+
+@q query
+  mode abduce
+  where gate_open yard
+  candidate $s_forced
+  candidate $s_key</code></pre><p>One explanation, <code>[s_key]</code>, and the key is <code>necessary</code>; <code>s_forced</code> is listed under <code>inconsistent</code> with <code>contradicts [not tool_marks yard]</code>. Asked as <code>mode effect</code>, the same candidates are classified one by one:</p><pre data-sop="knowledge-query" data-status="unknown" data-effects="s_forced:inconsistent,s_key:establishes"><code>@s_forced fact
+  holds forced_entry yard
+  status supposed
+
+@s_key fact
+  holds key_entry yard
+  status supposed
+
+@q query
+  mode effect
+  where gate_open yard
+  candidate $s_forced
+  candidate $s_key</code></pre><p><b>Every class over a default.</b> Birds fly unless injured. An injury blocks the default; a strict rule "birds do not fly" contradicts the claim; a supposed "Tweety is not a bird" is contradicted by the facts.</p><pre data-sop="knowledge"><code>@bird predicate
+  args subject:entity
+@flies predicate
+  args subject:entity
+@injured predicate
+  args subject:entity
+@f1 fact
+  holds bird tweety
+@d_flies default
+  when bird ?x
+  then flies ?x
+  except injured ?x
+@r_never rule
+  when bird ?x
+  then not flies ?x
+  approval proposed</code></pre><pre data-sop="knowledge-query" data-status="supported" data-effects="s_injured:blocks,r_never:contradicts,s_not_bird:inconsistent,s_pet:no_effect"><code>@s_injured fact
+  holds injured tweety
+  status supposed
+
+@s_not_bird fact
+  holds not bird tweety
+  status supposed
+
+@s_pet fact
+  holds injured polly
+  status supposed
+
+@q query
+  mode effect
+  where flies tweety
+  candidate $s_injured
+  candidate $r_never
+  candidate $s_not_bird
+  candidate $s_pet</code></pre><h3 id="fol-v3">Written by the formalizer: fol-v3 (2026-10-03)</h3><p>On the FOL path the formalizer (role prompt <code>config/prompts/fol-v3.md</code>, served by Ploinky Workers) writes these questions in FOL and the converter <code>lib/formalize/fol/</code> lowers them; the formalizer never states what an option does. A claim is a ground fact, a conjunction of them, or a rule <code>FORALLx (A(x) IMPLIES B(x))</code>, which is asked of an arbitrary instance (a new constant of which only <code>A</code> is given).</p><div class="table-wrap"><table><thead><tr><th>FOL line</th><th>Circuit</th><th>Answer to the caller</th></tr></thead><tbody><tr><td><code>SUPPOSE sam: FORALLx (Wet(x) IMPLIES Rained(x))</code></td><td>an option: a session <code>rule</code> <code>@opt_sam</code> (a fact: <code>stated certainty supposed</code>); several facts or rules under one label are candidates <code>opt_sam_1</code>, <code>opt_sam_2</code></td><td>never in force in another question</td></tr><tr><td><code>? Effect(Rained(market))</code></td><td><code>mode effect</code> with every option as a <code>candidate</code></td><td>whether the claim follows, and each option's effect</td></tr><tr><td><code>? Explain(Open(yard))</code></td><td><code>mode abduce</code> over the options</td><td>the options of the consistent explanations, <code>necessary</code>, the inconsistent ones</td></tr><tr><td><code>? Missing(Rained(market))</code></td><td><code>mode why_not</code> (also Effect or Explain without options)</td><td>whether the claim follows, and the missing facts</td></tr><tr><td><code>? Why(Animal(tom))</code></td><td><code>mode explain</code></td><td>the answer with the rules used</td></tr><tr><td><code>? Change(Wet(market))</code></td><td>one circuit per premise the claim rests on (at most 8): <code>mode effect</code> with that premise as the only candidate, the fact written <code>certainty supposed</code></td><td>per premise, the answer without it and its effect</td></tr><tr><td><code>ASSUME Swims(pingu)</code>, <code>ASSUME FORALLx (...)</code></td><td>a fact: an <code>assumed</code> wire (reported, never a fact); a rule: a session rule each question resting on it supposes with <code>if</code></td><td>answers resting on an assumed rule are conditional on it</td></tr><tr><td><code>? Assumed</code></td><td>the <code>assumed</code> wires and assumed rules, no question</td><td>the assumptions as written; the chat lists them ("The model assumed: …")</td></tr></tbody></table></div><p><b>Affirming the consequent, from FOL.</b> The card's rule, the observation, and two options: Sam's converse rule and Tess's truck.</p><pre><code>FORALLx (Rained(x) IMPLIES Wet(x))
+Wet(market)
+SUPPOSE sam: FORALLx (Wet(x) IMPLIES Rained(x))
+SUPPOSE tess: Truck(market)
+? Effect(Rained(market))</code></pre><p>The converter writes this circuit (each predicate carries its name in words as <code>label en</code>, so an answer reads "wet", not "f wet"):</p><pre><code>@f_wet predicate
+  args subject:entity
+  label en "wet"
+  closed true
+
+@f_rained predicate
+  args subject:entity
+  label en "rained"
+  closed true
+
+@f_truck predicate
+  args subject:entity
+  label en "truck"
+  closed true
+
+@fs1 stated
+  certainty asserted
+  relation "f_wet"
+  role subject "market"
+  polarity affirmed
+
+@fr1 rule
+  when f_rained ?x
+  then f_wet ?x
+
+@opt_sam rule
+  when f_wet ?x
+  then f_rained ?x
+
+@opt_tess stated
+  certainty supposed
+  relation "f_truck"
+  role subject "market"
+  polarity affirmed
+
+@q query
+  mode effect
+  candidate $opt_sam
+  candidate $opt_tess
+  where match
+    relation "f_rained"
+    role subject "market"
+    polarity affirmed
+  end</code></pre><p>Answer: the claim does not follow (status <code>refuted</code> without the options, a closed predicate); <code>opt_sam</code> <code>establishes</code> it, <code>opt_tess</code> has <code>no_effect</code>: "Without any of the options, what is known says it is false. With the rule "opt_sam" (if … wet …, then … rained …), it would follow." These circuits, and the other forms of the table, are executed through a chat turn by <code>tests/routed/fol-v3.test.mjs</code>.</p><h3>Invalid: candidates on a plain question</h3><pre data-sop="knowledge-invalid" data-error="candidate_needs_mode" data-role="query"><code>@s1 fact
+  holds injured tweety
+  status supposed
+
+@q query
+  where flies tweety
+  candidate $s1</code></pre><h3>Invalid: mode effect without a candidate</h3><pre data-sop="knowledge-invalid" data-error="effect_needs_ground_claim" data-role="query"><code>@q query
+  mode effect
+  where flies tweety</code></pre><h3>Invalid: <code>conform</code> without a trace</h3><pre data-sop="knowledge-invalid" data-error="missing_field" data-role="query"><code>@q query
+  mode conform</code></pre></section></main><script type="module" src="help-page.mjs"></script></body></html>

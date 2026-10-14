@@ -1,0 +1,32 @@
+{"id":"cs01","form":"class","question":"Is a violin a musical instrument?","gold":true,"why":"WordNet: violin < bowed stringed instrument < stringed instrument < musical instrument"}
+{"id":"cs02","form":"class","question":"Is a whale a mammal?","gold":true,"why":"zoology; WordNet whale < cetacean < aquatic mammal < mammal"}
+{"id":"cs03","form":"class","question":"Is a dog an animal?","gold":true,"why":"dog < canine < carnivore < mammal < vertebrate < animal"}
+{"id":"cs04","form":"class","question":"Is a hammer a tool?","gold":true,"why":"a hammer is a hand tool"}
+{"id":"cs05","form":"class","question":"Is an apple a fruit?","gold":true,"why":"apple < edible fruit < fruit"}
+{"id":"cs06","form":"class","question":"Is a car a vehicle?","gold":true,"why":"car < motor vehicle < self-propelled vehicle < wheeled vehicle < vehicle"}
+{"id":"cs07","form":"class","question":"Is gold a metal?","gold":true,"why":"gold is a metallic chemical element"}
+{"id":"cs08","form":"disjoint","question":"Is Paris a person?","gold":false,"why":"Paris is a city; cities and persons are disjoint classes"}
+{"id":"cs09","form":"disjoint","question":"Is Albert Einstein a city?","gold":false,"why":"Einstein is a person; persons and places are disjoint"}
+{"id":"cs10","form":"disjoint","question":"Is Germany a person?","gold":false,"why":"a country is a place, not a person"}
+{"id":"cs11","form":"typical","question":"Can birds fly?","gold":true,"why":"birds typically fly (ConceptNet CapableOf bird fly)"}
+{"id":"cs12","form":"typical","question":"Is a pillow usually found in a bedroom?","gold":true,"why":"ConceptNet AtLocation pillow bedroom"}
+{"id":"cs13","form":"typical","question":"Is a knife used for cutting?","gold":true,"why":"ConceptNet UsedFor knife cutting"}
+{"id":"cs14","form":"typical","question":"Is a finger part of a hand?","gold":true,"why":"WordNet part meronym finger / hand"}
+{"id":"cs15","form":"time","question":"Was Isaac Newton older than Albert Einstein?","gold":true,"why":"born 1643 vs 1879"}
+{"id":"cs16","form":"time","question":"Could Albert Einstein have met Napoleon?","gold":false,"why":"Napoleon died 1821, Einstein was born 1879: the lifetimes do not overlap"}
+{"id":"cs17","form":"time","question":"Were Mozart and Beethoven alive at the same time?","gold":true,"why":"Mozart 1756-1791, Beethoven 1770-1827 overlap"}
+{"id":"cs18","form":"time","question":"Did William Shakespeare die before Isaac Newton was born?","gold":true,"why":"Shakespeare died 1616, Newton born 1643"}
+{"id":"cs19","form":"time","question":"Did Leonardo da Vinci outlive Raphael?","gold":false,"why":"Leonardo died 1519, Raphael 1520"}
+{"id":"cs20","form":"time","question":"Who was born first, Charles Darwin or Karl Marx?","gold":["charles_darwin"],"why":"1809 vs 1818"}
+{"id":"cs21","form":"time","question":"Was Karl Marx younger than Charles Darwin?","gold":true,"why":"born 1818 vs 1809"}
+{"id":"cs22","form":"geo","question":"Is Lyon in Europe?","gold":true,"why":"Lyon in France, France in Europe"}
+{"id":"cs23","form":"geo","question":"Is Kyoto in Asia?","gold":true,"why":"Kyoto in Japan, Japan in Asia"}
+{"id":"cs24","form":"geo","question":"Are Munich and Hamburg in the same country?","gold":true,"why":"both in Germany"}
+{"id":"cs25","form":"geo","question":"Is the capital of Kenya in Africa?","gold":true,"why":"Nairobi, Kenya, Africa"}
+{"id":"cs26","form":"geo","question":"On which continent is Milan?","gold":["europe"],"why":"Milan in Italy, Italy in Europe"}
+{"id":"cs27","form":"units","question":"Is 1 kilogram heavier than 900 grams?","gold":true,"why":"1000 g > 900 g"}
+{"id":"cs28","form":"units","question":"Is a mile longer than a kilometre?","gold":true,"why":"1 mile = 1.609 km"}
+{"id":"cs29","form":"units","question":"Is an hour longer than 3000 seconds?","gold":true,"why":"3600 s > 3000 s"}
+{"id":"cs30","form":"units","question":"How many grams are in a kilogram?","gold":[1000],"why":"definition of the kilogram"}
+{"id":"cs31","form":"family","question":"Mary is the mother of John and Peter is Mary's brother. Is Peter John's uncle?","gold":true,"why":"a brother of a parent is an uncle"}
+{"id":"cs32","form":"family","question":"Ann is the mother of Tom and Tom is the father of Lisa. Is Ann Lisa's grandmother?","gold":true,"why":"mother of a parent"}

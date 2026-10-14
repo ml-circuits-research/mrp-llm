@@ -1,0 +1,11 @@
+{
+  "feature": "Nonlinear recursion (two recursive atoms): the closure of a chain",
+  "status": "supported",
+  "complete": true,
+  "count": 465,
+  "requires": [
+    "rules",
+    "recursion",
+    "count"
+  ]
+}

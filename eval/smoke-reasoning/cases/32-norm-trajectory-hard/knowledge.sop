@@ -1,0 +1,49 @@
+@valve_a_open predicate
+  args none
+  closed true
+@valve_b_open predicate
+  args none
+  closed true
+@both_open predicate
+  args none
+@rinsed_a predicate
+  args none
+@rinsed_b predicate
+  args none
+
+@open_a action
+  requires not valve_a_open
+  adds valve_a_open
+  cost 1
+@open_b action
+  requires not valve_b_open
+  adds valve_b_open
+  cost 1
+@close_a action
+  requires valve_a_open
+  removes valve_a_open
+  cost 1
+@close_b action
+  requires valve_b_open
+  removes valve_b_open
+  cost 3
+@rinse_a action
+  requires valve_a_open
+  adds rinsed_a
+  cost 1
+@rinse_b action
+  requires valve_b_open
+  adds rinsed_b
+  cost 1
+
+@r_both rule
+  when valve_a_open
+  when valve_b_open
+  then both_open
+
+@no_cross_flow norm
+  forbid both_open
+  always
+  severity hard
+  binding strict
+  version 1

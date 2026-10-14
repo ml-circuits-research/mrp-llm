@@ -1,0 +1,18 @@
+@via_a predicate
+  args subject:entity
+@via_b predicate
+  args subject:entity
+@ok predicate
+  args subject:entity
+
+@fa fact
+  holds via_a z
+@fb fact
+  holds via_b z
+
+@r1 rule
+  when via_a ?x
+  then ok ?x
+@r2 rule
+  when via_b ?x
+  then ok ?x

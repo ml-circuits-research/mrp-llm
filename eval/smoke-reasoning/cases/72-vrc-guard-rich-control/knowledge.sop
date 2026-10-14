@@ -1,0 +1,27 @@
+@ready predicate
+  args none
+@state predicate
+  args subject:entity topic:entity object:rational
+
+@m0 fact
+  holds ready
+@sq fact
+  holds state demo q 0
+@sa fact
+  holds state demo a 2
+@sb fact
+  holds state demo b 3
+
+@scale action
+  requires ready
+  guard ?a at_least 1
+  next q ?q + ?a * ?b
+  next a 2 * ?a
+  next b 1/2 * ?b
+
+@swap action
+  requires ready
+  guard ?a at_least 1
+  next q ?q + ?a * ?b
+  next a ?b
+  next b ?a

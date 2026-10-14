@@ -1,0 +1,7 @@
+# expect: aggregate_one_function
+@s aggregate
+  over salary ?p ?d ?v
+  group ?d
+  sum ?v as ?t
+  count ?p as ?n
+  yields x ?d ?t

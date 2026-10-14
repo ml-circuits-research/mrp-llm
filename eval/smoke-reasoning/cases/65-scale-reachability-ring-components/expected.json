@@ -1,0 +1,26 @@
+{
+  "feature": "Scale: transitive closure over many small ring components (10^5 facts in the speed table)",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "y": "n0_0"
+    },
+    {
+      "y": "n0_1"
+    },
+    {
+      "y": "n0_2"
+    },
+    {
+      "y": "n0_3"
+    },
+    {
+      "y": "n0_4"
+    }
+  ],
+  "requires": [
+    "rules",
+    "recursion"
+  ]
+}

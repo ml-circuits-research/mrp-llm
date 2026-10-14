@@ -1,0 +1,3 @@
+@q query
+  where great_grandparent ?who di
+  select ?who

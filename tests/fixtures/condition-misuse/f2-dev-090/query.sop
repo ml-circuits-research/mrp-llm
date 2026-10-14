@@ -1,0 +1,3 @@
+@q query
+  where department_total department_sanziana_dev_267 ?total
+  select ?total

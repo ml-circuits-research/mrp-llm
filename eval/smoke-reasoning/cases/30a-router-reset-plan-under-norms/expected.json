@@ -1,0 +1,56 @@
+{
+  "feature": "Mode of work: a strict method with a choice, a hard prohibition and a soft obligation; the plan is the cheapest legal run",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 5,
+    "steps": 3,
+    "names": [
+      "notify_oncall",
+      "soft_reset",
+      "verify_link"
+    ]
+  },
+  "used": [
+    {
+      "id": "reset_router",
+      "version": 2
+    },
+    {
+      "id": "no_hard_reset_in_hours",
+      "version": 1
+    },
+    {
+      "id": "notify_promptly",
+      "version": 1
+    },
+    {
+      "id": "notify_oncall",
+      "version": 1
+    },
+    {
+      "id": "soft_reset",
+      "version": 1
+    },
+    {
+      "id": "verify_link",
+      "version": 1
+    }
+  ],
+  "compliance": {
+    "hard": "ok",
+    "soft_violations": [],
+    "total_cost": 5
+  },
+  "requires": [
+    "plan",
+    "method",
+    "htn_choice",
+    "norms_hard",
+    "norms_soft",
+    "temporal_norms",
+    "procedures",
+    "used",
+    "zero_arity"
+  ]
+}

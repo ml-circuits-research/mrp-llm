@@ -1,0 +1,10 @@
+{
+  "feature": "Contradictions: two sources disagree, both are kept",
+  "status": "both",
+  "complete": true,
+  "requires": [
+    "facts",
+    "classical_negation",
+    "conflict"
+  ]
+}

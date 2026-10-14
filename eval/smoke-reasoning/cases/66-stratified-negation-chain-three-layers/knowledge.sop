@@ -1,0 +1,53 @@
+@node predicate
+  args subject:entity
+  closed true
+@blocked predicate
+  args subject:entity
+  closed true
+@special predicate
+  args subject:entity
+  closed true
+@s1 predicate
+  args subject:entity
+  closed true
+@s2 predicate
+  args subject:entity
+  closed true
+@s3 predicate
+  args subject:entity
+  closed true
+@f1 fact
+  holds node n1
+@f2 fact
+  holds node n2
+@f3 fact
+  holds node n3
+@f4 fact
+  holds node n4
+@f5 fact
+  holds node n5
+@f6 fact
+  holds node n6
+@f7 fact
+  holds node n7
+@f8 fact
+  holds node n8
+@f9 fact
+  holds blocked n1
+@f10 fact
+  holds blocked n2
+@f11 fact
+  holds special n5
+@r1 rule
+  when node ?x
+  when absent blocked ?x
+  then s1 ?x
+@r2 rule
+  when node ?x
+  when absent s1 ?x
+  then s2 ?x
+@r3 rule
+  when node ?x
+  when absent s2 ?x
+  when absent special ?x
+  then s3 ?x

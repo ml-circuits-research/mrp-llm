@@ -1,0 +1,29 @@
+# analysis-core-v1: claims without support. A claim that the document draws from a premise the document never states, shows or cites.
+# The document is a closed record: a premise it does not state is not established by it (absent over the closed premise_stated).
+
+@has_unsupported_claim predicate
+  args none
+  closed true
+  label en "has unsupported claim"
+  description "Some claim of the document rests on a premise the document does not state."
+
+@an_unsupported_claim integrity
+  never all
+    claim_rests_on ?c ?p
+    absent premise_stated ?p
+  end
+  witness ?c
+  message "a claim rests on a premise the document does not state"
+  severity warning
+  source "analysis-core-v1: claim support (every premise a claim rests on is stated)"
+
+@an_r_unsupported rule
+  when claim_rests_on ?c ?p
+  when absent premise_stated ?p
+  then has_unsupported_claim
+
+@analysis_claim_support procedure
+  members $an_unsupported_claim
+  description "Analysis: claims without support in a document - a claim drawn from, or depending on, a premise that the document does not state, show or cite."
+  scope "analysis, findings"
+  source "analysis-core-v1"

@@ -1,0 +1,203 @@
+@a predicate
+  args subject:entity object:entity
+@b predicate
+  args subject:entity object:entity
+@c predicate
+  args subject:entity
+@d predicate
+  args subject:entity
+@hit predicate
+  args subject:entity object:entity
+
+@fa0 fact
+  holds a n0 m0
+@fb0 fact
+  holds b m0 o0
+@fa1 fact
+  holds a n1 m1
+@fb1 fact
+  holds b m1 o1
+@fa2 fact
+  holds a n2 m2
+@fb2 fact
+  holds b m2 o2
+@fa3 fact
+  holds a n3 m3
+@fb3 fact
+  holds b m3 o3
+@fa4 fact
+  holds a n4 m4
+@fb4 fact
+  holds b m4 o4
+@fa5 fact
+  holds a n5 m5
+@fb5 fact
+  holds b m5 o5
+@fa6 fact
+  holds a n6 m6
+@fb6 fact
+  holds b m6 o6
+@fa7 fact
+  holds a n7 m7
+@fb7 fact
+  holds b m7 o7
+@fa8 fact
+  holds a n8 m8
+@fb8 fact
+  holds b m8 o8
+@fa9 fact
+  holds a n9 m9
+@fb9 fact
+  holds b m9 o9
+@fa10 fact
+  holds a n10 m0
+@fb10 fact
+  holds b m0 o10
+@fa11 fact
+  holds a n11 m1
+@fb11 fact
+  holds b m1 o11
+@fa12 fact
+  holds a n12 m2
+@fb12 fact
+  holds b m2 o12
+@fa13 fact
+  holds a n13 m3
+@fb13 fact
+  holds b m3 o13
+@fa14 fact
+  holds a n14 m4
+@fb14 fact
+  holds b m4 o14
+@fa15 fact
+  holds a n15 m5
+@fb15 fact
+  holds b m5 o15
+@fa16 fact
+  holds a n16 m6
+@fb16 fact
+  holds b m6 o16
+@fa17 fact
+  holds a n17 m7
+@fb17 fact
+  holds b m7 o17
+@fa18 fact
+  holds a n18 m8
+@fb18 fact
+  holds b m8 o18
+@fa19 fact
+  holds a n19 m9
+@fb19 fact
+  holds b m9 o19
+@fa20 fact
+  holds a n20 m0
+@fb20 fact
+  holds b m0 o20
+@fa21 fact
+  holds a n21 m1
+@fb21 fact
+  holds b m1 o21
+@fa22 fact
+  holds a n22 m2
+@fb22 fact
+  holds b m2 o22
+@fa23 fact
+  holds a n23 m3
+@fb23 fact
+  holds b m3 o23
+@fa24 fact
+  holds a n24 m4
+@fb24 fact
+  holds b m4 o24
+@fa25 fact
+  holds a n25 m5
+@fb25 fact
+  holds b m5 o25
+@fa26 fact
+  holds a n26 m6
+@fb26 fact
+  holds b m6 o26
+@fa27 fact
+  holds a n27 m7
+@fb27 fact
+  holds b m7 o27
+@fa28 fact
+  holds a n28 m8
+@fb28 fact
+  holds b m8 o28
+@fa29 fact
+  holds a n29 m9
+@fb29 fact
+  holds b m9 o29
+@fa30 fact
+  holds a n30 m0
+@fb30 fact
+  holds b m0 o30
+@fa31 fact
+  holds a n31 m1
+@fb31 fact
+  holds b m1 o31
+@fa32 fact
+  holds a n32 m2
+@fb32 fact
+  holds b m2 o32
+@fa33 fact
+  holds a n33 m3
+@fb33 fact
+  holds b m3 o33
+@fa34 fact
+  holds a n34 m4
+@fb34 fact
+  holds b m4 o34
+@fa35 fact
+  holds a n35 m5
+@fb35 fact
+  holds b m5 o35
+@fa36 fact
+  holds a n36 m6
+@fb36 fact
+  holds b m6 o36
+@fa37 fact
+  holds a n37 m7
+@fb37 fact
+  holds b m7 o37
+@fa38 fact
+  holds a n38 m8
+@fb38 fact
+  holds b m8 o38
+@fa39 fact
+  holds a n39 m9
+@fb39 fact
+  holds b m9 o39
+@fc0 fact
+  holds c n0
+@fc1 fact
+  holds c n1
+@fc2 fact
+  holds c n2
+@fd0 fact
+  holds d o0
+@fd1 fact
+  holds d o20
+
+@r_hit rule
+  when a ?x ?y
+  when b ?y ?z
+  when c ?x
+  then hit ?x ?z
+  version 1
+  approval superseded
+  approved_by "owner"
+  approved_at 2026-01-01
+
+@new_r_hit_v2 rule
+  when a ?x ?y
+  when b ?y ?z
+  when c ?x
+  when d ?z
+  then hit ?x ?z
+  version 2
+  supersedes $r_hit
+  approval approved
+  approved_by "owner"
+  approved_at 2026-06-01

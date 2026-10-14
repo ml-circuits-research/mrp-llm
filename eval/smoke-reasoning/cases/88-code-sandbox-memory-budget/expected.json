@@ -1,0 +1,10 @@
+{
+ "status": "budget_exhausted",
+ "complete": false,
+ "reason": "memory",
+ "feature": "Code sandbox: unbounded allocation ends as budget_exhausted (memory), the host is unaffected",
+ "requires": [
+  "code_sandbox"
+ ],
+ "warnings": []
+}

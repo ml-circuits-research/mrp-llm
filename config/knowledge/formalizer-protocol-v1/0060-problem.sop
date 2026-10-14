@@ -1,0 +1,315 @@
+# formalizer-protocol-v1: problem mode (DS014 "Problems that state their own data", DS022 "LocalLLMStepByStep" and
+# "InternalReasoningStepByStep"). A message that gives its own numbers, things or conditions and asks about them is modelled from its
+# own text: the model answers the problem questions below, the system writes the circuit (session predicates, `stated` data, session
+# rules with `compute` lines, the queries). Both step-by-step strategies read this file (lib/formalize/protocol-data.mjs): the kind of
+# problem, the questions of each kind in order, the conditions under which a step is asked, the steps whose unreadable answer ends
+# problem mode (early exits), the kinds after which the "own data" gate is asked, and every text. The readers of the answers are
+# structural code (lib/query-author/step-by-step/problem.mjs PROBLEM_READERS, named by fp_answer_format); the learned-rules layer
+# (config/knowledge/formalizer-learned-v1) may add hints and examples to a question, or replace its text (the last text wins).
+
+@fp_own_data_kind predicate
+  args subject:entity
+  closed true
+  description "after a first answer of this kind (subject) the own-data gate asks whether the request gives its own data"
+@fp_problem_fallback_kind predicate
+  args subject:entity
+  closed true
+  description "when the problem questions cannot be read and the first answer was the problem kind itself, the request is formalized as this kind (subject)"
+@fp_problem_step predicate
+  args subject:entity object:integer topic:entity
+  closed true
+  description "for a problem of this kind (subject), step number (object) is the problem question (topic)"
+@fp_problem_step_when predicate
+  args subject:entity object:entity
+  closed true
+  description "the problem question (subject) is asked only when this structural condition (object) holds: options_found, no_direction, several_formulas"
+@fp_problem_required predicate
+  args subject:entity
+  closed true
+  description "an answer of the problem question (subject) that cannot be read twice ends problem mode (an early exit)"
+@fp_problem_exit_kind predicate
+  args subject:entity
+  closed true
+  description "a problem of this kind (subject) is not modelled by the problem questions (an early exit)"
+@fp_problem_tokens predicate
+  args subject:entity object:integer
+  closed true
+  description "the answer of the problem question (subject) may use at most this many tokens (object)"
+@fp_problem_again predicate
+  args subject:entity object:text
+  closed true
+  description "an unreadable answer of the problem question (subject) is asked once more with this format reminder (object)"
+@fp_problem_kind_note predicate
+  args subject:entity object:entity topic:text
+  closed true
+  description "for a problem of this kind (subject) the problem question (object) adds this sentence (topic) at its {{kind_note}} place"
+@fp_problem_needs predicate
+  args subject:entity
+  closed true
+  description "problem mode is offered only when this structural precondition (subject: stated_data, a number or a statement before the question) holds"
+@fp_hint predicate
+  args subject:entity object:text
+  closed true
+  description "a learned hint: the question (subject) is followed by this line (object); hints are shown in file order"
+@fp_example predicate
+  args subject:entity object:text
+  closed true
+  description "a learned worked example (generic, never a test case): shown after the question (subject) as an example line (object)"
+
+# --- the own-data gate (asked once, right after the first questions, for these first answers)
+@fp_pp1 fact
+  holds fp_question_text ask_own_data "Does the request itself give the numbers, facts or rules that its answer must be worked out from (a word problem, a choice by given numbers, a deduction from given rules), rather than ask about things in general? Reply yes or no."
+@fp_pp2 fact
+  holds fp_answer_format ask_own_data own_data
+@fp_pp3 fact
+  holds fp_establishes ask_own_data own_data
+@fp_pp4 fact
+  holds fp_priority ask_own_data 15
+@fp_pp5 fact
+  holds fp_prelude_slot own_data
+@fp_pp6 fact
+  holds fp_own_data_kind yesno
+@fp_pp7 fact
+  holds fp_own_data_kind reach
+@fp_pp8 fact
+  holds fp_own_data_kind list
+@fp_pp9 fact
+  holds fp_own_data_kind value
+@fp_pp10 fact
+  holds fp_own_data_kind count
+@fp_pp11 fact
+  holds fp_own_data_kind highest
+@fp_pp12 fact
+  holds fp_own_data_kind lowest
+@fp_pp13 fact
+  holds fp_own_data_kind every
+@fp_pp14 fact
+  holds fp_own_data_kind when
+@fp_pp15 fact
+  holds fp_own_data_kind why
+@fp_pp16 fact
+  holds fp_own_data_kind statement
+@fp_pp17 fact
+  holds fp_problem_fallback_kind value
+@fp_pp18n fact
+  holds fp_problem_needs stated_data
+
+# --- the problem kind in the first question (choice 13; `none` stays last as 14 in 0020-questions.sop)
+@fp_pp18 fact
+  holds fp_choice ask_kind 13 problem
+@fp_pp19 fact
+  holds fp_choice_text ask_kind 13 "a result worked out from numbers, things, facts or rules the request itself gives (a word problem, a choice by given numbers, a deduction) (for example: Pens cost 1.5 each; what do 12 pens cost? Plan A costs 400, Plan B 150; which is cheaper? Every glorp is blue and Zed is a glorp; is Zed blue?)"
+
+# --- the problem questions: one action for the planner of InternalReasoningStepByStep, the questions as its follow-ups
+@fp_pp20 fact
+  holds fp_question_text ask_problem "{{problem_questions}}"
+@fp_pp21 fact
+  holds fp_answer_format ask_problem problem
+@fp_pp22 fact
+  holds fp_establishes ask_problem problem
+@fp_pp23 fact
+  holds fp_priority ask_problem 20
+
+@fp_pp30 fact
+  holds fp_question_text problem_kind "Answer about the same request. The request is a problem that gives its own data. What does it ask for?\n{{choices}}\nReply with the number only."
+@fp_pp31 fact
+  holds fp_follow_up problem_kind ask_problem
+@fp_pp32 fact
+  holds fp_answer_format problem_kind number
+@fp_pp33 fact
+  holds fp_choice problem_kind 1 compute
+@fp_pp34 fact
+  holds fp_choice_text problem_kind 1 "one or more numbers computed from the numbers the problem gives (a total, a cost, an average, a time, a difference)"
+@fp_pp35 fact
+  holds fp_choice problem_kind 2 choose
+@fp_pp36 fact
+  holds fp_choice_text problem_kind 2 "which of several options, things or plans is best (cheapest, largest, fastest, lowest score), judged by a number computed for each"
+@fp_pp37 fact
+  holds fp_choice problem_kind 3 deduce
+@fp_pp38 fact
+  holds fp_choice_text problem_kind 3 "an answer that follows from facts and rules the problem states about its things and how they relate, with no numbers to compute: yes or no, who or what, or how many"
+@fp_pp39 fact
+  holds fp_choice problem_kind 4 other
+@fp_pp40 fact
+  holds fp_choice_text problem_kind 4 "none of these"
+@fp_pp41 fact
+  holds fp_problem_tokens problem_kind 8
+@fp_pp42 fact
+  holds fp_problem_again problem_kind "Reply with one number from 1 to {{count}}."
+@fp_pp43 fact
+  holds fp_problem_required problem_kind
+@fp_pp44 fact
+  holds fp_problem_exit_kind other
+
+@fp_pp50 fact
+  holds fp_question_text problem_values "List every number the problem gives, one per line, as `name = number`. The name is a short name of what the number is, made of words of the problem joined by underscores, and it names the thing the number belongs to when there are several (like `cost_plan_a = 400`, `price_per_unit = 8`). Copy each number exactly as the problem writes it (11% is `rate_percent = 11`). Do not compute anything."
+@fp_pp51 fact
+  holds fp_follow_up problem_values ask_problem
+@fp_pp52 fact
+  holds fp_answer_format problem_values values
+@fp_pp53 fact
+  holds fp_problem_tokens problem_values 300
+@fp_pp54 fact
+  holds fp_problem_again problem_values "One line per number, like `cost_plan_a = 400`, with numbers written in the problem."
+@fp_pp55 fact
+  holds fp_problem_required problem_values
+
+@fp_pp60 fact
+  holds fp_question_text problem_formulas "The values are: {{names}}.\nWrite how each value the question asks for is computed from these values, one line per value, as `new_name = formula`. A formula uses only the value names above, names defined on earlier lines, numbers, + - * / ^ and parentheses, // (whole division) and % (remainder), and round(x, 0.01), ceil(x), floor(x), max(a, b), min(a, b); a yes/no check is one comparison, like `fits = need <= capacity`.{{kind_note}} Do not compute the result."
+@fp_pp61 fact
+  holds fp_follow_up problem_formulas ask_problem
+@fp_pp62 fact
+  holds fp_answer_format problem_formulas formulas
+@fp_pp63 fact
+  holds fp_problem_tokens problem_formulas 300
+@fp_pp64 fact
+  holds fp_problem_again problem_formulas "One line per asked value, like `total = price * quantity`, using only the listed names and numbers."
+@fp_pp65 fact
+  holds fp_problem_required problem_formulas
+@fp_pp66 fact
+  holds fp_problem_kind_note choose problem_formulas " Write one line per option, for the number the options are judged by."
+
+@fp_pp70 fact
+  holds fp_question_text problem_options "Which computed value belongs to which option? Write one line per option, as `option name as the problem writes it = value name`, using these value names: {{names}}."
+@fp_pp71 fact
+  holds fp_follow_up problem_options ask_problem
+@fp_pp72 fact
+  holds fp_answer_format problem_options options
+@fp_pp73 fact
+  holds fp_problem_tokens problem_options 200
+@fp_pp74 fact
+  holds fp_problem_again problem_options "One line per option, like `Plan A = total_plan_a`: each option once, with the one value it is judged by."
+
+@fp_pp80 fact
+  holds fp_question_text problem_direction "Is the best option the one with the lowest or the highest value?\n{{choices}}\nReply with the number only."
+@fp_pp81 fact
+  holds fp_follow_up problem_direction ask_problem
+@fp_pp82 fact
+  holds fp_answer_format problem_direction number
+@fp_pp83 fact
+  holds fp_choice problem_direction 1 lowest
+@fp_pp84 fact
+  holds fp_choice_text problem_direction 1 "lowest"
+@fp_pp85 fact
+  holds fp_choice problem_direction 2 highest
+@fp_pp86 fact
+  holds fp_choice_text problem_direction 2 "highest"
+@fp_pp87 fact
+  holds fp_problem_tokens problem_direction 8
+@fp_pp88 fact
+  holds fp_problem_again problem_direction "Reply with 1 or 2."
+@fp_pp89 fact
+  holds fp_problem_step_when problem_direction options_found
+
+@fp_pp90 fact
+  holds fp_question_text problem_asked "Which of these values does the question ask for?\n{{numbered_names}}\nReply with the numbers separated by commas."
+@fp_pp91 fact
+  holds fp_follow_up problem_asked ask_problem
+@fp_pp92 fact
+  holds fp_answer_format problem_asked asked
+@fp_pp93 fact
+  holds fp_problem_tokens problem_asked 24
+@fp_pp94 fact
+  holds fp_problem_again problem_asked "Reply with the numbers separated by commas."
+@fp_pp95 fact
+  holds fp_problem_step_when problem_asked no_direction
+@fp_pp96 fact
+  holds fp_problem_step_when problem_asked several_formulas
+
+@fp_pp100 fact
+  holds fp_question_text problem_facts "List the facts the problem states, one per line, as `thing | property` for a fact about one thing or `thing | relation | other thing` for a relation between two things (write `not` before the property or relation when it does not hold). Copy each thing as the problem writes it; a property or relation is a few words joined by underscores (like `Zed | is_glorp` or `Mara | works_at | Delta`)."
+@fp_pp101 fact
+  holds fp_follow_up problem_facts ask_problem
+@fp_pp102 fact
+  holds fp_answer_format problem_facts facts
+@fp_pp103 fact
+  holds fp_problem_tokens problem_facts 200
+@fp_pp104 fact
+  holds fp_problem_again problem_facts "One line per fact, like `Zed | is_glorp` or `Mara | works_at | Delta`."
+@fp_pp105 fact
+  holds fp_problem_required problem_facts
+
+@fp_pp110 fact
+  holds fp_question_text problem_rules "List the general rules the problem states, one per line, as `if ... then ...` with the same property and relation names as the facts: for properties of one thing `if is_glorp and not is_red then is_blue`; with relations, name the unknown things ?x, ?y, ?z, like `if ?x parent_of ?y and ?y parent_of ?z then ?x grandparent_of ?z`. Reply \"none\" if there are none."
+@fp_pp111 fact
+  holds fp_follow_up problem_rules ask_problem
+@fp_pp112 fact
+  holds fp_answer_format problem_rules rules
+@fp_pp113 fact
+  holds fp_problem_tokens problem_rules 200
+@fp_pp114 fact
+  holds fp_problem_again problem_rules "One line per rule, like `if is_glorp then is_blue`, or \"none\"."
+
+@fp_pp120 fact
+  holds fp_question_text problem_question "Write what the question asks as one line with the same names as the facts: `thing | property` or `thing | relation | other thing` for a yes or no question; `?x | relation | thing`, `thing | relation | ?x` or `?x | property` for who or what; `count ?x | relation | thing` for how many."
+@fp_pp121 fact
+  holds fp_follow_up problem_question ask_problem
+@fp_pp122 fact
+  holds fp_answer_format problem_question fact
+@fp_pp123 fact
+  holds fp_problem_tokens problem_question 40
+@fp_pp124 fact
+  holds fp_problem_again problem_question "One line, like `Zed | is_blue`, `?x | works_at | Delta` or `count ?x | plays | chess`."
+@fp_pp125 fact
+  holds fp_problem_required problem_question
+
+@fp_pp130 fact
+  holds fp_question_text problem_again "That could not be read. {{what}}"
+@fp_pp131 fact
+  holds fp_follow_up problem_again ask_problem
+
+# --- the order of the problem questions per kind of problem
+@fp_pp140 fact
+  holds fp_problem_step compute 1 problem_values
+@fp_pp141 fact
+  holds fp_problem_step compute 2 problem_formulas
+@fp_pp142 fact
+  holds fp_problem_step compute 3 problem_asked
+@fp_pp143 fact
+  holds fp_problem_step choose 1 problem_values
+@fp_pp144 fact
+  holds fp_problem_step choose 2 problem_formulas
+@fp_pp145 fact
+  holds fp_problem_step choose 3 problem_options
+@fp_pp146 fact
+  holds fp_problem_step choose 4 problem_direction
+@fp_pp147 fact
+  holds fp_problem_step choose 5 problem_asked
+@fp_pp148 fact
+  holds fp_problem_step deduce 1 problem_facts
+@fp_pp149 fact
+  holds fp_problem_step deduce 2 problem_rules
+@fp_pp150 fact
+  holds fp_problem_step deduce 3 problem_question
+
+# --- InternalReasoningStepByStep: the gate and the problem questions as planned actions
+@fp_need_own_data rule
+  when fp_kind ?k
+  when fp_own_data_kind ?k
+  then fp_needed own_data none
+
+@fp_askable_ask_own_data rule
+  when fp_open_slot own_data none
+  when fp_budget_left
+  then fp_askable ask_own_data none
+
+@fp_ask_own_data action
+  params ?a
+  requires fp_askable ask_own_data ?a
+  adds fp_answered ask_own_data ?a
+  cost 1
+
+@fp_need_problem rule
+  when fp_kind problem
+  then fp_needed problem none
+
+@fp_askable_ask_problem rule
+  when fp_open_slot problem none
+  when fp_budget_left
+  then fp_askable ask_problem none
+
+@fp_ask_problem action
+  params ?a
+  requires fp_askable ask_problem ?a
+  adds fp_answered ask_problem ?a
+  cost 4

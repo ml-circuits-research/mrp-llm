@@ -1,0 +1,165 @@
+{
+  "note": "The converter family of the capability battery (tools/capabilities/l1-fol.mjs): fixed fol-v3 lines of invented problems (never book text) read by the FOL reader, lowered by the converters and executed on the product route (ChatSOPAdapter's scratch executor), no model. A case passes when the refusals and every circuit's kind, status, decoded value and detail are the expected ones; a field left out is not compared. `capability` is the case's main capability, `also` the others it exercises.",
+  "cases": [
+    {
+      "id": "f:effect:establishes-and-no-effect",
+      "capability": "f.question.effect",
+      "also": ["f.line.suppose", "f.effect.establishes", "f.effect.no_effect"],
+      "comment": "a rule option makes the claim follow, a fact option is irrelevant; without the options the claim does not follow",
+      "fol": ["FORALLx (Frozen(x) IMPLIES Cold(x))", "Cold(pond)", "SUPPOSE rev: FORALLx (Cold(x) IMPLIES Frozen(x))", "SUPPOSE sun: Sunny(pond)", "? Effect(Frozen(pond))"],
+      "expect": {"answers": [{"kind": "effect", "status": "refuted", "value": false, "detail": {"effects": [{"option": "rev", "effect": "establishes"}, {"option": "sun", "effect": "no_effect"}]}}]}
+    },
+    {
+      "id": "f:effect:contradicts-and-inconsistent",
+      "capability": "f.effect.contradicts",
+      "also": ["f.question.effect", "f.line.suppose", "f.effect.inconsistent", "f.effect.no_effect"],
+      "comment": "the claim rests on an absence over a closed predicate: the exception refutes it; the option that denies the claim contradicts what is known",
+      "fol": ["FORALLx ((Bird(x) AND NOT Penguin(x)) IMPLIES Flies(x))", "Bird(tweety)", "Penguin(pingu)", "SUPPOSE p: Penguin(tweety)", "SUPPOSE w: Wing(tweety)", "SUPPOSE c: NOT Flies(tweety)", "? Effect(Flies(tweety))"],
+      "expect": {"answers": [{"kind": "effect", "status": "supported", "value": true, "detail": {"effects": [{"option": "p", "effect": "contradicts"}, {"option": "w", "effect": "no_effect"}, {"option": "c", "effect": "inconsistent"}]}}]}
+    },
+    {
+      "id": "f:effect:blocks",
+      "capability": "f.effect.blocks",
+      "also": ["f.question.effect", "f.line.suppose"],
+      "comment": "the claim's predicate is open (a disjunct elsewhere): the exception leaves it undecided, not refuted",
+      "fol": ["FORALLx ((Bird(x) AND NOT Penguin(x)) IMPLIES Flies(x))", "FORALLx (Bat(x) IMPLIES (Flies(x) OR Crawls(x)))", "Bird(tweety)", "Penguin(pingu)", "SUPPOSE p: Penguin(tweety)", "SUPPOSE w: Wing(tweety)", "? Effect(Flies(tweety))"],
+      "expect": {"answers": [{"kind": "effect", "status": "supported", "value": true, "detail": {"effects": [{"option": "p", "effect": "blocks"}, {"option": "w", "effect": "no_effect"}]}}]}
+    },
+    {
+      "id": "f:effect:without-options",
+      "capability": "f.question.effect",
+      "comment": "Effect without options asks whether the premises prove the claim (mode why_not): no, and the missing fact is named",
+      "fol": ["FORALLx (Rained(x) IMPLIES Wet(x))", "Wet(square)", "? Effect(Rained(square))"],
+      "expect": {"answers": [{"kind": "why_not", "status": "refuted", "value": false, "detail": {"missing": [["f_rained local_square"]]}}]}
+    },
+    {
+      "id": "f:effect:claim-not-ground",
+      "capability": "f.question.effect",
+      "comment": "a claim with a free variable is refused by the converter, never asked",
+      "fol": ["Wet(square)", "? Effect(EXISTSx Wet(x))"],
+      "expect": {"rejected": ["the claim of effect is a fact or a conjunction of facts"], "answers": []}
+    },
+    {
+      "id": "f:effect:ordinary-atom",
+      "capability": "f.question.effect",
+      "comment": "Effect(a, b) holds no formula: the reader keeps it an ordinary atom, asked as a yes/no question",
+      "fol": ["Effect(drug, sleep)", "? Effect(drug, sleep)"],
+      "expect": {"answers": [{"kind": "yesno", "status": "supported", "value": true}]}
+    },
+    {
+      "id": "f:explain:abduce-rejects-inconsistent",
+      "capability": "f.question.explain",
+      "also": ["f.line.suppose"],
+      "comment": "mode abduce over the options: the option whose other consequence contradicts an observation is rejected",
+      "fol": ["FORALLx (Switch(x) IMPLIES Lit(x))", "FORALLx (Fire(x) IMPLIES (Lit(x) AND Smoke(x)))", "Lit(hall)", "NOT Smoke(hall)", "SUPPOSE switch: Switch(hall)", "SUPPOSE fire: Fire(hall)", "? Explain(Lit(hall))"],
+      "expect": {"answers": [{"kind": "abduce", "status": "hypotheses", "value": ["switch"], "detail": {"explanations": [["switch"]], "necessary": ["switch"], "inconsistent": [["fire"]]}}]}
+    },
+    {
+      "id": "f:explain:rule-and-fact-options",
+      "capability": "f.question.explain",
+      "also": ["f.line.suppose"],
+      "comment": "a rule option and a fact option each explain the claim alone: two explanations, none necessary",
+      "fol": ["FORALLx (Sprinkler(x) IMPLIES Damp(x))", "Cloudy(lawn)", "SUPPOSE drizzle: FORALLx (Cloudy(x) IMPLIES Damp(x))", "SUPPOSE spr: Sprinkler(lawn)", "? Explain(Damp(lawn))"],
+      "expect": {"answers": [{"kind": "abduce", "status": "hypotheses", "value": ["drizzle", "spr"], "detail": {"explanations": [["drizzle"], ["spr"]], "necessary": [], "inconsistent": []}}]}
+    },
+    {
+      "id": "f:explain:without-options",
+      "capability": "f.question.explain",
+      "comment": "Explain without options asks what must be added (mode why_not); no verdict while the claim does not follow",
+      "fol": ["FORALLx (Rained(x) IMPLIES Wet(x))", "Wet(square)", "? Explain(Rained(square))"],
+      "expect": {"answers": [{"kind": "why_not", "status": "refuted", "value": null, "detail": {"missing": [["f_rained local_square"]]}}]}
+    },
+    {
+      "id": "f:missing:names-the-missing-fact",
+      "capability": "f.question.missing",
+      "comment": "mode why_not: the base fact whose addition makes the claim follow",
+      "fol": ["FORALLx ((Ticket(x) AND Paid(x)) IMPLIES Boards(x))", "Ticket(lena)", "? Missing(Boards(lena))"],
+      "expect": {"answers": [{"kind": "why_not", "status": "refuted", "value": null, "detail": {"missing": [["f_paid local_lena"]]}}]}
+    },
+    {
+      "id": "f:missing:claim-follows",
+      "capability": "f.question.missing",
+      "comment": "nothing is missing when the claim follows: the verdict is yes",
+      "fol": ["FORALLx ((Ticket(x) AND Paid(x)) IMPLIES Boards(x))", "Ticket(lena)", "Paid(lena)", "? Missing(Boards(lena))"],
+      "expect": {"answers": [{"kind": "why_not", "status": "supported", "value": true}]}
+    },
+    {
+      "id": "f:why:names-the-rules",
+      "capability": "f.question.why",
+      "comment": "mode explain: the proof names the rules it used",
+      "fol": ["FORALLx (Oak(x) IMPLIES Tree(x))", "FORALLx (Tree(x) IMPLIES Plant(x))", "Oak(elm1)", "? Why(Plant(elm1))"],
+      "expect": {"answers": [{"kind": "explain", "status": "supported", "value": true, "detail": {"rules_used": ["fr2", "fr1"]}}]}
+    },
+    {
+      "id": "f:why:rule-claim",
+      "capability": "f.question.why",
+      "comment": "a rule asked as the claim is asked of an arbitrary instance",
+      "fol": ["FORALLx (Oak(x) IMPLIES Tree(x))", "FORALLx (Tree(x) IMPLIES Plant(x))", "? Why(FORALLx (Oak(x) IMPLIES Plant(x)))"],
+      "expect": {"answers": [{"kind": "explain", "status": "supported", "value": true, "detail": {"rules_used": ["fr2", "fr1"]}}]}
+    },
+    {
+      "id": "f:change:one-circuit-per-premise",
+      "capability": "f.question.change",
+      "also": ["f.effect.establishes"],
+      "comment": "one mode effect circuit per premise the claim rests on (the unrelated fact is no premise); each premise is needed",
+      "fol": ["FORALLx ((Ticket(x) AND Paid(x)) IMPLIES Boards(x))", "Ticket(lena)", "Paid(lena)", "Cat(tom)", "? Change(Boards(lena))"],
+      "expect": {"answers": [
+        {"kind": "change", "status": "refuted", "value": true, "detail": {"premise": "Ticket(lena)", "effect": "establishes", "without": "refuted"}},
+        {"kind": "change", "status": "refuted", "value": true, "detail": {"premise": "Paid(lena)", "effect": "establishes", "without": "refuted"}},
+        {"kind": "change", "status": "refuted", "value": true, "detail": {"premise": "Ticket(?x) AND Paid(?x) IMPLIES Boards(?x)", "effect": "establishes", "without": "refuted"}}
+      ]}
+    },
+    {
+      "id": "f:change:redundant-premise",
+      "capability": "f.question.change",
+      "also": ["f.effect.no_effect"],
+      "comment": "a claim with two independent supports: removing either premise changes nothing",
+      "fol": ["FORALLx (Rained(x) IMPLIES Wet(x))", "FORALLx (Hosed(x) IMPLIES Wet(x))", "Rained(yard)", "Hosed(yard)", "? Change(Wet(yard))"],
+      "expect": {"answers": [
+        {"kind": "change", "status": "supported", "value": true, "detail": {"premise": "Rained(yard)", "effect": "no_effect", "without": "supported"}},
+        {"kind": "change", "status": "supported", "value": true, "detail": {"premise": "Hosed(yard)", "effect": "no_effect", "without": "supported"}},
+        {"kind": "change", "status": "supported", "value": true, "detail": {"premise": "Rained(?x) IMPLIES Wet(?x)", "effect": "no_effect", "without": "supported"}},
+        {"kind": "change", "status": "supported", "value": true, "detail": {"premise": "Hosed(?x) IMPLIES Wet(?x)", "effect": "no_effect", "without": "supported"}}
+      ]}
+    },
+    {
+      "id": "f:assume:rule-makes-answer-conditional",
+      "capability": "f.line.assume",
+      "comment": "an assumed rule is a session rule the question supposes with `if`: the answer is conditional on it",
+      "fol": ["Robin(rob)", "ASSUME FORALLx (Robin(x) IMPLIES Bird(x))", "? Bird(rob)"],
+      "expect": {"answers": [{"kind": "yesno", "status": "supported", "value": true, "conditional": ["fa_r1"]}]}
+    },
+    {
+      "id": "f:assume:fact-is-not-a-fact",
+      "capability": "f.line.assume",
+      "comment": "an assumed fact is an `assumed` wire, reported, never a stated fact: the closed world does not derive from it, and the answer rests on no assumption",
+      "fol": ["FORALLx (Sings(x) IMPLIES Bird(x))", "Robin(rob)", "ASSUME Sings(rob)", "? Bird(rob)"],
+      "expect": {"answers": [{"kind": "yesno", "status": "refuted", "value": false, "conditional": []}]}
+    },
+    {
+      "id": "f:assumed:lists-the-assumptions",
+      "capability": "f.question.assumed",
+      "also": ["f.line.assume"],
+      "comment": "Assumed lists the formalizer's assumptions as written; the assumed fact is reported by the runtime",
+      "fol": ["Robin(rob)", "ASSUME Sings(rob)", "ASSUME FORALLx (Robin(x) IMPLIES Bird(x))", "? Bird(rob)", "? Assumed"],
+      "expect": {"answers": [
+        {"kind": "yesno", "status": "supported", "value": true, "conditional": ["fa_r1"]},
+        {"kind": "assumed", "status": "context_updated", "value": ["ASSUME Sings(rob)", "ASSUME FORALLx (Robin(x) IMPLIES Bird(x))"], "detail": {"model_assumptions": ["The model assumed: f_sings (subject: rob)."]}}
+      ]}
+    },
+    {
+      "id": "f:suppose:not-a-line-form",
+      "capability": "f.line.suppose",
+      "comment": "SUPPOSE takes a formula, never another line form",
+      "fol": ["SUPPOSE a: Effect(Wet(square))"],
+      "expect": {"rejected": ["SUPPOSE takes a formula", "not parsed"], "answers": []}
+    },
+    {
+      "id": "f:suppose:not-a-number",
+      "capability": "f.line.suppose",
+      "comment": "an option is a fact or a rule, never a quantity",
+      "fol": ["Gift(ana)", "SUPPOSE a: Value(price, 3)", "? Gift(ana)"],
+      "expect": {"rejected": ["an option is a fact or a rule, not a number"], "answers": [{"kind": "yesno", "status": "supported", "value": true}]}
+    }
+  ]
+}

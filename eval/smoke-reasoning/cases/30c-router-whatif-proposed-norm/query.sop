@@ -1,0 +1,4 @@
+@q query
+  mode plan
+  where router_reset r7
+  if $relax_hours

@@ -1,0 +1,13 @@
+{
+  "feature": "A universal answer over an open domain is unknown, not supported (no counterexample is not a proof)",
+  "status": "unknown",
+  "complete": true,
+  "reason": "open_domain",
+  "warnings": [
+    "every_needs_closed_scope"
+  ],
+  "requires": [
+    "facts",
+    "every"
+  ]
+}

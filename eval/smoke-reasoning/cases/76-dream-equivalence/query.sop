@@ -1,0 +1,3 @@
+@q query
+  where hit n0 ?z
+  select ?z

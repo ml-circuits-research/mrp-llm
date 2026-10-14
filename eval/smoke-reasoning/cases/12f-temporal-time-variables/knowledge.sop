@@ -1,0 +1,23 @@
+@works_at predicate
+  args subject:entity object:entity
+@moved_on predicate
+  args subject:entity
+
+@f1 fact
+  holds works_at ann alpha
+  valid 2020-01-01 2023-01-01
+@f2 fact
+  holds works_at ann beta
+  valid 2023-01-01 open
+@f3 fact
+  holds works_at cy beta
+  valid 2019-01-01 2021-01-01
+@f4 fact
+  holds works_at cy alpha
+  valid 2021-01-01 open
+
+@r_moved rule
+  when start_of ?t1 works_at ?p alpha
+  when start_of ?t2 works_at ?p beta
+  when order ?t1 before ?t2
+  then moved_on ?p

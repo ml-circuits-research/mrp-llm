@@ -1,0 +1,7 @@
+{
+  "feature": "A planning horizon cut is budget_exhausted with reason horizon, never no_plan",
+  "status": "budget_exhausted",
+  "complete": false,
+  "reason": "horizon",
+  "requires": ["plan", "numeric_action", "zero_arity", "budget"]
+}

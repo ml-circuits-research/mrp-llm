@@ -1,0 +1,28 @@
+{
+  "feature": "oblige ... after ~b: once b has occurred a later occurrence of the pattern is required; a hard obligation unmet at the end of the plan makes the plan invalid, so the engine adds the follow-up",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 2,
+    "steps": 2,
+    "names": [
+      "deploy",
+      "announce"
+    ]
+  },
+  "obligations_triggered": [
+    "announce_after s1"
+  ],
+  "used": [
+    {
+      "id": "announce_after",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "plan",
+    "norms_hard",
+    "temporal_norms",
+    "used"
+  ]
+}

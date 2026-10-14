@@ -1,0 +1,27 @@
+{
+  "feature": "Memory at scale: absent over a recursive derived predicate is valid only if every rule of it is in the slice",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "y": "a"
+    },
+    {
+      "y": "d"
+    }
+  ],
+  "retrieval": {
+    "max_wires": 40,
+    "needed_recall": 1,
+    "min_steps": 2,
+    "flagged_first_step": true
+  },
+  "requires": [
+    "rules",
+    "recursion",
+    "naf",
+    "closed_world",
+    "closed_derived",
+    "retrieval"
+  ]
+}

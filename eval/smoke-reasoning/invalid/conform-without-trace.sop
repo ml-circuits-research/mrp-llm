@@ -1,0 +1,3 @@
+# expect: missing_field
+@q query
+  mode conform

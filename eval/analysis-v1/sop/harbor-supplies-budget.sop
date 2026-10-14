@@ -1,0 +1,86 @@
+# Hand-written SOP of documents/harbor-supplies-budget.md (the control document: no planted issue).
+
+@hs_ref fact
+  holds as_of_year 2026
+  quote "This budget refers to the year 2026."
+  source "harbor-supplies-budget.md, line 3"
+@hs_total fact
+  holds amount supplies_budget 10000
+  quote "The supplies budget for 2026 is 10000 EUR"
+  source "harbor-supplies-budget.md, line 5"
+@hs_total_unit fact
+  holds unit_of supplies_budget eur
+  quote "The supplies budget for 2026 is 10000 EUR"
+  source "harbor-supplies-budget.md, line 5"
+@hs_2026 fact
+  holds period_amount supplies_budget year_2026 10000
+  quote "The supplies budget for 2026 is 10000 EUR"
+  source "harbor-supplies-budget.md, line 5"
+@hs_2025 fact
+  holds period_amount supplies_budget year_2025 9000
+  quote "up from 9000 EUR in 2025"
+  source "harbor-supplies-budget.md, line 5"
+@hs_periods fact
+  holds period_follows year_2026 year_2025
+  quote "up from 9000 EUR in 2025"
+  source "harbor-supplies-budget.md, line 5"
+@hs_split fact
+  holds breakdown_complete supplies_budget
+  quote "It is split into paper (4000 EUR), toner (3500 EUR) and other supplies (2500 EUR)."
+  source "harbor-supplies-budget.md, line 6"
+@hs_paper_part fact
+  holds component_of paper_budget supplies_budget
+  quote "paper (4000 EUR)"
+  source "harbor-supplies-budget.md, line 6"
+@hs_paper fact
+  holds amount paper_budget 4000
+  quote "paper (4000 EUR)"
+  source "harbor-supplies-budget.md, line 6"
+@hs_paper_unit fact
+  holds unit_of paper_budget eur
+  quote "paper (4000 EUR)"
+  source "harbor-supplies-budget.md, line 6"
+@hs_toner_part fact
+  holds component_of toner_budget supplies_budget
+  quote "toner (3500 EUR)"
+  source "harbor-supplies-budget.md, line 6"
+@hs_toner fact
+  holds amount toner_budget 3500
+  quote "toner (3500 EUR)"
+  source "harbor-supplies-budget.md, line 6"
+@hs_toner_unit fact
+  holds unit_of toner_budget eur
+  quote "toner (3500 EUR)"
+  source "harbor-supplies-budget.md, line 6"
+@hs_other_part fact
+  holds component_of other_budget supplies_budget
+  quote "other supplies (2500 EUR)"
+  source "harbor-supplies-budget.md, line 6"
+@hs_other fact
+  holds amount other_budget 2500
+  quote "other supplies (2500 EUR)"
+  source "harbor-supplies-budget.md, line 6"
+@hs_other_unit fact
+  holds unit_of other_budget eur
+  quote "other supplies (2500 EUR)"
+  source "harbor-supplies-budget.md, line 6"
+@hs_share_paper fact
+  holds share_of paper_budget supplies_budget 40
+  quote "Paper accounts for 40% of the budget"
+  source "harbor-supplies-budget.md, line 7"
+@hs_share_toner fact
+  holds share_of toner_budget supplies_budget 35
+  quote "toner for 35%"
+  source "harbor-supplies-budget.md, line 7"
+@hs_share_other fact
+  holds share_of other_budget supplies_budget 25
+  quote "other supplies for 25%"
+  source "harbor-supplies-budget.md, line 7"
+@hs_board fact
+  holds premise_stated board_decision_printed_contracts
+  quote "as decided by the board in January 2026"
+  source "harbor-supplies-budget.md, line 9"
+@hs_claim fact
+  holds claim_rests_on paper_line_increase board_decision_printed_contracts
+  quote "The paper line is larger than in 2025 because the office moves to printed contracts, as decided by the board in January 2026."
+  source "harbor-supplies-budget.md, line 9"

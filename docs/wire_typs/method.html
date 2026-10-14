@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#method" target="_top">← Wire type index</a></p><h1><code>method</code></h1><p>The manual's own procedure for a task: an ordered list of steps with the choice points the engine may optimise, in the style of hierarchical task networks. "To back up a server, lock the database, take a snapshot (or a dump if the database is small), then unlock it."</p><p><strong>Status and author:</strong> Knowledge wire, written by a model or the owner from a source and stored by the host after review. A model-origin program cannot author it (the model-origin compiler rejects it). Governed: its `version`, `supersedes` and `approval` fields decide which version binds. Methods are the "mode of work" half of a procedure; the norms that bound them are <a href="norm.html"><code>norm</code></a> wires.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="field-achieves"><code>achieves</code></th><td>At most once; required</td><td>The task atom this method achieves (<code>backup_done ?s</code>). Its variables are the method's parameters.</td></tr>
+<tr><th scope="row" id="field-when"><code>when</code></th><td>Repeatable; optional</td><td>A guard: a condition group that must hold for the method to apply.</td></tr>
+<tr><th scope="row" id="field-step"><code>step</code></th><td>Repeatable; required</td><td>One step per line, in order; a block opens on the line and closes with <code>end</code>. Forms: <code>~action term...</code> (arity must match the action's <code>params</code>: <code>step_arity_mismatch</code>), a sub-task atom (some approved method must achieve it: <code>subtask_without_method</code>), <code>achieve ATOM</code>, <code>optional STEP</code>, <code>choose</code> (two or more alternatives, one per line: <code>choose_needs_alternatives</code>), <code>any_order</code>, <code>if ATOM</code> ... <code>else</code> ... <code>end</code>, <code>until ATOM max N</code> ... <code>end</code> (<code>max</code> is mandatory: <code>until_needs_max</code>), <code>pick ?x where ATOM</code>.</td></tr>
+<tr><th scope="row" id="field-prefer"><code>prefer</code></th><td>Repeatable; optional</td><td><code>~a over ~b</code>: between equal-cost alternatives, prefer <code>a</code>.</td></tr>
+<tr><th scope="row" id="field-on_failure"><code>on_failure</code></th><td>At most once; optional</td><td><code>$method</code>, <code>replan</code> or <code>abort</code>: what to do when the method cannot proceed. Under <code>binding strict</code> this is the only way out of the method.</td></tr>
+<tr><th scope="row" id="field-triggered_by"><code>triggered_by</code></th><td>At most once; optional</td><td>An event atom that triggers the method.</td></tr>
+<tr><th scope="row" id="field-binding"><code>binding</code></th><td>At most once; optional</td><td><code>strict</code> (default: the engine may not plan from primitives when an approved method exists, and may leave the method only through <code>on_failure</code>) or <code>advisory</code> (the method guides the search and the engine may fall back). Write <code>advisory</code> only when the source says "recommended".</td></tr>
+<tr><th scope="row" id="field-cost"><code>cost</code></th><td>At most once; optional</td><td>A non-negative integer cost of using the method.</td></tr>
+<tr><th scope="row" id="field-source"><code>source</code></th><td>At most once; optional</td><td>Quoted citation of the manual section.</td></tr>
+<tr><th scope="row" id="field-version"><code>version</code></th><td>At most once; optional</td><td>A positive integer. A revision is a new wire with <code>version N+1</code> and <code>supersedes $old</code>; the old wire is never edited.</td></tr>
+<tr><th scope="row" id="field-supersedes"><code>supersedes</code></th><td>At most once; optional</td><td>A <code>$id</code> of a wire of the same type with a lower version (<code>supersedes_type_mismatch</code>, <code>version_not_increasing</code>). An approved successor makes its predecessor <code>approval superseded</code>.</td></tr>
+<tr><th scope="row" id="field-approval"><code>approval</code></th><td>At most once; optional</td><td><code>proposed</code>, <code>approved</code>, <code>contested</code>, <code>rejected</code>, <code>superseded</code> or <code>retired</code>. Written by the host when it accepts the wire; an author never writes it (authoring mode ignores it with <code>governance_ignored</code>). Only approved wires bind, and so do contested ones, flagged.</td></tr>
+<tr><th scope="row" id="field-approved_by"><code>approved_by</code></th><td>At most once; optional</td><td>Text. Written by the host at approval; required with <code>approval approved</code> in memory (<code>approval_incomplete</code>).</td></tr>
+<tr><th scope="row" id="field-approved_at"><code>approved_at</code></th><td>At most once; optional</td><td>ISO date or timestamp. Written by the host; <code>asof</code> selects the version in force from this date. Required for every norm and every strict method.</td></tr>
+<tr><th scope="row" id="field-retired_at"><code>retired_at</code></th><td>At most once; optional</td><td>ISO date or timestamp after which the wire no longer binds.</td></tr>
+<tr><th scope="row" id="field-scope"><code>scope</code></th><td>At most once; optional</td><td>A quoted list of tags (<code>scope "ops, business_hours"</code>). A scoped wire binds when its tags intersect the query context; an unscoped wire always binds.</td></tr>
+<tr><th scope="row" id="field-quote"><code>quote</code></th><td>At most once; optional</td><td>The exact words of the source, copied byte for byte.</td></tr></tbody></table></div></section><section><h2>What it is for and how to write it</h2><p>Write each step the manual gives, in order, with the primitive <a href="action.html"><code>action</code></a> wires it names (each with its preconditions and effects). Put the manual's own branching in <code>if</code>, <code>choose</code> and <code>optional</code>; the engine chooses only at the choice points you write. Branching beyond that is several methods with guards. Every loop has <code>max</code>; an unbounded loop cannot be expressed and goes into the report as "not expressed". "Always do it this way" is <code>binding strict</code>; "recommended" is <code>binding advisory</code>; an omitted <code>binding</code> is strict.</p><table><thead><tr><th>Step</th><th>Meaning</th></tr></thead><tbody><tr><td><code>~action ?x</code></td><td>a primitive step</td></tr><tr><td><code>task ?x</code></td><td>a sub-task, achieved by another method</td></tr><tr><td><code>achieve ATOM</code></td><td>the planner fills the gap between the state and the atom</td></tr><tr><td><code>optional STEP</code></td><td>the engine may skip it, and does when it costs more than it helps</td></tr><tr><td><code>choose ... end</code></td><td>one alternative per line, at least two</td></tr><tr><td><code>any_order ... end</code></td><td>the enclosed steps in any order</td></tr><tr><td><code>if ATOM ... else ... end</code></td><td>branch on the state reached before the step</td></tr><tr><td><code>until ATOM max N ... end</code></td><td>bounded iteration</td></tr><tr><td><code>pick ?x where ATOM</code></td><td>the engine chooses a binding</td></tr></tbody></table></section><section><h2>What the engine does</h2><p>A plan is a run of the program: the legal executions are all the ways of resolving the choice points (<code>choose</code>, <code>pick</code>, <code>any_order</code>, <code>optional</code>, <code>achieve</code>, and the <code>if</code> outcomes fixed by the state). <code>mode plan</code> returns the cheapest legal execution that satisfies the norms in force, ties broken by <code>prefer</code>, with the choices it made in <code>choices</code>. A depth or iteration cap that is hit gives <code>budget_exhausted</code>, not a plan. <code>mode procedure</code> renders the approved method of a task as of <code>asof</code> without planning. Methods are planned by the strategies that declare <code>method</code>; the oracle <code>js-reference</code> declares them <code>not_expressible</code>.</p></section><section><h2>Examples</h2><pre data-sop="knowledge"><code>@server predicate
+  args subject:entity
+@big_db predicate
+  args subject:entity
+@locked predicate
+  args subject:entity
+@image predicate
+  args subject:entity
+@backup_done predicate
+  args subject:entity
+
+@lock_db action
+  params ?s
+  requires server ?s
+  adds locked ?s
+  cost 1
+@snapshot action
+  params ?s
+  requires locked ?s
+  adds image ?s
+  cost 2
+@dump action
+  params ?s
+  requires locked ?s
+  adds image ?s
+  cost 4
+@unlock_db action
+  params ?s
+  requires image ?s
+  requires locked ?s
+  adds backup_done ?s
+  removes locked ?s
+  cost 1
+
+@s1 fact
+  holds server s1
+@do_backup method
+  achieves backup_done ?s
+  when server ?s
+  binding strict
+  step ~lock_db ?s
+  step if big_db ?s
+    ~snapshot ?s
+  else
+    ~dump ?s
+  end
+  step ~unlock_db ?s</code></pre><pre data-sop="knowledge-query" data-run="validate"><code>@q query
+  mode plan
+  where backup_done s1</code></pre><p>The question is validated and, by a strategy that declares <code>method</code>, planned; the oracle answers <code>not_expressible</code>.</p><h3>Invalid: a loop without a bound</h3><pre data-sop="knowledge-invalid" data-error="until_needs_max"><code>@ready predicate
+  args subject:entity
+@wait action
+  params ?s
+  requires ready ?s
+  adds ready ?s
+@m method
+  achieves ready ?s
+  when ready ?s
+  step until ready ?s
+    ~wait ?s
+  end</code></pre></section><section><h2>Common mistakes</h2><ol><li>A <code>~step</code> with the wrong number of terms for its action (<code>step_arity_mismatch</code>).</li><li><code>choose</code> with one alternative, or <code>until</code> without <code>max</code>.</li><li>A sub-task atom that no method achieves (<code>subtask_without_method</code>).</li><li>Writing <code>advisory</code> for a step the manual makes mandatory, or leaving a mandatory step to a <code>strict</code> method that a <code>strict</code> hard norm forbids (<code>strict_forbid_conflicts_method</code>).</li><li>Writing <code>approval</code>, <code>approved_by</code> or <code>approved_at</code>: the host writes them.</li></ol></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.method</code></li><li><code>sop/knowledge/validate-fields.mjs:checkSteps</code></li><li><code>sop/knowledge/cross-checks.mjs (procedure checks)</code></li></ul><p>Related: <a href="action.html"><code>action</code></a>, <a href="norm.html"><code>norm</code></a>, <a href="procedure.html"><code>procedure</code></a>, <a href="query-modes.html"><code>query-modes</code></a>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>; the shared semantics are in <a href="knowledge-semantics.html">Knowledge semantics</a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

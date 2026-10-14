@@ -1,0 +1,5 @@
+# expect: arity_mismatch
+@f1 fact
+  holds parent ann bob
+@f2 fact
+  holds parent ann

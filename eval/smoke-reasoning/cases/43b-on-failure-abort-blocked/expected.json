@@ -1,0 +1,16 @@
+{
+  "feature": "on_failure abort: the strict method has no legal run and no fallback; the answer names the step and the unmet requirement (never a bare no_plan)",
+  "status": "blocked",
+  "complete": true,
+  "blocked_by": [],
+  "blocked": {
+    "step": "~upload_cloud s1",
+    "requirement": "network_up s1"
+  },
+  "requires": [
+    "plan",
+    "method",
+    "on_failure",
+    "blocked_info"
+  ]
+}

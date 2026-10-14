@@ -1,0 +1,32 @@
+{
+  "feature": "severity x binding: an advisory hard norm that blocks is relaxed and listed in relaxed (a relaxable hard constraint)",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 2,
+    "steps": 1,
+    "names": [
+      "force_fix"
+    ]
+  },
+  "relaxed": [
+    "no_force"
+  ],
+  "compliance": {
+    "hard": "relaxed",
+    "soft_violations": [],
+    "total_cost": 2
+  },
+  "used": [
+    {
+      "id": "no_force",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "plan",
+    "norms_hard",
+    "binding_advisory",
+    "used"
+  ]
+}

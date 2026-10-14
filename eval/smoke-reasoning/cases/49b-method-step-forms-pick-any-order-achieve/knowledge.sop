@@ -1,0 +1,71 @@
+@user predicate
+  args subject:entity
+@host_free predicate
+  args subject:entity
+@account predicate
+  args subject:entity
+@desk predicate
+  args subject:entity
+@provisioned predicate
+  args subject:entity
+@printed predicate
+  args subject:entity
+@badge_ready predicate
+  args subject:entity
+@onboarded predicate
+  args subject:entity
+
+@f1 fact
+  holds user u1
+@f2 fact
+  holds host_free h1
+@f3 fact
+  holds host_free h2
+
+@create_account action
+  params ?u
+  requires user ?u
+  adds account ?u
+  cost 1
+@assign_desk action
+  params ?u
+  requires user ?u
+  adds desk ?u
+  cost 1
+@provision action
+  params ?u ?h
+  requires account ?u
+  requires desk ?u
+  requires host_free ?h
+  adds provisioned ?u
+  removes host_free ?h
+  cost 2
+@print_badge action
+  params ?u
+  requires account ?u
+  adds printed ?u
+  cost 1
+@laminate action
+  params ?u
+  requires printed ?u
+  adds badge_ready ?u
+  cost 1
+@finish action
+  params ?u
+  requires provisioned ?u
+  requires badge_ready ?u
+  adds onboarded ?u
+  cost 1
+
+@onboard method
+  achieves onboarded ?u
+  when user ?u
+  binding strict
+  step any_order
+    ~create_account ?u
+    ~assign_desk ?u
+  end
+  step pick ?h where host_free ?h
+  step ~provision ?u ?h
+  step achieve badge_ready ?u
+  step ~finish ?u

@@ -1,0 +1,54 @@
+@price predicate
+  args subject:entity object:rational
+  closed true
+@qty predicate
+  args subject:entity object:rational
+  closed true
+@line_total predicate
+  args subject:entity object:rational
+  closed true
+@basket_total predicate
+  args subject:entity object:rational
+@basket_items predicate
+  args subject:entity object:rational
+@cheapest predicate
+  args subject:entity object:rational
+@dear predicate
+  args subject:entity
+@p1 fact
+  holds price tea 0.1
+@p2 fact
+  holds price milk 0.2
+@p3 fact
+  holds price bread 19.99
+@p4 fact
+  holds price pen 2.5
+@q1 fact
+  holds qty tea 7
+@q2 fact
+  holds qty milk 3
+@q3 fact
+  holds qty bread 3
+@q4 fact
+  holds qty pen 4
+@r_line rule
+  when price ?i ?p
+  when qty ?i ?q
+  when compute ?t ?p times ?q
+  then line_total ?i ?t
+@a_sum aggregate
+  over line_total ?i ?t
+  sum ?t as ?s
+  yields basket_total all ?s
+@a_count aggregate
+  over line_total ?i ?t
+  count ?i as ?n
+  yields basket_items all ?n
+@a_min aggregate
+  over price ?i ?p
+  min ?p as ?m
+  yields cheapest all ?m
+@r_dear rule
+  when price ?i ?p
+  when compare ?p above 2.45
+  then dear ?i

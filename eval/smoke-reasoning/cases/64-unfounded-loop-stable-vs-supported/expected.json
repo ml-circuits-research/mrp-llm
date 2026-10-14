@@ -1,0 +1,15 @@
+{
+  "feature": "An unfounded loop: stable (least) models and Clark-completion (supported) models differ, so a completion engine must decline",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {"x": "n2"}
+  ],
+  "requires": [
+    "rules",
+    "recursion",
+    "naf",
+    "closed_world",
+    "closed_derived"
+  ]
+}

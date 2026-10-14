@@ -1,0 +1,10 @@
+# expect: absent_needs_closed
+@reach predicate
+  args source:entity destination:entity
+@r rule
+  when edge ?x ?y
+  then reach ?x ?y
+@u rule
+  when node ?y
+  when absent reach a ?y
+  then unreached ?y

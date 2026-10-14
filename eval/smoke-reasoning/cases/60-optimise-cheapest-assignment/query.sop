@@ -1,0 +1,10 @@
+@cheapest constraint
+  var ?a int 0 6
+  var ?b int 0 6
+  var ?c int 0 6
+  require 3 times ?a plus 4 times ?b plus 6 times ?c at_least 18
+  require ?a plus ?b plus ?c at_most 5
+  objective 2 times ?a plus 3 times ?b plus 6 times ?c
+  direction min
+  task optimize
+  select ?a ?b ?c

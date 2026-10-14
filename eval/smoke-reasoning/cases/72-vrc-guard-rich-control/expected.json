@@ -1,0 +1,7 @@
+{
+  "feature": "Negative control of state compression: a guard that does not factor through any smaller encoding",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {"cost": 2, "steps": 2},
+  "requires": ["plan", "numeric_action", "zero_arity"]
+}

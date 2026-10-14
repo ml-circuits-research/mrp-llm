@@ -1,0 +1,5 @@
+{
+  "name": "Core (minimal)",
+  "description": "The smallest shared vocabulary: the relation is_a and the upper classes (class, entity, person, organization, place, occupation, property, unit). Every base memory imports it.",
+  "imports": []
+}

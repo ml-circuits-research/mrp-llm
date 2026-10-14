@@ -1,0 +1,3 @@
+@q query
+  where reaches ?x ?y
+  select ?x ?y

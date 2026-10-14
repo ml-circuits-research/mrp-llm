@@ -1,0 +1,23 @@
+@departure value
+  data 770
+
+@duration value
+  data 70
+
+@deadline value
+  data 840
+
+@c constraint
+  var ?arrival int 770 900
+  require ?arrival >= $departure + $duration
+  claim ?arrival <= $deadline
+  task possible
+  unit minute
+
+@r reason
+  constraint $c
+  backend auto
+
+@answer cnl
+  result $r
+  language en

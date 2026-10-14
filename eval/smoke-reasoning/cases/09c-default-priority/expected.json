@@ -1,0 +1,8 @@
+{
+  "feature": "Defaults: a higher priority resolves the conflict",
+  "status": "refuted",
+  "complete": true,
+  "requires": [
+    "default"
+  ]
+}

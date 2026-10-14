@@ -1,0 +1,21 @@
+@booked predicate
+  args subject:entity object:entity location:entity
+@violation predicate
+  args subject:entity object:entity
+
+@b1 fact
+  holds booked room1 slot9 ann
+@b2 fact
+  holds booked room1 slot9 bob
+@b3 fact
+  holds booked room2 slot9 cy
+
+@no_double_booking integrity
+  never all
+    booked ?r ?s ?a
+    booked ?r ?s ?b
+    compare ?a not_equal ?b
+  end
+  witness ?r
+  message "a room has two bookings in one slot"
+  severity error

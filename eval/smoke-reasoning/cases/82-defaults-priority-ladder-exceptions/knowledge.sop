@@ -1,0 +1,93 @@
+@bird predicate
+  args subject:entity
+@penguin predicate
+  args subject:entity
+@ostrich predicate
+  args subject:entity
+@jetpack predicate
+  args subject:entity
+@injured predicate
+  args subject:entity
+@rescued predicate
+  args subject:entity
+@frozen predicate
+  args subject:entity
+@flies predicate
+  args subject:entity
+
+@f1 fact
+  holds bird a
+@f2 fact
+  holds bird b
+@f3 fact
+  holds penguin b
+@f4 fact
+  holds bird c
+@f5 fact
+  holds penguin c
+@f6 fact
+  holds jetpack c
+@f7 fact
+  holds bird d
+@f8 fact
+  holds penguin d
+@f9 fact
+  holds jetpack d
+@f10 fact
+  holds injured d
+@f11 fact
+  holds bird e
+@f12 fact
+  holds ostrich e
+@f13 fact
+  holds bird f
+@f14 fact
+  holds penguin f
+@f15 fact
+  holds injured f
+@f16 fact
+  holds rescued f
+@f17 fact
+  holds bird g
+@f18 fact
+  holds frozen g
+@f19 fact
+  holds bird h
+@f20 fact
+  holds jetpack h
+@f21 fact
+  holds injured h
+@f22 fact
+  holds rescued h
+@f23 fact
+  holds penguin h
+@f24 fact
+  holds jetpack i
+@f25 fact
+  holds not flies g
+
+@d_bird default
+  when bird ?x
+  then flies ?x
+  priority 1
+@d_penguin default
+  when penguin ?x
+  then not flies ?x
+  priority 2
+@d_ostrich default
+  when ostrich ?x
+  then not flies ?x
+  priority 2
+@d_jetpack default
+  when jetpack ?x
+  then flies ?x
+  priority 3
+@d_injured default
+  when injured ?x
+  then not flies ?x
+  except rescued ?x
+  priority 4
+@d_rescued default
+  when rescued ?x
+  then flies ?x
+  priority 4

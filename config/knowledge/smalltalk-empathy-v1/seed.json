@@ -1,0 +1,110 @@
+{
+  "name": "Small talk: empathy (English)",
+  "description": "Replies to feelings shown in a message without a request: frustration, sadness, joy, grief, loneliness, stress, fear, anger, disappointment, embarrassment, tiredness, pride, excitement, nostalgia, surprise, and a crisis reply that points to emergency help; neutral and warm registers.",
+  "imports": [
+    "conversation-v1"
+  ],
+  "role": "conversation",
+  "licence": "MIT (repository LICENSE); original MRP-LLM text written by model runs of jobs/smalltalk-replies and reviewed automatically",
+  "provenance": {
+    "generator": "jobs/smalltalk-replies (worker tier, bulk audit by the auditor tier, decider tier for fixes)",
+    "builder": "tools/smalltalk/build.mjs",
+    "taxonomy": "tools/smalltalk/taxonomy.json",
+    "runs": [
+      "state/llm-jobs/smalltalk-replies/20261002T155845-d6eeea",
+      "state/llm-jobs/smalltalk-replies-escalated/20261002T171332-ff6ba4"
+    ],
+    "inspired_by": [
+      {
+        "source": "DailyDialog",
+        "use": "topic categories and dialogue-act types (inform, question, directive, commissive) as ideas",
+        "text_copied": false
+      },
+      {
+        "source": "EmpatheticDialogues",
+        "use": "the set of 32 emotion labels, grouped into the empathy situations",
+        "text_copied": false
+      },
+      {
+        "source": "MultiWOZ",
+        "use": "general dialogue acts (greet, bye, thank, welcome, reqmore) as ideas",
+        "text_copied": false
+      },
+      {
+        "source": "Wizard of Wikipedia",
+        "use": "chit-chat about a topic that leads to knowledge, as an idea",
+        "text_copied": false
+      },
+      {
+        "source": "Cornell Movie-Dialogs Corpus",
+        "use": "turn patterns of casual conversation, as an idea",
+        "text_copied": false
+      }
+    ]
+  },
+  "counts": {
+    "situations": 19,
+    "replies": 102,
+    "by_register": {
+      "neutral": 52,
+      "warm": 50
+    },
+    "rules": 0,
+    "data_facts": 38,
+    "mean_distinct_1": 0.566,
+    "mean_distinct_2": 0.776,
+    "near_duplicates_dropped": 15
+  },
+  "acts": [
+    {
+      "kind": "crisis",
+      "group": "hard_feeling",
+      "situation": "empathy_crisis"
+    },
+    {
+      "kind": "grief",
+      "group": "hard_feeling",
+      "situation": "empathy_grief"
+    },
+    {
+      "kind": "loneliness",
+      "group": "hard_feeling",
+      "situation": "empathy_loneliness"
+    },
+    {
+      "kind": "stress",
+      "group": "hard_feeling",
+      "situation": "empathy_anxiety"
+    },
+    {
+      "kind": "tiredness",
+      "group": "hard_feeling",
+      "situation": "empathy_tiredness"
+    },
+    {
+      "kind": "embarrassment",
+      "group": "hard_feeling",
+      "situation": "empathy_guilt"
+    },
+    {
+      "kind": "pride",
+      "group": "good_feeling",
+      "situation": "empathy_pride"
+    },
+    {
+      "kind": "excitement",
+      "group": "good_feeling",
+      "situation": "empathy_excitement"
+    },
+    {
+      "kind": "nostalgia",
+      "group": "good_feeling",
+      "situation": "empathy_nostalgia"
+    },
+    {
+      "kind": "surprise",
+      "group": "good_feeling",
+      "situation": "empathy_surprise"
+    }
+  ]
+}

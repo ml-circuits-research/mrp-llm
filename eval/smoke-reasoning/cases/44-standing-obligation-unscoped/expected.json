@@ -1,0 +1,39 @@
+{
+  "feature": "A standing obligation applies to every binding of its when, whatever the goal: the instance for i2 exists although the goal concerns i1, and the packet says so",
+  "status": "plan_found",
+  "complete": true,
+  "plan": {
+    "cost": 6,
+    "steps": 4
+  },
+  "obligations_triggered": [
+    "log_all i1",
+    "log_all i2"
+  ],
+  "obligation_unscoped": [
+    "log_all"
+  ],
+  "notes_include": [
+    "obligation_unscoped"
+  ],
+  "compliance": {
+    "hard": "ok",
+    "soft_violations": [],
+    "total_cost": 6
+  },
+  "used": [
+    {
+      "id": "log_all",
+      "version": 1
+    }
+  ],
+  "warnings": [
+    "obligation_unscoped"
+  ],
+  "requires": [
+    "plan",
+    "norms_soft",
+    "temporal_norms",
+    "used"
+  ]
+}

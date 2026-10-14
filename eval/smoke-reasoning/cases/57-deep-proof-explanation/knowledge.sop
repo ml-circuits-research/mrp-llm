@@ -1,0 +1,31 @@
+@parent predicate
+  args subject:entity object:entity
+@ancestor predicate
+  args subject:entity object:entity
+
+@f_01 fact
+  holds parent p0 p1
+@f_12 fact
+  holds parent p1 p2
+@f_23 fact
+  holds parent p2 p3
+@f_34 fact
+  holds parent p3 p4
+@f_45 fact
+  holds parent p4 p5
+@f_56 fact
+  holds parent p5 p6
+@f_67 fact
+  holds parent p6 p7
+@f_78 fact
+  holds parent p7 p8
+@f_short fact
+  holds parent p0 p3
+
+@r_base rule
+  when parent ?x ?y
+  then ancestor ?x ?y
+@r_step rule
+  when parent ?x ?m
+  when ancestor ?m ?y
+  then ancestor ?x ?y

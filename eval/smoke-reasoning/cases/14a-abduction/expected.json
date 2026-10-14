@@ -1,0 +1,17 @@
+{
+  "feature": "Abduction: minimal explanations of an observation",
+  "status": "hypotheses",
+  "complete": true,
+  "hypotheses": [
+    [
+      "rained grass"
+    ],
+    [
+      "sprinkler_on grass"
+    ]
+  ],
+  "requires": [
+    "rules",
+    "abduce"
+  ]
+}

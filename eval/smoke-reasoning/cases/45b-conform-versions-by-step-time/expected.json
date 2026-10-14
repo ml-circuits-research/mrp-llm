@@ -1,0 +1,40 @@
+{
+  "feature": "Each step is judged against the version in force at its own time: the March deployment meets the soft v1 of the freeze, the July one the hard v2",
+  "status": "non_compliant",
+  "complete": true,
+  "compliance": {
+    "hard": "violated",
+    "violated": [
+      "freeze_v2"
+    ],
+    "soft_violations": [
+      {
+        "id": "freeze_v1",
+        "cost": 5
+      }
+    ],
+    "total_cost": 9
+  },
+  "used": [
+    {
+      "id": "freeze_v1",
+      "version": 1
+    },
+    {
+      "id": "freeze_v2",
+      "version": 2
+    },
+    {
+      "id": "deploy",
+      "version": 1
+    }
+  ],
+  "requires": [
+    "check_plan",
+    "norms_hard",
+    "norms_soft",
+    "conform_asof",
+    "versions",
+    "used"
+  ]
+}

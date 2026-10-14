@@ -1,0 +1,15 @@
+{
+  "feature": "Quantifiers: every with a grouping select (which teams have only certified players?)",
+  "status": "supported",
+  "complete": true,
+  "rows": [
+    {
+      "t": "rapid"
+    }
+  ],
+  "requires": [
+    "facts",
+    "every",
+    "every_grouped"
+  ]
+}

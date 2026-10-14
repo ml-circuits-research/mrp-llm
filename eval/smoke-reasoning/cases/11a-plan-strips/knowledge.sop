@@ -1,0 +1,19 @@
+@at predicate
+  args subject:entity location:entity
+@road predicate
+  args source:entity destination:entity
+
+@s1 fact
+  holds at robot a
+@s2 fact
+  holds road a b
+@s3 fact
+  holds road b c
+
+@move action
+  params ?r ?f ?t
+  requires at ?r ?f
+  requires road ?f ?t
+  adds at ?r ?t
+  removes at ?r ?f
+  cost 1

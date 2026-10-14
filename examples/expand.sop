@@ -1,0 +1,6 @@
+@person value
+  data "carina"
+
+@answer expand
+  using ~find_ancestors
+  with person $person

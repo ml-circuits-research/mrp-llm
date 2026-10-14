@@ -1,0 +1,11 @@
+@member predicate
+  args subject:entity object:entity
+@works predicate
+  args subject:entity object:entity
+
+@m1 fact
+  holds member ann delta
+@m2 fact
+  holds member bob delta
+@w1 fact
+  holds works ann alpha

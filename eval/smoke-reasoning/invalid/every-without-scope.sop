@@ -1,0 +1,4 @@
+# expect: missing_field
+@q query
+  mode every
+  where member ?m delta

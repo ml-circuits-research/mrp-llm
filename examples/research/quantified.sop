@@ -1,0 +1,12 @@
+# Usage example 6 — counted question.
+# Authored here, no external rows copied. Domain: agriculture and food.
+#
+# Message: "How many plots are irrigated?"
+@question query
+  mode count
+  select ?plot
+  where match
+    relation "irrigated"
+    role subject ?plot
+    polarity affirmed
+  end

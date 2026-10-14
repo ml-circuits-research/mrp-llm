@@ -1,0 +1,12 @@
+# expect: strict_forbid_conflicts_method
+@a action
+  requires p
+  adds done
+@m method
+  achieves done
+  binding strict
+  step ~a
+@n norm
+  forbid ~a
+  severity hard
+  binding strict

@@ -1,0 +1,5 @@
+# expect: unsafe_action
+@a action
+  params ?r ?x
+  requires at ?r
+  adds at ?r

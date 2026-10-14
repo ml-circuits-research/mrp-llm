@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head><body>
+<div data-include="../partials/header.html" data-link-base="../"></div>
+<main class="wire-help"><p><a href="../wire_types.html#action" target="_top">All wire types</a></p><h1><code>action</code></h1><p>An action describes a symbolic state transition for planning; it does not operate a physical device. Only trusted or reviewed ingestion can author actions in the current runtime, although a trusted system/tool circuit can use an approved action handle.</p><p><a href="../wiki.html#definition-sop">SOP</a> syntax: <code>@id type</code>, exactly two leading spaces on each field line, <code>$id</code> for a computed value, <code>~id</code> for a declaration handle, and <code>?x</code> for a local logic variable or an output name. Atoms use <code>[not ]predicate term1 [term2 [term3 [term4]]]</code> with one to four whitespace-separated terms; lowercase predicate names, canonical symbols, JSON-quoted strings or safe integers. Parenthesized <code>predicate(arg, …)</code> and comma-separated arguments are not executable syntax.</p><section><h2>Fields and inputs</h2><table><thead><tr><th scope="col">Keyword</th><th scope="col">Cardinality</th><th scope="col">Accepted value, default and effect</th></tr></thead><tbody><tr><th scope="row" id="field-params"><code>params</code></th><td>At most once; optional</td><td>Whitespace-separated distinct <code>?variable</code> names; default empty. Each must occur in a <code>requires</code> atom.</td></tr><tr><th scope="row" id="field-requires"><code>requires</code></th><td>Repeatable; required</td><td>One to any repeated predicate atoms describing preconditions. Their variables bind parameters and effects; an action needs at least one precondition.</td></tr><tr><th scope="row" id="field-adds"><code>adds</code></th><td>Repeatable; optional</td><td>Repeatable effect atoms inserted into a hypothetical plan state. At least one <code>adds</code> or <code>removes</code> is required.</td></tr><tr><th scope="row" id="field-removes"><code>removes</code></th><td>Repeatable; optional</td><td>Repeatable effect atoms removed from a hypothetical plan state; insertion also removes explicit opposing polarity.</td></tr><tr><th scope="row" id="field-cost"><code>cost</code></th><td>At most once; optional</td><td>Finite nonnegative number, default 1; used in lowest-cost state search.</td></tr><tr><th scope="row" id="field-source"><code>source</code></th><td>At most once; optional</td><td>Plain/quoted provenance text, default <code>provided</code>.</td></tr><tr><th scope="row" id="field-valid"><code>valid</code></th><td>At most once; optional</td><td><code>timeless</code> (default) or <code>start exclusive-end</code> using ISO date/UTC timestamp, <code>beginning</code>/<code>open</code>; applies to whether the action can be used at planning time.</td></tr></tbody></table><p>Pass <code>~action</code> or <code>$action</code> (or a packed $array) to <code>plan actions</code>, or include actions in <code>plan data</code> if <code>actions</code> is omitted. Supplying a nonempty explicit actions set overrides action declarations from data.</p></section><section><h2>Result and limits</h2><p>The declaration produces a typed action with preconditions, effects, parameters, cost and validity. <code>plan</code> grounds variables against a candidate state and returns steps labelled planned-not-executed; no actuation or repository write happens.</p><p>Variables in <code>params</code>, <code>adds</code> and <code>removes</code> must occur in preconditions. The planning state is finite and search bounded by host or tighter policy; a missing plan under incomplete search is not proof of impossibility.</p></section><section><h2>Executable examples</h2><h3>Move between connected places</h3><pre data-sop="current"><code>@move action
+  params ?robot ?from ?to
+  requires located_in ?robot ?from
+  requires connected ?from ?to
+  removes located_in ?robot ?from
+  adds located_in ?robot ?to
+  cost 1</code></pre><p>Planning can instantiate all three parameters from the two preconditions; the resulting step changes only a hypothetical state.</p><h3>Release a reservation</h3><pre data-sop="current"><code>@release action
+  params ?item
+  requires reserved ?item
+  removes reserved ?item
+  adds available ?item
+  valid 2026-01-01 open</code></pre><p>The transition can be considered on or after the start date and never performs an external release.</p><h3>Invalid or unsafe use</h3><pre data-sop="invalid" data-check="runtime" data-error="Action effects must be range-restricted"><code>@unsafe action
+  requires ready machine
+  adds ready ?other</code></pre><p>The parser accepts both atoms, but lowering rejects <code>?other</code> because effects must be range-restricted by preconditions.</p></section><section><h2>Implementation references</h2><p><code>sop/parser.mjs</code> (<code>SPEC.action</code>, <code>validateShape</code>), <code>reasoning/lower.mjs</code> (<code>lowerDeclaration</code>), <code>reasoning/worlds.mjs</code> (<code>plan</code>).</p><p>Related wires: <a href="goal.html"><code>goal</code></a> · <a href="plan.html"><code>plan</code></a>.</p></section><section id="knowledge-language"><h2>Knowledge language: <code>action</code></h2><p class="note">In the knowledge language an <code>action</code> is a primitive STRIPS step with preconditions and effects, governed like a method. The tables and examples of this section are about the <b>knowledge</b> form, written from a source and checked by <code>sop/knowledge/</code>; the sections above describe the host-circuit form. Anchors of this section's fields start with <code>kfield-</code>. The language manual is the section "Knowledge wires" of <a href="../specsLoader.html?spec=DS004-sop.md" target="_top">DS004</a>.</p><p>Other field names are rejected (<code>unknown_field</code>). The table is generated from <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table data-knowledge="fields"><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="kfield-params"><code>params</code></th><td>At most once; optional</td><td>The <code>?variables</code> of the action; every parameter must occur in a <code>requires</code> (<code>unsafe_action</code>).</td></tr>
+<tr><th scope="row" id="kfield-requires"><code>requires</code></th><td>Repeatable; required</td><td>Preconditions: atoms, possibly negative. Without evidence a precondition is unsatisfied (unknown is not true); over a closed predicate <code>requires not p</code> means <code>p</code> is absent.</td></tr>
+<tr><th scope="row" id="kfield-adds"><code>adds</code></th><td>Repeatable; optional</td><td>Atoms made true; their variables must be parameters.</td></tr>
+<tr><th scope="row" id="kfield-removes"><code>removes</code></th><td>Repeatable; optional</td><td>Atoms made false. An action needs <code>adds</code>, <code>removes</code>, <code>next</code> or <code>guard</code> (<code>action_needs_effect</code>).</td></tr>
+<tr><th scope="row" id="kfield-next"><code>next</code></th><td>Repeatable; optional</td><td>Numeric effect (extension E2): <code>next VAR EXPR</code>, one line per state variable, identity written explicitly (<code>next a ?a</code>). EXPR is a polynomial in the state variables <code>?v</code> with exact rational constants (<code>+ - * ^</code>, parentheses, division by a nonzero constant); it is parsed as data, never run as code. Problems: <code>bad_next</code>, <code>duplicate_next</code>, <code>missing_next</code>, <code>unknown_state_variable</code>.</td></tr>
+<tr><th scope="row" id="kfield-guard"><code>guard</code></th><td>Repeatable; optional</td><td>Numeric precondition (extension E2): <code>guard EXPR WORD EXPR</code> with WORD in <code>above below at_least at_most equal</code>; every guard must hold for the action to apply (<code>bad_guard</code>).</td></tr>
+<tr><th scope="row" id="kfield-cost"><code>cost</code></th><td>At most once; optional</td><td>A non-negative integer step cost (default 1).</td></tr>
+<tr><th scope="row" id="kfield-source"><code>source</code></th><td>At most once; optional</td><td>Quoted citation of the manual section.</td></tr>
+<tr><th scope="row" id="kfield-version"><code>version</code></th><td>At most once; optional</td><td>A positive integer. A revision is a new wire with <code>version N+1</code> and <code>supersedes $old</code>; the old wire is never edited.</td></tr>
+<tr><th scope="row" id="kfield-supersedes"><code>supersedes</code></th><td>At most once; optional</td><td>A <code>$id</code> of a wire of the same type with a lower version (<code>supersedes_type_mismatch</code>, <code>version_not_increasing</code>). An approved successor makes its predecessor <code>approval superseded</code>.</td></tr>
+<tr><th scope="row" id="kfield-approval"><code>approval</code></th><td>At most once; optional</td><td><code>proposed</code>, <code>approved</code>, <code>contested</code>, <code>rejected</code>, <code>superseded</code> or <code>retired</code>. Written by the host when it accepts the wire; an author never writes it (authoring mode ignores it with <code>governance_ignored</code>). Only approved wires bind, and so do contested ones, flagged.</td></tr>
+<tr><th scope="row" id="kfield-approved_by"><code>approved_by</code></th><td>At most once; optional</td><td>Text. Written by the host at approval; required with <code>approval approved</code> in memory (<code>approval_incomplete</code>).</td></tr>
+<tr><th scope="row" id="kfield-approved_at"><code>approved_at</code></th><td>At most once; optional</td><td>ISO date or timestamp. Written by the host; <code>asof</code> selects the version in force from this date. Required for every norm and every strict method.</td></tr>
+<tr><th scope="row" id="kfield-retired_at"><code>retired_at</code></th><td>At most once; optional</td><td>ISO date or timestamp after which the wire no longer binds.</td></tr>
+<tr><th scope="row" id="kfield-scope"><code>scope</code></th><td>At most once; optional</td><td>A quoted list of tags (<code>scope "ops, business_hours"</code>). A scoped wire binds when its tags intersect the query context; an unscoped wire always binds.</td></tr>
+<tr><th scope="row" id="kfield-quote"><code>quote</code></th><td>At most once; optional</td><td>The exact words of the source, copied byte for byte.</td></tr></tbody></table></div><h3>What it is for</h3><p>An action is one step a manual names, with what it needs and what it changes. Methods and norms refer to it as <code>~lock_db ?s</code> (the term count must match <code>params</code>). A planner reaches a <a href="goal.html"><code>goal</code></a> by actions alone, or by a <a href="method.html"><code>method</code></a>'s steps; an action that took part in a plan is listed in <code>used</code> with its version.</p><h3>Examples</h3><pre data-sop="knowledge"><code>@server predicate
+  args subject:entity
+@locked predicate
+  args subject:entity
+
+@lock_db action
+  params ?s
+  requires server ?s
+  adds locked ?s
+  cost 1</code></pre><h3>Invalid: an action with no effect</h3><pre data-sop="knowledge-invalid" data-error="action_needs_effect"><code>@server predicate
+  args subject:entity
+@noop action
+  params ?s
+  requires server ?s</code></pre><h3>Numeric action (extension E2)</h3><p>A numeric action carries exact-rational arithmetic as in the VRC planner. The numeric state lives in ground facts of the reserved relation <code>state</code> (entity, variable, value), declared with the argument type <code>rational</code> (an integer, a decimal or <code>n/d</code>). The relational part is optional in spirit: <code>requires</code> may be a zero-arity flag, and the effect may be numeric only. Only a strategy that declares the feature <code>numeric_action</code> answers such a question; every other strategy of the smoke harness answers <code>not_expressible</code>; the query below is executed by <code>vrc-compressed-planning</code>.</p><pre data-sop="knowledge"><code>@ready predicate
+  args none
+@state predicate
+  args subject:entity topic:entity object:rational
+@m0 fact
+  holds ready
+@sq fact
+  holds state demo q 0
+@sa fact
+  holds state demo a 2
+@scale action
+  requires ready
+  guard ?a at_least 1
+  next q ?q + ?a * ?a
+  next a 3/2 * ?a</code></pre><p>One step adds the square of <code>a</code> to <code>q</code> and multiplies <code>a</code> by one and a half; the guard keeps <code>a</code> at one or more.</p><pre data-sop="knowledge-query" data-run="vrc" data-status="plan_found"><code>@q query
+  mode plan
+  observe demo ?q at_least 20
+  horizon 6</code></pre><p>The plan query needs no <code>where</code>: <code>observe</code> names the entity, the expression and the threshold. See <a href="query.html#kfield-observe"><code>observe</code></a> and <a href="query.html#kfield-horizon"><code>horizon</code></a>.</p><h3>Invalid: a guard without a comparison word</h3><pre data-sop="knowledge-invalid" data-error="bad_guard"><code>@ready predicate
+  args none
+@bad action
+  requires ready
+  guard ?a plus 1
+  next a ?a</code></pre><h3>Common mistakes</h3><ol><li>A parameter that no <code>requires</code> mentions.</li><li>An effect variable that is not a parameter.</li><li>Writing the approval fields: the host writes them.</li></ol></section><!--/knowledge-language--></main>
+<script type="module" src="help-page.mjs"></script></body></html>

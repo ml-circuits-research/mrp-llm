@@ -1,0 +1,14 @@
+{
+  "feature": "Dense nonlinear recursion with an unbound query, where demand rewriting only adds work",
+  "status": "supported",
+  "complete": true,
+  "count": 36,
+  "requires": [
+    "rules",
+    "recursion",
+    "naf",
+    "closed_world",
+    "closed_derived",
+    "count"
+  ]
+}
