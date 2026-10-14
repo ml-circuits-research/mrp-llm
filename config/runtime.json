@@ -154,6 +154,7 @@
   },
   "mrp": {
     "_note": "MRP-LLM models (DS025): the model answering requests that name none. Models live under <chatData.root>/models; profiles in config/profiles.",
-    "defaultModel": "acme-demo"
+    "defaultModel": "acme-demo",
+    "strategyService": {"_note": "The MRP strategy service (DS028): python3 services/strategy-service/server.py; MRP_STRATEGY_SERVICE_URL overrides.", "url": "http://127.0.0.1:18090"}
   }
 }

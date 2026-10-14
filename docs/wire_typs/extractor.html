@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#extractor" target="_top">← Wire type index</a></p><h1><code>extractor</code></h1><p>An extraction recipe of a <a href="schema.html">schema</a> (<a href="../specsLoader.html?spec=DS028-schemas-discovery-and-benchmark.md" target="_top">DS028</a>): the formalize strategy that extracts its instances, the triggers that select it, the Ploinky task of its prompt and the wire types it is expected to write.</p><p><strong>Status and author:</strong> Knowledge wire of a base memory, written by a person or proposed by a discover strategy. The routed formalizers <code>SpladeRouted</code> and <code>SaeRouted</code> select extractors by their triggers (external strategies); <code>SchemaGuidedLLM</code> reads the schema itself.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="field-schema"><code>schema</code></th><td>Exactly once; required</td><td><code>~id</code> of a schema wire (<code>schema_member_type</code> when the wire is not a schema).</td></tr><tr><th scope="row" id="field-strategy"><code>strategy</code></th><td>Exactly once; required</td><td>One of <code>SchemaGuidedLLM SpladeRouted SaeRouted DependencyScaffold</code>.</td></tr><tr><th scope="row" id="field-trigger"><code>trigger</code></th><td>Repeatable; optional</td><td>Text: a term, an SAE feature or a pattern that selects this extractor.</td></tr><tr><th scope="row" id="field-task"><code>task</code></th><td>At most once; optional</td><td>Text: the name of the Ploinky task (<code>config/tasks/NAME.md</code>) of its prompt.</td></tr><tr><th scope="row" id="field-output"><code>output</code></th><td>Repeatable; optional</td><td>A lowercase symbol: a wire type the extraction is expected to write (<code>query</code>, <code>stated</code>, ...).</td></tr><tr><th scope="row" id="field-source"><code>source</code></th><td>At most once; optional</td><td>Text: where the recipe comes from.</td></tr></tbody></table></div></section><section><h2>Examples</h2><pre data-sop="knowledge"><code>@works_at predicate
+  args subject:entity object:entity
+  label en "works at"
+
+@s_company schema
+  name "company"
+  predicate ~works_at
+
+@ex_company extractor
+  schema ~s_company
+  strategy SchemaGuidedLLM
+  trigger "work"
+  task "mrp-formalize-one-shot"
+  output query
+</code></pre><h3>Invalid: a strategy that does not extract</h3><pre data-sop="knowledge-invalid" data-error="bad_enum"><code>@works_at predicate
+  args subject:entity object:entity
+  label en "works at"
+
+@s_company schema
+  name "company"
+  predicate ~works_at
+
+@ex_bad extractor
+  schema ~s_company
+  strategy Guess
+</code></pre></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.extractor</code></li><li><code>sop/knowledge/lexicon-checks.mjs</code></li></ul><p>Related: <a href="schema.html"><code>schema</code></a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

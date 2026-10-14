@@ -1,0 +1,40 @@
+{"id": "a01", "form": "list", "question": "Who works at Acme?", "gold": ["ana", "bogdan", "dan"]}
+{"id": "a02", "form": "list", "question": "Who works at Globex?", "gold": ["carina", "elena"]}
+{"id": "a03", "form": "list", "question": "Where does Ana work?", "gold": ["acme"]}
+{"id": "a04", "form": "list", "question": "Where is Globex located?", "gold": ["bucharest"]}
+{"id": "a05", "form": "list", "question": "In which city is Acme?", "gold": ["cluj"]}
+{"id": "a06", "form": "yes_no", "question": "Does Dan work at Acme?", "gold": true}
+{"id": "a07", "form": "yes_no", "question": "Does Elena work at Acme?", "gold": false}
+{"id": "a08", "form": "list", "question": "Who is on project Apollo?", "gold": ["ana", "dan"]}
+{"id": "a09", "form": "list", "question": "Which people are members of project Hermes?", "gold": ["bogdan", "elena"]}
+{"id": "a10", "form": "list", "question": "Which project is Bogdan on?", "gold": ["hermes"]}
+{"id": "a11", "form": "yes_no", "question": "Is Elena a member of project Hermes?", "gold": true}
+{"id": "a12", "form": "list", "question": "Who is the parent of Carina?", "gold": ["bogdan"]}
+{"id": "a13", "form": "list", "question": "Who are the children of Ana?", "gold": ["bogdan"]}
+{"id": "a14", "form": "list", "question": "Who is Carina's grandparent?", "gold": ["ana"]}
+{"id": "a15", "form": "yes_no", "question": "Is Ana a grandparent of Carina?", "gold": true}
+{"id": "a16", "form": "list", "question": "Who is Elena's parent?", "gold": ["dan"]}
+{"id": "a17", "form": "count", "question": "How many people work at Acme?", "gold": 3}
+{"id": "a18", "form": "count", "question": "How many people work at Globex?", "gold": 2}
+{"id": "a19", "form": "count", "question": "How many members does project Apollo have?", "gold": 2}
+{"id": "a20", "form": "list", "question": "Which company does Dan work for?", "gold": ["acme"]}
+{"id": "a21", "form": "join", "question": "In which city is the company where Carina works?", "gold": ["bucharest"]}
+{"id": "a22", "form": "join", "question": "Which people work at a company located in Cluj?", "gold": ["ana", "bogdan", "dan"]}
+{"id": "a23", "form": "join", "question": "Who works at Acme and is on project Apollo?", "gold": ["ana", "dan"]}
+{"id": "a24", "form": "join", "question": "Which projects have a member who works at Acme?", "gold": ["apollo", "hermes"]}
+{"id": "a25", "form": "yes_no", "question": "Is Bogdan the parent of Carina?", "gold": true}
+{"id": "a26", "form": "yes_no", "question": "Is Carina the parent of Bogdan?", "gold": false}
+{"id": "a27", "form": "yes_no", "question": "Does Carina work at Globex?", "gold": true}
+{"id": "a28", "form": "join", "question": "Where is the company that employs Dan located?", "gold": ["cluj"]}
+{"id": "a29", "form": "join", "question": "Name the people on project Hermes who work at Globex.", "gold": ["elena"]}
+{"id": "a30", "form": "yes_no", "question": "Is Ana on project Hermes?", "gold": false}
+{"id": "a31", "form": "unknown", "question": "Who manages Acme?", "gold": "unknown"}
+{"id": "a32", "form": "unknown", "question": "Where does Ana live?", "gold": "unknown"}
+{"id": "a33", "form": "unknown", "question": "What is Bogdan's occupation?", "gold": "unknown"}
+{"id": "a34", "form": "unknown", "question": "What is the capital of France?", "gold": "unknown"}
+{"id": "a35", "form": "unknown", "question": "Who works at Initech?", "gold": "unknown"}
+{"id": "a36", "form": "unknown", "question": "Write me a poem about Acme.", "gold": "unknown"}
+{"id": "a37", "form": "list", "question": "which ppl r on apollo", "gold": ["ana", "dan"]}
+{"id": "a38", "form": "yes_no", "question": "is acme in cluj?", "gold": true}
+{"id": "a39", "form": "count", "question": "how many folks does globex employ", "gold": 2}
+{"id": "a40", "form": "list", "question": "Who has Ana as a grandparent?", "gold": ["carina"]}

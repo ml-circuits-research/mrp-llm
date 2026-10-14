@@ -38,6 +38,8 @@ import {chatTurn} from '../lib/adapter/chat-turn.mjs';
 import {Models,checkSlots} from '../lib/mrp/models.mjs';
 import {createMrpPipeline} from '../lib/mrp/pipeline.mjs';
 import {createMrpRoutes,MRP_ENDPOINTS,writeToBase} from './mrp-routes.mjs';
+import {configureStrategyService} from '../lib/mrp/strategy-service.mjs';
+import {retrieveCandidates} from '../lib/mrp/retrieve.mjs';
 import {modelsPage} from './pages/models.mjs';
 
 /** `GET /v1/status` (server/status.mjs): the formalization strategies, base memories, engines and caches of this server. */
@@ -182,8 +184,9 @@ export function createServer({config,repo,lexicon,authTokens,auth=null,base='dem
  mrpModels=config.mrp&&memories&&(chatData.modelsDir??chatData.root??chatData.baseMemoriesDir)?new Models({root:chatData.modelsDir??path.join(chatData.root??path.dirname(chatData.baseMemoriesDir),'models'),memories}):null;
  if(mrpModels){try{const made=mrpModels.ensureDefaults();if(made.length)console.log('models created from profiles: '+made.join(', '));}catch(e){console.error('creating the default models failed: '+e.message);}}
  const defaultModel=mrpModels?(mrpModels.exists(config.mrp?.defaultModel)?config.mrp.defaultModel:mrpModels.ids()[0]??null):null;
+ configureStrategyService(config.mrp?.strategyService?.url??null);
  const mrp=mrpModels?createMrpPipeline({models:mrpModels,extraBody:config.mrp?.extraBody??null,...(config.mrp?.client?{client:config.mrp.client}:{})}):null;
- const mrpRoutes=mrpModels?createMrpRoutes({models:mrpModels,memories,readBody,json}):null;
+ const mrpRoutes=mrpModels?createMrpRoutes({models:mrpModels,memories,readBody,json,...(config.mrp?.client?{client:config.mrp.client}:{})}):null;
  const sessionStore=chatData?new Sessions({chatData,memories,memory:config.memory}):null;
  const runtimes=chatData?new SessionRuntimes({sessions:sessionStore,memories,config:{...config,contextMaxBytes:Math.min(config.contextMaxBytes??maxContextBytes,maxContextBytes)},defaultBase}):null;
  const authoring=chatData?createAuthoring({sessions:sessionStore,runtimes,chatData,formalizer:queryParser.settings??null,settings:{model:config.ingest?.tier??'small'},chat:authorChat,readBody,json,maxBytes:limits.maxProductBytes??8_000_000}):null;
@@ -267,7 +270,7 @@ export function createServer({config,repo,lexicon,authTokens,auth=null,base='dem
     // conversation layer with the verification status.
     // MRP slots before the core (lib/mrp/pipeline.mjs): normalize to English, reflex, affect. A reflex answer ends the turn here.
     const history=rt&&sessionStore?sessionStore.transcript(sessionId,{limit:40}).map(e=>({role:e.role,text:e.role==='user'?(e.english??e.text):e.text})):[];
-    const pre=modelId?await mrp.before({modelId,text,history,session:{slots:rt?.info?.settings?.slots??null,language:rt?.info?.settings?.language??null},request:requestLayer}):null;
+    const pre=modelId?await mrp.before({modelId,text,history,memoryReflexes:(rt?.lexicon??lexicon)?.reflexes??[],session:{slots:rt?.info?.settings?.slots??null,language:rt?.info?.settings?.language??null},request:requestLayer}):null;
     const circuitsBefore=rt&&sessionStore?sessionStore.circuits(sessionId).map(c=>c.name):[];
     if(pre?.reflex){
      const said=await mrp.reflexReply({pre});
@@ -283,9 +286,16 @@ export function createServer({config,repo,lexicon,authTokens,auth=null,base='dem
     const sessionWins=!pre||pre.effective.model.allowOverrides;
     const mode=asked??(sessionWins?rt?.info?.settings?.adapter_mode:null)??modelMode??rt?.info?.settings?.adapter_mode??adapter.settings.mode;
     // The turn itself (circuit author, adapter, result assembly) is lib/adapter/chat-turn.mjs, shared with every evaluation harness.
-    const stepStrategy=['LocalLLMStepByStep','InternalReasoningStepByStep'].includes(formalizeSlot?.strategy)?formalizeSlot.strategy:null;
-    const turned=await chatTurn({adapter,agent:entry.agent,queryParser,lexicon:lex,message,mode,options,source:'chat',preferredModel:(sessionWins?rt?.info?.settings?.formalizer_model??rt?.info?.settings?.omp_model:null)??formalizeSlot?.params?.tier??null,strategy:(sessionWins?rt?.info?.settings?.formalizer:null)??stepStrategy??null}).catch(e=>{parseRecord=e.parse??null;throw e;});
-    parseRecord=turned.parse;
+    const stepStrategy=['LocalLLMStepByStep','InternalReasoningStepByStep','DirectSOP','SchemaGuidedLLM','SchemaOrDirect','Ensemble','EnsembleOneShot','DependencyScaffold','SpladeRouted','SaeRouted','FrameGuided'].includes(formalizeSlot?.strategy)?formalizeSlot.strategy:null;
+    // The reason and verify slots of the Model (DS025): a named engine and the verification policy reach the turn's runtime policy.
+    // The retrieve slot (lib/mrp/retrieve.mjs): candidate predicates for the one-shot formalizers, computed on the English text.
+    let retrieval=null;
+    if(pre&&pre.effective.slots.retrieve.strategy!=='slice'){const rv=pre.effective.slots.retrieve,mid=pre.effective.model.base,t0=performance.now();
+     retrieval=await retrieveCandidates({strategy:rv.strategy,params:rv.params,memory:mid,english:pre.english,lexicon:memories.lexicon(mid),circuits:memories.layeredCircuits(mid)});
+     pre.trace.push({slot:'retrieve',strategy:rv.strategy,ms:Math.round(performance.now()-t0),candidates:(retrieval?.predicates??[]).map(p=>p.id)});}
+    if(pre){const r=pre.effective.slots.reason,v=pre.effective.slots.verify;entry.agent.turnPolicy={...(retrieval?{retrieval}:{}),...(r.strategy==='engine'?{reasoningStrategy:r.params.engine}:{}),...(v.strategy==='oracle-always'?{verify:'always'}:v.strategy==='off'?{verify:'never'}:v.strategy==='cross-engine'?{crossEngine:v.params.engine}:{})};}
+    const turned=await chatTurn({adapter,agent:entry.agent,queryParser,lexicon:lex,message,mode,options,source:'chat',preferredModel:(sessionWins?rt?.info?.settings?.formalizer_model??rt?.info?.settings?.omp_model:null)??formalizeSlot?.params?.tier??null,strategy:(sessionWins?rt?.info?.settings?.formalizer:null)??stepStrategy??null}).catch(e=>{parseRecord=e.parse??null;entry.agent.turnPolicy=null;throw e;});
+    parseRecord=turned.parse;entry.agent.turnPolicy=null;
     const {result,author,answered}=turned;
     // The deterministic English answer stays in the trace; a faithful phrasing in the message's language replaces the shown text.
     let mrpInfo=null;
@@ -313,7 +323,7 @@ export function createServer({config,repo,lexicon,authTokens,auth=null,base='dem
    // The circuit was written but not admitted or could not be executed: 422 with what the author wrote, so the chat can show it.
    if(e.modelSop!==undefined)return json(res,422,{error:{message:'The circuit was not admitted or could not be executed',type:'invalid_request_error',code:'model_output_rejected'},chatSop:{status:'rejected',parse:e.parse??parseRecord,rejection:String(e.message).slice(0,500),model_sop:e.modelSop,formalizer_model:e.formalization?.model??null,formalization_ms:e.formalization?.ms??null}});
    const status=e.status??(e.name==='TimeoutError'||e.message==='Request time limit reached'?504:400);error(res,status,(e.status&&e.code)||(status===413?'request_limit':status===504?'time_limit':status===400?'invalid_request':'internal_error'),status===400&&!e.status?'Invalid SOP or request; no detail exposed':status===504?'Request time limit reached':e.status?e.message:'Server request failed');}
- });server.auth=auth;server.capabilities=capabilities;server.sessions=sessionStore;server.memories=memories;server.authoring=authoring;server.feedback=feedback;server.knowledge=knowledge;server.queryParser=queryParser;server.defaultBase=defaultBase;server.models=mrpModels;server.defaultModel=defaultModel;
+ });server.config=config;server.auth=auth;server.capabilities=capabilities;server.sessions=sessionStore;server.memories=memories;server.authoring=authoring;server.feedback=feedback;server.knowledge=knowledge;server.queryParser=queryParser;server.defaultBase=defaultBase;server.models=mrpModels;server.defaultModel=defaultModel;
  server.on('close',()=>capabilities.close());
  // A managed local model server (a step-by-step strategy with an explicit GGUF) stops with the chat server.
  server.on('close',()=>{queryParser.stop?.().catch(()=>{});});

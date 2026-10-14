@@ -89,7 +89,7 @@ async function select(id){
 }
 function strategyOptions(slot,current){
  const sel=el('select',{'aria-label':'strategy of '+slot.title});
- for(const s of slot.strategies){const o=el('option',{value:s.id,text:s.title+(s.default?' (default)':'')+(s.available===false?' \\u2014 unavailable':'')});if(s.available===false&&s.runs==='external')o.disabled=true;o.title=(s.summary||'')+(s.reason?'\\n'+s.reason:'');sel.append(o);}
+ for(const s of slot.strategies){const o=el('option',{value:s.id,text:s.title+(s.default?' (default)':'')+(s.status==='not-implemented'?' \\u2014 not implemented yet':s.available===false?' \\u2014 unavailable':'')});if(s.status==='not-implemented'||(s.available===false&&s.runs==='external'))o.disabled=true;o.title=(s.summary||'')+(s.reason?'\\n'+s.reason:'');sel.append(o);}
  sel.value=current;return sel;
 }
 function paramInputs(slot,cfg){
@@ -138,13 +138,26 @@ function renderEditor(state){
  box.append(el('section',{class:'card faq'},el('h2',{text:'FAQ (reflex slot)'}),el('p',{class:'muted',text:'Questions are matched in English after normalization, so one English entry serves every language. Variants are other ways to ask the same thing.'}),
   el('table',{},el('thead',{},el('tr',{},el('th',{text:'Question'}),el('th',{text:'Variants'}),el('th',{text:'Answer'}),el('th',{}))),faqBody),
   el('button',{type:'button',text:'Add a question',onclick:()=>{(m.faq=m.faq||[]).push({q:'',a:''});drawFaq();}})));
+ // pattern reflexes
+ const refBody=el('tbody');
+ const drawRef=()=>{refBody.textContent='';(m.reflexes||[]).forEach((r,i)=>{
+  const p=el('input',{type:'text',placeholder:'^who are you',oninput:e=>r.pattern=e.target.value||undefined});p.value=r.pattern||'';
+  const af=el('select',{onchange:e=>{r.affect=e.target.value||undefined;}},el('option',{value:'',text:'any'}),...['frustrated','urgent','confused','grateful','angry','happy','sad'].map(v=>el('option',{value:v,text:v})));af.value=r.affect||'';
+  const mode=el('select',{onchange:e=>{r.mode=e.target.value;}},...['stop','continue','pragmatic'].map(v=>el('option',{value:v,text:v})));mode.value=r.mode||'stop';
+  const text=el('textarea',{placeholder:'reply (stop, continue) or tone line (pragmatic)',oninput:e=>{if((r.mode||'stop')==='pragmatic')r.tone=e.target.value;else r.reply=e.target.value;}});text.value=(r.mode==='pragmatic'?r.tone:r.reply)||'';
+  const pr=el('input',{type:'number',step:'1',style:'width:5em',oninput:e=>r.priority=Number(e.target.value)||0});pr.value=r.priority||0;
+  refBody.append(el('tr',{},el('td',{},p),el('td',{},af),el('td',{},mode),el('td',{},text),el('td',{},pr),el('td',{},el('button',{class:'small',type:'button',text:'Remove',onclick:()=>{m.reflexes.splice(i,1);drawRef();}}))));});};
+ drawRef();
+ box.append(el('section',{class:'card faq'},el('h2',{text:'Pattern reflexes (reflex slot)'}),el('p',{class:'muted',text:'Case-insensitive regular expressions over the English message and/or an affect label of the turn, tried by priority before the FAQ (every reflex strategy but off); reflex wires of the base memory count too. stop answers and ends the turn, continue puts the reply before the computed answer, pragmatic only gives the voice a tone line.'}),
+  el('table',{},el('thead',{},el('tr',{},el('th',{text:'Pattern'}),el('th',{text:'Affect'}),el('th',{text:'Mode'}),el('th',{text:'Reply or tone'}),el('th',{text:'Priority'}),el('th',{}))),refBody),
+  el('button',{type:'button',text:'Add a reflex',onclick:()=>{(m.reflexes=m.reflexes||[]).push({pattern:'',mode:'stop',reply:''});drawRef();}})));
  // learned state and review queue
  const r=state.reflex||{};
  const learned=el('p',{text:'Reflex answers: '+(r.hits||0)+' \\u00b7 votes up '+(r.up||0)+', down '+(r.down||0)+(typeof r.learnedThreshold==='number'?' \\u00b7 learned boundary '+r.learnedThreshold:'')});
  const queue=el('div');const items=(state.review||[]).filter(x=>x.status==='pending');
  if(!items.length)queue.append(el('p',{class:'muted',text:'No knowledge waiting for review.'}));
  for(const it of items){const pre=el('pre',{text:it.circuits.map(c=>c.text).join('\\n\\n')});
-  queue.append(el('div',{class:'card'},el('p',{text:'From session '+it.session+(it.message?': \\u201c'+it.message+'\\u201d':'')}),pre,el('div',{class:'bar'},
+  queue.append(el('div',{class:'card'},el('p',{text:(it.source?'From '+it.source:'From session '+it.session)+(it.message?': \\u201c'+it.message+'\\u201d':'')}),pre,el('div',{class:'bar'},
    el('button',{class:'primary',type:'button',text:'Approve: write to the base memory',onclick:async()=>{const x=await call('POST','/v1/mrp/models/'+m.id+'/review/'+it.id+'/approve');say('models-msg',x.ok?'Written to '+m.base+'.':errOf(x),x.ok);select(m.id);}}),
    el('button',{type:'button',text:'Reject',onclick:async()=>{const x=await call('POST','/v1/mrp/models/'+m.id+'/review/'+it.id+'/reject');say('models-msg',x.ok?'Rejected.':errOf(x),x.ok);select(m.id);}}))));}
  box.append(el('section',{class:'card'},el('h2',{text:'What the model learned'}),learned,el('h3',{text:'Review queue'}),queue));
@@ -153,7 +166,7 @@ function renderEditor(state){
 }
 async function save(){
  const m=S.draft;const mem=S.knowledge?S.knowledge.value():[m.base];if(!mem.length){say('models-msg','Choose at least one base memory.',false);return;}
- const body={name:m.name,description:m.description||'',memories:mem,language:m.language,allowOverrides:Boolean(m.allowOverrides),slots:m.slots,faq:(m.faq||[]).filter(f=>f.q&&f.a)};
+ const body={name:m.name,description:m.description||'',memories:mem,language:m.language,allowOverrides:Boolean(m.allowOverrides),slots:m.slots,faq:(m.faq||[]).filter(f=>f.q&&f.a),reflexes:(m.reflexes||[]).filter(r=>(r.pattern||r.affect)&&(r.mode==='pragmatic'?r.tone:r.reply)).map(r=>({...r,mode:r.mode||'stop'}))};
  const r=await call('PUT','/v1/mrp/models/'+encodeURIComponent(m.id),body);
  if(r.ok){const l=await call('GET','/v1/mrp/models');S.models=l.body.data;await select(m.id);}
  say('models-msg',r.ok?'Saved. New turns use these settings.':errOf(r),r.ok);

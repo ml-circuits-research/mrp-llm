@@ -33,6 +33,24 @@ export function lexiconChecks({files, allWires, ctxs, problems, linking = false}
     return args && args.length <= 2 ? ['subject', 'object'].slice(0, args.length) : null;
   };
 
+  // Value schemas (DS028): `predicate` lines name predicate wires, `lexeme` lines lexeme wires; an extractor names a schema.
+  const byId = new Map(allWires.map(w => [w.id, w]));
+  for (const w of allWires.filter(x => x.type === 'schema')) {
+    for (const f of fAll(w, 'predicate')) { const t = byId.get(f.value.trim().slice(1)); if (t && t.type !== 'predicate') add('schema_member_type', w, f.line, `schema ${w.id}: ${f.value.trim()} is a ${t.type}, not a predicate`); }
+    for (const f of fAll(w, 'lexeme')) { const t = byId.get(f.value.trim().slice(1)); if (t && t.type !== 'lexeme') add('schema_member_type', w, f.line, `schema ${w.id}: ${f.value.trim()} is a ${t.type}, not a lexeme`); }
+  }
+  for (const w of allWires.filter(x => x.type === 'reflex')) {
+    const pattern = f1(w, 'pattern'), mode = f1(w, 'mode')?.value.trim() ?? 'stop';
+    if (!pattern && !f1(w, 'affect')) add('reflex_without_trigger', w, w.line, `reflex ${w.id} needs a pattern, an affect label or both`);
+    if (pattern) { try { new RegExp(JSON.parse(pattern.value.trim()), 'iu'); } catch (e) { add('bad_pattern', w, pattern.line, `reflex ${w.id}: the pattern is not a valid regular expression (${e.message})`); } }
+    if (mode !== 'pragmatic' && !f1(w, 'reply')) add('reflex_without_reply', w, w.line, `reflex ${w.id}: mode ${mode} needs a reply`);
+    if (mode === 'pragmatic' && !f1(w, 'tone')) add('reflex_without_reply', w, w.line, `reflex ${w.id}: mode pragmatic needs a tone line`);
+  }
+  for (const w of allWires.filter(x => x.type === 'extractor')) {
+    const f = f1(w, 'schema'), t = f ? byId.get(f.value.trim().slice(1)) : null;
+    if (t && t.type !== 'schema') add('schema_member_type', w, f.line, `extractor ${w.id}: ${f.value.trim()} is a ${t.type}, not a schema`);
+  }
+
   for (const w of predicates.values()) {
     const args = specOf(w.id).args, roles = rolesOf(w.id);
     if (roles) {

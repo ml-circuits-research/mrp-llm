@@ -1,0 +1,70 @@
+{"id":"r01","slot":"reflex","text":"What are your opening hours?","expect":"hours"}
+{"id":"r02","slot":"reflex","text":"When does the office open?","expect":"hours"}
+{"id":"r03","slot":"reflex","text":"Are you open on Monday morning?","expect":"hours"}
+{"id":"r04","slot":"reflex","text":"what time do you close","expect":"hours"}
+{"id":"r05","slot":"reflex","text":"Can I come by your office tomorrow?","expect":"hours"}
+{"id":"r06","slot":"reflex","text":"What is the office schedule this week?","expect":"hours"}
+{"id":"r07","slot":"reflex","text":"How can I contact support?","expect":"contact"}
+{"id":"r08","slot":"reflex","text":"What's the support phone number?","expect":"contact"}
+{"id":"r09","slot":"reflex","text":"Give me an email address for help.","expect":"contact"}
+{"id":"r10","slot":"reflex","text":"How do I get in touch with your team?","expect":"contact"}
+{"id":"r11","slot":"reflex","text":"Is there a hotline I can call?","expect":"contact"}
+{"id":"r12","slot":"reflex","text":"Who are you?","expect":"who-are-you"}
+{"id":"r13","slot":"reflex","text":"What can you do for me?","expect":"who-are-you"}
+{"id":"r14","slot":"reflex","text":"What kind of questions do you answer?","expect":"who-are-you"}
+{"id":"r15","slot":"reflex","text":"Tell me about yourself.","expect":"who-are-you"}
+{"id":"r16","slot":"reflex","text":"Who works at Acme?","expect":null}
+{"id":"r17","slot":"reflex","text":"Where is Globex located?","expect":null}
+{"id":"r18","slot":"reflex","text":"Who is on project Apollo?","expect":null}
+{"id":"r19","slot":"reflex","text":"Does Ana work at the Cluj office?","expect":null}
+{"id":"r20","slot":"reflex","text":"When did Dan join Globex?","expect":null}
+{"id":"r21","slot":"reflex","text":"Who are the grandparents of Carina?","expect":null}
+{"id":"r22","slot":"reflex","text":"What can Ana do on project Hermes?","expect":null}
+{"id":"r23","slot":"reflex","text":"How can I contact Elena Ionescu?","expect":null}
+{"id":"r24","slot":"reflex","text":"Is the Bucharest office open to visitors on project days?","expect":null}
+{"id":"r25","slot":"reflex","text":"Who are you working with on Apollo?","expect":null}
+{"id":"r26","slot":"reflex","text":"What are the hours Bogdan works?","expect":null}
+{"id":"r27","slot":"reflex","text":"How many people work at Acme?","expect":null}
+{"id":"r28","slot":"reflex","text":"List the projects of Globex.","expect":null}
+{"id":"a01","slot":"affect","text":"Who works at Acme?","expect":"neutral"}
+{"id":"a02","slot":"affect","text":"Where is the Cluj office?","expect":"neutral"}
+{"id":"a03","slot":"affect","text":"List the projects of Globex, please.","expect":"neutral"}
+{"id":"a04","slot":"affect","text":"This answer is still wrong, I already asked twice!","expect":"frustrated"}
+{"id":"a05","slot":"affect","text":"Ugh, it does not work again.","expect":"frustrated"}
+{"id":"a06","slot":"affect","text":"How many times do I have to repeat myself?","expect":"frustrated"}
+{"id":"a07","slot":"affect","text":"Seriously, this is a waste of time.","expect":"frustrated"}
+{"id":"a08","slot":"affect","text":"I need the contact of Ana right now, it's urgent.","expect":"urgent"}
+{"id":"a09","slot":"affect","text":"Quick, who leads Apollo? The meeting starts in two minutes.","expect":"urgent"}
+{"id":"a10","slot":"affect","text":"Please answer ASAP, we have a deadline today.","expect":"urgent"}
+{"id":"a11","slot":"affect","text":"Emergency: who is on call at Globex?","expect":"urgent"}
+{"id":"a12","slot":"affect","text":"I don't understand your last answer.","expect":"confused"}
+{"id":"a13","slot":"affect","text":"What do you mean by grandparent here?","expect":"confused"}
+{"id":"a14","slot":"affect","text":"I'm lost, which office is which?","expect":"confused"}
+{"id":"a15","slot":"affect","text":"That makes no sense to me.","expect":"confused"}
+{"id":"a16","slot":"affect","text":"Thank you, that was helpful!","expect":"grateful"}
+{"id":"a17","slot":"affect","text":"Thanks a lot for the quick answer.","expect":"grateful"}
+{"id":"a18","slot":"affect","text":"I really appreciate your help.","expect":"grateful"}
+{"id":"a19","slot":"affect","text":"This is unacceptable, you gave me the wrong person!","expect":"angry"}
+{"id":"a20","slot":"affect","text":"I'm furious, nobody at Acme answers the phone.","expect":"angry"}
+{"id":"a21","slot":"affect","text":"Awesome, that's exactly what I needed.","expect":"happy"}
+{"id":"a22","slot":"affect","text":"Great, I'm glad Ana is on the project.","expect":"happy"}
+{"id":"a23","slot":"affect","text":"I'm sad that Bogdan left Acme.","expect":"sad"}
+{"id":"a24","slot":"affect","text":"I'm disappointed nobody told me about the move.","expect":"sad"}
+{"id":"r29","slot":"reflex","text":"hours?","expect":"hours"}
+{"id":"r30","slot":"reflex","text":"open today?","expect":"hours"}
+{"id":"r31","slot":"reflex","text":"support email","expect":"contact"}
+{"id":"r32","slot":"reflex","text":"who r u","expect":"who-are-you"}
+{"id":"r33","slot":"reflex","text":"What do you know?","expect":"who-are-you"}
+{"id":"r34","slot":"reflex","text":"Until what time is the Cluj office open on Fridays?","expect":"hours"}
+{"id":"r35","slot":"reflex","text":"I need to talk to a human from support, how?","expect":"contact"}
+{"id":"r36","slot":"reflex","text":"Who?","expect":null}
+{"id":"r37","slot":"reflex","text":"Who is Ana?","expect":null}
+{"id":"r38","slot":"reflex","text":"What is Apollo?","expect":null}
+{"id":"r39","slot":"reflex","text":"When is the Apollo deadline?","expect":null}
+{"id":"r40","slot":"reflex","text":"What hours does Ana work?","expect":null}
+{"id":"r41","slot":"reflex","text":"Contact Dan for me.","expect":null}
+{"id":"r42","slot":"reflex","text":"Can you do the Hermes report?","expect":null}
+{"id":"r43","slot":"reflex","text":"What do you know about Globex?","expect":null}
+{"id":"r44","slot":"reflex","text":"Who are the people at Acme?","expect":null}
+{"id":"r45","slot":"reflex","text":"When are the Globex people in the office?","expect":null}
+{"id":"r46","slot":"reflex","text":"open","expect":null}

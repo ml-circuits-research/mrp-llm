@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ChatSOP Documentation</title><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="help.css"></head>
+<body><div data-include="../partials/header.html" data-link-base="../"></div><main class="wire-help"><p><a href="../wire_types.html#schema" target="_top">← Wire type index</a></p><h1><code>schema</code></h1><p>A value schema of a Symbolic Model (<a href="../specsLoader.html?spec=DS028-schemas-discovery-and-benchmark.md" target="_top">DS028</a>): the predicates of one domain, the lexemes that trigger them and the kinds of entity they are about, with who proposed it, a version and a review status. A reviewed schema is the closed vocabulary of the formalize strategy <code>SchemaGuidedLLM</code>: its prompt offers only these predicates and the validator refuses any other.</p><p><strong>Status and author:</strong> Knowledge wire of a base memory, written by a person (<code>provenance manual</code>) or proposed by a discover strategy (<code>POST /v1/mrp/models/{id}/discover</code>) and approved through the review queue. The small model never authors it.</p><section><h2>Accepted fields</h2><p>Single means at most once, repeatable means zero or more, and required means at least once. Other field names are rejected (<code>unknown_field</code>). The table is generated from the grammar in <code>sop/knowledge/grammar.mjs</code>.</p><div class="table-wrap"><table><thead><tr><th>Field</th><th>Cardinality</th><th>Accepted values and behavior</th></tr></thead><tbody><tr><th scope="row" id="field-name"><code>name</code></th><td>Exactly once; required</td><td>A JSON-quoted display name of the schema.</td></tr><tr><th scope="row" id="field-domain"><code>domain</code></th><td>At most once; optional</td><td>A lowercase symbol naming the domain.</td></tr><tr><th scope="row" id="field-predicate"><code>predicate</code></th><td>Repeatable; required</td><td><code>~id</code> of a predicate wire of the memory or its imports (<code>unknown_ref</code> when there is none, <code>schema_member_type</code> when the wire is not a predicate).</td></tr><tr><th scope="row" id="field-lexeme"><code>lexeme</code></th><td>Repeatable; optional</td><td><code>~id</code> of a lexeme wire that triggers one of the predicates (<code>schema_member_type</code> when the wire is not a lexeme).</td></tr><tr><th scope="row" id="field-entity_type"><code>entity_type</code></th><td>Repeatable; optional</td><td>A lowercase symbol: a kind of entity the schema is about.</td></tr><tr><th scope="row" id="field-provenance"><code>provenance</code></th><td>At most once; optional</td><td>One of <code>manual splade-stats llm-consolidate frame-seed sae-llm-activations sae-sentence-embeddings sae-pretrained-dictionary</code> (default <code>manual</code>).</td></tr><tr><th scope="row" id="field-version"><code>version</code></th><td>At most once; optional</td><td>A positive integer; a re-run of discovery proposes a new version, never overwrites.</td></tr><tr><th scope="row" id="field-status"><code>status</code></th><td>At most once; optional</td><td>One of <code>proposed reviewed deprecated</code> (default <code>reviewed</code>). Only reviewed schemas guide formalization.</td></tr><tr><th scope="row" id="field-description"><code>description</code></th><td>At most once; optional</td><td>Text: what the schema covers.</td></tr><tr><th scope="row" id="field-source"><code>source</code></th><td>At most once; optional</td><td>Text: where the schema comes from.</td></tr></tbody></table></div></section><section><h2>What it is for and how to write it</h2><p>List the predicates the Model's questions are about. A predicate stays the contract with the reasoners and with rules written by people: once reviewed it is never renamed; deprecate the schema and add a new version instead.</p></section><section><h2>Examples</h2><pre data-sop="knowledge"><code>@works_at predicate
+  args subject:entity object:entity
+  label en "works at"
+
+@lx_works_at_en lexeme
+  of works_at
+  language en
+  form "work at"
+  frame subject object
+
+@s_company schema
+  name "company"
+  domain company
+  provenance manual
+  version 1
+  status reviewed
+  predicate ~works_at
+  lexeme ~lx_works_at_en
+  entity_type person
+</code></pre><h3>Invalid: a member that is not a predicate</h3><pre data-sop="knowledge-invalid" data-error="schema_member_type"><code>@ana entity
+  label en "Ana"
+
+@s_bad schema
+  name "bad"
+  predicate ~ana
+</code></pre></section><section><h2>Implementation sources</h2><ul><li><code>sop/knowledge/grammar.mjs:GRAMMAR.schema</code></li><li><code>sop/knowledge/lexicon-checks.mjs</code></li><li><code>sop/lexicon.mjs:Lexicon.reviewedSchemaPredicates</code></li><li><code>lib/formalize/strategies.mjs</code> (SchemaGuidedLLM)</li></ul><p>Related: <a href="extractor.html"><code>extractor</code></a>, <a href="predicate.html"><code>predicate</code></a>, <a href="lexeme.html"><code>lexeme</code></a>.</p></section></main><script type="module" src="help-page.mjs"></script></body></html>

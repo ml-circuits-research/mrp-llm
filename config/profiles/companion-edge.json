@@ -1,14 +1,38 @@
 {
   "name": "Companion (edge)",
-  "description": "Small devices: the cheapest tiers, translation only for non-English messages, no round trip, the English answer translated only when needed.",
+  "description": "Small devices: the cheapest tiers, translation only for non-English messages, one-call formalization (DirectSOP: about one model call per question against six for the step-by-step protocol, eval 2026-10-14), no round trip, the English answer translated only when needed.",
   "base": "default",
   "slots": {
-    "normalize": {"strategy": "translate-if-foreign", "params": {"tier": "tiny"}},
-    "reflex": {"strategy": "faq-fixed"},
-    "formalize": {"strategy": "LocalLLMStepByStep", "params": {"tier": "tiny"}},
-    "roundtrip": {"strategy": "off"},
-    "voice": {"strategy": "translate-only", "params": {"tier": "tiny"}},
-    "commit": {"strategy": "auto-validated"}
+    "normalize": {
+      "strategy": "translate-if-foreign",
+      "params": {
+        "tier": "tiny"
+      }
+    },
+    "reflex": {
+      "strategy": "faq-fixed"
+    },
+    "formalize": {
+      "strategy": "DirectSOP",
+      "params": {
+        "tier": "tiny"
+      }
+    },
+    "roundtrip": {
+      "strategy": "off"
+    },
+    "voice": {
+      "strategy": "translate-only",
+      "params": {
+        "tier": "tiny"
+      }
+    },
+    "commit": {
+      "strategy": "auto-validated"
+    },
+    "affect": {
+      "strategy": "lexicon"
+    }
   },
   "allowOverrides": true
 }

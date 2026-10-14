@@ -4,15 +4,16 @@
  *   GET    /v1/mrp/strategies[?check=1]                 slots and the strategy catalog (with availability on this server)
  *   GET    /v1/mrp/profiles                             ready-made model configurations
  *   GET    /v1/mrp/models                               the models
- *   POST   /v1/mrp/models                               {id, name?, description?, memories? | base?, createBase?, profile?, slots?, language?, faq?, allowOverrides?}
+ *   POST   /v1/mrp/models                               {id, name?, description?, memories? | base?, createBase?, profile?, slots?, language?, faq?, reflexes?, allowOverrides?}
  *   GET    /v1/mrp/models/{id}                          a model with its learned state
- *   PUT    /v1/mrp/models/{id}                          {name?, description?, memories? | base?, slots?, language?, faq?, allowOverrides?}
+ *   PUT    /v1/mrp/models/{id}                          {name?, description?, memories? | base?, slots?, language?, faq?, reflexes?, allowOverrides?}
  *   DELETE /v1/mrp/models/{id}
  *   GET    /v1/mrp/models/{id}/effective                the effective slot configuration (defaults filled in)
  *   POST   /v1/mrp/models/{id}/reflex-feedback          {score, helpful}: a vote on a reflex answer (faq-feedback learns from it)
  *   GET    /v1/mrp/models/{id}/review                   the review queue (commit strategy review-queue)
  *   POST   /v1/mrp/models/{id}/review/{item}/approve    write the queued circuits to the model's base memory
  *   POST   /v1/mrp/models/{id}/review/{item}/reject
+ *   POST   /v1/mrp/models/{id}/discover                 {passages: [text], strategy?, params?}: schema proposals into the review queue (DS028)
  *
  *   GET    /v1/mrp/tiers                                the Ploinky tiers and the real models behind them (read only, every user)
  *
@@ -31,6 +32,14 @@ import {catalog} from '../lib/mrp/strategies.mjs';
 import {profiles} from '../lib/mrp/models.mjs';
 import {pworker} from '../lib/pworker.mjs';
 import {compose} from '../lib/chat-data/composer.mjs';
+import {validateCircuits} from '../lib/chat-data/memories.mjs';
+import {Lexicon} from '../sop/lexicon.mjs';
+import {strategy as findStrategy, checkParams, availability} from '../lib/mrp/strategies.mjs';
+import {llmConsolidate, schemaRecord, DISCOVER_PURPOSE} from '../lib/mrp/discover.mjs';
+import {runTasks} from '../lib/mrp/tasks.mjs';
+import {serviceAvailability, runService} from '../lib/mrp/strategy-service.mjs';
+import {saeDiscover} from '../lib/mrp/discover-sae.mjs';
+import {frameSeed} from '../lib/mrp/frames.mjs';
 
 const ID = '([a-z0-9][a-z0-9_-]{0,63})';
 const bad = (message, code = 'invalid_request', status = 400) => Object.assign(new Error(message), {status, code});
@@ -39,11 +48,12 @@ export const MRP_ENDPOINTS = Object.freeze([
   {method: 'GET', path: '/v1/mrp/strategies', capability: 'mrp.strategies'},
   {method: 'GET', path: '/v1/mrp/profiles', capability: 'mrp.profiles'},
   {method: 'GET', path: '/v1/mrp/models', capability: 'mrp.models.list'},
-  {method: 'POST', path: '/v1/mrp/models', capability: 'mrp.models.create', body: ['id', 'name', 'description', 'memories', 'base', 'createBase', 'profile', 'slots', 'language', 'faq', 'allowOverrides']},
+  {method: 'POST', path: '/v1/mrp/models', capability: 'mrp.models.create', body: ['id', 'name', 'description', 'memories', 'base', 'createBase', 'profile', 'slots', 'language', 'faq', 'reflexes', 'allowOverrides']},
   {method: 'GET', path: '/v1/mrp/models/{id}', capability: 'mrp.models.get'},
-  {method: 'PUT', path: '/v1/mrp/models/{id}', capability: 'mrp.models.update', body: ['name', 'description', 'memories', 'base', 'slots', 'language', 'faq', 'allowOverrides']},
+  {method: 'PUT', path: '/v1/mrp/models/{id}', capability: 'mrp.models.update', body: ['name', 'description', 'memories', 'base', 'slots', 'language', 'faq', 'reflexes', 'allowOverrides']},
   {method: 'GET', path: '/v1/mrp/models/{id}/effective', capability: 'mrp.models.effective'},
   {method: 'GET', path: '/v1/mrp/models/{id}/review', capability: 'mrp.models.review'},
+  {method: 'POST', path: '/v1/mrp/models/{id}/discover', capability: 'mrp.models.discover', body: ['passages', 'strategy', 'params']},
   {method: 'GET', path: '/v1/mrp/tiers', capability: 'mrp.tiers'},
   {method: 'GET', path: '/v1/mrp/pworker', capability: 'mrp.pworker'},
 ]);
@@ -53,7 +63,7 @@ export function writeToBase({memories, model, circuits, approvedBy, reason, sour
   return memories.addKnowledge(model.base, {circuits, approvedBy, reason, source});
 }
 
-export function createMrpRoutes({models, memories, readBody, json, maxBytes = 2_000_000, admin: gatewayAdmin = gateway, env = process.env}) {
+export function createMrpRoutes({models, memories, readBody, json, maxBytes = 2_000_000, admin: gatewayAdmin = gateway, env = process.env, client = purpose => pworker({purpose, priority: 'background'})}) {
   const send = (res, status, body) => json(res, status, body);
   const body = async req => { const b = await readBody(req, maxBytes); if (!b || typeof b !== 'object' || Array.isArray(b)) throw bad('Expected a JSON object'); return b; };
   const requireAdmin = admin => { if (!admin) throw bad('The model gateway settings need the administrator session (sign in at /login)', 'forbidden', 403); };
@@ -127,8 +137,59 @@ export function createMrpRoutes({models, memories, readBody, json, maxBytes = 2_
       const model = models.get(m[1]), item = models.reviewItem(m[1], m[2]);
       if (item.status !== 'pending') throw bad(`the review item is already ${item.status}`, 'invalid_state', 409);
       if (m[3] === 'reject') return send(res, 200, {object: 'mrp.review', ...models.setReviewStatus(m[1], m[2], 'rejected', {by: user}).review.find(r => r.id === m[2])});
-      const written = writeToBase({memories, model, circuits: item.circuits, approvedBy: user, reason: `review queue of model ${model.id} (session ${item.session})`, source: `session:${item.session}`});
+      const circuits = item.kind === 'schema-record' ? item.circuits.map(c => ({...c, text: c.text.replace(/^  status proposed$/m, '  status reviewed')})) : item.circuits;
+      const written = writeToBase({memories, model, circuits, approvedBy: user, reason: item.source ? `review queue of model ${model.id} (${item.source})` : `review queue of model ${model.id} (session ${item.session})`, source: item.source ?? `session:${item.session}`});
       send(res, 200, {object: 'mrp.review', ...models.setReviewStatus(m[1], m[2], 'approved', {by: user, written: written?.added?.length ?? 0}).review.find(r => r.id === m[2])});
+    }],
+    // Schema discovery (DS028): a server discover strategy proposes predicate and lexeme wires; each valid candidate becomes one review item.
+    ['POST', new RegExp(`^/v1/mrp/models/${ID}/discover$`), async ({req, res, m}) => {
+      const model = models.get(m[1]), b = await body(req);
+      const id = b.strategy ?? models.effective(m[1]).slots.discover.strategy;
+      const entry = findStrategy('discover', id);
+      if (!entry) throw bad(`the discover slot has no strategy ${JSON.stringify(id)}`, 'invalid_parameter');
+      if (id === 'manual') throw bad('the manual discover strategy runs nothing: write predicate and lexeme wires through POST /v1/memories/{id}/knowledge, or name a discover strategy', 'invalid_parameter');
+      if (entry.runs === 'external' && !entry.service) throw bad(`the discover strategy ${id} ${entry.implemented ? 'requires' : 'is not implemented yet; it would require'} ${entry.requires}`, 'strategy_unavailable', 503);
+      const badPassages = !Array.isArray(b.passages) || !b.passages.length || b.passages.length > 2000 || b.passages.some(p => typeof p !== 'string' || !p.trim() || p.length > 20000);
+      if (id !== 'frame-seed' && badPassages) throw bad('passages must be a list of 1 to 2000 texts (at most 20000 characters each)', 'invalid_parameter');
+      const params = checkParams(entry, {...(id === models.effective(m[1]).slots.discover.strategy ? models.effective(m[1]).slots.discover.params : {}), ...(b.params ?? {})});
+      if (id === 'frame-seed') {
+        const free = await availability(entry, {params});
+        if (!free.available) throw bad(`the discover strategy ${id}: ${free.reason}`, 'strategy_unavailable', 503);
+        const layered = memories.layeredCircuits(model.base);
+        const out = await frameSeed({lexicon: Lexicon.fromCircuits(layered), validate: circuits => validateCircuits(circuits, layered)});
+        for (const p of out.proposed) models.queueReview(m[1], {kind: 'schema', source: 'discover:frame-seed', circuits: [{name: p.name, text: p.text}], message: `${p.predicate}: "${p.form}" (FrameNet ${p.frame})`});
+        return send(res, 200, {object: 'mrp.discover', model: m[1], strategy: id, ...out, queued: out.proposed.length});
+      }
+      if (id === 'sae-sentence-embeddings' || id === 'sae-llm-activations') {
+        const free = await availability(entry, {params});
+        if (!free.available) throw bad(`the discover strategy ${id}: ${free.reason}`, 'strategy_unavailable', 503);
+        const layered = memories.layeredCircuits(model.base);
+        const run = (name, inputs, o) => runTasks(name, inputs, {client: client(DISCOVER_PURPOSE), ...o});
+        const out = await saeDiscover({strategy: id, passages: b.passages, params, run, lexicon: Lexicon.fromCircuits(layered), validate: circuits => validateCircuits(circuits, layered), model: m[1]});
+        for (const p of out.proposed) models.queueReview(m[1], {kind: 'schema-record', source: `discover:${id}`, circuits: [{name: p.name, text: p.text}], message: `feature ${p.feature} (${out.source}) -> ${p.predicates.join(', ')}`});
+        return send(res, 200, {object: 'mrp.discover', model: m[1], ...out, queued: out.proposed.length});
+      }
+      if (entry.service) {
+        // A strategy of the strategy service: its candidates carry no roles, so they are listed for review, never written as wires.
+        const free = await serviceAvailability('discover', id);
+        if (!free.available) throw bad(`the discover strategy ${id}: ${free.reason}`, 'strategy_unavailable', 503);
+        const r = await runService('discover', id, {passages: b.passages}, params);
+        if (!r.ok) throw bad(`the discover strategy ${id} failed: ${r.error}`, 'strategy_failed', 502);
+        return send(res, 200, {object: 'mrp.discover', model: m[1], strategy: id, candidates: r.output, trace: r.trace ?? null, queued: 0});
+      }
+      if (!memories) throw bad('discovery needs the base memories of the server', 'unavailable', 503);
+      const layered = memories.layeredCircuits(model.base);
+      const run = (name, inputs, o) => runTasks(name, inputs, {client: client(DISCOVER_PURPOSE), ...o});
+      const own = new Set(Object.keys(Lexicon.fromCircuits(memories.circuits(model.base)).predicates));
+      const out = await llmConsolidate({passages: b.passages, params, run, own, lexicon: Lexicon.fromCircuits(layered), validate: circuits => validateCircuits(circuits, layered)});
+      for (const p of out.proposed) models.queueReview(m[1], {kind: 'schema', source: `discover:${id}`, circuits: [{name: p.name, text: p.text}], message: `proposed by ${id} from ${p.batches} batch(es)${p.synonyms ? `; merged synonyms ${p.synonyms.join(', ')}` : ''}`});
+      // The schema record groups the proposals (status proposed); approving it after its predicates writes it as reviewed.
+      if (out.proposed.length) {
+        const record = schemaRecord(out.proposed.map(p => p.name.replace(/^discover-/, '')), {strategy: id, model: m[1]});
+        models.queueReview(m[1], {kind: 'schema-record', source: `discover:${id}`, circuits: [record], message: `the schema record of ${out.proposed.length} proposed predicate(s); approve it after them`});
+        out.schema = record;
+      }
+      send(res, 200, {object: 'mrp.discover', model: m[1], ...out, queued: out.proposed.length});
     }],
     // The Ploinky tiers and the real models behind them, read only, for every authenticated user (no key, no provider secret).
     ['GET', /^\/v1\/mrp\/tiers$/, async ({res}) => send(res, 200, {object: 'list', data: await tierView()})],

@@ -1,0 +1,20 @@
+{"id": "p01", "form": "list", "question": "Who is employed by Acme?", "gold": ["ana", "bogdan", "dan"]}
+{"id": "p02", "form": "list", "question": "Which city hosts the Globex office?", "gold": ["bucharest"]}
+{"id": "p03", "form": "list", "question": "Who belongs to the Apollo team?", "gold": ["ana", "dan"]}
+{"id": "p04", "form": "list", "question": "Who is Carina's grandma or grandpa?", "gold": ["ana"]}
+{"id": "p05", "form": "list", "question": "Who is Bogdan's kid?", "gold": ["carina"]}
+{"id": "p06", "form": "list", "question": "Which organization pays Elena's salary?", "gold": ["globex"]}
+{"id": "p07", "form": "yes_no", "question": "Is Dan on the payroll of Acme?", "gold": true}
+{"id": "p08", "form": "list", "question": "Where is Acme based?", "gold": ["cluj"]}
+{"id": "p09", "form": "list", "question": "Who are the staff of Globex?", "gold": ["carina", "elena"]}
+{"id": "p10", "form": "list", "question": "Which initiative is Elena part of?", "gold": ["hermes"]}
+{"id": "p11", "form": "count", "question": "How big is the Acme workforce?", "gold": 3}
+{"id": "p12", "form": "yes_no", "question": "Does Hermes count Bogdan among its contributors?", "gold": true}
+{"id": "p13", "form": "list", "question": "Who raised Elena?", "gold": ["dan"]}
+{"id": "p14", "form": "list", "question": "Which firm has Carina on its staff?", "gold": ["globex"]}
+{"id": "p15", "form": "list", "question": "Who are Ana's descendants two generations down?", "gold": ["carina"]}
+{"id": "p16", "form": "list", "question": "Who contributes to Apollo?", "gold": ["ana", "dan"]}
+{"id": "p17", "form": "list", "question": "Name the employer of Ana.", "gold": ["acme"]}
+{"id": "p18", "form": "list", "question": "In what town is Globex headquartered?", "gold": ["bucharest"]}
+{"id": "p19", "form": "count", "question": "How many contributors does Hermes have?", "gold": 2}
+{"id": "p20", "form": "list", "question": "Who is the mother or father of Bogdan?", "gold": ["ana"]}

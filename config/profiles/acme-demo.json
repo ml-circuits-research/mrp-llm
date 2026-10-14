@@ -20,10 +20,10 @@
       }
     },
     "affect": {
-      "strategy": "formalizer-pragmatic"
+      "strategy": "lexicon"
     },
     "formalize": {
-      "strategy": "LocalLLMStepByStep",
+      "strategy": "DirectSOP",
       "params": {
         "tier": "fast"
       }

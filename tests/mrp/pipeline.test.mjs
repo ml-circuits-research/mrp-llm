@@ -30,8 +30,8 @@ test('normalize translates to English with the detected language; the answer lan
   assert.equal(pre.output, 'ro');
   assert.equal(pre.reflex, null);
   assert.equal(fake.calls[0].tier, 'small');
-  assert.match(fake.calls[0].system, /reads only English/);
-  assert.deepEqual(pre.trace.map(s => s.slot), ['normalize', 'reflex', 'affect']);
+  assert.match(fake.calls[0].prompt, /reads only English/);
+  assert.deepEqual(pre.trace.map(s => s.slot), ['normalize', 'affect', 'reflex']);
 });
 
 test('normalize degrades to the original text when the tier fails, and says so', async t => {
@@ -57,7 +57,7 @@ test('reflex: a FAQ variant above the boundary ends the turn; the voice phrases 
   assert.equal(pre.output, 'fr');
   const out = await mrp.reflexReply({pre});
   assert.equal(out.text, 'Nous sommes ouverts de 9 à 17.');
-  assert.match(fake.calls.at(-1).system, /French/);
+  assert.match(fake.calls.at(-1).prompt, /French/);
   assert.equal(models.state('m').reflex.hits, 1);
 });
 
@@ -68,11 +68,11 @@ test('reflex strategies: off never fires, margin needs a lead, the judge must co
   const margin = setup(t, {faq: twoFaq, slots: {normalize: 'passthrough', reflex: {strategy: 'faq-margin', params: {threshold: 0.3, margin: 0.5}}}});
   const pre = await margin.mrp.before({modelId: 'm', text: 'opening hours'});
   assert.equal(pre.reflex, null);
-  assert.ok(pre.trace[1].margin < 0.5);
+  assert.ok(pre.trace.find(s => s.slot === 'reflex').margin < 0.5);
   const judge = setup(t, {slots: {normalize: 'passthrough', reflex: 'faq-llm-judge'}}, purpose => purpose === 'reflex' ? '{"same": false}' : null);
   const j = await judge.mrp.before({modelId: 'm', text: 'What are your opening hours?'});
   assert.equal(j.reflex, null);
-  assert.deepEqual(j.trace[1].judge, {same: false});
+  assert.deepEqual(j.trace.find(s => s.slot === 'reflex').judge, {same: false});
 });
 
 test('round trip: on-doubt runs only on doubtful circuits; a mismatch with warn adds a note before the voice', async t => {
@@ -134,7 +134,7 @@ test('affect llm-label tunes the voice; doubt signals and language names', async
   const pre = await mrp.before({modelId: 'm', text: 'WHO works at acme, I asked three times'});
   assert.deepEqual(pre.affect, {label: 'frustrated', intensity: 0.9});
   await mrp.after({pre, result: {text: 'Answers: Ana.', sop: '', packet: {}}});
-  assert.match(fake.calls.at(-1).system, /frustrated/);
+  assert.match(fake.calls.at(-1).prompt, /frustrated/);
   assert.deepEqual(doubted({modelSop: '@a assumed\n  x 1', parse: {escalated: 1}}), ['assumed lines in the circuit', 'a formalization question escalated to a larger tier']);
   assert.equal(languageName('ro'), 'Romanian');
   assert.equal(languageName('xx'), 'xx');
@@ -146,9 +146,136 @@ test('normalize with context: previous turns are shown so the message becomes se
   const pre = await mrp.before({modelId: 'm', text: 'What is MY_VAR?', history});
   assert.equal(pre.english, 'Given that MY_VAR is 100, what is MY_VAR?');
   assert.match(fake.calls[0].prompt, /PREVIOUS TURNS:\nUSER: Remember that MY_VAR is 100\.\nASSISTANT: Noted\.\n\nMESSAGE:\nWhat is MY_VAR\?/);
-  assert.match(fake.calls[0].system, /self-contained/);
+  assert.match(fake.calls[0].prompt, /self-contained/);
   assert.equal(pre.trace[0].context_turns, 2);
   const alone = setup(t, {slots: {normalize: {strategy: 'translate-llm', params: {context: 0}}}}, () => '{"language": "en", "english": "What is MY_VAR?"}');
   await alone.mrp.before({modelId: 'm', text: 'What is MY_VAR?', history});
   assert.doesNotMatch(alone.fake.calls[0].prompt, /PREVIOUS TURNS/);
+});
+
+test('pattern reflexes: stop ends the turn before the FAQ, continue prefaces the computed answer, pragmatic only tunes the voice', async t => {
+  const reflexes = [
+    {id: 'who', pattern: '^who are you\\??$', mode: 'stop', reply: 'I am the test model.', priority: 5},
+    {id: 'hurry', pattern: '\\bquick(ly)?\\b', mode: 'continue', reply: 'Here is the short answer.'},
+    {id: 'calm', pattern: 'nothing works', mode: 'pragmatic', tone: 'Be calm and brief.'},
+  ];
+  const {mrp, models, fake} = setup(t, {reflexes, slots: {normalize: 'passthrough', reflex: 'faq-fixed', voice: 'natural-rephrase'}, language: {output: 'en'}},
+    (purpose, request) => purpose === 'voice' ? request.prompt.match(/DRAFT REPLY:\n([\s\S]*?)\n\nRESULT/)[1] : null);
+  const stop = await mrp.before({modelId: 'm', text: 'Who are you?'});
+  assert.equal(stop.reflex.kind, 'pattern');
+  assert.equal(stop.reflex.answer, 'I am the test model.');
+  assert.deepEqual(stop.trace.find(s => s.slot === 'reflex').pattern, {id: 'who', mode: 'stop'});
+  assert.equal((await mrp.reflexReply({pre: stop})).english, 'I am the test model.');
+  const cont = await mrp.before({modelId: 'm', text: 'Quickly: who works at Acme?'});
+  assert.equal(cont.reflex, null);
+  assert.equal(cont.preface, 'Here is the short answer.');
+  const after = await mrp.after({pre: cont, result: {text: 'Ana works at Acme.', sop: '', packet: {}}});
+  assert.equal(after.english, 'Here is the short answer.\n\nAna works at Acme.');
+  const calm = await mrp.before({modelId: 'm', text: 'Nothing works, who works at Acme?'});
+  assert.equal(calm.tone, 'Be calm and brief.');
+  await mrp.after({pre: calm, result: {text: 'Ana works at Acme.', sop: '', packet: {}}});
+  assert.match(fake.calls.at(-1).prompt, /Tone: Be calm and brief\./);
+  assert.equal(models.state('m').reflex.hits, 3);
+  const only = setup(t, {reflexes, slots: {normalize: 'passthrough', reflex: 'pattern-reflex'}});
+  assert.equal((await only.mrp.before({modelId: 'm', text: 'When are you open?'})).reflex, null, 'pattern-reflex never consults the FAQ');
+  const off = setup(t, {reflexes, slots: {normalize: 'passthrough', reflex: 'off'}});
+  assert.equal((await off.mrp.before({modelId: 'm', text: 'Who are you?'})).reflex, null, 'off ignores the pattern reflexes');
+});
+
+test('pattern reflexes are checked when a model is saved', t => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'mrp-pipe-'));
+  t.after(() => fs.rmSync(root, {recursive: true, force: true}));
+  const models = new Models({root});
+  assert.throws(() => models.create({id: 'a', reflexes: [{pattern: '(', reply: 'x'}]}), /invalid pattern/);
+  assert.throws(() => models.create({id: 'b', reflexes: [{pattern: 'hi', mode: 'stop'}]}), /needs a reply/);
+  assert.throws(() => models.create({id: 'c', reflexes: [{pattern: 'hi', mode: 'pragmatic'}]}), /tone line/);
+  assert.throws(() => models.create({id: 'd', reflexes: [{pattern: 'hi', mode: 'shout', reply: 'x'}]}), /mode must be/);
+  assert.deepEqual(models.create({id: 'e', reflexes: [{pattern: 'hi', reply: 'Hello.'}]}).reflexes, [{id: 'reflex-1', pattern: 'hi', mode: 'stop', priority: 0, reply: 'Hello.'}]);
+});
+
+test('affect lexicon: whole-word cues give a label and an intensity with no model call; the voice gets the tone', async t => {
+  const {readAffect} = await import('../../lib/mrp/affect-lexicon.mjs');
+  assert.deepEqual(readAffect('This is still wrong, I already asked!'), {label: 'frustrated', intensity: 0.9, cues: ['still wrong', 'i already asked']});
+  assert.equal(readAffect('I need this urgently').label, 'urgent');
+  assert.deepEqual(readAffect('Who works at Acme?'), {label: 'neutral', intensity: 0, cues: []});
+  assert.equal(readAffect('the agains').label, 'neutral', 'cues match whole words only');
+  const {mrp, fake} = setup(t, {slots: {normalize: 'passthrough', reflex: 'off', affect: 'lexicon'}, language: {output: 'en'}}, purpose => purpose === 'voice' ? 'Ana works at Acme.' : null);
+  const pre = await mrp.before({modelId: 'm', text: 'Still wrong! Who works at Acme?'});
+  assert.deepEqual(pre.affect, {label: 'frustrated', intensity: 0.8});
+  assert.equal(fake.calls.length, 0, 'the lexicon calls no model');
+  await mrp.after({pre, result: {text: 'Ana works at Acme.', sop: '', packet: {}}});
+  assert.match(fake.calls.at(-1).prompt, /seems frustrated/);
+});
+
+test('affect runs before the reflex: an affect reflex reacts to the emotion; reflex wires of the base memory count like the model\'s', async t => {
+  const reflexes = [{id: 'hurry', affect: 'urgent', mode: 'continue', reply: 'I see this is urgent; here is the answer.'}];
+  const memoryReflexes = [{id: 'rx_who', pattern: '^who are you', mode: 'stop', reply: 'I am the memory reflex.', priority: 0, source: 'memory'}];
+  const {mrp} = setup(t, {reflexes, slots: {normalize: 'passthrough', affect: 'lexicon', reflex: 'pattern-reflex'}, language: {output: 'en'}});
+  const urgent = await mrp.before({modelId: 'm', text: 'I need it right now, who works at Acme?'});
+  assert.deepEqual(urgent.trace.map(s => s.slot), ['normalize', 'affect', 'reflex']);
+  assert.equal(urgent.preface, 'I see this is urgent; here is the answer.');
+  assert.equal((await mrp.before({modelId: 'm', text: 'Who works at Acme?'})).preface, null, 'no emotion, no affect reflex');
+  const who = await mrp.before({modelId: 'm', text: 'Who are you?', memoryReflexes});
+  assert.equal(who.reflex.answer, 'I am the memory reflex.');
+  assert.deepEqual(who.trace.find(s => s.slot === 'reflex').pattern, {id: 'rx_who', mode: 'stop', source: 'memory'});
+});
+
+test('a reflex wire is knowledge: the validator checks its trigger, pattern and reply; the lexicon reads it', async () => {
+  const {validateProgram, parse} = await import('../../sop/knowledge/index.mjs');
+  const {Lexicon} = await import('../../sop/lexicon.mjs');
+  const {validateCircuits} = await import('../../lib/chat-data/memories.mjs');
+  const ok = '@rx_hours reflex\n  pattern "opening hours"\n  mode stop\n  reply "From 9 to 17."\n  priority 2\n@rx_calm reflex\n  affect angry\n  mode pragmatic\n  tone "Stay calm."\n';
+  assert.equal(validateCircuits([{name: 'r', text: ok}]).ok, true, JSON.stringify(validateCircuits([{name: 'r', text: ok}]).problems));
+  const codes = text => validateCircuits([{name: 'r', text}]).problems.map(p => p.code);
+  assert.ok(codes('@rx reflex\n  mode stop\n  reply "x"\n').includes('reflex_without_trigger'));
+  assert.ok(codes('@rx reflex\n  pattern "("\n  reply "x"\n').includes('bad_pattern'));
+  assert.ok(codes('@rx reflex\n  pattern "hi"\n').includes('reflex_without_reply'));
+  const lexicon = Lexicon.fromCircuits([{name: 'r', text: ok}]);
+  assert.deepEqual(lexicon.reflexes.map(r => [r.id, r.mode, r.reply ?? r.tone, r.affect]), [['rx_hours', 'stop', 'From 9 to 17.', null], ['rx_calm', 'pragmatic', 'Stay calm.', 'angry']]);
+  void validateProgram; void parse;
+});
+
+test('the compiled lexicon cache keeps the schemas and the reflexes of a memory', async () => {
+  const {Lexicon} = await import('../../sop/lexicon.mjs');
+  const lexicon = Lexicon.fromCircuits([{name: 'm', text: '@p predicate\n  args subject:entity\n@s schema\n  name "s"\n  predicate ~p\n@rx reflex\n  pattern "hi"\n  reply "Hello."\n'}]);
+  const revived = Lexicon.revive(JSON.parse(JSON.stringify(lexicon.serialize())));
+  assert.deepEqual(revived.reviewedSchemaPredicates(), ['p']);
+  assert.equal(revived.reflexes[0].reply, 'Hello.');
+});
+
+test('faq-llm-select: the model names the FAQ entry or none; the answer is the entry\'s', async t => {
+  const {mrp, fake} = setup(t, {slots: {normalize: 'passthrough', reflex: 'faq-llm-select'}}, (purpose, request) => purpose === 'reflex' ? (/MESSAGE: til when r u open/.test(request.prompt) ? '{"faq": "hours"}' : '{"faq": null}') : null);
+  const hit = await mrp.before({modelId: 'm', text: 'til when r u open'});
+  assert.equal(hit.reflex.id, 'hours');
+  assert.match(fake.calls[0].prompt, /- hours: What are your opening hours\? \| When are you open\?/);
+  assert.equal((await mrp.before({modelId: 'm', text: 'Who works at Acme?'})).reflex, null);
+});
+
+test('faq-hybrid: no call for a clear match or a clear miss, the model chooses in between', async t => {
+  const {mrp, fake} = setup(t, {slots: {normalize: 'passthrough', reflex: 'faq-hybrid'}}, (purpose, request) => purpose === 'reflex' ? (/MESSAGE: til when do you open/.test(request.prompt) ? '{"faq": "hours"}' : '{"faq": null}') : null);
+  assert.equal((await mrp.before({modelId: 'm', text: 'What are your opening hours?'})).reflex.id, 'hours');
+  assert.equal(fake.calls.length, 0, 'a clear lexical match costs no call');
+  assert.equal((await mrp.before({modelId: 'm', text: 'Who works at Globex?'})).reflex, null);
+  assert.equal(fake.calls.length, 0, 'a clear miss costs no call');
+  const between = await mrp.before({modelId: 'm', text: 'til when do you open'});
+  assert.equal(between.reflex.id, 'hours');
+  assert.equal(between.trace.find(s => s.slot === 'reflex').band, 'model');
+  assert.equal(fake.calls.length, 1);
+});
+
+test('lexicon-then-llm asks the model only without a cue; judge-on-doubt judges only doubtful circuits; natural-if-foreign skips English', async t => {
+  const {mrp, fake} = setup(t, {slots: {normalize: 'passthrough', reflex: 'off', affect: 'lexicon-then-llm', roundtrip: 'judge-on-doubt', voice: 'natural-if-foreign'}, language: {output: 'en'}},
+    (purpose, request) => purpose === 'affect' ? '{"label": "sad", "intensity": 0.7}' : purpose === 'roundtrip' ? (/Decide whether two English sentences/.test(request.prompt) ? '{"same": false}' : 'Who works at Globex?') : null);
+  const cue = await mrp.before({modelId: 'm', text: 'This is urgent: who works at Acme?'});
+  assert.equal(cue.affect.label, 'urgent');
+  assert.equal(fake.calls.length, 0, 'a cue answers without a model');
+  const none = await mrp.before({modelId: 'm', text: 'My dog died, who works at Acme?'});
+  assert.deepEqual(none.affect, {label: 'sad', intensity: 0.7});
+  assert.equal(fake.calls.length, 1);
+  const calm = await mrp.after({pre: none, result: {text: 'Ana works at Acme.', sop: '@q query\n  select ?x\n  where works_at ?x acme\n', packet: {}}});
+  assert.equal(calm.roundtrip, null, 'no doubt, no judge');
+  assert.equal(calm.text, 'Ana works at Acme.', 'English output is the deterministic answer, with no voice call');
+  const doubt = await mrp.after({pre: none, result: {text: 'Ana works at Acme.', sop: '@q query\n  select ?x\n  where works_at ?x acme\n@a assumed\n  relation "works at"\n', packet: {}}});
+  assert.equal(doubt.roundtrip.agree, false);
+  assert.match(doubt.english, /I understood your message as/);
 });

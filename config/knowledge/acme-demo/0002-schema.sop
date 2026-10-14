@@ -1,0 +1,47 @@
+# The value schema of the acme-demo Symbolic Model (DS028 "Value schemas"): the relations its questions are about, written by hand
+# (provenance manual) and reviewed, so SchemaGuidedLLM offers exactly these predicates; anything else is unparsed or unclear.
+
+@s_acme_company schema
+  name "company"
+  domain company
+  provenance manual
+  version 1
+  status reviewed
+  description "People, the organizations they work at, their projects, offices and family."
+  predicate ~works_at
+  predicate ~project_member
+  predicate ~located_in
+  predicate ~parent_of
+  predicate ~grandparent_of
+  predicate ~colleague_of
+  predicate ~manages
+  predicate ~lives_in
+  predicate ~has_occupation
+  lexeme ~lx_project_member_en
+  lexeme ~lx_works_at_en_verb
+  entity_type person
+  entity_type organization
+  entity_type project
+  entity_type city
+
+@ex_acme_company extractor
+  schema ~s_acme_company
+  strategy SchemaGuidedLLM
+  trigger "work"
+  trigger "job"
+  trigger "employ"
+  trigger "company"
+  trigger "staff"
+  trigger "project"
+  trigger "team"
+  trigger "member"
+  trigger "office"
+  trigger "city"
+  trigger "located"
+  trigger "parent"
+  trigger "child"
+  trigger "grandparent"
+  trigger "family"
+  task "mrp-formalize-one-shot"
+  output query
+  output stated

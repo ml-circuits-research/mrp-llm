@@ -14,7 +14,7 @@ import {normalize, fold, tokens, phraseKey} from './text-keys.mjs';
 export {normalize};
 
 /** Version of the compiled format: part of every cache key and of the serialized form. */
-export const LEXICON_FORMAT = 7;
+export const LEXICON_FORMAT = 9;
 
 const spans = (s, a) => { const out = []; let at = s.indexOf(a); while (at >= 0) { const end = at + a.length, left = at === 0 || !/[\p{L}\p{N}_]/u.test(s[at - 1]), right = end === s.length || !/[\p{L}\p{N}_]/u.test(s[end]); if (left && right) out.push([at, end]); at = s.indexOf(a, at + 1); } return out; };
 const field = (w, key) => w.fields.find(f => f.key === key)?.value.trim();
@@ -29,7 +29,7 @@ export class Lexicon {
   /** `new Lexicon(text)` compiles one circuit text; `Lexicon.fromCircuits([...])` compiles the layers of a base memory. */
   constructor(source = '', {provenance = 'host-lexicon', circuits = null} = {}) {
     const parts = circuits ?? (source.trim() ? [{name: provenance, text: source}] : []);
-    this.entities = {}; this.predicates = {}; this.classes = {}; this.lexemes = [];
+    this.entities = {}; this.predicates = {}; this.classes = {}; this.lexemes = []; this.schemas = {}; this.reflexes = []; this.extractors = [];
     this.entries = []; this.index = new Map(); this.exact = new Map(); this.folded = new Map();
     this.predicatesByKey = new Map(); this.formsByKey = new Map(); this.isA = new Map(); this.factCounts = new Map(); this.unitFacts = {};
     this.version = digest(parts.map(c => c.name + '\0' + c.text).join('\0'));
@@ -51,6 +51,9 @@ export class Lexicon {
     for (const w of wires) if (w.type === 'entity') this.addEntity(w);
     for (const w of wires) if (w.type === 'lexeme') this.addLexeme(w);
     for (const w of wires) if (w.type === 'fact') this.addFact(w);
+    for (const w of wires) if (w.type === 'schema') this.addSchema(w);
+    for (const w of wires) if (w.type === 'reflex') this.addReflex(w);
+    for (const w of wires) if (w.type === 'extractor') this.extractors.push({id: w.id, schema: (field(w, 'schema') ?? '').replace(/^[~$]/, ''), strategy: field(w, 'strategy'), triggers: fieldsOf(w, 'trigger').map(unquote), task: field(w, 'task') ? unquote(field(w, 'task')) : null, outputs: fieldsOf(w, 'output')});
     for (const p of Object.values(this.predicates)) { p.factCount = this.factCounts.get(p.id) ?? 0; this.indexPredicate(p); }
     for (const e of Object.values(this.entities)) this.indexEntity(e);
   }
@@ -76,6 +79,24 @@ export class Lexicon {
       lexemes: [], valueTypes: types.map(t => (ARG_TYPES.includes(t) ? t : 'entity')),
     };
   }
+
+  /** A value schema (DS028): its predicates and lexemes by id (`~id` lines), status (default reviewed) and provenance. */
+  addSchema(w) {
+    const ids = key => fieldsOf(w, key).map(v => String(v).trim().replace(/^[~$]/, ''));
+    this.schemas[w.id] = {id: w.id, name: unquote(field(w, 'name') ?? '') ?? w.id, domain: field(w, 'domain') ?? null, status: field(w, 'status') ?? 'reviewed', provenance: field(w, 'provenance') ?? 'manual',
+      version: field(w, 'version') ? Number(field(w, 'version')) : null, predicates: ids('predicate').filter(id => this.predicates[id]), lexemes: ids('lexeme'), entityTypes: fieldsOf(w, 'entity_type')};
+  }
+
+  /** A reflex wire (DS025): the same shape as a Model's pattern reflexes, with `affect` as a further trigger. */
+  addReflex(w) {
+    const text = key => { const v = field(w, key); return v === undefined ? null : unquote(v); };
+    const mode = field(w, 'mode') ?? 'stop';
+    this.reflexes.push({id: w.id, pattern: text('pattern'), affect: field(w, 'affect') ?? null, mode, priority: field(w, 'priority') ? Number(field(w, 'priority')) : 0,
+      ...(mode === 'pragmatic' ? {tone: text('tone')} : {reply: text('reply')}), source: 'memory'});
+  }
+
+  /** The predicate ids of the reviewed schemas: the closed vocabulary of SchemaGuidedLLM (empty when the memory has no reviewed schema). */
+  reviewedSchemaPredicates() { return [...new Set(Object.values(this.schemas).filter(s => s.status === 'reviewed').flatMap(s => s.predicates))]; }
 
   addLexeme(w) {
     const predicate = this.predicates[field(w, 'of')];
@@ -203,7 +224,7 @@ export class Lexicon {
 
   /** The compiled lexicon as JSON (the on-disk cache of a base memory's lexicon); `Lexicon.revive` rebuilds the indexes. */
   serialize() {
-    return {format: LEXICON_FORMAT, version: this.version, provenance: this.provenance, entities: this.entities, predicates: this.predicates, isA: [...this.isA].map(([k, v]) => [k, [...v]]), unitFacts: this.unitFacts};
+    return {format: LEXICON_FORMAT, version: this.version, provenance: this.provenance, entities: this.entities, predicates: this.predicates, isA: [...this.isA].map(([k, v]) => [k, [...v]]), unitFacts: this.unitFacts, schemas: this.schemas, reflexes: this.reflexes, extractors: this.extractors};
   }
 
   static revive(data) {
@@ -215,6 +236,7 @@ export class Lexicon {
     for (const e of Object.values(lexicon.entities)) if (e.entityType === CLASS_KIND) lexicon.classes[e.id] = e;
     lexicon.isA = new Map(data.isA.map(([k, v]) => [k, new Set(v)]));
     lexicon.unitFacts = data.unitFacts ?? {};
+    lexicon.schemas = data.schemas ?? {}; lexicon.reflexes = data.reflexes ?? []; lexicon.extractors = data.extractors ?? [];
     for (const p of Object.values(lexicon.predicates)) lexicon.indexPredicate(p);
     for (const e of Object.values(lexicon.entities)) lexicon.indexEntity(e);
     return lexicon;

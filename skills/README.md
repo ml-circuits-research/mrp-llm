@@ -6,7 +6,7 @@ These files describe working procedures, not automatically loaded executable plu
 
 ## Procedural skills (with `SKILL.md`)
 
-**coding-agent-query** (archived 2026-10-02) — the guide of the one-shot author LLMDirect, which wrote whole SOP query circuits; formalization is now step by step (DS022 "Formalization strategies"). Kept for history in `probably_obsolete/one-shot-formalization/skills/coding-agent-query/`.
+**coding-agent-query** — the guide of the one-shot author. The chat formalizes step by step (DS022 "Formalization strategies"); the guide was restored from ChatSOP's archive on 2026-10-14 for the MRP formalize strategies DirectSOP and SchemaGuidedLLM (DS028 "Routed formalizers"), which read it as their system prompt.
 
 **compare-memory** — Compare memory strategies without changing the semantic task.
 

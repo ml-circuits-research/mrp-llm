@@ -8,7 +8,8 @@
  * ladder of proxy tiers (`queryParser.local.ladder`, product: tiny, then small, then good): each question goes to the smallest tier and
  * escalates only when its answer cannot be read or the tier does not answer. The one-shot strategy LLMDirect is archived
  * (probably_obsolete/one-shot-formalization/); a session or a caller that names it (or CodingAgent, LocalLLMDirect) gets the default
- * step-by-step strategy and a `strategy_note` in the parse record. There is no other parser and no fallback parser: when the first
+ * step-by-step strategy and a `strategy_note` in the parse record. The MRP formalize slot adds DirectSOP, SchemaGuidedLLM and Ensemble
+ * (lib/formalize/strategies.mjs, DS028), run through this same parser. There is no fallback parser: when the first
  * tier cannot run, the turn fails with the honest code `parse_unavailable` (503); a run that ended without a valid circuit fails with
  * `parse_failed` (422). Both errors carry the `parse` record for the trace.
  *
@@ -87,7 +88,7 @@ export function createQueryParser({settings = queryParserSettings(), chatData = 
     backend: r.backend ?? 'completion', cost_usd: r.usage?.cost_usd ?? r.cost_usd ?? 0, ms: r.ms ?? r.duration_ms ?? 0, cache: r.cache ?? 'miss',
     ...(r.usage?.cache_read_tokens ? {cache_read_tokens: r.usage.cache_read_tokens} : {}),
     ...(r.unlinked?.length ? {unlinked: r.unlinked} : {}), ...(r.mode ? {mode: r.mode, retrieval: {predicates: r.retrieval?.predicates?.length ?? 0, entity_mentions: r.retrieval?.entities?.length ?? 0, neighbourhood: r.retrieval?.neighbourhood ?? null}} : {}),
-    ...(r.closest ? {closest: r.closest} : {}), ...(r.repairs?.length ? {repairs: r.repairs} : {}), ...extra});
+    ...(r.closest ? {closest: r.closest} : {}), ...(r.repairs?.length ? {repairs: r.repairs} : {}), ...(r.ensemble ? {ensemble: r.ensemble} : {}), ...(r.chosen ? {chosen: r.chosen} : {}), ...(r.routing ? {routing: r.routing} : {}), ...extra});
 
   // Every formalization of every caller (chat, evaluations, jobs) reports its failures to the formalization error inbox
   // (AGENTS.md "Formalization improvement"): an invalid circuit, and an `unclear` other than a missing relation (a knowledge gap). Off
@@ -111,7 +112,7 @@ export function createQueryParser({settings = queryParserSettings(), chatData = 
     const free = await parser.availability(firstTier);
     if (!free.available) { stats.failures++; throw fail('parse_unavailable', 503, free.reason, {parser: PARSER_NAMES[strategy], strategy, model: null, ms: now() - started, failed: free.reason, tried: free.skipped ?? [], ...noted}); }
     const store = authorExecution.getStore();
-    const key = createHash('sha256').update([memoryKey ?? '', store?.key ?? '', settings.runTag ?? '', String(store?.selfCheck ?? false), strategy,
+    const key = createHash('sha256').update([memoryKey ?? '', store?.key ?? '', settings.runTag ?? '', String(store?.selfCheck ?? false), strategy, (store?.retrieval?.predicates ?? []).map(p => p.id).join(','),
       parser.tag ?? `${settings.local.alias}@${settings.local.endpoint ?? settings.local.gguf ?? ''}#${settings.local.method ?? 'A'}`, firstTier ?? '', normalize(message)].join('\0')).digest('hex');
     const hit = cache.get(key);
     if (hit && (!hit.fragment || hit.contextKey === store?.contextKey)) { stats.cache_hits++; stats.parsed++; return {sop: hit.sop, parse: recordOf({...hit.result, strategy, cache: 'hit', ms: now() - started, cost_usd: 0, usage: {cost_usd: 0}}, noted)}; }

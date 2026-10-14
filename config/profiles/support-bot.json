@@ -3,13 +3,27 @@
   "description": "Chat support over a memory of procedures: FAQ reflexes with a boundary learned from votes, round-trip checks only on doubtful formalizations, a review queue for knowledge learned in conversations.",
   "base": "default",
   "slots": {
-    "normalize": {"strategy": "translate-llm"},
-    "reflex": {"strategy": "faq-feedback"},
-    "affect": {"strategy": "llm-label"},
-    "formalize": {"strategy": "LocalLLMStepByStep"},
-    "roundtrip": {"strategy": "on-doubt"},
-    "voice": {"strategy": "natural-rephrase"},
-    "commit": {"strategy": "review-queue"}
+    "normalize": {
+      "strategy": "translate-llm"
+    },
+    "reflex": {
+      "strategy": "faq-feedback"
+    },
+    "affect": {
+      "strategy": "llm-label"
+    },
+    "formalize": {
+      "strategy": "DirectSOP"
+    },
+    "roundtrip": {
+      "strategy": "on-doubt"
+    },
+    "voice": {
+      "strategy": "natural-rephrase"
+    },
+    "commit": {
+      "strategy": "review-queue"
+    }
   },
   "allowOverrides": true
 }

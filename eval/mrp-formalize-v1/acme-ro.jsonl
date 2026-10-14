@@ -1,0 +1,16 @@
+{"id": "a01-ro", "form": "list", "question": "Cine lucrează la Acme?", "gold": ["ana", "bogdan", "dan"], "language": "ro"}
+{"id": "a03-ro", "form": "list", "question": "Unde lucrează Ana?", "gold": ["acme"], "language": "ro"}
+{"id": "a04-ro", "form": "list", "question": "Unde se află Globex?", "gold": ["bucharest"], "language": "ro"}
+{"id": "a06-ro", "form": "yes_no", "question": "Dan lucrează la Acme?", "gold": true, "language": "ro"}
+{"id": "a08-ro", "form": "list", "question": "Cine e în proiectul Apollo?", "gold": ["ana", "dan"], "language": "ro"}
+{"id": "a10-ro", "form": "list", "question": "La ce proiect lucrează Bogdan?", "gold": ["hermes"], "language": "ro"}
+{"id": "a12-ro", "form": "list", "question": "Cine este părintele Carinei?", "gold": ["bogdan"], "language": "ro"}
+{"id": "a14-ro", "form": "list", "question": "Cine e bunicul sau bunica Carinei?", "gold": ["ana"], "language": "ro"}
+{"id": "a17-ro", "form": "count", "question": "Câți oameni lucrează la Acme?", "gold": 3, "language": "ro"}
+{"id": "a21-ro", "form": "join", "question": "În ce oraș e firma la care lucrează Carina?", "gold": ["bucharest"], "language": "ro"}
+{"id": "a23-ro", "form": "join", "question": "Cine lucrează la Acme și e în proiectul Apollo?", "gold": ["ana", "dan"], "language": "ro"}
+{"id": "a27-ro", "form": "yes_no", "question": "Carina lucrează la Globex?", "gold": true, "language": "ro"}
+{"id": "a31-ro", "form": "unknown", "question": "Cine conduce Acme?", "gold": "unknown", "language": "ro"}
+{"id": "a35-ro", "form": "unknown", "question": "Cine lucrează la Initech?", "gold": "unknown", "language": "ro"}
+{"id": "a37-ro", "form": "list", "question": "cn e pe apollo", "gold": ["ana", "dan"], "language": "ro"}
+{"id": "a39-ro", "form": "count", "question": "cati oameni are globex", "gold": 2, "language": "ro"}

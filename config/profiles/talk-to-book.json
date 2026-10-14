@@ -1,0 +1,39 @@
+{
+  "name": "Talk to a book",
+  "description": "Questions about an ingested corpus: the vocabulary of the book is discovered (llm-consolidate) and reviewed, formalization is one call over the memory vocabulary (DirectSOP; switch to SchemaGuidedLLM once a schema is reviewed), doubtful formalizations are checked by a round trip that warns, and the answer is phrased in the user's language.",
+  "base": "default",
+  "language": {
+    "output": "auto"
+  },
+  "slots": {
+    "normalize": {
+      "strategy": "translate-llm"
+    },
+    "affect": {
+      "strategy": "lexicon"
+    },
+    "reflex": {
+      "strategy": "faq-fixed"
+    },
+    "formalize": {
+      "strategy": "DirectSOP"
+    },
+    "roundtrip": {
+      "strategy": "on-doubt",
+      "params": {
+        "onMismatch": "warn"
+      }
+    },
+    "voice": {
+      "strategy": "natural-rephrase"
+    },
+    "commit": {
+      "strategy": "review-queue"
+    },
+    "discover": {
+      "strategy": "llm-consolidate"
+    }
+  },
+  "faq": [],
+  "allowOverrides": true
+}

@@ -7,13 +7,16 @@ What a user or an API client talks to is a **Symbolic Model**: a base memory (fa
 | Slot | What it does | Example strategies |
 | --- | --- | --- |
 | normalize | the message in clean English, with its language | translate-llm, translate-if-foreign, proofread-llm, passthrough |
-| reflex | instant answers from the Model's FAQ | faq-fixed, faq-margin, faq-feedback (boundary learned from votes), faq-llm-judge, off |
-| affect | emotion and urgency, for tone only | formalizer-pragmatic, llm-label, off |
-| formalize … render | the symbolic core: SOP circuits, validation, linking, retrieval, reasoning, oracle verification, deterministic English answer | LocalLLMStepByStep, InternalReasoningStepByStep, Routed, DirectVerified, … |
-| roundtrip | restate the circuit and compare it with the message | on-doubt, lexical-always, lexical-sampled, llm-judge, off |
-| voice | the answer in the user's language, adding no fact | natural-rephrase, translate-only, english-only |
+| affect | emotion and urgency, for tone and for affect reflexes | lexicon, lexicon-then-llm, llm-label, formalizer-pragmatic, off |
+| reflex | instant answers: pattern and affect reflexes, the Model's FAQ | faq-hybrid, faq-fixed, faq-margin, faq-feedback, faq-llm-judge, faq-llm-select, pattern-reflex, off |
+| formalize | SOP circuits from the English text | DirectSOP, SchemaGuidedLLM, SchemaOrDirect, Ensemble, EnsembleOneShot, LocalLLMStepByStep, InternalReasoningStepByStep, Routed, DirectVerified |
+| admit … render | validation, linking, retrieval, the symbolic engines, oracle verification, deterministic English answer | reason: strategy-router or a named engine; verify: oracle-js, oracle-always, cross-engine, off |
+| roundtrip | restate the circuit and compare it with the message | on-doubt, judge-on-doubt, lexical-always, lexical-sampled, llm-judge, off |
+| voice | the answer in the user's language, adding no fact | natural-rephrase, natural-if-foreign, translate-only, english-only |
 | commit | what session knowledge does to the memory | manual, review-queue, auto-validated, never |
-| discover | value schemas from a corpus | manual, splade-stats, llm-consolidate, frame-seed, three SAE strategies |
+| discover | value schemas from a corpus | manual, llm-consolidate, term-stats and splade-stats (strategy service) |
+
+The catalog (`GET /v1/mrp/strategies?check=1`, `/models`) also lists documented designs that are not implemented yet (SPLADE routing, SAE, dependency scaffolds, controlled English, graph retrieval) with the status `not-implemented`, apart from strategies that only miss a dependency. Prompts are Ploinky Workers tasks in Markdown under `config/tasks/`; value schemas (`schema`, `extractor`) and reflexes (`reflex`) are knowledge wires of a base memory. The strategies that need Python run in the strategy service (`python3 services/strategy-service/server.py`).
 
 Everything inside works in English; a model translates at the start of a turn and phrases the answer at the end. Every model call goes through **Ploinky Workers** (`pworker`) by tier name. SOP Lang is accepted in two surfaces: canonical field lines and compact `@id type key=value` pairs.
 

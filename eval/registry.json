@@ -65,7 +65,9 @@
   ],
   "ignoredScripts": {
     "start": "starts the server",
-    "pworker": "the Ploinky Workers CLI"
+    "pworker": "the Ploinky Workers CLI",
+    "test:fast": "the fast subset of npm test: every folder but engines, reasoning, memory and eval-tooling (about a third of the time)",
+    "test:full": "the same run as npm test"
   },
   "headlineOrder": [
     "books",
@@ -2691,6 +2693,72 @@
         "tests/mrp/pipeline.test.mjs",
         "tests/mrp/server.test.mjs"
       ]
+    },
+    {
+      "id": "eval-mrp-slots",
+      "title": "MRP slots before the core: reflex boundary and affect (eval/mrp-slots-v1)",
+      "kind": "live-eval",
+      "measures": "The MRP slots around the core, every strategy on the same cases: reflex (eval/mrp-slots-v1, 46 cases over the acme-demo FAQ: right, wrong, intrusive, missed, precision, recall), affect (the same file, or the 300 labelled messages of eval/pragmatics-v1 behind a normalize strategy: accuracy, macro P/R, emotion detection), roundtrip (catch rate of misread circuits and false alarms, from a formalize run) and voice (share of phrasings that pass the fidelity guard per language).",
+      "components": [
+        "conversation"
+      ],
+      "paths": [
+        "tools/eval/mrp/slots.mjs",
+        "tools/eval/mrp/roundtrip.mjs",
+        "tools/eval/mrp/voice.mjs",
+        "eval/mrp-slots-v1/"
+      ],
+      "modelCalls": {
+        "level": "cloud",
+        "typical": "none offline; with --live one call per case for faq-llm-judge candidates and llm-label",
+        "cost": "a few cents per live run on a flash tier"
+      },
+      "dataSource": [
+        "self-written"
+      ],
+      "command": "node tools/eval/mrp/slots.mjs [--live --tier fast] [--set pragmatics --normalize translate-llm]; node tools/eval/mrp/roundtrip.mjs; node tools/eval/mrp/voice.mjs",
+      "runsIn": [
+        "manual"
+      ],
+      "status": "active",
+      "latest": {
+        "result": "live 2026-10-14, tier fast: reflex faq-fixed P 0.875 R 0.467, faq-llm-judge P 1.0 R 0.533 (10 calls); affect lexicon 0.958, llm-label 1.0 (24 calls). A small dev set written next to the lexicon, not a held-out measure",
+        "date": "2026-10-14",
+        "path": "eval/reports/current/mrp-slots/2026-10-14.json"
+      },
+      "runtime": "under 1 s offline; about 2 min live on a flash tier"
+    },
+    {
+      "id": "eval-mrp-formalize",
+      "title": "MRP formalize slot: every formalize strategy on the same questions (eval/mrp-formalize-v1)",
+      "kind": "live-eval",
+      "measures": "40 acme-demo questions with hand gold (lists, yes/no, counts, rule-derived relations, joins, casual wording, 6 unanswerable), the 32 commonsense questions and 16 Romanian acme questions behind a normalize strategy, through the chat turn of ChatSOPAdapter: correct, wrong, honest unknown, parser failed, abstention on unanswerable questions, latency, model calls and tokens from Ploinky's request log.",
+      "components": [
+        "formalizer"
+      ],
+      "paths": [
+        "tools/eval/mrp/formalize.mjs",
+        "eval/mrp-formalize-v1/"
+      ],
+      "modelCalls": {
+        "level": "cloud",
+        "typical": "1 to 60 calls per question depending on the strategy",
+        "cost": "under 1 USD per full run on a flash tier"
+      },
+      "dataSource": [
+        "self-written"
+      ],
+      "command": "node tools/eval/mrp/formalize.mjs --suites acme,commonsense --tier fast; node tools/eval/mrp/formalize.mjs --suites acme-ro --strategies DirectSOP --normalize translate-llm",
+      "runsIn": [
+        "manual"
+      ],
+      "status": "active",
+      "runtime": "about 1 to 2 hours for all strategies on a flash tier",
+      "latest": {
+        "result": "acme: DirectSOP 0.925 (0 wrong, 1.1 calls/q), SchemaGuidedLLM 0.900, LocalLLMStepByStep 0.800 (1 wrong, 6.4 calls/q); see eval/reports/history/mrp-strategies-2026-10-14.md",
+        "date": "2026-10-14",
+        "path": "eval/reports/current/mrp-formalize/report.json"
+      }
     }
   ],
   "archived": [

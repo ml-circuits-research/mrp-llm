@@ -17,7 +17,7 @@
       "strategy": "faq-fixed"
     },
     "formalize": {
-      "strategy": "LocalLLMStepByStep",
+      "strategy": "DirectSOP",
       "params": {
         "tier": "fast"
       }

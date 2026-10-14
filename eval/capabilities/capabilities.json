@@ -227,9 +227,9 @@
   "link×certainty"
  ],
  "counts": {
-  "capabilities": 994,
+  "capabilities": 1048,
   "combinations": 556,
-  "knowledge": 662,
+  "knowledge": 716,
   "model": 270
  },
  "capabilities": [
@@ -634,6 +634,478 @@
   },
   {
    "id": "k.field.lexeme.quote",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "text"
+  },
+  {
+   "id": "k.wire.schema",
+   "surface": "knowledge",
+   "kind": "wire",
+   "layers": [
+    "L1"
+   ],
+   "doc": "A value schema of a Model: the predicates (by ~id) of one domain, the lexemes that trigger them and the kinds of entity they are about, with who proposed it (manual or a discover strategy), a version and a review status. Only reviewed schemas guide formalization; a proposed one waits for review; a deprecated one is kept for history."
+  },
+  {
+   "id": "k.field.schema.name",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": true,
+   "valueKind": "text"
+  },
+  {
+   "id": "k.field.schema.domain",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "sym"
+  },
+  {
+   "id": "k.field.schema.predicate",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "many",
+   "required": true,
+   "valueKind": "ref"
+  },
+  {
+   "id": "k.field.schema.lexeme",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "many",
+   "required": false,
+   "valueKind": "ref"
+  },
+  {
+   "id": "k.field.schema.entity_type",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "many",
+   "required": false,
+   "valueKind": "sym"
+  },
+  {
+   "id": "k.field.schema.provenance",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "enum"
+  },
+  {
+   "id": "k.enum.schema.provenance.manual",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.schema.provenance.splade-stats",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.schema.provenance.llm-consolidate",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.schema.provenance.frame-seed",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.schema.provenance.sae-llm-activations",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.schema.provenance.sae-sentence-embeddings",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.schema.provenance.sae-pretrained-dictionary",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.field.schema.version",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "posint"
+  },
+  {
+   "id": "k.field.schema.status",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "enum"
+  },
+  {
+   "id": "k.enum.schema.status.proposed",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.schema.status.reviewed",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.schema.status.deprecated",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.field.schema.description",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "text"
+  },
+  {
+   "id": "k.field.schema.source",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "text"
+  },
+  {
+   "id": "k.wire.reflex",
+   "surface": "knowledge",
+   "kind": "wire",
+   "layers": [
+    "L1"
+   ],
+   "doc": "A prepared reaction of a Symbolic Model, tried before formalization: a trigger (a case-insensitive regular expression over the English message, an affect label, or both) and a reply mode (stop answers and ends the turn, continue puts the reply before the computed answer, pragmatic only gives the voice a tone line). A higher priority is tried first. Reflex wires are knowledge: they enter a base memory through review like any other wire."
+  },
+  {
+   "id": "k.field.reflex.pattern",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "text"
+  },
+  {
+   "id": "k.field.reflex.affect",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "enum"
+  },
+  {
+   "id": "k.enum.reflex.affect.frustrated",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.reflex.affect.urgent",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.reflex.affect.confused",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.reflex.affect.grateful",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.reflex.affect.angry",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.reflex.affect.happy",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.reflex.affect.sad",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.field.reflex.mode",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "enum"
+  },
+  {
+   "id": "k.enum.reflex.mode.stop",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.reflex.mode.continue",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.reflex.mode.pragmatic",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.field.reflex.reply",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "text"
+  },
+  {
+   "id": "k.field.reflex.tone",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "text"
+  },
+  {
+   "id": "k.field.reflex.priority",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "int"
+  },
+  {
+   "id": "k.field.reflex.source",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "text"
+  },
+  {
+   "id": "k.wire.extractor",
+   "surface": "knowledge",
+   "kind": "wire",
+   "layers": [
+    "L1"
+   ],
+   "doc": "An extraction recipe of a schema: the formalize strategy that extracts its instances, the triggers that select it (terms, SAE features or patterns, as text), the Ploinky task of its prompt and the wire types it is expected to write."
+  },
+  {
+   "id": "k.field.extractor.schema",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": true,
+   "valueKind": "ref"
+  },
+  {
+   "id": "k.field.extractor.strategy",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": true,
+   "valueKind": "enum"
+  },
+  {
+   "id": "k.enum.extractor.strategy.SchemaGuidedLLM",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.extractor.strategy.SpladeRouted",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.extractor.strategy.SaeRouted",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.enum.extractor.strategy.DependencyScaffold",
+   "surface": "knowledge",
+   "kind": "enum",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.field.extractor.trigger",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "many",
+   "required": false,
+   "valueKind": "text"
+  },
+  {
+   "id": "k.field.extractor.task",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "one",
+   "required": false,
+   "valueKind": "text"
+  },
+  {
+   "id": "k.field.extractor.output",
+   "surface": "knowledge",
+   "kind": "field",
+   "layers": [
+    "L1"
+   ],
+   "card": "many",
+   "required": false,
+   "valueKind": "sym"
+  },
+  {
+   "id": "k.field.extractor.source",
    "surface": "knowledge",
    "kind": "field",
    "layers": [
@@ -5839,6 +6311,14 @@
    ]
   },
   {
+   "id": "k.check.bad_pattern",
+   "surface": "knowledge",
+   "kind": "check",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
    "id": "k.check.bad_prefer",
    "surface": "knowledge",
    "kind": "check",
@@ -6303,6 +6783,22 @@
    ]
   },
   {
+   "id": "k.check.reflex_without_reply",
+   "surface": "knowledge",
+   "kind": "check",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.check.reflex_without_trigger",
+   "surface": "knowledge",
+   "kind": "check",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
    "id": "k.check.repeated_field",
    "surface": "knowledge",
    "kind": "check",
@@ -6336,6 +6832,14 @@
   },
   {
    "id": "k.check.role_class_unknown",
+   "surface": "knowledge",
+   "kind": "check",
+   "layers": [
+    "L1"
+   ]
+  },
+  {
+   "id": "k.check.schema_member_type",
    "surface": "knowledge",
    "kind": "check",
    "layers": [

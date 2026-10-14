@@ -41,6 +41,16 @@ export const REPLY_SLOT = /\{\{([a-z][a-z0-9_]*)\}\}/g;
 export const CODE_PRODUCERS = ['renderer', 'llm-agent', 'user', 'dream'];
 export const ARG_TYPES = ['entity', 'integer', 'text', 'time', 'value', NUMERIC_ARG_TYPE];
 const APPROVALS = ['proposed', 'approved', 'contested', 'rejected', 'superseded', 'retired'];
+/** Who proposed a value schema (DS028 "Value schemas"): a person, or one discover strategy of the MRP catalog. */
+export const SCHEMA_PROVENANCE = ['manual', 'splade-stats', 'llm-consolidate', 'frame-seed', 'sae-llm-activations', 'sae-sentence-embeddings', 'sae-pretrained-dictionary'];
+/** The review state of a schema: only `reviewed` schemas guide formalization (SchemaGuidedLLM). */
+export const SCHEMA_STATUS = ['proposed', 'reviewed', 'deprecated'];
+/** The formalize strategies an extractor recipe can name (DS028 "Routed formalizers"). */
+/** The reply modes of a reflex (DS025 "Reflex boundary"): end the turn, preface the computed answer, or only tune the voice. */
+export const REFLEX_MODES = ['stop', 'continue', 'pragmatic'];
+/** The affect labels a reflex can react to (lib/mrp/pipeline.mjs, the affect slot). */
+export const AFFECT_LABELS = ['frustrated', 'urgent', 'confused', 'grateful', 'angry', 'happy', 'sad'];
+export const EXTRACTOR_STRATEGIES = ['SchemaGuidedLLM', 'SpladeRouted', 'SaeRouted', 'DependencyScaffold'];
 
 const one = (kind, extra = {}) => ({card: 'one', kind, ...extra});
 const many = (kind, extra = {}) => ({card: 'many', kind, ...extra});
@@ -60,6 +70,21 @@ export const GRAMMAR = {
     status: 'new', side: 'knowledge',
     doc: 'One lexicalization of one predicate: the relation phrases (model-language convention: the lemma with its particles and prepositions, the copula included for copular phrases) in one language, the part of speech, and the roles the surface realizes in order (the grammatical subject first; a converse lists the object role first). A restrict line limits the form to values of a class; two predicates that share a form with the same frame must declare restrict or distinct weights.',
     fields: {of: req(one('sym')), language: req(one('langcode')), pos: one('enum', {values: LEXEME_POS}), form: req(many('phrase')), frame: req(one('rolelist')), restrict: many('restrict'), weight: one('int'), source: one('text'), quote: one('text')}
+  },
+  schema: {
+    status: 'new (MRP-LLM, DS028)', side: 'knowledge',
+    doc: 'A value schema of a Model: the predicates (by ~id) of one domain, the lexemes that trigger them and the kinds of entity they are about, with who proposed it (manual or a discover strategy), a version and a review status. Only reviewed schemas guide formalization; a proposed one waits for review; a deprecated one is kept for history.',
+    fields: {name: req(one('text')), domain: one('sym'), predicate: req(many('ref')), lexeme: many('ref'), entity_type: many('sym'), provenance: one('enum', {values: SCHEMA_PROVENANCE}), version: one('posint'), status: one('enum', {values: SCHEMA_STATUS}), description: one('text'), source: one('text')}
+  },
+  reflex: {
+    status: 'new (MRP-LLM, DS025)', side: 'knowledge',
+    doc: 'A prepared reaction of a Symbolic Model, tried before formalization: a trigger (a case-insensitive regular expression over the English message, an affect label, or both) and a reply mode (stop answers and ends the turn, continue puts the reply before the computed answer, pragmatic only gives the voice a tone line). A higher priority is tried first. Reflex wires are knowledge: they enter a base memory through review like any other wire.',
+    fields: {pattern: one('text'), affect: one('enum', {values: AFFECT_LABELS}), mode: one('enum', {values: REFLEX_MODES}), reply: one('text'), tone: one('text'), priority: one('int'), source: one('text')}
+  },
+  extractor: {
+    status: 'new (MRP-LLM, DS028)', side: 'knowledge',
+    doc: 'An extraction recipe of a schema: the formalize strategy that extracts its instances, the triggers that select it (terms, SAE features or patterns, as text), the Ploinky task of its prompt and the wire types it is expected to write.',
+    fields: {schema: req(one('ref')), strategy: req(one('enum', {values: EXTRACTOR_STRATEGIES})), trigger: many('text'), task: one('text'), output: many('sym'), source: one('text')}
   },
   entity: {
     status: 'new', side: 'knowledge',

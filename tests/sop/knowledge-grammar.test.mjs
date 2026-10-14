@@ -24,7 +24,7 @@ const read = rel => fs.readFileSync(new URL('../../' + rel, import.meta.url), 'u
 const errors = r => r.problems.filter(p => p.severity !== 'warning').map(p => p.code);
 
 test('the grammar has the wire types of DS004 and shares its words with the model language', () => {
-  assert.deepEqual(Object.keys(GRAMMAR), ['predicate', 'lexeme', 'entity', 'fact', 'rule', 'default', 'integrity', 'reply', 'aggregate', 'constraint', 'action', 'method', 'norm', 'procedure', 'amendment', 'argument', 'trace', 'goal', 'hypothesis', 'policy', 'stated', 'query', 'test', 'code', 'pack']);
+  assert.deepEqual(Object.keys(GRAMMAR), ['predicate', 'lexeme', 'schema', 'reflex', 'extractor', 'entity', 'fact', 'rule', 'default', 'integrity', 'reply', 'aggregate', 'constraint', 'action', 'method', 'norm', 'procedure', 'amendment', 'argument', 'trace', 'goal', 'hypothesis', 'policy', 'stated', 'query', 'test', 'code', 'pack']);
   assert.deepEqual(knowledge.QUERY_MODES, [...QUERY_MODES, ...REASONING_QUERY_MODES]);
   assert.deepEqual(knowledge.ROLE_NAMES, [...ROLE_NAMES]);
   assert.deepEqual(knowledge.LINK_KEYWORDS, [...LINK_WORDS]);

@@ -1,0 +1,66 @@
+# Affect lexicon of the `lexicon` strategy (DS025 affect slot): English cue -> label and intensity in [0, 1].
+# A cue is one or more lowercase words matched on whole words of the normalized English message. Labels: neutral, frustrated,
+# urgent, confused, grateful, angry, happy, sad. Original data of this repository (MIT); edit freely, one cue per line.
+# cue	label	intensity
+again	frustrated	0.3
+still not	frustrated	0.6
+still wrong	frustrated	0.8
+not working	frustrated	0.6
+does not work	frustrated	0.6
+doesn't work	frustrated	0.6
+i already asked	frustrated	0.8
+i already told you	frustrated	0.8
+how many times	frustrated	0.8
+useless	frustrated	0.8
+annoying	frustrated	0.6
+fed up	frustrated	0.8
+ridiculous	frustrated	0.7
+waste of time	frustrated	0.8
+why can't you	frustrated	0.6
+come on	frustrated	0.4
+urgent	urgent	0.8
+urgently	urgent	0.8
+asap	urgent	0.8
+as soon as possible	urgent	0.7
+right now	urgent	0.6
+immediately	urgent	0.7
+quickly	urgent	0.5
+hurry	urgent	0.7
+emergency	urgent	0.9
+deadline	urgent	0.5
+i don't understand	confused	0.7
+i do not understand	confused	0.7
+confused	confused	0.7
+confusing	confused	0.6
+what do you mean	confused	0.6
+makes no sense	confused	0.6
+lost	confused	0.3
+not sure what	confused	0.4
+thank you	grateful	0.6
+thanks	grateful	0.6
+many thanks	grateful	0.8
+grateful	grateful	0.8
+appreciate	grateful	0.6
+much appreciated	grateful	0.8
+angry	angry	0.8
+furious	angry	0.9
+outraged	angry	0.9
+unacceptable	angry	0.8
+stupid	angry	0.7
+hate	angry	0.7
+damn	angry	0.6
+great	happy	0.4
+awesome	happy	0.6
+wonderful	happy	0.6
+perfect	happy	0.5
+glad	happy	0.5
+happy	happy	0.6
+love it	happy	0.7
+excellent	happy	0.5
+sad	sad	0.6
+unhappy	sad	0.6
+disappointed	sad	0.6
+upset	sad	0.6
+sorry to hear	sad	0.4
+lonely	sad	0.7
+depressed	sad	0.8

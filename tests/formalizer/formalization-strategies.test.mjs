@@ -17,7 +17,7 @@ function stubLocal() {
 }
 
 test('formalization is step by step: the strategies are named and selectable; archived one-shot names read as the default', () => {
-  assert.deepEqual(FORMALIZATION_STRATEGIES, ['LocalLLMStepByStep', 'InternalReasoningStepByStep']);
+  assert.deepEqual(FORMALIZATION_STRATEGIES, ['LocalLLMStepByStep', 'InternalReasoningStepByStep', 'DirectSOP', 'SchemaGuidedLLM', 'SchemaOrDirect', 'Ensemble', 'EnsembleOneShot', 'DependencyScaffold', 'SpladeRouted', 'SaeRouted', 'FrameGuided']);
   assert.equal(queryParserSettings({}, {}).strategy, 'LocalLLMStepByStep');
   const archived = queryParserSettings({queryParser: {strategy: 'LLMDirect'}}, {});
   assert.equal(archived.strategy, 'LocalLLMStepByStep');
@@ -105,7 +105,7 @@ test('the tier strategy sends each rung to its Ploinky tier and reports the tier
 test('the strategies listing reports a Ploinky proxy that does not answer, or an explicit endpoint, as unavailable, without starting anything', async () => {
   const parser = createQueryParser({settings: queryParserSettings({queryParser: {}}, {}), fetchImpl: async () => { throw new Error('ECONNREFUSED'); }});
   const listed = await parser.strategies();
-  assert.deepEqual(listed.map(s => s.id), ['LocalLLMStepByStep', 'InternalReasoningStepByStep']);
+  assert.deepEqual(listed.map(s => s.id), ['LocalLLMStepByStep', 'InternalReasoningStepByStep', 'DirectSOP', 'SchemaGuidedLLM', 'SchemaOrDirect', 'Ensemble', 'EnsembleOneShot', 'DependencyScaffold', 'SpladeRouted', 'SaeRouted', 'FrameGuided']);
   const local = listed.find(s => s.id === 'LocalLLMStepByStep');
   assert.equal(local.available, false);
   assert.match(local.reason, /proxy not reachable/);
@@ -132,4 +132,110 @@ test('the step-by-step strategies ask the Ploinky tier tiny: no model server is 
   assert.match((await missing.availability()).reason, /tier tiny is not available/);
   const failing = localStrategy('LocalLLMStepByStep', {}, {fetchImpl: health([{id: 'tiny', x_tier: {error: 'no provider of the chain has a key'}}])});
   assert.match((await failing.availability()).reason, /no provider of the chain has a key/);
+});
+
+test('DirectSOP: one call writes the whole circuit; a validator problem goes back for a repair round on the same tier', async () => {
+  const {localStrategy} = await import('../../lib/formalize/strategies.mjs');
+  const bodies = [];
+  const replies = ['@q query\n  where match\n    relation "approved_by_magic"\n    role subject "ana"\n    polarity affirmed\n  end\n', '```sop\n' + SOP + '```'];
+  const fetchImpl = async (url, init) => {
+    if (String(url).endsWith('/health')) return {ok: true, json: async () => ({ok: true, tiers: [{id: 'small'}]})};
+    const body = JSON.parse(init.body);
+    bodies.push(body);
+    return {ok: true, text: async () => JSON.stringify({choices: [{message: {content: replies[Math.min(bodies.length - 1, 1)]}, finish_reason: 'stop'}], usage: {prompt_tokens: 10, completion_tokens: 5}})};
+  };
+  const s = localStrategy('DirectSOP', {tier: 'small'}, {fetchImpl});
+  assert.deepEqual(s.ladder, ['small']);
+  assert.equal((await s.availability()).available, true);
+  const r = await s.run({message: 'Is Ana cleared?', lexicon});
+  assert.equal(r.ok, true, JSON.stringify(r.validation?.problems));
+  assert.equal(r.status, 'validated');
+  assert.equal(r.model, 'small');
+  assert.equal(bodies.length, 2, 'the first circuit named an unknown predicate and was repaired once');
+  assert.ok(bodies.every(b => b.model === 'small'), 'a one-shot strategy stays on its tier');
+  assert.match(bodies[0].messages.at(-1).content, /Writing the query of a request/, 'the prompt of the task holds the authoring guide');
+  assert.match(bodies[1].messages.at(-1).content, /YOUR query\.sop OF ROUND 1:[\s\S]*found these problems/, 'the repair round repeats the circuit with the validator output');
+  assert.equal(r.repairs.length, 1);
+});
+
+test('SchemaGuidedLLM: the vocabulary is closed; a session definition is refused for repair and the closed note is in the prompt', async () => {
+  const {localStrategy} = await import('../../lib/formalize/strategies.mjs');
+  const bodies = [];
+  const definition = '@cleared2 predicate\n  args subject:entity\n' + SOP;
+  const fetchImpl = async (url, init) => {
+    if (String(url).endsWith('/health')) return {ok: true, json: async () => ({ok: true, tiers: [{id: 'small'}]})};
+    const body = JSON.parse(init.body);
+    bodies.push(body);
+    return {ok: true, text: async () => JSON.stringify({choices: [{message: {content: bodies.length === 1 ? definition : SOP}, finish_reason: 'stop'}], usage: {}})};
+  };
+  const none = await localStrategy('SchemaGuidedLLM', {tier: 'small'}, {fetchImpl}).run({message: 'Is Ana cleared?', lexicon});
+  assert.equal(none.ok, false);
+  assert.match(none.reason, /needs a reviewed value schema/, 'without a reviewed schema the strategy refuses, never falls back to the whole vocabulary');
+  assert.equal(bodies.length, 0, 'no model call without a schema');
+  const schemaLexicon = Lexicon.fromCircuits([{name: 't', text: '@ana entity\n  kind entity\n  label en "Ana"\n@cleared predicate\n  args subject:entity\n@hidden predicate\n  args subject:entity\n@s_security schema\n  name "security"\n  predicate ~cleared\n  status reviewed\n'}]);
+  assert.deepEqual(schemaLexicon.reviewedSchemaPredicates(), ['cleared']);
+  const r = await localStrategy('SchemaGuidedLLM', {tier: 'small'}, {fetchImpl}).run({message: 'Is Ana cleared?', lexicon: schemaLexicon});
+  assert.doesNotMatch(bodies[0].messages.at(-1).content, /\bhidden\b/, 'a predicate outside the reviewed schemas is not offered');
+  assert.match(bodies[0].messages.at(-1).content, /CLOSED SCHEMA/);
+  assert.match(bodies[0].messages.at(-1).content, /cleared/, 'every predicate of the memory is offered');
+  assert.equal(r.retrieval.closed, true);
+  assert.equal(r.ok, true);
+  assert.ok(r.repairs[0].problems.includes('schema_closed'), JSON.stringify(r.repairs));
+  assert.equal(r.vocabulary_dialog.rounds, 0, 'a closed schema opens no vocabulary dialog');
+});
+
+test('a one-shot strategy reports a tier that is not served, and a cut reply is never read as a circuit', async () => {
+  const {localStrategy} = await import('../../lib/formalize/strategies.mjs');
+  const missing = localStrategy('DirectSOP', {tier: 'small'}, {fetchImpl: async () => ({ok: true, json: async () => ({ok: true, tiers: []})})});
+  assert.match((await missing.availability()).reason, /tier small is not available/);
+  const fetchImpl = async () => ({ok: true, text: async () => JSON.stringify({choices: [{message: {content: SOP}, finish_reason: 'length'}], usage: {}})});
+  const r = await localStrategy('DirectSOP', {tier: 'small'}, {fetchImpl}).run({message: 'Is Ana cleared?', lexicon});
+  assert.equal(r.ok, false);
+  assert.equal(r.status, 'failed');
+  assert.match(r.reason, /truncated/);
+});
+
+test('Ensemble: two agreeing members win; no agreement keeps the first valid circuit and records the disagreement as a doubt', async () => {
+  const {localStrategy, circuitSignature, ENSEMBLE_MEMBERS} = await import('../../lib/formalize/strategies.mjs');
+  const {doubted} = await import('../../lib/mrp/pipeline.mjs');
+  assert.deepEqual(ENSEMBLE_MEMBERS, ['DirectSOP', 'SchemaGuidedLLM', 'LocalLLMStepByStep']);
+  assert.equal(circuitSignature('@q query\n  select ?x\n  where p ?x "ana"'), circuitSignature('@q7 query\n  where p ?who "ana"\n  select ?who'), 'names do not matter');
+  const renamed = SOP.replace('@q query', '@main query');
+  // The one-shot members answer with the same circuit (renamed); the step-by-step member's questions get unreadable answers.
+  const fetchImpl = async (url, init) => {
+    if (String(url).endsWith('/health')) return {ok: true, json: async () => ({ok: true, tiers: [{id: 'small'}]})};
+    const body = JSON.parse(init.body);
+    const prompt = body.messages.at(-1).content;
+    const text = /Writing the query of a request/.test(prompt) ? (/CLOSED SCHEMA/.test(prompt) ? renamed : SOP) : 'I am not sure';
+    return {ok: true, text: async () => JSON.stringify({choices: [{message: {content: text}, finish_reason: 'stop'}], usage: {}})};
+  };
+  const withSchema = Lexicon.fromCircuits([{name: 't', text: '@ana entity\n  kind entity\n  label en "Ana"\n@cleared predicate\n  args subject:entity\n@s_security schema\n  name "security"\n  predicate ~cleared\n'}]);
+  const r = await localStrategy('Ensemble', {tier: 'small'}, {fetchImpl}).run({message: 'Is Ana cleared?', lexicon: withSchema});
+  assert.equal(r.ok, true);
+  assert.equal(r.ensemble.agreement, 'majority');
+  assert.equal(r.ensemble.chosen, 'DirectSOP');
+  assert.deepEqual(r.ensemble.members.filter(m => m.agrees).map(m => m.strategy), ['DirectSOP', 'SchemaGuidedLLM']);
+  assert.deepEqual(doubted({modelSop: r.sop, parse: {ensemble: r.ensemble}}), []);
+  assert.deepEqual(doubted({modelSop: SOP, parse: {ensemble: {agreement: 'none'}}}), ['the formalizers of the ensemble disagreed']);
+});
+
+test('SchemaOrDirect follows the memory: the closed schema when one is reviewed, DirectSOP otherwise; EnsembleOneShot runs the two one-shot authors', async () => {
+  const {localStrategy} = await import('../../lib/formalize/strategies.mjs');
+  const prompts = [];
+  const fetchImpl = async (url, init) => {
+    if (String(url).endsWith('/health')) return {ok: true, json: async () => ({ok: true, tiers: [{id: 'small'}]})};
+    prompts.push(JSON.parse(init.body).messages.at(-1).content);
+    return {ok: true, text: async () => JSON.stringify({choices: [{message: {content: SOP}, finish_reason: 'stop'}], usage: {}})};
+  };
+  const withSchema = Lexicon.fromCircuits([{name: 't', text: '@ana entity\n  kind entity\n  label en "Ana"\n@cleared predicate\n  args subject:entity\n@s schema\n  name "s"\n  predicate ~cleared\n'}]);
+  const s = localStrategy('SchemaOrDirect', {tier: 'small'}, {fetchImpl});
+  const a = await s.run({message: 'Is Ana cleared?', lexicon: withSchema});
+  assert.equal(a.chosen, 'SchemaGuidedLLM');
+  assert.match(prompts.at(-1), /CLOSED SCHEMA/);
+  const b = await s.run({message: 'Is Ana cleared?', lexicon});
+  assert.equal(b.chosen, 'DirectSOP');
+  assert.doesNotMatch(prompts.at(-1), /CLOSED SCHEMA/);
+  const e = await localStrategy('EnsembleOneShot', {tier: 'small'}, {fetchImpl}).run({message: 'Is Ana cleared?', lexicon: withSchema});
+  assert.equal(e.ensemble.agreement, 'unanimous');
+  assert.deepEqual(e.ensemble.members.map(m => m.strategy), ['DirectSOP', 'SchemaGuidedLLM']);
 });

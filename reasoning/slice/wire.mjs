@@ -104,7 +104,7 @@ export class Theory {
         this.predicates.set(w.id, w);
         if (value(w, 'closed') === 'true') this.closed.add(w.id);
         return;
-      case 'lexeme': case 'entity': case 'reply': return;
+      case 'lexeme': case 'schema': case 'extractor': case 'reflex': case 'entity': case 'reply': return;
       case 'rule': return this.rec(w, 'rule', naturalAtom(value(w, 'then')), atomsOf(w, 'when'));
       case 'default': return this.rec(w, 'default', naturalAtom(value(w, 'then')), atomsOf(w, 'when'), atomsOf(w, 'except'));
       case 'aggregate': return this.rec(w, 'aggregate', naturalAtom(value(w, 'yields')), atomsOf(w, 'over'));
@@ -214,7 +214,7 @@ function timeWindow(w) {
  * @param seed     the seed of `order random` (DS004 "Sampling"), passed to the StrategyRouter
  * @returns the oracle's packet with `retrieval` (R-P5): slice size, predicates, bounds, whether it is complete and why not
  */
-export function askMemory({theory, repo, session, query, lexicon = null, registry = new StrategyRegistry(), strategy = 'hybrid', limits = {}, budget = {}, reasoning = 'auto', verify = 'auto', verifyBudget = {}, seed = Date.now()}) {
+export function askMemory({theory, repo, session, query, lexicon = null, registry = new StrategyRegistry(), strategy = 'hybrid', limits = {}, budget = {}, reasoning = 'auto', verify = 'auto', verifyBudget = {}, crossEngine = null, seed = Date.now()}) {
   const {wires: qWires, errors} = parse(query);
   if (errors.length) throw new ProgramError(errors[0].code, `query: ${errors[0].message} (line ${errors[0].line})`);
   const qw = qWires.find(w => w.type === 'query');
@@ -263,7 +263,7 @@ export function askMemory({theory, repo, session, query, lexicon = null, registr
   // strategy id exactly that engine (AGENTS.md rule 8). The oracle stays the product route and the verifier.
   const solve = memory => routedAsk({
     handle: {kind: 'js-reference-handle', knowledge: '', wires: [...unique, ...memory.facts.map(f => factWire(lowering, f.id, f, f.kind === 'assumed' ? 'supposed' : 'observed'))]},
-    query, queryWires: qWires, requested: reasoning, verify, verifyBudget, budget, seed,
+    query, queryWires: qWires, requested: reasoning, verify, verifyBudget, budget, seed, crossEngine,
   });
 
   const answer = answerOverSlice({memory: first, query: {mode}, solve, decide: judgeWire});

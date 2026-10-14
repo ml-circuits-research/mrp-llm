@@ -3,12 +3,33 @@
   "description": "Decisions under rules: no reflexes, every formalization checked by a round trip that warns the user on a mismatch, a literal translation of the answer, and no knowledge written from conversations.",
   "base": "default",
   "slots": {
-    "normalize": {"strategy": "translate-llm", "params": {"formalize": false}},
-    "reflex": {"strategy": "off"},
-    "formalize": {"strategy": "LocalLLMStepByStep", "params": {"tier": "small"}},
-    "roundtrip": {"strategy": "lexical-always", "params": {"onMismatch": "warn"}},
-    "voice": {"strategy": "translate-only"},
-    "commit": {"strategy": "never"}
+    "normalize": {
+      "strategy": "translate-llm",
+      "params": {
+        "formalize": false
+      }
+    },
+    "reflex": {
+      "strategy": "off"
+    },
+    "formalize": {
+      "strategy": "Ensemble",
+      "params": {
+        "tier": "small"
+      }
+    },
+    "roundtrip": {
+      "strategy": "lexical-always",
+      "params": {
+        "onMismatch": "warn"
+      }
+    },
+    "voice": {
+      "strategy": "translate-only"
+    },
+    "commit": {
+      "strategy": "never"
+    }
   },
   "allowOverrides": false
 }

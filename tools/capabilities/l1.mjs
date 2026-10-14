@@ -38,6 +38,9 @@ export const EXTRA = path.join(ROOT, 'eval/capabilities/l1-cases.json');
 /** Context circuits shared by the skeletons: predicates, an action, an old rule, a contrary default, a soft norm, a procedure. */
 const CTX = `@p predicate
   args subject:entity
+@s_ctx schema
+  name "ctx"
+  predicate ~p
 @q predicate
   args subject:entity
 @r2 predicate
@@ -85,6 +88,9 @@ const CTX = `@p predicate
 const SKELETON = {
   predicate: {fields: [['args', 'subject:entity object:entity']]},
   lexeme: {fields: [['of', 'p'], ['language', 'en'], ['form', '"is p"'], ['frame', 'subject']]},
+  schema: {fields: [['name', '"s"'], ['predicate', '~p']]},
+  reflex: {fields: [['pattern', '"hi"'], ['reply', '"Hello."']]},
+  extractor: {fields: [['schema', '~s_ctx'], ['strategy', 'SchemaGuidedLLM']]},
   entity: {fields: [['kind', 'entity'], ['label', 'en "W"']]},
   fact: {fields: [['holds', 'p b']]},
   rule: {fields: [['when', 'p ?x'], ['then', 'q ?x']]},
@@ -126,6 +132,7 @@ const PATCH = {
   'predicate.describe_rank': {set: [['reading', 'describe'], ['describe_rank', '1']]},
   'predicate.unit': {set: [['unit', '"kg"']]},
   'lexeme.restrict': {set: [['restrict', 'subject entity']]},
+  'schema.lexeme': {set: [['lexeme', '~lx_ctx']], ctx: '@lx_ctx lexeme\n  of p\n  language en\n  form "is p"\n  frame subject\n'},
   'lexeme.frame': {set: [['frame', 'subject']]},
   'fact.speaker': {set: [['speaker', '"Ann"'], ['status', 'reported']]},
   'fact.valid': {set: [['valid', '2020-01-01 2021-01-01']]},
@@ -205,6 +212,7 @@ PATCH['query.candidate'] = {set: [['mode', 'abduce'], ['where', 'q b'], ['candid
 for (const k of Object.keys(GOV)) for (const t of ['default', 'integrity', 'action', 'method', 'norm', 'code']) PATCH[`${t}.${k}`] ??= PATCH[`rule.${k}`];
 /** Enum values that need more than the value itself (a query mode with its forms). */
 const ENUM_PATCH = {
+  'reflex.mode.pragmatic': {set: [['mode', 'pragmatic'], ['tone', '"Stay calm."']], remove: ['reply']},
   'query.mode.every': {set: [['mode', 'every'], ['scope', 'p ?x']], remove: ['select']},
   'query.mode.explain': {set: [['mode', 'explain'], ['where', 'val a 3']], remove: ['select', 'where']},
   'query.mode.exists': {set: [['mode', 'exists'], ['where', 'val a 3']], remove: ['select', 'where']},

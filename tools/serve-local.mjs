@@ -18,11 +18,16 @@ import '../lib/env-aliases.mjs';
 import os from 'node:os';
 import {startServer} from '../server/http.mjs';
 import {assert} from '../lib/util.mjs';
+import {startStrategyService} from '../lib/mrp/strategy-service.mjs';
 
 const host = process.env.CHATSOP_HOST ?? '0.0.0.0';
 const port = Number(process.env.CHATSOP_PORT ?? 9999);
 
 const server = await startServer({host, port, ...(process.env.CHATSOP_CONFIG ? {configPath: process.env.CHATSOP_CONFIG} : {})});
+// The MRP strategy service (services/strategy-service, DS028 "External strategies"): started with the server when it does not run
+// (config mrp.strategyService.autostart, default true), stopped with it.
+const serviceConfig = server.config?.mrp?.strategyService ?? {};
+const service = serviceConfig.autostart === false ? null : await startStrategyService({url: process.env.MRP_STRATEGY_SERVICE_URL ?? serviceConfig.url ?? undefined}).catch(e => ({started: false, reason: e.message}));
 const address = server.address();
 assert(address && typeof address === 'object', 'Server did not report an address');
 const shown = host === '0.0.0.0'
@@ -48,6 +53,7 @@ if (server.auth?.configured) {
 }
 console.log(`\nFormalizer: ${server.queryParser?.settings.strategy ?? 'LocalLLMStepByStep'}, tier ladder ${(server.queryParser?.settings.models ?? []).join(' -> ') || '(none configured)'}; without its first tier the chat answers parse_unavailable (503). The home page shows the state.`);
 if (host !== '127.0.0.1' && host !== '::1' && host !== 'localhost') console.log('Remote binding: the documentation path is unauthenticated, so expose this only on a trusted network.');
+console.log(service ? `Strategy service: ${service.started ? 'started' : service.child === null ? 'already running' : `not started (${service.reason})`}` : 'Strategy service: autostart off');
 console.log('Stop with Ctrl+C.\n');
 
 // A managed local model server (queryParser.local with an endpoint or a GGUF) is a child process: stop it on exit.

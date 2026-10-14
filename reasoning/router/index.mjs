@@ -98,6 +98,7 @@ const sampled = (seed, rate) => rate >= 1 || (rate > 0 && parseInt(digest(seed).
  * @param verify      'auto' (default: the policy above), 'always', 'never', or 'offline' (defer replay for the report pass)
  * @param verifyBudget independent trusted oracle-replay limits; never changes execution routing
  * @param seed        the seed of `order random` (the turn time or an explicit seed); reported in the packet's `sample`
+ * @param crossEngine null (default), 'auto' or an engine id: a second engine answers too (routeOnce)
  */
 export function routedAsk({query, queryWires = null, seed = Date.now(), ...rest}) {
   if (!queryWires) {
@@ -136,7 +137,39 @@ export function readSampling(queryWires) {
   };
 }
 
-function routeOnce({handle, query, queryWires, requested = 'auto', budget = {}, verifyBudget = {}, verify = 'auto', config = ROUTER_DEFAULTS}) {
+/**
+ * One routed answer, then the cross-engine check when `crossEngine` names a second engine (`auto`: the first other installed routable
+ * engine; MRP verify strategy cross-engine, DS025). The second engine answers the same problem; agreement is recorded in
+ * `route.cross_engine`. On a disagreement the oracle decides: the answer that equals the oracle's stays (or replaces the first when the
+ * question named no engine); an explicitly requested engine is never substituted and a disagreement answers `verification_discrepancy`.
+ */
+function routeOnce({crossEngine = null, ...args}) {
+  const packet = routeCore(args);
+  return crossEngine ? crossCheck(packet, {...args, crossEngine}) : packet;
+}
+
+function crossCheck(packet, {handle, query, queryWires, requested = 'auto', budget = {}, verifyBudget = {}, crossEngine}) {
+  const chosen = packet.route?.chosen ?? null;
+  if (!chosen || packet.status === 'unsupported') return packet;
+  // Every installed engine but the one that answered and the oracle; `auto` prefers the routable ones (those the router itself may choose).
+  const others = Object.keys(ENGINES).filter(id => id !== chosen && id !== ORACLE && ENGINES[id].available()).sort((a, b) => Number(ENGINES[b].routable) - Number(ENGINES[a].routable));
+  const second = crossEngine === 'auto' ? others[0] : others.includes(crossEngine) ? crossEngine : null;
+  const note = cross => ({...packet, route: {...packet.route, cross_engine: cross}});
+  if (!second) return note({engine: crossEngine === 'auto' ? null : crossEngine, outcome: 'unavailable', reason: crossEngine === 'auto' ? 'no second installed engine besides the one that answered' : `${crossEngine} is not installed, is the engine that answered, or is the oracle`});
+  let other;
+  try { other = ENGINES[second].ask({handle, query, queryWires}, budget); }
+  catch (e) { if (e instanceof NotExpressibleError) return note({engine: second, outcome: 'not_expressible', reason: e.message}); throw e; }
+  if (samePacket(packet, other)) return note({engine: second, outcome: 'agreed'});
+  const check = verifyAnswer({handle, query, queryWires}, {...CEILINGS, ...verifyBudget});
+  const cross = {engine: second, outcome: 'discrepancy', engine_answer: brief(other), oracle: check.complete === false ? 'unresolved' : samePacket(packet, check) ? 'first' : samePacket(other, check) ? 'second' : 'neither'};
+  if (cross.oracle === 'first') return note(cross);
+  if (requested !== 'auto') { const result = unsupported(requested, 'verification_discrepancy', `${chosen} and ${second} disagreed and the oracle did not side with ${chosen}; the explicitly requested engine is not substituted`); return {...result, route: {...result.route, cross_engine: cross}}; }
+  if (cross.oracle === 'second') return {...other, route: {...packet.route, chosen: second, rule: 'cross_engine', reason: `${chosen} disagreed with ${second} and the oracle; ${second}'s answer, the oracle's, is returned`, cross_engine: cross}};
+  if (cross.oracle === 'neither') return {...check, route: {...packet.route, chosen: ORACLE, rule: 'cross_engine', reason: `${chosen} and ${second} disagreed and neither equals the oracle; the oracle's answer is returned`, cross_engine: cross}};
+  return {...packet, complete: false, route: {...packet.route, cross_engine: cross, reason: `${chosen} and ${second} disagreed and the oracle could not decide within its budget`}};
+}
+
+function routeCore({handle, query, queryWires, requested = 'auto', budget = {}, verifyBudget = {}, verify = 'auto', config = ROUTER_DEFAULTS}) {
   const cfg = merge(ROUTER_DEFAULTS, config === ROUTER_DEFAULTS ? {} : config);
   const problem = {handle, query, queryWires};
   const run = id => ENGINES[id].ask(problem, budget);

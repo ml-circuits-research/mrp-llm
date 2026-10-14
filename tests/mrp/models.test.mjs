@@ -36,12 +36,13 @@ test('parameters are checked: unknown keys, ranges and enums are refused', () =>
 
 test('availability: server strategies check their tier, external strategies report their requirement', async () => {
   const tierCheck = async tier => tier === 'small' ? {available: true} : {available: false, reason: 'not configured'};
-  assert.deepEqual(await availability(strategy('normalize', 'translate-llm'), {tierCheck}), {available: true});
+  assert.deepEqual(await availability(strategy('normalize', 'translate-llm'), {tierCheck}), {available: true, status: 'ready'});
   assert.match((await availability(strategy('normalize', 'translate-llm'), {tierCheck, params: {tier: 'gone'}})).reason, /tier gone: not configured/);
-  assert.deepEqual(await availability(strategy('reflex', 'faq-fixed'), {tierCheck}), {available: true});
+  assert.deepEqual(await availability(strategy('reflex', 'faq-fixed'), {tierCheck}), {available: true, status: 'ready'});
   const ext = await availability(strategy('formalize', 'CNL-ACE'), {tierCheck});
   assert.equal(ext.available, false);
   assert.match(ext.reason, /Attempto/);
+  assert.equal(ext.status, 'not-implemented', 'a catalog entry without code says so, apart from a missing dependency');
   const all = await catalog({check: true, tierCheck});
   assert.equal(all.length, SLOTS.length);
 });
@@ -53,7 +54,7 @@ test('a model is created from a profile; effective settings layer catalog defaul
   const e = models.effective('acme-demo', {session: {language: 'ro'}, request: {slots: {roundtrip: {strategy: 'lexical-sampled', params: {rate: 0.5}}}}});
   assert.equal(e.language.output, 'ro');
   assert.equal(e.slots.reflex.strategy, 'faq-feedback');
-  assert.deepEqual(e.slots.roundtrip, {strategy: 'lexical-sampled', params: {tier: 'small', threshold: 0.45, rate: 0.5, onMismatch: 'note'}});
+  assert.deepEqual(e.slots.roundtrip, {strategy: 'lexical-sampled', params: {tier: 'small', threshold: 0.4, rate: 0.5, onMismatch: 'note'}});
   assert.equal(e.slots.admit.strategy, 'validate-repair');
   assert.deepEqual(e.overridden, ['session:language', 'request:slots']);
   const strict = models.effective('rigorous-judge', {request: {slots: {reflex: 'faq-fixed'}}});
@@ -107,4 +108,15 @@ test('ensureDefaults creates the first-start profiles only when no model exists 
   const models = new Models({root, memories});
   assert.deepEqual(models.ensureDefaults(), ['general']);
   assert.deepEqual(models.ensureDefaults(), []);
+});
+
+test('a stored model that names a strategy no longer in the catalog is refused with the reason, not a crash', t => {
+  const models = store(t);
+  models.create({id: 'old'});
+  const file = path.join(models.dir('old'), 'model.json');
+  const stored = JSON.parse(fs.readFileSync(file, 'utf8'));
+  stored.slots.memory = {strategy: 'hybrid', params: {}};
+  fs.writeFileSync(file, JSON.stringify(stored));
+  assert.throws(() => models.effective('old'), e => e.code === 'strategy_unavailable' && /hybrid/.test(e.message));
+  assert.equal(models.list().length, 1, 'listing the models still works');
 });
