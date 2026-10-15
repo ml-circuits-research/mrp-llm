@@ -93,7 +93,7 @@ export function runSouffle({lowered, mode = 'interpret', magic = null, timeoutMs
         const c0 = performance.now();
         const tmpExe = `${exe}.${process.pid}.tmp`;
         const built = spawnSync(bin, ['-w', ...magicArgs, '-o', tmpExe, dlFile], {encoding: 'utf8', timeout: compileTimeoutMs, maxBuffer: 1 << 26, env: compileEnv(bin)});
-        if (built.status !== 0 || !fs.existsSync(tmpExe)) throw new Error('souffle compile failed: ' + (built.stderr || built.error?.message || '').slice(0, 800));
+        if (built.status !== 0 || !fs.existsSync(tmpExe)) throw new Error('souffle compile failed: ' + (built.stderr || built.error?.message || '').slice(0, 800) + (process.env.SOUFFLE_DEBUG ? '\nFULL: ' + built.stderr + '\nSTDOUT: ' + built.stdout : ''));
         fs.renameSync(tmpExe, exe);
         fs.rmSync(`${tmpExe}.cpp`, {force: true});
         compileMs = performance.now() - c0;
@@ -106,7 +106,7 @@ export function runSouffle({lowered, mode = 'interpret', magic = null, timeoutMs
     const t2 = performance.now();
     if (r.error?.code === 'ETIMEDOUT' || (r.signal === 'SIGTERM' && r.status === null)) return {tables: new Map(), overflow: false, timedOut: true, timings: {write: ms(t0, t1), run: ms(t1, t2)}, compiled};
     if (r.error) throw r.error;
-    if (r.status !== 0) throw new Error(`souffle exited with ${r.status}: ${(r.stderr || '').slice(0, 1200)}`);
+    if (r.status !== 0) throw new Error(`souffle exited with ${r.status}: ${(r.stderr || '').slice(0, 1200)}${process.env.SOUFFLE_DEBUG ? '\nFULL: ' + r.stderr + '\nSTDOUT: ' + r.stdout : ''}`);
     const tables = new Map();
     for (const o of lowered.outputs) tables.set(o.key, readRelation(path.join(outDir, o.rel + '.csv'), o.cols));
     const overflow = lowered.overflowGuard && readRelation(path.join(outDir, 'x_ovf.csv'), ['symbol']).length > 0;

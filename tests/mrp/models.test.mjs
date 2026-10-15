@@ -39,9 +39,9 @@ test('availability: server strategies check their tier, external strategies repo
   assert.deepEqual(await availability(strategy('normalize', 'translate-llm'), {tierCheck}), {available: true, status: 'ready'});
   assert.match((await availability(strategy('normalize', 'translate-llm'), {tierCheck, params: {tier: 'gone'}})).reason, /tier gone: not configured/);
   assert.deepEqual(await availability(strategy('reflex', 'faq-fixed'), {tierCheck}), {available: true, status: 'ready'});
-  const ext = await availability(strategy('formalize', 'CNL-ACE'), {tierCheck});
+  const ext = await availability(strategy('discover', 'sae-pretrained-dictionary'), {tierCheck});
   assert.equal(ext.available, false);
-  assert.match(ext.reason, /Attempto/);
+  assert.match(ext.reason, /sentence-embedding/);
   assert.equal(ext.status, 'not-implemented', 'a catalog entry without code says so, apart from a missing dependency');
   const all = await catalog({check: true, tierCheck});
   assert.equal(all.length, SLOTS.length);
@@ -119,4 +119,16 @@ test('a stored model that names a strategy no longer in the catalog is refused w
   fs.writeFileSync(file, JSON.stringify(stored));
   assert.throws(() => models.effective('old'), e => e.code === 'strategy_unavailable' && /hybrid/.test(e.message));
   assert.equal(models.list().length, 1, 'listing the models still works');
+});
+
+test('a strategy of the strategy service with a tier is available when the service runs its operations and the tier answers', async t => {
+  const {configureStrategyService} = await import('../../lib/mrp/strategy-service.mjs');
+  const http = await import('node:http');
+  const srv = http.createServer((req, res) => { res.writeHead(200, {'content-type': 'application/json'}); res.end(JSON.stringify({ok: true, strategies: {'parse/spacy': {available: true}}})); });
+  await new Promise(r => srv.listen(0, '127.0.0.1', r));
+  t.after(() => { srv.close(); configureStrategyService(null); });
+  configureStrategyService(`http://127.0.0.1:${srv.address().port}`);
+  const tierCheck = async tier => tier === 'tiny' ? {available: true} : {available: false, reason: 'no tier'};
+  assert.deepEqual(await availability(strategy('formalize', 'DependencyScaffold'), {tierCheck}), {available: true, status: 'ready'});
+  assert.match((await availability(strategy('formalize', 'DependencyScaffold'), {tierCheck, params: {tier: 'gone'}})).reason, /tier gone: no tier/);
 });

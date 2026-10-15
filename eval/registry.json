@@ -67,7 +67,8 @@
     "start": "starts the server",
     "pworker": "the Ploinky Workers CLI",
     "test:fast": "the fast subset of npm test: every folder but engines, reasoning, memory and eval-tooling (about a third of the time)",
-    "test:full": "the same run as npm test"
+    "test:full": "the same run as npm test",
+    "test:ml": "the tests of the strategy service with its real models (tests-ml/): needs tools/.solvers/mrp-env and the models of dependencies.md; never part of npm test"
   },
   "headlineOrder": [
     "books",
@@ -2691,7 +2692,8 @@
       "paths": [
         "tests/mrp/models.test.mjs",
         "tests/mrp/pipeline.test.mjs",
-        "tests/mrp/server.test.mjs"
+        "tests/mrp/server.test.mjs",
+        "tests/mrp/service-strategies.test.mjs"
       ]
     },
     {
@@ -2738,7 +2740,8 @@
       ],
       "paths": [
         "tools/eval/mrp/formalize.mjs",
-        "eval/mrp-formalize-v1/"
+        "eval/mrp-formalize-v1/",
+        "tools/eval/mrp/sae-setup.mjs"
       ],
       "modelCalls": {
         "level": "cloud",
@@ -2758,6 +2761,35 @@
         "result": "acme: DirectSOP 0.925 (0 wrong, 1.1 calls/q), SchemaGuidedLLM 0.900, LocalLLMStepByStep 0.800 (1 wrong, 6.4 calls/q); see eval/reports/history/mrp-strategies-2026-10-14.md",
         "date": "2026-10-14",
         "path": "eval/reports/current/mrp-formalize/report.json"
+      }
+    },
+    {
+      "id": "tests-mrp-ml",
+      "title": "MRP strategy service with its real models",
+      "kind": "integration",
+      "measures": "The strategy service in the private Python environment: every operation available, SPLADE expansion, normalized dense vectors, the spaCy parse, FrameNet frames, a small SAE trained and encoding.",
+      "components": [
+        "formalizer"
+      ],
+      "paths": [
+        "tests-ml/strategy-service.test.mjs"
+      ],
+      "modelCalls": {
+        "level": "none"
+      },
+      "dataSource": [
+        "self-written"
+      ],
+      "command": "npm run test:ml",
+      "runsIn": [
+        "manual"
+      ],
+      "status": "active",
+      "runtime": "about 1 minute (model loading)",
+      "latest": {
+        "result": "3 tests: 3 pass",
+        "date": "2026-10-15",
+        "path": "tests-ml/strategy-service.test.mjs"
       }
     }
   ],

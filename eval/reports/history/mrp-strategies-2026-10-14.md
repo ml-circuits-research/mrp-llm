@@ -97,3 +97,58 @@ than `lexicon`, which stays the default; `SchemaOrDirect` acme 36/40 (it chose S
 `EnsembleOneShot` acme 37/40, the answers of DirectSOP (both from Ploinky's cache, so their latency is not measured). Also added:
 `judge-on-doubt` (roundtrip), `natural-if-foreign` (voice), `cross-engine` (verify: a second installed engine, refereed by the oracle).
 Profiles: acme-demo, general and support-bot formalize with DirectSOP, rigorous-judge with Ensemble.
+
+## Third pass (2026-10-14 evening and 2026-10-15): the strategies of the strategy service
+
+The Python packages were installed in the private environment `tools/.solvers/mrp-env` (dependencies.md) and the strategies that
+needed them were built; tier `fast` (zai glm-5.3-flash). New suite `acme-para`: 20 acme questions worded unlike the memory ("Who is
+employed by Acme?", "Which city hosts the Globex office?").
+
+| strategy | acme (40) correct / wrong | acme-para (20) correct / wrong | calls/q |
+| --- | --- | --- | --- |
+| DirectSOP (default) | 37 / 0 | 15 / 0 | 1.1 |
+| DirectSOP + dense-slice | – | 18 / 0 | 1.1 |
+| DirectSOP + splade-slice, graph-walk, hybrid-rerank | – | 16 / 0 each | 1.1 |
+| SpladeRouted | 33 / 0 | **20 / 0** | 0.9 |
+| SaeRouted, SAE trained on sentence embeddings | 33 / 1 | **20 / 0** | 1.2 |
+| SaeRouted, GPT-2 small pre-trained SAEs | 21 / 1 | 12 / 0 | 1.0 |
+| FrameGuided | 25 / 0 | 10 / 0 | 0.9 |
+| DependencyScaffold | 19 / 0 | 3 / 1 | 0.2 |
+| CNL-ACE (APE DRS skeleton) | 21 / 0 (22 with schema-linker) | 4 / 1 | 1.4 |
+| FineTunedSOP v1 (Qwen2.5-0.5B LoRA, tier `finetuned`, CPU) | 19 / 3 | 5 / 0 | 1.0 |
+| FineTunedSOP v2 (+ counts, chains, no-request; 2078 pairs) | 24 / 1 | 5 / 0 (10 / 0 with dense-slice) | 1.0 |
+
+`commonsense` (32 questions, 289 predicates): DirectSOP 13 / 0, Ensemble 13 / 0, DirectSOP + splade-slice 12 / 0, + dense-slice 11 / 0,
+LocalLLMStepByStep 11 / 4, FrameGuided 1 / 0, CNL-ACE and DependencyScaffold 0 / 0. Retrieval does not help there: the questions fail on
+entities the memory does not have, not on the vocabulary, so `slice` stays the retrieve default.
+
+FineTunedSOP v1 was trained on 1262 pairs written from the commonsense memory (single-relation questions only; no acme data). It gets
+the plain who/what questions right and fails on every shape it never saw: counts, two-relation joins and requests that are no question
+come out as invalid circuits (`condition_misuse`), so those are parser failures, not wrong answers; its 3 wrong answers are a wrong
+predicate (`project_member` for "Where does Ana work?") and joins reduced to one relation. Three serving faults were found and fixed in
+`tools/finetune/serve.sh`: ollama's ROCm runner crashes on the integrated GPU (gfx90c), so it runs on CPU; transformers 5 writes
+`rope_theta` under `rope_parameters`, which the ollama converter does not read (rope base 0, NaN logits); and the training prompts carried
+the Qwen default system message, which the Modelfile must repeat (without it the model answers in prose). The model tag is a hash of
+weights and Modelfile, since Ploinky's response cache keys on the served model name and had kept the replies of the broken setup.
+
+FineTunedSOP v2 (`state/finetune/model2`, served now as tier `finetuned`) adds to the pairs counts, chains of two predicates through a
+shared entity and requests that are no question, all written from the commonsense memory with invented names (1.2 epochs, 312 steps,
+88 min on CPU): acme 24 / 1, acme-para 5 / 0 alone and 10 / 0 with the dense-slice retrieve strategy (the lexical candidates miss the
+predicate of a paraphrase; the model cannot pick what it is not offered). Still failing: conjunctions over one subject ("works at Acme
+and is on project Apollo") and some two-hop wordings. It stays far behind DirectSOP (37 / 0) but costs no remote call; it is not a
+default. Training on a GPU would let it iterate (the owner's DGX is used only when it is idle).
+
+Tiers: openference has no active plan (402), so on the owner's instruction the small tiers `nano`, `micro` and `tiny` now use z.ai
+`glm-5.3-flash` (reasoning low), like `fast`; `medium` and `good` still point at openference.
+
+Round trip `embedding` (bge cosine): 0.885 of the misread circuits caught at threshold 0.8, **0.923 at 0.85** (the new default), with
+0.038 false alarms; better than lexical (0.846) at the same single call, below llm-judge (1.000 at two calls, 0.115 false alarms).
+
+The routed strategies need extractor wires: SpladeRouted used the seed extractor of acme-demo (term triggers), SaeRouted the 19
+extractors that `tools/eval/mrp/sae-setup.mjs` proposed and approved from a 637-sentence corpus written from the memory's facts. On
+paraphrases, routing by what the message is sensitive to beats offering the lexical candidates; on the plain acme questions DirectSOP
+stays first. `frame-seed` runs but its proposals are noisy (WordNet first senses); review is required. `sae-pretrained-dictionary`
+stays not implemented: the 170 releases of sae-lens are all SAEs over language models, none over a sentence-embedding model.
+
+Note: the openference plan of this machine expired on 2026-10-15 (HTTP 402 "No active plan"), so the tiers `tiny`, `medium` and `good`
+did not answer; every live run of this pass used `fast`.

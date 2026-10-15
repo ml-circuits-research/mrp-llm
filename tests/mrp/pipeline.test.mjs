@@ -124,8 +124,8 @@ test('voice keeps the English answer when the phrasing drops a number, and trans
 });
 
 test('a model whose slot names an external strategy is refused with the requirement, never run with a substitute', async t => {
-  const {mrp} = setup(t, {slots: {formalize: 'CNL-ACE'}});
-  await assert.rejects(mrp.before({modelId: 'm', text: 'hi'}), e => e.code === 'strategy_unavailable' && /Attempto/.test(e.message));
+  const {mrp} = setup(t, {slots: {discover: 'sae-pretrained-dictionary'}});
+  await assert.rejects(mrp.before({modelId: 'm', text: 'hi'}), e => e.code === 'strategy_unavailable' && /not implemented yet/.test(e.message));
 });
 
 test('affect llm-label tunes the voice; doubt signals and language names', async t => {

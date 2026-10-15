@@ -45,7 +45,7 @@ export class Agent{
   // The repository and session reach the formalization strategy (the step-by-step protocols read observed role fits from them).
   // The addressee of the message: the assistant's own entity in the self layer (config `assistant`), when this memory has it.
   const addressee=this.config?.assistant&&this.lexicon?.entities?.[this.config.assistant]?this.config.assistant:null;
-  const sop=await authorExecution.run({execute,circuits,addressee,repo:this.repo,session:this.session,retrieval:this.turnPolicy?.retrieval??null,key:digest([circuits.map(c=>c.text),this.context.statements,this.context.user]),contextKey:digest(this.context.lastQuery??''),selfCheck:this.config?.queryParser?.selfCheck!==false},()=>formalizer.formalize(text));
+  const sop=await authorExecution.run({execute,circuits,addressee,repo:this.repo,session:this.session,retrieval:this.turnPolicy?.retrieval??null,link:this.turnPolicy?.link??null,key:digest([circuits.map(c=>c.text),this.context.statements,this.context.user]),contextKey:digest(this.context.lastQuery??''),selfCheck:this.config?.queryParser?.selfCheck!==false},()=>formalizer.formalize(text));
   const formalization={model:formalizer.id??null,ms:Math.round(performance.now()-started)};
   let result,turnOnly=new Set();
   try{

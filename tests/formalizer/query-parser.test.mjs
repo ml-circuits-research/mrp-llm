@@ -133,7 +133,7 @@ test('chat: the step-by-step formalizer asks the Ploinky tiers, tagged; an unrea
   assert.match(second.body.chatSop.parse.strategy_note, /archived/);
   assert.ok(ta.calls.slice(before).every(x => x.body.model === 'small'), 'the session\'s first tier small starts the ladder');
   const status = await s.user('/v1/status');
-  assert.deepEqual(status.body.formalization.strategies.map(x => x.id), ['LocalLLMStepByStep', 'InternalReasoningStepByStep', 'DirectSOP', 'SchemaGuidedLLM', 'SchemaOrDirect', 'Ensemble', 'EnsembleOneShot', 'DependencyScaffold', 'SpladeRouted', 'SaeRouted', 'FrameGuided']);
+  assert.deepEqual(status.body.formalization.strategies.map(x => x.id), ['LocalLLMStepByStep', 'InternalReasoningStepByStep', 'DirectSOP', 'SchemaGuidedLLM', 'SchemaOrDirect', 'Ensemble', 'EnsembleOneShot', 'DependencyScaffold', 'SpladeRouted', 'SaeRouted', 'FrameGuided', 'CNL-ACE', 'FineTunedSOP']);
   assert.deepEqual(status.body.formalization.strategies[0].ladder, ['tiny', 'small']);
   const models = await s.user('/v1/models');
   assert.equal(models.body.data[0].chatsop.formalizer.available, true);

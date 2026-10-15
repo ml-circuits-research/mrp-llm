@@ -9,14 +9,16 @@ What a user or an API client talks to is a **Symbolic Model**: a base memory (fa
 | normalize | the message in clean English, with its language | translate-llm, translate-if-foreign, proofread-llm, passthrough |
 | affect | emotion and urgency, for tone and for affect reflexes | lexicon, lexicon-then-llm, llm-label, formalizer-pragmatic, off |
 | reflex | instant answers: pattern and affect reflexes, the Model's FAQ | faq-hybrid, faq-fixed, faq-margin, faq-feedback, faq-llm-judge, faq-llm-select, pattern-reflex, off |
-| formalize | SOP circuits from the English text | DirectSOP, SchemaGuidedLLM, SchemaOrDirect, Ensemble, EnsembleOneShot, LocalLLMStepByStep, InternalReasoningStepByStep, Routed, DirectVerified |
+| formalize | SOP circuits from the English text | DirectSOP, SchemaGuidedLLM, SchemaOrDirect, SpladeRouted, SaeRouted, FrameGuided, DependencyScaffold, CNL-ACE, FineTunedSOP, Ensemble, EnsembleOneShot, LocalLLMStepByStep, InternalReasoningStepByStep, Routed, DirectVerified |
+| retrieve | the vocabulary the formalizer is offered (the engine's slice stays exact) | slice, splade-slice, dense-slice, graph-walk, hybrid-rerank |
+| link | phrases of the circuit bound to predicates | knowledge-linker, schema-linker |
 | admit … render | validation, linking, retrieval, the symbolic engines, oracle verification, deterministic English answer | reason: strategy-router or a named engine; verify: oracle-js, oracle-always, cross-engine, off |
-| roundtrip | restate the circuit and compare it with the message | on-doubt, judge-on-doubt, lexical-always, lexical-sampled, llm-judge, off |
+| roundtrip | restate the circuit and compare it with the message | on-doubt, judge-on-doubt, embedding, lexical-always, lexical-sampled, llm-judge, off |
 | voice | the answer in the user's language, adding no fact | natural-rephrase, natural-if-foreign, translate-only, english-only |
 | commit | what session knowledge does to the memory | manual, review-queue, auto-validated, never |
-| discover | value schemas from a corpus | manual, llm-consolidate, term-stats and splade-stats (strategy service) |
+| discover | value schemas from a corpus | manual, llm-consolidate, term-stats, splade-stats, frame-seed, sae-sentence-embeddings, sae-llm-activations |
 
-The catalog (`GET /v1/mrp/strategies?check=1`, `/models`) also lists documented designs that are not implemented yet (SPLADE routing, SAE, dependency scaffolds, controlled English, graph retrieval) with the status `not-implemented`, apart from strategies that only miss a dependency. Prompts are Ploinky Workers tasks in Markdown under `config/tasks/`; value schemas (`schema`, `extractor`) and reflexes (`reflex`) are knowledge wires of a base memory. The strategies that need Python run in the strategy service (`python3 services/strategy-service/server.py`).
+The catalog (`GET /v1/mrp/strategies?check=1`, `/models`) also lists documented designs that are not implemented yet (today only a pre-trained SAE dictionary over sentence embeddings, which nobody publishes) with the status `not-implemented`, apart from strategies that only miss a dependency. Prompts are Ploinky Workers tasks in Markdown under `config/tasks/`; value schemas (`schema`, `extractor`) and reflexes (`reflex`) are knowledge wires of a base memory. The strategies that need Python run in the strategy service (`services/strategy-service/server.py`), in the private environment `tools/.solvers/mrp-env` (see `dependencies.md`); `npm start` starts it.
 
 Everything inside works in English; a model translates at the start of a turn and phrases the answer at the end. Every model call goes through **Ploinky Workers** (`pworker`) by tier name. SOP Lang is accepted in two surfaces: canonical field lines and compact `@id type key=value` pairs.
 
@@ -84,6 +86,8 @@ node server/cli.mjs validate --file examples/query.sop
 
 ```sh
 npm test          # node --test over tests/**/*.test.mjs
+npm run test:fast # every folder but engines, reasoning, memory and eval-tooling (about 20 s)
+npm run test:ml   # the strategy service with its real models (needs tools/.solvers/mrp-env); never part of npm test
 npm run verify    # tests, smoke reasoning, spec references, shard check, site links
 ```
 

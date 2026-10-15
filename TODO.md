@@ -1,8 +1,32 @@
-# TODO: resuming MRP-LLM work (state as of 2026-10-14 evening)
+# TODO: resuming MRP-LLM work (state as of 2026-10-14 evening, updated on 2026-10-15)
 
 The session stopped in the middle of the third pass (owner: "install the packages and build what is still missing"). **Nothing is
 committed**: about 74 changed or new files in `mrp-llm/` and 4 in `Ploinky-Worker/` (`git status`). Read this file first, then
 `eval/reports/history/mrp-strategies-2026-10-14.md` (measured results and defaults) and DS025/DS028.
+
+## 0. Progress of 2026-10-15 (morning)
+
+- Done: SaeRouted measured (sentence SAE: acme 33/40, acme-para 20/20; GPT-2 SAEs: 21/40, 12/20); unit tests
+  (`tests/mrp/service-strategies.test.mjs`, 10 tests) and `npm run test:ml` (`tests-ml/`, 3 tests with the real models); inventory;
+  DS025, DS028, README, api.html, the report addendum, dependencies.md; SWI-Prolog 9.0.4 (`tools/.solvers/swi-env`) and Soufflé 2.5
+  built 32-bit (`tools/.solvers/souffle32`): the engine tests pass; a real bug of the Soufflé lowering fixed (division by zero on
+  x86); **CNL-ACE** (acme 21/40, 0 wrong; acme-para 4/20), **schema-linker**, **FineTunedSOP** (pairs + LoRA training + ollama
+  serving + strategy) implemented.
+- **Note**: the openference plan expired (HTTP 402): the tiers `tiny`, `medium`, `good` do not answer; the live runs use `fast`.
+- Running when this was written: the LoRA training (`state/finetune/train.log`, ~80 min) and the commonsense benchmarks.
+- Left: serve the trained model (`tools/finetune/serve.sh`) and measure FineTunedSOP on acme and acme-para (tier `finetuned`);
+  the defaults if the numbers ask for it; rebuild the test server (§3.4); the final report.
+
+## 0b. Progress of 2026-10-15 (afternoon)
+
+- FineTunedSOP served and measured (v1 acme 19/3, v2 acme 24/1, acme-para 5/0 and 10/0 with dense-slice); `tools/finetune/serve.sh`
+  fixed (CPU only, `rope_theta`, the Qwen system message, a hashed model tag against Ploinky's response cache); `pairs.mjs` writes
+  counts, chains and no-request pairs. Report addendum updated.
+- Tiers `nano`, `micro`, `tiny` repointed to z.ai `glm-5.3-flash` (owner); backup `~/.pworker/config.json.bak-2026-10-15`.
+- The owner's DGX Spark (`ssh pgx`) is shared: use it only when its GPU is idle. Left over there from an aborted attempt:
+  `~/.ollama/models` (2.5 GB partial pull) and `~/mrp-ollama` (removal was blocked by the session permissions).
+- Left: nothing blocking. Pre-existing failures of `npm test`: two timing tests under load and the held-out check (its archived guide
+  folder `probably_obsolete/one-shot-formalization/...` is gone, so `scanned.guide` is 0).
 
 ## 1. State of the machine
 

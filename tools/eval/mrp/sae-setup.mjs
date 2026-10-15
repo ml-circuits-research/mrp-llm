@@ -6,7 +6,7 @@
  * feature triggers) are written as reviewed into that memory, as an administrator approving them would. Then
  * `node tools/eval/mrp/formalize.mjs --suites acme,acme-para --strategies SaeRouted` measures the routing.
  *
- *   node tools/eval/mrp/sae-setup.mjs [--strategy sae-sentence-embeddings|sae-llm-activations] [--top 30]
+ *   node tools/eval/mrp/sae-setup.mjs [--strategy sae-sentence-embeddings|sae-llm-activations] [--top 30] [--tier good]
  */
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -49,7 +49,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   const circuits = session.sessions.baseCircuits(session.id);
   const passages = corpusOf(session.lexicon, factsOf(circuits));
   const run = (name, inputs, o) => runTasks(name, inputs, {client: pworker({purpose: 'job:discover', run: `mrp-sae-setup-${strategy}`, priority: 'background'}), ...o});
-  const out = await saeDiscover({strategy, passages, params: {top: Number(opt('--top', 30)), ...(strategy === 'sae-sentence-embeddings' ? {latents: 256} : {})}, run, lexicon: session.lexicon, validate: c => validateCircuits(c, circuits), model: 'acme-bench'});
+  const out = await saeDiscover({strategy, passages, params: {top: Number(opt('--top', 30)), tier: opt('--tier', 'good'), ...(strategy === 'sae-sentence-embeddings' ? {latents: 256} : {})}, run, lexicon: session.lexicon, validate: c => validateCircuits(c, circuits), model: 'acme-bench'});
   session.close();
   const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'config/runtime.json'), 'utf8'));
   config.chatData = {...config.chatData, root: CHAT_ROOT};
@@ -57,5 +57,5 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   const reviewed = out.proposed.map(p => ({name: p.name, text: p.text.replace(/^ {2}status proposed$/m, '  status reviewed')}));
   const written = reviewed.length ? memories.addKnowledge('acme-demo', {circuits: reviewed, approvedBy: 'sae-setup', reason: `benchmark setup ${strategy}`, source: `discover:${strategy}`}) : null;
   console.log(JSON.stringify({strategy, passages: passages.length, features: out.features, proposed: out.proposed.length, skipped: out.skipped.length, written: written?.added?.length ?? 0, source: out.source,
-    examples: out.proposed.slice(0, 5).map(p => `${p.feature} -> ${p.predicates.join(',')}`)}, null, 1));
+    examples: out.proposed.slice(0, 5).map(p => `${p.feature} -> ${p.predicates.join(',')}`), skippedReasons: out.skipped.slice(0, 5)}, null, 1));
 }

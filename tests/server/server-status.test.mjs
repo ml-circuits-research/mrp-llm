@@ -12,7 +12,7 @@ test('status: strategies, base memories, engines and caches; listed in the capab
   assert.equal(r.status, 200, JSON.stringify(r.body));
   assert.equal(r.body.object, 'status');
   assert.equal(r.body.formalization.default, 'LocalLLMStepByStep');
-  assert.deepEqual(r.body.formalization.strategies.map(x => x.id), ['LocalLLMStepByStep', 'InternalReasoningStepByStep', 'DirectSOP', 'SchemaGuidedLLM', 'SchemaOrDirect', 'Ensemble', 'EnsembleOneShot', 'DependencyScaffold', 'SpladeRouted', 'SaeRouted', 'FrameGuided'], 'the one-shot LLMDirect is archived; DirectSOP and SchemaGuidedLLM are MRP strategies');
+  assert.deepEqual(r.body.formalization.strategies.map(x => x.id), ['LocalLLMStepByStep', 'InternalReasoningStepByStep', 'DirectSOP', 'SchemaGuidedLLM', 'SchemaOrDirect', 'Ensemble', 'EnsembleOneShot', 'DependencyScaffold', 'SpladeRouted', 'SaeRouted', 'FrameGuided', 'CNL-ACE', 'FineTunedSOP'], 'the one-shot LLMDirect is archived; DirectSOP and SchemaGuidedLLM are MRP strategies');
   const steps = r.body.formalization.strategies[0];
   assert.equal(steps.available, true);
   assert.deepEqual(steps.models.map(m => m.id), ['stub/model']);

@@ -17,7 +17,7 @@ function stubLocal() {
 }
 
 test('formalization is step by step: the strategies are named and selectable; archived one-shot names read as the default', () => {
-  assert.deepEqual(FORMALIZATION_STRATEGIES, ['LocalLLMStepByStep', 'InternalReasoningStepByStep', 'DirectSOP', 'SchemaGuidedLLM', 'SchemaOrDirect', 'Ensemble', 'EnsembleOneShot', 'DependencyScaffold', 'SpladeRouted', 'SaeRouted', 'FrameGuided']);
+  assert.deepEqual(FORMALIZATION_STRATEGIES, ['LocalLLMStepByStep', 'InternalReasoningStepByStep', 'DirectSOP', 'SchemaGuidedLLM', 'SchemaOrDirect', 'Ensemble', 'EnsembleOneShot', 'DependencyScaffold', 'SpladeRouted', 'SaeRouted', 'FrameGuided', 'CNL-ACE', 'FineTunedSOP']);
   assert.equal(queryParserSettings({}, {}).strategy, 'LocalLLMStepByStep');
   const archived = queryParserSettings({queryParser: {strategy: 'LLMDirect'}}, {});
   assert.equal(archived.strategy, 'LocalLLMStepByStep');
@@ -105,7 +105,7 @@ test('the tier strategy sends each rung to its Ploinky tier and reports the tier
 test('the strategies listing reports a Ploinky proxy that does not answer, or an explicit endpoint, as unavailable, without starting anything', async () => {
   const parser = createQueryParser({settings: queryParserSettings({queryParser: {}}, {}), fetchImpl: async () => { throw new Error('ECONNREFUSED'); }});
   const listed = await parser.strategies();
-  assert.deepEqual(listed.map(s => s.id), ['LocalLLMStepByStep', 'InternalReasoningStepByStep', 'DirectSOP', 'SchemaGuidedLLM', 'SchemaOrDirect', 'Ensemble', 'EnsembleOneShot', 'DependencyScaffold', 'SpladeRouted', 'SaeRouted', 'FrameGuided']);
+  assert.deepEqual(listed.map(s => s.id), ['LocalLLMStepByStep', 'InternalReasoningStepByStep', 'DirectSOP', 'SchemaGuidedLLM', 'SchemaOrDirect', 'Ensemble', 'EnsembleOneShot', 'DependencyScaffold', 'SpladeRouted', 'SaeRouted', 'FrameGuided', 'CNL-ACE', 'FineTunedSOP']);
   const local = listed.find(s => s.id === 'LocalLLMStepByStep');
   assert.equal(local.available, false);
   assert.match(local.reason, /proxy not reachable/);

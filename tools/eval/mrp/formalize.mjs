@@ -7,7 +7,7 @@
  *
  *   node tools/eval/mrp/formalize.mjs [--suites acme,commonsense] [--strategies LocalLLMStepByStep,DirectSOP,...] [--tier fast]
  *                                     [--normalize translate-llm|translate-if-foreign|proofread-llm|passthrough]
- *                                     [--retrieve splade-slice|dense-slice|graph-walk|hybrid-rerank] [--concurrency 4] [--limit N] [--force]
+ *                                     [--retrieve splade-slice|dense-slice|graph-walk|hybrid-rerank] [--link schema-linker] [--concurrency 4] [--limit N] [--force]
  *
  * `acme-para` (20 acme questions worded unlike the memory: "Who is employed by Acme?") measures the retrieve strategies.
  *
@@ -28,7 +28,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {ChatData} from '../../../lib/chat-data/index.mjs';
 import {BaseMemories, BASE_NAME} from '../../../lib/chat-data/memories.mjs';
-import {ensureSeedMemories} from '../../../lib/knowledge-seeds.mjs';
+import {ensureSeedMemories, seedCircuits} from '../../../lib/knowledge-seeds.mjs';
 import {openSession} from '../lib/session.mjs';
 import {harnessChat} from '../lib/chat-turn.mjs';
 import {judgeGold} from '../formalization/query-parsers.mjs';
@@ -84,7 +84,9 @@ export function prepareRoot(root = CHAT_ROOT) {
   fs.mkdirSync(root, {recursive: true});
   const memories = new BaseMemories({chatData: ChatData.open(config, {}, ROOT), memory: config.memory});
   const created = ensureSeedMemories(memories, {ids: Object.values(SUITES).map(s => s.base)});
-  if (created.stale?.length) {
+  // A memory is stale when its seed circuits changed; knowledge added after them (approved proposals, sae-setup.mjs) keeps it current.
+  const changed = (created.stale ?? []).filter(id => { const stored = memories.circuits(id).map(c => c.text), shipped = seedCircuits(id).map(c => c.text); return !shipped.every((t, i) => stored[i] === t); });
+  if (changed.length) {
     fs.rmSync(root, {recursive: true, force: true});
     return prepareRoot(root);
   }
@@ -111,7 +113,7 @@ async function run(args) {
   const opt = (n, d) => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : d; };
   const suites = opt('--suites', Object.keys(SUITES).join(',')).split(',');
   const strategies = opt('--strategies', STRATEGIES.join(',')).split(',');
-  const tier = opt('--tier', 'fast'), limit = Number(opt('--limit', 1e9)), concurrency = Number(opt('--concurrency', 4)), normalize = opt('--normalize', null), retrieve = opt('--retrieve', null);
+  const tier = opt('--tier', 'fast'), limit = Number(opt('--limit', 1e9)), concurrency = Number(opt('--concurrency', 4)), normalize = opt('--normalize', null), retrieve = opt('--retrieve', null), link = opt('--link', null);
   // --retrieve names a retrieve strategy (lib/mrp/retrieve.mjs): its candidate predicates reach the one-shot formalizer through the turn policy.
   if (retrieve && retrieve !== 'graph-walk' && retrieve !== 'slice') await startStrategyService();
   // The normalize slot of a throw-away Model (passthrough everywhere else), when --normalize is given.
@@ -130,7 +132,7 @@ async function run(args) {
   for (const suite of suites) {
     const rows = fs.readFileSync(path.join(ROOT, SUITES[suite].file), 'utf8').split('\n').filter(Boolean).map(l => JSON.parse(l)).slice(0, limit);
     for (const strategy of strategies) {
-      const label = [strategy, normalize, retrieve].filter(Boolean).join('+');
+      const label = [strategy, normalize, retrieve, link].filter(Boolean).join('+');
       const out = path.join(OUT, `${suite}-${label}-${tier}.jsonl`);
       if (args.includes('--force')) fs.rmSync(out, {force: true});
       const done = new Set(fs.existsSync(out) ? fs.readFileSync(out, 'utf8').split('\n').filter(Boolean).map(l => JSON.parse(l).id) : []);
@@ -147,7 +149,7 @@ async function run(args) {
           let result = null, parse = null, error = null;
           const entry = session.store.get('mrp', `c-${row.id}`, BASE_NAME);
           const n = await normalizeText(row.question);
-          entry.agent.turnPolicy = retrieve ? {retrieval: await retrieveCandidates({strategy: retrieve, memory: SUITES[suite].base, english: n.english, lexicon: session.lexicon, circuits: session.sessions.baseCircuits(session.id)})} : null;
+          entry.agent.turnPolicy = {...(retrieve ? {retrieval: await retrieveCandidates({strategy: retrieve, memory: SUITES[suite].base, english: n.english, lexicon: session.lexicon, circuits: session.sessions.baseCircuits(session.id)})} : {}), ...(link ? {link} : {})};
           try { const turned = await chat.turn(entry, n.english, {lexicon: session.lexicon}); result = turned.result; parse = turned.parse; } catch (e) { error = e; parse = e.parse ?? null; }
           const packet = result?.packet ?? null;
           const record = {id: row.id, form: row.form, question: row.question, ...(normalize ? {english: n.english, language: n.language, normalize_ms: n.ms} : {}), gold: row.gold, suite, strategy: label, tier, outcome: outcomeOf(row.gold, packet, error), status: packet?.status ?? null,

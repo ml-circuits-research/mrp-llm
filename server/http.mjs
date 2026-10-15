@@ -286,14 +286,14 @@ export function createServer({config,repo,lexicon,authTokens,auth=null,base='dem
     const sessionWins=!pre||pre.effective.model.allowOverrides;
     const mode=asked??(sessionWins?rt?.info?.settings?.adapter_mode:null)??modelMode??rt?.info?.settings?.adapter_mode??adapter.settings.mode;
     // The turn itself (circuit author, adapter, result assembly) is lib/adapter/chat-turn.mjs, shared with every evaluation harness.
-    const stepStrategy=['LocalLLMStepByStep','InternalReasoningStepByStep','DirectSOP','SchemaGuidedLLM','SchemaOrDirect','Ensemble','EnsembleOneShot','DependencyScaffold','SpladeRouted','SaeRouted','FrameGuided'].includes(formalizeSlot?.strategy)?formalizeSlot.strategy:null;
+    const stepStrategy=['LocalLLMStepByStep','InternalReasoningStepByStep','DirectSOP','SchemaGuidedLLM','SchemaOrDirect','Ensemble','EnsembleOneShot','DependencyScaffold','SpladeRouted','SaeRouted','FrameGuided','CNL-ACE','FineTunedSOP'].includes(formalizeSlot?.strategy)?formalizeSlot.strategy:null;
     // The reason and verify slots of the Model (DS025): a named engine and the verification policy reach the turn's runtime policy.
     // The retrieve slot (lib/mrp/retrieve.mjs): candidate predicates for the one-shot formalizers, computed on the English text.
     let retrieval=null;
     if(pre&&pre.effective.slots.retrieve.strategy!=='slice'){const rv=pre.effective.slots.retrieve,mid=pre.effective.model.base,t0=performance.now();
      retrieval=await retrieveCandidates({strategy:rv.strategy,params:rv.params,memory:mid,english:pre.english,lexicon:memories.lexicon(mid),circuits:memories.layeredCircuits(mid)});
      pre.trace.push({slot:'retrieve',strategy:rv.strategy,ms:Math.round(performance.now()-t0),candidates:(retrieval?.predicates??[]).map(p=>p.id)});}
-    if(pre){const r=pre.effective.slots.reason,v=pre.effective.slots.verify;entry.agent.turnPolicy={...(retrieval?{retrieval}:{}),...(r.strategy==='engine'?{reasoningStrategy:r.params.engine}:{}),...(v.strategy==='oracle-always'?{verify:'always'}:v.strategy==='off'?{verify:'never'}:v.strategy==='cross-engine'?{crossEngine:v.params.engine}:{})};}
+    if(pre){const r=pre.effective.slots.reason,v=pre.effective.slots.verify;entry.agent.turnPolicy={...(retrieval?{retrieval}:{}),...(pre.effective.slots.link.strategy!=='knowledge-linker'?{link:pre.effective.slots.link.strategy}:{}),...(r.strategy==='engine'?{reasoningStrategy:r.params.engine}:{}),...(v.strategy==='oracle-always'?{verify:'always'}:v.strategy==='off'?{verify:'never'}:v.strategy==='cross-engine'?{crossEngine:v.params.engine}:{})};}
     const turned=await chatTurn({adapter,agent:entry.agent,queryParser,lexicon:lex,message,mode,options,source:'chat',preferredModel:(sessionWins?rt?.info?.settings?.formalizer_model??rt?.info?.settings?.omp_model:null)??formalizeSlot?.params?.tier??null,strategy:(sessionWins?rt?.info?.settings?.formalizer:null)??stepStrategy??null}).catch(e=>{parseRecord=e.parse??null;entry.agent.turnPolicy=null;throw e;});
     parseRecord=turned.parse;entry.agent.turnPolicy=null;
     const {result,author,answered}=turned;

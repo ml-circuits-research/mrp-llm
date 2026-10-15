@@ -108,7 +108,11 @@ export function lowerProgram({program, facts, wanted = new Set(), extra = null, 
         const a = value(l.left, scope, true), b = value(l.right, scope, true);
         if (l.word === 'whole_divided_by') out.push(`${b} != 0`);
         else guardSink?.push({prefix: out.slice(), a, b, word: l.word});
-        out.push(`${varName(l.out)} = (${a} ${ARITH[l.word]} ${b})`);
+        // Soufflé does not keep the order of a rule's conditions: the division may be evaluated before the guard `b != 0`, and an
+        // integer division by zero traps on x86 (SIGFPE). The divisor is written so that it is never zero, b + 1 - min(1, |b|), which
+        // equals b whenever b != 0; the guard above still makes the body false for a zero divisor.
+        const divisor = l.word === 'whole_divided_by' ? `(${b} + 1 - min(1, max(${b}, -(${b}))))` : b;
+        out.push(`${varName(l.out)} = (${a} ${ARITH[l.word]} ${divisor})`);
       }
     }
     return out;

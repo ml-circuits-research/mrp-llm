@@ -146,7 +146,7 @@ test('discover llm-consolidate: batches name relations, synonyms merge, valid ca
   const s = await productServer(t, {config: {mrp: {defaultModel: 'shop', client}}});
   assert.equal((await s.user('/v1/mrp/models', 'POST', {id: 'shop', base: 'acme-demo'})).status, 201);
   assert.equal((await s.user('/v1/mrp/models/shop/discover', 'POST', {passages: ['x']})).status, 400, 'the default discover strategy manual runs nothing');
-  assert.equal((await s.user('/v1/mrp/models/shop/discover', 'POST', {strategy: 'splade-stats', passages: ['x']})).status, 503);
+  assert.equal((await s.user('/v1/mrp/models/shop/discover', 'POST', {strategy: 'sae-pretrained-dictionary', passages: ['x']})).status, 503);
   const r = await s.user('/v1/mrp/models/shop/discover', 'POST', {strategy: 'llm-consolidate', passages: ['Acme ships parts to Cluj every week. '.repeat(20), 'Globex delivers boxes to Bucharest. '.repeat(20)], params: {batchChars: 1000}});
   assert.equal(r.status, 200, JSON.stringify(r.body));
   assert.equal(r.body.batches, 2);
@@ -227,7 +227,7 @@ test('the strategy service: its self-check makes its strategies available; a dis
   const cat = await s.user('/v1/mrp/strategies?check=1');
   const discover = cat.body.data.find(x => x.id === 'discover').strategies;
   assert.equal(discover.find(x => x.id === 'term-stats').available, true);
-  assert.equal(discover.find(x => x.id === 'sae-llm-activations').status, 'not-implemented');
+  assert.equal(discover.find(x => x.id === 'sae-pretrained-dictionary').status, 'not-implemented');
   const r = await s.user('/v1/mrp/models/demo-mrp/discover', 'POST', {strategy: 'term-stats', passages: ['Acme ships parts to Cluj. Acme ships boxes.', 'Globex delivers parts; Globex delivers boxes.']});
   assert.equal(r.status, 200, JSON.stringify(r.body));
   assert.ok(r.body.candidates.lexemes.some(l => l.term === 'ships'));

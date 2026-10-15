@@ -112,7 +112,7 @@ export function createQueryParser({settings = queryParserSettings(), chatData = 
     const free = await parser.availability(firstTier);
     if (!free.available) { stats.failures++; throw fail('parse_unavailable', 503, free.reason, {parser: PARSER_NAMES[strategy], strategy, model: null, ms: now() - started, failed: free.reason, tried: free.skipped ?? [], ...noted}); }
     const store = authorExecution.getStore();
-    const key = createHash('sha256').update([memoryKey ?? '', store?.key ?? '', settings.runTag ?? '', String(store?.selfCheck ?? false), strategy, (store?.retrieval?.predicates ?? []).map(p => p.id).join(','),
+    const key = createHash('sha256').update([memoryKey ?? '', store?.key ?? '', settings.runTag ?? '', String(store?.selfCheck ?? false), strategy, (store?.retrieval?.predicates ?? []).map(p => p.id).join(','), store?.link ?? '',
       parser.tag ?? `${settings.local.alias}@${settings.local.endpoint ?? settings.local.gguf ?? ''}#${settings.local.method ?? 'A'}`, firstTier ?? '', normalize(message)].join('\0')).digest('hex');
     const hit = cache.get(key);
     if (hit && (!hit.fragment || hit.contextKey === store?.contextKey)) { stats.cache_hits++; stats.parsed++; return {sop: hit.sop, parse: recordOf({...hit.result, strategy, cache: 'hit', ms: now() - started, cost_usd: 0, usage: {cost_usd: 0}}, noted)}; }

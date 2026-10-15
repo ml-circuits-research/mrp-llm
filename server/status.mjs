@@ -24,11 +24,13 @@ export const FORMALIZATION_STRATEGIES = Object.freeze([
   {id: 'SchemaGuidedLLM', label: 'SchemaGuidedLLM (one call over the closed predicate schema of the memory; anything else is unparsed)'},
   {id: 'SchemaOrDirect', label: 'SchemaOrDirect (SchemaGuidedLLM when the memory has a reviewed schema, DirectSOP otherwise)'},
   {id: 'Ensemble', label: 'Ensemble (DirectSOP, SchemaGuidedLLM and LocalLLMStepByStep on the same tier; two agreeing circuits win, no agreement is a doubt)'},
+  {id: 'EnsembleOneShot', label: 'EnsembleOneShot (DirectSOP and SchemaGuidedLLM; agreement wins, disagreement is a doubt)'},
   {id: 'DependencyScaffold', label: 'DependencyScaffold (a spaCy skeleton becomes the circuit; a tiny model names the predicate only when the phrase does not link)'},
   {id: 'SpladeRouted', label: 'SpladeRouted (SPLADE terms of the message select the extractors of the memory; each runs over its schema)'},
   {id: 'SaeRouted', label: 'SaeRouted (active SAE features select the extractors of the memory; each runs over its schema)'},
   {id: 'FrameGuided', label: 'FrameGuided (FrameNet frames of the message select the predicates; SchemaGuidedLLM over them)'},
-  {id: 'EnsembleOneShot', label: 'EnsembleOneShot (DirectSOP and SchemaGuidedLLM; agreement wins, disagreement is a doubt)'},
+  {id: 'CNL-ACE', label: 'CNL-ACE (the question rewritten in Attempto Controlled English, parsed by APE into one relation)'},
+  {id: 'FineTunedSOP', label: 'FineTunedSOP (a small model fine-tuned on (prompt, circuit) pairs writes the circuit from a compact prompt)'},
 ]);
 
 /** The strategy the request parser runs when no strategy is asked for. */

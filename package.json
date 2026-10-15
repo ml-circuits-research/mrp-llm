@@ -17,6 +17,7 @@
     "demo:reasoning": "node examples/reasoning-demo.mjs",
     "pworker": "node node_modules/pworker/bin/pworker.mjs",
     "test:fast": "node --test --test-timeout=120000 'tests/{mrp,formalizer,sop,server,pworker,conversation,docs,routed,analysis,adapter,linker,ingestion,project}/**/*.test.mjs'",
-    "test:full": "node --test --test-timeout=120000 'tests/**/*.test.mjs'"
+    "test:full": "node --test --test-timeout=120000 'tests/**/*.test.mjs'",
+    "test:ml": "node --test --test-timeout=600000 'tests-ml/*.test.mjs'"
   }
 }
